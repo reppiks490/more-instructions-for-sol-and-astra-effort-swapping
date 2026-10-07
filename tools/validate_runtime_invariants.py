@@ -6,6 +6,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 REQUIRED_TOKENS = {
+    "verse/combat/ability_contract.verse": [
+        "RequiredTransformationId",
+        "TransformationId:string",
+    ],
     "verse/core/runtime_tick_device.verse": [
         "AEONFALLActivationCoordinator.TickPendingActivations",
         "AEONFALLAbilityRuntime.TickAll",
@@ -44,6 +48,8 @@ REQUIRED_TOKENS = {
     ],
     "verse/combat/ability_runtime.verse": [
         "OwnerByStateKey",
+        "RequiredTransformationId",
+        "Context.TransformationId",
         "ClearOwner",
         "TickAll",
         "PendingRequestId",
@@ -73,6 +79,7 @@ REQUIRED_TOKENS = {
     ],
     "verse/combat/actor_context_runtime.verse": [
         "EncounterDepth",
+        "TransformationId",
         "GetFlags",
         "EnterEncounter",
         "ExitEncounter",
