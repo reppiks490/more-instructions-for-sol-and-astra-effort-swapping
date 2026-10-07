@@ -17,11 +17,11 @@ aeonfall_ascension_gate_service := class():
         Profile.AscensionRank >= RequiredAbsoluteRank
         Profile.TranscendentState = 0
 
-    # TranscendentState:
-    # 0 = dormant / not currently available
-    # 1 = Choosing passed, transformation available
-    # 2 = active transformation
-    # 3 = cooldown / exhaustion
+    # Persistent TranscendentState:
+    # 0 = Choosing not yet completed
+    # 1 = Choosing passed / activation permanently unlocked
+    # Active transformation and cooldown/exhaustion are session-only runtime
+    # state and must never be persisted as profile values 2/3.
     CanActivateTranscendentState(Agent:agent)<decides><transacts>:void=
         Profile := ProfileService.GetProfile[Agent]
         Profile.IsZeroCandidate?
