@@ -1,0 +1,194 @@
+{
+  "version": 1,
+  "regions": [
+    {
+      "id": "REG-001",
+      "name": "Thronefall Necropolis",
+      "archetype": "ruined sovereign megacity",
+      "primary_ecologies": [
+        "necromantic",
+        "faction war",
+        "sovereign constructs"
+      ],
+      "signature": "walking grave districts and living throne infrastructure"
+    },
+    {
+      "id": "REG-002",
+      "name": "Vesperglass Meridian",
+      "archetype": "mirror desert and glass canyons",
+      "primary_ecologies": [
+        "refractive beasts",
+        "mirror cults",
+        "rift predators"
+      ],
+      "signature": "reflection routing and black-glass traversal"
+    },
+    {
+      "id": "REG-003",
+      "name": "The Crown of Unstorm",
+      "archetype": "storm mountain kingdom",
+      "primary_ecologies": [
+        "storm wildlife",
+        "sky predators",
+        "weather cults"
+      ],
+      "signature": "weather verticality and aerial traversal"
+    },
+    {
+      "id": "REG-004",
+      "name": "Red Orchard of Saintless Bloom",
+      "archetype": "predatory ancient forest",
+      "primary_ecologies": [
+        "living flora",
+        "Gravefeeding overlap",
+        "mythical beasts"
+      ],
+      "signature": "growing architecture and living weapon ecology"
+    },
+    {
+      "id": "REG-005",
+      "name": "The Thirteen-Tide Cathedral",
+      "archetype": "cliff-to-abyss ocean cathedral",
+      "primary_ecologies": [
+        "leviathans",
+        "drowned undead",
+        "abyssal fauna"
+      ],
+      "signature": "vertical ocean traversal and pressure raids"
+    },
+    {
+      "id": "REG-006",
+      "name": "Gloamforge Megalith",
+      "archetype": "infernal industrial metropolis",
+      "primary_ecologies": [
+        "demons",
+        "constructs",
+        "furnace wildlife"
+      ],
+      "signature": "foundries, rail logistics, and siege engines"
+    },
+    {
+      "id": "REG-007",
+      "name": "Hollow Astral Synod",
+      "archetype": "celestial crater nation",
+      "primary_ecologies": [
+        "celestial entities",
+        "star predators",
+        "astral cults"
+      ],
+      "signature": "artificial suns and observatory machinery"
+    },
+    {
+      "id": "REG-008",
+      "name": "Maw-Court Expanse",
+      "archetype": "cannibal badlands",
+      "primary_ecologies": [
+        "Gravefeeding tiers I-V",
+        "carrion wildlife",
+        "organ architects"
+      ],
+      "signature": "player-influenced five-stage evolutionary catastrophe"
+    },
+    {
+      "id": "REG-009",
+      "name": "Worldroot Sovereignty",
+      "archetype": "vertical mega-forest",
+      "primary_ecologies": [
+        "mythical wildlife",
+        "Worldroot guardians",
+        "tameables"
+      ],
+      "signature": "root cities, bridges, tunnels, and layered canopy traversal"
+    },
+    {
+      "id": "REG-010",
+      "name": "The Blackwake Dominion",
+      "archetype": "drowned floodplain and ship grave",
+      "primary_ecologies": [
+        "spectral fleets",
+        "blackwater beasts",
+        "drowned factions"
+      ],
+      "signature": "moving wake routes and stranded warship strongholds"
+    },
+    {
+      "id": "REG-011",
+      "name": "Court of Broken Hours",
+      "archetype": "temporal ruin-state",
+      "primary_ecologies": [
+        "Chronarch entities",
+        "time constructs",
+        "causal anomalies"
+      ],
+      "signature": "multi-era architecture and timing mechanics"
+    },
+    {
+      "id": "REG-012",
+      "name": "The Ossuary Crown",
+      "archetype": "necromancer state",
+      "primary_ecologies": [
+        "necromancers",
+        "corpse gardens",
+        "bone constructs"
+      ],
+      "signature": "catacomb megacity, funeral railway, and research crypts"
+    },
+    {
+      "id": "REG-013",
+      "name": "Night Before Creation",
+      "archetype": "eldritch negative-space wasteland",
+      "primary_ecologies": [
+        "buried eyes",
+        "angle predators",
+        "void entities"
+      ],
+      "signature": "unfinished-looking geometry and horizon-scale threats"
+    },
+    {
+      "id": "REG-014",
+      "name": "Starfall Reliquary",
+      "archetype": "celestial impact desert",
+      "primary_ecologies": [
+        "radiant fauna",
+        "relic scavengers",
+        "star cults"
+      ],
+      "signature": "star-metal carcasses and pilgrimage forges"
+    },
+    {
+      "id": "REG-015",
+      "name": "The Thousand Doors",
+      "archetype": "transdimensional dense city",
+      "primary_ecologies": [
+        "door entities",
+        "faction embassies",
+        "dream predators"
+      ],
+      "signature": "rotating pocket encounters and false interiors"
+    },
+    {
+      "id": "REG-016",
+      "name": "Axiom Scar",
+      "archetype": "Absolute endgame anomaly region",
+      "primary_ecologies": [
+        "God remnants",
+        "Absolute anomalies",
+        "ascension entities"
+      ],
+      "signature": "Axiom Forge, Ascension Trials, and hidden Zero-candidate spaces"
+    }
+  ],
+  "rules": {
+    "streaming": "World Partition from project inception",
+    "population": "abstract/dormant/materialized/event-surge/raid-reserve",
+    "region_completion_requires": [
+      "blockout",
+      "streaming validation",
+      "memory calculation",
+      "HLOD build",
+      "Spatial Profiler pass",
+      "AI surge test",
+      "boss reserve test"
+    ]
+  }
+}
