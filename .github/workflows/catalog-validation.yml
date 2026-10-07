@@ -33,6 +33,7 @@ on:
       - "tools/build_slice_hireable_registry.py"
       - "tools/validate_slice_classes.py"
       - "tools/build_slice_registry.py"
+      - "tools/build_world_registry.py"
       - "tools/build_slice_recipe_registry.py"
       - "tools/build_slice_shop_registry.py"
       - "tools/validate_verse_static.py"
@@ -161,6 +162,12 @@ jobs:
 
       - name: Check generated first-slice hireable bootstrap
         run: git diff --exit-code -- verse/generated/slice_001_hireable_bootstrap.verse
+
+      - name: Build world topology Verse registry
+        run: python tools/build_world_registry.py
+
+      - name: Check generated world topology bootstrap
+        run: git diff --exit-code -- verse/generated/world_topology_bootstrap.verse
 
       - name: Build runtime content index
         run: python tools/build_content_index.py
