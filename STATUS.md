@@ -1,62 +1,47 @@
 # AEONFALL — Live Status
 
+This file is generated from the canonical catalog by `tools/build_status.py`.
+
 ## Major Entity Catalog
-**Specified: 100 / 800 target (12.5%)**
+**Target-counted authored entities: 188 / 800 (23.5%)**
+**Additional major faction definitions: 8**
+**All catalog entities: 196**
 
 | Family | Specified | Target | Progress |
 |---|---:|---:|---:|
 | Weapons | 12 | 180 | 6.7% |
 | Armor / major pieces | 4 | 120 | 3.3% |
 | Monsters | 12 | 170 | 7.1% |
-| Wildlife / tameables | 0 | 60 | 0% |
-| Hireable / major NPCs | 36 | 60 | 60.0% |
+| Wildlife / tameables | 60 | 60 | 100.0% **(minimum met)** |
+| Hireable / major NPCs | 64 | 60 | 106.7% **(minimum met)** |
 | Bosses | 4 | 80 | 5.0% |
-| Relics / artifacts | 0 | 45 | 0% |
-| Vehicles / advanced variants | 0 | 25 | 0% |
-| Classes / major skills | 30 | 30 | **100%** |
+| Relics / artifacts | 0 | 45 | 0.0% |
+| Vehicles / advanced variants | 0 | 25 | 0.0% |
+| Classes / major skills | 30 | 30 | 100.0% **(minimum met)** |
 | World events / special effects | 2 | 30 | 6.7% |
-| **Total** | **100** | **800** | **12.5%** |
+| **Target-counted total** | **188** | **800** | **23.5%** |
 
-## Hireable Requirement
-Requested expansion completed at specification level:
-- Epic: 12 new
-- Legendary: 6 new
-- Mythic: 5 new
-- Exotic: 3 new
-- God: 2 new
+## Pipeline Status
+- concept: 0
+- specified: 196
+- prototype: 0
+- implemented: 0
+- vfx_ready: 0
+- animation_ready: 0
+- tested: 0
+- production: 0
 
-Existing Wave 001 hireables remain additional to these counts.
+## Premium-Designated Concepts
+- 6 catalog entities currently carry `acquisition.paid=true`.
+- Premium designation is a design flag only; implementation must use Epic-supported entitlement/transaction systems and publication rules.
 
-## Systems
-- [x] dedicated clean repo
-- [x] canonical content schema
-- [x] automated catalog validator
-- [x] GitHub Actions validation
-- [x] tier system
-- [x] Transcendent Zero design
-- [x] five world-bending class skills
-- [x] all eight Transcendent Authorities
-- [x] persistent player-profile foundation
-- [x] economy/shop architecture
-- [x] horror/horde evolution architecture
-- [x] faction/hiring architecture
-- [x] first 12 world regions
-- [x] distributed colossus boss architecture
-- [ ] UEFN project attached for compile/playtest
-- [ ] Verse compilation gate
-- [ ] first Scene Graph custom item prefab
-- [ ] first custom weapon prefab
-- [ ] first NPC Character Definition
-- [ ] first playable region blockout
-- [ ] vertical-slice Launch Session
+## Integrity Gates
+- canonical ID uniqueness: enforced by CI
+- canonical dependency existence: enforced by CI
+- declared per-wave entity counts: enforced by CI
+- tier depth / presentation requirements: enforced by CI
+- status dashboard freshness: enforced by CI
 
-## Catalog CI
-Latest canonical catalog migration passed automated validation.
-
-## Next Production Priorities
-1. Fill wildlife/tameables.
-2. Expand monster families.
-3. Expand weapons and armor.
-4. Define relics/material graph.
-5. Define vehicle families.
-6. Implement first UEFN vertical-slice runtime.
+## Production Boundary
+Catalog specification is not equivalent to UEFN implementation.
+The next implementation gates require the UEFN project, asset binding, Verse compilation, Launch Session testing, memory profiling, VFX/animation production, and balance passes.
