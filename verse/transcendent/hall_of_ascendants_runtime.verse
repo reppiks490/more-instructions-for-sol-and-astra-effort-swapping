@@ -24,6 +24,8 @@ aeonfall_hall_of_ascendants_runtime := class():
     ProfileService:aeonfall_profile_service = aeonfall_profile_service{}
 
     var Entries:[string]aeonfall_hall_entry = map{}
+    RefreshIntervalSeconds:float = 5.0
+    var RefreshRemainingSeconds:float = 5.0
 
     GetAuthorityDepth(Profile:aeonfall_player_profile)<transacts>:int=
         if (Profile.TranscendentState <> 1):
@@ -98,6 +100,30 @@ aeonfall_hall_of_ascendants_runtime := class():
                 SourceId := OwnerKey
             }
         )
+
+    TickAll(DeltaSeconds:float)<transacts>:void=
+        if (DeltaSeconds <= 0.0):
+            return
+
+        set RefreshRemainingSeconds =
+            RefreshRemainingSeconds - DeltaSeconds
+
+        if (RefreshRemainingSeconds > 0.0):
+            return
+
+        set RefreshRemainingSeconds = RefreshIntervalSeconds
+
+        var OwnerKeys:[]string = array{}
+        for (OwnerKey -> Entry : Entries):
+            set OwnerKeys = OwnerKeys + array{OwnerKey}
+
+        for (OwnerKey : OwnerKeys):
+            if:
+                Agent := AEONFALLActorRegistry.GetAgent[OwnerKey]
+            then:
+                Refreshed := RefreshIfReady(Agent)
+                if (Refreshed?):
+                    Refreshed = true
 
 AEONFALLHallOfAscendants:aeonfall_hall_of_ascendants_runtime =
     aeonfall_hall_of_ascendants_runtime{}
