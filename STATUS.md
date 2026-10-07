@@ -52,8 +52,22 @@ This file is generated from the canonical catalog by `tools/build_status.py`.
 - 840 total major definitions including factions.
 - Wave 019: validation success.
 - Wave 020: validation success.
-- core persistence, progression, material ledger, faction reputation, Zero Candidate, Ascension gate, boss contract, world-event contract, and companion contract scaffolds exist in Verse.
+- core persistence, progression, material ledger, atomic crafting, faction reputation, Zero Candidate, Ascension gate, typed event bus, status/ability contracts, boss state machine, world-event state machine, companion contract, AI archetype contract, and configurable NPC lifecycle behavior scaffolds exist in Verse.
 - five-stage cannibal horde, necromancer ecology, eldritch, infernal, mythical, skyscraper-class, continent-class, God, Absolute, and Transcendent Zero content are represented.
+
+## Validated Vertical Slice — SLICE-001
+- region: **The Ossuary March**
+- 12 monsters, 6 tameables, 8 hireables, 12 weapons, 2 armor families, 3 vehicles
+- 2 minibosses + 1 major boss
+- world event: **EVT-011 Grave Market Eclipse**
+- dungeon structure: **The Ossuary Exchange**
+- first shop specification: **The Grave Market Quartermaster**
+- 6 first-slice crafting recipes with batch material validation
+- UEFN binding matrix validated against the slice manifest
+- 10 authored boss phases + 4 authored world-event stages
+- 13-region world topology and 4 world-scale event shells validated
+- first-slice Verse registry generator executes in CI
+- current limitation: Verse has not yet been compiled inside the actual UEFN project, so runtime files remain scaffolds rather than production-verified implementation.
 
 ## Next Production Priority
 Quantity is no longer the bottleneck. The priority is now:
