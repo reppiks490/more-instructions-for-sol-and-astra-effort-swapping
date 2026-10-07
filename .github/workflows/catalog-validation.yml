@@ -7,6 +7,7 @@ on:
       - "content/crafting/**"
       - "content/vertical_slice/**"
       - "content/world/**"
+      - "verse/generated/**"
       - "schemas/**"
       - "tools/validate_catalog.py"
       - "tools/validate_crafting.py"
@@ -85,6 +86,9 @@ jobs:
 
       - name: Build first-slice combat Verse registry
         run: python tools/build_slice_combat_registry.py
+
+      - name: Check generated first-slice combat bootstrap
+        run: git diff --exit-code -- verse/generated/slice_001_combat_bootstrap.verse
 
       - name: Build runtime content index
         run: python tools/build_content_index.py
