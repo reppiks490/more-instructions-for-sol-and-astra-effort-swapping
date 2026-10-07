@@ -9,6 +9,7 @@
 aeonfall_ability_runtime := class():
 
     var States:[string]aeonfall_ability_runtime_state = map{}
+    var OwnerByStateKey:[string]string = map{}
 
     MakeStateKey(OwnerKey:string, AbilityId:string):string=
         OwnerKey + "::" + AbilityId
@@ -26,7 +27,11 @@ aeonfall_ability_runtime := class():
             if:
                 Existing := States[Key]
             then:
-                return true
+                if:
+                    set OwnerByStateKey[Key] = OwnerKey
+                then:
+                    return true
+                return false
             else:
                 InitialCharges:int =
                     if (Definition.ResourcePolicy = aeonfall_resource_policy.Charges):
@@ -48,6 +53,7 @@ aeonfall_ability_runtime := class():
 
                 if:
                     set States[Key] = Initial
+                    set OwnerByStateKey[Key] = OwnerKey
                 then:
                     AEONFALLRuntimeBus.Emit(
                         aeonfall_runtime_event{
@@ -548,5 +554,38 @@ aeonfall_ability_runtime := class():
                 set UpdatedStates = UpdatedStates
 
         set States = UpdatedStates
+
+    ClearOwner(OwnerKey:string)<transacts>:void=
+        var UpdatedStates:[string]aeonfall_ability_runtime_state = map{}
+        var UpdatedOwners:[string]string = map{}
+
+        for (Key -> State : States):
+            var Keep:logic = true
+
+            if:
+                StoredOwner := OwnerByStateKey[Key]
+            then:
+                if (StoredOwner = OwnerKey):
+                    set Keep = false
+
+            if (Keep?):
+                if:
+                    set UpdatedStates[Key] = State
+                then:
+                    if:
+                        StoredOwner := OwnerByStateKey[Key]
+                        set UpdatedOwners[Key] = StoredOwner
+                    then:
+                        set UpdatedOwners = UpdatedOwners
+
+        set States = UpdatedStates
+        set OwnerByStateKey = UpdatedOwners
+
+        AEONFALLRuntimeBus.Emit(
+            aeonfall_runtime_event{
+                EventType := "ability.owner_cleared",
+                SourceId := OwnerKey
+            }
+        )
 
 AEONFALLAbilityRuntime:aeonfall_ability_runtime = aeonfall_ability_runtime{}
