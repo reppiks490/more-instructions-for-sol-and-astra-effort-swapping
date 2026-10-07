@@ -1,0 +1,1759 @@
+{
+  "wave": "003",
+  "purpose": "Expanded hireable roster: 12 Epic, 6 Legendary, 5 Mythic, 3 Exotic, 2 God. Final three entries are premium-designated.",
+  "entity_count": 28,
+  "entities": [
+    {
+      "id": "NPC-009",
+      "name": "Ashen Valehound",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
+      "role": "tracker / execution skirmisher",
+      "identity": {
+        "fantasy": "Hunts wounded targets by reading heat, scent, and battlefield residue, then closes with a hooked carbine and execution dash.",
+        "silhouette": "Charcoal ranger armor, ember-lined hood, asymmetric wolf-mask visor, and a folding hooked rifle carried low like a hunting spear.",
+        "lore_hook": "Former border warden of the Cinder March who hires only after the player finishes a flawless predator contract."
+      },
+      "mechanics": {
+        "core": [
+          "wound tracking",
+          "execution dash",
+          "pack target marking"
+        ],
+        "signature": [
+          "Bloodtrail Sense reveals recently injured hostiles through nearby cover for a short tactical window.",
+          "Houndstep converts a successful mark into one curved high-speed flank dash.",
+          "Execution Hook deals bonus stagger only to targets below a visible health threshold."
+        ],
+        "counterplay": [
+          "Marks are short-range and decay; Houndstep exposes a predictable landing lane that enemies can punish."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Thin ember footprints, thermal scent ribbons, and a sharp ash-ring burst around execution-qualified targets."
+        ],
+        "animation": [
+          "Low stalking posture shifts into a forward shoulder sprint; successful executions end in a rifle-hook recoil spin rather than a static firing pose."
+        ],
+        "audio": [
+          "Dry chain clicks, distant hound-like resonance on marks, and a low heartbeat cue when a target enters execution range."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Complete the Vale Predator contract chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-001"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-010",
+      "name": "Rook Hexmarch",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
+      "role": "mobile bulwark / breach support",
+      "identity": {
+        "fantasy": "Turns forward movement into defensive momentum, advancing behind a compact hex-shield while breaking fortified lanes.",
+        "silhouette": "Broad black-and-brass coat armor, tower-shoulder plates, six glowing shield facets orbiting one forearm.",
+        "lore_hook": "An exiled siege captain whose oath prevents him from retreating while an ally remains downed nearby."
+      },
+      "mechanics": {
+        "core": [
+          "mobile cover",
+          "breach charge",
+          "ally rescue"
+        ],
+        "signature": [
+          "Hexwall Advance projects a narrow moving frontal barrier instead of a stationary bubble.",
+          "Bastion Ram stores blocked damage and releases it as a short knockback breach.",
+          "Last Rampart accelerates his revive movement when a squadmate is downed behind his wall."
+        ],
+        "counterplay": [
+          "Flanking bypasses Hexwall; stored Ram energy is lost if the shield is forced to collapse."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Six amber barrier facets tessellate into a moving wall, crack visibly under pressure, then implode into geometric sparks when broken."
+        ],
+        "animation": [
+          "Heavy planted steps while guarding, shoulder-first acceleration during Ram, and a one-knee shield brace while covering revives."
+        ],
+        "audio": [
+          "Layered brass impacts, rising harmonic strain on the wall, and a deep gate-slam sound when Ram releases."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Win Rook's moving-fortress challenge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-002"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-011",
+      "name": "Nyra Stormglass",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
+      "role": "storm sniper / mobility support",
+      "identity": {
+        "fantasy": "Builds charge from exposed weather and converts it into ricochet precision shots and short squad movement bursts.",
+        "silhouette": "Translucent blue coat plates, stormglass rifle barrel, silver braids floating slightly in charged air.",
+        "lore_hook": "Nyra maps impossible thunderstorms and sells her aim only to players who recover a shattered weather lens."
+      },
+      "mechanics": {
+        "core": [
+          "storm charge",
+          "ricochet shot",
+          "squad speed burst"
+        ],
+        "signature": [
+          "Stormglass Bank gains charge while under open sky or inside active weather events.",
+          "Refraction Shot bends once toward a marked secondary target after striking terrain or armor.",
+          "Blue Gale grants nearby allies a brief movement burst when Nyra spends a full charge bank."
+        ],
+        "counterplay": [
+          "Indoor engagements starve charge; ricochet trajectory is telegraphed by a visible blue line."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Electric rain beads orbit the rifle, refractive blue arcs bend at ricochet points, and a thin wind halo expands during Blue Gale."
+        ],
+        "animation": [
+          "Rifle aim pulls her entire posture into a glass-still stance; full-charge release snaps her coat and braids backward in a pressure wave."
+        ],
+        "audio": [
+          "Rain-on-glass ticks while charging, crystalline thunder on ricochet, and a bright wind chime when allies receive Gale."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Restore the Tempest Observatory lens array."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-003"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-012",
+      "name": "Kael Vantablade",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
+      "role": "anti-elite duelist",
+      "identity": {
+        "fantasy": "Challenges one elite at a time, suppressing that target's mobility while gaining parry windows against telegraphed attacks.",
+        "silhouette": "Lean matte-black armor with a single white edge-line, split mantle, and a long blade that absorbs nearby light.",
+        "lore_hook": "Kael is the surviving adjudicator of an order that settled wars through ritual single combat."
+      },
+      "mechanics": {
+        "core": [
+          "duel mark",
+          "parry window",
+          "mobility suppression"
+        ],
+        "signature": [
+          "Black Accord designates one elite as Kael's duel target and reduces his interest in lesser enemies.",
+          "Night Parry opens only against clearly telegraphed attacks and converts success into stagger.",
+          "Severing Step briefly reduces the duel target's dash or leap effectiveness after a clean blade hit."
+        ],
+        "counterplay": [
+          "Multiple enemies can overwhelm him; failed parries impose a recovery lockout."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Light drains subtly toward the blade, duel targets gain a razor-thin white ring, and parries burst into inverted black-white shards."
+        ],
+        "animation": [
+          "Economical fencing footwork, blade held behind the body before counters, and a sharp half-turn recovery after failed parries."
+        ],
+        "audio": [
+          "Muted ambience inside a duel, single metallic heartbeats before parry windows, and a vacuum snap on stagger."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Defeat Kael in a nonlethal adjudication duel."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-004"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-013",
+      "name": "Sable Meridian",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
+      "role": "recon infiltrator / sensor denial",
+      "identity": {
+        "fantasy": "Creates moving pockets of sensor confusion while tagging dangerous enemies for the squad.",
+        "silhouette": "Midnight longcoat with animated latitude lines, mirrored half-mask, compact suppressed sidearm and wrist cartography rig.",
+        "lore_hook": "Sable steals maps from hostile realities and marks paths that officially do not exist."
+      },
+      "mechanics": {
+        "core": [
+          "sensor denial",
+          "threat tagging",
+          "hidden-route discovery"
+        ],
+        "signature": [
+          "Dead Meridian suppresses selected enemy detection assists inside a small moving field without granting true invisibility.",
+          "Black Pin tags one high-threat enemy and shares the mark with the squad.",
+          "Impossible Route reveals authored flank doors, vents, or traversal shortcuts in supported encounters."
+        ],
+        "counterplay": [
+          "Direct sight still works; denial radius is small and Black Pin can be cleansed by specific elites."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Map-lines crawl over nearby surfaces, tagged enemies carry a rotating black compass rose, and hidden-route seams glow briefly like erased ink."
+        ],
+        "animation": [
+          "Constant scanning hand gestures, low-profile shoulder rolls through cover, and a map-snap animation when a hidden route is revealed."
+        ],
+        "audio": [
+          "Soft sonar inversion, pen-scratch spatial cues, and a subdued compass click when a threat is pinned."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Recover three stolen meridian charts."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-005"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-014",
+      "name": "Orin Dreadwake",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
+      "role": "heavy suppressor / fear breaker",
+      "identity": {
+        "fantasy": "Uses concussive fire and battle shouts to keep mobs off allies while granting resistance to panic-style encounter effects.",
+        "silhouette": "Massive sea-black plate, barnacle-textured pauldrons, red signal lantern on the chest, rotary cannon slung from a chain harness.",
+        "lore_hook": "Orin survived the Dreadwake Leviathan and now laughs whenever something larger than a building tries to scare him."
+      },
+      "mechanics": {
+        "core": [
+          "suppression fire",
+          "mob displacement",
+          "fear resistance"
+        ],
+        "signature": [
+          "Wakefire sweeps a controlled suppression cone that discourages lesser mobs from advancing.",
+          "Anchor Roar grants nearby allies temporary resistance to authored fear or intimidation states.",
+          "Chainbrace plants Orin in place to resist knockback while protecting a narrow rear safe lane."
+        ],
+        "counterplay": [
+          "Planting removes mobility; suppression loses value against disciplined elites and bosses."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Salt-black muzzle smoke, red lantern shock rings, and anchor-chain glyphs briefly lock to the ground during Chainbrace."
+        ],
+        "animation": [
+          "Weighty cannon harness recoil, chest-forward roar pose, and a two-handed ground brace that visibly transfers force into the terrain."
+        ],
+        "audio": [
+          "Ship-hull groans, thunderous breath, rotary cannon rumble, and a low foghorn pulse on Anchor Roar."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Clear the Dreadwake wreck without triggering a panic wipe."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-006"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-015",
+      "name": "Vexa Thorncoil",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
+      "role": "biotech trapper / tame support",
+      "identity": {
+        "fantasy": "Uses living thorn devices to pin predators, accelerate taming windows, and convert captured biomass into temporary field medicine.",
+        "silhouette": "Emerald-black bioarmor, thorn-vine gauntlets, luminous seed capsules, and a coiled living cable across her back.",
+        "lore_hook": "Vexa was raised by a predatory forest intelligence and treats monsters as negotiations waiting to happen."
+      },
+      "mechanics": {
+        "core": [
+          "living traps",
+          "taming assistance",
+          "biomass medicine"
+        ],
+        "signature": [
+          "Coil Snare grows a temporary thorn lattice that restrains supported non-boss creatures.",
+          "Wild Accord widens the player's taming opportunity on species compatible with Vexa's ecology.",
+          "Green Debt converts a successful tame or nonlethal capture into one limited healing seed."
+        ],
+        "counterplay": [
+          "Fire and cutting effects clear snares quickly; bosses cannot be hard-restrained."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Fast-growing luminous vines, spore motes that change color with creature disposition, and a green pulse that travels from a tamed creature to the player."
+        ],
+        "animation": [
+          "Throws seed capsules underhand, whips vines with full-body momentum, and kneels calmly during taming while combat continues around her."
+        ],
+        "audio": [
+          "Wet vine snaps, insectile harmonic clicks, and a warm wooden resonance when a taming state improves."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Complete the Verdant Teeth taming pilgrimage."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-007"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-016",
+      "name": "Thane Ironsaint",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
+      "role": "guardian / anti-corruption support",
+      "identity": {
+        "fantasy": "Carries sanctified iron that converts incoming corruption effects into temporary armor for nearby allies.",
+        "silhouette": "Cathedral-forged iron coat, circular reliquary shield, blunt warhammer with red-hot scripture engraved along the head.",
+        "lore_hook": "Thane was canonized by soldiers rather than priests after holding a plague gate alone for three nights."
+      },
+      "mechanics": {
+        "core": [
+          "corruption conversion",
+          "guard aura",
+          "stagger hammer"
+        ],
+        "signature": [
+          "Iron Absolution converts a portion of supported corruption buildup into temporary overshield.",
+          "Saintline creates a narrow safe corridor behind Thane while he advances.",
+          "Bellhammer Strike creates heavy stagger against necrotic constructs and shielded mobs."
+        ],
+        "counterplay": [
+          "Non-corruption damage bypasses his specialty; safe corridor disappears if he sprints or is launched."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Molten scripture crawls across his shield, corruption particles burn into silver sparks, and hammer impacts emit concentric cathedral-window patterns."
+        ],
+        "animation": [
+          "Slow shield advance, shoulder rotation before hammer impact, and a deliberate shield-to-ground kneel while converting corruption."
+        ],
+        "audio": [
+          "Deep iron bell tones, scripture hiss, and choir-like distortion that resolves into a clean chord when corruption is cleansed."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Defend the Plague Gate memorial event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-008"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-017",
+      "name": "Mira Riftborne",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
+      "role": "portal skirmisher / extraction specialist",
+      "identity": {
+        "fantasy": "Places paired short-range rifts for squad repositioning and emergency extraction while harassing enemies from changing angles.",
+        "silhouette": "Purple-white expedition suit, split cape appearing slightly displaced in space, twin ring devices mounted at the hips.",
+        "lore_hook": "Mira fell through seventeen failed realities and remembers a different version of every place she visits."
+      },
+      "mechanics": {
+        "core": [
+          "paired rifts",
+          "emergency extraction",
+          "angle pressure"
+        ],
+        "signature": [
+          "Twin Aperture creates a short-lived authored portal pair between valid nearby surfaces.",
+          "Recall Line can pull one downed or critical ally through the nearer aperture under strict range rules.",
+          "Crossfire Step rewards Mira with a brief accuracy bonus after she personally traverses her rift."
+        ],
+        "counterplay": [
+          "Portals are visible, destroyable, range-limited, and cannot bypass protected encounter boundaries."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Clean elliptical tears with layered parallax interiors, trailing white-violet displacement streaks, and a compression flash when Recall Line triggers."
+        ],
+        "animation": [
+          "She dives shoulder-first through apertures, lands in a low three-point stance, and spins one ring device to collapse a portal manually."
+        ],
+        "audio": [
+          "Glass tension rising into a soft spatial boom, doppler-shifted footsteps through rifts, and a high alarm tone before forced collapse."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Recover Mira's seventeen expedition anchors."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-001"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-018",
+      "name": "Cassian Bloodstar",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
+      "role": "risk-reward gunfighter",
+      "identity": {
+        "fantasy": "Trades his own temporary overshield for empowered precision bursts, then earns it back through aggressive finishing play.",
+        "silhouette": "Crimson duelist coat over star-metal plates, luminous red cylinder pistol, constellation scars across one exposed forearm.",
+        "lore_hook": "Cassian claims a dead star taught him how to gamble with blood; no astronomer has disproved him."
+      },
+      "mechanics": {
+        "core": [
+          "overshield wager",
+          "precision burst",
+          "finish recovery"
+        ],
+        "signature": [
+          "Red Ante spends a fixed overshield chunk to prime an empowered three-shot burst.",
+          "Deadstar Return restores part of the wager if Cassian helps finish the primed target.",
+          "House Edge briefly improves reload speed after a successful wager cycle."
+        ],
+        "counterplay": [
+          "Poor target selection leaves Cassian exposed; overshield spend cannot reduce him below a safety floor."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Red stellar motes drain from his armor into the pistol, targets gain a tiny eclipsed-star mark, and successful recovery showers sparks back into his chestplate."
+        ],
+        "animation": [
+          "Flourished cylinder spin before a wager, rigid two-handed burst stance, then a fast coat-sweep reload on successful recovery."
+        ],
+        "audio": [
+          "Casino-chip ticks mixed with stellar crackle, a sharp three-note burst cadence, and a satisfying reversed impact when shield returns."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Win the Bloodstar three-contract wager chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-002"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-019",
+      "name": "Ilyra Moonscar",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
+      "role": "night hunter / debuff support",
+      "identity": {
+        "fantasy": "Becomes stronger in darkness and can temporarily dim a localized combat pocket to expose spectral weak points.",
+        "silhouette": "Pale lunar armor cut by one diagonal black scar motif, crescent glaive, trailing veil made from starless fabric.",
+        "lore_hook": "Ilyra survived being marked by a moon that no longer exists and hunts things visible only in its absence."
+      },
+      "mechanics": {
+        "core": [
+          "darkness field",
+          "spectral weak points",
+          "glaive control"
+        ],
+        "signature": [
+          "Moonless Pocket dims a bounded area without globally altering the map's lighting.",
+          "Scar Sight reveals authored spectral weak points on supported monsters inside the pocket.",
+          "Crescent Sweep knocks lesser shadow creatures outward while preserving boss positioning."
+        ],
+        "counterplay": [
+          "Bright-zone enemies can force her out of ideal conditions; spectral weak points are temporary and encounter-authored."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Localized desaturation, silver edge-lighting on hidden weak points, and black crescent trails that remain for a fraction of a second after glaive swings."
+        ],
+        "animation": [
+          "Fluid circular glaive forms, veil lagging unnaturally behind movement, and a head-tilt tracking pose when Scar Sight locks on."
+        ],
+        "audio": [
+          "Soft lunar hum, cloth moving without wind, and a brittle silver crack when a spectral weak point is struck."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Complete a Moonscar hunt during the Nocturne event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-003"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-020",
+      "name": "Droven Blacktide",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
+      "role": "amphibious assault / rescue",
+      "identity": {
+        "fantasy": "Dominates waterline fights, creates temporary current lanes, and can drag incapacitated allies away from exposed shorelines.",
+        "silhouette": "Black-blue scaled assault suit, manta-shaped shoulder fins, pressure canisters, harpoon rifle with braided cable.",
+        "lore_hook": "Droven belongs to a drowned city whose soldiers still consider the ocean a road rather than a boundary."
+      },
+      "mechanics": {
+        "core": [
+          "water mobility",
+          "current lane",
+          "ally drag"
+        ],
+        "signature": [
+          "Black Current creates a short directional water-speed lane in supported zones.",
+          "Undertow Hook drags a lesser enemy or repositions a downed ally depending on target context.",
+          "Pressure Break fires a close-range concussive burst after leaving water."
+        ],
+        "counterplay": [
+          "Dry inland zones reduce his specialty; Undertow cannot move protected bosses or objectives."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Dark current ribbons, compressed bubble shock fronts, and blue-black water sheeting off armor even during short land transitions."
+        ],
+        "animation": [
+          "Dive-roll entries, low hydrodynamic sprinting, cable-braced harpoon recoil, and a violent shoulder twist during ally extraction."
+        ],
+        "audio": [
+          "Muffled underwater booms, cable whine, and a pressure-pop sound when Black Current activates."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Recover the Blacktide standard from the drowned transit tunnels."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-004"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-021",
+      "name": "Seraph Korr, the Sunless Banner",
+      "family": "npc",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "anti-boss commander",
+      "identity": {
+        "fantasy": "Plants a moving war standard that coordinates squad focus fire and changes formation based on boss phase.",
+        "silhouette": "Towering obsidian-gold commander armor, shredded solar banner that emits darkness rather than light, ceremonial rifle-spear.",
+        "lore_hook": "Seraph Korr led an army beneath a dead sun and still commands as if ten thousand soldiers stand behind him."
+      },
+      "mechanics": {
+        "core": [
+          "phase-aware command",
+          "focus-fire banner",
+          "formation shift",
+          "boss stagger support"
+        ],
+        "signature": [
+          "Sunless Standard marks a tactical rally zone whose buff changes between assault, brace, and recovery states.",
+          "Black Volley coordinates timed NPC ally fire against a designated boss weak point.",
+          "Command Debt stores a fraction of squad damage dealt inside the banner and converts it into one stagger pulse.",
+          "Last Formation automatically shifts the banner to defense when multiple allies become critical."
+        ],
+        "counterplay": [
+          "The standard is destructible and forces grouping; boss movement can pull the fight outside its influence."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "An inverted solar eclipse floats behind the banner, gold command lines connect allies briefly, stored damage appears as black light filling banner runes, and stagger release forms a silent expanding disk."
+        ],
+        "animation": [
+          "Banner planting uses a full kneeling spear-thrust, command gestures are broad and readable, rifle-spear attacks transition between ceremonial precision and brutal close defense."
+        ],
+        "audio": [
+          "Muted battlefield ambience near the standard, distant army footfalls, low brass commands, and a huge breath-like silence immediately before the stagger pulse."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Complete the Dead Sun command raid and earn Korr's oath."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-005"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-022",
+      "name": "Valkyra Nocturne",
+      "family": "npc",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "aerial assassin / rescue interceptor",
+      "identity": {
+        "fantasy": "Uses bounded aerial bursts to intercept threats, execute marked dives, and catch falling allies before impact.",
+        "silhouette": "Black chrome wing-rig with six blade-feathers, violet flight mask, narrow energy lance, long split-tail coat.",
+        "lore_hook": "Valkyra was built for a war above the cloud layer and refuses to accept gravity as a permanent instruction."
+      },
+      "mechanics": {
+        "core": [
+          "aerial burst",
+          "intercept dive",
+          "fall rescue",
+          "airborne mark"
+        ],
+        "signature": [
+          "Nightwing Burst grants short authored aerial dashes rather than unrestricted flight.",
+          "Meteor Intercept dives onto a marked elite and converts vertical distance into stagger up to a safety cap.",
+          "Sixth Feather can redirect one lethal fall for a nearby ally into a survivable glide.",
+          "Nocturne Mark increases Valkyra's aggression toward airborne threats and exposed weak points."
+        ],
+        "counterplay": [
+          "Wing bursts have visible recharge; anti-air enemies and ceilings constrain her strongest angles."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Six violet contrails split from the wing rig, feather-blades shed brief black sparks, intercept targets gain a descending triangular reticle, and rescued allies receive a temporary glide ribbon."
+        ],
+        "animation": [
+          "Explosive wing deployment, spear-forward dive pose, midair roll around incoming fire, and a dramatic one-arm catch animation during fall rescue."
+        ],
+        "audio": [
+          "Jet-like harmonic howl, feather blade chimes, accelerating dive tone, and a deep air-catch thump when a rescue succeeds."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Defeat Valkyra's aerial trial drones without touching the arena floor."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-006"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-023",
+      "name": "Orryx Bone-Crown",
+      "family": "npc",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "necromantic tactician",
+      "identity": {
+        "fantasy": "Builds temporary bone sentries from defeated lesser mobs and commands them as disposable positional tools rather than a permanent army.",
+        "silhouette": "Regal bone lamellar armor, antlered crown grown from fused vertebrae, staff-rifle wrapped in red marrow light.",
+        "lore_hook": "Orryx betrayed the Grave Architects after deciding death was too valuable to leave under one faction's control."
+      },
+      "mechanics": {
+        "core": [
+          "bone sentries",
+          "corpse resource",
+          "position command",
+          "anti-undead control"
+        ],
+        "signature": [
+          "Crown Levy converts eligible defeated lesser mobs into limited-duration bone sentry charges.",
+          "Marrow Order places sentries into guard, focus, or sacrifice positions.",
+          "King's Ossuary detonates expiring sentries into a defensive bone wall instead of wasting them.",
+          "Usurper Sigil weakens nearby uncontrolled undead coordination without hard-stunning them."
+        ],
+        "counterplay": [
+          "No corpses means no sentries; sentries are fragile and bosses cannot be converted."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Bone fragments assemble from red geometric threads, the crown grows extra prongs with stored charges, sentry orders draw skeletal arrows across the ground, and sacrifice walls erupt in pale ribs."
+        ],
+        "animation": [
+          "Staff commands resemble conducting motions, crown tilts toward available remains, and sentry creation uses a two-hand pull as bones rise from the floor."
+        ],
+        "audio": [
+          "Marrow rattles, whispered command syllables, dry crown creaks, and a heavy rib-cage slam when Ossuary forms."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Break Orryx's binding contract in the Sepulcher Court."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-007"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-024",
+      "name": "Eidolon Vesper",
+      "family": "npc",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "illusion duelist / threat misdirection",
+      "identity": {
+        "fantasy": "Projects combat echoes that imitate movement and muzzle flashes, causing authored enemies to split attention while Vesper attacks from changing lanes.",
+        "silhouette": "Deep indigo formal armor, mirror-smooth faceplate, four translucent afterimage ribbons pinned to the spine.",
+        "lore_hook": "Vesper claims to be the echo and insists the original died years ago."
+      },
+      "mechanics": {
+        "core": [
+          "combat echoes",
+          "aggro misdirection",
+          "mirror swap",
+          "duel burst"
+        ],
+        "signature": [
+          "Vesper Echoes replay short authored movement snippets and false muzzle flashes without dealing full damage.",
+          "Mirror Claim redirects selected lesser-enemy attention toward an echo for a brief window.",
+          "Vesper Swap exchanges position with a surviving echo inside bounded range.",
+          "Afterimage Verdict empowers one close burst immediately after a successful swap."
+        ],
+        "counterplay": [
+          "Players and elite enemies can distinguish echoes by subtle distortion; area damage clears them efficiently."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Indigo mirror shards, delayed translucent silhouettes, reversed muzzle flashes, and a polished black ripple at swap origin and destination."
+        ],
+        "animation": [
+          "Every dodge leaves a one-beat delayed body double, swaps are punctuated by a backward step into the mirror ripple, and close bursts use elegant one-handed weapon poses."
+        ],
+        "audio": [
+          "Doubled footsteps with slight delay, reversed gunshot tails on echoes, glass whispering, and a crisp stereo flip when positions swap."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Solve the Hall of Vesper identity puzzle."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-008"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-025",
+      "name": "Maelis Star-Render",
+      "family": "npc",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "artillery caster / terrain denial",
+      "identity": {
+        "fantasy": "Calls precise stellar bombardments that carve temporary danger lines and punish stationary elites.",
+        "silhouette": "White-black astral armor, long mantle patterned with moving constellations, floating targeting astrolabe above one shoulder.",
+        "lore_hook": "Maelis catalogues stars by the wars they ended and carries coordinates to several that should never answer."
+      },
+      "mechanics": {
+        "core": [
+          "stellar strike",
+          "danger lanes",
+          "anti-stationary pressure",
+          "orbital targeting"
+        ],
+        "signature": [
+          "Render Line paints a narrow telegraphed stellar strike lane across valid terrain.",
+          "Parallax Battery stores charge while Maelis keeps line of sight on a stationary elite.",
+          "Falling Meridian spends stored charge on a delayed vertical impact that scales stagger rather than raw damage against bosses.",
+          "Astrolabe Shift rotates the next strike lane after an ally pings a target."
+        ],
+        "counterplay": [
+          "Long telegraphs allow movement; ceilings and protected interiors disable orbital patterns."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Constellation lines draw across the ground, the shoulder astrolabe rotates faster with charge, skyward light collapses into razor-thin impact columns, and afterglow leaves temporary star-map scars."
+        ],
+        "animation": [
+          "Slow astronomical hand alignment before strikes, mantle lifts in zero-wind during full charge, and recoil drives Maelis backward a half step despite no conventional weapon."
+        ],
+        "audio": [
+          "Deep celestial ticking, a high descending whistle, distant thunder arriving after the flash, and quiet star-chime decay in the scorched lane."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Complete the Astral Battery world event with all observatories intact."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-001"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-026",
+      "name": "Torvane, the Ninth Ember",
+      "family": "npc",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "berserker tank / heat economy",
+      "identity": {
+        "fantasy": "Builds controlled heat by taking and dealing damage, then vents it through area denial or converts it into armor.",
+        "silhouette": "Enormous dark-red furnace armor, nine glowing chest vents, molten chain-axe, smoke leaking from helmet seams.",
+        "lore_hook": "Eight previous Ember champions burned themselves out; Torvane survived by learning that rage is an engineering problem."
+      },
+      "mechanics": {
+        "core": [
+          "heat meter",
+          "armor conversion",
+          "area vent",
+          "berserker cleave"
+        ],
+        "signature": [
+          "Ninth Furnace accumulates heat from combat up to a visible danger threshold.",
+          "Cinderplate converts stored heat into temporary armor instead of damage output.",
+          "Red Vent releases a directional heat wave that clears lesser mobs and leaves a short denial strip.",
+          "Chain Sun cleave grows wider with heat but never beyond authored encounter caps."
+        ],
+        "counterplay": [
+          "Overheating forces a vulnerable cooldown; cold effects and disengagement reduce his pressure."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Nine furnace vents illuminate one by one, armor seams glow from red to white, heat haze thickens around the axe, and Red Vent rolls forward as a low wall of sparks and distortion."
+        ],
+        "animation": [
+          "Heavy chain-axe windups shorten as heat rises, emergency venting opens armor panels violently, and Cinderplate locks plates inward like a closing furnace."
+        ],
+        "audio": [
+          "Layered furnace roar, chain drag, escalating pressure whistles, and an enormous valve blast when heat is vented."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Survive all nine stages of the Ember Crucible."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-002"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-027",
+      "name": "Calistra, Queen of Ruined Hours",
+      "family": "npc",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "temporal commander / encounter reset specialist",
+      "identity": {
+        "fantasy": "Manipulates approved combat timelines by recording squad positions, delaying hostile attacks, and restoring one tactical formation after a catastrophe.",
+        "silhouette": "Regal fractured-clock armor, crown of floating broken hour hands, translucent train showing multiple delayed poses at once.",
+        "lore_hook": "Calistra ruled a kingdom that experienced its final hour for three centuries and learned to negotiate with endings."
+      },
+      "mechanics": {
+        "core": [
+          "formation record",
+          "attack delay",
+          "approved tactical restore",
+          "temporal command"
+        ],
+        "signature": [
+          "Royal Timestamp records the squad's valid positions and selected support-state flags for a short authored window.",
+          "Ruined Second delays one telegraphed hostile attack channel rather than freezing the entire world.",
+          "Court Recall restores willing allies to recorded positions if those positions remain encounter-valid.",
+          "Throne of Hours creates a brief command zone where ability cooldown recovery is modestly accelerated.",
+          "Last Audience automatically consumes the record instead of restoring if recall would violate a protected boss phase."
+        ],
+        "counterplay": [
+          "The record is visible and short-lived; protected states, objectives, and boss health never rewind."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Gold clock fractures hover around allies, delayed attack telegraphs leave transparent ghost versions, court boundaries appear as rotating numeral fragments, and recall snaps figures through layered afterimages."
+        ],
+        "animation": [
+          "Every command begins with a crown-hand rotation, recalls pull her cloak and allies backward through their own afterimages, and delayed attacks visibly stutter rather than freezing globally."
+        ],
+        "audio": [
+          "Layered ticking at different tempos, reversed bell tails, a royal gavel pulse on record creation, and a sudden vacuum followed by one synchronized clock strike on recall."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Complete the Ruined Hours raid and return Calistra's missing final minute."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-003"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-028",
+      "name": "Rhazek, Mawbound Prince",
+      "family": "npc",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "demon bruiser / devour economy",
+      "identity": {
+        "fantasy": "Consumes temporary enemy buffs and environmental corruption to evolve his melee kit through three bounded combat forms.",
+        "silhouette": "Towering crimson-black demonic prince, ceremonial jaw-mask chained to his chest, two asymmetrical arms wrapped in living sigils.",
+        "lore_hook": "Rhazek was born heir to a court that worshipped hunger and was exiled for learning restraint."
+      },
+      "mechanics": {
+        "core": [
+          "buff devour",
+          "three combat forms",
+          "corruption feeding",
+          "boss break"
+        ],
+        "signature": [
+          "Mawbound Claim consumes one eligible lesser buff or corruption source and stores its flavor.",
+          "Prince of Teeth shifts between Hunter, Bulwark, and Ravager forms based on stored flavor and encounter need.",
+          "Royal Devour converts excess corruption into a capped stagger shield instead of raw healing.",
+          "Red Abdication sacrifices all stored flavor for one massive but telegraphed boss-break strike.",
+          "Chain of Restraint prevents autonomous frenzy while hired, making his strongest power a player-managed resource."
+        ],
+        "counterplay": [
+          "Eligible buffs are curated; starvation weakens his advanced forms and Abdication leaves a long recovery."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Living red sigils crawl from consumed effects onto his arms, jaw-mask opens without touching his face, form shifts grow different horn silhouettes, and Abdication produces a huge inward-collapse ring before impact."
+        ],
+        "animation": [
+          "Predatory crouch in Hunter, square planted shoulders in Bulwark, four-step accelerating combo posture in Ravager, and a full-body chain yank before Abdication."
+        ],
+        "audio": [
+          "Sub-bass growls filtered through metal, snapping chain percussion, swallowed spell sounds when buffs are consumed, and a cathedral-sized bite impact on Abdication."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Break Rhazek's infernal succession contract and defeat his three court champions."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-004"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-029",
+      "name": "Aureon, the Last Dawn",
+      "family": "npc",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "radiant paladin / resurrection support",
+      "identity": {
+        "fantasy": "Stores Dawn Charges through skilled squad play and spends them on powerful protective miracles, including one heavily limited combat resurrection.",
+        "silhouette": "Brilliant ivory-gold plate cracked by black night lines, halo made from six rotating sunrise blades, long radiant spear.",
+        "lore_hook": "Aureon is said to be the final sunrise preserved from a universe that no longer has a sky."
+      },
+      "mechanics": {
+        "core": [
+          "dawn charges",
+          "protective miracles",
+          "limited resurrection",
+          "radiant spear"
+        ],
+        "signature": [
+          "First Light earns Dawn Charges from boss weak-point breaks, successful revives, and protected-objective play.",
+          "Dawnwall projects a directional radiant barrier that weakens hostile projectiles passing through it.",
+          "Morning Spear marks an elite so squad damage fills a small shared restoration pool.",
+          "Last Sunrise spends maximum Dawn Charges to restore one eligible downed or recently eliminated ally under strict encounter rules.",
+          "Nightbreaker converts leftover charges into an anti-corruption pulse instead of wasting them between phases."
+        ],
+        "counterplay": [
+          "Resurrection has encounter-level lockouts, requires maximum charge, and cannot bypass scripted wipe mechanics."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Six sunrise blades orbit the halo independently, barriers refract attacks into golden rain, resurrection builds from a tiny horizon line into a vertical dawn column, and corruption burns away as black ash turning white."
+        ],
+        "animation": [
+          "Formal spear guard stances, halo blades lock into geometric shields, resurrection uses a two-handed upward spear raise, and Nightbreaker ends with the spear planted into the ground."
+        ],
+        "audio": [
+          "Warm brass choir, sunrise wind, restrained spear impacts, and a massive but clean major chord when Last Sunrise succeeds."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Complete the Last Dawn pilgrimage and save all three sanctuary beacons."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-005"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-030",
+      "name": "Nemea Void-Sister",
+      "family": "npc",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "void controller / ally reposition",
+      "identity": {
+        "fantasy": "Manipulates bounded void anchors to bend movement lanes, pull hostile projectiles off course, and create safe micro-routes through lethal arenas.",
+        "silhouette": "Elegant midnight armor with impossible negative-space cutouts, floating black rings around wrists and ankles, eyes rendered as tiny starfields.",
+        "lore_hook": "Nemea claims she is one of two sisters; records disagree on whether the other sister ever existed."
+      },
+      "mechanics": {
+        "core": [
+          "void anchors",
+          "projectile deflection",
+          "safe route",
+          "enemy pull"
+        ],
+        "signature": [
+          "Sister Anchors place two short-lived void points that curve supported movement and projectiles between them.",
+          "Black Courtesy opens a narrow safe micro-route through selected environmental hazards for nearby allies.",
+          "Absent Hand pulls lesser enemies toward a void anchor without affecting protected boss positioning.",
+          "Null Orbit causes incoming supported projectiles to bend visibly around Nemea for a short defensive window.",
+          "Missing Sister creates one decoy anchor that collapses violently if enemies commit to it."
+        ],
+        "counterplay": [
+          "Anchors are visible, range-limited, and destructible; heavy boss attacks ignore hard redirection."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Perfect black disks with starfield rims, curved projectile trails, negative-space footprints along safe routes, and decoy collapse forming an inside-out sphere of purple fragments."
+        ],
+        "animation": [
+          "Hands trace circular anchor geometry, movement seems to skip tiny frames near active void points, and Null Orbit holds her unnaturally still while projectiles bend around her."
+        ],
+        "audio": [
+          "Low gravitational hum, reversed impact tails, muffled footsteps inside safe routes, and a sudden high crack when a decoy anchor collapses."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Recover both Void-Sister seals, including the one that should not exist."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-006"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-031",
+      "name": "Malachar, Saint of Chains",
+      "family": "npc",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "control tank / boss restraint support",
+      "identity": {
+        "fantasy": "Uses sacred chain constructs to limit elite movement, protect objectives, and create timed team attack windows against massive enemies.",
+        "silhouette": "Black cathedral plate, floating aureole made from broken chain links, enormous chain-lance coiled around one arm.",
+        "lore_hook": "Malachar was imprisoned as a demon, worshipped as a saint, and refuses to clarify which accusation was correct."
+      },
+      "mechanics": {
+        "core": [
+          "chain zones",
+          "objective guard",
+          "elite restraint",
+          "team damage window"
+        ],
+        "signature": [
+          "Sainted Chain draws an authored tether between Malachar and a selected elite, limiting extreme movement without rooting protected bosses.",
+          "Reliquary Circle wraps an objective in rotating chains that intercept a limited number of incoming threats.",
+          "Penitent Window tightens existing tethers after a successful weak-point break, briefly increasing team stagger effectiveness.",
+          "Martyr Link lets Malachar absorb a capped portion of damage aimed at a protected ally.",
+          "Cathedral Lock combines active chains into one massive phase-specific restraint during supported boss mechanics."
+        ],
+        "counterplay": [
+          "Chains have health and range; multiple tethers reduce Malachar's own movement and expose him to area attacks."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Black-gold chains emerge from glowing floor seals, broken aureole links rotate into complete circles during major casts, boss tethers thicken with each weak-point break, and Cathedral Lock forms towering chain arches."
+        ],
+        "animation": [
+          "Whole-body lance throws, backward bracing against boss movement, one-knee objective defense, and a brutal two-hand chain pull during Penitent Window."
+        ],
+        "audio": [
+          "Cathedral bells struck through chains, massive tension creaks, metallic choir resonance, and a deep lock-closing boom during Cathedral Lock."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Complete the Chain Saint dungeon without allowing a protected reliquary to break."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-007"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-032",
+      "name": "Juno Wildfire Kestrel",
+      "family": "npc",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "chaos pilot / vehicle-combat specialist",
+      "identity": {
+        "fantasy": "Treats vehicles as extensions of her combat kit, hot-swapping mounted effects, performing rescue pickups, and turning wrecks into temporary hazards.",
+        "silhouette": "Neon-orange flight suit under asymmetric ceramic armor, mirrored aviator mask, mechanical kestrel drone perched on one shoulder.",
+        "lore_hook": "Juno has been banned from six racing leagues, three militaries, and one moon for reasons she calls 'creative routing.'"
+      },
+      "mechanics": {
+        "core": [
+          "vehicle enhancement",
+          "combat pickup",
+          "wreck hazard",
+          "drone spotter"
+        ],
+        "signature": [
+          "Wildfire Retrofit temporarily changes one supported vehicle subsystem between speed, armor, or combat-support tuning.",
+          "Kestrel Eye drone marks dangerous road threats and reveals nearby vehicle salvage.",
+          "Hot Pickup shortens safe ally boarding time during combat and grants a brief departure boost.",
+          "Burnout Grave turns Juno's own destroyed supported vehicle into a short-lived denial field instead of an inert wreck.",
+          "Impossible Turn enables one heavily telegraphed emergency vector correction with a long cooldown rather than unrestricted vehicle physics."
+        ],
+        "counterplay": [
+          "Her strongest value disappears without vehicles; retrofits are temporary and mutually exclusive."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Neon engine tracers change color by retrofit mode, kestrel drone paints thin orange scan cones, wreck hazards burn in geometric tire patterns, and Impossible Turn leaves a corkscrew ribbon of fragmented light."
+        ],
+        "animation": [
+          "Rapid cockpit handwork, shoulder drone launch with a wrist flick, aggressive body lean through turns, and a full harness snap during emergency vector correction."
+        ],
+        "audio": [
+          "Turbo chirps, drone falcon-like synth cries, distorted tire harmonics, and a rising warning siren before Impossible Turn engages."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Win Juno's illegal cross-biome rally."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-008"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-033",
+      "name": "Zyrella Prism-Fang",
+      "family": "npc",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "spectrum assassin / elemental adaptation",
+      "identity": {
+        "fantasy": "Reads the dominant damage environment and rotates through prism stances that alter her attacks, resistances, and mobility style.",
+        "silhouette": "Faceted iridescent armor, translucent fang-blades, long white hair refracting into spectral color bands.",
+        "lore_hook": "Zyrella is a living optical weapon grown inside a crystal that remembers every color it has ever seen."
+      },
+      "mechanics": {
+        "core": [
+          "prism stances",
+          "damage adaptation",
+          "spectral dash",
+          "elemental counter"
+        ],
+        "signature": [
+          "Prism Read samples recent supported damage channels and recommends one of several authored counter-stances.",
+          "Fang Spectrum changes blade behavior and VFX with the active stance instead of merely recoloring damage.",
+          "Chromatic Slip becomes a distinct movement action in each stance: dash, hop, slide, or brief guard-shift.",
+          "Whiteout spends all stance charge to clear selected debuffs and return to neutral.",
+          "Refraction Punish grants a short counterattack window after correctly matching an incoming supported damage family."
+        ],
+        "counterplay": [
+          "Repeatedly changing enemy damage channels prevents perfect adaptation; Whiteout resets her strongest bonuses."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Armor facets reorganize with each stance, blade trails split into spectral sub-trails, matched counters flash white before resolving into the chosen color family, and Whiteout momentarily removes all color from the local character VFX."
+        ],
+        "animation": [
+          "Each stance has different footwork and blade posture, transitions snap through a crystalline full-body ripple, and Whiteout freezes her silhouette for one frame before explosive reset."
+        ],
+        "audio": [
+          "Glass harmonics map to stance colors, matched counters resolve into bright tonal chords, and incorrect adaptation produces intentionally rough dissonance."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Complete the seven-spectrum hunt and attune the Prism Fang."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-001"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Earnable hireable NPC."
+      ]
+    },
+    {
+      "id": "NPC-034",
+      "name": "Bront Hexdrive",
+      "family": "npc",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "paid-designated siege engineer / mech support",
+      "identity": {
+        "fantasy": "Deploys a compact walker platform, configurable turret logic, and moving repair geometry for high-pressure events.",
+        "silhouette": "Bulky cobalt engineer armor, six-tool mechanical backpack, hexagonal visor, compact two-legged siege walker folded behind him.",
+        "lore_hook": "Bront designed siege engines for every major faction and was fired by all of them for refusing to include an off switch."
+      },
+      "mechanics": {
+        "core": [
+          "walker deployment",
+          "configurable turret",
+          "mobile repair",
+          "siege support"
+        ],
+        "signature": [
+          "Hexwalker unfolds into a limited-duration two-legged support platform with authored weapon and utility modules.",
+          "Drive Matrix selects suppress, anti-elite, or repair behavior before deployment.",
+          "Marching Workshop projects a small moving repair radius for supported vehicles and deployables.",
+          "Siege Override spends all walker charge on one boss-armor cracking barrage with a major telegraph.",
+          "Emergency Fold recalls the walker early to recover part of its cooldown instead of losing the full cycle."
+        ],
+        "counterplay": [
+          "Walker has visible health, cannot enter protected spaces, and module selection is locked until redeployment."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Hex plates unfold in precise mechanical waves, walker feet stamp luminous engineering grids, repair beams braid into rotating polygons, and Siege Override fills the platform with dangerous overbright cobalt vents."
+        ],
+        "animation": [
+          "Bront assembles components with fast tool-switch choreography, physically climbs and kicks the walker into motion, then braces with both hands on a control yoke during Override."
+        ],
+        "audio": [
+          "Servo chatter, huge magnetic clunks, rapid tool ratchets, and a rising industrial turbine scream before the siege barrage."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Premium-designated hire entitlement plus completion of the Hexdrive proving contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "FAC-002"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Premium-designated concept; implementation must use Epic-supported in-island entitlement systems and publication rules."
+      ]
+    },
+    {
+      "id": "NPC-035",
+      "name": "Azura Sol, Goddess of the Burning Tide",
+      "family": "npc",
+      "tier": "god",
+      "status": "specified",
+      "role": "paid-designated god-tier battle siren / oceanic solar controller",
+      "identity": {
+        "fantasy": "An adult war-deity who combines solar heat, tidal force, squad empowerment, and spectacular battlefield movement without relying on permanent flight.",
+        "silhouette": "Adult goddess in stylized iridescent armored bikini-inspired battle regalia with a flowing sun-sail mantle, gold thigh armor, high boots, radiant jewelry, and a massive crescent trident; glamorous but battle-ready rather than explicit.",
+        "lore_hook": "Azura is worshipped where volcanic islands meet impossible blue suns; she hires champions who can survive both her tide trial and her judgment."
+      },
+      "mechanics": {
+        "core": [
+          "solar tide",
+          "trident combat",
+          "squad empowerment",
+          "tidal traversal",
+          "god-form surge"
+        ],
+        "signature": [
+          "Burning Tide alternates a bounded arena sector between advancing solar surf and retreating cooling water, changing safe positioning without globally editing the world.",
+          "Sunwake Trident throws a returning crescent projectile whose return path can heal allies it passes near and stagger enemies it crosses.",
+          "Siren of Noon grants nearby allies a short empowered state after they execute mechanics inside her tide rather than granting a passive aura.",
+          "Tidal Crown creates a rotating ring of water that deflects selected lesser projectiles and accelerates allied movement through it.",
+          "Godwake Surge briefly transforms Azura's mantle and trident into a radiant leviathan silhouette for one cinematic multi-hit assault with explicit boss damage caps."
+        ],
+        "counterplay": [
+          "Burning Tide is heavily telegraphed, Godwake has a long cooldown, and dry/protected interiors disable the largest tidal presentation."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Ocean sheets rise into gold-lit walls, solar fire runs across water without consuming it, trident trails form giant crescent suns, jewelry becomes orbiting points of light during Siren of Noon, and Godwake projects a colossal translucent solar leviathan above her path."
+        ],
+        "animation": [
+          "Confident trident spins, wave-assisted leaps, one-arm sun-sail mantle flourishes, a full-body spear dive during Godwake, and a throne-like hover pose only during the brief transformation sequence."
+        ],
+        "audio": [
+          "Layered surf and solar roar, powerful melodic vocal motifs without lyrics, deep trident impacts, shell-horn warning calls before tide shifts, and a huge sunrise chord during Godwake."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Premium-designated God hire entitlement plus completion of Azura's Burning Tide judgment."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [
+        "FAC-003"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Premium-designated concept; implementation must use Epic-supported in-island entitlement systems and publication rules."
+      ]
+    },
+    {
+      "id": "NPC-036",
+      "name": "Kharon Imperator, Lord of the Last Gate",
+      "family": "npc",
+      "tier": "god",
+      "status": "specified",
+      "role": "paid-designated god-tier frontline commander / death-denial tank",
+      "identity": {
+        "fantasy": "Controls a bounded last-stand domain where allies gain powerful survival tools while Kharon absorbs escalating responsibility for keeping the formation alive.",
+        "silhouette": "Colossal gunmetal and ivory armor, crown-like helm shaped as a fortress gate, enormous rectangular blade-shield covered in names of fallen cities.",
+        "lore_hook": "Kharon guards the metaphysical Last Gate and treats every hired squad as a temporary kingdom he is personally forbidden to abandon."
+      },
+      "mechanics": {
+        "core": [
+          "last-stand domain",
+          "damage guardianship",
+          "formation command",
+          "execution denial",
+          "god-tier countercharge"
+        ],
+        "signature": [
+          "Last Gate Domain establishes a visible fortress-shaped combat zone that strengthens defensive actions but never grants invulnerability.",
+          "Imperator's Burden redirects a capped portion of eligible ally damage into Kharon's own guard meter until the meter breaks.",
+          "Names of the Fallen stores successful rescues and revives as charges that empower later defensive counters.",
+          "No One Passes converts a lethal hit against one eligible nearby ally into a critical survival state once per major encounter under explicit lockouts.",
+          "Final Gate Counter empties Kharon's entire guard meter into a massive shield-blade counterwave whose strength depends on damage responsibly absorbed rather than raw stats."
+        ],
+        "counterplay": [
+          "The domain forces positioning, Burden can break Kharon's guard, and No One Passes cannot override scripted wipes or protected elimination rules."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Fortress walls appear only as towering translucent outlines, absorbed damage writes glowing temporary names across his shield, the gate-helm opens with white internal light during rescue charges, and Final Gate Counter projects a city-sized gate silhouette that slams shut behind the shockwave."
+        ],
+        "animation": [
+          "Extremely heavy shield planting, one-handed ally lifts during rescue, two-step countercharge braced behind the blade-shield, and a monumental kneeling collapse if his guard meter breaks."
+        ],
+        "audio": [
+          "Stone gate groans, deep command horns, layered shield impacts stored as rhythmic pulses, whispered city names in the ambience, and an enormous closing-gate impact during Final Gate Counter."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Premium-designated God hire entitlement plus completion of the Last Gate ordeal."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [
+        "FAC-004"
+      ],
+      "notes": [
+        "Hireable roster entry.",
+        "Premium-designated concept; implementation must use Epic-supported in-island entitlement systems and publication rules."
+      ]
+    }
+  ]
+}
