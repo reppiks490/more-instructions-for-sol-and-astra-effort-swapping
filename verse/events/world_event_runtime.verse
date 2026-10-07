@@ -7,7 +7,7 @@ aeonfall_world_event_service := class():
 
     var States:[string]aeonfall_world_event_runtime_state = map{}
 
-    StartEvent(EventId:string, InitialRegionIds:[]string):logic=
+    StartEvent(EventId:string, InitialRegionIds:[]string)<transacts>:logic=
         if:
             Existing := States[EventId]
             Existing.Active?
@@ -39,7 +39,7 @@ aeonfall_world_event_service := class():
     GetState(EventId:string)<decides><transacts>:aeonfall_world_event_runtime_state=
         States[EventId]
 
-    MarkObjectiveComplete(EventId:string, ObjectiveId:string):logic=
+    MarkObjectiveComplete(EventId:string, ObjectiveId:string)<transacts>:logic=
         if:
             Old := States[EventId]
             Old.Active?
@@ -76,7 +76,7 @@ aeonfall_world_event_service := class():
         EventId:string,
         NextStageIndex:int,
         ActiveRegionIds:[]string
-    ):logic=
+    )<transacts>:logic=
         if:
             NextStageIndex >= 0
             Old := States[EventId]
@@ -106,7 +106,7 @@ aeonfall_world_event_service := class():
 
         false
 
-    CompleteEvent(EventId:string):logic=
+    CompleteEvent(EventId:string)<transacts>:logic=
         if:
             Old := States[EventId]
             Old.Active?
@@ -133,7 +133,7 @@ aeonfall_world_event_service := class():
 
         false
 
-    FailEvent(EventId:string):logic=
+    FailEvent(EventId:string)<transacts>:logic=
         if:
             Old := States[EventId]
             Old.Active?
