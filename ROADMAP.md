@@ -6,9 +6,9 @@
 - [x] tier system
 - [x] 800-entity allocation
 - [x] technical architecture
-- [ ] machine-validated content schema
-- [ ] CI content validation
-- [ ] canonical status dashboard
+- [x] machine-validated content schema
+- [x] CI catalog and crafting validation
+- [x] canonical status dashboard
 
 ## Gate 1 — Core Runtime
 - [ ] entity registry
@@ -16,39 +16,43 @@
 - [ ] status-effect model
 - [ ] ability runtime
 - [ ] cooldown/resource runtime
-- [ ] progression service
-- [ ] persistent player profile
-- [ ] material ledger
-- [ ] recipe/refinement graph
+- [x] progression service scaffold
+- [x] persistent player profile
+- [x] persistent profile service
+- [x] material ledger
+- [x] recipe/refinement graph specification + validation
 - [ ] faction/reputation service
+- [x] Zero Candidate qualification scaffold
 
 ## Gate 2 — Vertical Slice
 One production-quality region containing:
-- [ ] 12+ monsters
-- [ ] 6+ tameable wildlife
-- [ ] 8+ hireables
-- [ ] 12+ original weapons
-- [ ] 2 armor sets
+- [ ] 12+ implemented monsters
+- [ ] 6+ implemented tameable wildlife
+- [ ] 8+ implemented hireables
+- [ ] 12+ implemented original weapons
+- [ ] 2 implemented armor sets
 - [ ] 1 dungeon
 - [ ] 2 minibosses
 - [ ] 1 major boss
 - [ ] 1 world event
-- [ ] crafting/refinement loop
-- [ ] class skill loop
-- [ ] persistent progression
+- [ ] crafting/refinement runtime loop
+- [ ] class skill runtime loop
+- [ ] persistent progression compiled in UEFN
 - [ ] first shop
 - [ ] performance/streaming validation
 
 ## Gate 3 — Content Factory
-- [ ] authored entity schema
-- [ ] generator for status dashboards
+- [x] authored entity schema
+- [x] generator for status dashboards
 - [ ] generator for Verse registration data where practical
 - [ ] asset/VFX/animation checklists
 - [ ] balance linting
 - [ ] duplicate-mechanic detection
-- [ ] tier-complexity validation
+- [x] tier-complexity validation
 
 ## Gate 4 — 800 Major Entities
+Current target-counted status: **400 / 800 (50.0%)**
+
 Targets:
 - Weapons: 180
 - Armor/major pieces: 120
@@ -66,25 +70,26 @@ Targets:
 - [ ] aggression escalation
 - [ ] taming/hiring
 - [ ] dynamic invasions
-- [ ] horde evolution
-- [ ] necromancer ecosystems
-- [ ] roaming mythic threats
+- [x] five-tier cannibal horde evolution specified
+- [x] necromancer ecosystem baseline specified
+- [x] roaming mythic threat baseline specified
 - [ ] faction wars
-- [ ] regional mutation/corruption
+- [ ] regional mutation/corruption runtime
 
 ## Gate 6 — Endgame
-- [ ] God
-- [ ] Absolute
-- [ ] Zero Candidate
-- [ ] 10 Ascension Trials
-- [ ] Axiom Heart
-- [ ] Choosing
-- [ ] Transcendent Zero
-- [ ] seven Authorities
-- [ ] Reality Engine
+- [ ] God runtime
+- [ ] Absolute runtime
+- [x] Zero Candidate qualification specification/scaffold
+- [ ] 10 Ascension Trials runtime
+- [x] Axiom Heart 68,420+ raw-acquisition crafting graph
+- [ ] Choosing runtime
+- [ ] Transcendent Zero runtime
+- [x] seven Authorities + Reality Engine specified
 - [ ] Hall of Ascendants
 
 ## Gate 7 — Production
+- [ ] UEFN project binding
+- [ ] Verse compile verification
 - [ ] memory calculations
 - [ ] spatial profiling
 - [ ] console/platform validation
