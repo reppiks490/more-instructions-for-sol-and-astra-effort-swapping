@@ -23,7 +23,7 @@ aeonfall_status_runtime := class():
         Definition:aeonfall_status_definition,
         SourceId:string,
         Magnitude:int
-    ):logic=
+    )<transacts>:logic=
         if:
             TargetKey <> ""
             Definition.StatusId <> ""
@@ -112,7 +112,7 @@ aeonfall_status_runtime := class():
 
         false
 
-    RemoveStatus(TargetKey:string, StatusId:string):logic=
+    RemoveStatus(TargetKey:string, StatusId:string)<transacts>:logic=
         Existing := GetStatuses(TargetKey)
         var Updated:[]aeonfall_status_instance = array{}
         var Removed:logic = false
@@ -138,7 +138,7 @@ aeonfall_status_runtime := class():
 
         false
 
-    Tick(TargetKey:string, DeltaSeconds:float):void=
+    Tick(TargetKey:string, DeltaSeconds:float)<transacts>:void=
         if (DeltaSeconds <= 0.0):
             return
 
@@ -174,7 +174,7 @@ aeonfall_status_runtime := class():
             set StatusesByTarget[TargetKey] = Updated
         then:
             return
-    ClearTarget(TargetKey:string):void=
+    ClearTarget(TargetKey:string)<transacts>:void=
         if:
             set StatusesByTarget[TargetKey] = array{}
         then:
