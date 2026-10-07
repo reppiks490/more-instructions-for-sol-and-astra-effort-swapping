@@ -1,0 +1,955 @@
+{
+  "wave": "002",
+  "purpose": "complete planned class and major skill allocation",
+  "entity_count": 30,
+  "entities": [
+    {
+      "id": "CLS-001",
+      "family": "class",
+      "name": "Gravemancer",
+      "tier": "Mythic",
+      "role": "gravity battlefield controller",
+      "concept": "Controls bounded vector fields, lift zones, crush lanes, and momentum transfer rather than relying on raw projectile damage.",
+      "signature_mechanic": "Vector Mastery converts authored gravity nodes into traversal, crowd control, or defensive redirection based on player placement.",
+      "capabilities": [
+        "vector fields",
+        "momentum transfer",
+        "lift zones",
+        "crush lanes"
+      ],
+      "counterplay": [
+        "Anchor nodes are visible and destructible; protected bosses resist full displacement."
+      ],
+      "visual_identity": "Heavy asymmetric armor with floating stone fragments and circular mass gauges.",
+      "animation_profile": "Movement appears weighted until abilities trigger sudden low-gravity transitions and anchored casting poses.",
+      "vfx_profile": "Dense but localized lensing arcs, debris orbits, and directional vector lines.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Master the gravity trial chain and regional observatory.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 2,
+        "vfx_band": "high",
+        "replication_band": "medium",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "CLS-002",
+      "family": "class",
+      "name": "Chronarch",
+      "tier": "Mythic",
+      "role": "temporal state strategist",
+      "concept": "Uses recorded authored states, delayed echoes, timing windows, and replay tracks to control encounters without literal unrestricted time travel.",
+      "signature_mechanic": "Chronicle Engine records selected approved combat objects and replays their authored state transitions on a visible timeline.",
+      "capabilities": [
+        "state recording",
+        "echo replay",
+        "timing windows",
+        "cooldown manipulation"
+      ],
+      "counterplay": [
+        "Timeline is visible; anchors can be disrupted; protected states are never rewound."
+      ],
+      "visual_identity": "Silver regalia with transparent clock plates and rotating offset rings.",
+      "animation_profile": "Casting deliberately desynchronizes limb afterimages before snapping them back into alignment.",
+      "vfx_profile": "Clock rings, ghost-state silhouettes, timeline rails, and restrained local time-snap effects.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Chronarch trials and mastery relic.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 2,
+        "vfx_band": "high",
+        "replication_band": "medium",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "CLS-003",
+      "family": "class",
+      "name": "Primordial Warden",
+      "tier": "Legendary",
+      "role": "living-terrain defender",
+      "concept": "Builds temporary roots, groves, shelters, bridges, and healing ecology from authored spawn points.",
+      "signature_mechanic": "Worldroot Network links temporary living structures so damage or healing can propagate through selected connected nodes.",
+      "capabilities": [
+        "temporary fortifications",
+        "healing groves",
+        "root traversal",
+        "entanglement"
+      ],
+      "counterplay": [
+        "Fire/corruption enemies can prune nodes; structure counts are capped and telegraphed."
+      ],
+      "visual_identity": "Layered bark-metal armor with luminous sap seams and branch-like antlers.",
+      "animation_profile": "Abilities grow outward from grounded stances with hands directing roots through visible node paths.",
+      "vfx_profile": "Root growth, leaf bursts, sap light, and structure-growth effects with strict cleanup rules.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Ancient grove covenant.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 3,
+        "vfx_band": "medium",
+        "replication_band": "medium",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "CLS-004",
+      "family": "class",
+      "name": "Eclipse Sovereign",
+      "tier": "Exotic",
+      "role": "domain pressure caster",
+      "concept": "Manipulates a moving eclipse domain that changes visibility pressure, marks enemies, and alters shield/stealth interactions.",
+      "signature_mechanic": "Eclipse Cycle rotates authored domain phases between Hunt, Silence, and Revelation, each changing tactical priorities.",
+      "capabilities": [
+        "moving domain",
+        "marking",
+        "perception pressure",
+        "phase cycling"
+      ],
+      "counterplay": [
+        "Luminous objectives weaken the domain and phase order is visible in advance."
+      ],
+      "visual_identity": "Black-gold armor with a floating crescent crown and moving umbral cloak.",
+      "animation_profile": "Crown and cloak rotate into different silhouettes at each domain phase.",
+      "vfx_profile": "Bounded eclipse shadow, corona rim, phase sigils, and readable marked-target highlights.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Exotic eclipse observatory lineage.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 2,
+        "vfx_band": "high",
+        "replication_band": "medium",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "CLS-005",
+      "family": "class",
+      "name": "Ascendant",
+      "tier": "God",
+      "role": "mastery synthesis class",
+      "concept": "Rewards long-term account mastery by borrowing reduced signature abilities from classes the player has genuinely mastered.",
+      "signature_mechanic": "Pantheon Engine rotates a limited set of mastered class signatures into a temporary secondary ability wheel.",
+      "capabilities": [
+        "borrowed signatures",
+        "mastery scaling",
+        "adaptive loadout"
+      ],
+      "counterplay": [
+        "Borrowed abilities are weaker than native versions and rotation timing is fixed."
+      ],
+      "visual_identity": "Neutral celestial armor whose ornamentation changes to reflect currently borrowed classes.",
+      "animation_profile": "Transitions between stance languages from borrowed classes while preserving one central ascendant posture.",
+      "vfx_profile": "Layered but controlled cross-class motifs with strict effect prioritization.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "God-tier mastery path across multiple classes.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 1,
+        "vfx_band": "extreme",
+        "replication_band": "high",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "CLS-006",
+      "family": "class",
+      "name": "Sepulchral Sovereign",
+      "tier": "Mythic",
+      "role": "necromantic resource commander",
+      "concept": "Treats remains as a strategic economy for echoes, structures, denial, and temporary undead specialists rather than endless basic summons.",
+      "signature_mechanic": "Grave Ledger stores corpse charges and spends them on one of several controlled necromantic constructs or echoes.",
+      "capabilities": [
+        "corpse economy",
+        "temporary echoes",
+        "bone constructs",
+        "denial"
+      ],
+      "counterplay": [
+        "Cleansing/burning corpses denies resources; active constructs are capped."
+      ],
+      "visual_identity": "Bone-black robes with a vertebral abacus and lanterns carrying silhouettes.",
+      "animation_profile": "Casting uses deliberate accounting gestures, bone counters, and lantern-release choreography.",
+      "vfx_profile": "Cold grave mist, bone construction lines, spectral stitching, and explicit corpse-charge indicators.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Necropolis mastery and covenant choice.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 2,
+        "vfx_band": "high",
+        "replication_band": "medium",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "CLS-007",
+      "family": "class",
+      "name": "Beast-Crown",
+      "tier": "Legendary",
+      "role": "taming and pack commander",
+      "concept": "Specializes in taming eligible aggressive wildlife, coordinating companion behavior, and borrowing species traits temporarily.",
+      "signature_mechanic": "Crown Bond opens skill challenges for eligible elite beasts and grants species-specific command options after success.",
+      "capabilities": [
+        "taming",
+        "pack commands",
+        "species traits",
+        "companion rescue"
+      ],
+      "counterplay": [
+        "Protected bosses cannot be tamed; failed elite challenges enrage targets and impose cooldowns."
+      ],
+      "visual_identity": "Predatory ceremonial armor assembled from nonliteral symbolic claws, feathers, horns, and living mantle shapes.",
+      "animation_profile": "Locomotion and idle borrow subtle motifs from the active bonded species.",
+      "vfx_profile": "Scent ribbons, crown sigils, companion call waves, and species-themed aura accents.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Wild Court reputation and hunt mastery.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 2,
+        "vfx_band": "medium",
+        "replication_band": "medium",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "CLS-008",
+      "family": "class",
+      "name": "Rift Warden",
+      "tier": "Epic",
+      "role": "mobile vanguard",
+      "concept": "Protects allies through directional cover, short breach steps, intercepts, and controlled portal traversal.",
+      "signature_mechanic": "Breach Guard detects threatened allies within authored conditions and enables a short-range intervention route with temporary one-way cover.",
+      "capabilities": [
+        "intercept",
+        "directional shield",
+        "short rift step",
+        "portal utility"
+      ],
+      "counterplay": [
+        "Limited charges and cannot protect widely separated allies simultaneously."
+      ],
+      "visual_identity": "Angular midnight armor with cyan split mantle and compact geometric buckler.",
+      "animation_profile": "Sharp military motion with single-frame-like rift cuts and grounded shield braces.",
+      "vfx_profile": "Compact cyan geometry, breach cuts, and directional barrier shimmer.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Epic Warden order initiation.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 4,
+        "vfx_band": "medium",
+        "replication_band": "medium",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "CLS-009",
+      "family": "class",
+      "name": "Storm Throne",
+      "tier": "God",
+      "role": "aerial domain striker",
+      "concept": "Controls a moving stormfront, airspace pressure, chain lightning, and rescue movement while remaining strongest outdoors.",
+      "signature_mechanic": "Thronefront follows the caster as a bounded storm domain that periodically chains authored lightning targets and pressures hostile flyers.",
+      "capabilities": [
+        "storm domain",
+        "chain lightning",
+        "flight",
+        "ally rescue"
+      ],
+      "counterplay": [
+        "Weaker indoors; major discharge triggers a long recovery window."
+      ],
+      "visual_identity": "Regal storm plate with floating crown fragments and a cape that behaves like a miniature cloud system.",
+      "animation_profile": "Hover locomotion, spear-like casts, and throne-shaped crown assembly for major discharges.",
+      "vfx_profile": "Cloud crown, target-capped lightning, wind ribbons, and distant storm landmark effect.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "God-tier storm covenant.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 1,
+        "vfx_band": "extreme",
+        "replication_band": "high",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "CLS-010",
+      "family": "class",
+      "name": "Void Sovereign",
+      "tier": "Absolute",
+      "role": "bounded rule-domain controller",
+      "concept": "Uses authored void doctrines to temporarily change movement, projectile pacing, and ability pressure inside clearly bounded arenas.",
+      "signature_mechanic": "Void Doctrine selects one of several encounter rule packages and locks it for a meaningful interval rather than freely rewriting the game.",
+      "capabilities": [
+        "rule domain",
+        "projectile pacing",
+        "mobility alteration",
+        "ability disruption"
+      ],
+      "counterplay": [
+        "Visible boundary, locked doctrine duration, and protected mechanics remain immune."
+      ],
+      "visual_identity": "Black-white voidplate with negative-space seams and debris orbiting impossible axes.",
+      "animation_profile": "Armor unfolds into doctrine-specific configurations while the caster rises into a rigid axis pose.",
+      "vfx_profile": "Monochrome local boundary, geometric fractures, suspended debris, and strict edge culling.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Absolute ascension doctrine trials.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 1,
+        "vfx_band": "extreme",
+        "replication_band": "high",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "SKL-001",
+      "family": "skill",
+      "name": "Heavenfall Vector",
+      "tier": "God",
+      "role": "world-bending gravity skill",
+      "concept": "Creates a bounded gravity lattice with multiple authored vector nodes used for traversal, crowd control, and environmental attack setups.",
+      "signature_mechanic": "Players can rotate active vector orientation between approved directions, changing pull paths without changing global physics.",
+      "capabilities": [
+        "multi-vector lattice",
+        "traversal",
+        "crowd control",
+        "hazard setup"
+      ],
+      "counterplay": [
+        "Destroyable pylons; clear orientation telegraph; boss displacement immunity where required."
+      ],
+      "visual_identity": "Four luminous mass pylons linked by curved vector rails.",
+      "animation_profile": "Caster anchors both feet, rotates arms like orbital rings, then snaps vectors into alignment.",
+      "vfx_profile": "Curved vector ribbons, debris flow, low-frequency lensing, and direction arrows readable at distance.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Gravemancer God mastery.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 1,
+        "vfx_band": "extreme",
+        "replication_band": "high",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "SKL-002",
+      "family": "skill",
+      "name": "Epoch Cathedral",
+      "tier": "God",
+      "role": "world-bending temporal skill",
+      "concept": "Builds a bounded arena where selected projectiles, hazards, and cover states replay from an approved recorded timeline.",
+      "signature_mechanic": "Replay Choir schedules multiple authored state echoes on visible tracks so teams can exploit or avoid future reoccurrences.",
+      "capabilities": [
+        "state replay",
+        "hazard scheduling",
+        "cover echo",
+        "timeline control"
+      ],
+      "counterplay": [
+        "Replay tracks are visible; temporal anchors can be destroyed; unapproved states never rewind."
+      ],
+      "visual_identity": "A circular cathedral of clock arches assembled from translucent prior-state silhouettes.",
+      "animation_profile": "Caster conducts replay tracks like an orchestra while arches pulse in sequence.",
+      "vfx_profile": "Ghost geometry, timeline rails, state afterimages, and clean time-snap pulses.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Chronarch God mastery.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 1,
+        "vfx_band": "extreme",
+        "replication_band": "high",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "SKL-003",
+      "family": "skill",
+      "name": "Worldroot Dominion",
+      "tier": "God",
+      "role": "world-bending construction skill",
+      "concept": "Rapidly grows a temporary network of bridges, shelters, healing groves, launch vines, and entangling lanes from authored nodes.",
+      "signature_mechanic": "Adaptive Grove selects structure packages according to nearby threats while respecting strict active-count caps.",
+      "capabilities": [
+        "fortification",
+        "healing",
+        "traversal",
+        "entanglement"
+      ],
+      "counterplay": [
+        "Growth nodes are destructible; fire/corruption counters structures; active count is capped."
+      ],
+      "visual_identity": "Massive glowing root-heart with branching structural routes.",
+      "animation_profile": "Caster plants a seed-core and physically directs branching growth with sweeping arm paths.",
+      "vfx_profile": "Fast root extrusion, leaf/sap bursts, structure outline previews, and cleanup dissolve.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Primordial Warden God mastery.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 1,
+        "vfx_band": "extreme",
+        "replication_band": "high",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "SKL-004",
+      "family": "skill",
+      "name": "Black-Sun Coronation",
+      "tier": "God",
+      "role": "world-bending eclipse skill",
+      "concept": "Creates a moving eclipse field with authored phases affecting perception, shields, marks, and enemy targeting pressure.",
+      "signature_mechanic": "Coronation Cycle rotates Hunt, Silence, and Revelation phases with different encounter effects and clear advance warnings.",
+      "capabilities": [
+        "moving eclipse",
+        "phase domain",
+        "mark pressure",
+        "shield-rule modifiers"
+      ],
+      "counterplay": [
+        "Luminous objectives weaken it; phase order is visible; domain is bounded."
+      ],
+      "visual_identity": "Black sun disk with a razor gold corona suspended above the caster.",
+      "animation_profile": "Caster raises the crown into the sky, then shifts posture at each phase transition.",
+      "vfx_profile": "Bounded eclipse shadow, gold corona, phase runes, and high-contrast target marking.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Eclipse Sovereign God mastery.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 1,
+        "vfx_band": "extreme",
+        "replication_band": "high",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "SKL-005",
+      "family": "skill",
+      "name": "Pantheon Engine",
+      "tier": "Absolute",
+      "role": "world-bending mastery skill",
+      "concept": "Loads reduced versions of mastered class signatures into a rotating temporary wheel, turning long-term mastery into tactical breadth.",
+      "signature_mechanic": "Mastery Rotation selects encounter-relevant learned signatures while preventing duplicates of protected apex abilities.",
+      "capabilities": [
+        "borrowed powers",
+        "adaptive rotation",
+        "mastery scaling"
+      ],
+      "counterplay": [
+        "Borrowed versions are weaker; rotation is time-locked; Transcendent authorities cannot be copied."
+      ],
+      "visual_identity": "Concentric class emblems orbit a central zero-like hub behind the caster.",
+      "animation_profile": "Each rotation physically shifts stance and emblem alignment before the next borrowed power becomes available.",
+      "vfx_profile": "Layered class emblems, selective motif blending, strict effect priority and cleanup.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Ascendant Absolute mastery.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 1,
+        "vfx_band": "extreme",
+        "replication_band": "high",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "SKL-006",
+      "family": "skill",
+      "name": "Grave Architecture",
+      "tier": "Mythic",
+      "role": "necromantic construction skill",
+      "concept": "Spends corpse charges to erect a bone barricade, turret, bridge, or ritual anchor from one shared resource economy.",
+      "signature_mechanic": "Blueprint Choice previews each structure footprint before committing corpse charges, preventing blind construction spam.",
+      "capabilities": [
+        "bone barricade",
+        "bone turret",
+        "bone bridge",
+        "ritual anchor"
+      ],
+      "counterplay": [
+        "Corpses can be denied; caster is vulnerable during construction; structure count capped."
+      ],
+      "visual_identity": "White skeletal drafting lines with spine-like measuring markers.",
+      "animation_profile": "Caster traces exact construction lines with bone calipers before growth begins.",
+      "vfx_profile": "Rapid ossified growth, dusty extrusion, pale blueprint lines.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Sepulchral Sovereign mastery.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 2,
+        "vfx_band": "high",
+        "replication_band": "medium",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "SKL-007",
+      "family": "skill",
+      "name": "Royal Scent",
+      "tier": "Mythic",
+      "role": "elite taming skill",
+      "concept": "Marks one eligible aggressive elite beast and begins a species-specific taming challenge rather than instant conversion.",
+      "signature_mechanic": "Taming Trial asks the player to perform an authored sequence—distance, feeding, dodging, or calming—based on species.",
+      "capabilities": [
+        "elite taming",
+        "species challenge",
+        "temporary command"
+      ],
+      "counterplay": [
+        "Failure enrages the target; bosses and protected mythic creatures are excluded."
+      ],
+      "visual_identity": "Crown-shaped scent sigil around the selected beast.",
+      "animation_profile": "Caster lowers stance and mirrors species-specific calming motion.",
+      "vfx_profile": "Scent ribbons, crown glyph, heartbeat pulse, species-color cues.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Beast-Crown mastery.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 2,
+        "vfx_band": "high",
+        "replication_band": "medium",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "SKL-008",
+      "family": "skill",
+      "name": "Guardian Breach",
+      "tier": "Legendary",
+      "role": "ally interception skill",
+      "concept": "Creates a short-range rescue route to a threatened ally and erects directional cover on arrival.",
+      "signature_mechanic": "Threat Gate only activates under authored danger conditions, reserving the move for meaningful rescues.",
+      "capabilities": [
+        "intercept",
+        "cover plane",
+        "counterattack"
+      ],
+      "counterplay": [
+        "Limited charges; ally must be within route constraints; shield only blocks one direction."
+      ],
+      "visual_identity": "Cyan split-plane portal and compact geometric shield.",
+      "animation_profile": "Fast shoulder-led rift step into hard shield brace.",
+      "vfx_profile": "Clean cyan cut, barrier snap, directional spark shedding.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Rift Warden mastery.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 4,
+        "vfx_band": "medium",
+        "replication_band": "medium",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "SKL-009",
+      "family": "skill",
+      "name": "Thronefront",
+      "tier": "God",
+      "role": "storm domain skill",
+      "concept": "Creates a moving bounded stormfront that pressures hostile flyers and periodically chains lightning among marked enemies.",
+      "signature_mechanic": "Storm Crown accumulates charge through movement and releases a target-capped sovereign discharge at threshold.",
+      "capabilities": [
+        "stormfront",
+        "chain lightning",
+        "air denial",
+        "movement charge"
+      ],
+      "counterplay": [
+        "Weaker indoors; discharge recovery leaves caster vulnerable."
+      ],
+      "visual_identity": "Rotating crown cloud over a spear-shaped lightning focus.",
+      "animation_profile": "Hovering charge posture culminates in a throne silhouette before discharge.",
+      "vfx_profile": "Cloud crown, lightning branches, wind lanes, and capped ground arcs.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Storm Throne mastery.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 1,
+        "vfx_band": "extreme",
+        "replication_band": "high",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "SKL-010",
+      "family": "skill",
+      "name": "Null Dominion",
+      "tier": "Absolute",
+      "role": "absolute rule-domain skill",
+      "concept": "Creates a bounded zero-law arena using authored movement, projectile, and ability-pressure replacements.",
+      "signature_mechanic": "Doctrine Lock selects one approved domain package and enforces it until collapse, avoiding arbitrary mid-cast rule changes.",
+      "capabilities": [
+        "bounded rule rewrite",
+        "movement alteration",
+        "projectile pressure",
+        "ability disruption"
+      ],
+      "counterplay": [
+        "Boundary and doctrine are obvious; duration is short; protected mechanics ignore replacement rules."
+      ],
+      "visual_identity": "Monochrome arena with white fracture axes and orbiting black debris.",
+      "animation_profile": "Caster ascends rigidly while armor plates separate into axial geometry.",
+      "vfx_profile": "Monochrome boundary, frozen-looking debris where supported, white law fractures, hard edge culling.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Void Sovereign Absolute mastery.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 1,
+        "vfx_band": "extreme",
+        "replication_band": "high",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "SKL-011",
+      "family": "skill",
+      "name": "Grief Gaze",
+      "tier": "Mythic",
+      "role": "observation pressure skill",
+      "concept": "Builds exposure only on enemies who maintain line of sight, creating a deliberate look-away decision instead of unavoidable damage.",
+      "signature_mechanic": "Exposure Threshold empowers allied horrors when targets look away, creating a tradeoff between personal safety and encounter pressure.",
+      "capabilities": [
+        "line-of-sight exposure",
+        "pressure tradeoff",
+        "minion empowerment"
+      ],
+      "counterplay": [
+        "Solid cover clears buildup; team members can alternate attention."
+      ],
+      "visual_identity": "Vertical black eye-window sigil floating above the caster.",
+      "animation_profile": "Caster remains unnaturally still while the sigil tracks viewers independently.",
+      "vfx_profile": "Upward black rain, stained-glass eye light, target-local exposure edge.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Eldritch class relic unlock.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 2,
+        "vfx_band": "high",
+        "replication_band": "medium",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "SKL-012",
+      "family": "skill",
+      "name": "Living Nave",
+      "tier": "Mythic",
+      "role": "colossus breach skill",
+      "concept": "Temporarily opens a large creature or structure into a playable internal objective space with timed weak points.",
+      "signature_mechanic": "Breach Window coordinates exterior and interior objectives so squads must split responsibilities.",
+      "capabilities": [
+        "internal objective",
+        "weak-point breach",
+        "timed escape"
+      ],
+      "counterplay": [
+        "Exterior team can extend escape timer; interior route is telegraphed and bounded."
+      ],
+      "visual_identity": "Rib-like doors and luminous internal pathways.",
+      "animation_profile": "Large geometry unfolds in staged mechanical-organic arcs.",
+      "vfx_profile": "Internal pulse lighting, membrane glow, breach dust, and exit countdown signals.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Colossus encounter specialization.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 1,
+        "vfx_band": "extreme",
+        "replication_band": "high",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "SKL-013",
+      "family": "skill",
+      "name": "Axiom Break",
+      "tier": "Transcendent Zero",
+      "role": "Transcendent authority",
+      "concept": "Temporarily replaces one approved local encounter rule inside a bounded authority zone.",
+      "signature_mechanic": "Authority Selection chooses from a curated rule set such as gravity-like movement, projectile pacing, healing interaction, or structure phasing.",
+      "capabilities": [
+        "rule selection",
+        "bounded authority",
+        "encounter rewrite"
+      ],
+      "counterplay": [
+        "One rule at a time; explicit duration; protected mechanics and global systems are immune."
+      ],
+      "visual_identity": "A black-white axiom glyph fractures into the selected law symbol.",
+      "animation_profile": "Ascendant raises one hand while the selected law symbol rotates through the body and arena.",
+      "vfx_profile": "Law-specific world treatment, zero glyph, localized fracture geometry, aggressive LOD and cleanup.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Transcendent Zero authority unlock.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 1,
+        "vfx_band": "extreme",
+        "replication_band": "extreme",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "SKL-014",
+      "family": "skill",
+      "name": "World Devourer",
+      "tier": "Transcendent Zero",
+      "role": "Transcendent authority",
+      "concept": "Marks a vast but bounded encounter region for staged dimensional collapse that pressures movement and damages hostile entities over time.",
+      "signature_mechanic": "Collapse Front advances through authored sectors, mutating hazards and opening/closing traversal routes as it moves.",
+      "capabilities": [
+        "advancing collapse",
+        "sector mutation",
+        "boss pressure",
+        "route disruption"
+      ],
+      "counterplay": [
+        "Clearly previewed front; safe corridors exist; protected objectives cannot be erased."
+      ],
+      "visual_identity": "Black horizon wall threaded with inverted stars.",
+      "animation_profile": "Ascendant plants a zero sigil; collapse then advances independently in staged sector animation.",
+      "vfx_profile": "Massive horizon fold, inverted-star field, ground fracture, sector-specific fallbacks.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Transcendent Zero authority unlock.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 1,
+        "vfx_band": "extreme",
+        "replication_band": "extreme",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "SKL-015",
+      "family": "skill",
+      "name": "Omnipresence",
+      "tier": "Transcendent Zero",
+      "role": "Transcendent authority",
+      "concept": "Creates several temporary authored manifestations of the player that operate at nearby battlefronts with limited reduced skill kits.",
+      "signature_mechanic": "Manifest Network shares target priorities and can reposition between qualified allies without becoming independent full player copies.",
+      "capabilities": [
+        "multiple manifestations",
+        "ally protection",
+        "multi-front pressure"
+      ],
+      "counterplay": [
+        "Manifestations are weaker, capped in number, and collapse if the primary is disabled."
+      ],
+      "visual_identity": "Identical but translucent zero-armored manifestations with different orbiting role sigils.",
+      "animation_profile": "Manifestations emerge from split shadows and synchronize idle poses before acting independently.",
+      "vfx_profile": "Zero-outline duplicates, role sigils, tether flashes on shared target changes.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Transcendent Zero authority unlock.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 1,
+        "vfx_band": "extreme",
+        "replication_band": "extreme",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "SKL-016",
+      "family": "skill",
+      "name": "Causality Rejection",
+      "tier": "Transcendent Zero",
+      "role": "Transcendent authority",
+      "concept": "Records a curated set of approved local combat states for a short window and restores selected state channels on command.",
+      "signature_mechanic": "Accept/Reject lets the player preserve approved outcomes while reverting selected recorded positions, cover states, or damage channels.",
+      "capabilities": [
+        "state recording",
+        "selective restore",
+        "outcome choice"
+      ],
+      "counterplay": [
+        "Only approved entities/states participate; clear recording duration; protected objectives never revert."
+      ],
+      "visual_identity": "A circular black-white timeline halo split into ACCEPT and REJECT halves.",
+      "animation_profile": "Caster traces backward through their own afterimage before snapping selected channels to recorded state.",
+      "vfx_profile": "Timeline ghosts, state rails, reverse debris cues, and crisp channel-specific restore effects.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Transcendent Zero authority unlock.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 1,
+        "vfx_band": "extreme",
+        "replication_band": "extreme",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "SKL-017",
+      "family": "skill",
+      "name": "Genesis Engine",
+      "tier": "Transcendent Zero",
+      "role": "Transcendent authority",
+      "concept": "Builds an adaptive temporary fortress package containing defenses, healing, traversal, and support entities selected for the current encounter.",
+      "signature_mechanic": "Adaptive Blueprint chooses from authored fortress modules based on enemy family, terrain, and active objectives.",
+      "capabilities": [
+        "temporary fortress",
+        "healing zone",
+        "defense modules",
+        "traversal network"
+      ],
+      "counterplay": [
+        "Fortress duration and module counts are capped; enemy archetypes have specific counters."
+      ],
+      "visual_identity": "Black-white construction core unfolding into faction-neutral celestial architecture.",
+      "animation_profile": "Large structures assemble in visible modular stages rather than instant spawning.",
+      "vfx_profile": "Luminous construction lattice, modular geometry assembly, support beams, bounded fortress aura.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Transcendent Zero authority unlock.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 1,
+        "vfx_band": "extreme",
+        "replication_band": "extreme",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "SKL-018",
+      "family": "skill",
+      "name": "Pantheon",
+      "tier": "Transcendent Zero",
+      "role": "Transcendent authority",
+      "concept": "Temporarily exposes a broad selection of reduced mastered class signatures through a Transcendent ability interface.",
+      "signature_mechanic": "Authority Wheel dynamically pages mastered signatures while enforcing per-family lockouts and reduced potency.",
+      "capabilities": [
+        "mastery synthesis",
+        "multi-class access",
+        "adaptive loadout"
+      ],
+      "counterplay": [
+        "No unmastered skills; protected authorities excluded; strict duration and family cooldowns."
+      ],
+      "visual_identity": "A vast rotating halo of mastered class emblems behind the player.",
+      "animation_profile": "Stance and weapon posture change fluidly as authority pages rotate.",
+      "vfx_profile": "Prioritized class motifs, emblem halo, controlled transitions to prevent VFX overload.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Transcendent Zero authority unlock plus extensive class mastery.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 1,
+        "vfx_band": "extreme",
+        "replication_band": "extreme",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "SKL-019",
+      "family": "skill",
+      "name": "The Last Word",
+      "tier": "Transcendent Zero",
+      "role": "Transcendent authority",
+      "concept": "Once per Transcendent transformation, selects one authored decree to resolve a major battlefield state.",
+      "signature_mechanic": "Decree Choice offers Annihilate, Restore, Banish, Dominate, Fracture, or Ascend variants with encounter-safe implementations.",
+      "capabilities": [
+        "decree selection",
+        "massive battlefield resolution",
+        "once-per-form use"
+      ],
+      "counterplay": [
+        "One use per transformation; long telegraph; bosses and protected objectives have decree-specific safeguards."
+      ],
+      "visual_identity": "Single enormous zero sigil above the battlefield with decree text represented by unique glyph language.",
+      "animation_profile": "Player becomes still as all UI except the decree interface suppresses, followed by one decisive gesture.",
+      "vfx_profile": "World-scale but bounded sigil, silence beat, decree-specific effect stack, strict platform fallbacks.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Transcendent Zero authority unlock.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 1,
+        "vfx_band": "extreme",
+        "replication_band": "extreme",
+        "streaming_local": true
+      },
+      "status": "specified"
+    },
+    {
+      "id": "SKL-020",
+      "family": "skill",
+      "name": "Reality Engine",
+      "tier": "Transcendent Zero",
+      "role": "final apex authority",
+      "concept": "The final internal apex capability exposes a curated set of encounter parameters for temporary selection instead of freeform engine control.",
+      "signature_mechanic": "Director Panel selects approved weather, gravity-like movement, mob aggression, allegiance pressure, hazards, traversal, or dimensional instability presets.",
+      "capabilities": [
+        "encounter parameter selection",
+        "director state",
+        "world-event integration"
+      ],
+      "counterplay": [
+        "Only curated presets; 30-second class of duration; protected systems and publication-critical settings remain untouched."
+      ],
+      "visual_identity": "Orbiting world-model rings around a black-white core representing each selectable parameter family.",
+      "animation_profile": "Ascendant manipulates a floating world-model interface while arena rings reconfigure in sequence.",
+      "vfx_profile": "Parameter-specific bounded world treatment, orbital rings, zero core, aggressive cleanup and LOD.",
+      "audio_profile": "Distinct activation, sustain, warning, impact, and collapse cues with accessibility-readable equivalents.",
+      "acquisition": "Transcendent Zero Ω completion.",
+      "evolution": "",
+      "dependencies": [],
+      "performance": {
+        "concurrency": 1,
+        "vfx_band": "extreme",
+        "replication_band": "extreme",
+        "streaming_local": true
+      },
+      "status": "specified"
+    }
+  ]
+}
