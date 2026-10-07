@@ -7,6 +7,7 @@ on:
       - "content/crafting/**"
       - "content/vertical_slice/**"
       - "content/world/**"
+      - "content/transcendent/**"
       - "verse/**"
       - "verse/generated/**"
       - "schemas/**"
@@ -44,6 +45,8 @@ on:
       - "tools/build_slice_shop_registry.py"
       - "tools/validate_verse_static.py"
       - "tools/validate_runtime_invariants.py"
+      - "tools/build_transcendent_authority_registry.py"
+      - "tools/validate_transcendent_authorities.py"
       - "tools/validate_launch_test_plan.py"
       - "STATUS.md"
       - ".github/workflows/catalog-validation.yml"
@@ -162,6 +165,15 @@ jobs:
 
       - name: Validate AEONFALL runtime invariants
         run: python tools/validate_runtime_invariants.py
+
+      - name: Validate Transcendent Zero Authorities
+        run: python tools/validate_transcendent_authorities.py
+
+      - name: Build Transcendent Authority Verse registry
+        run: python tools/build_transcendent_authority_registry.py
+
+      - name: Check generated Transcendent Authority bootstrap
+        run: git diff --exit-code -- verse/generated/transcendent_authority_bootstrap.verse
 
       - name: Validate Slice 001 Launch Session plan
         run: python tools/validate_launch_test_plan.py
