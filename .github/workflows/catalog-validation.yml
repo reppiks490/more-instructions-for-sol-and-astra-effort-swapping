@@ -24,6 +24,8 @@ on:
       - "tools/validate_slice_combat.py"
       - "tools/build_slice_combat_registry.py"
       - "tools/build_slice_class_registry.py"
+      - "tools/validate_slice_taming.py"
+      - "tools/build_slice_taming_registry.py"
       - "tools/validate_slice_classes.py"
       - "tools/build_slice_registry.py"
       - "STATUS.md"
@@ -104,6 +106,15 @@ jobs:
 
       - name: Check generated first-slice class bootstrap
         run: git diff --exit-code -- verse/generated/slice_001_class_bootstrap.verse
+
+      - name: Validate first-slice taming challenges
+        run: python tools/validate_slice_taming.py
+
+      - name: Build first-slice taming Verse registry
+        run: python tools/build_slice_taming_registry.py
+
+      - name: Check generated first-slice taming bootstrap
+        run: git diff --exit-code -- verse/generated/slice_001_taming_bootstrap.verse
 
       - name: Build runtime content index
         run: python tools/build_content_index.py
