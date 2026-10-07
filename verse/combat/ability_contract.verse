@@ -46,6 +46,7 @@ aeonfall_ability_definition := class:
     EventIds:[]string = array{}
     PresentationId:string = ""
     AudioId:string = ""
+    AdapterId:string = ""
     BossSafe:logic = true
 
 aeonfall_ability_runtime_state := class:
