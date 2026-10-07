@@ -18,6 +18,7 @@ on:
       - "tools/validate_uefn_bindings.py"
       - "tools/validate_world_topology.py"
       - "tools/validate_slice_recipes.py"
+      - "tools/validate_slice_encounters.py"
       - "tools/build_slice_registry.py"
       - "STATUS.md"
       - ".github/workflows/catalog-validation.yml"
@@ -69,6 +70,9 @@ jobs:
 
       - name: Validate vertical slice recipes
         run: python tools/validate_slice_recipes.py
+
+      - name: Validate vertical slice encounters
+        run: python tools/validate_slice_encounters.py
 
       - name: Build runtime content index
         run: python tools/build_content_index.py
