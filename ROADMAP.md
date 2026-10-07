@@ -11,7 +11,7 @@
 - [x] canonical status dashboard
 
 ## Gate 1 — Core Runtime
-- [ ] entity registry
+- [ ] entity registry runtime (canonical JSON index generator complete)
 - [ ] event bus
 - [ ] status-effect model
 - [ ] ability runtime
@@ -44,14 +44,16 @@ One production-quality region containing:
 ## Gate 3 — Content Factory
 - [x] authored entity schema
 - [x] generator for status dashboards
+- [x] canonical runtime content-index generator
 - [ ] generator for Verse registration data where practical
 - [ ] asset/VFX/animation checklists
 - [ ] balance linting
-- [ ] duplicate-mechanic detection
+- [x] duplicate-name / repeated-signature audit
+- [ ] semantic duplicate-mechanic detection
 - [x] tier-complexity validation
 
-## Gate 4 — 800 Major Entities
-Current target-counted status: **684 / 800 (85.5%)**
+## Gate 4 — 800 Major Entities ✅
+Current target-counted status: **832 / 800 (104.0%) — every original family minimum met**
 
 Targets:
 - Weapons: 180
@@ -68,8 +70,8 @@ Targets:
 ## Gate 5 — Living World
 - [ ] multi-faction territory state
 - [ ] aggression escalation
-- [ ] taming/hiring
-- [ ] dynamic invasions
+- [ ] taming/hiring runtime (shared companion contract complete)
+- [ ] dynamic invasions (world-event lifecycle contract complete)
 - [x] five-tier cannibal horde evolution specified
 - [x] necromancer ecosystem baseline specified
 - [x] roaming mythic threat baseline specified
