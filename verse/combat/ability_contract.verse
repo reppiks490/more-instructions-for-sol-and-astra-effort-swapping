@@ -45,6 +45,9 @@ aeonfall_ability_definition := class:
     # Context gates.
     RequiresEncounterContext:logic = false
     RequiresTransformationContext:logic = false
+    # Optional exact transformation identity. Empty means any valid
+    # transformation context satisfies TransformationOnly.
+    RequiredTransformationId:string = ""
     AllowWhileActive:logic = false
 
     # Optional class-resource gate. ExternalClassResource means this is the
@@ -77,3 +80,4 @@ aeonfall_ability_runtime_state := class:
 aeonfall_ability_context_flags := class:
     EncounterActive:logic = false
     TransformationActive:logic = false
+    TransformationId:string = ""
