@@ -1,0 +1,1798 @@
+{
+  "wave": "006",
+  "purpose": "Necrotic, necromancer, demon, eldritch, and mythical monster expansion.",
+  "entity_count": 30,
+  "entities": [
+    {
+      "id": "MON-013",
+      "name": "Stilt-Famished",
+      "family": "monster",
+      "tier": "rare",
+      "status": "specified",
+      "role": "necrotic ambush scavenger",
+      "identity": {
+        "fantasy": "A corpse-starved predator whose legs have overgrown into insectlike stilts, letting it step over cover and drop vertically onto wounded targets.",
+        "silhouette": "Gaunt torso hanging between four overlong bone-jointed limbs, jaw split vertically, scraps of clothing trailing far below the body.",
+        "lore_hook": "These Famished develop where corpse competition is extreme; height lets them reach feeding sites other brood cannot."
+      },
+      "mechanics": {
+        "core": [
+          "vertical ambush",
+          "wound scent",
+          "cover stepping"
+        ],
+        "signature": [
+          "Carrion Step ignores low cover by walking over it rather than pathing around it.",
+          "Drop Maw telegraphs a vertical pounce onto wounded targets.",
+          "Bone Tap scouts the floor with limb tips and reveals recent movement nearby.",
+          "Feed Panic makes nearby lesser Famished race toward any corpse it successfully reaches."
+        ],
+        "counterplay": [
+          "Break its elongated limb joints or move into low-ceiling areas where the vertical pounce cannot form."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Thin black saliva threads, dust rings beneath each stilt impact, and a brief red scent ribbon leading toward wounded targets."
+        ],
+        "animation": [
+          "Jerky crane-like gait, sudden complete stillness before a drop, then a horrifying folding collapse as all limbs spear inward around prey."
+        ],
+        "audio": [
+          "Hollow bone knocks, far-above scraping, wet jaw clicks, and a descending rattle immediately before Drop Maw."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-014",
+      "name": "Carrion Bell",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "horde signal organism",
+      "identity": {
+        "fantasy": "A bloated necrotic body whose rib cage has calcified into a resonant bell that redirects lesser hordes with different call patterns.",
+        "silhouette": "Heavy suspended torso on short crawler limbs, enormous hollow rib vault, throat fused into a pendulum-like bone clapper.",
+        "lore_hook": "Carrion Bells emerge when Gorged brood consume enough singers, animals, and metal debris to turn resonance into command."
+      },
+      "mechanics": {
+        "core": [
+          "horde redirection",
+          "sonic pressure",
+          "corpse defense"
+        ],
+        "signature": [
+          "Hunger Toll redirects nearby Famished toward a marked food source.",
+          "War Toll increases lesser-horde aggression while exposing the Bell's rib cavity.",
+          "Mourning Toll causes nearby undead to drag corpses away from players.",
+          "Cracked Bell releases a final concussive pulse if its rib vault is destroyed at close range."
+        ],
+        "counterplay": [
+          "Visible rib glow identifies the next call; shooting the suspended clapper interrupts the toll."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Rib arches pulse dull crimson from inside, each call emits thick pressure rings, and nearby horde eyes flash in the toll's assigned pattern."
+        ],
+        "animation": [
+          "Body rocks backward to swing its internal clapper, forelimbs brace before loud calls, and interrupted tolls make the entire torso convulse violently."
+        ],
+        "audio": [
+          "Massive warped church-bell notes, wet internal resonance, horde response shrieks, and a sharp metal-bone crack when interrupted."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-015",
+      "name": "Corpse-Caravan",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "mobile biomass carrier",
+      "identity": {
+        "fantasy": "A many-bodied Remade creature that transports corpses inside an armored rib wagon grown from its own spine, feeding nearby horde evolution.",
+        "silhouette": "Low centipede-like mass of fused torsos beneath a cathedral-shaped rib cage packed with dangling remains and scavenged armor.",
+        "lore_hook": "Caravans appear behind successful outbreaks, turning battlefields into moving supply lines for future mutations."
+      },
+      "mechanics": {
+        "core": [
+          "corpse transport",
+          "mutation supply",
+          "armored route pushing"
+        ],
+        "signature": [
+          "Grave Freight stores eligible corpses and converts them into regional horde biomass if it escapes.",
+          "Rib Bastion closes around its cargo under ranged pressure.",
+          "Butcher Drop ejects one stored corpse to instantly feed a nearby evolving brood unit.",
+          "Road of Meat leaves a scent trail that attracts scavengers and lesser undead."
+        ],
+        "counterplay": [
+          "Destroy wheel-like limb clusters to slow it, then target exposed cargo when the rib armor opens."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Bone armor plates knit and separate visibly, corpse tags glow through ribs, black-red scent vapor trails behind it, and biomass transfers pulse through vein-like ground lines."
+        ],
+        "animation": [
+          "Dozens of limbs move in unsettling waves, rib doors slam shut like shutters, and feeding transfers use an articulated spine-arm to fling cargo."
+        ],
+        "audio": [
+          "Layered foot-skitter, cart-wheel groans made from bone, muffled voices from inside the cargo cage, and a deep digestive thump during biomass transfer."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-016",
+      "name": "Choir-Fused Pursuer",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "cooperative sensory predator",
+      "identity": {
+        "fantasy": "Three necrotic bodies fused back-to-back share sight, hearing, and attack timing, making flanking ineffective until one sensory head is disabled.",
+        "silhouette": "Tripod arrangement of three torsos around one shared pelvis, each head facing a different direction, arms interlocked into rotating attack limbs.",
+        "lore_hook": "Choir-Fused organisms are not true hiveminds; they are terrified individuals forced into perfect cooperation by shared nerves."
+      },
+      "mechanics": {
+        "core": [
+          "shared perception",
+          "rotation attack",
+          "anti-flank"
+        ],
+        "signature": [
+          "Triune Sight grants near-complete local awareness while all three heads remain active.",
+          "Chorus Turn rapidly rotates the fused body to bring a fresh attacker toward the current threat.",
+          "Shared Pain moves a portion of stagger between intact bodies.",
+          "Dissonance Frenzy triggers erratic attacks when one sensory head is destroyed."
+        ],
+        "counterplay": [
+          "Silence, blind, or destroy individual sensory heads to create directional dead zones."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Three different eye-glow rhythms synchronize while healthy, shared nerve lines flash during stagger transfer, and destroyed heads leave a flickering dark sector."
+        ],
+        "animation": [
+          "Continuous rotational locomotion, arms handing weapons or limbs between bodies mid-spin, and increasingly asynchronous movement after sensory damage."
+        ],
+        "audio": [
+          "Three breathing patterns phase-lock into one chord, directional screams rotate around the player, and lost heads remove one layer from the audio mix."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-017",
+      "name": "Grave Architect Mason",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "necrotic battlefield builder",
+      "identity": {
+        "fantasy": "An intelligent Apostate that constructs flesh barricades, corpse ramps, resurrection nests, and ambush tunnels during active combat.",
+        "silhouette": "Tall robed cadaver with six thin masonry arms, pelvis surrounded by a belt of bone tools, face hidden behind a brick-like mask of fused teeth.",
+        "lore_hook": "Architects regard corpses as building material first and people second, designing battlefields that grow more hostile the longer they remain uncontested."
+      },
+      "mechanics": {
+        "core": [
+          "combat construction",
+          "resurrection nest",
+          "route mutation",
+          "corpse resource"
+        ],
+        "signature": [
+          "Mortuary Wall raises a destructible barricade from nearby corpse resources.",
+          "Ossuary Ramp opens an alternate vertical route for lesser undead.",
+          "Red Nest converts a corpse cluster into a limited resurrection point.",
+          "Burial Tunnel marks two nearby authored ground anchors and spawns ambushers between them after a delay."
+        ],
+        "counterplay": [
+          "Deny corpses, destroy construction markers early, and pressure the Mason before structures finish curing."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Red geometry lines sketch structures before flesh rises, bone tools orbit its hands, walls grow in layered ribs, and nests pulse with visible corpse-resource counters."
+        ],
+        "animation": [
+          "Multiple arms work independently like masons laying bricks, the mask remains unnaturally still, and construction accelerates into frantic synchronized motion under pressure."
+        ],
+        "audio": [
+          "Stonework rhythms made from bone taps, wet mortar sounds, muffled counting whispers, and a low nursery-like hum from active resurrection nests."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-018",
+      "name": "Marrow Taxer",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "necromancer debt caster",
+      "identity": {
+        "fantasy": "A necromancer that marks living targets as 'debts' and gains resources whenever marked creatures—friend or foe—are downed nearby.",
+        "silhouette": "Thin ceremonial accountant robes over skeletal armor, long ledger tablets chained to forearms, quill-like finger bones glowing red.",
+        "lore_hook": "The Taxers emerged from a cult that believed death was not tragedy but unpaid accounting."
+      },
+      "mechanics": {
+        "core": [
+          "death marks",
+          "resource theft",
+          "debt summons",
+          "anti-revive pressure"
+        ],
+        "signature": [
+          "Red Ledger marks several combatants as active debts with visible symbols.",
+          "Collection converts nearby marked downs into Marrow Charges regardless of allegiance.",
+          "Foreclosure spends charges to summon temporary collector constructs.",
+          "Compounding Interest increases pressure on repeatedly downed marked targets without permanently punishing recovery."
+        ],
+        "counterplay": [
+          "Cleanse marks, move downs outside collection range, or force the Taxer to spend charges defensively."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Floating red numerals and tally strokes orbit marked targets, charge counters fill chained tablets, and summons emerge from stamped circular seals."
+        ],
+        "animation": [
+          "Quill fingers write in midair, tablet chains snap taut during Collection, and Foreclosure ends with both ledgers slamming shut."
+        ],
+        "audio": [
+          "Scratchy pen strokes, whispered arithmetic, chain clinks, and a severe stamp-like impact whenever a debt is collected."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-019",
+      "name": "Black Archivist",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "necromancer mimic controller",
+      "identity": {
+        "fantasy": "Records simplified combat archetypes from defeated enemies and later manifests imperfect echoes with deliberately incomplete abilities.",
+        "silhouette": "Tall lacquer-black corpse scholar with shelves of bone tablets mounted along the spine and a featureless porcelain face.",
+        "lore_hook": "Archivists believe identity is only a combat pattern that can be catalogued, copied, and filed."
+      },
+      "mechanics": {
+        "core": [
+          "archetype recording",
+          "imperfect echoes",
+          "pattern adaptation",
+          "archive denial"
+        ],
+        "signature": [
+          "Death Index records the family of a nearby defeated eligible creature.",
+          "Filed Echo summons a weaker spectral imitation with one signature move.",
+          "Cross Reference chooses an echo that counters the squad's most repeated recent tactic.",
+          "Archive Burn destroys one stored pattern to empower the Archivist's escape or defense."
+        ],
+        "counterplay": [
+          "Destroy exposed archive tablets to delete stored patterns before they can be summoned."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Recorded enemies appear as tiny moving silhouettes inside spine tablets, echoes render as incomplete black-white bodies, and Cross Reference draws red index lines between player actions and archive slots."
+        ],
+        "animation": [
+          "Slow librarian-like gestures contrast with sudden panic when tablets are broken; summoning resembles pulling a book from the spine shelf and tearing it open."
+        ],
+        "audio": [
+          "Page turns made from bone clicks, whispered names without language, distant copies of recorded creature sounds, and porcelain cracks when archive slots are destroyed."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-020",
+      "name": "Choir Mother",
+      "family": "monster",
+      "tier": "god",
+      "status": "specified",
+      "role": "regional necromancer commander",
+      "identity": {
+        "fantasy": "A towering necromancer whose body contains dozens of preserved throats; she synchronizes whole hordes through layered song and can recompose formations mid-battle.",
+        "silhouette": "Three-story robed figure with a cathedral-organ torso of living throats, antler-like tuning forks, and a faceless silver veil.",
+        "lore_hook": "Choir Mothers are born when Grave Cantors merge voluntarily into one conductor rather than compete for corpses."
+      },
+      "mechanics": {
+        "core": [
+          "regional horde command",
+          "formation rewrite",
+          "sonic domain",
+          "corpse orchestration"
+        ],
+        "signature": [
+          "Processional Verse reorganizes nearby horde roles into shield, pursuit, or feeding formations.",
+          "Requiem Harvest converts unclaimed corpses into a slowly growing choir resource instead of instant resurrection.",
+          "Antiphon Ward causes selected lesser horde to mirror movement around a protected elite.",
+          "Final Cadence spends choir resource to trigger one giant synchronized assault with long musical telegraph."
+        ],
+        "counterplay": [
+          "Destroy throat clusters to remove song layers, burn corpse resources, and use silence windows between verses."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Visible sound geometry rolls across terrain, individual throat clusters light by harmony part, hordes gain formation-specific glyphs, and Final Cadence paints enormous staff lines through the arena."
+        ],
+        "animation": [
+          "Upper body barely moves while dozens of throat organs pulse independently; tuning-fork antlers rotate before formation changes; damaged clusters sag silent."
+        ],
+        "audio": [
+          "Multi-part choral horror with each destructible cluster mapped to an audible voice layer, deep organ bass, and a huge breath intake before Final Cadence."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-021",
+      "name": "Sepulcher Knight",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "resurrection-anchor bruiser",
+      "identity": {
+        "fantasy": "An armored necromantic champion tethered to a grave anchor; destroying its body without breaking the anchor causes it to rebuild in a changed combat stance.",
+        "silhouette": "Massive funerary plate, coffin-shaped shield, grave chain running from spine into a buried black obelisk.",
+        "lore_hook": "Sepulcher Knights are not immortal; they are simply contractually difficult to finish."
+      },
+      "mechanics": {
+        "core": [
+          "resurrection anchor",
+          "stance evolution",
+          "coffin shield"
+        ],
+        "signature": [
+          "Burial Contract rebuilds the Knight once if its grave anchor survives.",
+          "Second Interment changes weapon stance based on how it was defeated the first time.",
+          "Coffin Guard blocks a narrow frontal lane and shelters lesser undead.",
+          "Chain Recall pulls the Knight back toward its anchor when separated too far."
+        ],
+        "counterplay": [
+          "Locate and destroy the grave anchor before committing full damage to the Knight."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Black chains glow under strain, defeated armor collapses into dust that streams backward to the obelisk, and the second body rebuilds with visibly altered weapon geometry."
+        ],
+        "animation": [
+          "Heavy shield dragging, abrupt chain-yank movement, kneeling collapse on first defeat, then reverse-assembly from boots upward."
+        ],
+        "audio": [
+          "Stone coffin scraping, chain tension groans, low oath murmurs, and a reversed burial thump during resurrection."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-022",
+      "name": "Crowned Devourer Larva",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "pre-apex cannibal mutant",
+      "identity": {
+        "fantasy": "A rare pre-Crowned horde organism that studies squad behavior while consuming lesser brood, preparing one counter-mutation before it matures or is killed.",
+        "silhouette": "Enormous quadrupedal torso wrapped in half-formed crown bones, multiple sealed mouths along the flanks, one oversized observing eye.",
+        "lore_hook": "These larvae are regional emergencies because every meal is also a tactical lesson."
+      },
+      "mechanics": {
+        "core": [
+          "brood consumption",
+          "tactic observation",
+          "counter mutation",
+          "escape objective"
+        ],
+        "signature": [
+          "Study Feast records one dominant squad tactic while devouring a lesser brood member.",
+          "Counter Bud visibly grows one mutation organ associated with the observed tactic.",
+          "Breakaway attempts to flee toward a maturation site once enough biomass is stored.",
+          "False Hunger can consume its own spawned bait brood to tempt players into accelerating its growth."
+        ],
+        "counterplay": [
+          "Vary tactics, kill bait brood from range, and interrupt escape before maturation completes."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Mutation buds pulse different colors by counter family, biomass visibly travels beneath translucent flank skin, and the crown bones extend with each successful study."
+        ],
+        "animation": [
+          "Low animal crawl becomes increasingly deliberate, the observing eye tracks player formations independently, and escape uses violent digging lunges."
+        ],
+        "audio": [
+          "Multiple sealed-mouth chewing noises, analytical clicking from the eye socket, rising bone-creak as the crown grows, and a regional alarm roar when Breakaway begins."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-023",
+      "name": "Ash Court Censer-Beast",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "infernal area-denial hound",
+      "identity": {
+        "fantasy": "A six-legged demon that swings burning censers from its shoulders, filling routes with ritual smoke that empowers Ash Court allies.",
+        "silhouette": "Charred lion-hound body, six basalt legs, two iron censers chained through shoulder sockets, face like a cracked furnace door.",
+        "lore_hook": "Ash Court handlers breed them to turn corridors into moving temples of heat."
+      },
+      "mechanics": {
+        "core": [
+          "ritual smoke",
+          "route denial",
+          "ally heat buff"
+        ],
+        "signature": [
+          "Censer Sweep paints two crossing smoke lanes while the beast charges.",
+          "Ash Communion empowers nearby Ash Court demons standing inside the smoke.",
+          "Furnace Bite applies a short heat vulnerability after a clearly telegraphed lunge.",
+          "Chain Snag can catch low cover and temporarily alter the beast's path, creating emergent openings."
+        ],
+        "counterplay": [
+          "Wind or cleansing effects shorten smoke duration; attack exposed shoulder chains between sweeps."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Orange ritual smoke forms geometric prayer shapes, chains shower sparks across walls, and the furnace face flares white before lunges."
+        ],
+        "animation": [
+          "Six-leg gallop with asymmetric shoulder swing, full-body skid before crossing smoke lanes, and jaw-door opening in mechanical segments."
+        ],
+        "audio": [
+          "Heavy chain pendulums, furnace breathing, ritual bells inside the smoke, and a bright metal shriek when chains are damaged."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-024",
+      "name": "Brass Court Siege Mastiff",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "infernal anti-fortification beast",
+      "identity": {
+        "fantasy": "A plated demon bred to crack structures, barriers, vehicles, and deployables while largely ignoring ordinary infantry until challenged.",
+        "silhouette": "Rhinoceros-sized mastiff in articulated brass siege armor, battering-ram skull, piston shoulders, molten saliva.",
+        "lore_hook": "Brass Court generals release them only when something expensive needs to stop existing."
+      },
+      "mechanics": {
+        "core": [
+          "structure breaker",
+          "vehicle pressure",
+          "armor plates",
+          "challenge response"
+        ],
+        "signature": [
+          "Ram Doctrine prioritizes tagged structures and supported deployables over players.",
+          "Molten Jaw weakens one constructed target after a sustained bite.",
+          "Challenge Roar redirects the Mastiff toward a player who deliberately provokes it.",
+          "Siege Plates shed in stages, trading armor for speed as damage accumulates."
+        ],
+        "counterplay": [
+          "Use challenge mechanics to pull it away from objectives, then punish exposed joints after armor sheds."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Brass plates glow at impact seams, piston shoulders vent flame, molten bite marks remain briefly on objectives, and shed plates hit the ground with showering sparks."
+        ],
+        "animation": [
+          "Slow armored trot escalates into terrifying piston-driven charge, neck locks straight during Ram, and late-phase movement becomes low and fast after plates drop."
+        ],
+        "audio": [
+          "Industrial hammering, piston exhaust, deep canine growls through brass tubing, and resonant gong impacts against structures."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-025",
+      "name": "Velvet Court Mirror-Liar",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "demonic deception duelist",
+      "identity": {
+        "fantasy": "A court demon that creates false copies of combat telegraphs and disguises which attack is real until players read subtle mirror errors.",
+        "silhouette": "Elegant crimson formalwear fused to black mirror skin, too many articulated fingers, oval face reflecting whoever looks at it.",
+        "lore_hook": "The Velvet Court considers lying with words crude; a true artist lies with cause and effect."
+      },
+      "mechanics": {
+        "core": [
+          "false telegraphs",
+          "mirror clones",
+          "target deception",
+          "duel punishment"
+        ],
+        "signature": [
+          "Counterfeit Tell creates two fake attack telegraphs and one real pattern with consistent learnable differences.",
+          "Borrowed Face briefly mirrors the appearance silhouette of one nearby combatant without copying identity systems.",
+          "Velvet Reversal punishes players who attack a fake clone with a short counter dash.",
+          "Truth Tax exposes the real body for a damage window after players correctly identify multiple patterns."
+        ],
+        "counterplay": [
+          "Watch reflection direction and sound origin; correct reads force Truth Tax vulnerability."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Black mirrors bloom upright from floors, fake telegraphs have subtly reversed particle spirals, the demon's face reflects the nearest viewer, and correct reads shatter false copies into red silk fragments."
+        ],
+        "animation": [
+          "Graceful ballroom footwork, impossible finger fans during deception, mirrored attacks performed half a beat apart, and a formal bow when Truth Tax triggers."
+        ],
+        "audio": [
+          "Soft ballroom strings detune around fakes, real attacks originate from a consistent dry heel-click, mirrors whisper contradictory cues, and correct reads resolve into one clean note."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-026",
+      "name": "Hollow Court Null Saint",
+      "family": "monster",
+      "tier": "god",
+      "status": "specified",
+      "role": "anti-healing domain demon",
+      "identity": {
+        "fantasy": "A colossal saint-shaped demon whose empty chest forms a moving zone where healing systems weaken and recovery must shift to positioning and shield management.",
+        "silhouette": "Cathedral-sized pale figure in torn ceremonial robes, chest cavity containing only a black horizon, halo made from missing segments.",
+        "lore_hook": "The Hollow Court canonized absence itself and gave it a body large enough to walk."
+      },
+      "mechanics": {
+        "core": [
+          "anti-healing domain",
+          "absence projectiles",
+          "recovery inversion",
+          "domain collapse"
+        ],
+        "signature": [
+          "Hollow Benediction creates a bounded moving zone where supported healing effectiveness is reduced, never fully disabled.",
+          "Absent Host fires projectiles that erase temporary buffs rather than raw health.",
+          "Empty Communion converts destroyed summons into temporary holes in safe terrain lanes.",
+          "Uncanonization exposes the chest horizon as a major weak point when enough halo segments are broken."
+        ],
+        "counterplay": [
+          "Stay outside the moving domain when possible, break halo segments, and use shields/cover until Uncanonization opens."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Color drains near the chest horizon, healing VFX visibly thin inside the domain, halo segments float as missing-shaped gaps, and the weak point reveals a starless depth beyond the torso."
+        ],
+        "animation": [
+          "Slow processional walking, hands raised in blessing poses while attacks emerge from absence, halo pieces rotate without visible support, and the chest opens wider during Uncanonization."
+        ],
+        "audio": [
+          "Near-silence inside the domain, choir audio with missing frequency bands, distant vacuum pulses, and a sudden return of full ambience when the weak point opens."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-027",
+      "name": "Red Choir Howler",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "infernal pack amplifier",
+      "identity": {
+        "fantasy": "A thin demon vocalist that weaponizes rhythm: each successful howl changes nearby demon timing, making predictable packs suddenly syncopated.",
+        "silhouette": "Emaciated red-black humanoid with rib strings across the chest and a jaw extending into a horn-like throat.",
+        "lore_hook": "Red Choir packs are dangerous less because they are strong than because they stop attacking on the beat you learned."
+      },
+      "mechanics": {
+        "core": [
+          "rhythm shift",
+          "pack buff",
+          "sonic cone"
+        ],
+        "signature": [
+          "Meter Break changes nearby lesser demon attack cadence after a visible count-in.",
+          "Blood Chorus grants brief movement speed to demons that attack on the new beat.",
+          "Howl Cone pushes lightly and disrupts stationary channeling.",
+          "Broken Voice loses rhythm control if chest strings are destroyed."
+        ],
+        "counterplay": [
+          "Destroy rib strings or fight outside hearing range; visual telegraphs remain valid even when rhythm changes."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Red waveform ribbons connect pack members, chest strings vibrate visibly, beat markers flash under affected demons, and broken strings recoil like snapped instrument wires."
+        ],
+        "animation": [
+          "Conductor-like arm swings, chest expansion before howls, head jerks marking count-in beats, and frantic off-rhythm movement when silenced."
+        ],
+        "audio": [
+          "Percussive throat howls, audible count-ins, layered pack growls snapping to new tempo, and painful string twangs when weak points break."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-028",
+      "name": "Seven-Seal Bailiff",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "contract demon enforcer",
+      "identity": {
+        "fantasy": "A towering legalistic demon that imposes visible combat clauses; obeying them weakens the Bailiff while violating them grants it temporary powers.",
+        "silhouette": "Black-red judicial armor, seven wax seals floating around a massive gavel-blade, parchment skin covered in moving clauses.",
+        "lore_hook": "Infernal contracts require enforcement, and the Bailiffs insist they are only doing administrative work."
+      },
+      "mechanics": {
+        "core": [
+          "combat clauses",
+          "seal weak points",
+          "violation powers",
+          "judgment attacks"
+        ],
+        "signature": [
+          "Clause of Distance forbids one clearly displayed range band for a short period.",
+          "Clause of Mercy marks one lesser enemy that must not be killed until the timer ends.",
+          "Violation Fee grants the Bailiff a specific temporary buff tied to the broken clause.",
+          "Seal Appeal lets players destroy the active seal after correctly obeying a clause, permanently weakening the fight."
+        ],
+        "counterplay": [
+          "Read and follow clauses to expose seals; deliberate violation can be used strategically but empowers the next phase."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Burning contract text wraps the arena edge, each active seal projects a distinct icon, violations stamp huge red marks above offenders, and destroyed seals burst into ash-paper birds."
+        ],
+        "animation": [
+          "Slow courtroom pacing, gavel-blade raised during clause reading, parchment skin unfurls from arms, and successful appeals make the Bailiff recoil as if physically struck by law."
+        ],
+        "audio": [
+          "Deep spoken legal cadences, wax-seal pops, enormous stamping impacts, and chains of whispered objections when players comply."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-029",
+      "name": "Ash Throne Executioner",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "infernal elite finisher",
+      "identity": {
+        "fantasy": "A giant masked execution demon that becomes dangerous around downed targets but offers clear rescue windows through interruptible ceremonial attacks.",
+        "silhouette": "Ten-foot basalt humanoid, square execution mask, double-ended furnace axe, chains of engraved nameplates.",
+        "lore_hook": "Executioners believe killing is meaningless unless witnessed, announced, and performed correctly."
+      },
+      "mechanics": {
+        "core": [
+          "downed-target pressure",
+          "ceremonial finisher",
+          "interrupt window",
+          "axe zoning"
+        ],
+        "signature": [
+          "Sentence Mark identifies one downed target but begins a long visible execution path.",
+          "Witness Circle creates a dangerous but readable zone around the marked victim.",
+          "Mercy Interrupt staggers the Executioner heavily if players break the mask seal during the ceremony.",
+          "Nameplate Rage briefly widens axe swings after a failed execution."
+        ],
+        "counterplay": [
+          "Break mask seals during the ceremony; never treat the finisher as an unavoidable instant kill."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Orange sentence glyphs circle downed targets, nameplates ignite one by one, the mask seal glows white during interrupt windows, and failed executions shed black sparks."
+        ],
+        "animation": [
+          "Deliberate march toward victims, two-handed ceremonial axe raises, rigid pause before the finishing strike, and enraged low sweeps after interruption."
+        ],
+        "audio": [
+          "Chain-name clatter, slow drumlike footsteps, formal sentence tones, and a loud mask crack when interrupted."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-030",
+      "name": "Brass Cathedral Walker",
+      "family": "monster",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "infernal mobile siege organism",
+      "identity": {
+        "fantasy": "A skyscraper-scale demon-engine whose body is a walking cathedral; players assault different exterior and interior sectors while it advances toward a regional objective.",
+        "silhouette": "Four colossal brass legs carrying a cathedral-city torso, furnace nave glowing inside, bell-tower head, chains the size of bridges.",
+        "lore_hook": "Brass Court legends claim the Walkers are not built; cities are sentenced to war and eventually stand up."
+      },
+      "mechanics": {
+        "core": [
+          "distributed sectors",
+          "moving objective",
+          "interior raid",
+          "siege bells"
+        ],
+        "signature": [
+          "Pilgrim Legs each function as separate traversal and sabotage sectors whose destruction changes the Walker's route.",
+          "Furnace Nave is an interior combat space that can be entered only during specific cooling windows.",
+          "Bell Judgment sends regional shock fronts that teams can mitigate by disabling exterior bell towers.",
+          "Cathedral Fall triggers a staged collapse encounter rather than a single death animation, creating final escape and loot objectives."
+        ],
+        "counterplay": [
+          "Coordinate sector teams, disable bells before shocks, and exploit cooling windows; raw damage to the visual shell is intentionally ineffective."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Kilometer-visible brass heat shimmer, city-window lights across the torso, bridge-sized chains swinging between legs, bell shockwaves crossing landscapes, and a multi-stage collapse with streaming-safe debris illusions."
+        ],
+        "animation": [
+          "Locomotion is conveyed through enormous slow leg arcs and environmental motion; local sector components animate independently, interiors shake in timed cycles, and collapse occurs as authored regional stages."
+        ],
+        "audio": [
+          "Regional bell thunder, distant metal groans arriving seconds after movement, furnace ambience inside the nave, and escalating structural alarms during Cathedral Fall."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-031",
+      "name": "The Window That Hunts",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "eldritch observation predator",
+      "identity": {
+        "fantasy": "An impossible window appears on nearby walls and follows the player from surface to surface; looking through it reveals danger, but looking too long lets the danger look back.",
+        "silhouette": "A normal rectangular window containing a starless landscape, except the frame grows subtle jointed legs only when no one faces it.",
+        "lore_hook": "No one has found the building this window originally belonged to."
+      },
+      "mechanics": {
+        "core": [
+          "surface relocation",
+          "observation meter",
+          "look-back attack",
+          "information temptation"
+        ],
+        "signature": [
+          "Helpful View briefly reveals nearby hidden threats when players glance through the window.",
+          "Attention Debt accumulates only while a player keeps the window centered in view.",
+          "Look Back manifests an attack from the landscape once debt crosses a visible threshold.",
+          "Frame Scuttle relocates between valid authored surfaces whenever unobserved."
+        ],
+        "counterplay": [
+          "Use brief glances for information, then break line of sight before Attention Debt fills."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Almost no ambient VFX; the interior landscape moves at the wrong parallax, frame shadows point toward observers, and Look Back introduces one impossible distant silhouette rapidly approaching the glass."
+        ],
+        "animation": [
+          "The window itself barely animates while watched; when unseen, brief peripheral glimpses show insectlike frame legs folding into walls."
+        ],
+        "audio": [
+          "Room tone becomes slightly delayed near it, distant wind comes from the wrong direction, glass taps answer player footsteps, and Look Back begins with one sound from behind the listener."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-032",
+      "name": "Taxonomist of Unfinished Species",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "eldritch classification controller",
+      "identity": {
+        "fantasy": "A floating entity that assigns temporary 'species' labels to combatants, changing which of its attacks consider them prey, predator, parasite, or environment.",
+        "silhouette": "Cluster of ivory specimen drawers orbiting a black central lens, long measuring limbs, labels pinned into empty air.",
+        "lore_hook": "The Taxonomists do not kill from hatred; they kill when a specimen refuses to fit the drawer."
+      },
+      "mechanics": {
+        "core": [
+          "classification labels",
+          "role rewrite",
+          "specimen beams",
+          "drawer weak points"
+        ],
+        "signature": [
+          "Provisional Name assigns visible classification labels with clear icons and timers.",
+          "Predator Rule targets only entities currently labeled prey, allowing players to manipulate positioning.",
+          "Misfiled Specimen creates a hazard when two incompatible labels overlap.",
+          "Drawer Correction exposes one orbiting specimen drawer whenever players intentionally exploit a classification rule."
+        ],
+        "counterplay": [
+          "Read labels, use classification rules against adds, and destroy exposed drawers to reduce available categories."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Paper labels pin themselves into empty space beside targets, thin measuring beams triangulate bodies, drawers open onto impossible depths, and destroyed categories scatter white index cards that dissolve before landing."
+        ],
+        "animation": [
+          "Measuring limbs move like drafting compasses, drawers rotate into firing positions, and the central lens contracts whenever a classification contradiction occurs."
+        ],
+        "audio": [
+          "Quiet cabinet slides, pencil measurement scratches, museum-room ambience, and a sharp index-card snap on every label assignment."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-033",
+      "name": "Mnemonic Moth Cathedral",
+      "family": "monster",
+      "tier": "god",
+      "status": "specified",
+      "role": "eldritch memory predator swarm",
+      "identity": {
+        "fantasy": "A vast moth-like organism composed of thousands of paper-thin wings; it steals recent combat cues and replays them as misleading echoes across a region.",
+        "silhouette": "Skyscraper-wide luminous moth silhouette made from countless page-wings, hollow cathedral nave visible through its body.",
+        "lore_hook": "It feeds not on memories themselves but on the confidence that a remembered warning will happen the same way twice."
+      },
+      "mechanics": {
+        "core": [
+          "cue theft",
+          "false replay",
+          "regional swarm",
+          "memory weak points"
+        ],
+        "signature": [
+          "Cue Harvest records selected recent noncritical audio/visual telegraphs used in the encounter.",
+          "False Litany replays harvested cues from incorrect safe locations without suppressing the real telegraph.",
+          "Page Swarm divides into regional clouds that must be cleared to reveal body weak points.",
+          "Remembered Truth rewards players who respond to current source location rather than repeated cue appearance."
+        ],
+        "counterplay": [
+          "Track source direction and unique accessibility markers; destroying page-swarm anchors reduces false cue density."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Millions of paper wings create giant stained-glass moth patterns in the sky, false telegraphs bloom as faded copies, body weak points appear as blank missing pages, and damaged swarms rain letters that vanish midair."
+        ],
+        "animation": [
+          "Macro body motion is slow and cathedral-like while local wing clouds surge rapidly; weak points open as sections of pages fold outward in huge synchronized fans."
+        ],
+        "audio": [
+          "Page storms, distant choir made from remembered encounter sounds, false cues with intentionally degraded timbre, and a clean present-tense tone attached only to real attacks."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-034",
+      "name": "Euclid Leech",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "eldritch geometry parasite",
+      "identity": {
+        "fantasy": "A crawling shape that attaches to structures and rewrites nearby traversal into sharp impossible angles until players remove its anchor limbs.",
+        "silhouette": "Glossy black polyhedron with too many folding legs, each joint forming perfect right angles even on curved surfaces.",
+        "lore_hook": "Architects first mistook them for decorative errors until entire staircases began leading sideways."
+      },
+      "mechanics": {
+        "core": [
+          "geometry warp",
+          "route hazard",
+          "structure parasite"
+        ],
+        "signature": [
+          "Right-Angle Infection marks nearby authored traversal nodes for alternate route geometry.",
+          "Fold Step lets the Leech move between connected infected surfaces without conventional pathing.",
+          "Acute Trap creates a short triangular hazard lane between three anchors.",
+          "Proof Failure stuns the Leech when players destroy anchors in the displayed sequence."
+        ],
+        "counterplay": [
+          "Follow anchor numbering and break the proof sequence; uninfected terrain remains normal."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Black ruler lines crawl over surfaces, triangles snap into place as hazards, infected stairs project ghosted alternate orientations, and failed geometry breaks into chalk-like fragments."
+        ],
+        "animation": [
+          "Legs fold with mathematical precision, body rotates without momentum, and anchor placement resembles a compass drawing arcs across surfaces."
+        ],
+        "audio": [
+          "Dry chalk scratches, ruler snaps, low geometric hum, and a satisfying board-eraser sound when Proof Failure triggers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-035",
+      "name": "False Lighthouse",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "eldritch landmark predator",
+      "identity": {
+        "fantasy": "A distant lighthouse appears where no structure exists, guiding players toward a safe-looking route that becomes increasingly hostile unless its beam pattern is decoded.",
+        "silhouette": "Tall weathered lighthouse silhouette visible through fog, but close inspection reveals the tower is a segmented neck and the lantern room is an enormous eye.",
+        "lore_hook": "Maps disagree on how many False Lighthouses exist because every sighting claims to be the first."
+      },
+      "mechanics": {
+        "core": [
+          "false landmark",
+          "navigation lure",
+          "beam code",
+          "terrain ambush"
+        ],
+        "signature": [
+          "Harbor Promise projects an apparently safe route through local hazards.",
+          "Wrong Coast adds subtle anomalies to the route each time players follow without decoding the beam.",
+          "Beacon Cipher flashes a learnable sequence revealing the actual safe branch.",
+          "Low Tide reveals the creature's buried body and weak points after the cipher is solved."
+        ],
+        "counterplay": [
+          "Read the beam sequence instead of following the brightest route; solving the cipher forces exposure."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Volumetric fog splits around the rotating eye-beam, fake safety markers grow increasingly distorted, the tower surface subtly flexes like skin, and exposure reveals miles of buried rib-like roots."
+        ],
+        "animation": [
+          "At distance only beam rotation is visible; up close the tower bends like a neck, windows blink shut, and exposed roots heave sections of terrain in authored waves."
+        ],
+        "audio": [
+          "Lonely foghorn, gull calls played backward, distant surf in inland regions, and a huge eyelid-like stone scrape when the true body surfaces."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-036",
+      "name": "Palimpsest Walker",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "eldritch state-overwrite hunter",
+      "identity": {
+        "fantasy": "A tall creature covered in layered versions of its own body; damage reveals older states with different movement and attacks rather than simply reducing health.",
+        "silhouette": "Humanoid silhouette drawn in many semi-transparent anatomical layers, each offset like erased sketches.",
+        "lore_hook": "It appears in places that have been rebuilt too many times, as if discarded versions of reality learned to walk together."
+      },
+      "mechanics": {
+        "core": [
+          "layered phases",
+          "state overwrite",
+          "attack inheritance"
+        ],
+        "signature": [
+          "Latest Draft begins with the fastest but least durable movement set.",
+          "Erase Layer causes the damaged state to peel away and reveal an older combat pattern.",
+          "Margin Note preserves one attack trait from the previous layer into the next.",
+          "Original Text exposes the final vulnerable core only after all authored layers are removed."
+        ],
+        "counterplay": [
+          "Learn each layer's telegraphs; previous attacks may persist in reduced form, so space management matters."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Body layers peel away as translucent sheets, old poses remain briefly in air, preserved traits appear as dark margin symbols, and the final core looks like a single glowing handwritten line."
+        ],
+        "animation": [
+          "Each layer uses distinct posture and locomotion, transitions resemble pages being ripped backward through the body, and inherited attacks overlap old and new motion language."
+        ],
+        "audio": [
+          "Pencil scratching, paper tearing, multiple footsteps from slightly offset positions, and a single pen stroke tone when the core appears."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-037",
+      "name": "Weather Eater Calf",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "juvenile eldritch storm organism",
+      "identity": {
+        "fantasy": "A juvenile sky-beast that consumes local weather effects, storing lightning, rain, fog, or heat and releasing altered versions when threatened.",
+        "silhouette": "Whale-sized floating translucent creature with cloud organs visible inside, fin-like lightning rods, circular mouth facing upward.",
+        "lore_hook": "Adults may be impossible-weather organisms; fortunately, this is considered a calf."
+      },
+      "mechanics": {
+        "core": [
+          "weather consumption",
+          "stored climate",
+          "adaptive release",
+          "sky migration"
+        ],
+        "signature": [
+          "Atmosphere Sip absorbs one supported local weather channel over time.",
+          "Storm Stomach visibly stores the current channel as an internal organ color.",
+          "Reflex Weather releases a defensive pattern based on stored climate: lightning arcs, fog burst, rain push, or heat mirage.",
+          "Migration Panic causes rapid sky movement toward another region if severely threatened."
+        ],
+        "counterplay": [
+          "Fight under favorable weather, force it to spend stored climate, then attack during the empty-stomach window."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Cloud organs swirl visibly under translucent skin, absorbed weather streams upward into its mouth, stored lightning crawls through fins, and released fog forms enormous spiral wakes."
+        ],
+        "animation": [
+          "Slow buoyant swimming through air, mouth opening toward the sky during feeding, fins snapping rigid before release, and panicked corkscrew migration when wounded."
+        ],
+        "audio": [
+          "Whale-like atmospheric moans, thunder inside a body cavity, rain on stretched membrane, and Doppler-heavy sky rush during migration."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-038",
+      "name": "Parallax Stalker",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "eldritch distance predator",
+      "identity": {
+        "fantasy": "A predator whose apparent size changes with camera distance; it attacks only when players misjudge whether it is near or far, using consistent environmental clues as the fair counter.",
+        "silhouette": "Black feline outline with too many horizon-length limbs, body always visually similar in screen size regardless of world distance.",
+        "lore_hook": "It may not manipulate distance at all; it may simply manipulate confidence in distance."
+      },
+      "mechanics": {
+        "core": [
+          "distance deception",
+          "environmental clue",
+          "lunge punishment",
+          "shadow anchor"
+        ],
+        "signature": [
+          "False Scale keeps visual silhouette size deceptively stable across a bounded range.",
+          "Ground Truth preserves accurate dust, shadow, and footprint cues that reveal real distance.",
+          "Horizon Lunge triggers only from specific distance bands and is heavily telegraphed by the shadow.",
+          "Anchor Tear exposes a stationary weak point whenever the Stalker changes false-scale band."
+        ],
+        "counterplay": [
+          "Ignore silhouette size and read shadow/footprint position; punish Anchor Tear after band changes."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Minimal body detail, perfectly black fur edge, realistic dust and shadow intentionally contradict apparent scale, and distance-band changes ripple the horizon line."
+        ],
+        "animation": [
+          "Catlike stalking whose stride length appears visually wrong, horizon limbs compress during lunges, and band changes include a brief full-body flattening into the shadow."
+        ],
+        "audio": [
+          "Footsteps use accurate world distance even when the body looks close, low purr spans stereo width, and lunges begin with a shadow-first tearing sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-039",
+      "name": "Moonhorn Wyrm",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "mythical ridge predator",
+      "identity": {
+        "fantasy": "A serpentine mountain wyrm whose antlers collect moonlight and project temporary luminous bridges between peaks.",
+        "silhouette": "Long white-scaled wyrm, enormous branching silver antlers, six climbing limbs, translucent sail fins.",
+        "lore_hook": "Some mountain cultures treat Moonhorn migration as a public transit schedule."
+      },
+      "mechanics": {
+        "core": [
+          "ridge traversal",
+          "moon bridges",
+          "antler beam",
+          "territorial coil"
+        ],
+        "signature": [
+          "Silver Span projects a temporary authored light bridge between compatible ridge anchors.",
+          "Antler Lance concentrates stored moonlight into a slow sweeping beam.",
+          "Peak Coil wraps around a terrain feature to create a moving hazard ring.",
+          "Dawn Weakness drains stored light and lowers aggression after sunrise events."
+        ],
+        "counterplay": [
+          "Break antler crystals to reduce beam duration; use bridge windows for traversal before turning on the Wyrm."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Silver bridges form from drifting dust, antlers fill with visible lunar currents, sail fins cast rainbow moon halos, and Peak Coil leaves glowing scales on rock."
+        ],
+        "animation": [
+          "Serpentine climbing with synchronized limb grips, antlers tilt independently toward light sources, and bridge casting arches the entire body between peaks."
+        ],
+        "audio": [
+          "Stone scraping, deep flute-like calls, crystalline antler resonance, and soft choral wind across active moon bridges."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-040",
+      "name": "Aurora Roc",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "mythical aerial apex",
+      "identity": {
+        "fantasy": "A city-block-sized roc whose feathers store charged aurora bands, creating spectacular dive lanes and temporary updraft corridors.",
+        "silhouette": "Enormous dark eagle with translucent aurora tail feathers, crown plume like polar lights, claws wrapped in frost lightning.",
+        "lore_hook": "Roc migrations are visible across half the world and often become regional events whether anyone planned for them or not."
+      },
+      "mechanics": {
+        "core": [
+          "aerial apex",
+          "aurora dives",
+          "updraft corridors",
+          "nest defense"
+        ],
+        "signature": [
+          "Polar Dive paints a long multicolor warning lane before a devastating pass.",
+          "Feather Wake leaves a temporary updraft that players can deliberately use for traversal.",
+          "Crown Flash blinds only through direct line of sight and provides strong pre-flash warning.",
+          "Nest Sovereignty calls smaller aerial wildlife and changes local sky encounters while active."
+        ],
+        "counterplay": [
+          "Use terrain to break dive lines, exploit Feather Wake, and turn away from Crown Flash."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Kilometer-long aurora contrails, prismatic feather shedding, frost-lightning crawling between claws, and enormous shadow sweeps across terrain before dives."
+        ],
+        "animation": [
+          "Wingbeats are slow at altitude but violent near ground, dive posture folds the body into a spear, and landing sends carefully staged debris rings rather than uncontrolled physics."
+        ],
+        "audio": [
+          "Distant thunder from wingbeats, eagle calls stretched into orchestral brass, electric feather crackle, and a roaring wind wall during dives."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-041",
+      "name": "Gilded Chimera",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "mythical adaptive tri-form hunter",
+      "identity": {
+        "fantasy": "A gold-armored chimera whose lion, serpent, and avian aspects take turns controlling movement and attacks based on player positioning.",
+        "silhouette": "Massive lion body in natural gold plates, serpent tail with jeweled eyes, eagle-like forewing structures folded along shoulders.",
+        "lore_hook": "Ancient kings bred Chimeras as living tests: every head represents a different failure of arrogance."
+      },
+      "mechanics": {
+        "core": [
+          "tri-form control",
+          "position response",
+          "gold armor",
+          "aspect combos"
+        ],
+        "signature": [
+          "Lion Aspect controls frontal pressure with pounces and roars.",
+          "Serpent Aspect dominates rear and flank zones with venom lines and tail grabs.",
+          "Aerie Aspect opens shoulder wings for short vertical repositioning and feather volleys.",
+          "Royal Concord combines two aspects after armor plates are broken, creating mixed patterns instead of raw stat escalation."
+        ],
+        "counterplay": [
+          "Identify which aspect currently leads; break corresponding armor plates to interrupt transitions."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Gold plates reflect local environment, aspect eyes change distinct colors, wing feathers leave metallic sun trails, and Concord overlays two heraldic animal silhouettes."
+        ],
+        "animation": [
+          "Control visibly passes through body posture: lion lowers shoulders, serpent lifts tail and twists hips, Aerie spreads wing joints and lightens footwork."
+        ],
+        "audio": [
+          "Three distinct vocal layers, metallic plate resonance, jeweled tail rattles, and a royal horn chord when Concord begins."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    },
+    {
+      "id": "MON-042",
+      "name": "Abyss Stag of Thirteen Tides",
+      "family": "monster",
+      "tier": "god",
+      "status": "specified",
+      "role": "mythical ocean-world guardian",
+      "identity": {
+        "fantasy": "A colossal stag that walks across ocean surfaces and coastal cliffs, each of thirteen antler branches governing a different tidal encounter pattern.",
+        "silhouette": "Skyscraper-tall black-blue stag, thirteen branching coral antlers, water cascading upward along its legs, starfish-like eyes.",
+        "lore_hook": "Old sailors say the sea does not create tides; it follows this Stag's breathing."
+      },
+      "mechanics": {
+        "core": [
+          "thirteen tide patterns",
+          "coastal traversal",
+          "antler weak points",
+          "regional guardian"
+        ],
+        "signature": [
+          "Tide Crown selects one of several authored tidal patterns based on intact antler branches.",
+          "Ocean Step raises temporary water platforms beneath each hoof, creating traversal and hazard opportunities.",
+          "Thirteen Witnesses makes selected antler branches independently targetable to remove corresponding attack families.",
+          "Low Moon Mercy creates a brief non-hostile phase if players complete a coastal protection objective instead of only dealing damage."
+        ],
+        "counterplay": [
+          "Coordinate branch breaks to remove dangerous tide patterns; use hoof platforms and protection objectives to create safe phases."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Ocean water climbs vertically up its legs, each antler branch glows with a different tide color, hoofsteps raise island-sized circular swells, and mercy phases calm the entire local sea surface into mirror stillness."
+        ],
+        "animation": [
+          "Movement is monumentally slow at distance with local leg-sector animations up close, antlers rotate subtly like a celestial instrument, and hoof lifts expose temporary traversal structures."
+        ],
+        "audio": [
+          "Sub-oceanic groans, whale-song harmonics, coral chimes, regional surf responding to breath cycles, and a vast silence when Low Moon Mercy begins."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Encounter, hunt, event, or ecology-specific discovery; not directly purchasable."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Hostile creature definition; implementation must preserve explicit counterplay and regional AI/VFX budgets."
+      ]
+    }
+  ]
+}
