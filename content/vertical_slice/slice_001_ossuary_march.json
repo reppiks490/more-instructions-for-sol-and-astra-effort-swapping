@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "slice_id": "SLICE-001",
+  "name": "The Ossuary March",
+  "purpose": "First production vertical slice proving AEONFALL's combat, taming, hireables, crafting, progression, dungeon, boss, world-event, shop, persistence, streaming, and presentation architecture before broad content binding.",
+  "region": {
+    "working_name": "The Ossuary March",
+    "fantasy": "A necrotic frontier where corpse-fed ecology, ruined pilgrimage infrastructure, blackwater marshes, grave markets, and mobile ossuary fortifications collide.",
+    "subzones": [
+      "Graveglass Causeway",
+      "The Blackwater Reliquary",
+      "Maw-Court Fields",
+      "Saintless Crossing",
+      "Ossuary Exchange",
+      "Red Mason Bastion"
+    ]
+  },
+  "monsters": [
+    "MON-001",
+    "MON-002",
+    "MON-007",
+    "MON-008",
+    "MON-043",
+    "MON-044",
+    "MON-048",
+    "MON-049",
+    "MON-050",
+    "MON-053",
+    "MON-058",
+    "MON-133"
+  ],
+  "tameable_wildlife": [
+    "WLD-001",
+    "WLD-006",
+    "WLD-007",
+    "WLD-008",
+    "WLD-009",
+    "WLD-010"
+  ],
+  "hireables": [
+    "NPC-003",
+    "NPC-008",
+    "NPC-009",
+    "NPC-010",
+    "NPC-012",
+    "NPC-016",
+    "NPC-023",
+    "NPC-051"
+  ],
+  "weapons": [
+    "WPN-001",
+    "WPN-003",
+    "WPN-007",
+    "WPN-008",
+    "WPN-011",
+    "WPN-012",
+    "WPN-122",
+    "WPN-124",
+    "WPN-126",
+    "WPN-143",
+    "WPN-166",
+    "WPN-173"
+  ],
+  "armor_sets": [
+    "ARM-001",
+    "ARM-002"
+  ],
+  "vehicles": [
+    "VEH-001",
+    "VEH-002",
+    "VEH-010"
+  ],
+  "classes": [
+    "CLS-006",
+    "CLS-007"
+  ],
+  "skills": [
+    "SKL-006",
+    "SKL-007",
+    "SKL-008",
+    "SKL-011"
+  ],
+  "minibosses": [
+    "BOS-005",
+    "BOS-006"
+  ],
+  "major_boss": "BOS-011",
+  "world_event": "EVT-011",
+  "crafting_materials": [
+    "MAT-003",
+    "MAT-008",
+    "MAT-011",
+    "MAT-018",
+    "MAT-022",
+    "MAT-027"
+  ],
+  "dungeon": {
+    "name": "The Ossuary Exchange",
+    "acts": [
+      "Outer Market breach and faction choice",
+      "Corpse-economy disruption chambers",
+      "Necromancer construction gauntlet",
+      "Miniboss branch",
+      "King Without Pulse throne approach"
+    ],
+    "checkpoint_count": 4,
+    "supports_companions": true
+  },
+  "shop": {
+    "name": "The Grave Market Quartermaster",
+    "stock_ids": [
+      "WPN-001",
+      "WPN-007",
+      "WPN-122",
+      "ARM-002",
+      "VEH-010"
+    ],
+    "design_currency": "slice_test_currency",
+    "real_money_binding": "none_in_vertical_slice",
+    "notes": [
+      "The first slice validates stock rotation, unlock gating, persistence, and UI without coupling core progression to real-money transactions.",
+      "Any later monetization must be implemented only through then-current Epic-supported systems and publication rules."
+    ]
+  },
+  "runtime_requirements": [
+    "persistent player profile",
+    "level and mastery progression",
+    "material ledger",
+    "crafting/refinement transaction",
+    "faction reputation",
+    "hire/tame companion state",
+    "ability and status contracts",
+    "boss phase state machine",
+    "world-event state machine",
+    "streaming-safe spawn budgets",
+    "deterministic temporary-effect cleanup"
+  ],
+  "acceptance_gates": [
+    "all referenced canonical IDs resolve",
+    "Verse compiles in the bound UEFN project",
+    "Launch Session completes full dungeon and world-event loop",
+    "persistence survives leave/rejoin test",
+    "no permanent orphaned spawns or VFX after event cleanup",
+    "memory and spatial profiling pass target platform budgets",
+    "boss encounter supports solo scaling and coordinated squad play",
+    "tameable and hireable pathing recover from blocked navigation",
+    "shop purchases and crafting transactions are idempotent",
+    "all lethal mechanics have redundant visual/audio readability cues"
+  ]
+}
