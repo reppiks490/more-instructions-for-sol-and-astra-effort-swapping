@@ -1,0 +1,2872 @@
+{
+  "wave": "015",
+  "purpose": "Second horror/ecology expansion: additional cannibal horde forms, necromancers, eldritch entities, demons, mythical creatures, mega-bosses, and post-target world events.",
+  "entity_count": 44,
+  "entities": [
+    {
+      "id": "MON-073",
+      "name": "Gravegnawer",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "cannibal horde tier I",
+      "identity": {
+        "fantasy": "A fast corpse-eater that grows stronger by consuming fallen members of its own pack; it is the first stage of the Devouring Line.",
+        "silhouette": "Lean hairless humanoid with split jaw, overlong forearms, and pale ember veins.",
+        "lore_hook": "The horde does not bury its dead because death is considered unfinished nutrition."
+      },
+      "mechanics": {
+        "core": [
+          "pack feeding",
+          "corpse race",
+          "mobility"
+        ],
+        "signature": [
+          "Devour Kindred lets a Gravegnawer consume a fallen horde body to gain temporary speed and armor.",
+          "Feeding near another Gravegnawer starts a violent contest that briefly distracts both."
+        ],
+        "counterplay": [
+          "Destroy or deny corpses, kite packs away from feeding sites, punish the long feeding crouch."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Pale veins brighten during feeding.",
+          "Consumed corpse dissolves into ash ribbons rather than lingering."
+        ],
+        "animation": [
+          "Low four-limb sprint.",
+          "Feeding animation hunches over a corpse and snaps upright violently."
+        ],
+        "audio": [
+          "Jaw clicks, wet growls, escalating heartbeat."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Spawns in early horde outbreaks."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-074",
+      "name": "Carrion Ascendant",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "cannibal horde tier II",
+      "identity": {
+        "fantasy": "A Gravegnawer that survived enough feedings to grow armored bone ridges and command lesser feeders through scent bursts.",
+        "silhouette": "Broad predatory frame with spinal bone fins and sealed lower face.",
+        "lore_hook": "The second stage remembers where food was found and teaches the pack to return."
+      },
+      "mechanics": {
+        "core": [
+          "pack command",
+          "feeding evolution",
+          "scent control"
+        ],
+        "signature": [
+          "Scent Brand marks a corpse cluster and redirects nearby tier-I horde units toward it.",
+          "Bone Rush shoulder-charges players who interrupt a feed.",
+          "Overfed State briefly hardens bone fins and reduces stagger."
+        ],
+        "counterplay": [
+          "Scent Brands are visible; breaking corpse clusters denies growth; Overfed State has a slow turning rate."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Red scent ribbons stream from branded corpses.",
+          "Bone fins glow from within during Overfed State."
+        ],
+        "animation": [
+          "Command posture arches spine fins outward.",
+          "Bone Rush drops to all fours before impact."
+        ],
+        "audio": [
+          "Deep scent bellow, bone clatter, low charge roar."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Evolves from tier-I horde state during sustained outbreaks."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-075",
+      "name": "Marrow Apostle",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "cannibal horde tier III",
+      "identity": {
+        "fantasy": "A towering third-stage devourer that ritualizes cannibalism, converting consumed kin into temporary mutations chosen by battlefield need.",
+        "silhouette": "Twelve-foot gaunt giant with rib-cage crown and three asymmetrical arms.",
+        "lore_hook": "At the third stage the horde stops merely eating and begins choosing what it wants to become."
+      },
+      "mechanics": {
+        "core": [
+          "adaptive mutation",
+          "corpse resource",
+          "elite leadership"
+        ],
+        "signature": [
+          "Consume Runner grants burst mobility.",
+          "Consume Brute grants temporary plated limbs.",
+          "Consume Screamer grants a sonic cone.",
+          "Consume Necrotic grants a short corruption aura.",
+          "Apostolic Call forces nearby lower tiers to stop feeding and attack one marked target."
+        ],
+        "counterplay": [
+          "Only one mutation can be active; mutation tells are visible in silhouette; corpse denial remains effective."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Rib crown changes shape per mutation.",
+          "Consumed essence spirals into one specific limb.",
+          "Call paints a blood-red target glyph visible to players."
+        ],
+        "animation": [
+          "Each mutation physically rearranges one body region.",
+          "Call uses the smaller third arm to point while main arms brace."
+        ],
+        "audio": [
+          "Layered throat voices, rib creaks, mutation-specific stingers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Rare evolution during mature horde events."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-076",
+      "name": "Corpse Basilica",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "cannibal horde tier IV siege-form",
+      "identity": {
+        "fantasy": "A collective fourth-stage organism formed when dozens of devourers merge into a mobile fortress that breeds temporary attack bodies from its own mass.",
+        "silhouette": "Building-sized crawling cathedral of fused bone arches, limbs, and hanging cocoon chambers.",
+        "lore_hook": "The fourth stage is no longer an individual. It is where the horde begins constructing itself."
+      },
+      "mechanics": {
+        "core": [
+          "mobile nest",
+          "mass redistribution",
+          "spawn pressure"
+        ],
+        "signature": [
+          "Basilica Mass can be shifted between armor, movement, or spawn output.",
+          "Cocoon Nave produces temporary lesser attackers until its chamber is destroyed.",
+          "Procession Legs can anchor into the ground to become a siege nest.",
+          "Hunger Bell draws nearby lower-tier horde bodies toward the Basilica for absorption."
+        ],
+        "counterplay": [
+          "Destroy cocoon chambers and leg anchors; absorbed bodies are vulnerable while traveling toward the Basilica."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Bone-arch silhouette visible from extreme distance.",
+          "Cocoons pulse with different spawn colors.",
+          "Anchoring grows a ring of rib-like buttresses."
+        ],
+        "animation": [
+          "Whole structure moves like a slow centipede church.",
+          "Anchoring unfolds legs into structural columns.",
+          "Destroyed chambers collapse inward before sealing."
+        ],
+        "audio": [
+          "Cathedral groans, distant bell made from bone resonance, many muffled snarls."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Event-only evolution from an unchecked tier-III horde."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-077",
+      "name": "Crowned Hunger",
+      "family": "monster",
+      "tier": "god",
+      "status": "specified",
+      "role": "cannibal horde tier V apex",
+      "identity": {
+        "fantasy": "The fifth and final horde evolution: a god-scale predator-mind that consumes its own swarm to create specialized limbs, armor organs, and temporary avatars across a region.",
+        "silhouette": "Colossal crown-headed silhouette with multiple city-block appendages emerging from a moving horde mass.",
+        "lore_hook": "The final stage does not command the horde. The horde realizes it has always been one organism."
+      },
+      "mechanics": {
+        "core": [
+          "regional hive mind",
+          "self-consumption",
+          "apex evolution"
+        ],
+        "signature": [
+          "Royal Consumption sacrifices active lower-tier horde units to grow one authored combat organ.",
+          "Legion Hand manifests a temporary giant limb in a targeted region.",
+          "Maw Avatar spawns a smaller controllable boss-body while the core remains distant.",
+          "Hunger Weather creates a regional red ash storm that changes horde behavior.",
+          "Crown Pulse synchronizes all surviving horde units into one attack cadence."
+        ],
+        "counterplay": [
+          "Every apex organ exposes corresponding weak points; consuming the horde reduces its field presence; coordinated teams can force inefficient organ choices."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "A crown of moving red-black silhouettes appears in the sky above the active region.",
+          "Giant limb manifestations rise from swarms rather than teleporting in.",
+          "Ash storm contains faint jaw-shaped vortices.",
+          "Weak organs glow with distinct anatomy colors."
+        ],
+        "animation": [
+          "Core silhouette slowly reconfigures when organs are purchased.",
+          "Legion Hand uses multi-stage emergence to telegraph impact.",
+          "Maw Avatar peels away from the main mass in a dramatic birth-like split."
+        ],
+        "audio": [
+          "Regional heartbeat, thousands of synchronized footfalls, crown-tone horn."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Only appears after a full five-stage horde escalation event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-078",
+      "name": "Candlebone Hierophant",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "necromancer support caster",
+      "identity": {
+        "fantasy": "A skeletal necromancer carrying burning candles inside its ribs, using each flame as a charge to reanimate lesser corpses or curse ground.",
+        "silhouette": "Tall skeletal priest with wax-draped antlers and candles burning inside ribcage.",
+        "lore_hook": "Every candle is said to belong to someone whose death it postponed."
+      },
+      "mechanics": {
+        "core": [
+          "corpse reanimation",
+          "curse zones",
+          "finite charges"
+        ],
+        "signature": [
+          "Spend one Rib Candle to reanimate one eligible corpse as a short-lived thrall.",
+          "Spend two candles to create a wax curse pool that slows healing.",
+          "Extinguishing candles through focused damage reduces its spell options."
+        ],
+        "counterplay": [
+          "Shoot visible candles, deny corpses, interrupt long wax-pour cast."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Warm candle glow inside black ribs.",
+          "Wax sigils spread over ground.",
+          "Extinguished candles leave smoke trails."
+        ],
+        "animation": [
+          "Hands protect ribcage while retreating.",
+          "Reanimation gestures pull wax threads upward."
+        ],
+        "audio": [
+          "Candle crackle, whispered liturgy, wax drip hiss."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Necropolis and ossuary regions."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-079",
+      "name": "Widow-Lector",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "necromancer duelist",
+      "identity": {
+        "fantasy": "A necromancer that binds the shadow of a recently downed creature and makes it mimic attacks independently.",
+        "silhouette": "Veiled figure with six black parchment arms and a floating shadow spindle.",
+        "lore_hook": "It reads the dead like scripture and edits the parts it dislikes."
+      },
+      "mechanics": {
+        "core": [
+          "shadow binding",
+          "attack mimic",
+          "duelist pressure"
+        ],
+        "signature": [
+          "Black Annotation captures a shadow imprint from an eligible defeated enemy.",
+          "Margin Ghost repeats one simplified attack pattern from the imprint.",
+          "Redaction Step swaps positions with the ghost.",
+          "Final Footnote detonates the ghost into a silence field."
+        ],
+        "counterplay": [
+          "Destroy the ghost, force bad imprints, track swap telegraph."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Black parchment strips orbit like spider legs.",
+          "Captured shadow appears on the spindle.",
+          "Swap draws a horizontal ink slash."
+        ],
+        "animation": [
+          "Extra parchment arms write continuously.",
+          "Swap folds the body flat like a page before reappearing."
+        ],
+        "audio": [
+          "Page scratches, female whisper chorus, ink snap."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic necromancer coven encounter."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-080",
+      "name": "Sepulcher Astronomer",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "necromancer artillery caster",
+      "identity": {
+        "fantasy": "A death mage that maps graves as stars and calls bone meteors along geometric grave constellations.",
+        "silhouette": "Robed corpse with brass astrolabe fused through the torso.",
+        "lore_hook": "It believes cemeteries are constellations viewed from below."
+      },
+      "mechanics": {
+        "core": [
+          "grave constellation",
+          "artillery",
+          "zone planning"
+        ],
+        "signature": [
+          "Marks three grave points to create a Constellation Triangle.",
+          "After a delay, bone meteors fall along triangle edges.",
+          "Can collapse the triangle inward for a central burst.",
+          "Destroyed grave anchors shorten the pattern."
+        ],
+        "counterplay": [
+          "Break anchors and move across the geometry rather than along its edges."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Brass star lines connect graves.",
+          "Bone meteors carry cold blue tails.",
+          "Collapse draws all lines inward."
+        ],
+        "animation": [
+          "Astrolabe rotates independently of body.",
+          "Casting pose tracks points with long finger arcs."
+        ],
+        "audio": [
+          "Astrolabe ticks, distant falling whistle, grave bell."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic cemetery anomaly."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-081",
+      "name": "Ossuary Shepherd",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "necromancer pack controller",
+      "identity": {
+        "fantasy": "A crooked staff-bearing necromancer that herds bone beasts into formations instead of directly attacking.",
+        "silhouette": "Hunched black-robed figure with vertebrae crook and skull lantern.",
+        "lore_hook": "It treats skeletons as livestock and adventurers as wolves."
+      },
+      "mechanics": {
+        "core": [
+          "minion formation",
+          "lantern control",
+          "herding"
+        ],
+        "signature": [
+          "Crook Command forms minions into line, wedge, or circle patterns.",
+          "Skull Lantern buffs only minions within its cone.",
+          "Breaking the lantern forces the Shepherd to flee briefly."
+        ],
+        "counterplay": [
+          "Focus lantern and exploit formation transition gaps."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Bone beasts receive thin formation lines.",
+          "Lantern cone is clearly visible."
+        ],
+        "animation": [
+          "Staff sweeps define formation shape.",
+          "Lantern break causes exaggerated recoil and retreat."
+        ],
+        "audio": [
+          "Shepherd whistle, dry hoof-bone clatter, lantern hum."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Common necromancer patrol leader."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-082",
+      "name": "The Angle That Hunts",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "eldritch geometry predator",
+      "identity": {
+        "fantasy": "An impossible predator that moves only when players' camera and body orientation create certain angles to nearby structures.",
+        "silhouette": "A broken triangular silhouette that seems flatter from some directions and enormous from others.",
+        "lore_hook": "It was not summoned; someone accidentally built a room with the correct corner."
+      },
+      "mechanics": {
+        "core": [
+          "angle movement",
+          "line-of-sight paradox",
+          "geometry pressure"
+        ],
+        "signature": [
+          "Moves rapidly when no player directly observes its central angle.",
+          "Right Angle Leap lets it emerge from an eligible corner.",
+          "Acute Hunger marks players standing between two geometry anchors.",
+          "Reflex Collapse briefly flattens into a harmless plane after a failed ambush."
+        ],
+        "counterplay": [
+          "Maintain observation, avoid marked angle lanes, punish Reflex Collapse."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Edges shimmer without interior texture.",
+          "Corner emergence bends nearby straight lines.",
+          "Marked lanes show faint triangular overlays."
+        ],
+        "animation": [
+          "Movement alternates between impossible stillness and sudden geometric unfolding.",
+          "Collapse compresses the body into a thin plane.",
+          "The Angle That Hunts uses a bespoke phase-transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Dry ruler snap, stone scrape from wrong direction, silence before leap."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic anomaly geometry event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-083",
+      "name": "Mouth Behind the Moon",
+      "family": "monster",
+      "tier": "god",
+      "status": "specified",
+      "role": "eldritch regional entity",
+      "identity": {
+        "fantasy": "A distant eldritch organism visible only as a lunar mouth that periodically projects feeding tendrils into the active region.",
+        "silhouette": "Moon-sized jaw silhouette appearing behind a false moon.",
+        "lore_hook": "Ancient cultures thought eclipses were celestial events; they were feeding schedules."
+      },
+      "mechanics": {
+        "core": [
+          "regional projection",
+          "sky entity",
+          "feeding tendrils"
+        ],
+        "signature": [
+          "False Moon replaces local sky object during event.",
+          "Feeding Lines descend onto marked resource-rich or corpse-rich locations.",
+          "Moonbite removes light from a subregion, empowering selected eldritch mobs.",
+          "Reject Light creates safe zones around activated luminous relics.",
+          "Closing Jaw ends a phase with a regional shockwave."
+        ],
+        "counterplay": [
+          "Players cannot attack the sky-mouth directly; they sever feeding lines, power relics, and damage projected organs."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Giant toothed lunar silhouette.",
+          "Tendrils appear as black columns filled with stars.",
+          "Subregions lose color during Moonbite.",
+          "Safe relic zones shine warm gold against the black sky."
+        ],
+        "animation": [
+          "Moon jaw opens slowly over minutes.",
+          "Projected tendrils flex independently.",
+          "Closing Jaw uses a massive slow bite visible from anywhere in the event region."
+        ],
+        "audio": [
+          "Deep lunar groan, inverted tidal sound, distant impossible chewing."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier eldritch world incursion."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-084",
+      "name": "Pale Arithmetic",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "eldritch pattern caster",
+      "identity": {
+        "fantasy": "A faceless creature that attacks through repeating numerical patterns players can interrupt by breaking sequence.",
+        "silhouette": "Tall chalk-white humanoid covered in moving equations.",
+        "lore_hook": "It does not cast spells; it proves injuries must occur."
+      },
+      "mechanics": {
+        "core": [
+          "sequence attack",
+          "pattern puzzle",
+          "prediction"
+        ],
+        "signature": [
+          "Begins a visible 1-2-3-5 attack cadence.",
+          "Breaking the expected spacing causes Proof Error and stuns it.",
+          "Prime Step teleports only on prime-numbered beats.",
+          "Sum Field combines two previous attack zones into a third predicted zone."
+        ],
+        "counterplay": [
+          "Read the sequence and intentionally disrupt timing; random panic makes it stronger."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Numbers appear over attack zones.",
+          "Proof Error shatters equations into chalk dust.",
+          "Prime Step leaves numbered afterimages."
+        ],
+        "animation": [
+          "Movement occurs in exact rhythmic beats.",
+          "Stun animation collapses equations out of order."
+        ],
+        "audio": [
+          "Metronome clicks, whispered counting, chalk scratch."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic eldritch puzzle hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-085",
+      "name": "Choir Without Faces",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "eldritch sonic swarm",
+      "identity": {
+        "fantasy": "A cluster of robed figures sharing one invisible head-space, attacking through harmonized cones and resonance zones.",
+        "silhouette": "Seven headless robes circling an empty central space.",
+        "lore_hook": "The choir removed their faces so the song would have fewer opinions."
+      },
+      "mechanics": {
+        "core": [
+          "sonic cones",
+          "shared health tendency",
+          "formation"
+        ],
+        "signature": [
+          "Seven bodies rotate to create intersecting harmonic cones.",
+          "Breaking formation by staggering two bodies causes Discord.",
+          "Discord exposes the invisible central core briefly."
+        ],
+        "counterplay": [
+          "Split the formation and target the revealed center."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Sound cones appear as thin rippling fabric.",
+          "Invisible core becomes visible as a dark orb during Discord."
+        ],
+        "animation": [
+          "Robes rotate in synchronized steps.",
+          "Discord makes all bodies stumble in different directions."
+        ],
+        "audio": [
+          "Seven-part dissonant choir, fabric flutter, bass core pulse."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary eldritch procession."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-086",
+      "name": "Ash Duke Varkesh",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "infernal commander",
+      "identity": {
+        "fantasy": "A demon noble who marks sections of ground as temporary legal territory where only certain attack types are favored.",
+        "silhouette": "Tall horned officer in scorched ceremonial armor with burning map cape.",
+        "lore_hook": "Varkesh believes conquest is paperwork conducted with fire."
+      },
+      "mechanics": {
+        "core": [
+          "infernal zones",
+          "attack rule",
+          "commander"
+        ],
+        "signature": [
+          "Decree of Steel favors close-range attacks inside one zone.",
+          "Decree of Ash favors movement and burn effects in another.",
+          "Border Tax damages lesser summoned entities crossing zone lines.",
+          "Appeal to Violence temporarily merges two zones after taking heavy damage."
+        ],
+        "counterplay": [
+          "Fight from neutral ground, bait decrees into bad locations, exploit merge windup."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Burning map cape projects red boundary lines.",
+          "Each decree stamps a different infernal seal.",
+          "Ash Duke Varkesh adds another readable presentation layer with distance-aware LOD and a unique telegraph silhouette."
+        ],
+        "animation": [
+          "Cape unfurls as a map.",
+          "Decrees are issued with formal sword gestures."
+        ],
+        "audio": [
+          "Military horn, burning parchment, courtroom gavel boom."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic infernal officer hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-087",
+      "name": "Iron Gospel Fiend",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "demon bruiser",
+      "identity": {
+        "fantasy": "A heavy demon that quotes attack patterns through glowing scripture across its armor before executing them.",
+        "silhouette": "Massive iron-plated brute with molten words moving over shoulders.",
+        "lore_hook": "It learned prophecy by writing its own next move on itself."
+      },
+      "mechanics": {
+        "core": [
+          "telegraphed combo",
+          "heavy melee",
+          "script armor"
+        ],
+        "signature": [
+          "Armor scripture previews the next two attacks.",
+          "Completing the written combo grants it temporary armor.",
+          "Interrupting the second written attack erases the armor bonus."
+        ],
+        "counterplay": [
+          "Read the text cues and interrupt combo completion."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Molten words scroll across plates.",
+          "Interrupted scripture cracks and falls as sparks."
+        ],
+        "animation": [
+          "Each attack starts with shoulder text flaring.",
+          "Failed combo causes a frustrated plate slam."
+        ],
+        "audio": [
+          "Metal chanting, forge impacts, scripture hiss."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary infernal patrol elite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-088",
+      "name": "Velvet Horn Temptress",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "demon control specialist",
+      "identity": {
+        "fantasy": "A demon that creates alluring false safe zones which become dangerous if players remain inside too long.",
+        "silhouette": "Elegant horned figure in flowing crimson-black battle robes, face hidden behind velvet mask.",
+        "lore_hook": "It does not lie about safety; it simply never says for how long."
+      },
+      "mechanics": {
+        "core": [
+          "false sanctuary",
+          "control zones",
+          "mobility pressure"
+        ],
+        "signature": [
+          "Velvet Refuge creates a zone that initially heals lightly.",
+          "After a clear timer the refuge flips into a snare field.",
+          "Second Promise places a decoy refuge with a different timer.",
+          "Broken Promise empowers the demon if players stay through the flip."
+        ],
+        "counterplay": [
+          "Watch the timer and leave before the flip; refuges are visibly distinct from genuine support zones."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Warm rose sanctuary that slowly darkens.",
+          "Flip produces black thorn ribbons.",
+          "Mask eyes ignite when players overstay."
+        ],
+        "animation": [
+          "Slow inviting hand gesture creates refuge.",
+          "Flip animation snaps the hand shut."
+        ],
+        "audio": [
+          "Soft lullaby, clock-like heartbeat, thorn crack."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic infernal court encounter."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-089",
+      "name": "Hellclock Auditor",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "demon time-enforcer",
+      "identity": {
+        "fantasy": "A bureaucratic demon that imposes timed combat obligations, punishing players who fail clearly signaled objectives before the bell.",
+        "silhouette": "Thin red-black clerk with six clock faces embedded in torso.",
+        "lore_hook": "In Hell, lateness is the only unforgivable sin."
+      },
+      "mechanics": {
+        "core": [
+          "timed obligations",
+          "combat tasks",
+          "penalty bell"
+        ],
+        "signature": [
+          "Issues one of several visible Contracts: move, damage marked target, break object, or regroup.",
+          "Completing Contract grants a brief boon.",
+          "Failure triggers Penalty Bell with a tailored debuff.",
+          "Audit Trail records repeated failures and escalates only that penalty category."
+        ],
+        "counterplay": [
+          "Objectives are explicit and fair; completing them turns its own mechanic into player advantage."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Clock faces display contract icons.",
+          "Successful contract bursts into green-gold seal.",
+          "Penalty Bell sends red rings across the floor."
+        ],
+        "animation": [
+          "All six clocks point at target player.",
+          "Bell strike uses a giant spectral stamp.",
+          "Hellclock Auditor uses a bespoke phase-transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Office clock swarm, infernal bell, stamp impact."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic infernal bureaucracy anomaly."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-090",
+      "name": "Starhorn Behemoth",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "mythical celestial beast",
+      "identity": {
+        "fantasy": "A colossal elk-like creature whose antlers hold miniature constellations and whose charge rearranges local gravity lanes.",
+        "silhouette": "Building-sized midnight elk with branching starfield antlers.",
+        "lore_hook": "It migrates by walking between constellations rather than across land."
+      },
+      "mechanics": {
+        "core": [
+          "gravity charge",
+          "celestial antlers",
+          "beast mobility"
+        ],
+        "signature": [
+          "Charge leaves low-gravity lanes behind.",
+          "Antler Sweep drops star sparks that become temporary launch points.",
+          "Constellation Bellow calls smaller celestial fauna.",
+          "Breaking antler nodes reduces gravity effects without killing the beast."
+        ],
+        "counterplay": [
+          "Target antler nodes, use gravity lanes carefully, avoid charge corridors."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Antlers contain moving stars.",
+          "Charge lane bends dust upward.",
+          "Bellow draws constellation animals in the sky."
+        ],
+        "animation": [
+          "Long telegraphed hoof scrape before charge.",
+          "Antlers flex like tree branches during sweep."
+        ],
+        "audio": [
+          "Deep elk call mixed with cosmic resonance, hoof thunder."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic celestial migration event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-091",
+      "name": "Glass Basilisk",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "mythical reflection predator",
+      "identity": {
+        "fantasy": "A transparent basilisk that turns direct sustained aim into brittle crystal stacks on the viewer.",
+        "silhouette": "Serpentine lizard made from smoky glass with prism eyes.",
+        "lore_hook": "Hunters learned too late that looking carefully was exactly what it wanted."
+      },
+      "mechanics": {
+        "core": [
+          "gaze pressure",
+          "crystal stacks",
+          "reflection"
+        ],
+        "signature": [
+          "Sustained direct aim builds Brittle Gaze stacks.",
+          "Breaking line of sight decays stacks.",
+          "Prism Spit targets highly stacked players with a shatter projectile."
+        ],
+        "counterplay": [
+          "Use short peeks and indirect damage; reflective eye plates can be broken."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Prismatic eye beams.",
+          "Crystal overlay creeps over HUD edges at high stacks."
+        ],
+        "animation": [
+          "Head tracks aim direction with uncanny precision.",
+          "Eye plate break makes the creature recoil and scrape face along ground."
+        ],
+        "audio": [
+          "Glass resonance, prism ping, shatter hiss."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary crystal desert hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-092",
+      "name": "Tidemother Nacre",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "mythical amphibious summoner",
+      "identity": {
+        "fantasy": "A huge pearl-armored amphibious beast that lays temporary tide eggs which hatch into specialized support creatures.",
+        "silhouette": "Whale-sized salamander with nacre shell ridges and luminous throat.",
+        "lore_hook": "Coastal clans call her mother because every storm seems to arrive with another brood."
+      },
+      "mechanics": {
+        "core": [
+          "egg summons",
+          "water control",
+          "amphibious"
+        ],
+        "signature": [
+          "Places three egg types: healer, charger, fogger.",
+          "Tide Roll pushes water-like pressure across shoreline arenas.",
+          "Shell Choir buffs surviving hatchlings while she is submerged.",
+          "Breaking shell ridges limits egg capacity."
+        ],
+        "counterplay": [
+          "Destroy eggs before hatch, target shell ridges, pull fight away from deep water."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Pearl sheen with wave caustics.",
+          "Eggs pulse distinct colors.",
+          "Tide Roll appears as a translucent pressure wall."
+        ],
+        "animation": [
+          "Heavy salamander crawl.",
+          "Egg-laying uses tail and shell plates together."
+        ],
+        "audio": [
+          "Whale-song throat call, shell knocks, surf roar."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic coast leviathan event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-093",
+      "name": "Thunder Roc Sovereign",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "mythical aerial apex",
+      "identity": {
+        "fantasy": "A giant storm bird that owns the airspace, creating electrified thermal columns and dive paths players can exploit for traversal.",
+        "silhouette": "Skyscraper-winged black-gold roc with storm-cloud feathers.",
+        "lore_hook": "Entire cities once planned roads according to where its shadow passed."
+      },
+      "mechanics": {
+        "core": [
+          "airspace control",
+          "storm thermals",
+          "dive attack"
+        ],
+        "signature": [
+          "Creates Updraft Pillars that launch anyone entering them.",
+          "Marks Dive Corridors before high-speed strikes.",
+          "Featherfall drops electrified feathers that become temporary hazards.",
+          "Storm Crown phase creates rotating safe air lanes between lightning bands."
+        ],
+        "counterplay": [
+          "Use updrafts to evade or pursue; dive corridors are clearly forecast."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Cloud feathers shed lightning.",
+          "Dive corridor paints a giant sky-arrow.",
+          "Storm Crown forms a rotating thunder halo."
+        ],
+        "animation": [
+          "Wingbeats deform cloud layers.",
+          "Dive folds wings into a spear silhouette.",
+          "Landing shakes nearby props."
+        ],
+        "audio": [
+          "Massive wing thunder, eagle scream, electrical storm roll."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic high-altitude world hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-094",
+      "name": "Ironback World-Tortoise Spawn",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "mythical armored beast",
+      "identity": {
+        "fantasy": "A young world-tortoise whose shell supports a small moving ecology and defensive creatures.",
+        "silhouette": "House-sized tortoise with soil, shrubs, and tiny ruins growing on its shell.",
+        "lore_hook": "Adults are mistaken for islands; the young are mistaken for hills until they stand up."
+      },
+      "mechanics": {
+        "core": [
+          "mobile terrain",
+          "shell ecology",
+          "defensive symbiosis"
+        ],
+        "signature": [
+          "Shell creatures fire from the moving back.",
+          "Ground Stance roots the tortoise and hardens shell.",
+          "Ridge Tilt changes which shell side is accessible.",
+          "Players can climb the shell during vulnerable phases."
+        ],
+        "counterplay": [
+          "Attack leg joints to force kneel, then climb and clear shell defenders."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Dust and foliage shake with movement.",
+          "Shell veins glow when rooted."
+        ],
+        "animation": [
+          "Massive slow steps.",
+          "Kneel animation lowers shell into traversable ramp."
+        ],
+        "audio": [
+          "Earthy groan, stone scrape, distant shell-creature calls."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic roaming mythic-fauna encounter."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-095",
+      "name": "Dream-Eater Mare",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "nightmare predator",
+      "identity": {
+        "fantasy": "A spectral horse-like creature that steals HUD information and sound cues temporarily rather than simply dealing damage.",
+        "silhouette": "Tall black mare with too many translucent legs and a mane of sleeping faces.",
+        "lore_hook": "Travelers wake remembering hoofbeats but not where their companions went."
+      },
+      "mechanics": {
+        "core": [
+          "information denial",
+          "mobility",
+          "nightmare"
+        ],
+        "signature": [
+          "Nightmare Pass briefly hides one selected HUD element after a successful charge.",
+          "Dream Fog dampens directional audio in a small zone.",
+          "Wake Kick ends the effect early if players stagger the mare."
+        ],
+        "counterplay": [
+          "Effects are short, never remove essential accessibility information, and the creature is vulnerable after charges."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Mane contains faint sleeping face silhouettes.",
+          "Fog shows floating closed-eye symbols."
+        ],
+        "animation": [
+          "Leg count appears to change during gallop.",
+          "Charge passes through a spectral gallop blur."
+        ],
+        "audio": [
+          "Distant lullaby, reversed hoofbeats, sudden wake clap."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary dreamwood encounter."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "MON-096",
+      "name": "Sunken Oracle Crab",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "mythical predictive beast",
+      "identity": {
+        "fantasy": "A giant crab that predicts a player's next broad movement direction and blocks it with one oversized claw.",
+        "silhouette": "Tank-sized blue stone crab with one enormous rune-covered claw.",
+        "lore_hook": "Fisherfolk consult its shell patterns for storms, usually from very far away."
+      },
+      "mechanics": {
+        "core": [
+          "movement prediction",
+          "blocking claw",
+          "shore defense"
+        ],
+        "signature": [
+          "Oracle Mark predicts forward, back, left, or right movement tendency.",
+          "Claw Gate blocks the predicted lane.",
+          "Wrong prediction exposes the claw joint."
+        ],
+        "counterplay": [
+          "Feint direction to trigger a wrong block and punish the joint."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Rune arrow appears on shell.",
+          "Blocked lane raises a blue stone wall effect."
+        ],
+        "animation": [
+          "Claw winds up toward predicted lane.",
+          "Wrong block leaves claw embedded briefly."
+        ],
+        "audio": [
+          "Shell clicks, oracle gong, stone slam."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic coastal wildlife anomaly."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "BOS-051",
+      "name": "The Red Orchard King",
+      "family": "boss",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "horde mini-boss",
+      "identity": {
+        "fantasy": "A grotesque but strategic horde commander that plants corpse-seed pods and forces the battlefield to grow new attack lanes.",
+        "silhouette": "Tree-like devourer with antler branches carrying sealed red pods.",
+        "lore_hook": "It discovered that eating the dead was less efficient than planting them."
+      },
+      "mechanics": {
+        "core": [
+          "corpse pods",
+          "lane creation",
+          "horde command"
+        ],
+        "signature": [
+          "Seed the Fallen converts eligible corpses into delayed spawn pods.",
+          "Root Charge creates a thorn lane between two pods.",
+          "Harvest Call detonates unbroken pods into temporary speed fields for horde units."
+        ],
+        "counterplay": [
+          "Destroy pods early and keep corpses away from clustered lanes."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Red pods glow through bark skin.",
+          "Root lanes pulse underground before erupting."
+        ],
+        "animation": [
+          "Branches bend to plant pods.",
+          "Harvest Call shakes the whole crown violently."
+        ],
+        "audio": [
+          "Wood crack, pod heartbeat, horde howl."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by mid-stage horde escalation."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "medium",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "BOS-052",
+      "name": "Arch-Necromancer Ilyr Voss",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "raid necromancer",
+      "identity": {
+        "fantasy": "A master necromancer who never directly resurrects the same corpse twice, cycling bodies through soldier, shield, bomb, and gate roles.",
+        "silhouette": "Tall black-gold mage with rotating cemetery gates behind the back.",
+        "lore_hook": "Voss considered ordinary resurrection unimaginative."
+      },
+      "mechanics": {
+        "core": [
+          "corpse role cycling",
+          "raid control",
+          "necromancy"
+        ],
+        "signature": [
+          "First use raises a corpse as a soldier.",
+          "Second use converts that corpse into a shield wall.",
+          "Third use turns remains into a delayed soul bomb.",
+          "Fourth use opens a short gate to another grave site.",
+          "Grave Ledger marks which stage each corpse has reached."
+        ],
+        "counterplay": [
+          "Track corpse stages, destroy or cleanse remains before dangerous conversions, interrupt gate cast."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Rotating grave gates show four role icons.",
+          "Ledger numbers hover over reusable remains.",
+          "Soul bombs compress into black-gold spheres."
+        ],
+        "animation": [
+          "Back gates rotate one quarter-turn per conversion.",
+          "Gate cast uses both arms to wrench open an invisible door."
+        ],
+        "audio": [
+          "Four-note grave motif, ledger scratch, gate groan."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Necromancer citadel raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "BOS-053",
+      "name": "Vermilion Contract Devil",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "infernal contract boss",
+      "identity": {
+        "fantasy": "A demon boss that offers optional combat contracts mid-fight; accepting gives power but adds new obligations and failure penalties.",
+        "silhouette": "Tall red legalist demon with burning scroll wings.",
+        "lore_hook": "It has never broken a promise because every promise was written to hurt someone."
+      },
+      "mechanics": {
+        "core": [
+          "optional contracts",
+          "risk reward",
+          "adaptive obligations"
+        ],
+        "signature": [
+          "Offer Contract choices during safe intermissions.",
+          "Contract of Fury boosts damage but demands constant aggression.",
+          "Contract of Mercy boosts support but punishes ally neglect.",
+          "Contract of Motion boosts mobility but punishes standing still.",
+          "Breaking any accepted clause empowers the boss temporarily."
+        ],
+        "counterplay": [
+          "Players may refuse every contract; reading clauses and choosing team-suitable risks is key."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Burning scroll wings display active clauses.",
+          "Accepted contract creates wrist seals on players.",
+          "Breach causes red ink explosion."
+        ],
+        "animation": [
+          "Boss bows before each offer.",
+          "Scroll wings tear off strips that fly to accepting players."
+        ],
+        "audio": [
+          "Pen scratch, infernal courtroom murmur, breach gavel."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Infernal tribunal raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "BOS-054",
+      "name": "Pale Equation Prime",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "eldritch puzzle boss",
+      "identity": {
+        "fantasy": "A larger form of Pale Arithmetic that turns the entire arena into a solvable sequence machine.",
+        "silhouette": "Faceless giant embedded in a rotating chalkboard ring.",
+        "lore_hook": "The Prime is less a creature than a proof trying to finish itself."
+      },
+      "mechanics": {
+        "core": [
+          "arena sequence",
+          "pattern solving",
+          "phase mathematics"
+        ],
+        "signature": [
+          "Phase One uses additive spatial sequences.",
+          "Phase Two uses rotating prime-number platforms.",
+          "Phase Three combines prior safe zones into predicted intersections.",
+          "Proof Break windows open when players deliberately force a contradiction."
+        ],
+        "counterplay": [
+          "Observe and solve; raw damage is inefficient outside Proof Break."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Arena floor writes giant equations.",
+          "Safe zones are crisp geometric shapes.",
+          "Contradiction shatters the chalkboard ring."
+        ],
+        "animation": [
+          "Body rotates with ring rather than walking.",
+          "Proof Break causes all limbs to desynchronize."
+        ],
+        "audio": [
+          "Gigantic chalk scrape, counting choir, error tone."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Eldritch theorem vault raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "BOS-055",
+      "name": "Saint Ebon, Keeper of the Last Door",
+      "family": "boss",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "dimensional guardian",
+      "identity": {
+        "fantasy": "A guardian that controls a single impossible door which can redirect attacks, enemies, and players between authored arena positions.",
+        "silhouette": "Black armored knight carrying a freestanding door instead of a shield.",
+        "lore_hook": "No one knows what lies behind the Last Door because Ebon only opens it sideways."
+      },
+      "mechanics": {
+        "core": [
+          "portal door",
+          "redirect",
+          "arena mastery"
+        ],
+        "signature": [
+          "Door Guard redirects eligible projectiles to another marked doorway.",
+          "Threshold Step moves Ebon through the door to a linked position.",
+          "Open Sentence releases stored redirected projectiles in sequence.",
+          "Final Lock seals one arena route and opens another."
+        ],
+        "counterplay": [
+          "Track linked doors, avoid feeding stored projectiles, punish lock animation."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Door interior shows shifting locations.",
+          "Stored projectiles appear as tiny lights behind the frame.",
+          "Final Lock sends giant keys through the floor."
+        ],
+        "animation": [
+          "Door is physically carried and planted.",
+          "Threshold Step walks sideways through the frame.",
+          "Lock turns with a two-handed key motion."
+        ],
+        "audio": [
+          "Door hinge groan, key thunder, spatial echo."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic dimensional fortress boss."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "BOS-056",
+      "name": "Titan of the Hollow Crown",
+      "family": "boss",
+      "tier": "god",
+      "status": "specified",
+      "role": "skyscraper-class siege boss",
+      "identity": {
+        "fantasy": "A skyscraper-sized armored titan whose crown contains the command network for its limbs; teams must disable regional relays before climbing the body.",
+        "silhouette": "Skyscraper humanoid with hollow crown, city-sized shoulder plates, and glowing relay towers.",
+        "lore_hook": "The titan was built as a mobile capital. Its citizens vanished, but the city kept walking."
+      },
+      "mechanics": {
+        "core": [
+          "distributed weak points",
+          "climbable boss",
+          "regional relays"
+        ],
+        "signature": [
+          "Four ground relays each disable one defensive crown behavior.",
+          "Knee Break opens a climb route after sufficient leg stagger.",
+          "Shoulder City phase requires fighting across moving armor terraces.",
+          "Crown Core becomes vulnerable only after synchronized relay shutdown.",
+          "Falling Architecture creates temporary traversal debris rather than instant-fail hazards."
+        ],
+        "counterplay": [
+          "Split teams between relays and body weak points; failing synchronization restores crown defenses."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Crown visible across region.",
+          "Relay beams connect terrain to titan.",
+          "Shoulder terraces light as traversable paths.",
+          "Core exposure turns sky behind crown white-gold."
+        ],
+        "animation": [
+          "Huge stride cycles move background skyline.",
+          "Knee collapse is a multi-stage cinematic with safe traversal prompts.",
+          "Crown opens like an enormous mechanical iris."
+        ],
+        "audio": [
+          "City-scale metal groan, relay sirens, crown choir."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier regional siege event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "BOS-057",
+      "name": "Leviathan Below Glass",
+      "family": "boss",
+      "tier": "god",
+      "status": "specified",
+      "role": "ocean-region world boss",
+      "identity": {
+        "fantasy": "A vast sea creature fought through multiple shoreline and underwater projections while the true body remains beneath a translucent ocean surface.",
+        "silhouette": "Kilometers-long shadow under water with periodic luminous organs surfacing.",
+        "lore_hook": "The ocean is not deep; it is simply resting on top of the Leviathan."
+      },
+      "mechanics": {
+        "core": [
+          "distributed organs",
+          "shoreline phases",
+          "underwater projection"
+        ],
+        "signature": [
+          "Gill Towers surface as attackable organs.",
+          "Tidal Spine creates moving water walls across coastal regions.",
+          "Eye Island phase exposes a giant eye large enough to fight on.",
+          "Deep Roll changes shoreline geometry through scripted water pressure.",
+          "Heart Sonar creates rhythm windows for synchronized team damage."
+        ],
+        "counterplay": [
+          "Attack surfaced organs, use terrain between tidal walls, synchronize to sonar rhythm."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Enormous moving shadow beneath water.",
+          "Bioluminescent organs break surface.",
+          "Eye reflection shows players as tiny silhouettes.",
+          "Sonar rings traverse entire coastal arena."
+        ],
+        "animation": [
+          "Body motion represented through ocean deformation and regional shell animation.",
+          "Eye blinks as a full-arena event.",
+          "Gill towers flex like buildings."
+        ],
+        "audio": [
+          "Sub-ocean bass, whale-like tectonic groan, sonar pulse."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier oceanic world event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "BOS-058",
+      "name": "Mother of Unfinished Angels",
+      "family": "boss",
+      "tier": "god",
+      "status": "specified",
+      "role": "celestial horror world boss",
+      "identity": {
+        "fantasy": "A colossal winged entity that creates incomplete angelic constructs from fragments of defeated summons and broken terrain.",
+        "silhouette": "Mountain-tall humanoid cocoon with dozens of half-formed wings.",
+        "lore_hook": "The angels were not born broken; she simply stopped finishing them."
+      },
+      "mechanics": {
+        "core": [
+          "construct creation",
+          "terrain salvage",
+          "celestial horror"
+        ],
+        "signature": [
+          "Gather Fragments pulls destroyed props and defeated summons into angel frames.",
+          "Unfinished Choir activates incomplete constructs with partial abilities.",
+          "Wing Weather creates directional wind bands across the arena.",
+          "Mercy Failure causes damaged constructs to collapse into healing zones for players if destroyed correctly.",
+          "Final Birth attempts to assemble one complete avatar unless teams destroy key fragments."
+        ],
+        "counterplay": [
+          "Target fragment nodes, intentionally finish Mercy Failure conditions, interrupt Final Birth assembly."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Floating white-gold debris forms humanoid outlines.",
+          "Half-wings cast enormous moving shadows.",
+          "Final Birth creates a city-sized halo frame.",
+          "Mother of Unfinished Angels adds another readable presentation layer with distance-aware LOD and a unique telegraph silhouette."
+        ],
+        "animation": [
+          "Main cocoon barely moves while wings perform attacks.",
+          "Constructs assemble piece by piece in air.",
+          "Final Birth unfolds one enormous arm from the cocoon."
+        ],
+        "audio": [
+          "Choir missing notes, wing thunder, porcelain fracture."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier celestial apocalypse event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "BOS-059",
+      "name": "The Walking Continent: Orun",
+      "family": "boss",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "continent-class distributed boss",
+      "identity": {
+        "fantasy": "An Absolute-class living landmass encountered as an entire moving region; players fight ecosystems, organs, cities, and weather systems that are all parts of one creature.",
+        "silhouette": "A horizon-wide landform whose mountains are dorsal plates and whose storms are breath.",
+        "lore_hook": "Maps call Orun a continent because admitting otherwise would require changing too many books."
+      },
+      "mechanics": {
+        "core": [
+          "continent encounter",
+          "multi-region organs",
+          "world traversal"
+        ],
+        "signature": [
+          "Heartland Pulse links objectives across several streamed regions.",
+          "Mountain Spine weak points require traversal and siege equipment.",
+          "Weather Lung changes storm patterns as a combat phase.",
+          "City Parasites are hostile settlements growing on the creature and must be cleared or allied with.",
+          "Continental Roll changes which regions are accessible.",
+          "Absolute Wound opens a temporary interior biome as the final damage phase."
+        ],
+        "counterplay": [
+          "No single attack harms Orun meaningfully; teams must complete synchronized regional objectives and exploit the interior Wound."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Mountains pulse with faint internal light.",
+          "Storm fronts visibly originate from breathing vents.",
+          "Entire horizons tilt subtly during Continental Roll.",
+          "Absolute Wound appears as a glowing canyon visible from multiple regions.",
+          "Interior biome uses radically different organic sky and gravity cues."
+        ],
+        "animation": [
+          "Regional shell animation moves terrain over long timescales.",
+          "Mountain plates rise during defense phases.",
+          "Wound opening is a multi-minute world cinematic.",
+          "Interior organ contractions act as encounter timers."
+        ],
+        "audio": [
+          "Tectonic heartbeat, continent-scale breath, distant mountain groan."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute event chain requiring multiple prior world-boss victories."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "BOS-060",
+      "name": "The Null Emperor",
+      "family": "boss",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "reality-domain raid boss",
+      "identity": {
+        "fantasy": "An Absolute sovereign that removes one combat assumption per phase, forcing squads to adapt to changing rules.",
+        "silhouette": "Tall crowned figure made from missing pieces of the background.",
+        "lore_hook": "The Emperor conquered nothing. Places simply stopped being able to disagree with him."
+      },
+      "mechanics": {
+        "core": [
+          "rule removal",
+          "phase adaptation",
+          "domain control"
+        ],
+        "signature": [
+          "Phase of Weight alters jump and fall behavior in authored zones.",
+          "Phase of Distance changes effective engagement ranges through portals.",
+          "Phase of Names hides ordinary target labels and relies on visual identification.",
+          "Phase of Cover makes selected structures intangible after telegraph.",
+          "Phase of Return replays one prior hazard pattern from a different angle.",
+          "Imperial Contradiction opens damage windows when players use the current rule against him."
+        ],
+        "counterplay": [
+          "Every rule change is announced and learnable; exploit Contradiction instead of brute-forcing."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Emperor body contains cutouts showing background.",
+          "Each phase erases one category of environmental VFX then redraws it differently.",
+          "Contradiction outlines the boss in impossible white.",
+          "The Null Emperor adds another readable presentation layer with distance-aware LOD and a unique telegraph silhouette.",
+          "The Null Emperor adds another readable presentation layer with distance-aware LOD and a unique telegraph silhouette."
+        ],
+        "animation": [
+          "Walk cycle appears to skip frames intentionally.",
+          "Phase changes occur by crown rotation while body remains still.",
+          "Contradiction forces a kneeling glitch-like pose.",
+          "The Null Emperor uses a bespoke phase-transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Muted imperial choir, rule-announcement tone, silence slices."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute throne raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "BOS-061",
+      "name": "The Last Necropolis",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "city-fortress boss",
+      "identity": {
+        "fantasy": "A moving necromantic city whose streets, towers, and gates act as boss limbs in a multi-stage siege.",
+        "silhouette": "Fortress-city on enormous bone legs, grave towers leaning like teeth.",
+        "lore_hook": "When the last necromancer died, the city continued practicing the ritual by itself."
+      },
+      "mechanics": {
+        "core": [
+          "city boss",
+          "siege objectives",
+          "necromantic infrastructure"
+        ],
+        "signature": [
+          "Gate Jaw opens and closes as a crushing hazard.",
+          "Bell Towers resurrect district defenders unless silenced.",
+          "Bone Legs can be crippled to stop city movement.",
+          "Central Mausoleum serves as final heart chamber.",
+          "Street Shift rearranges interior lanes between phases."
+        ],
+        "counterplay": [
+          "Split objectives across towers and legs, then enter mausoleum during immobilized phase."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "City silhouette dominates skyline.",
+          "Bell shockwaves ripple through streets.",
+          "Street Shift makes buildings slide along bone rails."
+        ],
+        "animation": [
+          "Bone legs step slowly under entire city.",
+          "Gate behaves like jaw.",
+          "Mausoleum opens upward like a coffin lid."
+        ],
+        "audio": [
+          "City bells, street stone grinding, thousands of whispered epitaphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic necromancer campaign finale."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "BOS-062",
+      "name": "The First Questioner",
+      "family": "boss",
+      "tier": "transcendent_zero",
+      "status": "specified",
+      "role": "Ascendant trial manifestation",
+      "identity": {
+        "fantasy": "A non-loot Transcendent trial entity that tests whether a Zero Candidate understands the systems they mastered rather than merely possessing strong gear.",
+        "silhouette": "Humanoid outline composed of every previously encountered boss telegraph layered at once, then simplified as the trial progresses.",
+        "lore_hook": "It is not the first being to ask questions. It is the first question that learned how to ask itself."
+      },
+      "mechanics": {
+        "core": [
+          "mastery trial",
+          "system remix",
+          "candidate evaluation"
+        ],
+        "signature": [
+          "Question of Hunt remixes monster counterplay mechanics.",
+          "Question of Command tests faction and hireable control.",
+          "Question of Craft consumes prepared trial resources to open safe solutions.",
+          "Question of Memory replays altered versions of prior boss mechanics.",
+          "Question of Sacrifice forces temporary surrender of selected gear advantages.",
+          "Question of Judgment scores survival, objective completion, team support, and mechanical accuracy.",
+          "Final Answer creates no new attack; it checks whether the candidate solved the encounter with required mastery conditions."
+        ],
+        "counterplay": [
+          "The encounter is designed to be difficult but deterministic and learnable; failure preserves most long-term progression but requires trial re-entry conditions."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Body cycles through visual fragments of prior bosses.",
+          "Each Question strips away unrelated effects until only its mechanic remains.",
+          "Memory phase overlays ghost arenas from previous encounters.",
+          "Sacrifice makes surrendered gear appear as orbiting sealed relics.",
+          "Final Answer removes all spectacle except one stark symbol.",
+          "Success restores every color at once in a world-scale burst."
+        ],
+        "animation": [
+          "Idle stance borrows poses from prior bosses.",
+          "Question transitions morph between known silhouettes.",
+          "Sacrifice physically removes visible equipment effects.",
+          "Final Answer freezes all motion except the central symbol.",
+          "Success animation breaks the entity into ascending fragments."
+        ],
+        "audio": [
+          "Layered boss motifs recomposed into one score, long silence before Final Answer, unique Zero-success chord."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Only appears inside the final Zero Candidate trial sequence."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "EVT-031",
+      "name": "The Devouring Moon",
+      "family": "event",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "five-stage horde escalation",
+      "identity": {
+        "fantasy": "A world event where cannibal horde units evolve from Gravegnawers through Crowned Hunger if players fail to contain feeding chains.",
+        "silhouette": "Regional moon turns dark red and horde migration lines appear across the map.",
+        "lore_hook": "Old records describe the moon as a timer, not an omen."
+      },
+      "mechanics": {
+        "core": [
+          "five-tier evolution",
+          "corpse economy",
+          "regional escalation"
+        ],
+        "signature": [
+          "Stage I seeds Gravegnawer packs.",
+          "Stage II introduces Carrion Ascendants if feed thresholds are crossed.",
+          "Stage III allows Marrow Apostles to select mutations.",
+          "Stage IV can create a Corpse Basilica.",
+          "Stage V manifests Crowned Hunger as regional apex.",
+          "Containment bonuses reward ending the event at earlier stages without making late stages unrewarding."
+        ],
+        "counterplay": [
+          "Deny feeding resources, destroy evolution nodes, coordinate containment lines."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Moon changes appearance each stage.",
+          "Regional red migration paths intensify.",
+          "Stage V adds crown-shaped cloud vortex."
+        ],
+        "animation": [
+          "World props subtly react more strongly each stage.",
+          "Basilica and apex introductions use large silhouette cinematics."
+        ],
+        "audio": [
+          "Escalating five-part horde score, regional warning horns."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Dynamic horde event with persistence-safe session state."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "EVT-032",
+      "name": "Night of a Thousand Doors",
+      "family": "event",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "portal invasion",
+      "identity": {
+        "fantasy": "Hundreds of temporary doorways appear across active regions, linking unexpected locations and releasing themed threats.",
+        "silhouette": "Floating freestanding doors of different materials and eras.",
+        "lore_hook": "No one knows who opened the first door because every witness walked through a different one."
+      },
+      "mechanics": {
+        "core": [
+          "portal network",
+          "region remix",
+          "invasion"
+        ],
+        "signature": [
+          "Door pairs reshuffle traversal routes.",
+          "Some doors release hostile factions.",
+          "Some create treasure micro-dungeons.",
+          "Key Doors require defeating linked guardians to close the network."
+        ],
+        "counterplay": [
+          "Read door visual language, close key nodes, avoid uncontrolled chaining."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Distinct colored door interiors.",
+          "Sky map briefly displays network pulses.",
+          "Closed doors implode into keys."
+        ],
+        "animation": [
+          "Doors open with unique directional hinges.",
+          "Key Door closures ripple through connected frames."
+        ],
+        "audio": [
+          "Many layered hinges, distant knocking, portal hum."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary roaming world event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "EVT-033",
+      "name": "Sky-Cathedral Descent",
+      "family": "event",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "falling celestial dungeon",
+      "identity": {
+        "fantasy": "A cathedral appears upside down in the sky and slowly descends, becoming a temporary multi-level raid space before impact.",
+        "silhouette": "Enormous inverted gothic structure descending through clouds.",
+        "lore_hook": "It was built above the world because its architects were afraid of what foundations touched."
+      },
+      "mechanics": {
+        "core": [
+          "temporary dungeon",
+          "descent timer",
+          "celestial hazards"
+        ],
+        "signature": [
+          "Players enter through falling debris portals.",
+          "Each cleared nave slows descent.",
+          "Uncleared wings become impact hazards on the ground.",
+          "Final choir chamber decides whether the cathedral lands intact as a temporary POI."
+        ],
+        "counterplay": [
+          "Prioritize wings based on regional danger and raid capability."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Clouds split around cathedral.",
+          "Falling stained glass becomes traversal platforms.",
+          "Impact path glows on terrain."
+        ],
+        "animation": [
+          "Whole structure rotates slowly during descent.",
+          "Cleared wings lock into stable orientation."
+        ],
+        "audio": [
+          "Massive organ, wind shear, cathedral stone groan."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic scheduled world event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "EVT-034",
+      "name": "Axiom Storm",
+      "family": "event",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "regional rule anomaly",
+      "identity": {
+        "fantasy": "A rare Absolute event where one authored combat rule changes every few minutes across a region.",
+        "silhouette": "Black-white storm fronts containing giant moving equations.",
+        "lore_hook": "Axiom Storms occur when too many reality-altering artifacts are used in one place."
+      },
+      "mechanics": {
+        "core": [
+          "rotating rules",
+          "regional adaptation",
+          "absolute anomaly"
+        ],
+        "signature": [
+          "Possible rules alter gravity-like movement, projectile behavior, healing efficiency, visibility, or summon allegiance within safe authored bounds.",
+          "Rule transitions are announced before activation.",
+          "Stabilizer objectives let squads lock one favorable rule temporarily.",
+          "Breaking stabilizers accelerates the rotation unpredictably.",
+          "Axiom Storm gains an additional authored phase interaction that changes target priority, movement, or arena pressure."
+        ],
+        "counterplay": [
+          "Listen for announcements, capture stabilizers, build flexible loadouts."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Storm clouds contain equations.",
+          "Each rule changes environmental particle motion.",
+          "Stabilizers cast tall monochrome beams.",
+          "Transition wave visibly crosses terrain.",
+          "Axiom Storm adds another readable presentation layer with distance-aware LOD and a unique telegraph silhouette."
+        ],
+        "animation": [
+          "Environmental objects lean or float differently by rule.",
+          "Stabilizer lock uses large world machinery animation.",
+          "Axiom Storm uses a bespoke phase-transition animation with protected anticipation frames.",
+          "Axiom Storm uses a bespoke phase-transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Equation thunder, rule-announcement chord, stabilizer hum."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Rare Absolute anomaly event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "EVT-035",
+      "name": "The Continent Wakes",
+      "family": "event",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "Orun world-boss activation",
+      "identity": {
+        "fantasy": "The living continent Orun wakes and converts multiple map regions into synchronized boss objectives.",
+        "silhouette": "Entire horizon subtly tilts as mountains begin moving.",
+        "lore_hook": "The event starts when enough deep-world seals are broken across prior campaigns."
+      },
+      "mechanics": {
+        "core": [
+          "multi-region boss trigger",
+          "synchronized objectives",
+          "world traversal"
+        ],
+        "signature": [
+          "Opens Orun's regional relay objectives.",
+          "Activates special traversal routes between spine regions.",
+          "Replaces ordinary weather with Weather Lung phases.",
+          "Tracks contribution across simultaneous squads.",
+          "Unlocks Absolute Wound only after synchronized completion."
+        ],
+        "counterplay": [
+          "Coordinate teams across regions and avoid overcommitting to one objective."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Mountains pulse.",
+          "Regional objective beams synchronize.",
+          "Skyline tilts during roll phases.",
+          "The Continent Wakes adds another readable presentation layer with distance-aware LOD and a unique telegraph silhouette.",
+          "The Continent Wakes adds another readable presentation layer with distance-aware LOD and a unique telegraph silhouette."
+        ],
+        "animation": [
+          "Large terrain shell movement over long intervals.",
+          "Wound-opening world cinematic.",
+          "The Continent Wakes uses a bespoke phase-transition animation with protected anticipation frames.",
+          "The Continent Wakes uses a bespoke phase-transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Tectonic alarm score, synchronized relay bells."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Endgame prerequisite chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "EVT-036",
+      "name": "Black Sun Procession",
+      "family": "event",
+      "tier": "god",
+      "status": "specified",
+      "role": "eclipse invasion",
+      "identity": {
+        "fantasy": "A moving artificial eclipse crosses the world, spawning elite enemies and changing light-dependent mechanics as it travels.",
+        "silhouette": "Perfect black disk with burning gold ring moving across sky.",
+        "lore_hook": "The procession is not celestial motion; something is carrying the sun's shadow."
+      },
+      "mechanics": {
+        "core": [
+          "moving eclipse",
+          "light-state gameplay",
+          "elite procession"
+        ],
+        "signature": [
+          "Regions under umbra gain special enemy variants.",
+          "Penumbra regions spawn rare crafting opportunities.",
+          "Following the eclipse reveals moving Procession Guardians.",
+          "Destroying guardians changes the eclipse route.",
+          "Final totality opens a God-tier encounter."
+        ],
+        "counterplay": [
+          "Choose whether to chase rewards or alter route to protect regions."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Moving eclipse shadow across terrain.",
+          "Gold corona visible from all active regions.",
+          "Guardians leave black-gold footprints.",
+          "Black Sun Procession adds another readable presentation layer with distance-aware LOD and a unique telegraph silhouette."
+        ],
+        "animation": [
+          "Sky disk movement is slow and continuous.",
+          "Guardian deaths cause visible route correction arc.",
+          "Black Sun Procession uses a bespoke phase-transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Solar drone, processional drums, corona crackle."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier traveling world event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "EVT-037",
+      "name": "Necropolis Bloom",
+      "family": "event",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "city resurrection outbreak",
+      "identity": {
+        "fantasy": "Buried grave districts rise vertically from the earth, creating temporary necromantic city blocks and dungeon entrances.",
+        "silhouette": "Towers and streets emerging from ground under sheets of black dust.",
+        "lore_hook": "The dead city was not buried. It was waiting below its own address."
+      },
+      "mechanics": {
+        "core": [
+          "temporary city",
+          "necromancer surge",
+          "vertical emergence"
+        ],
+        "signature": [
+          "Districts emerge in phases.",
+          "Bell towers empower local undead.",
+          "Players can cleanse or capture districts.",
+          "Captured districts become temporary allied safe zones.",
+          "Final mausoleum opens only if enough districts are stabilized."
+        ],
+        "counterplay": [
+          "Silence bells, stabilize districts, avoid being trapped during street emergence."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Black dust columns mark rising streets.",
+          "Green grave lights form windows.",
+          "Cleansed districts switch to warm lanterns."
+        ],
+        "animation": [
+          "Buildings rise in sections.",
+          "Streets crack and rotate into place."
+        ],
+        "audio": [
+          "Stone ascent, grave bells, buried crowd whispers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic regional outbreak."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    },
+    {
+      "id": "EVT-038",
+      "name": "Zero Resonance",
+      "family": "event",
+      "tier": "transcendent_zero",
+      "status": "specified",
+      "role": "Ascendant world reaction",
+      "identity": {
+        "fantasy": "A rare non-farmable world response that occurs when a qualified Transcendent Zero Ascendant enters an eligible endgame session, altering presentation and opening special challenge reactions rather than free rewards.",
+        "silhouette": "Skybox develops a faint impossible seam centered on the Ascendant's region.",
+        "lore_hook": "The world does not celebrate a Transcendent. It checks whether one should still exist."
+      },
+      "mechanics": {
+        "core": [
+          "ascendant recognition",
+          "world reaction",
+          "challenge escalation"
+        ],
+        "signature": [
+          "Selected bosses gain optional Zero-response mechanics rather than raw stat inflation.",
+          "NPC factions react with fear, reverence, or challenge according to authored reputation.",
+          "Reality seams expose temporary challenge portals.",
+          "Ascendant powers gain stricter resource telemetry during the event.",
+          "Completing Zero-response objectives records prestige history without granting another unrestricted power tier.",
+          "Event ends cleanly if the Ascendant leaves."
+        ],
+        "counterplay": [
+          "Designed as prestige/endgame challenge, not mandatory power creep; all reactions remain authored and bounded."
+        ],
+        "evolution": [
+          "Escalation changes behavior trees, resource rules, and encounter geometry rather than simply multiplying health."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Impossible sky seam.",
+          "Faction banners animate toward or away from Ascendant.",
+          "Challenge portals appear as silent black-white cuts.",
+          "Boss response sigils are visible before mechanics change.",
+          "HUD receives restrained Zero frame treatment.",
+          "Event close reseals the sky seam."
+        ],
+        "animation": [
+          "Ascendant arrival has a unique but brief world animation.",
+          "Bosses use bespoke recognition stances.",
+          "Portals unfold as flat planes.",
+          "Exit sequence reverses the seam animation.",
+          "Faction NPCs use authored kneel, brace, or weapon-ready reactions."
+        ],
+        "audio": [
+          "Single global Zero tone, faction reaction motifs, restrained reality hum."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Only during eligible Transcendent Zero endgame sessions."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 011. Large forms must use streaming-safe shells and distributed controllers where required."
+      ]
+    }
+  ]
+}
