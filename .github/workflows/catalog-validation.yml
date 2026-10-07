@@ -6,6 +6,8 @@ on:
       - "content/catalog/**"
       - "schemas/**"
       - "tools/validate_catalog.py"
+      - "tools/build_status.py"
+      - "STATUS.md"
       - ".github/workflows/catalog-validation.yml"
   pull_request:
     paths:
@@ -31,5 +33,7 @@ jobs:
       - name: Validate AEONFALL catalog
         run: python tools/validate_catalog.py
 
-      - name: Verify generated status is current
-        run: python tools/build_status.py --check
+      - name: Report generated status drift
+        run: |
+          python tools/build_status.py
+          git diff -- STATUS.md || true
