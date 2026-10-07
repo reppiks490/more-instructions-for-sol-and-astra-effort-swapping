@@ -1,0 +1,1297 @@
+{
+  "wave": "014",
+  "purpose": "Twenty regional and world-scale dynamic events spanning ecology, factions, weather, raids, exploration, crafting, and Absolute ascension precursors.",
+  "entity_count": 20,
+  "entities": [
+    {
+      "id": "EVT-003",
+      "name": "Red Procession",
+      "family": "event",
+      "tier": "epic",
+      "status": "specified",
+      "role": "regional Gravefeeding migration",
+      "identity": {
+        "fantasy": "A migrating river of carrion creatures crosses several POIs, consuming battlefield remains and escalating if players leave biomass behind.",
+        "silhouette": "Long red-black moving front of small and mid-sized monsters with towering bone standards marking its route.",
+        "lore_hook": "The Procession is what happens when hunger stops nesting and starts traveling."
+      },
+      "mechanics": {
+        "core": [
+          "moving horde route",
+          "biomass escalation",
+          "route defense"
+        ],
+        "signature": [
+          "Procession Route advances between authored anchors and changes nearby spawn tables.",
+          "Clean Field objectives ask players to destroy or burn biomass caches before the horde reaches them."
+        ],
+        "counterplay": [
+          "Clear biomass ahead of the route and use chokepoints; ignoring caches upgrades later waves."
+        ],
+        "evolution": [
+          "Event intensity escalates through authored phases and terminates cleanly with regional reset/reward state."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Distant bone standards and red dust reveal the route long before enemies arrive."
+        ],
+        "animation": [
+          "Horde density streams in controlled encounter packets while standards physically advance between anchors."
+        ],
+        "audio": [
+          "Regional phase stingers, long-range event ambience, objective-state cues, and clear resolution audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered when regional Gravefeeding activity crosses a threshold."
+        ],
+        "crafting_links": [],
+        "boss_links": [
+          "BOS-016",
+          "BOS-037"
+        ],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "World events must be interruptible, recoverable, and bounded to supported UEFN systems.",
+        "Events change objectives, encounter composition, traversal, or authored environmental states rather than relying on invisible stat multipliers."
+      ]
+    },
+    {
+      "id": "EVT-004",
+      "name": "Skyglass Rain",
+      "family": "event",
+      "tier": "epic",
+      "status": "specified",
+      "role": "crystal meteor weather event",
+      "identity": {
+        "fantasy": "A brief regional storm rains fragile crystal shards that create temporary cover, resource nodes, and dangerous refractive lanes.",
+        "silhouette": "Prismatic clouds and slow-falling spear-like glass meteors embedding across open terrain.",
+        "lore_hook": "The sky occasionally remembers it was once solid."
+      },
+      "mechanics": {
+        "core": [
+          "temporary cover",
+          "resource scramble",
+          "refractive hazard"
+        ],
+        "signature": [
+          "Falling Glass creates pre-marked impact zones that become destructible cover pillars.",
+          "Prism Rush activates a short collection phase where rare crafting motes form near intact pillars."
+        ],
+        "counterplay": [
+          "Avoid impact markers and decide whether to preserve pillars for resources or destroy them to open sightlines."
+        ],
+        "evolution": [
+          "Event intensity escalates through authored phases and terminates cleanly with regional reset/reward state."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Rainbow storm bands, glass trails, and refracted sun shafts sweep the region."
+        ],
+        "animation": [
+          "Pillars grow from impacts with layered fracture animations and collapse cleanly when destroyed."
+        ],
+        "audio": [
+          "Regional phase stingers, long-range event ambience, objective-state cues, and clear resolution audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Randomized authored weather window in glass/desert regions."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "World events must be interruptible, recoverable, and bounded to supported UEFN systems.",
+        "Events change objectives, encounter composition, traversal, or authored environmental states rather than relying on invisible stat multipliers."
+      ]
+    },
+    {
+      "id": "EVT-005",
+      "name": "Funeral Rail",
+      "family": "event",
+      "tier": "epic",
+      "status": "specified",
+      "role": "moving necromancer convoy event",
+      "identity": {
+        "fantasy": "A spectral train carries necromancers and grave cargo across the world on temporary tracks that appear only during the event.",
+        "silhouette": "Black locomotive with coffin cars, green furnace light, and ghost rails forming seconds ahead of the wheels.",
+        "lore_hook": "The dead built a railway because walking back from the grave took too long."
+      },
+      "mechanics": {
+        "core": [
+          "moving convoy",
+          "boarding objective",
+          "cargo choice"
+        ],
+        "signature": [
+          "Ghost Track establishes a moving encounter route across authored anchors.",
+          "Boarding Windows open selected cars for timed sabotage or loot objectives."
+        ],
+        "counterplay": [
+          "Choose cars instead of trying to destroy the entire train; missing a boarding window advances the convoy."
+        ],
+        "evolution": [
+          "Event intensity escalates through authored phases and terminates cleanly with regional reset/reward state."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Rails materialize as pale lines in front of the locomotive and evaporate behind it."
+        ],
+        "animation": [
+          "Cars couple/uncouple during phases and doors open into distinct encounter modules."
+        ],
+        "audio": [
+          "Regional phase stingers, long-range event ambience, objective-state cues, and clear resolution audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Regional necromancer logistics state."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "World events must be interruptible, recoverable, and bounded to supported UEFN systems.",
+        "Events change objectives, encounter composition, traversal, or authored environmental states rather than relying on invisible stat multipliers."
+      ]
+    },
+    {
+      "id": "EVT-006",
+      "name": "Kingmaker Hunt",
+      "family": "event",
+      "tier": "epic",
+      "status": "specified",
+      "role": "faction succession event",
+      "identity": {
+        "fantasy": "Several factions simultaneously field champion NPCs and compete for control of a neutral stronghold, allowing players to influence who becomes regional ruler.",
+        "silhouette": "Multiple colored war banners converge on one fortress while champion flares mark moving commanders.",
+        "lore_hook": "Every faction calls it destiny when enough people agree to fight over the same chair."
+      },
+      "mechanics": {
+        "core": [
+          "multi-faction battle",
+          "champion survival",
+          "regional succession"
+        ],
+        "signature": [
+          "Champion Stakes track which faction commanders remain active and which objectives they hold.",
+          "Crown Vote resolves the event from controlled objectives and player-aligned support rather than raw elimination count."
+        ],
+        "counterplay": [
+          "Target logistics, revive/escort aligned champions, and deny objective captures."
+        ],
+        "evolution": [
+          "Event intensity escalates through authored phases and terminates cleanly with regional reset/reward state."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Faction banners dynamically replace neutral stronghold symbols as control shifts."
+        ],
+        "animation": [
+          "Stronghold gates, banners, and champion arrival cinematics change by faction."
+        ],
+        "audio": [
+          "Regional phase stingers, long-range event ambience, objective-state cues, and clear resolution audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered when regional faction influence is sufficiently contested."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "World events must be interruptible, recoverable, and bounded to supported UEFN systems.",
+        "Events change objectives, encounter composition, traversal, or authored environmental states rather than relying on invisible stat multipliers."
+      ]
+    },
+    {
+      "id": "EVT-007",
+      "name": "Black Rain Census",
+      "family": "event",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "eldritch surveillance storm",
+      "identity": {
+        "fantasy": "Black rain causes certain hostile entities to become outlined by strange census marks, while lingering too long under open sky attracts increasingly powerful observers.",
+        "silhouette": "Ink-black rain falling upward in places, with giant tally marks appearing briefly in cloud cover.",
+        "lore_hook": "Something counts the living during these storms. Nobody knows what total it expects."
+      },
+      "mechanics": {
+        "core": [
+          "exposure meter",
+          "observer escalation",
+          "indoor-outdoor routing"
+        ],
+        "signature": [
+          "Census Exposure rises only in designated open-sky cells and is always visible to the player.",
+          "Observer Tiers spawn increasingly strange enemies at thresholds while also improving rare anomaly drops.",
+          "Shelter Reset reduces exposure after a deliberate safe interval rather than instantly."
+        ],
+        "counterplay": [
+          "Route between shelter and objectives; high exposure is optional risk rather than unavoidable punishment."
+        ],
+        "evolution": [
+          "Event intensity escalates through authored phases and terminates cleanly with regional reset/reward state."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Rain beads crawl upward on armor before falling normally.",
+          "Cloud-scale tally marks flash at exposure thresholds.",
+          "Observers arrive through vertical black-water apertures."
+        ],
+        "animation": [
+          "Exposure causes nearby anomaly props to rotate toward the player before spawns."
+        ],
+        "audio": [
+          "Regional phase stingers, long-range event ambience, objective-state cues, and clear resolution audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary eldritch weather schedule."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "World events must be interruptible, recoverable, and bounded to supported UEFN systems.",
+        "Events change objectives, encounter composition, traversal, or authored environmental states rather than relying on invisible stat multipliers."
+      ]
+    },
+    {
+      "id": "EVT-008",
+      "name": "Bellstorm",
+      "family": "event",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "sound-driven demon incursion",
+      "identity": {
+        "fantasy": "Hundreds of distant bells ring in moving waves; each tonal band corresponds to a different demon behavior and safe response.",
+        "silhouette": "Storm clouds filled with enormous bell silhouettes, with visible sound rings traveling across hills and cities.",
+        "lore_hook": "The bells are not announcing an invasion. They are the invasion."
+      },
+      "mechanics": {
+        "core": [
+          "tone phases",
+          "behavior switching",
+          "sound-wave routing"
+        ],
+        "signature": [
+          "Bronze Tone empowers charging demons and creates long horizontal danger lanes.",
+          "Silver Tone suppresses ranged demon behavior but activates close-range hunters.",
+          "Mute Interval creates a short objective window where bell pylons can be destroyed."
+        ],
+        "counterplay": [
+          "Read bell color/tone and change positioning by phase; use mute windows aggressively."
+        ],
+        "evolution": [
+          "Event intensity escalates through authored phases and terminates cleanly with regional reset/reward state."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Huge concentric rings move visibly across terrain.",
+          "Cloud-bells illuminate bronze or silver by current tone.",
+          "Destroyed pylons release visible silence bubbles."
+        ],
+        "animation": [
+          "Demon archetypes visibly change stance as tones switch; bell pylons vibrate before each wave."
+        ],
+        "audio": [
+          "Regional phase stingers, long-range event ambience, objective-state cues, and clear resolution audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary infernal regional incursion."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "World events must be interruptible, recoverable, and bounded to supported UEFN systems.",
+        "Events change objectives, encounter composition, traversal, or authored environmental states rather than relying on invisible stat multipliers."
+      ]
+    },
+    {
+      "id": "EVT-009",
+      "name": "The Great Antler Migration",
+      "family": "event",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "mythical wildlife migration",
+      "identity": {
+        "fantasy": "Massive herds of mythic wildlife cross the map, pursued by predators and poachers, creating dynamic escort, hunting, and taming opportunities.",
+        "silhouette": "Hundreds of luminous antlers visible over hills at night, accompanied by flying herds and giant guardian beasts.",
+        "lore_hook": "The migration follows a road older than every settlement built across it."
+      },
+      "mechanics": {
+        "core": [
+          "moving wildlife population",
+          "predator pressure",
+          "taming opportunity"
+        ],
+        "signature": [
+          "Migration Front advances between large biome anchors and temporarily changes wildlife spawn ecology.",
+          "Guardian Response escalates if players attack juveniles or protected animals.",
+          "Bond Windows create rare opportunities to tame special variants through non-lethal objectives."
+        ],
+        "counterplay": [
+          "Respect guardian rules or prepare for escalating defense; predators can be redirected away from the herd."
+        ],
+        "evolution": [
+          "Event intensity escalates through authored phases and terminates cleanly with regional reset/reward state."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Antlers create a moving constellation across the terrain.",
+          "Guardian anger turns constellation lines red.",
+          "Bond windows surround tameable variants with soft spiral particles."
+        ],
+        "animation": [
+          "Herd movement is streamed in groups with synchronized route changes and rest periods."
+        ],
+        "audio": [
+          "Regional phase stingers, long-range event ambience, objective-state cues, and clear resolution audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Seasonal legendary wildlife event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "World events must be interruptible, recoverable, and bounded to supported UEFN systems.",
+        "Events change objectives, encounter composition, traversal, or authored environmental states rather than relying on invisible stat multipliers."
+      ]
+    },
+    {
+      "id": "EVT-010",
+      "name": "Ember Sea",
+      "family": "event",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "temporary lava-flood traversal event",
+      "identity": {
+        "fantasy": "A volcanic region fills with a shallow authored sea of ember hazards, turning rooftops, bridges, and vehicles into temporary traversal routes.",
+        "silhouette": "Rolling red-orange ember fog at street level with islands of safe stone and heat-lit skylines.",
+        "lore_hook": "The volcano never erupts upward twice in the same century."
+      },
+      "mechanics": {
+        "core": [
+          "hazard flood",
+          "route transformation",
+          "vehicle rescue"
+        ],
+        "signature": [
+          "Rising Ember closes low routes in timed stages while opening high traversal objectives.",
+          "Coolant Convoys spawn limited vehicles or devices capable of creating short safe corridors.",
+          "Ashfall Resolution lowers the hazard in predictable steps and exposes rare cooled deposits."
+        ],
+        "counterplay": [
+          "Move vertically before each rise, protect coolant resources, and avoid being trapped in low interiors."
+        ],
+        "evolution": [
+          "Event intensity escalates through authored phases and terminates cleanly with regional reset/reward state."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Heatline markers show the next rise level on structures.",
+          "Safe corridors leave blue-white cooling trails.",
+          "Resolution turns red fog to black cooling ash."
+        ],
+        "animation": [
+          "Regional doors, bridges, and authored traversal props shift state as flood level changes."
+        ],
+        "audio": [
+          "Regional phase stingers, long-range event ambience, objective-state cues, and clear resolution audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary volcanic world-state event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "World events must be interruptible, recoverable, and bounded to supported UEFN systems.",
+        "Events change objectives, encounter composition, traversal, or authored environmental states rather than relying on invisible stat multipliers."
+      ]
+    },
+    {
+      "id": "EVT-011",
+      "name": "Mirror Eclipse",
+      "family": "event",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "global reflection anomaly",
+      "identity": {
+        "fantasy": "An eclipse creates mirrored versions of selected POI routes and combat arenas, with duplicate-looking spaces that contain different objectives but shared landmarks.",
+        "silhouette": "Black sun surrounded by a silver ring; reflective surfaces become doorways into authored mirror layers.",
+        "lore_hook": "For one hour the world casts a reflection in the wrong direction."
+      },
+      "mechanics": {
+        "core": [
+          "mirror layer",
+          "paired objectives",
+          "reflection routing"
+        ],
+        "signature": [
+          "Silver Thresholds open only at authored mirrors and transport players to matched local encounter layers.",
+          "Paired Objective progress in one layer modifies obstacles or enemy composition in the other.",
+          "Eclipse Break requires coordinated completion of both versions before the layers close."
+        ],
+        "counterplay": [
+          "Communicate between layers, use landmark differences, and avoid assuming mirrored geometry has identical hazards."
+        ],
+        "evolution": [
+          "Event intensity escalates through authored phases and terminates cleanly with regional reset/reward state."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "The sun becomes a perfect black disk with bright silver corona.",
+          "Threshold surfaces ripple like vertical mercury.",
+          "Cross-layer objective changes travel as mirror cracks."
+        ],
+        "animation": [
+          "POI mirror gates unfold from existing reflective props; no uncontrolled geometry duplication."
+        ],
+        "audio": [
+          "Regional phase stingers, long-range event ambience, objective-state cues, and clear resolution audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic scheduled eclipse chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "World events must be interruptible, recoverable, and bounded to supported UEFN systems.",
+        "Events change objectives, encounter composition, traversal, or authored environmental states rather than relying on invisible stat multipliers."
+      ]
+    },
+    {
+      "id": "EVT-012",
+      "name": "Dead City March",
+      "family": "event",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "mobile necropolis invasion",
+      "identity": {
+        "fantasy": "An entire undead district assembles piece by piece and marches across the map on skeletal foundations, bringing streets, towers, and necromancer encounters with it.",
+        "silhouette": "City blocks walking on bone pylons with green-lit windows and bridges connecting moving structures.",
+        "lore_hook": "The city was buried because nobody could destroy it. Burial merely taught it how to stand."
+      },
+      "mechanics": {
+        "core": [
+          "mobile city cells",
+          "district objectives",
+          "moving dungeon"
+        ],
+        "signature": [
+          "District Assembly streams in a bounded set of city modules along a regional route.",
+          "Street War turns one district at a time into an encounter objective whose result changes the next module.",
+          "Heart Avenue exposes the central necromantic engine only after enough districts are liberated."
+        ],
+        "counterplay": [
+          "Clear objectives by district, sabotage leg pylons, and do not chase every spawned undead."
+        ],
+        "evolution": [
+          "Event intensity escalates through authored phases and terminates cleanly with regional reset/reward state."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Bone pylons lift city modules through grave mist.",
+          "Liberated districts switch window light from green to white.",
+          "Heart Avenue glows like a luminous street map through the city's center."
+        ],
+        "animation": [
+          "Modules move independently on synchronized skeletal legs and lock together during combat stops."
+        ],
+        "audio": [
+          "Regional phase stingers, long-range event ambience, objective-state cues, and clear resolution audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic necromancer escalation event."
+        ],
+        "crafting_links": [],
+        "boss_links": [
+          "BOS-020",
+          "BOS-040"
+        ],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "World events must be interruptible, recoverable, and bounded to supported UEFN systems.",
+        "Events change objectives, encounter composition, traversal, or authored environmental states rather than relying on invisible stat multipliers."
+      ]
+    },
+    {
+      "id": "EVT-013",
+      "name": "Starforge Descent",
+      "family": "event",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "celestial crafting event",
+      "identity": {
+        "fantasy": "A broken celestial forge descends in stages, scattering star-metal objectives and eventually opening a short endgame crafting window guarded by cosmic enemies.",
+        "silhouette": "Enormous ring forge burning across the sky, dropping glowing anvils and chains toward the landscape.",
+        "lore_hook": "The forge falls because something above AEONFALL keeps dropping unfinished weapons."
+      },
+      "mechanics": {
+        "core": [
+          "falling forge stages",
+          "rare crafting",
+          "defense window"
+        ],
+        "signature": [
+          "Anvilfall marks several defendable star-metal impact sites.",
+          "Chain Alignment requires teams to activate forge anchors in a safe sequence.",
+          "Open Crucible creates a timed crafting state for selected high-tier recipes if the defenses survive."
+        ],
+        "counterplay": [
+          "Split between impact sites, preserve anchors, and craft strategically during the limited opening."
+        ],
+        "evolution": [
+          "Event intensity escalates through authored phases and terminates cleanly with regional reset/reward state."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Celestial chains stretch from sky to impact anvils.",
+          "Forge ring grows larger each phase.",
+          "Open Crucible paints giant gold blueprint lines over the ground."
+        ],
+        "animation": [
+          "Anvils descend slowly enough to become moving objectives; anchors rotate into alignment."
+        ],
+        "audio": [
+          "Regional phase stingers, long-range event ambience, objective-state cues, and clear resolution audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic celestial event and high-tier crafting prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "World events must be interruptible, recoverable, and bounded to supported UEFN systems.",
+        "Events change objectives, encounter composition, traversal, or authored environmental states rather than relying on invisible stat multipliers."
+      ]
+    },
+    {
+      "id": "EVT-014",
+      "name": "Gravefeeding Ascension",
+      "family": "event",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "five-tier cannibal ecology event",
+      "identity": {
+        "fantasy": "A Gravefeeding outbreak evolves in real time from Carrion Seeds to a potential Saint Devourer if players fail to control feeding and biomass transfer.",
+        "silhouette": "Regional corruption changes from small nest lights to moving flesh-cathedral silhouettes and eventually a giant mouth-halo on the horizon.",
+        "lore_hook": "This is not a horde event. It is evolution compressed into one catastrophe."
+      },
+      "mechanics": {
+        "core": [
+          "five-stage evolution",
+          "biomass economy",
+          "player-driven escalation"
+        ],
+        "signature": [
+          "Feeding Index rises when Gravefeeding creatures consume eligible corpses or each other.",
+          "Mutation Thresholds replace surviving populations with higher forms rather than merely spawning stronger enemies.",
+          "Containment Objectives can reduce the index by destroying nests, corpse caches, and organ foundries."
+        ],
+        "counterplay": [
+          "Control biomass early; later tiers become exponentially more complex but also yield rarer materials."
+        ],
+        "evolution": [
+          "Event intensity escalates through authored phases and terminates cleanly with regional reset/reward state."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Regional sky and ground effects change distinctly at each evolution tier.",
+          "Index milestones produce visible mutation pulses across active nests.",
+          "Stage V paints a mouth-halo across cloud cover."
+        ],
+        "animation": [
+          "Creature replacement uses authored metamorphosis events at key nests instead of pop-in where practical."
+        ],
+        "audio": [
+          "Regional phase stingers, long-range event ambience, objective-state cues, and clear resolution audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic regional outbreak chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [
+          "BOS-016"
+        ],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [
+        "MON-043",
+        "MON-044",
+        "MON-045",
+        "MON-046",
+        "MON-047"
+      ],
+      "notes": [
+        "World events must be interruptible, recoverable, and bounded to supported UEFN systems.",
+        "Events change objectives, encounter composition, traversal, or authored environmental states rather than relying on invisible stat multipliers."
+      ]
+    },
+    {
+      "id": "EVT-015",
+      "name": "Wyrm Season",
+      "family": "event",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "sky-serpent migration war",
+      "identity": {
+        "fantasy": "Multiple great wyrms cross regional skies, fighting each other and altering local climate while factions race to harvest shed scales.",
+        "silhouette": "Several enormous serpentine silhouettes weave through cloud layers with different weather wakes.",
+        "lore_hook": "Wyrms migrate once every generation because the sky itself eventually runs out of room."
+      },
+      "mechanics": {
+        "core": [
+          "multi-wyrm routes",
+          "weather wakes",
+          "faction harvest race"
+        ],
+        "signature": [
+          "Sky Paths assign distinct regional routes to each wyrm and forecast crossing points.",
+          "Wake Climate changes local encounter modifiers in the area recently traversed by a wyrm.",
+          "Scalefall creates contested harvesting objectives after major aerial clashes."
+        ],
+        "counterplay": [
+          "Choose which wake to enter, avoid crossing-point catastrophes, and contest scales without needing to kill the wyrms."
+        ],
+        "evolution": [
+          "Event intensity escalates through authored phases and terminates cleanly with regional reset/reward state."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Each wyrm leaves a unique weather ribbon across the sky.",
+          "Crossing points build layered cloud spirals.",
+          "Shed scales fall like slow meteors."
+        ],
+        "animation": [
+          "Distant wyrms follow high-altitude spline routes while local segments materialize only near relevant encounters."
+        ],
+        "audio": [
+          "Regional phase stingers, long-range event ambience, objective-state cues, and clear resolution audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic seasonal sky event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "World events must be interruptible, recoverable, and bounded to supported UEFN systems.",
+        "Events change objectives, encounter composition, traversal, or authored environmental states rather than relying on invisible stat multipliers."
+      ]
+    },
+    {
+      "id": "EVT-016",
+      "name": "Thronefall War",
+      "family": "event",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "multi-faction capital siege",
+      "identity": {
+        "fantasy": "Several major factions converge on a fallen sovereign capital while a living throne beneath the city begins waking, forcing temporary alliances and betrayals.",
+        "silhouette": "City-sized battlefront with faction banners, siege engines, and a black throne silhouette growing beneath the skyline.",
+        "lore_hook": "Everyone came to claim the throne before anyone confirmed the throne was furniture."
+      },
+      "mechanics": {
+        "core": [
+          "multi-faction siege",
+          "temporary alliance",
+          "hidden boss awakening"
+        ],
+        "signature": [
+          "War Council lets player-aligned faction state determine which siege routes become available.",
+          "Breach Phases open distinct city districts with faction-specific objectives.",
+          "Throne Pulse periodically forces all factions to deal with a neutral existential threat rather than only each other."
+        ],
+        "counterplay": [
+          "Balance faction objectives with shared survival; overcommitting to PvE rivals accelerates throne awakening."
+        ],
+        "evolution": [
+          "Event intensity escalates through authored phases and terminates cleanly with regional reset/reward state."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Faction colors occupy different skyline sectors.",
+          "Throne pulses send black crown-shaped shockwaves through streets.",
+          "Temporary alliance states visibly merge banners at shared objectives."
+        ],
+        "animation": [
+          "Siege gates, engines, and district defenses transition by phase; the throne silhouette gradually rises."
+        ],
+        "audio": [
+          "Regional phase stingers, long-range event ambience, objective-state cues, and clear resolution audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic faction-endgame world state."
+        ],
+        "crafting_links": [],
+        "boss_links": [
+          "BOS-048"
+        ],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "World events must be interruptible, recoverable, and bounded to supported UEFN systems.",
+        "Events change objectives, encounter composition, traversal, or authored environmental states rather than relying on invisible stat multipliers."
+      ]
+    },
+    {
+      "id": "EVT-017",
+      "name": "The Thousand Doors",
+      "family": "event",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "dimensional exploration event",
+      "identity": {
+        "fantasy": "Hundreds of decorative doors appear across the world, but only a small authored subset opens into temporary pocket encounters, puzzles, shops, or dangerous anomalies.",
+        "silhouette": "Doorframes of every architectural style standing in impossible outdoor locations with different light leaking underneath.",
+        "lore_hook": "No one built the doors. That does not mean nobody lives behind them."
+      },
+      "mechanics": {
+        "core": [
+          "door discovery",
+          "pocket encounters",
+          "route mystery"
+        ],
+        "signature": [
+          "Door Pulse activates a rotating authored subset and provides subtle environmental clues rather than map-wide icons.",
+          "Threshold Memory records which door families a player has solved and changes future variants.",
+          "Wrong House may open a deliberately dangerous encounter but always telegraphs the risk before full entry."
+        ],
+        "counterplay": [
+          "Read door clues and leave dangerous thresholds before commitment; the event rewards exploration, not random checking."
+        ],
+        "evolution": [
+          "Event intensity escalates through authored phases and terminates cleanly with regional reset/reward state."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Active doors cast impossible interior light directions.",
+          "Solved families add small sigils to future doorframes.",
+          "Dangerous thresholds leak black particles outward."
+        ],
+        "animation": [
+          "Doors open into bounded pocket-space transitions with unique hinge and motion styles."
+        ],
+        "audio": [
+          "Regional phase stingers, long-range event ambience, objective-state cues, and clear resolution audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic dimensional exploration cycle."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "World events must be interruptible, recoverable, and bounded to supported UEFN systems.",
+        "Events change objectives, encounter composition, traversal, or authored environmental states rather than relying on invisible stat multipliers."
+      ]
+    },
+    {
+      "id": "EVT-018",
+      "name": "Ocean Ascension",
+      "family": "event",
+      "tier": "god",
+      "status": "specified",
+      "role": "regional ocean-rise catastrophe",
+      "identity": {
+        "fantasy": "The coastline rises vertically into a walking ocean event, turning sea, cliffs, and inland routes into one multi-layer raid against tidal objectives.",
+        "silhouette": "A continent-scale-looking vertical sea wall standing above the coast with islands suspended inside it.",
+        "lore_hook": "The ocean ascends when it remembers gravity was only ever a suggestion from the moon."
+      },
+      "mechanics": {
+        "core": [
+          "vertical ocean",
+          "multi-layer raid",
+          "tidal objective network"
+        ],
+        "signature": [
+          "Rising Shelf lifts authored ocean layers into accessible elevated encounter zones.",
+          "Tidal Columns become raid legs whose state controls flood corridors inland.",
+          "Island Drift moves selected POIs or encounter platforms along safe authored paths.",
+          "Low Tide Window exposes deep objectives after enough columns are disabled."
+        ],
+        "counterplay": [
+          "Coordinate ground evacuation, elevated objectives, and column sabotage; do not treat the event as one damage sponge."
+        ],
+        "evolution": [
+          "Event intensity escalates through authored phases and terminates cleanly with regional reset/reward state."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Water layers stack vertically with visible fish and debris motion.",
+          "Tidal columns refract entire skyline segments.",
+          "Low Tide pulls the wall upward to reveal abyssal architecture.",
+          "Disabled columns collapse into broad foam curtains instead of uncontrolled flood simulation."
+        ],
+        "animation": [
+          "Ocean layers move as controlled environment actors; islands drift on predictable routes; columns collapse with large staged water deformation."
+        ],
+        "audio": [
+          "Regional phase stingers, long-range event ambience, objective-state cues, and clear resolution audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier oceanic endgame event."
+        ],
+        "crafting_links": [],
+        "boss_links": [
+          "BOS-046"
+        ],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "World events must be interruptible, recoverable, and bounded to supported UEFN systems.",
+        "Events change objectives, encounter composition, traversal, or authored environmental states rather than relying on invisible stat multipliers."
+      ]
+    },
+    {
+      "id": "EVT-019",
+      "name": "The Last Dawn",
+      "family": "event",
+      "tier": "god",
+      "status": "specified",
+      "role": "solar endgame siege",
+      "identity": {
+        "fantasy": "A false final sunrise locks one region in accelerating daylight, awakening solar cults, star predators, and a descending artificial sun raid.",
+        "silhouette": "Multiple suns appear at the horizon while shadows shrink unnaturally toward zero.",
+        "lore_hook": "Every apocalypse claims to be the last. This one arrives at sunrise and brings receipts."
+      },
+      "mechanics": {
+        "core": [
+          "accelerating daylight",
+          "solar faction awakening",
+          "sun descent"
+        ],
+        "signature": [
+          "Dawn Pressure changes authored enemy spawns and resource states as shadows shorten.",
+          "Shadow Refuge creates moving safe-objective zones under large structures and celestial debris.",
+          "Eightfold Descent introduces solar avatars in sequence before the final stellar objective.",
+          "True Morning resets the region if players complete the raid chain."
+        ],
+        "counterplay": [
+          "Use moving shadow zones, defeat avatars in strategic order, and preserve eclipse resources for later phases."
+        ],
+        "evolution": [
+          "Event intensity escalates through authored phases and terminates cleanly with regional reset/reward state."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Sky color races through sunrise stages without becoming unreadable.",
+          "Shadows visibly shorten by phase.",
+          "Additional suns appear as controlled sky effects.",
+          "True Morning returns one ordinary sun with a clean color reset."
+        ],
+        "animation": [
+          "Solar avatars descend on orbital paths; refuge shadows move with authored celestial props."
+        ],
+        "audio": [
+          "Regional phase stingers, long-range event ambience, objective-state cues, and clear resolution audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier celestial world chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [
+          "BOS-045"
+        ],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "World events must be interruptible, recoverable, and bounded to supported UEFN systems.",
+        "Events change objectives, encounter composition, traversal, or authored environmental states rather than relying on invisible stat multipliers."
+      ]
+    },
+    {
+      "id": "EVT-020",
+      "name": "Cathedral Eclipse",
+      "family": "event",
+      "tier": "god",
+      "status": "specified",
+      "role": "religious-eldritch world collision",
+      "identity": {
+        "fantasy": "A floating cathedral crosses the sun and casts a moving shadow in which holy, infernal, and eldritch factions all gain different objectives.",
+        "silhouette": "Skyborne black cathedral larger than a mountain slowly eclipsing the sun while stained-glass light falls upward.",
+        "lore_hook": "The cathedral has no congregation because every faction believes it belongs to them."
+      },
+      "mechanics": {
+        "core": [
+          "moving eclipse shadow",
+          "three-faction objectives",
+          "sky cathedral"
+        ],
+        "signature": [
+          "Pilgrim Shadow moves along a predicted regional route and changes active encounters beneath it.",
+          "Stained War spawns three mutually conflicting objective types tied to holy, infernal, and eldritch forces.",
+          "Bell Aperture opens traversal gateways into selected cathedral interior cells.",
+          "Final Window asks players to choose which faction's ritual to disrupt, altering the regional aftermath."
+        ],
+        "counterplay": [
+          "Follow the moving shadow only when desired, choose objectives deliberately, and coordinate before committing to the aftermath choice."
+        ],
+        "evolution": [
+          "Event intensity escalates through authored phases and terminates cleanly with regional reset/reward state."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Cathedral silhouette crosses the sun with massive stained-glass corona.",
+          "Colored light falls upward from ground to sky.",
+          "Interior gates appear as tall moving window portals.",
+          "Final choice cracks one celestial window color across the sky."
+        ],
+        "animation": [
+          "Cathedral moves on a slow sky spline; window portals rotate with its orientation; interior cells stream only for participating players."
+        ],
+        "audio": [
+          "Regional phase stingers, long-range event ambience, objective-state cues, and clear resolution audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier faction convergence event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "World events must be interruptible, recoverable, and bounded to supported UEFN systems.",
+        "Events change objectives, encounter composition, traversal, or authored environmental states rather than relying on invisible stat multipliers."
+      ]
+    },
+    {
+      "id": "EVT-021",
+      "name": "Genesis Storm",
+      "family": "event",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "temporary world-authoring event",
+      "identity": {
+        "fantasy": "An Absolute storm grows temporary structures, traversal routes, wildlife habitats, and encounter geometry from luminous blueprint rain, then tests whether players can use what it created before it dissolves.",
+        "silhouette": "White-gold storm clouds raining geometric wireframes that become short-lived trees, bridges, towers, caves, and platforms.",
+        "lore_hook": "The storm is not weather. It is a world trying several drafts at once."
+      },
+      "mechanics": {
+        "core": [
+          "temporary authored geometry",
+          "creation objectives",
+          "dissolution cycle"
+        ],
+        "signature": [
+          "Blueprint Rain selects from a bounded library of prebuilt temporary structures valid for the current region.",
+          "Genesis Routes create alternate traversal networks and hidden objective access without modifying core terrain permanently.",
+          "Created Ecology temporarily introduces compatible wildlife and resource nodes tied to the generated structure set.",
+          "Revision Phase removes selected structures in a telegraphed order, forcing route adaptation.",
+          "Final Draft opens one rare Absolute crafting objective if players completed enough creation challenges before dissolution."
+        ],
+        "counterplay": [
+          "Read revision warnings, avoid depending on one route, and prioritize structures tied to desired rewards."
+        ],
+        "evolution": [
+          "Event intensity escalates through authored phases and terminates cleanly with regional reset/reward state."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Wireframe rain assembles into solid authored structures.",
+          "Creation categories use distinct geometric motifs.",
+          "Revision marks doomed structures with red edit lines.",
+          "Ecology nodes bloom from blueprint particles.",
+          "Final Draft turns surviving structures brilliant white before the storm clears."
+        ],
+        "animation": [
+          "Structures build in staged modular sequences and dissolve in reverse assembly order.",
+          "Wildlife habitats grow around generated anchor points.",
+          "Final Draft collapses blueprints into a single forge-like objective.",
+          "Revision waves travel visibly across structures before removal."
+        ],
+        "audio": [
+          "Regional phase stingers, long-range event ambience, objective-state cues, and clear resolution audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute post-God progression event and Genesis mastery prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "World events must be interruptible, recoverable, and bounded to supported UEFN systems.",
+        "Events change objectives, encounter composition, traversal, or authored environmental states rather than relying on invisible stat multipliers."
+      ]
+    },
+    {
+      "id": "EVT-022",
+      "name": "Zero Echo",
+      "family": "event",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "Transcendent-candidate precursor anomaly",
+      "identity": {
+        "fantasy": "A vanishingly rare Absolute event that appears only to qualified Zero Candidates and tests mastery through echoes of prior systems without itself granting Transcendent Zero.",
+        "silhouette": "The region loses most color while faint copies of past bosses, routes, faction banners, and crafting symbols overlap like memories.",
+        "lore_hook": "Before Zero chooses anyone, the world asks whether the candidate remembers what it cost to arrive."
+      },
+      "mechanics": {
+        "core": [
+          "candidate-specific eligibility",
+          "system mastery remix",
+          "ascension precursor"
+        ],
+        "signature": [
+          "Echo Ledger selects authored mechanics from previously completed content rather than copying entire encounters.",
+          "No New Lesson combines familiar rules in unfamiliar pairings, testing understanding rather than hidden trivia.",
+          "Burden Recall temporarily requires candidate-crafted relics or materials to activate optional shortcuts without consuming irreplaceable items.",
+          "Witnesses allows squadmates to support objectives while reserving candidate-only mastery checks for the eligible player.",
+          "Silent Verdict records completion into Zero Candidate progression but does not guarantee selection or ascension."
+        ],
+        "counterplay": [
+          "There is no pay shortcut or brute-force damage solution; candidates must recognize systems and can retry after failure under controlled rules."
+        ],
+        "evolution": [
+          "Event intensity escalates through authored phases and terminates cleanly with regional reset/reward state."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Past encounter motifs appear as translucent monochrome echoes.",
+          "Correct system recognition restores one color channel at a time.",
+          "Burden Recall projects ghost images of qualifying relics.",
+          "Witness support creates white rings around allied objectives.",
+          "Silent Verdict collapses every echo into a tiny black point that remains briefly above the candidate."
+        ],
+        "animation": [
+          "Echo encounters use abbreviated but recognizable transition animations from prior systems.",
+          "Color restoration travels outward from completed objectives.",
+          "Final collapse reverses all active echo animations simultaneously.",
+          "Candidate-only checks use distinct slow hand-sign animations so squadmates can read the phase."
+        ],
+        "audio": [
+          "Regional phase stingers, long-range event ambience, objective-state cues, and clear resolution audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute hidden event available only to qualified Zero Candidates after extensive prerequisite completion."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [
+        "REL-045"
+      ],
+      "notes": [
+        "World events must be interruptible, recoverable, and bounded to supported UEFN systems.",
+        "Events change objectives, encounter composition, traversal, or authored environmental states rather than relying on invisible stat multipliers."
+      ]
+    }
+  ]
+}
