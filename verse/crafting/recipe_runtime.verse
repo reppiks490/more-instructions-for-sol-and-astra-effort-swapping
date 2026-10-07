@@ -30,6 +30,7 @@ aeonfall_recipe_service := class():
                 if:
                     Profile.UnlockedEntityIds.Find[UnlockId]
                 then:
+                    set RequirementsMet = RequirementsMet
                 else:
                     set RequirementsMet = false
 
@@ -44,12 +45,14 @@ aeonfall_recipe_service := class():
                         if:
                             set RequiredTotals[Cost.MaterialId] = Existing + Cost.Amount
                         then:
+                            set RequirementsMet = RequirementsMet
                         else:
                             set RequirementsMet = false
                     else:
                         if:
                             set RequiredTotals[Cost.MaterialId] = Cost.Amount
                         then:
+                            set RequirementsMet = RequirementsMet
                         else:
                             set RequirementsMet = false
                 else:
@@ -70,6 +73,7 @@ aeonfall_recipe_service := class():
                         if:
                             set UpdatedLedger[MaterialId] = Current - RequiredAmount
                         then:
+                            set RequirementsMet = RequirementsMet
                         else:
                             set RequirementsMet = false
                     else:
