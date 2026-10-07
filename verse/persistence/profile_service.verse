@@ -27,10 +27,23 @@ aeonfall_profile_service := class():
             Player := player[Agent]
             Old := AEONFALLPlayerProfiles[Player]
         then:
+            NewXP:int = Old.XP + Amount
+            NewLevel:int = AEONFALLGetLevelForXP(NewXP)
+
             Candidate := aeonfall_player_profile:
                 MakeAEONFALLPlayerProfile<constructor>(Old)
-                XP := Old.XP + Amount
+                XP := NewXP
+                Level := NewLevel
             SaveProfile(Player, Candidate)
+
+            AEONFALLRuntimeBus.Emit(
+                aeonfall_runtime_event{
+                    EventType := "progression.xp_granted",
+                    SourceId := "player",
+                    Amount := Amount,
+                    ContextId := "{NewLevel}"
+                }
+            )
 
     GrantMasteryPoints(Agent:agent, Amount:int)<transacts>:void=
         if:
