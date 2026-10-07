@@ -5,6 +5,7 @@ on:
     paths:
       - "content/catalog/**"
       - "content/crafting/**"
+      - "content/vertical_slice/**"
       - "schemas/**"
       - "tools/validate_catalog.py"
       - "tools/validate_crafting.py"
@@ -12,6 +13,7 @@ on:
       - "tools/build_content_index.py"
       - "tools/quality_audit.py"
       - "tools/validate_quotas.py"
+      - "tools/validate_vertical_slice.py"
       - "STATUS.md"
       - ".github/workflows/catalog-validation.yml"
   pull_request:
@@ -50,6 +52,9 @@ jobs:
 
       - name: Enforce original family minimums
         run: python tools/validate_quotas.py
+
+      - name: Validate first production vertical slice
+        run: python tools/validate_vertical_slice.py
 
       - name: Build runtime content index
         run: python tools/build_content_index.py
