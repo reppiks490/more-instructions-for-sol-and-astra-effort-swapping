@@ -3,27 +3,27 @@
 This file is generated from the canonical catalog by `tools/build_status.py`.
 
 ## Major Entity Catalog
-**Target-counted authored entities: 188 / 800 (23.5%)**
+**Target-counted authored entities: 288 / 800 (36.0%)**
 **Additional major faction definitions: 8**
-**All catalog entities: 196**
+**All catalog entities: 296**
 
 | Family | Specified | Target | Progress |
 |---|---:|---:|---:|
 | Weapons | 12 | 180 | 6.7% |
 | Armor / major pieces | 4 | 120 | 3.3% |
-| Monsters | 12 | 170 | 7.1% |
+| Monsters | 42 | 170 | 24.7% |
 | Wildlife / tameables | 60 | 60 | 100.0% **(minimum met)** |
 | Hireable / major NPCs | 64 | 60 | 106.7% **(minimum met)** |
 | Bosses | 4 | 80 | 5.0% |
-| Relics / artifacts | 0 | 45 | 0.0% |
-| Vehicles / advanced variants | 0 | 25 | 0.0% |
+| Relics / artifacts | 45 | 45 | 100.0% **(minimum met)** |
+| Vehicles / advanced variants | 25 | 25 | 100.0% **(minimum met)** |
 | Classes / major skills | 30 | 30 | 100.0% **(minimum met)** |
 | World events / special effects | 2 | 30 | 6.7% |
-| **Target-counted total** | **188** | **800** | **23.5%** |
+| **Target-counted total** | **288** | **800** | **36.0%** |
 
 ## Pipeline Status
 - concept: 0
-- specified: 196
+- specified: 296
 - prototype: 0
 - implemented: 0
 - vfx_ready: 0
