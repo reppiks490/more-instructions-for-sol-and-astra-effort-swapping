@@ -379,7 +379,8 @@
         "signature": [
           "Critical hit establishes Tidemark height.",
           "Marked enemy crossing above or below the plane arms a pressure echo.",
-          "Echo produces stagger, not full duplicate damage."
+          "Echo produces stagger, not full duplicate damage.",
+          "A correctly triggered pressure echo primes the next direct hit to draw a brief visible wake toward the target, helping the squad read the tide plane without adding another damage multiplier."
         ],
         "counterplay": [
           "Remain near same height or break the mark."
@@ -441,7 +442,8 @@
         "signature": [
           "Defeating two different archetypes loads Funeral Sequence.",
           "Third distinct archetype enables a high-stagger ceremonial round.",
-          "Repeating an archetype clears the oldest sigil."
+          "Repeating an archetype clears the oldest sigil.",
+          "Completing the three-archetype Funeral Sequence also locks the cylinder state until the ceremonial round is fired or deliberately discarded, turning target order into a commitment."
         ],
         "counterplay": [
           "Mixed encounters are required; farming one mob type does not charge it."
@@ -504,7 +506,8 @@
           "Primary hit creates Relay Mark.",
           "Ally damage passes mark to a second target.",
           "Second handoff changes mark into a short vulnerability reveal.",
-          "Third valid handoff detonates a stagger pulse and resets."
+          "Third valid handoff detonates a stagger pulse and resets.",
+          "A broken relay can be deliberately grounded on the current target, converting remaining relay progress into a short squad-visible tracking pulse instead of losing it."
         ],
         "counterplay": [
           "Requires coordination; repeated same-player hits do not advance relay."
@@ -566,7 +569,8 @@
         "signature": [
           "Hits on eligible buffed enemies add Tax.",
           "Spend Tax to briefly reveal nearby buff sources.",
-          "Full Tax allows one shot to shorten an eligible lesser buff."
+          "Full Tax allows one shot to shorten an eligible lesser buff.",
+          "Tax can be spent defensively to identify the source object or NPC maintaining an eligible lesser buff, allowing the squad to attack the economy behind the effect."
         ],
         "counterplay": [
           "Unbuffed enemies give normal value; boss buffs obey explicit exceptions."
@@ -628,7 +632,8 @@
         "signature": [
           "Target eligible spent fire zone to create Frost Wake.",
           "Wake can form one temporary traversal platform.",
-          "Alternate detonation creates a localized slow patch."
+          "Alternate detonation creates a localized slow patch.",
+          "Two overlapping Frost Wakes can fuse into one brittle crossing that cracks after several traversals, creating a temporary route rather than a permanent platform."
         ],
         "counterplay": [
           "Requires existing spent heat/fire interactions and surfaces are short-lived."
@@ -690,7 +695,8 @@
         "signature": [
           "Scan struck lesser enemy for eligible property such as burn, slow, or knock.",
           "Next magazine gains normalized sampled property.",
-          "Confess reload discards sample for faster reload."
+          "Confess reload discards sample for faster reload.",
+          "Keeping a sampled property through an entire magazine creates a brief Mastered Sample state that improves only that property's reliability, then forces the weapon blank."
         ],
         "counterplay": [
           "Boss abilities and complex mechanics cannot be copied."
@@ -1262,7 +1268,8 @@
         "signature": [
           "Quiet stance reduces eligible lesser AI threat after no attacks.",
           "Crown stance increases threat to peel enemies from allies.",
-          "Switching stances has a lockout."
+          "Switching stances has a lockout.",
+          "Changing from Quiet directly into Crown after successfully peeling enemies from an ally creates a short Command Window that improves companion target clarity without increasing player damage."
         ],
         "counterplay": [
           "Boss targeting obeys authored rules; attacking breaks Quiet."
@@ -1325,7 +1332,8 @@
           "First crossing primes Tide Note.",
           "Second allied crossing adds Harmony.",
           "Third triggers brief team movement stabilization.",
-          "Sequence expires quickly."
+          "Sequence expires quickly.",
+          "Breaking a three-player Tide Harmony voluntarily converts the remaining resonance into a visible safe-path marker through the next nearby pressure wake."
         ],
         "counterplay": [
           "Requires coordinated pathing and offers little solo value."
@@ -1886,7 +1894,8 @@
         "signature": [
           "Storm feeding creates Clear Pocket.",
           "Charge converts to Crescent Slash.",
-          "Dry zones weaken it."
+          "Dry zones weaken it.",
+          "After consuming enough weather, the Rain-Eater Mantis creates a short-lived Dry Hunt state that trades weather-derived slash power for faster ground pursuit."
         ],
         "counterplay": [
           "Drag it away from weather cells and interrupt feeding."
@@ -1948,7 +1957,8 @@
         "signature": [
           "Scavenge eligible expired zones.",
           "Stores one effect archetype per segment.",
-          "Break segment to remove stored effect."
+          "Break segment to remove stored effect.",
+          "When three different stored effect archetypes occupy adjacent body segments, the Archive Centipede can chain them in sequence, exposing those charged segments as a larger weak-point cluster."
         ],
         "counterplay": [
           "Destroy charged segments before reuse."
@@ -2010,7 +2020,8 @@
         "signature": [
           "Crosses Gate A to emerge Gate B.",
           "Oar Sweep pushes players toward a gate.",
-          "Destroyed gate strands knight and slows it."
+          "Destroyed gate strands knight and slows it.",
+          "If both ferry gates remain intact long enough, the Pale Ferry Knight can lock one gate briefly and force all subsequent crossings through the other, creating a predictable punish window."
         ],
         "counterplay": [
           "Pressure gateways and punish stranded phase."
@@ -2071,7 +2082,8 @@
         ],
         "signature": [
           "Arm glyphs show slam, grab, leap sequence.",
-          "Interrupting correct transition causes long stumble."
+          "Interrupting correct transition causes long stumble.",
+          "Completing its fully written combo causes the Cinder Scripture Ape to rewrite one pictogram into a stronger variant; interrupting that rewritten step strips the temporary armor it just earned."
         ],
         "counterplay": [
           "Read glyph order and punish transitions."
