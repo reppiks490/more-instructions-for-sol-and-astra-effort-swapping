@@ -1,0 +1,1885 @@
+{
+  "wave": "012",
+  "purpose": "Thirty horror, necromantic, demonic, mythical, and eldritch monsters with distinct readable mechanics, including a five-stage cannibal Gravefeeding ecology.",
+  "entity_count": 30,
+  "entities": [
+    {
+      "id": "MON-043",
+      "name": "Carrion Seed",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "tier-I self-devouring swarm horror",
+      "identity": {
+        "fantasy": "A fist-sized grave organism that survives by eating dead tissue—including its own wounded broodmates—to grow replacement limbs within seconds.",
+        "silhouette": "Hairless quadruped no larger than a dog, with translucent abdomen, lamprey mouth, and six folding bone-spines.",
+        "lore_hook": "The first stage of the Gravefeeding Cycle is less a corpse-eater than a biological decision to never waste meat."
+      },
+      "mechanics": {
+        "core": [
+          "brood cannibalism",
+          "rapid regrowth",
+          "pack pressure"
+        ],
+        "signature": [
+          "Feast Instinct causes injured Seeds to drag down a critically wounded broodmate and consume it, healing the survivors while reducing total pack size."
+        ],
+        "counterplay": [
+          "Burst-kill multiple Seeds before they can begin a feast; fire or area denial can interrupt the feeding channel."
+        ],
+        "evolution": [
+          "Survivors that consume enough biomass during authored events can be replaced by MON-044 Broodmaws."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Consumed flesh becomes visible dark mass moving through translucent abdomens."
+        ],
+        "animation": [
+          "Feeding uses frantic multi-body latch animations rather than generic melee swipes."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Tier-I Gravefeeding outbreaks and low-level carrion nests."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-044",
+      "name": "Broodmaw",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "tier-II cannibal pack predator",
+      "identity": {
+        "fantasy": "A human-sized Gravefeeding predator grown from fused Carrion Seeds; it carries vestigial mouths across its torso that bite its own flesh to trigger combat mutations.",
+        "silhouette": "Six-limbed hyena-like body with ribcage mouths, backward antlers, and mismatched limbs grown from consumed brood.",
+        "lore_hook": "A Broodmaw remembers every sibling it ate as another mouth arguing inside its chest."
+      },
+      "mechanics": {
+        "core": [
+          "self-cannibal mutation",
+          "pack leap",
+          "biomass stealing"
+        ],
+        "signature": [
+          "Rib Feast bites one of its own vestigial mouths shut, sacrificing health to gain a short mutation such as armor plates or leap speed.",
+          "Biomass Claim executes a feeding leap toward fallen lesser Gravefeeding creatures to restore the sacrificed health."
+        ],
+        "counterplay": [
+          "Punish self-damage during Rib Feast; deny corpse access to prevent full recovery."
+        ],
+        "evolution": [
+          "A Broodmaw that wins repeated cannibal contests can become MON-045 Maw-Court Butcher."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Different mutations visibly grow as bone plates, tendon fins, or swollen jump muscles.",
+          "Consumed corpses stream into the rib mouths as red-black particulate."
+        ],
+        "animation": [
+          "It bites into its own torso before mutating.",
+          "Feeding leaps end in a dragging, possessive corpse pull."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Tier-II Gravefeeding nests after a region accumulates enough carrion."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-045",
+      "name": "Maw-Court Butcher",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "tier-III cannibal hierarchy enforcer",
+      "identity": {
+        "fantasy": "A towering Gravefeeding butcher that breeds strength through ritualized pack cannibalism, selecting one lesser creature at a time to consume for specialized organs.",
+        "silhouette": "Twelve-foot upright brute with butcher-hook forearms, an exposed second spine, and a crown made from fused jawbones.",
+        "lore_hook": "The Maw-Court discovered hierarchy when the strongest creature realized it could choose who was eaten next."
+      },
+      "mechanics": {
+        "core": [
+          "victim selection",
+          "organ theft",
+          "pack hierarchy"
+        ],
+        "signature": [
+          "Meat Decree marks one nearby lesser Gravefeeding unit as the next sacrifice.",
+          "Organ Claim consumes the marked unit after a windup and gains one visible organ-power based on that unit's archetype.",
+          "Butcher's Law orders surviving lesser creatures to protect the newly grown organ until it is destroyed."
+        ],
+        "counterplay": [
+          "Kill or separate the marked sacrifice before the consume completes; newly grown organs become visible weak points."
+        ],
+        "evolution": [
+          "Butchers that accumulate five distinct organ types may enter a regional metamorphosis into MON-046 Cathedral of Hunger."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "A red jaw-crown sigil appears above the chosen sacrifice.",
+          "Stolen organs grow externally along the shoulders.",
+          "Protective pack lines glow between the Butcher and defenders."
+        ],
+        "animation": [
+          "The Butcher points a hook at the chosen victim before allies turn on it.",
+          "Organ Claim uses a full lift-and-tear consumption animation.",
+          "New organs visibly graft into the torso."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Tier-III Gravefeeding strongholds and cannibal-court events."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-046",
+      "name": "Cathedral of Hunger",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "tier-IV walking cannibal colony",
+      "identity": {
+        "fantasy": "A building-sized Gravefeeding organism formed when multiple Butchers fuse into a walking flesh-cathedral that manufactures new monsters from whatever it consumes.",
+        "silhouette": "Four-story walking rib cathedral on dozens of grasping limbs, with bell-like stomach sacs and stained-glass membranes.",
+        "lore_hook": "At the fourth stage, the horde stops seeking shelter because it has become its own city."
+      },
+      "mechanics": {
+        "core": [
+          "mobile spawner",
+          "corpse refinery",
+          "organ district weakpoints"
+        ],
+        "signature": [
+          "Flesh Foundry converts nearby eligible corpses into one of several lesser Gravefeeding variants after a visible processing cycle.",
+          "Procession moves the entire colony toward high-biomass combat areas while smaller creatures emerge from side chapels.",
+          "Organ Districts function as discrete weak points whose destruction disables spawning, movement, or defensive behavior."
+        ],
+        "counterplay": [
+          "Destroy exposed organ districts in a chosen order; starve the refinery by clearing corpses and adds away from its intake limbs."
+        ],
+        "evolution": [
+          "A fully fed Cathedral can trigger the rare stage-V emergence MON-047 Saint Devourer during a world event."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Membrane windows glow according to which organ district is active.",
+          "Stomach bells pulse before new creatures emerge.",
+          "Intake limbs drag corpse particles toward processing chambers."
+        ],
+        "animation": [
+          "The entire cathedral walks in slow asynchronous limb waves.",
+          "Destroyed districts sag and change the monster's gait.",
+          "Spawn chambers open like fleshy chapel doors."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Tier-IV Gravefeeding regional disaster state."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-047",
+      "name": "Saint Devourer",
+      "family": "monster",
+      "tier": "god",
+      "status": "specified",
+      "role": "tier-V apex cannibal world horror",
+      "identity": {
+        "fantasy": "The final Gravefeeding form: a colossal saint-shaped predator that consumes its own cathedral body to manufacture new combat organs during the fight.",
+        "silhouette": "Skyscraper-scale emaciated humanoid wrapped in cathedral ribs, halo made of rotating mouths, arms long enough to bridge city blocks.",
+        "lore_hook": "The Gravefeeding Cycle ends when hunger learns religion and decides the world is communion."
+      },
+      "mechanics": {
+        "core": [
+          "self-consumption phases",
+          "colossal organ growth",
+          "regional horde command"
+        ],
+        "signature": [
+          "Communion tears a visible section from its own body, reducing one defense while growing a new attack organ elsewhere.",
+          "Halo of Mouths issues feeding commands that cause lesser Gravefeeding units to attack wounded allies of their own species for rapid mutation.",
+          "Pilgrim Hand reaches across a large authored arena to relocate biomass piles and alter horde routes.",
+          "Last Supper begins a final phase where the Devourer consumes remaining lesser units to expose a massive heart weak point."
+        ],
+        "counterplay": [
+          "Its self-consumption creates deliberate vulnerability trades; squads choose whether to punish lost armor, destroy new organs, or preserve adds to delay Last Supper."
+        ],
+        "evolution": [
+          "Final Gravefeeding stage; defeat resets the regional cannibal ecology and seeds rare crafting material states."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Each consumed body region leaves a glowing hollow cathedral cavity.",
+          "The mouth-halo rotates faster with active horde commands.",
+          "Pilgrim Hand casts enormous perspective-safe shadows across the arena.",
+          "Last Supper draws every remaining biomass effect toward the chest heart."
+        ],
+        "animation": [
+          "Distributed body regions animate independently under one encounter director.",
+          "Communion uses a horrifying self-tearing sequence with clear pre-attack telegraph.",
+          "Pilgrim Hand movement is slow, massive, and objective-like rather than a normal melee swing."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Rare world-event culmination of an unmanaged Gravefeeding outbreak."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-048",
+      "name": "Ossuary Bishop",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "necromancer support caster",
+      "identity": {
+        "fantasy": "A tall necromancer who writes temporary combat orders into floating bones, turning nearby corpses into disciplined skeletal formations.",
+        "silhouette": "Robed figure with a cage-mitre of finger bones and six levitating femurs arranged like a bishop's staff.",
+        "lore_hook": "The Bishop believes death is simply a workforce that has stopped receiving instructions."
+      },
+      "mechanics": {
+        "core": [
+          "corpse scripting",
+          "formation summon",
+          "bone order"
+        ],
+        "signature": [
+          "Bone Edict converts one eligible corpse resource into a small formation with a clearly displayed role.",
+          "Dismissal shatters one active formation to create a brief bone-wall cover strip."
+        ],
+        "counterplay": [
+          "Destroy floating edict bones to weaken formations; corpse denial limits its army."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Script crawls across floating bones before summons form.",
+          "Dismissed skeletons collapse into a clean wall of pale fragments."
+        ],
+        "animation": [
+          "The Bishop writes in the air with a finger-bone quill.",
+          "Formation orders use sharp conductor gestures."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Necropolis chapels and Ossuary faction patrols."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-049",
+      "name": "Marrow Taxonomist",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "adaptive necromancer researcher",
+      "identity": {
+        "fantasy": "A necromancer-scientist that studies damage types used against its minions and rebuilds subsequent skeletons with visible anatomical counters.",
+        "silhouette": "Hunched scholar carrying a rotating cabinet of labeled bones and wearing magnifying lenses over an eyeless face.",
+        "lore_hook": "It does not raise the dead; it publishes revised editions of them."
+      },
+      "mechanics": {
+        "core": [
+          "damage observation",
+          "counter-skeleton design",
+          "field research"
+        ],
+        "signature": [
+          "Specimen Notes records the most common recent damage category used against its summons.",
+          "Revised Anatomy spawns the next wave with a modest visible resistance tradeoff and a new weakness.",
+          "Peer Review exposes its bone cabinet while it updates, creating a precision weak-point window."
+        ],
+        "counterplay": [
+          "Vary damage types to prevent strong adaptation; punish the long Peer Review update."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Observed damage appears as colored labels orbiting the bone cabinet.",
+          "Revised skeletons have visibly altered bone materials.",
+          "Weakness category is shown by glowing fracture lines."
+        ],
+        "animation": [
+          "The Taxonomist physically swaps bones between drawers.",
+          "Peer Review locks it into a frantic writing posture."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic necromancer laboratories."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-050",
+      "name": "Funeral Cartographer",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "territory-control necromancer",
+      "identity": {
+        "fantasy": "A map-making necromancer that redraws a fight by marking 'death roads' on the ground along routes where creatures recently fell.",
+        "silhouette": "Thin corpse in surveyor robes carrying a huge parchment roll stitched from burial shrouds.",
+        "lore_hook": "It maps where death has been because it assumes death will want to travel the same road again."
+      },
+      "mechanics": {
+        "core": [
+          "death-road mapping",
+          "route hazard",
+          "corpse navigation"
+        ],
+        "signature": [
+          "Last Route traces recent elimination locations into visible connected roads.",
+          "Pallbearer Traffic lets summoned undead move faster only while following those roads.",
+          "Erase Margin removes one road to create a brief necrotic burst at its endpoints."
+        ],
+        "counterplay": [
+          "Fight away from dense death history; roads are visible and can be avoided."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Ink-black roads write themselves across terrain.",
+          "Summons leave funeral-lantern footprints while using the network.",
+          "Erased lines burn away like paper."
+        ],
+        "animation": [
+          "The Cartographer unrolls and redraws the map during road creation.",
+          "Erase Margin uses a long ruler-like blade gesture."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic cemetery-route anomalies and map vaults."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-051",
+      "name": "Second-Death Cantor",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "resurrection-denial necromancer",
+      "identity": {
+        "fantasy": "A necromantic singer that marks recently defeated undead so their next resurrection fails and releases stored death energy as hostile song.",
+        "silhouette": "Tall singer with a split jaw, black choir robes, and glowing nameplates of the dead hanging like tuning forks.",
+        "lore_hook": "The Cantor discovered that resurrection has a rhythm—and that every rhythm can be interrupted."
+      },
+      "mechanics": {
+        "core": [
+          "resurrection denial",
+          "death storage",
+          "hostile song"
+        ],
+        "signature": [
+          "Final Name marks eligible defeated undead and prevents one scripted reassembly.",
+          "Borrowed Funeral stores power from each denied return up to a cap.",
+          "Second Verse releases stored power as expanding sound rings that stagger lesser units."
+        ],
+        "counterplay": [
+          "Eliminate the Cantor before heavily relying on resurrection mechanics; sound rings have visible gaps."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Names appear in pale script above denied remains.",
+          "Stored names orbit the throat as tuning-fork glyphs.",
+          "Second Verse expands in alternating black-white rings."
+        ],
+        "animation": [
+          "The split jaw opens beyond normal anatomy during song.",
+          "Name collection uses delicate conductor motions.",
+          "Second-Death Cantor uses a bespoke locomotion or attack transition for hostile song so the mechanic is visually identifiable."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic funerary choir encounters."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-052",
+      "name": "Pope of Empty Graves",
+      "family": "monster",
+      "tier": "god",
+      "status": "specified",
+      "role": "necromancer sovereign monster",
+      "identity": {
+        "fantasy": "A colossal necromancer enthroned on a mobile cemetery that can temporarily declare sections of its arena 'unburied,' causing buried threats and old hazards to return.",
+        "silhouette": "Thirty-foot skeletal pontiff fused to a walking stone graveyard, with a halo of empty coffins and mile-high-looking spectral vestments.",
+        "lore_hook": "It conquered death by ensuring nothing stayed buried long enough to become history."
+      },
+      "mechanics": {
+        "core": [
+          "graveyard throne",
+          "arena resurrection",
+          "burial decree"
+        ],
+        "signature": [
+          "Unbury District activates one authored cemetery sector, returning predefined hazards and undead formations.",
+          "Empty Coffin marks one destroyed elite and creates a weaker spectral imitation with reduced rewards.",
+          "Grave Tithe consumes active lesser undead to repair one throne segment rather than the Pope directly.",
+          "Final Interment opens the central tomb weak point only after enough outer grave sectors are purified."
+        ],
+        "counterplay": [
+          "Purify active districts instead of endlessly farming adds; destroy throne segments to limit Tithe and unlock Final Interment."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Coffin halo opens one lid per active district.",
+          "Spectral city-graves rise in perspective-safe layers.",
+          "Tithe sends pale funeral processions into throne cracks.",
+          "Final Interment turns the entire graveyard floor into a luminous burial seal."
+        ],
+        "animation": [
+          "Distributed throne segments move like a slow cemetery beast.",
+          "District activation uses a huge staff strike and rising coffin wave.",
+          "Final Interment forces the Pope to stand for the first time, exposing the tomb."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier necromancer world raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-053",
+      "name": "Eye Beneath the Soil",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "eldritch ambush organism",
+      "identity": {
+        "fantasy": "A buried eye-creature that watches through root tips and only surfaces its real pupil when players repeatedly use the same route.",
+        "silhouette": "When exposed, a wagon-sized vertical eye wrapped in roots with dozens of tiny dirt-caked eyelids.",
+        "lore_hook": "Farmers blamed crows for the missing cattle until the fields began blinking."
+      },
+      "mechanics": {
+        "core": [
+          "route observation",
+          "buried ambush",
+          "pattern punishment"
+        ],
+        "signature": [
+          "Path Memory quietly records repeated traversal through a small area.",
+          "Blinkhole opens ahead of a predictable route, briefly exposing the main eye for a gaze attack."
+        ],
+        "counterplay": [
+          "Vary routes and punish the exposed pupil during Blinkhole."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Tiny root-eyes glimmer beneath disturbed soil.",
+          "The main pupil reflects silhouettes of recent travelers."
+        ],
+        "animation": [
+          "Surface emergence folds roots outward like eyelids.",
+          "Eye Beneath the Soil uses a bespoke locomotion or attack transition for buried ambush so the mechanic is visually identifiable."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Eldritch-corrupted farmlands and buried-eye anomalies."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-054",
+      "name": "Threadmother of Angles",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "geometry-warping eldritch predator",
+      "identity": {
+        "fantasy": "A spiderlike intelligence that spins invisible-looking angular lanes between surfaces and attacks along impossible-looking but pre-authored geometric paths.",
+        "silhouette": "Tall many-legged creature made of black jointed lines, with no body center—only intersections.",
+        "lore_hook": "It nests in corners because it believes curves are a disease."
+      },
+      "mechanics": {
+        "core": [
+          "angle lanes",
+          "corner nesting",
+          "geometric lunge"
+        ],
+        "signature": [
+          "Hard Line draws visible angular traversal segments between valid anchors.",
+          "Impossible Lunge moves rapidly only along those segments and cannot freely steer.",
+          "Acute Nest creates a temporary corner node that strengthens nearby line intersections."
+        ],
+        "counterplay": [
+          "Destroy anchor nodes and step away from dense corner geometry; lunges are constrained to drawn paths."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Thin black lines appear with bright angle labels.",
+          "Nest corners fold space visually without changing collision.",
+          "Lunges leave ruler-straight afterimages."
+        ],
+        "animation": [
+          "Legs reorient independently to snap onto line segments.",
+          "Turning happens as instant-looking but telegraphed ninety-degree body folds."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic non-Euclidean ruins."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-055",
+      "name": "Lantern That Dreams",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "eldritch lure entity",
+      "identity": {
+        "fantasy": "A floating lantern-creature that projects false safe zones copied from places players previously rested, then reveals itself when someone trusts the illusion.",
+        "silhouette": "Warm antique lantern suspended beneath a huge invisible body revealed only by drifting dust outlining impossible limbs.",
+        "lore_hook": "It learned that predators catch more travelers by imitating relief than fear."
+      },
+      "mechanics": {
+        "core": [
+          "safe-zone mimicry",
+          "memory lure",
+          "reveal ambush"
+        ],
+        "signature": [
+          "Borrowed Hearth projects a familiar-looking rest vignette based on authored island assets.",
+          "Dream Warmth offers a small real benefit so the lure is not purely fake, but accumulates suspicion cues over time.",
+          "Wake Hungry reveals the hidden body and attacks if players remain too long."
+        ],
+        "counterplay": [
+          "Look for inconsistent environmental details and leave before the reveal timer completes."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Warm light contains subtle reversed shadows.",
+          "Dust outlines enormous limbs only when viewed from certain angles.",
+          "Reveal extinguishes the lantern and lights the invisible body from within."
+        ],
+        "animation": [
+          "The lantern sways gently while hidden.",
+          "Wake Hungry unfolds the body as dust rushes upward.",
+          "Lantern That Dreams uses a bespoke locomotion or attack transition for reveal ambush so the mechanic is visually identifiable."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic dream-fog regions and false camp events."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-056",
+      "name": "Horizon Eater",
+      "family": "monster",
+      "tier": "god",
+      "status": "specified",
+      "role": "regional eldritch distance predator",
+      "identity": {
+        "fantasy": "A gigantic flat-bodied creature seen only along the horizon that attacks by compressing apparent distance between itself and the arena rather than sprinting normally.",
+        "silhouette": "Mountain-long black ribbon with a white mouth spanning its front edge, always appearing far away until an attack begins.",
+        "lore_hook": "Travelers first thought it was the edge of a storm. Then the edge opened its mouth."
+      },
+      "mechanics": {
+        "core": [
+          "distance compression",
+          "horizon presence",
+          "arena-scale bite"
+        ],
+        "signature": [
+          "Nearer Than It Looks reduces the staged visual distance during each phase without changing protected world geometry.",
+          "Horizon Bite marks a wide safe/unsafe band across the encounter and closes it after a long telegraph.",
+          "Vanishing Line disappears when directly pressured and reappears at another authored horizon anchor.",
+          "Distant Hunger spawns lesser perspective-creatures that become tangible only near players."
+        ],
+        "counterplay": [
+          "Read horizon-band telegraphs, rotate between authored anchors, and destroy local projection organs that control compression."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "The horizon physically darkens behind the creature.",
+          "Distance compression uses layered parallax rather than uncontrolled world scaling.",
+          "Bite zones are marked by enormous white perspective teeth.",
+          "Projection organs beam thin lines toward the horizon body."
+        ],
+        "animation": [
+          "Most motion is environmental/parallax rather than conventional locomotion.",
+          "The mouth opens across the entire visible silhouette during Bite.",
+          "Anchor shifts dissolve the ribbon into a flat line before reforming elsewhere."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier eldritch regional event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-057",
+      "name": "Unname Tide",
+      "family": "monster",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "identity-eroding eldritch world entity",
+      "identity": {
+        "fantasy": "An Absolute-class tide of black mirrored fluid whose threat comes from temporarily suppressing authored labels, faction markers, and recognition cues rather than stealing player control.",
+        "silhouette": "A moving sea wall filled with half-reflected faces, nameplates, banners, and symbols that dissolve as the tide approaches.",
+        "lore_hook": "The Tide cannot kill a name. It only proves how little remains when the name is gone."
+      },
+      "mechanics": {
+        "core": [
+          "recognition suppression",
+          "faction confusion",
+          "mirror flood"
+        ],
+        "signature": [
+          "Nameless Shore creates a bounded event region where selected non-critical UI identity cues are intentionally reduced.",
+          "Borrowed Face spawns mirrored NPC silhouettes using safe generic forms rather than player impersonation.",
+          "Bannerless temporarily disables eligible faction-color bonuses while leaving hostility rules unchanged.",
+          "Call Yourself lets players restore their own cues by reaching identity pylons and completing a short interaction.",
+          "True Name opens the Tide's core weak point when enough pylons are restored."
+        ],
+        "counterplay": [
+          "Use pylons and environmental silhouettes instead of relying solely on markers; core gameplay ownership and controls remain intact."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Black mirrored flood carries dissolved icon fragments.",
+          "Mirrored faces ripple across the tide surface.",
+          "Identity pylons burn with sharp white symbols.",
+          "True Name draws restored names as giant light strokes toward the core.",
+          "Core reveal turns the tide transparent around one impossible dark sphere."
+        ],
+        "animation": [
+          "The Tide is a distributed environment entity rather than one skeletal mesh.",
+          "Borrowed silhouettes rise vertically from reflections.",
+          "Pylon restoration pushes the local tide backward in waves.",
+          "Core reveal makes the whole fluid wall recoil."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute eldritch endgame event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-058",
+      "name": "Furnace Hound",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "infernal pursuit beast",
+      "identity": {
+        "fantasy": "A demon hound whose chest furnace grows hotter the longer it chases one target, forcing players to break pursuit intelligently.",
+        "silhouette": "Lean iron canine with open rib furnace, chain tail, and ceramic claws glowing at the tips.",
+        "lore_hook": "It was bred to hunt deserters across lava plains where ordinary scent burned away."
+      },
+      "mechanics": {
+        "core": [
+          "target fixation",
+          "chase heat",
+          "chain pounce"
+        ],
+        "signature": [
+          "Pursuit Furnace builds while maintaining chase on one target, empowering speed until line-of-sight is broken long enough to cool it."
+        ],
+        "counterplay": [
+          "Use hard cover or team peel to break fixation before maximum heat."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Chest furnace brightens from orange to white during pursuit."
+        ],
+        "animation": [
+          "Chain tail stiffens into a counterbalance at high-speed pounce."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Infernal patrol packs and furnace kennels."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-059",
+      "name": "Covenant Reaver",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "demon contract enforcer",
+      "identity": {
+        "fantasy": "An armored demon that marks players who repeatedly use the same powerful ability and punishes predictable repetition with a contractual counterattack.",
+        "silhouette": "Horned red knight covered in hanging parchment contracts and carrying a blade shaped like a wax seal.",
+        "lore_hook": "Hell discovered that terms and conditions are more efficient than chains."
+      },
+      "mechanics": {
+        "core": [
+          "ability repetition scan",
+          "contract mark",
+          "counter strike"
+        ],
+        "signature": [
+          "Clause Violation marks repeated use of the same eligible ability pattern.",
+          "Seal Breaker gains one telegraphed counter-lunge against the marked ability's next activation."
+        ],
+        "counterplay": [
+          "Vary ability sequencing; the contract mark clearly identifies what behavior triggered it."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Burning contract text wraps around the marked target.",
+          "Counter-lunge leaves a wax-seal impact sigil."
+        ],
+        "animation": [
+          "The Reaver stamps its blade into a floating contract before lunging.",
+          "Covenant Reaver uses a bespoke locomotion or attack transition for contract mark so the mechanic is visually identifiable."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary infernal courthouse patrols."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-060",
+      "name": "Seven-Jawed Magistrate",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "infernal crowd-control demon",
+      "identity": {
+        "fantasy": "A tall demon judge with seven rotating jaws, each issuing a different bounded combat sentence against lesser targets and players.",
+        "silhouette": "Robed giant with a vertical wheel of seven mouths around its faceless head and iron scales hanging from both wrists.",
+        "lore_hook": "Every jaw believes it is the only lawful voice; combat is their argument."
+      },
+      "mechanics": {
+        "core": [
+          "sentence rotation",
+          "crowd-control variety",
+          "jaw weakpoints"
+        ],
+        "signature": [
+          "Sentence Wheel rotates visibly between slow, displacement, silence-like lockout, and other authored effects.",
+          "Objection allows players to damage the currently active jaw to cancel its sentence.",
+          "Contempt releases lesser demons if too many sentences are interrupted in rapid succession."
+        ],
+        "counterplay": [
+          "Focus the lit jaw before sentence completion; stagger interruptions to avoid Contempt add waves."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Each jaw has a distinct color and glyph.",
+          "Sentence area appears as courtroom floor geometry.",
+          "Interrupted jaws crack and dim."
+        ],
+        "animation": [
+          "The head-wheel rotates physically to bring one mouth forward.",
+          "Objection staggers the entire upper body sideways."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic infernal tribunal encounters."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-061",
+      "name": "Choir Titan of Cinders",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "demonic siege singer",
+      "identity": {
+        "fantasy": "A house-sized demon whose chest contains dozens of singing faces; their chords change the behavior of fire hazards around the battlefield.",
+        "silhouette": "Massive charred torso on pillar legs, chest opened into a choir loft of ember faces, no conventional head.",
+        "lore_hook": "Its hymns are sung by everyone it has ever burned."
+      },
+      "mechanics": {
+        "core": [
+          "fire-hazard orchestration",
+          "chord phases",
+          "choir weakpoints"
+        ],
+        "signature": [
+          "Cinder Chord causes existing authored fire hazards to lean or spread in one telegraphed direction.",
+          "Dissonant Choir creates safe lanes where faces fall out of harmony.",
+          "Soloist exposes one large face whose destruction weakens the next chord."
+        ],
+        "counterplay": [
+          "Move through the visible safe lanes and prioritize exposed Soloists."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Fire bends in rhythmic waves toward the current chord direction.",
+          "Choir faces light in sequence.",
+          "Safe lanes are outlined by extinguished ash."
+        ],
+        "animation": [
+          "Chest faces inhale together before each chord.",
+          "Titan steps land on the beat of its choir.",
+          "Choir Titan of Cinders uses a bespoke locomotion or attack transition for choir weakpoints so the mechanic is visually identifiable."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic infernal siege events."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-062",
+      "name": "Infernal Auditor",
+      "family": "monster",
+      "tier": "god",
+      "status": "specified",
+      "role": "demon economy sovereign",
+      "identity": {
+        "fantasy": "A colossal demon that weaponizes accumulated encounter resources, spawning hostile constructs based on what players hoard rather than directly stealing inventory.",
+        "silhouette": "Twenty-foot accountant demon with abacus ribs, coin-molten eyes, and scroll wings covered in impossible ledgers.",
+        "lore_hook": "Hell's oldest monster is not hunger or war. It is accounting."
+      },
+      "mechanics": {
+        "core": [
+          "resource observation",
+          "hoard pressure",
+          "construct taxation"
+        ],
+        "signature": [
+          "Inventory Census reads broad authored resource categories without exposing private data to other players.",
+          "Luxury Tax spawns stronger constructs when the squad carries excessive event currency above an encounter threshold.",
+          "Write-Off offers optional deposit shrines where players can temporarily bank event currency to weaken the Auditor.",
+          "Compound Interest increases construct variety, not raw unavoidable damage, if taxes are ignored."
+        ],
+        "counterplay": [
+          "Use deposit shrines and spend event currency strategically; destroy abacus-rib weak points to reduce census frequency."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Abacus ribs slide with each census.",
+          "Tax constructs form from molten coin-like particles.",
+          "Deposit shrines send gold numbers backward into the wings.",
+          "Compound Interest adds extra ledger pages orbiting the demon."
+        ],
+        "animation": [
+          "The Auditor counts on rib beads with enormous claws.",
+          "Tax spawning uses a stamping seal motion.",
+          "Destroyed ribs make its counting gestures increasingly erratic."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier infernal economy raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-063",
+      "name": "Moonhorn Behemoth",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "mythical territorial megafauna",
+      "identity": {
+        "fantasy": "A gigantic nocturnal herbivore whose crescent antlers bend projectile paths visually and create dangerous charge corridors when threatened.",
+        "silhouette": "Elephant-scale black stag with silver crescent antlers wider than a building and star-pattern hide.",
+        "lore_hook": "Villages learned not to build where moonlight pooled in hoofprints."
+      },
+      "mechanics": {
+        "core": [
+          "territorial charge",
+          "antler deflection field",
+          "herd defense"
+        ],
+        "signature": [
+          "Moon Corridor telegraphs a long straight charge lane while antlers create mild authored projectile deflection visuals near the head.",
+          "Herd Call summons non-hostile juveniles to retreat, increasing the Behemoth's aggression if players pursue them."
+        ],
+        "counterplay": [
+          "Attack from flanks, avoid the obvious charge corridor, and leave juveniles alone to reduce escalation."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Moonlight gathers along antler edges.",
+          "Charge lane becomes a pale lunar track."
+        ],
+        "animation": [
+          "The Behemoth scrapes a huge crescent in the ground before charging.",
+          "Antlers tilt to shield retreating juveniles."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary moon plains wildlife encounter."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-064",
+      "name": "Glass Serpent of Uru",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "mythical refractive ambusher",
+      "identity": {
+        "fantasy": "A kilometer-looking crystal serpent represented through segmented local encounter pieces that refract attacks and relocate between mirror pools.",
+        "silhouette": "Transparent serpent segments with rainbow internal organs and a crown of broken prism fins.",
+        "lore_hook": "It grew by eating reflections until the original serpent became the least important version."
+      },
+      "mechanics": {
+        "core": [
+          "segment encounter",
+          "mirror-pool relocation",
+          "refraction"
+        ],
+        "signature": [
+          "Prism Hide redirects eligible low-power projectiles into harmless visual splinters unless weak facets are targeted.",
+          "Mirror Dive moves the active combat segment between authored pools.",
+          "Rainbow Organ becomes vulnerable after repeated facet breaks and drives the phase objective."
+        ],
+        "counterplay": [
+          "Target dull weak facets instead of firing blindly; predict pool relocation from colored ripples."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Segments split sunlight into moving spectra.",
+          "Mirror pools show the next segment silhouette before emergence.",
+          "Organ exposure turns internal rainbow light white-hot."
+        ],
+        "animation": [
+          "Serpent movement is shared across multiple streamed segments.",
+          "Dive collapses each segment into a sheet of reflection."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Uru glass desert event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-065",
+      "name": "Storm Roc Matriarch",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "mythical aerial predator",
+      "identity": {
+        "fantasy": "A colossal roc that herds players with wind walls before diving through the only remaining safe corridor.",
+        "silhouette": "Airliner-scale bird with thundercloud plumage, copper beak, and lightning crawling across primary feathers.",
+        "lore_hook": "The Matriarch does not hunt prey individually; she hunts weather patterns that contain prey."
+      },
+      "mechanics": {
+        "core": [
+          "wind herding",
+          "aerial dive",
+          "lightning feathers"
+        ],
+        "signature": [
+          "Shear Wall creates visible lateral wind lanes that narrow movement choices.",
+          "Copper Dive commits to one telegraphed corridor after the walls settle.",
+          "Storm Molt drops charged feathers that become temporary hazard pylons."
+        ],
+        "counterplay": [
+          "Destroy or avoid feather pylons, then rotate through wind gaps before the dive locks."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Cloud feathers leave rolling thunder wake.",
+          "Dive corridor flashes copper-white.",
+          "Molt feathers spear into the ground as lightning rods."
+        ],
+        "animation": [
+          "Wingbeats drive local wind VFX rather than generic flight loops.",
+          "Dive folds wings completely and becomes a single thunderbolt silhouette."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic storm mesa hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-066",
+      "name": "Void Kraken Juvenile",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "mythical dimensional predator",
+      "identity": {
+        "fantasy": "A 'juvenile' kraken larger than a fortress whose tentacles emerge from separate small voids, making its real body location a recurring puzzle.",
+        "silhouette": "Only fragments are visible: star-black tentacles with galaxy suckers and a distant central eye seen through portals.",
+        "lore_hook": "Juvenile is a relative term when the adult species feeds between worlds."
+      },
+      "mechanics": {
+        "core": [
+          "distributed tentacles",
+          "body-location puzzle",
+          "void grapple"
+        ],
+        "signature": [
+          "False Body opens several decoy portals showing misleading eye positions.",
+          "Sucker Stars create pull zones along tentacle surfaces.",
+          "True Aperture is revealed by destroying enough marked suckers and exposes the central eye briefly."
+        ],
+        "counterplay": [
+          "Read portal parallax cues, destroy marked suckers, and avoid stacking near pull zones."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Galaxy-like suckers rotate independently.",
+          "Decoy portals show impossible starfields.",
+          "True eye aperture produces a narrow violet beam into the arena."
+        ],
+        "animation": [
+          "Tentacles are controlled as separate local encounter actors.",
+          "Portal withdrawal collapses limbs backward into flat black circles.",
+          "Void Kraken Juvenile uses a bespoke locomotion or attack transition for void grapple so the mechanic is visually identifiable."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic void-coast incursion."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-067",
+      "name": "Ironwood Oni",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "mythical forest bruiser",
+      "identity": {
+        "fantasy": "A bark-armored oni that rips living branches from its own body to change between club, spear, and shield attack patterns.",
+        "silhouette": "Ten-foot red-faced giant encased in iron-dark bark with a small tree growing from one shoulder.",
+        "lore_hook": "It planted itself for a century to become strong enough to uproot."
+      },
+      "mechanics": {
+        "core": [
+          "self-weapon growth",
+          "stance swapping",
+          "bark armor"
+        ],
+        "signature": [
+          "Branchbreak tears one of three visible growths from its body, changing attack pattern while exposing a temporary weak patch."
+        ],
+        "counterplay": [
+          "Bait a stance change and punish the exposed bark gap before it regrows."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Sap glows orange beneath broken bark.",
+          "New weapon branches grow in seconds."
+        ],
+        "animation": [
+          "Each weapon is physically torn from the body before use."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Ironwood groves."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-068",
+      "name": "Star-Antler Kirin",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "mythical reactive guardian",
+      "identity": {
+        "fantasy": "A luminous kirin that begins neutral and becomes violently aggressive only when players damage protected wildlife or sacred terrain nearby.",
+        "silhouette": "Horse-deer body of dark blue velvet with branching antlers carrying miniature constellations.",
+        "lore_hook": "Kirin do not protect forests. They protect agreements forests believe humans made."
+      },
+      "mechanics": {
+        "core": [
+          "conditional aggression",
+          "wildlife protection",
+          "constellation charge"
+        ],
+        "signature": [
+          "Witness Harm records qualifying aggression against protected creatures or sacred objects.",
+          "Star Judgment converts recorded harm into one telegraphed antler-charge pattern and then clears the record."
+        ],
+        "counterplay": [
+          "Respect protected ecology or disengage until Judgment is spent."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Constellations brighten with recorded harm.",
+          "Charge traces a star-map line along the ground."
+        ],
+        "animation": [
+          "Neutral locomotion is graceful; aggression snaps the neck and antlers into a rigid targeting frame.",
+          "Star-Antler Kirin uses a bespoke locomotion or attack transition for wildlife protection so the mechanic is visually identifiable."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary sacred-grove guardian encounter."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-069",
+      "name": "Wyrm of Broken Weather",
+      "family": "monster",
+      "tier": "god",
+      "status": "specified",
+      "role": "mythical continental storm serpent",
+      "identity": {
+        "fantasy": "A colossal sky wyrm whose damaged scales each leak a different weather system, turning the raid into a moving chain of climate objectives.",
+        "silhouette": "Cloud-long dragon with missing scales exposing miniature storms—blizzard, lightning, ash, rain, and clear vacuum patches.",
+        "lore_hook": "The world's weather was once one animal. This is what remains of it."
+      },
+      "mechanics": {
+        "core": [
+          "multi-weather body",
+          "scale objectives",
+          "moving climate raid"
+        ],
+        "signature": [
+          "Broken Scale activates a local authored climate around one body segment.",
+          "Season Coil moves active segments through the encounter route and changes which climates overlap.",
+          "Storm Stitch lets players repair one scale temporarily to suppress that climate and expose adjacent weak tissue.",
+          "Weather Heart becomes vulnerable only after enough scales are stabilized."
+        ],
+        "counterplay": [
+          "Assign squads to different climate segments, repair rather than simply damage scales, and rotate as the body moves."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Each body segment carries a distinct miniature storm system.",
+          "Climate boundaries travel with streamed segments.",
+          "Repaired scales crystallize into calm clear-sky plates.",
+          "Heart reveal pulls all weather colors into one white vortex."
+        ],
+        "animation": [
+          "Body is distributed across multiple moving segment actors.",
+          "Scale repairs visibly seal storm vents.",
+          "Coil transitions rearrange the visible serpent route across the sky."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier broken-weather world raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-070",
+      "name": "Ashen Sphinx",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "mythical riddle hunter",
+      "identity": {
+        "fantasy": "A soot-winged sphinx that changes its combat mechanic based on which of several environmental riddles the squad solves incorrectly.",
+        "silhouette": "Lion body carved from ash stone, human mask with no mouth, and wings made of drifting burned pages.",
+        "lore_hook": "It asks questions because violence is more satisfying when someone first had a chance to avoid it."
+      },
+      "mechanics": {
+        "core": [
+          "riddle branch",
+          "adaptive punishment",
+          "knowledge reward"
+        ],
+        "signature": [
+          "Three environmental answer shrines appear before engagement.",
+          "Wrong Answer selects one visible combat modifier for the next phase rather than instantly harming players.",
+          "Known Truth rewards a correct solution by revealing a temporary weak point and reducing add pressure."
+        ],
+        "counterplay": [
+          "Observe lore clues in the arena; even wrong answers telegraph the resulting modifier before combat resumes."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Burned-page wings write fragments of the active riddle.",
+          "Answer shrines change flame color on selection.",
+          "Weak point appears as a bright hieroglyph beneath the mask."
+        ],
+        "animation": [
+          "The Sphinx remains statue-still during questions.",
+          "Wrong Answer makes the stone body crack into motion from face to tail.",
+          "Ashen Sphinx uses a bespoke locomotion or attack transition for knowledge reward so the mechanic is visually identifiable."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic ash desert puzzle sanctums."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-071",
+      "name": "Mirror Basilisk",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "mythical gaze-control predator",
+      "identity": {
+        "fantasy": "A basilisk with mirror scales whose dangerous gaze is reflected through arena surfaces rather than emitted as an unavoidable direct beam.",
+        "silhouette": "Long low reptile armored in polished silver scales with a crown of black glass eyes.",
+        "lore_hook": "It blinded its first hunter without ever looking at him."
+      },
+      "mechanics": {
+        "core": [
+          "reflected gaze",
+          "mirror routing",
+          "scale break"
+        ],
+        "signature": [
+          "Gaze Ray targets a visible mirror surface and ricochets along a clearly previewed path.",
+          "Scale Turn changes which body side is reflective and which side exposes weak matte scales.",
+          "Shatter Glare breaks damaged mirrors into temporary safe cover shards."
+        ],
+        "counterplay": [
+          "Read preview lines, move mirrors through authored interactions where available, and attack matte scale side."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Gaze paths draw bright silver lines before activation.",
+          "Reflective scales show distorted player silhouettes.",
+          "Broken mirrors spray harmless light shards."
+        ],
+        "animation": [
+          "Head tracks mirror surfaces rather than players directly.",
+          "Scale Turn rolls the entire body to expose the opposite flank."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic mirror marsh lairs."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    },
+    {
+      "id": "MON-072",
+      "name": "The Child Behind Thunder",
+      "family": "monster",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "eldritch storm intelligence",
+      "identity": {
+        "fantasy": "An Absolute-class entity that appears as a small distant silhouette only when lightning flashes, while its real body is the entire authored storm system attacking the region.",
+        "silhouette": "A childlike figure far beyond the arena, visible for fractions of a second inside every lightning strike; no persistent local body.",
+        "lore_hook": "No one agrees whether the storm follows the Child or whether the Child is how the storm imagines itself."
+      },
+      "mechanics": {
+        "core": [
+          "storm-body encounter",
+          "flash apparition",
+          "regional pattern puzzle"
+        ],
+        "signature": [
+          "Seen Once makes the apparition visible in one of several distant anchors during lightning, revealing the next attack family.",
+          "Thunder Memory repeats earlier safe/unsafe patterns in altered order, rewarding observation.",
+          "Do Not Approach punishes attempts to chase the distant silhouette by redirecting players toward actual local storm objectives.",
+          "Name the Storm requires activating a sequence of grounded lightning rods matching apparition positions.",
+          "Quiet Child ends the storm-body phase and manifests a short-lived vulnerable local core only after the sequence is solved."
+        ],
+        "counterplay": [
+          "Watch apparition positions, solve rod sequences, and treat the silhouette as information rather than a chase target."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Lightning briefly reveals the distant figure at impossible scale depth.",
+          "Storm clouds form subtle facial negative space only during Thunder Memory.",
+          "Rod activations draw white lines toward the sky.",
+          "Quiet Child drains all color from the clouds before the local core appears.",
+          "The vulnerable core resembles a small black thunderhead containing a single white eye."
+        ],
+        "animation": [
+          "The apparition has almost no motion—only tiny posture changes between flashes.",
+          "Local objectives animate the storm rather than a body skeleton.",
+          "Quiet Child condenses cloud layers inward over several seconds.",
+          "Core defeat releases the storm upward instead of playing a conventional death fall."
+        ],
+        "audio": [
+          "Creature-specific positional tells for aggro, signature windup, impact, stagger, and retreat behavior."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute late-game eldritch storm event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Monster design prioritizes distinctive behavior, readable counterplay, and authored ecology over raw health scaling.",
+        "Large creatures use distributed/segmented encounter logic when conventional NPC scale would be unsafe."
+      ]
+    }
+  ]
+}
