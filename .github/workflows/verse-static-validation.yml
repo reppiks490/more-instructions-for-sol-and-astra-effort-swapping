@@ -1,0 +1,32 @@
+name: AEONFALL Verse Static Validation
+
+on:
+  push:
+    paths:
+      - "verse/**"
+      - "tools/validate_verse_static.py"
+      - ".github/workflows/verse-static-validation.yml"
+  pull_request:
+    paths:
+      - "verse/**"
+      - "tools/validate_verse_static.py"
+      - ".github/workflows/verse-static-validation.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate Verse source structure
+        run: python tools/validate_verse_static.py
