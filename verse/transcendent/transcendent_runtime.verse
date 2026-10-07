@@ -29,8 +29,10 @@ aeonfall_transcendent_runtime := class():
         Definition := AEONFALLTranscendentAuthorityRegistry.Get[AuthorityId]
         Profile := ProfileService.GetProfile[Agent]
         State := GetState(OwnerKey)
+        Flags := AEONFALLActorContextRuntime.GetFlags(OwnerKey)
 
         GateService.CanActivateTranscendentState[Agent]
+        not Flags.TransformationActive?
         Profile.TranscendentHistoryCount >= Definition.MinHistoryActivations
         State.Phase = aeonfall_transcendent_phase.Dormant
         State.ActiveRemainingSeconds <= 0.0
