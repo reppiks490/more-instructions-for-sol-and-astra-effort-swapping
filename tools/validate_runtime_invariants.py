@@ -20,6 +20,7 @@ REQUIRED_TOKENS = {
         "AEONFALLUnlockDeliveryService.TickAll",
         "AEONFALLAscensionTrialRuntime.TickAll",
         "AEONFALLChoosingRuntime.TickAll",
+        "AEONFALLAscendedFormRuntime.TickAll",
         "AEONFALLTranscendentRuntime.TickAll",
     ],
     "verse/core/actor_registry.verse": [
@@ -36,6 +37,7 @@ REQUIRED_TOKENS = {
         "AEONFALLClassRuntime.ClearOwner",
         "AEONFALLAscensionTrialRuntime.ClearOwner",
         "AEONFALLChoosingRuntime.ClearOwner",
+        "AEONFALLAscendedFormRuntime.ClearOwner",
         "AEONFALLTranscendentRuntime.ClearOwner",
     ],
     "verse/combat/activation_coordinator.verse": [
@@ -114,6 +116,16 @@ REQUIRED_TOKENS = {
     ],
     "verse/transcendent/choosing_runtime.verse": [
         "CommitChoosingSuccess",
+        "TickAll",
+        "ClearOwner",
+    ],
+    "verse/transcendent/ascended_form_runtime.verse": [
+        "Profile.AscensionRank",
+        "not Flags.TransformationActive?",
+        "AEONFALLActorContextRuntime.SetTransformation",
+        "StopFormAbilities",
+        "AEONFALLActivationCoordinator.CancelPending",
+        "AEONFALLActivationCoordinator.EndActivation",
         "TickAll",
         "ClearOwner",
     ],
