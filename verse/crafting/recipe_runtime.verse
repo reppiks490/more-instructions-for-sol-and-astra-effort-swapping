@@ -3,6 +3,7 @@ using { /Verse.org/Simulation }
 # Runtime recipe definition for persistent unlock crafting.
 aeonfall_recipe_definition := class:
     RecipeId:string = ""
+    StationId:string = ""
     OutputEntityId:string = ""
     Costs:[]aeonfall_material_cost = array{}
     RequiredUnlockIds:[]string = array{}
