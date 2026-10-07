@@ -1,0 +1,405 @@
+{
+  "version": 1,
+  "slice_id": "SLICE-001",
+  "boss_encounters": [
+    {
+      "boss_id": "BOS-005",
+      "controller_id": "EC_BOS_005",
+      "arena": "Red Mason Bastion",
+      "candidate_add_cap": 12,
+      "phases": [
+        {
+          "index": 0,
+          "id": "BOS005-P1-FRESH-MORTAR",
+          "name": "Fresh Mortar",
+          "allows_direct_boss_damage": true,
+          "objectives": [
+            "OBJ-BOS005-DENY-CORPSES"
+          ],
+          "weak_points": [
+            "WP-BOS005-RED-HAND"
+          ],
+          "hazards": [
+            "HZ-BOS005-RED-WALL",
+            "HZ-BOS005-MORTAR-FIST"
+          ],
+          "spawn_groups": [
+            "SG-BOS005-BUILDERS"
+          ],
+          "transition": "Boss reaches 70% health or corpse denial objective completes.",
+          "cleanup": [
+            "remove uncured walls",
+            "release unused corpse tokens"
+          ]
+        },
+        {
+          "index": 1,
+          "id": "BOS005-P2-DEADMANS-STAIR",
+          "name": "Deadman's Stair",
+          "allows_direct_boss_damage": false,
+          "objectives": [
+            "OBJ-BOS005-BREAK-STAIR-A",
+            "OBJ-BOS005-BREAK-STAIR-B",
+            "OBJ-BOS005-BREAK-STAIR-C"
+          ],
+          "weak_points": [
+            "WP-BOS005-TOOL-ARMS"
+          ],
+          "hazards": [
+            "HZ-BOS005-STAIR-LANES",
+            "HZ-BOS005-HARDENED-WALLS"
+          ],
+          "spawn_groups": [
+            "SG-BOS005-REINFORCEMENTS"
+          ],
+          "transition": "All three stair anchors destroyed.",
+          "cleanup": [
+            "collapse stairs into nonblocking debris",
+            "despawn queued reinforcements"
+          ]
+        },
+        {
+          "index": 2,
+          "id": "BOS005-P3-LAST-WALL",
+          "name": "Foreman's Last Wall",
+          "allows_direct_boss_damage": true,
+          "objectives": [
+            "OBJ-BOS005-PUNISH-WHISTLE"
+          ],
+          "weak_points": [
+            "WP-BOS005-RED-HAND",
+            "WP-BOS005-WHISTLE"
+          ],
+          "hazards": [
+            "HZ-BOS005-LAST-WALL",
+            "HZ-BOS005-MORTAR-FIST"
+          ],
+          "spawn_groups": [
+            "SG-BOS005-FINAL-BUILDERS"
+          ],
+          "transition": "Boss defeated.",
+          "cleanup": [
+            "remove combat construction",
+            "release path blockers",
+            "emit BOS-005 completion"
+          ]
+        }
+      ],
+      "rewards": {
+        "unlock_ids": [
+          "WPN-122"
+        ],
+        "material_rewards": [
+          {
+            "id": "MAT-008",
+            "amount": 30
+          }
+        ],
+        "boss_soul_roll": true
+      }
+    },
+    {
+      "boss_id": "BOS-006",
+      "controller_id": "EC_BOS_006",
+      "arena": "Saintless Crossing",
+      "candidate_add_cap": 8,
+      "phases": [
+        {
+          "index": 0,
+          "id": "BOS006-P1-BLESSING-SCENT",
+          "name": "Blessing Scent",
+          "allows_direct_boss_damage": true,
+          "objectives": [
+            "OBJ-BOS006-BAIT-POUNCE"
+          ],
+          "weak_points": [
+            "WP-BOS006-JAW"
+          ],
+          "hazards": [
+            "HZ-BOS006-SCENT-LINE"
+          ],
+          "spawn_groups": [],
+          "transition": "Boss reaches 70% health after at least one failed Halo Bite.",
+          "cleanup": [
+            "clear stale scent targets"
+          ]
+        },
+        {
+          "index": 1,
+          "id": "BOS006-P2-STOLEN-HALO",
+          "name": "Stolen Halo",
+          "allows_direct_boss_damage": true,
+          "objectives": [
+            "OBJ-BOS006-BREAK-STOLEN-HALO"
+          ],
+          "weak_points": [
+            "WP-BOS006-HALO-FRAGMENTS"
+          ],
+          "hazards": [
+            "HZ-BOS006-CORRUPTED-SUPPORT",
+            "HZ-BOS006-RELIC-SPIT"
+          ],
+          "spawn_groups": [
+            "SG-BOS006-PILFERED-RELICS"
+          ],
+          "transition": "Halo fragments broken or boss reaches 35% health.",
+          "cleanup": [
+            "restore support-zone ownership",
+            "remove stolen relic projectiles"
+          ]
+        },
+        {
+          "index": 2,
+          "id": "BOS006-P3-STARVED-GRIN",
+          "name": "Starved Grin",
+          "allows_direct_boss_damage": true,
+          "objectives": [
+            "OBJ-BOS006-PUNISH-ESCAPE"
+          ],
+          "weak_points": [
+            "WP-BOS006-BACK"
+          ],
+          "hazards": [
+            "HZ-BOS006-GRINNING-ESCAPE"
+          ],
+          "spawn_groups": [],
+          "transition": "Boss defeated.",
+          "cleanup": [
+            "clear corrupted support zones",
+            "emit BOS-006 completion"
+          ]
+        }
+      ],
+      "rewards": {
+        "unlock_ids": [
+          "WPN-126"
+        ],
+        "material_rewards": [
+          {
+            "id": "MAT-004",
+            "amount": 40
+          }
+        ],
+        "boss_soul_roll": true
+      }
+    },
+    {
+      "boss_id": "BOS-011",
+      "controller_id": "EC_BOS_011",
+      "arena": "The Ossuary Exchange — Black Throne",
+      "candidate_add_cap": 16,
+      "phases": [
+        {
+          "index": 0,
+          "id": "BOS011-P1-ROYAL-TAX",
+          "name": "Royal Tax",
+          "allows_direct_boss_damage": true,
+          "objectives": [
+            "OBJ-BOS011-CLEANSE-TAXED-CORPSES"
+          ],
+          "weak_points": [
+            "WP-BOS011-RIB-THRONE"
+          ],
+          "hazards": [
+            "HZ-BOS011-TAX-MARK"
+          ],
+          "spawn_groups": [
+            "SG-BOS011-TAX-COLLECTORS"
+          ],
+          "transition": "Dead Treasury reaches threshold or boss reaches 75% health.",
+          "cleanup": [
+            "clear untaken tax marks"
+          ]
+        },
+        {
+          "index": 1,
+          "id": "BOS011-P2-DEAD-TREASURY",
+          "name": "Dead Treasury",
+          "allows_direct_boss_damage": false,
+          "objectives": [
+            "OBJ-BOS011-BREAK-TREASURY-A",
+            "OBJ-BOS011-BREAK-TREASURY-B"
+          ],
+          "weak_points": [
+            "WP-BOS011-THRONE-LEDGER"
+          ],
+          "hazards": [
+            "HZ-BOS011-FORTIFICATION-BID"
+          ],
+          "spawn_groups": [
+            "SG-BOS011-BOUGHT-MINIONS"
+          ],
+          "transition": "Both treasury anchors destroyed.",
+          "cleanup": [
+            "despawn unspent purchased minions",
+            "collapse purchased fortifications"
+          ]
+        },
+        {
+          "index": 2,
+          "id": "BOS011-P3-BLACK-DECREE",
+          "name": "Black Decree",
+          "allows_direct_boss_damage": true,
+          "objectives": [
+            "OBJ-BOS011-SOLVE-DECREES"
+          ],
+          "weak_points": [
+            "WP-BOS011-CROWN-HANDS"
+          ],
+          "hazards": [
+            "HZ-BOS011-PRESERVE",
+            "HZ-BOS011-CONSUME",
+            "HZ-BOS011-WEAPONIZE"
+          ],
+          "spawn_groups": [
+            "SG-BOS011-DECREE-GUARDS"
+          ],
+          "transition": "Players successfully counter three decrees.",
+          "cleanup": [
+            "clear current corpse rule",
+            "release decree guard pool"
+          ]
+        },
+        {
+          "index": 3,
+          "id": "BOS011-P4-BANKRUPTCY",
+          "name": "Bankruptcy",
+          "allows_direct_boss_damage": true,
+          "objectives": [
+            "OBJ-BOS011-DENY-LAST-BID"
+          ],
+          "weak_points": [
+            "WP-BOS011-CROWN-HANDS",
+            "WP-BOS011-KING"
+          ],
+          "hazards": [
+            "HZ-BOS011-CROWN-HAND-SWEEP"
+          ],
+          "spawn_groups": [],
+          "transition": "Boss defeated.",
+          "cleanup": [
+            "zero encounter corpse treasury",
+            "remove royal fortifications",
+            "emit BOS-011 completion",
+            "persist first-clear reward"
+          ]
+        }
+      ],
+      "rewards": {
+        "unlock_ids": [
+          "WPN-124",
+          "ARM-002"
+        ],
+        "material_rewards": [
+          {
+            "id": "MAT-011",
+            "amount": 1
+          },
+          {
+            "id": "MAT-008",
+            "amount": 100
+          }
+        ],
+        "boss_soul_roll": false
+      }
+    }
+  ],
+  "world_event": {
+    "event_id": "EVT-011",
+    "director_id": "WD_EVT_011_GraveMarketEclipse",
+    "candidate_ai_cap": 24,
+    "stages": [
+      {
+        "index": 0,
+        "id": "EVT011-S1-CORPSE-LOTS",
+        "name": "Corpse Lots",
+        "regions": [
+          "REG-001"
+        ],
+        "objectives": [
+          "OBJ-EVT011-LOCATE-LOTS",
+          "OBJ-EVT011-CHOOSE-STANCE"
+        ],
+        "spawn_groups": [
+          "SG-EVT011-PORTERS"
+        ],
+        "hazards": [
+          "HZ-EVT011-LOT-CORRUPTION"
+        ],
+        "escalates_on_failure": true,
+        "transition": "Three lots are claimed, cleansed, or stolen."
+      },
+      {
+        "index": 1,
+        "id": "EVT011-S2-BLACK-AUCTION",
+        "name": "Black Auction",
+        "regions": [
+          "REG-001"
+        ],
+        "objectives": [
+          "OBJ-EVT011-DISRUPT-BIDS",
+          "OBJ-EVT011-TRACK-HIGH-VALUE-LOT"
+        ],
+        "spawn_groups": [
+          "SG-EVT011-BIDDERS",
+          "SG-EVT011-GUARDS"
+        ],
+        "hazards": [
+          "HZ-EVT011-AUCTION-ZONES"
+        ],
+        "escalates_on_failure": true,
+        "transition": "Auction influence threshold resolves."
+      },
+      {
+        "index": 2,
+        "id": "EVT011-S3-CLEAN-LEDGER",
+        "name": "Clean Ledger",
+        "regions": [
+          "REG-001"
+        ],
+        "objectives": [
+          "OBJ-EVT011-CLEANSE-LOTS",
+          "OBJ-EVT011-DEFEND-SANCTIFIERS"
+        ],
+        "spawn_groups": [
+          "SG-EVT011-NECROMANCERS"
+        ],
+        "hazards": [
+          "HZ-EVT011-BLACK-COIN-STORM"
+        ],
+        "escalates_on_failure": true,
+        "transition": "Enough lot value is denied to force Market Crash, or auction completes normally."
+      },
+      {
+        "index": 3,
+        "id": "EVT011-S4-MARKET-CRASH",
+        "name": "Market Crash",
+        "regions": [
+          "REG-001"
+        ],
+        "objectives": [
+          "OBJ-EVT011-BREAK-LEDGER",
+          "OBJ-EVT011-EXTRACT-REWARDS"
+        ],
+        "spawn_groups": [
+          "SG-EVT011-HOSTILE-MERCHANTS",
+          "SG-EVT011-CRASH-GUARDS"
+        ],
+        "hazards": [
+          "HZ-EVT011-COMBAT-STALLS",
+          "HZ-EVT011-RED-LEDGER"
+        ],
+        "escalates_on_failure": false,
+        "transition": "Ledger destroyed or event failure timer expires."
+      }
+    ],
+    "cleanup": [
+      "despawn event-only bidders, porters, guards, and hostile merchants",
+      "return pooled stalls and cages",
+      "remove corpse lot ownership tags",
+      "clear event weather/presentation",
+      "persist authored regional outcome",
+      "emit EVT-011 completion or failure"
+    ]
+  }
+}
