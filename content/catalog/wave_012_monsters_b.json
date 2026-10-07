@@ -22,7 +22,8 @@
           "pack pressure"
         ],
         "signature": [
-          "Feast Instinct causes injured Seeds to drag down a critically wounded broodmate and consume it, healing the survivors while reducing total pack size."
+          "Feast Instinct causes injured Seeds to drag down a critically wounded broodmate and consume it, healing the survivors while reducing total pack size.",
+          "Seed Panic causes surviving Carrion Seeds to scatter briefly if a Feast channel is interrupted, creating a punish window instead of immediate re-engagement."
         ],
         "counterplay": [
           "Burst-kill multiple Seeds before they can begin a feast; fire or area denial can interrupt the feeding channel."
@@ -82,7 +83,8 @@
         ],
         "signature": [
           "Rib Feast bites one of its own vestigial mouths shut, sacrificing health to gain a short mutation such as armor plates or leap speed.",
-          "Biomass Claim executes a feeding leap toward fallen lesser Gravefeeding creatures to restore the sacrificed health."
+          "Biomass Claim executes a feeding leap toward fallen lesser Gravefeeding creatures to restore the sacrificed health.",
+          "Maw Relay passes one temporary mutation trait to a nearby Broodmaw if the carrier dies during a feeding state, making target order matter."
         ],
         "counterplay": [
           "Punish self-damage during Rib Feast; deny corpse access to prevent full recovery."
@@ -341,7 +343,8 @@
         ],
         "signature": [
           "Bone Edict converts one eligible corpse resource into a small formation with a clearly displayed role.",
-          "Dismissal shatters one active formation to create a brief bone-wall cover strip."
+          "Dismissal shatters one active formation to create a brief bone-wall cover strip.",
+          "Processional Order rotates active formations between guard, pursuit, and sacrifice roles on a visible cadence rather than spawning more bodies indefinitely."
         ],
         "counterplay": [
           "Destroy floating edict bones to weaken formations; corpse denial limits its army."
@@ -653,7 +656,8 @@
         ],
         "signature": [
           "Path Memory quietly records repeated traversal through a small area.",
-          "Blinkhole opens ahead of a predictable route, briefly exposing the main eye for a gaze attack."
+          "Blinkhole opens ahead of a predictable route, briefly exposing the main eye for a gaze attack.",
+          "Soil Witness places a faint ground-eye marker on the most repeated route segment, warning players exactly which path is becoming dangerous."
         ],
         "counterplay": [
           "Vary routes and punish the exposed pupil during Blinkhole."
@@ -970,7 +974,8 @@
           "chain pounce"
         ],
         "signature": [
-          "Pursuit Furnace builds while maintaining chase on one target, empowering speed until line-of-sight is broken long enough to cool it."
+          "Pursuit Furnace builds while maintaining chase on one target, empowering speed until line-of-sight is broken long enough to cool it.",
+          "Ash Snap vents maximum Pursuit Furnace in a short frontal burst if the Hound loses its target at peak heat, creating a dangerous but readable reset."
         ],
         "counterplay": [
           "Use hard cover or team peel to break fixation before maximum heat."
@@ -1028,7 +1033,8 @@
         ],
         "signature": [
           "Clause Violation marks repeated use of the same eligible ability pattern.",
-          "Seal Breaker gains one telegraphed counter-lunge against the marked ability's next activation."
+          "Seal Breaker gains one telegraphed counter-lunge against the marked ability's next activation.",
+          "Counterfeit Clause occasionally marks a harmless behavior as bait; attacking the Reaver during its inspection animation cancels the fake contract and staggers it."
         ],
         "counterplay": [
           "Vary ability sequencing; the contract mark clearly identifies what behavior triggered it."
@@ -1278,7 +1284,8 @@
         ],
         "signature": [
           "Moon Corridor telegraphs a long straight charge lane while antlers create mild authored projectile deflection visuals near the head.",
-          "Herd Call summons non-hostile juveniles to retreat, increasing the Behemoth's aggression if players pursue them."
+          "Herd Call summons non-hostile juveniles to retreat, increasing the Behemoth's aggression if players pursue them.",
+          "Silver Bark converts one blocked frontal volley into temporary antler charge, encouraging lateral attacks instead of constant head-on fire."
         ],
         "counterplay": [
           "Attack from flanks, avoid the obvious charge corridor, and leave juveniles alone to reduce escalation."
@@ -1524,7 +1531,8 @@
           "bark armor"
         ],
         "signature": [
-          "Branchbreak tears one of three visible growths from its body, changing attack pattern while exposing a temporary weak patch."
+          "Branchbreak tears one of three visible growths from its body, changing attack pattern while exposing a temporary weak patch.",
+          "Rooted Fury causes the discarded Branchbreak weapon-growth to remain briefly as a destructible hazard or cover object, changing the local lane."
         ],
         "counterplay": [
           "Bait a stance change and punish the exposed bark gap before it regrows."
@@ -1583,7 +1591,8 @@
         ],
         "signature": [
           "Witness Harm records qualifying aggression against protected creatures or sacred objects.",
-          "Star Judgment converts recorded harm into one telegraphed antler-charge pattern and then clears the record."
+          "Star Judgment converts recorded harm into one telegraphed antler-charge pattern and then clears the record.",
+          "Constellation Mercy cancels stored Star Judgment if players complete a nearby wildlife-protection objective, creating a nonlethal resolution path."
         ],
         "counterplay": [
           "Respect protected ecology or disengage until Judgment is spent."
