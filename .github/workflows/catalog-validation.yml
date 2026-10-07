@@ -19,6 +19,7 @@ on:
       - "tools/validate_world_topology.py"
       - "tools/validate_slice_recipes.py"
       - "tools/validate_slice_encounters.py"
+      - "tools/validate_slice_shop.py"
       - "tools/build_slice_registry.py"
       - "STATUS.md"
       - ".github/workflows/catalog-validation.yml"
@@ -73,6 +74,9 @@ jobs:
 
       - name: Validate vertical slice encounters
         run: python tools/validate_slice_encounters.py
+
+      - name: Validate first-slice shop economy
+        run: python tools/validate_slice_shop.py
 
       - name: Build runtime content index
         run: python tools/build_content_index.py
