@@ -180,6 +180,12 @@
       "name": "Axiom Heart",
       "kind": "apex",
       "source": "Throne of Zero final craft"
+    },
+    {
+      "id": "MAT-031",
+      "name": "World Tribute Lattice",
+      "kind": "refined",
+      "source": "Axiom Forge synthesis of broad raw tribute requirements spanning major AEONFALL ecologies"
     }
   ]
 }
