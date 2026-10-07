@@ -23,6 +23,7 @@ on:
       - "tools/validate_slice_encounters.py"
       - "tools/validate_slice_shop.py"
       - "tools/validate_slice_combat.py"
+      - "tools/validate_slice_adapters.py"
       - "tools/build_slice_combat_registry.py"
       - "tools/build_slice_class_registry.py"
       - "tools/validate_slice_taming.py"
@@ -95,6 +96,9 @@ jobs:
 
       - name: Validate first-slice combat runtime data
         run: python tools/validate_slice_combat.py
+
+      - name: Validate first-slice adapter coverage
+        run: python tools/validate_slice_adapters.py
 
       - name: Validate first-slice class runtime data
         run: python tools/validate_slice_classes.py
