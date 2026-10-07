@@ -4,7 +4,7 @@ using { /Verse.org/Simulation }
 # IMPORTANT: after first production publication this class becomes append-only:
 # new fields must have defaults and existing field types/names must remain compatible.
 aeonfall_player_profile := class<final><persistable>:
-    Version:int = 2
+    Version:int = 3
 
     Level:int = 1
     XP:int = 0
@@ -21,6 +21,7 @@ aeonfall_player_profile := class<final><persistable>:
     HireableUnlockIds:[]string = array{}
 
     # Gameplay equipment selections. Visual asset state is reconstructed at runtime.
+    EquippedClassId:string = ""
     EquippedArmorIds:[]string = array{}
     EquippedWeaponIds:[]string = array{}
     EquippedRelicIds:[]string = array{}
@@ -54,6 +55,7 @@ MakeAEONFALLPlayerProfile<constructor>(Src:aeonfall_player_profile)<transacts> :
     TamedSpeciesIds := Src.TamedSpeciesIds
     HireableUnlockIds := Src.HireableUnlockIds
 
+    EquippedClassId := Src.EquippedClassId
     EquippedArmorIds := Src.EquippedArmorIds
     EquippedWeaponIds := Src.EquippedWeaponIds
     EquippedRelicIds := Src.EquippedRelicIds
