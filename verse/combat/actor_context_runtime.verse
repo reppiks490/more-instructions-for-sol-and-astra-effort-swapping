@@ -27,6 +27,7 @@ aeonfall_actor_context_runtime := class():
         aeonfall_ability_context_flags:
             EncounterActive := State.EncounterDepth > 0
             TransformationActive := State.TransformationActive
+            TransformationId := State.TransformationId
 
     EnterEncounter(
         Agent:agent,
