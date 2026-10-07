@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "official_publish_memory_ceiling": 100000,
+  "internal_targets": {
+    "baseline_region": 70000,
+    "dynamic_event_reserve": 15000,
+    "boss_cinematic_reserve": 10000,
+    "emergency_headroom": 5000
+  },
+  "global_rules": [
+    "Streaming enabled from project inception.",
+    "Start with default World Partition values and tune only from measured results.",
+    "High-cost content should be spatially loaded wherever compatible.",
+    "Distant AI is represented abstractly rather than kept alive.",
+    "Major raids may suppress ordinary local population to reclaim AI/VFX budget.",
+    "Custom source assets require intentional LODs before HLOD generation.",
+    "Every temporary event and VFX package requires deterministic cleanup."
+  ],
+  "region_release_gates": [
+    "baseline memory <= internal target",
+    "event surge remains below official ceiling",
+    "boss reserve remains below official ceiling",
+    "no uncontrolled always-loaded references",
+    "Spatial Profiler traversal pass completed",
+    "minimum-platform playtest completed"
+  ],
+  "notes": [
+    "Internal targets are AEONFALL engineering policy, not Epic platform guarantees.",
+    "Actual memory values can only be trusted after UEFN cook/memory calculation."
+  ]
+}
