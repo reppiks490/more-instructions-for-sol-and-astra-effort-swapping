@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "slice_id": "SLICE-001",
+  "recipes": [
+    {
+      "id": "SLR-001",
+      "output_entity_id": "WPN-001",
+      "station": "Grave Market Forge",
+      "costs": [
+        {
+          "material_id": "MAT-008",
+          "amount": 60
+        },
+        {
+          "material_id": "MAT-003",
+          "amount": 20
+        }
+      ],
+      "required_unlock_ids": []
+    },
+    {
+      "id": "SLR-002",
+      "output_entity_id": "WPN-007",
+      "station": "Grave Market Forge",
+      "costs": [
+        {
+          "material_id": "MAT-008",
+          "amount": 30
+        },
+        {
+          "material_id": "MAT-003",
+          "amount": 20
+        }
+      ],
+      "required_unlock_ids": []
+    },
+    {
+      "id": "SLR-003",
+      "output_entity_id": "WPN-122",
+      "station": "Ossuary Workbench",
+      "costs": [
+        {
+          "material_id": "MAT-008",
+          "amount": 80
+        },
+        {
+          "material_id": "MAT-003",
+          "amount": 40
+        }
+      ],
+      "required_unlock_ids": [
+        "WPN-001"
+      ]
+    },
+    {
+      "id": "SLR-004",
+      "output_entity_id": "WPN-124",
+      "station": "Ossuary Workbench",
+      "costs": [
+        {
+          "material_id": "MAT-008",
+          "amount": 120
+        },
+        {
+          "material_id": "MAT-003",
+          "amount": 60
+        },
+        {
+          "material_id": "MAT-011",
+          "amount": 1
+        }
+      ],
+      "required_unlock_ids": [
+        "WPN-001"
+      ]
+    },
+    {
+      "id": "SLR-005",
+      "output_entity_id": "ARM-002",
+      "station": "Saintless Reliquary",
+      "costs": [
+        {
+          "material_id": "MAT-008",
+          "amount": 150
+        },
+        {
+          "material_id": "MAT-003",
+          "amount": 100
+        },
+        {
+          "material_id": "MAT-011",
+          "amount": 2
+        }
+      ],
+      "required_unlock_ids": [
+        "WPN-124"
+      ]
+    },
+    {
+      "id": "SLR-006",
+      "output_entity_id": "VEH-010",
+      "station": "Bone Hauler Yard",
+      "costs": [
+        {
+          "material_id": "MAT-003",
+          "amount": 300
+        },
+        {
+          "material_id": "MAT-008",
+          "amount": 200
+        },
+        {
+          "material_id": "MAT-011",
+          "amount": 3
+        }
+      ],
+      "required_unlock_ids": [
+        "ARM-002"
+      ]
+    }
+  ],
+  "transaction_rules": [
+    "A recipe output already unlocked must not consume materials again.",
+    "All material requirements are coalesced by material ID before affordability is evaluated.",
+    "Material spend and durable canonical unlock commit in one profile replacement.",
+    "Physical inventory/prefab delivery happens only after durable commit succeeds and must be safe to retry.",
+    "Recipe UI must re-read profile state after a failed or repeated interaction."
+  ]
+}
