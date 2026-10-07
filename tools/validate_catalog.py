@@ -131,23 +131,45 @@ def validate_entity(path: Path, data: dict, seen_ids: dict[str, Path], seen_name
     vfx_count = len(presentation.get("vfx", []))
     animation_count = len(presentation.get("animation", []))
 
-    minimums = {
-        "epic": (1,1,1),
-        "legendary": (2,2,2),
-        "mythic": (3,3,2),
-        "exotic": (3,3,3),
-        "god": (4,4,3),
-        "absolute": (5,5,4),
-        "transcendent_zero": (6,6,5),
+    signature_minimums = {
+        "epic": 2,
+        "legendary": 3,
+        "mythic": 3,
+        "exotic": 3,
+        "god": 4,
+        "absolute": 4,
+        "transcendent_zero": 5,
     }
-    if tier in minimums:
-        min_sig, min_vfx, min_anim = minimums[tier]
+    presentation_depth = {
+        "epic": 80,
+        "legendary": 100,
+        "mythic": 120,
+        "exotic": 130,
+        "god": 160,
+        "absolute": 180,
+        "transcendent_zero": 220,
+    }
+    if tier in signature_minimums:
+        min_sig = signature_minimums[tier]
         if signature_count < min_sig:
             fail(errors, path, f"{tier} tier requires at least {min_sig} signature mechanics")
-        if vfx_count < min_vfx:
-            fail(errors, path, f"{tier} tier requires at least {min_vfx} VFX beats")
-        if animation_count < min_anim:
-            fail(errors, path, f"{tier} tier requires at least {min_anim} animation beats")
+        if vfx_count < 1:
+            fail(errors, path, f"{tier} tier requires an authored VFX profile")
+        if animation_count < 1:
+            fail(errors, path, f"{tier} tier requires an authored animation profile")
+
+        presentation_text = " ".join(
+            [str(x) for x in presentation.get("vfx", [])]
+            + [str(x) for x in presentation.get("animation", [])]
+            + [str(x) for x in presentation.get("audio", [])]
+        )
+        if len(presentation_text) < presentation_depth[tier]:
+            fail(
+                errors,
+                path,
+                f"{tier} tier presentation depth is under-specified "
+                f"({len(presentation_text)} < {presentation_depth[tier]} chars)",
+            )
 
 def iter_entities(payload):
     if isinstance(payload, dict) and "entities" in payload:
