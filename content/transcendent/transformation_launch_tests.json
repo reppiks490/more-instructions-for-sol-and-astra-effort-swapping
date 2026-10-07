@@ -1,0 +1,242 @@
+{
+  "version": 1,
+  "suite_id": "TZ-LAUNCH-001",
+  "purpose": "Launch Session acceptance matrix for God, Absolute, and Transcendent Zero transformation lifecycle and cross-tier safety.",
+  "cases": [
+    {
+      "id": "TZT-001",
+      "name": "God rank gate",
+      "preconditions": [
+        "AscensionRank=0",
+        "no active transformation"
+      ],
+      "action": "activate FORM-GOD",
+      "expect": [
+        "activation rejected",
+        "actor transformation remains inactive",
+        "no ability context unlocked"
+      ]
+    },
+    {
+      "id": "TZT-002",
+      "name": "God activation and expiry",
+      "preconditions": [
+        "AscensionRank=1",
+        "no active transformation"
+      ],
+      "action": "activate FORM-GOD and allow timer to expire",
+      "expect": [
+        "ASCENDED_GOD context active for configured duration",
+        "God abilities accepted only during active window",
+        "all pending/active God abilities terminated on expiry",
+        "God exhaustion begins"
+      ]
+    },
+    {
+      "id": "TZT-003",
+      "name": "God manual cancel",
+      "preconditions": [
+        "FORM-GOD active"
+      ],
+      "action": "use cancel input",
+      "expect": [
+        "transformation context cleared",
+        "abilities stopped",
+        "full God exhaustion begins",
+        "immediate reactivation rejected"
+      ]
+    },
+    {
+      "id": "TZT-004",
+      "name": "Absolute rank gate",
+      "preconditions": [
+        "AscensionRank=1",
+        "no active transformation"
+      ],
+      "action": "activate FORM-ABSOLUTE",
+      "expect": [
+        "activation rejected",
+        "no ASCENDED_ABSOLUTE context"
+      ]
+    },
+    {
+      "id": "TZT-005",
+      "name": "Absolute activation",
+      "preconditions": [
+        "AscensionRank=2",
+        "no active transformation"
+      ],
+      "action": "activate FORM-ABSOLUTE",
+      "expect": [
+        "ASCENDED_ABSOLUTE context active",
+        "Absolute abilities accepted",
+        "God abilities rejected by exact transformation ID",
+        "Transcendent abilities rejected"
+      ]
+    },
+    {
+      "id": "TZT-006",
+      "name": "Cross-tier mutex God to Absolute",
+      "preconditions": [
+        "FORM-GOD active",
+        "AscensionRank=2"
+      ],
+      "action": "activate FORM-ABSOLUTE",
+      "expect": [
+        "Absolute activation rejected",
+        "God context remains authoritative"
+      ]
+    },
+    {
+      "id": "TZT-007",
+      "name": "Cross-tier mutex Absolute to Transcendent",
+      "preconditions": [
+        "FORM-ABSOLUTE active",
+        "Choosing completed"
+      ],
+      "action": "activate AUTH-001",
+      "expect": [
+        "Transcendent activation rejected",
+        "Absolute context remains authoritative"
+      ]
+    },
+    {
+      "id": "TZT-008",
+      "name": "Transcendent pre-Choosing gate",
+      "preconditions": [
+        "Zero Candidate=true",
+        "Axiom Heart crafted",
+        "TranscendentState=0"
+      ],
+      "action": "activate AUTH-001",
+      "expect": [
+        "activation rejected",
+        "history not incremented"
+      ]
+    },
+    {
+      "id": "TZT-009",
+      "name": "Axiom Break activation",
+      "preconditions": [
+        "Choosing completed",
+        "TranscendentState=1",
+        "history requirement satisfied",
+        "no transformation active"
+      ],
+      "action": "activate AUTH-001",
+      "expect": [
+        "TRANSCENDENT_ZERO::AUTH-001 context active",
+        "persistent TranscendentHistoryCount increments once",
+        "TZA-001..003 accepted",
+        "other Authority abilities rejected by exact transformation ID"
+      ]
+    },
+    {
+      "id": "TZT-010",
+      "name": "Authority expiry cancels two-phase work",
+      "preconditions": [
+        "AUTH-001 active",
+        "one Authority ability pending adapter result",
+        "one Authority ability active"
+      ],
+      "action": "expire Authority duration",
+      "expect": [
+        "pending request canceled",
+        "active ability ended",
+        "transformation context cleared",
+        "Authority exhaustion begins",
+        "late adapter result cannot commit ability state"
+      ]
+    },
+    {
+      "id": "TZT-011",
+      "name": "Authority cross-identity lock",
+      "preconditions": [
+        "AUTH-003 active"
+      ],
+      "action": "attempt TZA-001 from AUTH-001",
+      "expect": [
+        "activation rejected because RequiredTransformationId mismatches",
+        "AUTH-003 remains active"
+      ]
+    },
+    {
+      "id": "TZT-012",
+      "name": "Reality Engine history gate",
+      "preconditions": [
+        "Choosing completed",
+        "TranscendentHistoryCount=7",
+        "no transformation active"
+      ],
+      "action": "activate AUTH-008",
+      "expect": [
+        "activation rejected",
+        "history remains 7"
+      ]
+    },
+    {
+      "id": "TZT-013",
+      "name": "Reality Engine unlock",
+      "preconditions": [
+        "Choosing completed",
+        "TranscendentHistoryCount>=8",
+        "no transformation active"
+      ],
+      "action": "activate AUTH-008",
+      "expect": [
+        "activation succeeds",
+        "history increments exactly once",
+        "only TZA-022..024 pass exact transformation gate"
+      ]
+    },
+    {
+      "id": "TZT-014",
+      "name": "Actor teardown cleanup",
+      "preconditions": [
+        "any God/Absolute/Transcendent transformation active"
+      ],
+      "action": "unregister owner actor",
+      "expect": [
+        "pending activation reservations cleared",
+        "form/Authority abilities stopped where addressable",
+        "Choosing/Ascension/transform runtime state removed",
+        "actor transformation context removed"
+      ]
+    },
+    {
+      "id": "TZT-015",
+      "name": "Session-only exhaustion",
+      "preconditions": [
+        "God/Absolute/Transcendent form exhausted"
+      ],
+      "action": "leave and begin a new session with persistent profile intact",
+      "expect": [
+        "persistent unlock/rank/history remains",
+        "session exhaustion state does not persist as profile state 2/3",
+        "new runtime begins dormant"
+      ]
+    },
+    {
+      "id": "TZT-016",
+      "name": "Boss-unsafe adapter rejection",
+      "preconditions": [
+        "boss-immune state active",
+        "boss-unsafe transformed ability requested"
+      ],
+      "action": "project adapter preflight",
+      "expect": [
+        "adapter reports failure before ability resource/state commit",
+        "boss encounter state unchanged"
+      ]
+    }
+  ],
+  "required_observability": [
+    "runtime bus events for transformation activation/end/exhaustion",
+    "ability requested/resolved/rejected events",
+    "actor context transformation ID",
+    "persistent profile snapshot before/after Choosing and Transcendent activation",
+    "pending adapter request count",
+    "active ability state before and after transformation expiry"
+  ],
+  "pass_rule": "All cases pass in multiplayer Launch Session with no orphaned runtime state, no cross-tier ability leakage, and no persistent active/cooldown transformation values."
+}
