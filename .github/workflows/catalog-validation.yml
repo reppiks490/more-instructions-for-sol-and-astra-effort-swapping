@@ -25,6 +25,8 @@ on:
       - "tools/build_region_001_living_world_registry.py"
       - "tools/validate_slice_recipes.py"
       - "tools/validate_slice_encounters.py"
+      - "tools/validate_slice_rewards.py"
+      - "tools/build_slice_reward_registry.py"
       - "tools/validate_slice_shop.py"
       - "tools/validate_slice_combat.py"
       - "tools/validate_slice_adapters.py"
@@ -124,6 +126,15 @@ jobs:
 
       - name: Validate vertical slice encounters
         run: python tools/validate_slice_encounters.py
+
+      - name: Validate first-slice encounter rewards
+        run: python tools/validate_slice_rewards.py
+
+      - name: Build first-slice encounter reward registry
+        run: python tools/build_slice_reward_registry.py
+
+      - name: Check generated first-slice reward bootstrap
+        run: git diff --exit-code -- verse/generated/slice_001_reward_bootstrap.verse
 
       - name: Validate first-slice shop economy
         run: python tools/validate_slice_shop.py
