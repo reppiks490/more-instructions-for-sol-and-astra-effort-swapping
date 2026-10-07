@@ -53,12 +53,14 @@ aeonfall_material_ledger := class():
                     if:
                         set RequiredTotals[Cost.MaterialId] = Existing + Cost.Amount
                     then:
+                        set Valid = Valid
                     else:
                         set Valid = false
                 else:
                     if:
                         set RequiredTotals[Cost.MaterialId] = Cost.Amount
                     then:
+                        set Valid = Valid
                     else:
                         set Valid = false
             else:
@@ -92,12 +94,14 @@ aeonfall_material_ledger := class():
                         if:
                             set RequiredTotals[Cost.MaterialId] = Existing + Cost.Amount
                         then:
+                            set Valid = Valid
                         else:
                             set Valid = false
                     else:
                         if:
                             set RequiredTotals[Cost.MaterialId] = Cost.Amount
                         then:
+                            set Valid = Valid
                         else:
                             set Valid = false
                 else:
@@ -117,6 +121,7 @@ aeonfall_material_ledger := class():
                         if:
                             set UpdatedLedger[MaterialId] = Current - RequiredAmount
                         then:
+                            set Valid = Valid
                         else:
                             set Valid = false
                     else:
