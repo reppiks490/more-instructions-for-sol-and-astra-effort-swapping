@@ -30,3 +30,6 @@ jobs:
           python-version: "3.12"
       - name: Validate AEONFALL catalog
         run: python tools/validate_catalog.py
+
+      - name: Verify generated status is current
+        run: python tools/build_status.py --check
