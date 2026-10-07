@@ -405,4 +405,32 @@ aeonfall_class_runtime := class():
 
         false
 
+    ClearOwner(OwnerKey:string)<transacts>:void=
+        var UpdatedStates:[string]aeonfall_class_runtime_state = map{}
+        var UpdatedReservations:[string]aeonfall_class_resource_reservation = map{}
+
+        for (StoredOwnerKey -> State : States):
+            if (StoredOwnerKey <> OwnerKey):
+                if:
+                    set UpdatedStates[StoredOwnerKey] = State
+                then:
+                    set UpdatedStates = UpdatedStates
+
+        for (RequestId -> Reservation : Reservations):
+            if (Reservation.OwnerKey <> OwnerKey):
+                if:
+                    set UpdatedReservations[RequestId] = Reservation
+                then:
+                    set UpdatedReservations = UpdatedReservations
+
+        set States = UpdatedStates
+        set Reservations = UpdatedReservations
+
+        AEONFALLRuntimeBus.Emit(
+            aeonfall_runtime_event{
+                EventType := "class.owner_cleared",
+                SourceId := OwnerKey
+            }
+        )
+
 AEONFALLClassRuntime:aeonfall_class_runtime = aeonfall_class_runtime{}
