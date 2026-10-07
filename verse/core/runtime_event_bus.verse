@@ -17,3 +17,8 @@ aeonfall_event_bus := class():
 
     Emit(Event:aeonfall_runtime_event):void=
         RuntimeEvent.Signal(Event)
+
+# One shared session bus. Persistent state is NOT stored here; this only routes
+# transient runtime signals between systems such as encounters, companions,
+# status effects, abilities, shops, crafting, UI, and presentation.
+AEONFALLRuntimeBus:aeonfall_event_bus = aeonfall_event_bus{}
