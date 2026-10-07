@@ -1,26 +1,29 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "AEONFALL Major Entity",
+  "title": "AEONFALL Canonical Major Entity",
   "type": "object",
   "required": [
     "id",
-    "family",
     "name",
+    "family",
     "tier",
+    "status",
     "role",
-    "concept",
-    "signature_mechanic",
-    "visual_identity",
-    "animation_profile",
-    "vfx_profile",
+    "identity",
+    "mechanics",
+    "presentation",
     "acquisition",
     "performance",
-    "status"
+    "dependencies"
   ],
   "properties": {
     "id": {
       "type": "string",
       "pattern": "^(WPN|ARM|REL|MON|WLD|NPC|FAC|BOS|VEH|SKL|CLS|MAT|EVT|POI)-[0-9]{3}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 3
     },
     "family": {
       "type": "string",
@@ -41,112 +44,20 @@
         "poi"
       ]
     },
-    "name": {
-      "type": "string",
-      "minLength": 3
-    },
     "tier": {
       "type": "string",
       "enum": [
-        "Common",
-        "Uncommon",
-        "Rare",
-        "Epic",
-        "Legendary",
-        "Mythic",
-        "Exotic",
-        "God",
-        "Absolute",
-        "Transcendent Zero"
+        "common",
+        "uncommon",
+        "rare",
+        "epic",
+        "legendary",
+        "mythic",
+        "exotic",
+        "god",
+        "absolute",
+        "transcendent_zero"
       ]
-    },
-    "role": {
-      "type": "string",
-      "minLength": 3
-    },
-    "concept": {
-      "type": "string",
-      "minLength": 20
-    },
-    "signature_mechanic": {
-      "type": "string",
-      "minLength": 10
-    },
-    "capabilities": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "minItems": 1
-    },
-    "counterplay": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "visual_identity": {
-      "type": "string",
-      "minLength": 10
-    },
-    "animation_profile": {
-      "type": "string",
-      "minLength": 10
-    },
-    "vfx_profile": {
-      "type": "string",
-      "minLength": 10
-    },
-    "audio_profile": {
-      "type": "string"
-    },
-    "acquisition": {
-      "type": "string",
-      "minLength": 3
-    },
-    "evolution": {
-      "type": "string"
-    },
-    "dependencies": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "performance": {
-      "type": "object",
-      "required": [
-        "concurrency",
-        "vfx_band",
-        "replication_band"
-      ],
-      "properties": {
-        "concurrency": {
-          "type": "integer",
-          "minimum": 1
-        },
-        "vfx_band": {
-          "type": "string",
-          "enum": [
-            "low",
-            "medium",
-            "high",
-            "extreme"
-          ]
-        },
-        "replication_band": {
-          "type": "string",
-          "enum": [
-            "low",
-            "medium",
-            "high",
-            "extreme"
-          ]
-        },
-        "streaming_local": {
-          "type": "boolean"
-        }
-      }
     },
     "status": {
       "type": "string",
@@ -160,6 +71,194 @@
         "tested",
         "production"
       ]
+    },
+    "role": {
+      "type": "string",
+      "minLength": 3
+    },
+    "identity": {
+      "type": "object",
+      "required": [
+        "fantasy",
+        "silhouette",
+        "lore_hook"
+      ],
+      "properties": {
+        "fantasy": {
+          "type": "string",
+          "minLength": 12
+        },
+        "silhouette": {
+          "type": "string",
+          "minLength": 12
+        },
+        "lore_hook": {
+          "type": "string",
+          "minLength": 12
+        }
+      }
+    },
+    "mechanics": {
+      "type": "object",
+      "required": [
+        "core",
+        "signature",
+        "counterplay"
+      ],
+      "properties": {
+        "core": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "signature": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "counterplay": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "evolution": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "presentation": {
+      "type": "object",
+      "required": [
+        "vfx",
+        "animation",
+        "audio"
+      ],
+      "properties": {
+        "vfx": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "animation": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "audio": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "acquisition": {
+      "type": "object",
+      "required": [
+        "method",
+        "crafting_links",
+        "boss_links",
+        "paid"
+      ],
+      "properties": {
+        "method": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "crafting_links": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "boss_links": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "paid": {
+          "type": "boolean"
+        }
+      }
+    },
+    "performance": {
+      "type": "object",
+      "required": [
+        "concurrency_class",
+        "vfx_class",
+        "replication_class",
+        "streaming_locality"
+      ],
+      "properties": {
+        "concurrency_class": {
+          "type": "string",
+          "enum": [
+            "tiny",
+            "low",
+            "medium",
+            "high",
+            "event_only"
+          ]
+        },
+        "vfx_class": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "cinematic"
+          ]
+        },
+        "replication_class": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        "streaming_locality": {
+          "type": "string",
+          "enum": [
+            "local",
+            "regional",
+            "global_event"
+          ]
+        }
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
-  }
+  },
+  "additionalProperties": true
 }
