@@ -4,7 +4,7 @@
   "entity_count": 48,
   "entities": [
     {
-      "id": "WPN-043",
+      "id": "WPN-073",
       "name": "Graviton Widow",
       "family": "weapon",
       "tier": "epic",
@@ -65,7 +65,7 @@
       ]
     },
     {
-      "id": "WPN-044",
+      "id": "WPN-074",
       "name": "Choirbreaker",
       "family": "weapon",
       "tier": "epic",
@@ -126,7 +126,7 @@
       ]
     },
     {
-      "id": "WPN-045",
+      "id": "WPN-075",
       "name": "Ashline Reclaimer",
       "family": "weapon",
       "tier": "epic",
@@ -187,7 +187,7 @@
       ]
     },
     {
-      "id": "WPN-046",
+      "id": "WPN-076",
       "name": "Harrowglass Needle",
       "family": "weapon",
       "tier": "epic",
@@ -248,7 +248,7 @@
       ]
     },
     {
-      "id": "WPN-047",
+      "id": "WPN-077",
       "name": "Cinder Orbit",
       "family": "weapon",
       "tier": "epic",
@@ -309,7 +309,7 @@
       ]
     },
     {
-      "id": "WPN-048",
+      "id": "WPN-078",
       "name": "Ravenous Psalm",
       "family": "weapon",
       "tier": "epic",
@@ -370,7 +370,7 @@
       ]
     },
     {
-      "id": "WPN-049",
+      "id": "WPN-079",
       "name": "Chronosear Array",
       "family": "weapon",
       "tier": "legendary",
@@ -432,7 +432,7 @@
       ]
     },
     {
-      "id": "WPN-050",
+      "id": "WPN-080",
       "name": "Kingsfall Mortar",
       "family": "weapon",
       "tier": "legendary",
@@ -494,7 +494,7 @@
       ]
     },
     {
-      "id": "WPN-051",
+      "id": "WPN-081",
       "name": "Mirrorwolf",
       "family": "weapon",
       "tier": "legendary",
@@ -556,7 +556,7 @@
       ]
     },
     {
-      "id": "WPN-052",
+      "id": "WPN-082",
       "name": "Black Orchard",
       "family": "weapon",
       "tier": "legendary",
@@ -618,7 +618,7 @@
       ]
     },
     {
-      "id": "WPN-053",
+      "id": "WPN-083",
       "name": "Warden of Rain",
       "family": "weapon",
       "tier": "legendary",
@@ -680,7 +680,7 @@
       ]
     },
     {
-      "id": "WPN-054",
+      "id": "WPN-084",
       "name": "Bone Parliament",
       "family": "weapon",
       "tier": "legendary",
@@ -742,7 +742,7 @@
       ]
     },
     {
-      "id": "WPN-055",
+      "id": "WPN-085",
       "name": "Saint of Zero Distance",
       "family": "weapon",
       "tier": "mythic",
@@ -806,7 +806,7 @@
       ]
     },
     {
-      "id": "WPN-056",
+      "id": "WPN-086",
       "name": "Leviathan's Receipt",
       "family": "weapon",
       "tier": "mythic",
@@ -871,7 +871,7 @@
       ]
     },
     {
-      "id": "WPN-057",
+      "id": "WPN-087",
       "name": "Eclipse Grammar",
       "family": "weapon",
       "tier": "mythic",
@@ -935,7 +935,7 @@
       ]
     },
     {
-      "id": "WPN-058",
+      "id": "WPN-088",
       "name": "Seraph Engine IX",
       "family": "weapon",
       "tier": "mythic",
@@ -1000,7 +1000,7 @@
       ]
     },
     {
-      "id": "WPN-059",
+      "id": "WPN-089",
       "name": "The Hungry Horizon",
       "family": "weapon",
       "tier": "mythic",
@@ -1064,7 +1064,7 @@
       ]
     },
     {
-      "id": "WPN-060",
+      "id": "WPN-090",
       "name": "Apostate's Compass",
       "family": "weapon",
       "tier": "exotic",
@@ -1129,7 +1129,7 @@
       ]
     },
     {
-      "id": "WPN-061",
+      "id": "WPN-091",
       "name": "Murder of Suns",
       "family": "weapon",
       "tier": "exotic",
@@ -1194,7 +1194,7 @@
       ]
     },
     {
-      "id": "WPN-062",
+      "id": "WPN-092",
       "name": "Mercy Is a Weapon",
       "family": "weapon",
       "tier": "exotic",
@@ -1259,7 +1259,7 @@
       ]
     },
     {
-      "id": "WPN-063",
+      "id": "WPN-093",
       "name": "Thronebreaker Omega",
       "family": "weapon",
       "tier": "god",
@@ -1326,7 +1326,7 @@
       ]
     },
     {
-      "id": "WPN-064",
+      "id": "WPN-094",
       "name": "Book of Falling Stars",
       "family": "weapon",
       "tier": "god",
@@ -1394,7 +1394,7 @@
       ]
     },
     {
-      "id": "WPN-065",
+      "id": "WPN-095",
       "name": "Law Without Witness",
       "family": "weapon",
       "tier": "absolute",
@@ -1464,7 +1464,7 @@
       ]
     },
     {
-      "id": "WPN-066",
+      "id": "WPN-096",
       "name": "Zero's First Question",
       "family": "weapon",
       "tier": "transcendent_zero",
@@ -1537,7 +1537,7 @@
       ]
     },
     {
-      "id": "ARM-035",
+      "id": "ARM-065",
       "name": "Grave-Mason Harness",
       "family": "armor",
       "tier": "epic",
@@ -1598,7 +1598,7 @@
       ]
     },
     {
-      "id": "ARM-036",
+      "id": "ARM-066",
       "name": "Stormskin Mantle",
       "family": "armor",
       "tier": "epic",
@@ -1659,7 +1659,7 @@
       ]
     },
     {
-      "id": "ARM-037",
+      "id": "ARM-067",
       "name": "Mirror-Bone Cuirass",
       "family": "armor",
       "tier": "epic",
@@ -1720,7 +1720,7 @@
       ]
     },
     {
-      "id": "ARM-038",
+      "id": "ARM-068",
       "name": "Pilgrim's Embermail",
       "family": "armor",
       "tier": "epic",
@@ -1781,7 +1781,7 @@
       ]
     },
     {
-      "id": "ARM-039",
+      "id": "ARM-069",
       "name": "Hourglass Bastion",
       "family": "armor",
       "tier": "legendary",
@@ -1843,7 +1843,7 @@
       ]
     },
     {
-      "id": "ARM-040",
+      "id": "ARM-070",
       "name": "Choir of Knives",
       "family": "armor",
       "tier": "legendary",
@@ -1905,7 +1905,7 @@
       ]
     },
     {
-      "id": "ARM-041",
+      "id": "ARM-071",
       "name": "Root-King Exoskin",
       "family": "armor",
       "tier": "legendary",
@@ -1968,7 +1968,7 @@
       ]
     },
     {
-      "id": "ARM-042",
+      "id": "ARM-072",
       "name": "Helix Ward",
       "family": "armor",
       "tier": "legendary",
@@ -2030,7 +2030,7 @@
       ]
     },
     {
-      "id": "ARM-043",
+      "id": "ARM-073",
       "name": "Starved Halo Panoply",
       "family": "armor",
       "tier": "mythic",
@@ -2094,7 +2094,7 @@
       ]
     },
     {
-      "id": "ARM-044",
+      "id": "ARM-074",
       "name": "Mawplate of Oth",
       "family": "armor",
       "tier": "mythic",
@@ -2158,7 +2158,7 @@
       ]
     },
     {
-      "id": "ARM-045",
+      "id": "ARM-075",
       "name": "Twelvefold Aegis",
       "family": "armor",
       "tier": "mythic",
@@ -2222,7 +2222,7 @@
       ]
     },
     {
-      "id": "ARM-046",
+      "id": "ARM-076",
       "name": "Cathedral of One",
       "family": "armor",
       "tier": "mythic",
@@ -2286,7 +2286,7 @@
       ]
     },
     {
-      "id": "ARM-047",
+      "id": "ARM-077",
       "name": "Paradox Hide",
       "family": "armor",
       "tier": "exotic",
@@ -2351,7 +2351,7 @@
       ]
     },
     {
-      "id": "ARM-048",
+      "id": "ARM-078",
       "name": "Basilisk Crownmail",
       "family": "armor",
       "tier": "exotic",
@@ -2416,7 +2416,7 @@
       ]
     },
     {
-      "id": "ARM-049",
+      "id": "ARM-079",
       "name": "Debt of Feathers",
       "family": "armor",
       "tier": "exotic",
@@ -2481,7 +2481,7 @@
       ]
     },
     {
-      "id": "ARM-050",
+      "id": "ARM-080",
       "name": "Crown of the Deep Engine",
       "family": "armor",
       "tier": "god",
@@ -2548,7 +2548,7 @@
       ]
     },
     {
-      "id": "ARM-051",
+      "id": "ARM-081",
       "name": "Vestments of the Last Storm",
       "family": "armor",
       "tier": "god",
@@ -2615,7 +2615,7 @@
       ]
     },
     {
-      "id": "ARM-052",
+      "id": "ARM-082",
       "name": "Axiom Skin",
       "family": "armor",
       "tier": "absolute",
@@ -2685,7 +2685,7 @@
       ]
     },
     {
-      "id": "ARM-053",
+      "id": "ARM-083",
       "name": "Mantle of the Unauthored",
       "family": "armor",
       "tier": "transcendent_zero",
@@ -2758,7 +2758,7 @@
       ]
     },
     {
-      "id": "ARM-054",
+      "id": "ARM-084",
       "name": "Citadel of Teeth",
       "family": "armor",
       "tier": "legendary",
@@ -2820,7 +2820,7 @@
       ]
     },
     {
-      "id": "ARM-055",
+      "id": "ARM-085",
       "name": "Void Cartographer Rig",
       "family": "armor",
       "tier": "mythic",
@@ -2884,7 +2884,7 @@
       ]
     },
     {
-      "id": "ARM-056",
+      "id": "ARM-086",
       "name": "Red Mercy Shell",
       "family": "armor",
       "tier": "mythic",
@@ -2948,7 +2948,7 @@
       ]
     },
     {
-      "id": "ARM-057",
+      "id": "ARM-087",
       "name": "Night Parliament Regalia",
       "family": "armor",
       "tier": "exotic",
@@ -3014,7 +3014,7 @@
       ]
     },
     {
-      "id": "ARM-058",
+      "id": "ARM-088",
       "name": "Black Sun Carapace",
       "family": "armor",
       "tier": "god",
