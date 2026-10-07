@@ -7,7 +7,7 @@ aeonfall_boss_encounter_service := class():
 
     var States:[string]aeonfall_boss_runtime_state = map{}
 
-    StartEncounter(BossId:string):logic=
+    StartEncounter(BossId:string)<transacts>:logic=
         if:
             Existing := States[BossId]
             Existing.EncounterActive?
@@ -39,7 +39,7 @@ aeonfall_boss_encounter_service := class():
     GetState(BossId:string)<decides><transacts>:aeonfall_boss_runtime_state=
         States[BossId]
 
-    MarkObjectiveComplete(BossId:string, ObjectiveId:string):logic=
+    MarkObjectiveComplete(BossId:string, ObjectiveId:string)<transacts>:logic=
         if:
             Old := States[BossId]
             Old.EncounterActive?
@@ -72,7 +72,7 @@ aeonfall_boss_encounter_service := class():
 
         false
 
-    MarkWeakPointBroken(BossId:string, WeakPointId:string):logic=
+    MarkWeakPointBroken(BossId:string, WeakPointId:string)<transacts>:logic=
         if:
             Old := States[BossId]
             Old.EncounterActive?
@@ -105,7 +105,7 @@ aeonfall_boss_encounter_service := class():
 
         false
 
-    AdvancePhase(BossId:string, NextPhaseIndex:int):logic=
+    AdvancePhase(BossId:string, NextPhaseIndex:int)<transacts>:logic=
         if:
             NextPhaseIndex >= 0
             Old := States[BossId]
@@ -135,7 +135,7 @@ aeonfall_boss_encounter_service := class():
 
         false
 
-    CompleteEncounter(BossId:string):logic=
+    CompleteEncounter(BossId:string)<transacts>:logic=
         if:
             Old := States[BossId]
             Old.EncounterActive?
@@ -162,7 +162,7 @@ aeonfall_boss_encounter_service := class():
 
         false
 
-    FailEncounter(BossId:string):logic=
+    FailEncounter(BossId:string)<transacts>:logic=
         if:
             Old := States[BossId]
             Old.EncounterActive?
