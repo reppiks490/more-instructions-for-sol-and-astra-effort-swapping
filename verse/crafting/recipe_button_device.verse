@@ -12,6 +12,12 @@ aeonfall_recipe_button_device := class(creative_device):
     @editable
     RecipeId:string = ""
 
+    @editable
+    SuccessMessage:hud_message_device = hud_message_device{}
+
+    @editable
+    RejectedMessage:hud_message_device = hud_message_device{}
+
     OnBegin<override>()<suspends>:void=
         Button.InteractedWithEvent.Subscribe(OnInteracted)
 
@@ -25,6 +31,8 @@ aeonfall_recipe_button_device := class(creative_device):
             )
 
             if (Crafted?):
+                SuccessMessage.Show(Agent)
+
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{
                         EventType := "crafting.interaction_succeeded",
@@ -33,6 +41,8 @@ aeonfall_recipe_button_device := class(creative_device):
                     }
                 )
                 return
+
+        RejectedMessage.Show(Agent)
 
         AEONFALLRuntimeBus.Emit(
             aeonfall_runtime_event{
