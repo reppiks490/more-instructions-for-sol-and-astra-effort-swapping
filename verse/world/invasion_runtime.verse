@@ -221,12 +221,15 @@ aeonfall_invasion_runtime := class():
                 if (Removed?):
                     Removed = true
 
-                Corrupted := AEONFALLRegionRuntime.SetCorruption(
-                    Definition.RegionId,
-                    Old.CurrentWaveIndex * 10 + 10
-                )
-                if (Corrupted?):
-                    Corrupted = true
+                if:
+                    RegionState := AEONFALLRegionRuntime.GetState[Definition.RegionId]
+                then:
+                    Corrupted := AEONFALLRegionRuntime.SetCorruption(
+                        Definition.RegionId,
+                        RegionState.Corruption + Old.CurrentWaveIndex * 10 + 10
+                    )
+                    if (Corrupted?):
+                        Corrupted = true
 
                 AEONFALLRegionalEscalation.ReconcileRegion(
                     Definition.RegionId
@@ -270,6 +273,21 @@ aeonfall_invasion_runtime := class():
                     then:
                         set Updated = Updated
                 else:
+                    Expired := aeonfall_invasion_runtime_state:
+                        InvasionId := State.InvasionId
+                        RegionId := State.RegionId
+                        CurrentWaveIndex := State.CurrentWaveIndex
+                        CompletedObjectiveIds := State.CompletedObjectiveIds
+                        RemainingSeconds := 0.0
+                        Active := true
+                        Completed := false
+                        Failed := false
+
+                    if:
+                        set Updated[InvasionId] = Expired
+                    then:
+                        set Updated = Updated
+
                     set ExpiredIds = ExpiredIds + array{InvasionId}
             else:
                 if:
