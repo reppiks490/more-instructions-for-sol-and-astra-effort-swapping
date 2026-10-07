@@ -78,7 +78,7 @@ After the Choosing:
 - history 5+ → adds The Last Word
 - history 8+ → adds Reality Engine
 
-Successful Transcendent activations increment persistent `TranscendentHistoryCount` exactly once. The Hall of Ascendants derives Authority Depth from these gates for players currently connected to the session.
+Only a Transcendent Authority that reaches its full natural duration increments persistent `TranscendentHistoryCount`, exactly once. Manual cancel, teardown, or interrupted sessions do not advance Authority Depth. The Hall of Ascendants derives Authority Depth from these gates for players currently connected to the session.
 
 ## Runtime Safety Rule
 God, Absolute, and Transcendent Zero share one authoritative transformation context and are mutually exclusive. Transformation-only abilities also carry an exact required transformation ID, preventing cross-tier or cross-Authority ability leakage.
