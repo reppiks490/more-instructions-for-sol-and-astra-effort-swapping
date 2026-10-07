@@ -1,0 +1,393 @@
+{
+  "version": 1,
+  "slice_id": "SLICE-001",
+  "publish_path": "aeonfall_runtime_adapters",
+  "statuses": [
+    {
+      "id": "STS-001",
+      "name": "Royal Tax",
+      "category": "Mark",
+      "stack_rule": "RefreshDuration",
+      "max_stacks": 1,
+      "duration_seconds": 18,
+      "dispellable": true,
+      "boss_eligible": false,
+      "presentation_id": "FX_STS_001",
+      "audio_id": "SFX_STS_001"
+    },
+    {
+      "id": "STS-002",
+      "name": "Sanctified Ground",
+      "category": "Buff",
+      "stack_rule": "RefreshDuration",
+      "max_stacks": 1,
+      "duration_seconds": 10,
+      "dispellable": true,
+      "boss_eligible": false,
+      "presentation_id": "FX_STS_002",
+      "audio_id": "SFX_STS_002"
+    },
+    {
+      "id": "STS-003",
+      "name": "Corrupted Support",
+      "category": "Debuff",
+      "stack_rule": "RefreshDuration",
+      "max_stacks": 1,
+      "duration_seconds": 8,
+      "dispellable": true,
+      "boss_eligible": false,
+      "presentation_id": "FX_STS_003",
+      "audio_id": "SFX_STS_003"
+    },
+    {
+      "id": "STS-004",
+      "name": "Breach Guard",
+      "category": "Buff",
+      "stack_rule": "ReplaceIfStronger",
+      "max_stacks": 1,
+      "duration_seconds": 6,
+      "dispellable": true,
+      "boss_eligible": false,
+      "presentation_id": "FX_STS_004",
+      "audio_id": "SFX_STS_004"
+    },
+    {
+      "id": "STS-005",
+      "name": "Monster Tracked",
+      "category": "Reveal",
+      "stack_rule": "RefreshDuration",
+      "max_stacks": 1,
+      "duration_seconds": 12,
+      "dispellable": true,
+      "boss_eligible": true,
+      "presentation_id": "FX_STS_005",
+      "audio_id": "SFX_STS_005"
+    },
+    {
+      "id": "STS-006",
+      "name": "Necrotic Drag",
+      "category": "Debuff",
+      "stack_rule": "AddStack",
+      "max_stacks": 3,
+      "duration_seconds": 7,
+      "dispellable": true,
+      "boss_eligible": false,
+      "presentation_id": "FX_STS_006",
+      "audio_id": "SFX_STS_006"
+    },
+    {
+      "id": "STS-007",
+      "name": "Grief Exposure",
+      "category": "Mark",
+      "stack_rule": "AddStack",
+      "max_stacks": 3,
+      "duration_seconds": 9,
+      "dispellable": true,
+      "boss_eligible": true,
+      "presentation_id": "FX_STS_007",
+      "audio_id": "SFX_STS_007"
+    },
+    {
+      "id": "STS-008",
+      "name": "Tame Bond",
+      "category": "Buff",
+      "stack_rule": "RefreshDuration",
+      "max_stacks": 1,
+      "duration_seconds": 0,
+      "dispellable": false,
+      "boss_eligible": false,
+      "presentation_id": "FX_STS_008",
+      "audio_id": "SFX_STS_008"
+    },
+    {
+      "id": "STS-009",
+      "name": "Corpse Denied",
+      "category": "Environmental",
+      "stack_rule": "RefreshDuration",
+      "max_stacks": 1,
+      "duration_seconds": 15,
+      "dispellable": false,
+      "boss_eligible": false,
+      "presentation_id": "FX_STS_009",
+      "audio_id": "SFX_STS_009"
+    },
+    {
+      "id": "STS-010",
+      "name": "Ash Coil Heat",
+      "category": "Buff",
+      "stack_rule": "AddStack",
+      "max_stacks": 5,
+      "duration_seconds": 4,
+      "dispellable": false,
+      "boss_eligible": false,
+      "presentation_id": "FX_STS_010",
+      "audio_id": "SFX_STS_010"
+    },
+    {
+      "id": "STS-011",
+      "name": "Chronoclast Window",
+      "category": "Buff",
+      "stack_rule": "RefreshDuration",
+      "max_stacks": 1,
+      "duration_seconds": 3,
+      "dispellable": false,
+      "boss_eligible": false,
+      "presentation_id": "FX_STS_011",
+      "audio_id": "SFX_STS_011"
+    },
+    {
+      "id": "STS-012",
+      "name": "Parallax Mercy Link",
+      "category": "Buff",
+      "stack_rule": "RefreshDuration",
+      "max_stacks": 1,
+      "duration_seconds": 8,
+      "dispellable": true,
+      "boss_eligible": false,
+      "presentation_id": "FX_STS_012",
+      "audio_id": "SFX_STS_012"
+    }
+  ],
+  "abilities": [
+    {
+      "id": "ABL-001",
+      "name": "Raise Redoubt",
+      "owner_entity_id": "SKL-006",
+      "resource_policy": "Meter",
+      "target_policy": "Position",
+      "cooldown_seconds": 0,
+      "max_charges": 0,
+      "recharge_seconds": 0,
+      "max_meter": 100,
+      "activation_cost": 35,
+      "requires_encounter_context": false,
+      "requires_transformation_context": false,
+      "allow_while_active": false,
+      "status_ids": [],
+      "spawn_ids": [
+        "SPAWN-GRAVE-WALL"
+      ],
+      "event_ids": [
+        "ability.grave_architecture.redoubt"
+      ],
+      "adapter_id": "grave_architecture_redoubt_adapter",
+      "boss_safe": true
+    },
+    {
+      "id": "ABL-002",
+      "name": "Deadman's Stair",
+      "owner_entity_id": "SKL-006",
+      "resource_policy": "Meter",
+      "target_policy": "Position",
+      "cooldown_seconds": 0,
+      "max_charges": 0,
+      "recharge_seconds": 0,
+      "max_meter": 100,
+      "activation_cost": 50,
+      "requires_encounter_context": false,
+      "requires_transformation_context": false,
+      "allow_while_active": false,
+      "status_ids": [],
+      "spawn_ids": [
+        "SPAWN-GRAVE-STAIR"
+      ],
+      "event_ids": [
+        "ability.grave_architecture.stair"
+      ],
+      "adapter_id": "grave_architecture_stair_adapter",
+      "boss_safe": true
+    },
+    {
+      "id": "ABL-003",
+      "name": "Royal Scent",
+      "owner_entity_id": "SKL-007",
+      "resource_policy": "Charges",
+      "target_policy": "Enemy",
+      "cooldown_seconds": 0,
+      "max_charges": 2,
+      "recharge_seconds": 22,
+      "max_meter": 0,
+      "activation_cost": 0,
+      "requires_encounter_context": false,
+      "requires_transformation_context": false,
+      "allow_while_active": false,
+      "status_ids": [
+        "STS-005"
+      ],
+      "spawn_ids": [],
+      "event_ids": [
+        "ability.royal_scent.mark"
+      ],
+      "adapter_id": "royal_scent_adapter",
+      "boss_safe": true
+    },
+    {
+      "id": "ABL-004",
+      "name": "Guardian Breach",
+      "owner_entity_id": "SKL-008",
+      "resource_policy": "Cooldown",
+      "target_policy": "Ally",
+      "cooldown_seconds": 18,
+      "max_charges": 0,
+      "recharge_seconds": 0,
+      "max_meter": 0,
+      "activation_cost": 0,
+      "requires_encounter_context": false,
+      "requires_transformation_context": false,
+      "allow_while_active": false,
+      "status_ids": [
+        "STS-004"
+      ],
+      "spawn_ids": [],
+      "event_ids": [
+        "ability.guardian_breach.intercept"
+      ],
+      "adapter_id": "guardian_breach_adapter",
+      "boss_safe": true
+    },
+    {
+      "id": "ABL-005",
+      "name": "Grief Gaze",
+      "owner_entity_id": "SKL-011",
+      "resource_policy": "Cooldown",
+      "target_policy": "Enemy",
+      "cooldown_seconds": 14,
+      "max_charges": 0,
+      "recharge_seconds": 0,
+      "max_meter": 0,
+      "activation_cost": 0,
+      "requires_encounter_context": false,
+      "requires_transformation_context": false,
+      "allow_while_active": false,
+      "status_ids": [
+        "STS-007"
+      ],
+      "spawn_ids": [],
+      "event_ids": [
+        "ability.grief_gaze.apply"
+      ],
+      "adapter_id": "grief_gaze_adapter",
+      "boss_safe": true
+    },
+    {
+      "id": "ABL-006",
+      "name": "Ashcoil Vent",
+      "owner_entity_id": "WPN-007",
+      "resource_policy": "Meter",
+      "target_policy": "Self",
+      "cooldown_seconds": 0,
+      "max_charges": 0,
+      "recharge_seconds": 0,
+      "max_meter": 100,
+      "activation_cost": 60,
+      "requires_encounter_context": false,
+      "requires_transformation_context": false,
+      "allow_while_active": false,
+      "status_ids": [
+        "STS-010"
+      ],
+      "spawn_ids": [],
+      "event_ids": [
+        "weapon.ashcoil.vent"
+      ],
+      "adapter_id": "heat_motion_component",
+      "boss_safe": true
+    },
+    {
+      "id": "ABL-007",
+      "name": "Chronoclast Reprise",
+      "owner_entity_id": "WPN-008",
+      "resource_policy": "Cooldown",
+      "target_policy": "Self",
+      "cooldown_seconds": 20,
+      "max_charges": 0,
+      "recharge_seconds": 0,
+      "max_meter": 0,
+      "activation_cost": 0,
+      "requires_encounter_context": false,
+      "requires_transformation_context": false,
+      "allow_while_active": false,
+      "status_ids": [
+        "STS-011"
+      ],
+      "spawn_ids": [],
+      "event_ids": [
+        "weapon.chronoclast.reprise"
+      ],
+      "adapter_id": "temporal_duelist_component",
+      "boss_safe": true
+    },
+    {
+      "id": "ABL-008",
+      "name": "Mercy Link",
+      "owner_entity_id": "WPN-012",
+      "resource_policy": "Charges",
+      "target_policy": "Ally",
+      "cooldown_seconds": 0,
+      "max_charges": 2,
+      "recharge_seconds": 30,
+      "max_meter": 0,
+      "activation_cost": 0,
+      "requires_encounter_context": false,
+      "requires_transformation_context": false,
+      "allow_while_active": false,
+      "status_ids": [
+        "STS-012"
+      ],
+      "spawn_ids": [],
+      "event_ids": [
+        "weapon.parallax_mercy.link"
+      ],
+      "adapter_id": "support_sniper_component",
+      "boss_safe": true
+    },
+    {
+      "id": "ABL-009",
+      "name": "Devour Charge",
+      "owner_entity_id": "WPN-003",
+      "resource_policy": "Meter",
+      "target_policy": "Self",
+      "cooldown_seconds": 0,
+      "max_charges": 0,
+      "recharge_seconds": 0,
+      "max_meter": 100,
+      "activation_cost": 100,
+      "requires_encounter_context": false,
+      "requires_transformation_context": false,
+      "allow_while_active": false,
+      "status_ids": [],
+      "spawn_ids": [],
+      "event_ids": [
+        "weapon.maw.devour_charge"
+      ],
+      "adapter_id": "status_devour_component",
+      "boss_safe": false
+    },
+    {
+      "id": "ABL-010",
+      "name": "Corpse Route",
+      "owner_entity_id": "WPN-124",
+      "resource_policy": "Cooldown",
+      "target_policy": "Position",
+      "cooldown_seconds": 10,
+      "max_charges": 0,
+      "recharge_seconds": 0,
+      "max_meter": 0,
+      "activation_cost": 0,
+      "requires_encounter_context": false,
+      "requires_transformation_context": false,
+      "allow_while_active": false,
+      "status_ids": [
+        "STS-009"
+      ],
+      "spawn_ids": [
+        "SPAWN-GRAVE-ROUTE"
+      ],
+      "event_ids": [
+        "weapon.grave_cartographer.route"
+      ],
+      "adapter_id": "corpse_route_component",
+      "boss_safe": true
+    }
+  ]
+}
