@@ -34,3 +34,13 @@ aeonfall_companion_runtime_state := class:
     IsTamed:logic = false
     IsActive:logic = false
     IsDowned:logic = false
+
+
+aeonfall_companion_binding := class:
+    OwnerKey:string = ""
+    CompanionKey:string = ""
+    CanonicalId:string = ""
+    Kind:aeonfall_companion_kind = aeonfall_companion_kind.Hireable
+    ReservationId:string = ""
+    SourceAbilityId:string = ""
+    Active:logic = false
