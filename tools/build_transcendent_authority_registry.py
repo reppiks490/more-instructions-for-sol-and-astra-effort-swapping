@@ -68,6 +68,7 @@ def main() -> int:
                 "        ActivationCost := 0,",
                 "        RequiresEncounterContext := false,",
                 "        RequiresTransformationContext := true,",
+                f"        RequiredTransformationId := {q('TRANSCENDENT_ZERO::' + authority['id'])},",
                 "        AllowWhileActive := false,",
                 '        RequiredClassId := "",',
                 "        ClassResourceCost := 0,",
