@@ -42,6 +42,7 @@ aeonfall_shop_service := class():
                         Offer.RequiredReputation
                     ]
                 then:
+                    set Eligible = Eligible
                 else:
                     set Eligible = false
 
@@ -49,6 +50,7 @@ aeonfall_shop_service := class():
                 if:
                     Profile.UnlockedEntityIds.Find[UnlockId]
                 then:
+                    set Eligible = Eligible
                 else:
                     set Eligible = false
 
@@ -63,12 +65,14 @@ aeonfall_shop_service := class():
                         if:
                             set RequiredTotals[Cost.MaterialId] = Existing + Cost.Amount
                         then:
+                            set Eligible = Eligible
                         else:
                             set Eligible = false
                     else:
                         if:
                             set RequiredTotals[Cost.MaterialId] = Cost.Amount
                         then:
+                            set Eligible = Eligible
                         else:
                             set Eligible = false
                 else:
@@ -89,6 +93,7 @@ aeonfall_shop_service := class():
                         if:
                             set UpdatedLedger[MaterialId] = Current - RequiredAmount
                         then:
+                            set Eligible = Eligible
                         else:
                             set Eligible = false
                     else:
