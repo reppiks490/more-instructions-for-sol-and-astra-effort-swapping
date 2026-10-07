@@ -1,0 +1,1777 @@
+{
+  "wave": "005",
+  "purpose": "Wildlife and tameable ecology wave 2 of 2; completes 60-entity wildlife target.",
+  "entity_count": 30,
+  "entities": [
+    {
+      "id": "WLD-031",
+      "name": "Crystal Yak",
+      "family": "wildlife",
+      "tier": "rare",
+      "status": "specified",
+      "role": "tameable cargo and resonance beast",
+      "identity": {
+        "fantasy": "A massive cold-adapted yak whose crystal horns resonate with safe ice frequencies and can stabilize selected brittle crossings.",
+        "silhouette": "Broad white-furred body with translucent blue horns, crystal shoulder growths, and heavy insulated tack points.",
+        "lore_hook": "Crystal Yak belongs to a distinct regional ecology and is tied to this acquisition path: Escort a herd through a resonance storm without breaking any crystal formations."
+      },
+      "mechanics": {
+        "core": [
+          "cargo carry",
+          "ice stabilization",
+          "cold resistance"
+        ],
+        "signature": [
+          "Resonant Brace emits a low horn tone that temporarily stabilizes one eligible brittle ice route for the bonded squad.",
+          "Capability expression: cargo carry.",
+          "Capability expression: ice stabilization.",
+          "Capability expression: cold resistance."
+        ],
+        "counterplay": [
+          "Only authored brittle routes respond; heavy attacks cancel the channel."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Blue horn resonance bands, small crystal shimmer, and soft vibration ripples over stabilized ice."
+        ],
+        "animation": [
+          "Slow powerful walk, head-low resonant hum posture, four-leg brace during route stabilization."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Escort a herd through a resonance storm without breaking any crystal formations."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-032",
+      "name": "Chime Owl",
+      "family": "wildlife",
+      "tier": "epic",
+      "status": "specified",
+      "role": "tameable acoustic scout",
+      "identity": {
+        "fantasy": "A large silent owl whose metallic feathers ring only near hidden movement, making it a precision warning familiar.",
+        "silhouette": "Silver-white owl with long bell-shaped tail feathers and dark cobalt eyes.",
+        "lore_hook": "Chime Owl belongs to a distinct regional ecology and is tied to this acquisition path: Complete a no-damage night watch beside its nesting tower."
+      },
+      "mechanics": {
+        "core": [
+          "hidden-movement warning",
+          "silent flight",
+          "perch scouting"
+        ],
+        "signature": [
+          "Chime Lock produces one directional harmonic note when an eligible concealed threat moves within its observed sector.",
+          "Capability expression: hidden-movement warning.",
+          "Capability expression: silent flight.",
+          "Capability expression: perch scouting."
+        ],
+        "counterplay": [
+          "Stationary threats produce no note; loud environmental events can mask the warning."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Faint blue ring from the active tail feather, tiny silver motes, no constant glow."
+        ],
+        "animation": [
+          "Nearly silent wingbeats, rigid perch scan, sudden neck-and-tail alignment before the warning note."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Complete a no-damage night watch beside its nesting tower."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-033",
+      "name": "Rimewolf",
+      "family": "wildlife",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "tameable pack guardian",
+      "identity": {
+        "fantasy": "A legendary frost wolf that forms temporary ice footpaths for its pack and protects wounded allies with a circling guard pattern.",
+        "silhouette": "Large slate-white wolf with crystalline mane plates and cold vapor leaking between teeth.",
+        "lore_hook": "Rimewolf belongs to a distinct regional ecology and is tied to this acquisition path: Defend a wounded pack leader without killing any healthy pack member."
+      },
+      "mechanics": {
+        "core": [
+          "pack guard",
+          "ice footpath",
+          "wounded ally protection"
+        ],
+        "signature": [
+          "Winter Circuit circles one low-health ally, leaving a short-lived frost path that slows lesser pursuers but not teammates.",
+          "Capability expression: pack guard.",
+          "Capability expression: ice footpath.",
+          "Capability expression: wounded ally protection."
+        ],
+        "counterplay": [
+          "Only one protected ally; fire removes frost path quickly."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Thin frost trail, crystalline mane pulse, compact snow burst on guard turn."
+        ],
+        "animation": [
+          "Low protective orbit, shoulder checks against pursuers, short howl before guard state."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Defend a wounded pack leader without killing any healthy pack member."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-034",
+      "name": "Glacier Moth",
+      "family": "wildlife",
+      "tier": "uncommon",
+      "status": "specified",
+      "role": "ambient crystal pollinator",
+      "identity": {
+        "fantasy": "A large pale moth that carries resonance dust between frozen crystal groves and can expose minor crafting deposits.",
+        "silhouette": "Soft white wings with blue geometric veins and featherlike antennae.",
+        "lore_hook": "Glacier Moth belongs to a distinct regional ecology and is tied to this acquisition path: Ambient Pale Resonance species; attract with frost blossoms."
+      },
+      "mechanics": {
+        "core": [
+          "crystal pollination",
+          "deposit reveal",
+          "cold flocking"
+        ],
+        "signature": [
+          "Resonance Dust briefly makes nearby minor crystal seams visible after the moth feeds.",
+          "Capability expression: crystal pollination.",
+          "Capability expression: deposit reveal.",
+          "Capability expression: cold flocking."
+        ],
+        "counterplay": [
+          "No combat value; frightened flocks stop pollinating."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Low-cost sparkling dust, pale wing shimmer, faint blue seam highlight."
+        ],
+        "animation": [
+          "Slow flock spirals, crystal clings, synchronized takeoff waves."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Ambient Pale Resonance species; attract with frost blossoms."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "high",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-035",
+      "name": "Harmonic Elk",
+      "family": "wildlife",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "rare tameable resonance mount",
+      "identity": {
+        "fantasy": "A mythic elk whose antlers resonate with environmental frequencies and can cancel one selected sonic hazard pulse.",
+        "silhouette": "Tall blue-white elk with enormous branching tuning-fork antlers and crystalline chest plates.",
+        "lore_hook": "Harmonic Elk belongs to a distinct regional ecology and is tied to this acquisition path: Complete the seven-tone glacier pilgrimage and never strike a Harmonic herd."
+      },
+      "mechanics": {
+        "core": [
+          "sonic cancellation",
+          "fast tundra mount",
+          "resonance sensing"
+        ],
+        "signature": [
+          "Countertone listens to an authored hazard frequency, then emits an opposite pulse that cancels one upcoming wave for nearby allies.",
+          "Capability expression: sonic cancellation.",
+          "Capability expression: fast tundra mount.",
+          "Capability expression: resonance sensing."
+        ],
+        "counterplay": [
+          "One cancellation per long cooldown; requires successful frequency tell recognition."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Antler wave interference patterns, blue-white cancellation ring, crystal chest resonance."
+        ],
+        "animation": [
+          "Still listening posture, precise antler tilt, then full-body countertone release and sprint recovery."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Complete the seven-tone glacier pilgrimage and never strike a Harmonic herd."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-036",
+      "name": "Rootstag",
+      "family": "wildlife",
+      "tier": "rare",
+      "status": "specified",
+      "role": "tameable forest traversal beast",
+      "identity": {
+        "fantasy": "A living-bark stag that grows temporary stepping roots from its tracks across swampy or broken forest terrain.",
+        "silhouette": "Dark bark body with leaf-covered antlers and luminous sap eyes.",
+        "lore_hook": "Rootstag belongs to a distinct regional ecology and is tied to this acquisition path: Restore a damaged grove and allow the stag to approach voluntarily."
+      },
+      "mechanics": {
+        "core": [
+          "root stepping",
+          "forest navigation",
+          "healing graze"
+        ],
+        "signature": [
+          "Trailroot leaves a capped sequence of temporary foothold roots behind the bonded stag on eligible terrain.",
+          "Capability expression: root stepping.",
+          "Capability expression: forest navigation.",
+          "Capability expression: healing graze."
+        ],
+        "counterplay": [
+          "Roots decay quickly and cannot bridge protected gaps."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Small root sprouts, green sap glow, leaf scatter kept low-density."
+        ],
+        "animation": [
+          "Springing forest gait, hoof-root impact, antler shake during healing graze."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Restore a damaged grove and allow the stag to approach voluntarily."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-037",
+      "name": "Bloom Panther",
+      "family": "wildlife",
+      "tier": "epic",
+      "status": "specified",
+      "role": "tameable ambush protector",
+      "identity": {
+        "fantasy": "A large floral panther that disguises itself among Worldroot growth and protects bonded players from the first ambush strike.",
+        "silhouette": "Black-green feline with luminous flower clusters opening along shoulders and tail.",
+        "lore_hook": "Bloom Panther belongs to a distinct regional ecology and is tied to this acquisition path: Survive its stalking trial without firing until it reveals itself."
+      },
+      "mechanics": {
+        "core": [
+          "floral camouflage",
+          "ambush intercept",
+          "scent tracking"
+        ],
+        "signature": [
+          "Bloomguard senses one eligible ambush initiation and intercepts the attacker with a short pounce if within range.",
+          "Capability expression: floral camouflage.",
+          "Capability expression: ambush intercept.",
+          "Capability expression: scent tracking."
+        ],
+        "counterplay": [
+          "Long cooldown; cannot intercept boss ultimates or ranged artillery."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Flowers flash open on detection, green-gold pounce streak, pollen burst on intercept."
+        ],
+        "animation": [
+          "Low branch-like crawl, crouched floral close, explosive intercept leap."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Survive its stalking trial without firing until it reveals itself."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-038",
+      "name": "Vine Ape",
+      "family": "wildlife",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "tameable traversal constructor",
+      "identity": {
+        "fantasy": "A powerful arboreal ape that throws and anchors living vines between authored points for temporary squad traversal.",
+        "silhouette": "Massive moss-covered ape with braided vine forearms and bright amber eyes.",
+        "lore_hook": "Vine Ape belongs to a distinct regional ecology and is tied to this acquisition path: Help a troop reclaim three canopy nests from corrupted predators."
+      },
+      "mechanics": {
+        "core": [
+          "vine bridge",
+          "vertical carry",
+          "enemy throw"
+        ],
+        "signature": [
+          "Canopy Line anchors one temporary climb or swing vine between eligible Worldroot nodes.",
+          "Capability expression: vine bridge.",
+          "Capability expression: vertical carry.",
+          "Capability expression: enemy throw."
+        ],
+        "counterplay": [
+          "Node-restricted; vine can be destroyed; heavy combat interrupts setup."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Fast vine growth, leaf snap, anchor-root burst with moderate particle caps."
+        ],
+        "animation": [
+          "Knuckle run, overhead vine throw, hand-over-hand traversal demonstration."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Help a troop reclaim three canopy nests from corrupted predators."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-039",
+      "name": "Lantern Elk",
+      "family": "wildlife",
+      "tier": "epic",
+      "status": "specified",
+      "role": "tameable healing guide",
+      "identity": {
+        "fantasy": "A peaceful bioluminescent elk that seeks injured living creatures and can guide bonded squads toward nearby natural healing groves.",
+        "silhouette": "Deep green elk with hanging lantern blossoms suspended from antlers.",
+        "lore_hook": "Lantern Elk belongs to a distinct regional ecology and is tied to this acquisition path: Protect a Lantern herd through a corruption bloom without using fire."
+      },
+      "mechanics": {
+        "core": [
+          "healing-grove sensing",
+          "soft regeneration aura",
+          "night navigation"
+        ],
+        "signature": [
+          "Lantern Path points toward one eligible natural recovery site and emits a weak regeneration aura while traveling there.",
+          "Capability expression: healing-grove sensing.",
+          "Capability expression: soft regeneration aura.",
+          "Capability expression: night navigation."
+        ],
+        "counterplay": [
+          "Aura is small and disabled during heavy combat; no direct combat role."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Warm green lantern blossoms, soft ground motes, narrow path glow."
+        ],
+        "animation": [
+          "Graceful slow walk, blossom sway, kneeling rest posture at healing grove."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Protect a Lantern herd through a corruption bloom without using fire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-040",
+      "name": "Sporecap Tortoise",
+      "family": "wildlife",
+      "tier": "rare",
+      "status": "specified",
+      "role": "tameable crafting ecology beast",
+      "identity": {
+        "fantasy": "A huge tortoise carrying a miniature fungal garden whose spores can refine selected herbal materials over time.",
+        "silhouette": "Broad bark-like shell supporting colorful mushroom towers and moss pools.",
+        "lore_hook": "Sporecap Tortoise belongs to a distinct regional ecology and is tied to this acquisition path: Restore its shell garden with three regional fungi."
+      },
+      "mechanics": {
+        "core": [
+          "material refinement",
+          "spore cloud",
+          "portable garden"
+        ],
+        "signature": [
+          "Living Kiln passively converts one eligible raw herb stack into a refined fungal reagent over a timed rest cycle.",
+          "Capability expression: material refinement.",
+          "Capability expression: spore cloud.",
+          "Capability expression: portable garden."
+        ],
+        "counterplay": [
+          "Slow, vulnerable while refining, and only one recipe family at a time."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Colored spore puffs, subtle mushroom glow, moisture droplets on shell."
+        ],
+        "animation": [
+          "Very slow crawl, shell-garden shiver, full stop during refinement cycle."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Restore its shell garden with three regional fungi."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-041",
+      "name": "Hourglass Scorpion",
+      "family": "wildlife",
+      "tier": "epic",
+      "status": "specified",
+      "role": "tameable timing familiar",
+      "identity": {
+        "fantasy": "A desert scorpion whose translucent tail chamber fills with sand according to nearby authored timing cycles.",
+        "silhouette": "Large bronze scorpion with clear hourglass tail bulb and clocklike claw joints.",
+        "lore_hook": "Hourglass Scorpion belongs to a distinct regional ecology and is tied to this acquisition path: Follow one through a temporal minefield without triggering a hazard."
+      },
+      "mechanics": {
+        "core": [
+          "hazard timing",
+          "burrow scout",
+          "interrupt sting"
+        ],
+        "signature": [
+          "Sandtell mirrors the countdown of one nearby eligible timed hazard and flashes just before the danger window.",
+          "Capability expression: hazard timing.",
+          "Capability expression: burrow scout.",
+          "Capability expression: interrupt sting."
+        ],
+        "counterplay": [
+          "Tracks only one hazard; sand chamber can be obscured by dust storms."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Gold sand flow in tail, small countdown flash, controlled burrow dust."
+        ],
+        "animation": [
+          "Sideways crawl, tail-hourglass inversion, rapid burrow and emerge."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Follow one through a temporal minefield without triggering a hazard."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-042",
+      "name": "Echo Jackal",
+      "family": "wildlife",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "tameable temporal tracker",
+      "identity": {
+        "fantasy": "A desert jackal that can briefly reveal the prior movement trail of one marked creature or player within approved encounter rules.",
+        "silhouette": "Lean copper jackal with double-exposed legs and two offset shadows.",
+        "lore_hook": "Echo Jackal belongs to a distinct regional ecology and is tied to this acquisition path: Complete a tracking trial using only past footprints and environmental clues."
+      },
+      "mechanics": {
+        "core": [
+          "recent-trail reveal",
+          "scouting",
+          "temporal scent"
+        ],
+        "signature": [
+          "Aftertrail displays a short historical path for one eligible marked target rather than its current hidden position.",
+          "Capability expression: recent-trail reveal.",
+          "Capability expression: scouting.",
+          "Capability expression: temporal scent."
+        ],
+        "counterplay": [
+          "Short history only; cannot penetrate protected stealth or reveal exact current location."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Faint orange-blue double trail, brief pawprint echoes, low shimmer around nose."
+        ],
+        "animation": [
+          "Sniffs backward along a path, body briefly double-steps, then accelerates toward trail end."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Complete a tracking trial using only past footprints and environmental clues."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-043",
+      "name": "Phase Fox",
+      "family": "wildlife",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "rare tameable route trickster",
+      "identity": {
+        "fantasy": "A mythic fox that exists in two authored route states and can choose which one becomes traversable for a brief period.",
+        "silhouette": "Small silver fox with one normal half and one translucent blue temporal half.",
+        "lore_hook": "Phase Fox belongs to a distinct regional ecology and is tied to this acquisition path: Solve its paired-route maze without forcing either state."
+      },
+      "mechanics": {
+        "core": [
+          "route phasing",
+          "trap avoidance",
+          "temporal decoy"
+        ],
+        "signature": [
+          "Forked Path temporarily reveals one of two preauthored route variants selected by the bonded player.",
+          "Capability expression: route phasing.",
+          "Capability expression: trap avoidance.",
+          "Capability expression: temporal decoy."
+        ],
+        "counterplay": [
+          "Only specific route sets; phase duration short; cannot bypass progression locks."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Blue temporal half shifts forward/back, route geometry preview lines, tiny phase sparks."
+        ],
+        "animation": [
+          "Playful stop-start gait, half-body desynchronization, tail sweep selecting route state."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Solve its paired-route maze without forcing either state."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-044",
+      "name": "Sundial Strider",
+      "family": "wildlife",
+      "tier": "rare",
+      "status": "specified",
+      "role": "tameable desert courier",
+      "identity": {
+        "fantasy": "A tall bird whose body shadow acts as a reliable local orientation tool inside visually confusing Chronarch mirages.",
+        "silhouette": "Long-legged tan bird with radial gold neck feathers resembling sundial marks.",
+        "lore_hook": "Sundial Strider belongs to a distinct regional ecology and is tied to this acquisition path: Escort a nesting pair through a mirage storm."
+      },
+      "mechanics": {
+        "core": [
+          "orientation aid",
+          "fast courier",
+          "mirage resistance"
+        ],
+        "signature": [
+          "True Shadow points toward a designated regional anchor even while authored mirage effects distort other landmarks.",
+          "Capability expression: orientation aid.",
+          "Capability expression: fast courier.",
+          "Capability expression: mirage resistance."
+        ],
+        "counterplay": [
+          "Only one anchor mode at a time; no effect outside supported mirage zones."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Sharp gold shadow line and minimal mirage-cancel shimmer around feet."
+        ],
+        "animation": [
+          "Fast ostrich-like stride, rigid stop for orientation, neck fan opening during signal."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Escort a nesting pair through a mirage storm."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-045",
+      "name": "Dust Manta",
+      "family": "wildlife",
+      "tier": "epic",
+      "status": "specified",
+      "role": "tameable sand-glide mount",
+      "identity": {
+        "fantasy": "A broad ray-like creature that swims through loose temporal sand and launches into short overland glides.",
+        "silhouette": "Flat ochre manta with blue hourglass markings across wings.",
+        "lore_hook": "Dust Manta belongs to a distinct regional ecology and is tied to this acquisition path: Ride alongside a migrating school through the Scar without using vehicles."
+      },
+      "mechanics": {
+        "core": [
+          "sand swim",
+          "short glide",
+          "buried-cache sensing"
+        ],
+        "signature": [
+          "Chronodune Leap emerges from eligible sand with stored momentum and carries one rider across a bounded gap.",
+          "Capability expression: sand swim.",
+          "Capability expression: short glide.",
+          "Capability expression: buried-cache sensing."
+        ],
+        "counterplay": [
+          "Requires loose sand region; glide cannot be sustained indefinitely."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Sand wake, blue hourglass flare, controlled launch plume."
+        ],
+        "animation": [
+          "Subsurface fin trace, sudden breach, wide shallow glide, sand-skid landing."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Ride alongside a migrating school through the Scar without using vehicles."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-046",
+      "name": "Zero Hound",
+      "family": "wildlife",
+      "tier": "epic",
+      "status": "specified",
+      "role": "tameable anti-domain tracker",
+      "identity": {
+        "fantasy": "A black-white hound bred around Null Basilica doctrine zones, able to sense where local rule domains begin and end.",
+        "silhouette": "Lean hound split perfectly black and white with a thin glowing axis line along spine.",
+        "lore_hook": "Zero Hound belongs to a distinct regional ecology and is tied to this acquisition path: Cross three doctrine districts by following only the hound's cues."
+      },
+      "mechanics": {
+        "core": [
+          "domain boundary sensing",
+          "anti-ambush",
+          "fast pursuit"
+        ],
+        "signature": [
+          "Law Scent traces the nearest eligible doctrine boundary and signals when the squad is about to cross it.",
+          "Capability expression: domain boundary sensing.",
+          "Capability expression: anti-ambush.",
+          "Capability expression: fast pursuit."
+        ],
+        "counterplay": [
+          "Detects boundaries, not the effects inside them; silence fields reduce warning range."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Thin white boundary line projected from nose, spine-axis pulse."
+        ],
+        "animation": [
+          "Rigid geometric turns, sudden sprint, exact stop at boundary edge."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Cross three doctrine districts by following only the hound's cues."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-047",
+      "name": "Mute Crow",
+      "family": "wildlife",
+      "tier": "uncommon",
+      "status": "specified",
+      "role": "ambient silence-zone wildlife",
+      "identity": {
+        "fantasy": "A matte-black crow that nests only where the Basilica's ambient sound suppression is stable.",
+        "silhouette": "Featureless black crow with white beak tip and no visible eye shine.",
+        "lore_hook": "Mute Crow belongs to a distinct regional ecology and is tied to this acquisition path: Ambient Null Basilica species; cannot be permanently owned."
+      },
+      "mechanics": {
+        "core": [
+          "silence-zone indicator",
+          "perch marking",
+          "disturbance reaction"
+        ],
+        "signature": [
+          "Quiet Roost makes stable silence pockets easy to identify by flock behavior rather than UI.",
+          "Capability expression: silence-zone indicator.",
+          "Capability expression: perch marking.",
+          "Capability expression: disturbance reaction."
+        ],
+        "counterplay": [
+          "Only environmental information; flock scatters during combat."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Almost no VFX beyond a tiny white beak glint and shadow movement."
+        ],
+        "animation": [
+          "Slow synchronized perch turns, noiseless takeoff, angular flock relocation."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Ambient Null Basilica species; cannot be permanently owned."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "high",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-048",
+      "name": "Axis Crab",
+      "family": "wildlife",
+      "tier": "rare",
+      "status": "specified",
+      "role": "tameable puzzle helper",
+      "identity": {
+        "fantasy": "A geometric crab that insists on moving only along one active world axis at a time and can solve certain Basilica plate puzzles.",
+        "silhouette": "White-black cube-shell crab with three colored axis seams.",
+        "lore_hook": "Axis Crab belongs to a distinct regional ecology and is tied to this acquisition path: Complete an axis maze without carrying the crab manually."
+      },
+      "mechanics": {
+        "core": [
+          "axis movement",
+          "pressure plate utility",
+          "puzzle signaling"
+        ],
+        "signature": [
+          "Axis Shift rotates its allowed movement axis after interacting with designated control nodes.",
+          "Capability expression: axis movement.",
+          "Capability expression: pressure plate utility.",
+          "Capability expression: puzzle signaling."
+        ],
+        "counterplay": [
+          "Extremely limited mobility outside puzzle spaces; no combat value."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Axis seam highlight and short grid-line projection."
+        ],
+        "animation": [
+          "Perfectly straight crab walks, ninety-degree shell rotation at axis changes."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Complete an axis maze without carrying the crab manually."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-049",
+      "name": "White Shadow Lizard",
+      "family": "wildlife",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "tameable stealth anomaly",
+      "identity": {
+        "fantasy": "A pale lizard whose shadow moves ahead of it and can briefly scout around a nearby corner or doorway.",
+        "silhouette": "Long white reptile with a deep black shadow detached by several meters.",
+        "lore_hook": "White Shadow Lizard belongs to a distinct regional ecology and is tied to this acquisition path: Observe its shadow-scout cycle three times without startling it."
+      },
+      "mechanics": {
+        "core": [
+          "shadow scout",
+          "corner check",
+          "wall cling"
+        ],
+        "signature": [
+          "Forward Shadow sends the detached shadow along one eligible nearby surface and returns a threat-presence signal.",
+          "Capability expression: shadow scout.",
+          "Capability expression: corner check.",
+          "Capability expression: wall cling."
+        ],
+        "counterplay": [
+          "No exact enemy identity or wallhack; short range and long reuse delay."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Detached black shadow glide, thin return pulse, otherwise almost no particles."
+        ],
+        "animation": [
+          "Body remains still while shadow crawls; then lizard snaps to shadow's final facing."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Observe its shadow-scout cycle three times without startling it."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-050",
+      "name": "Null Stag",
+      "family": "wildlife",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "rare tameable doctrine mount",
+      "identity": {
+        "fantasy": "A mythic stag that can temporarily carry a rider through one hostile Basilica doctrine without inheriting that doctrine's lesser movement penalty.",
+        "silhouette": "Monochrome stag with antlers shaped like intersecting coordinate axes and no visible pupils.",
+        "lore_hook": "Null Stag belongs to a distinct regional ecology and is tied to this acquisition path: Complete the Basilica's Three Laws pilgrimage without violating a trial rule."
+      },
+      "mechanics": {
+        "core": [
+          "doctrine traversal",
+          "mount",
+          "boundary pulse"
+        ],
+        "signature": [
+          "Lawstride grants one bounded passage through an eligible movement doctrine while mounted.",
+          "Capability expression: doctrine traversal.",
+          "Capability expression: mount.",
+          "Capability expression: boundary pulse."
+        ],
+        "counterplay": [
+          "Does not ignore damage, boss mechanics, or progression locks; one passage per charge."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "White axis antlers, black hoof rings, local doctrine ripple on crossing."
+        ],
+        "animation": [
+          "Rigid elegant gallop, antler-axis alignment before crossing, heavy exhale afterward."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Complete the Basilica's Three Laws pilgrimage without violating a trial rule."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-051",
+      "name": "Siegehorn Auroch",
+      "family": "wildlife",
+      "tier": "epic",
+      "status": "specified",
+      "role": "tameable heavy convoy beast",
+      "identity": {
+        "fantasy": "A massive plains auroch used by march factions to haul siege loads and push through lesser swarm fronts.",
+        "silhouette": "Dark armored bovine with forward ironlike horns and old banner strips caught on the shoulders.",
+        "lore_hook": "Siegehorn Auroch belongs to a distinct regional ecology and is tied to this acquisition path: Defend a migrating herd from scavenger waves without using explosive damage."
+      },
+      "mechanics": {
+        "core": [
+          "cargo haul",
+          "swarm push",
+          "convoy brace"
+        ],
+        "signature": [
+          "March Breaker drives a short lane through lesser mobs while protecting a carried load from stagger.",
+          "Capability expression: cargo haul.",
+          "Capability expression: swarm push.",
+          "Capability expression: convoy brace."
+        ],
+        "counterplay": [
+          "Very slow turn rate; heavy elites stop the charge."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Dust wall, horn sparks, low debris push, banner snap."
+        ],
+        "animation": [
+          "Long build-up gallop, shoulder-led shove, braced halt around cargo."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Defend a migrating herd from scavenger waves without using explosive damage."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-052",
+      "name": "Banner Vulture",
+      "family": "wildlife",
+      "tier": "rare",
+      "status": "specified",
+      "role": "battlefield scavenger scout",
+      "identity": {
+        "fantasy": "A huge vulture attracted to abandoned war banners and large creature movement, useful for predicting where conflict is forming.",
+        "silhouette": "Broad rust-brown wings, pale skull-like head, strips of old cloth woven into tail feathers.",
+        "lore_hook": "Banner Vulture belongs to a distinct regional ecology and is tied to this acquisition path: Follow a War Circle to three conflicts without shooting the bird."
+      },
+      "mechanics": {
+        "core": [
+          "conflict sensing",
+          "high-altitude scout",
+          "banner attraction"
+        ],
+        "signature": [
+          "War Circle begins circling over one nearby emerging regional conflict before ordinary patrols arrive.",
+          "Capability expression: conflict sensing.",
+          "Capability expression: high-altitude scout.",
+          "Capability expression: banner attraction."
+        ],
+        "counterplay": [
+          "Gives approximate area only; can be fooled by scripted decoy banners."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Minimal dust and cloth trails, high-distance silhouette optimization."
+        ],
+        "animation": [
+          "Wide thermal circles, steep banner dive, grounded hopping scavenger gait."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Follow a War Circle to three conflicts without shooting the bird."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-053",
+      "name": "Ironback Boar",
+      "family": "wildlife",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "tameable armored breaker",
+      "identity": {
+        "fantasy": "A legendary march boar whose naturally plated back can protect a rider from rear fire while it smashes through light defenses.",
+        "silhouette": "Enormous slate boar with layered metallic keratin plates and broken spearheads embedded in hide.",
+        "lore_hook": "Ironback Boar belongs to a distinct regional ecology and is tied to this acquisition path: Remove embedded weapons from an injured elder and survive its trust test."
+      },
+      "mechanics": {
+        "core": [
+          "rear rider cover",
+          "barrier break",
+          "fearless charge"
+        ],
+        "signature": [
+          "Ironwake creates a short protected lane behind the charging boar by deflecting selected light projectiles outward.",
+          "Capability expression: rear rider cover.",
+          "Capability expression: barrier break.",
+          "Capability expression: fearless charge."
+        ],
+        "counterplay": [
+          "Front and sides remain exposed; heavy shots penetrate; charge path telegraphed."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Metallic deflection sparks, dust lane, plate edge glow only during Ironwake."
+        ],
+        "animation": [
+          "Violent ground paw, low armored charge, heavy sideways skid and plate shake."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Remove embedded weapons from an injured elder and survive its trust test."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-054",
+      "name": "March Wolf",
+      "family": "wildlife",
+      "tier": "epic",
+      "status": "specified",
+      "role": "tameable formation predator",
+      "identity": {
+        "fantasy": "A disciplined plains wolf that instinctively mirrors squad movement and helps maintain formation during chaotic horde fights.",
+        "silhouette": "Long-legged grey wolf with natural stripe pattern resembling marching chevrons.",
+        "lore_hook": "March Wolf belongs to a distinct regional ecology and is tied to this acquisition path: Travel a full March route beside a wild pack without breaking formation."
+      },
+      "mechanics": {
+        "core": [
+          "formation mirror",
+          "flank warning",
+          "pack focus"
+        ],
+        "signature": [
+          "Packline chooses left or right flank and actively guards that side of the bonded squad formation.",
+          "Capability expression: formation mirror.",
+          "Capability expression: flank warning.",
+          "Capability expression: pack focus."
+        ],
+        "counterplay": [
+          "Only one flank; rapid squad splitting confuses its formation state."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Subtle flank chevron, small dust wake, concise threat ping."
+        ],
+        "animation": [
+          "Parallel running posture, side-switch crossing maneuver, low defensive lunge."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Travel a full March route beside a wild pack without breaking formation."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-055",
+      "name": "Colossus Mite",
+      "family": "wildlife",
+      "tier": "uncommon",
+      "status": "specified",
+      "role": "ambient giant-creature symbiote",
+      "identity": {
+        "fantasy": "A dog-sized harmless arthropod that lives on fallen plates shed by continent-class creatures and can reveal fresh colossus tracks.",
+        "silhouette": "Round tan-black mite with broad adhesive feet and tiny glowing sensory whiskers.",
+        "lore_hook": "Colossus Mite belongs to a distinct regional ecology and is tied to this acquisition path: Ambient Crownless March species; lure with mineral salt."
+      },
+      "mechanics": {
+        "core": [
+          "track freshness",
+          "plate scavenging",
+          "symbiote migration"
+        ],
+        "signature": [
+          "Titan Scent changes whisker color near recently shed colossus material or fresh passage traces.",
+          "Capability expression: track freshness.",
+          "Capability expression: plate scavenging.",
+          "Capability expression: symbiote migration."
+        ],
+        "counterplay": [
+          "No direction at long range; no combat role."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Very small whisker color shift, dust adhesion, no heavy particles."
+        ],
+        "animation": [
+          "Fast cling-crawl over rock, antenna sweep, group clustering on fresh plates."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Ambient Crownless March species; lure with mineral salt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "high",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-056",
+      "name": "Axiom Hare",
+      "family": "wildlife",
+      "tier": "rare",
+      "status": "specified",
+      "role": "endgame warning familiar",
+      "identity": {
+        "fantasy": "A small Reliquary hare whose ears rotate toward active trial laws and help candidates read environmental rule changes.",
+        "silhouette": "White-black hare with one circular and one triangular ear mark.",
+        "lore_hook": "Axiom Hare belongs to a distinct regional ecology and is tied to this acquisition path: Earn temporary bond during a Zero Candidate navigation trial."
+      },
+      "mechanics": {
+        "core": [
+          "trial-law sensing",
+          "hazard warning",
+          "route hint"
+        ],
+        "signature": [
+          "Axiom Twitch signals which of several authored trial-law categories is currently active through ear posture.",
+          "Capability expression: trial-law sensing.",
+          "Capability expression: hazard warning.",
+          "Capability expression: route hint."
+        ],
+        "counterplay": [
+          "Only category-level information; no exact solution is revealed."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Minimal black-white ear glyph flare and a tiny floor symbol."
+        ],
+        "animation": [
+          "Fast nervous hops, distinct ear-code poses, sudden freeze before law transition."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earn temporary bond during a Zero Candidate navigation trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-057",
+      "name": "Halo Manta",
+      "family": "wildlife",
+      "tier": "epic",
+      "status": "specified",
+      "role": "endgame aerial traversal beast",
+      "identity": {
+        "fantasy": "A luminous manta that swims through the Reliquary's suspended air currents and carries candidates between trial platforms.",
+        "silhouette": "Large pearl-black manta with a circular halo opening through the center of its body.",
+        "lore_hook": "Halo Manta belongs to a distinct regional ecology and is tied to this acquisition path: Unlocked as a temporary trial companion after a flawless traversal section."
+      },
+      "mechanics": {
+        "core": [
+          "air-current glide",
+          "candidate carry",
+          "platform rescue"
+        ],
+        "signature": [
+          "Halo Lift catches a falling eligible candidate once and returns them to the nearest active trial platform at a resource cost.",
+          "Capability expression: air-current glide.",
+          "Capability expression: candidate carry.",
+          "Capability expression: platform rescue."
+        ],
+        "counterplay": [
+          "One rescue charge; does not bypass trial failure states."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Pearl current ribbons, circular halo flare, gentle platform landing ring."
+        ],
+        "animation": [
+          "Slow aerial swim, rapid dip for rescue, vertical halo flare during lift."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Unlocked as a temporary trial companion after a flawless traversal section."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-058",
+      "name": "Reliquary Serpent",
+      "family": "wildlife",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "endgame relic-sensing familiar",
+      "identity": {
+        "fantasy": "A small ancient serpent that coils around dormant ascension relics and reacts to compatible Axiom crafting components.",
+        "silhouette": "Black serpent with white runes moving slowly beneath transparent scales.",
+        "lore_hook": "Reliquary Serpent belongs to a distinct regional ecology and is tied to this acquisition path: Complete a Reliquary relic-matching puzzle without consuming a wrong component."
+      },
+      "mechanics": {
+        "core": [
+          "relic compatibility",
+          "crafting warning",
+          "hidden socket sensing"
+        ],
+        "signature": [
+          "Relic Accord identifies whether one selected eligible component belongs to the current Axiom subassembly branch.",
+          "Capability expression: relic compatibility.",
+          "Capability expression: crafting warning.",
+          "Capability expression: hidden socket sensing."
+        ],
+        "counterplay": [
+          "It does not reveal missing components or solve recipes automatically."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Moving white rune band, soft component resonance pulse, tiny coil halo."
+        ],
+        "animation": [
+          "Slow precise coil, head alignment to component, runes accelerating on match."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Complete a Reliquary relic-matching puzzle without consuming a wrong component."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-059",
+      "name": "Threshold Lion",
+      "family": "wildlife",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "Zero-trial guardian tameable",
+      "identity": {
+        "fantasy": "A mythic lion that appears only to candidates who have repeatedly survived boundary trials and can temporarily accompany one final trial segment.",
+        "silhouette": "Enormous white lion with black mane shaped like a doorway and star-like eyes.",
+        "lore_hook": "Threshold Lion belongs to a distinct regional ecology and is tied to this acquisition path: Earn temporary bond by completing every boundary challenge in one Choosing attempt."
+      },
+      "mechanics": {
+        "core": [
+          "trial guardian",
+          "fear immunity aura",
+          "boundary leap"
+        ],
+        "signature": [
+          "Threshold Roar suppresses selected fear/panic effects and opens one authored leap route across a collapsing trial boundary.",
+          "Capability expression: trial guardian.",
+          "Capability expression: fear immunity aura.",
+          "Capability expression: boundary leap."
+        ],
+        "counterplay": [
+          "Temporary trial-only bond; no use in ordinary farming; roar has one charge."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Black doorway mane ripple, white shock ring, star-eye flare, bounded leap bridge."
+        ],
+        "animation": [
+          "Slow sovereign walk, full-body roar, impossible long leap with clean landing bow."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earn temporary bond by completing every boundary challenge in one Choosing attempt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    },
+    {
+      "id": "WLD-060",
+      "name": "Zero Finch",
+      "family": "wildlife",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "ultra-rare ascension omen",
+      "identity": {
+        "fantasy": "An exotic tiny bird seen only around players whose Zero Candidate state is approaching the next hidden prerequisite.",
+        "silhouette": "Small black-white finch with a ring-shaped tail and a single gold eye.",
+        "lore_hook": "Zero Finch belongs to a distinct regional ecology and is tied to this acquisition path: Not permanently tameable; appears only through hidden Zero Candidate progression."
+      },
+      "mechanics": {
+        "core": [
+          "ascension omen",
+          "secret-state hint",
+          "noncombat companion"
+        ],
+        "signature": [
+          "Impossible Perch appears briefly near one eligible hidden prerequisite location but never reveals the task directly.",
+          "Capability expression: ascension omen.",
+          "Capability expression: secret-state hint.",
+          "Capability expression: noncombat companion."
+        ],
+        "counterplay": [
+          "Pure hint system; cannot be commanded, farmed, or used for combat."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Tiny zero-ring tail shimmer, single gold eye glint, brief black-white feather inversion."
+        ],
+        "animation": [
+          "Appears without landing sound, perches facing the relevant direction, vanishes in a reverse wingbeat."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues with restrained frequency and clear spatial separation from combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Not permanently tameable; appears only through hidden Zero Candidate progression."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife/tameable entity; behavior must respect regional AI concurrency and cleanup rules."
+      ]
+    }
+  ]
+}
