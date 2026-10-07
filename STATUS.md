@@ -3,27 +3,27 @@
 This file is generated from the canonical catalog by `tools/build_status.py`.
 
 ## Major Entity Catalog
-**Target-counted authored entities: 684 / 800 (85.5%)**
+**Target-counted authored entities: 832 / 800 (104.0%)**
 **Additional major faction definitions: 8**
-**All catalog entities: 692**
+**All catalog entities: 840**
 
 | Family | Specified | Target | Progress |
 |---|---:|---:|---:|
-| Weapons | 120 | 180 | 66.7% |
-| Armor / major pieces | 100 | 120 | 83.3% |
-| Monsters | 114 | 170 | 67.1% |
+| Weapons | 180 | 180 | 100.0% **(minimum met)** |
+| Armor / major pieces | 120 | 120 | 100.0% **(minimum met)** |
+| Monsters | 170 | 170 | 100.0% **(minimum met)** |
 | Wildlife / tameables | 60 | 60 | 100.0% **(minimum met)** |
 | Hireable / major NPCs | 64 | 60 | 106.7% **(minimum met)** |
-| Bosses | 68 | 80 | 85.0% |
+| Bosses | 80 | 80 | 100.0% **(minimum met)** |
 | Relics / artifacts | 45 | 45 | 100.0% **(minimum met)** |
 | Vehicles / advanced variants | 25 | 25 | 100.0% **(minimum met)** |
 | Classes / major skills | 30 | 30 | 100.0% **(minimum met)** |
 | World events / special effects | 58 | 30 | 193.3% **(minimum met)** |
-| **Target-counted total** | **684** | **800** | **85.5%** |
+| **Target-counted total** | **832** | **800** | **104.0%** |
 
 ## Pipeline Status
 - concept: 0
-- specified: 692
+- specified: 840
 - prototype: 0
 - implemented: 0
 - vfx_ready: 0
@@ -40,25 +40,30 @@ This file is generated from the canonical catalog by `tools/build_status.py`.
 - canonical dependency existence: enforced by CI
 - declared per-wave entity counts: enforced by CI
 - tier depth / presentation requirements: enforced by CI
+- normalized-name and repeated-signature diversity audit: enforced by CI
+- runtime content index generation: executed by CI
+- original family minimums: protected by `tools/validate_quotas.py`
 - Axiom Heart crafting graph: validated independently and in unified CI
 - Axiom Heart recursive raw acquisition burden: **68,420**
-- status dashboard generation: available through `tools/build_status.py`
 
 ## Current Milestone
-- 684 / 800 target-counted major entities authored.
-- 692 total major definitions including factions.
-- latest Wave 017 validation: **success**.
-- persistent profile, material ledger, progression, faction reputation, Zero Candidate, and Ascension gate scaffolds exist in Verse.
-- five-stage cannibal horde, necromancer ecology, eldritch, infernal, mythical, skyscraper-class, continent-class, Absolute, and Transcendent content are represented.
+- **All original 800-entity family minimums are met.**
+- 832 target-counted major entities are specified, with intentional overage in hireables and world events.
+- 840 total major definitions including factions.
+- Wave 019: validation success.
+- Wave 020: validation success.
+- core persistence, progression, material ledger, faction reputation, Zero Candidate, Ascension gate, boss contract, world-event contract, and companion contract scaffolds exist in Verse.
+- five-stage cannibal horde, necromancer ecology, eldritch, infernal, mythical, skyscraper-class, continent-class, God, Absolute, and Transcendent Zero content are represented.
 
-## Remaining Under-Target Families
-- Weapons: 60 remaining to minimum target
-- Armor: 20 remaining
-- Monsters: 56 remaining
-- Bosses: 12 remaining
-
-Meeting every family minimum will intentionally take the catalog beyond 800 because hireables and world events already exceed their original minimum allocations.
+## Next Production Priority
+Quantity is no longer the bottleneck. The priority is now:
+1. core runtime services and data binding;
+2. one complete vertical-slice region;
+3. UEFN asset/device/Scene Graph binding;
+4. Verse compile + Launch Session verification;
+5. VFX/animation/audio production and optimization;
+6. encounter, persistence, balance, accessibility, and platform validation.
 
 ## Production Boundary
-Catalog specification is not equivalent to UEFN implementation.
-Final implementation requires the UEFN project, asset binding, Verse compilation, Launch Session testing, memory profiling, VFX/animation production, and balance passes.
+Catalog specification is not equivalent to a finished Fortnite island.
+Final implementation requires the actual UEFN project, project-specific asset references, generated digests, Verse compilation, Launch Session testing, memory calculations, spatial profiling, VFX/animation production, balance passes, and Epic publication/compliance review.
