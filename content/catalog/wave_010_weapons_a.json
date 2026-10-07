@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "WPN-013",
-      "name": "Ashcoil Repeater",
+      "name": "Cindercoil Cadence",
       "family": "weapon",
       "tier": "epic",
       "status": "specified",
@@ -65,7 +65,8 @@
       "notes": [
         "Base custom ranged implementation target: assault_rifle_template.",
         "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
-        "Earnable equipment concept."
+        "Earnable equipment concept.",
+        "Renamed from duplicate draft title 'Ashcoil Repeater' to preserve canonical name uniqueness; mechanics unchanged."
       ]
     },
     {
