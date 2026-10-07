@@ -8,6 +8,7 @@ on:
       - "content/vertical_slice/**"
       - "content/world/**"
       - "content/transcendent/**"
+      - "content/implementation/**"
       - "verse/**"
       - "verse/generated/**"
       - "schemas/**"
@@ -45,6 +46,7 @@ on:
       - "tools/build_slice_shop_registry.py"
       - "tools/validate_verse_static.py"
       - "tools/validate_runtime_invariants.py"
+      - "tools/validate_implementation_evidence.py"
       - "tools/build_transcendent_authority_registry.py"
       - "tools/validate_transcendent_authorities.py"
       - "tools/build_ascended_form_registry.py"
@@ -62,6 +64,7 @@ on:
       - "content/vertical_slice/**"
       - "content/world/**"
       - "content/transcendent/**"
+      - "content/implementation/**"
       - "verse/**"
       - "verse/generated/**"
       - "schemas/**"
@@ -172,6 +175,9 @@ jobs:
 
       - name: Validate AEONFALL runtime invariants
         run: python tools/validate_runtime_invariants.py
+
+      - name: Validate implementation evidence
+        run: python tools/validate_implementation_evidence.py
 
       - name: Validate God and Absolute forms
         run: python tools/validate_ascended_forms.py
