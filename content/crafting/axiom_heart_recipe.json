@@ -1,0 +1,365 @@
+{
+  "version": 1,
+  "root_material_id": "MAT-030",
+  "declared_raw_acquisition_total": 57515,
+  "design_rule": "The Axiom Heart requires broad game mastery and 57,515 raw acquisitions after recursive recipe expansion; refined intermediates prevent one-screen inventory clutter.",
+  "recipes": [
+    {
+      "id": "RCP-001",
+      "output": {
+        "material_id": "MAT-018",
+        "quantity": 1
+      },
+      "station": "Axiom Forge",
+      "inputs": [
+        {
+          "material_id": "MAT-001",
+          "quantity": 100
+        }
+      ],
+      "prerequisites": [
+        "Unlock void refinement"
+      ]
+    },
+    {
+      "id": "RCP-002",
+      "output": {
+        "material_id": "MAT-019",
+        "quantity": 1
+      },
+      "station": "Axiom Forge",
+      "inputs": [
+        {
+          "material_id": "MAT-018",
+          "quantity": 10
+        },
+        {
+          "material_id": "MAT-010",
+          "quantity": 10
+        }
+      ],
+      "prerequisites": [
+        "Complete dimensional stabilization mastery"
+      ]
+    },
+    {
+      "id": "RCP-003",
+      "output": {
+        "material_id": "MAT-020",
+        "quantity": 1
+      },
+      "station": "Axiom Forge",
+      "inputs": [
+        {
+          "material_id": "MAT-019",
+          "quantity": 5
+        },
+        {
+          "material_id": "MAT-011",
+          "quantity": 5
+        },
+        {
+          "material_id": "MAT-012",
+          "quantity": 5
+        }
+      ],
+      "prerequisites": [
+        "Defeat designated mythic bosses"
+      ]
+    },
+    {
+      "id": "RCP-004",
+      "output": {
+        "material_id": "MAT-021",
+        "quantity": 1
+      },
+      "station": "Astral Crucible",
+      "inputs": [
+        {
+          "material_id": "MAT-002",
+          "quantity": 1000
+        },
+        {
+          "material_id": "MAT-005",
+          "quantity": 10
+        },
+        {
+          "material_id": "MAT-011",
+          "quantity": 2
+        }
+      ],
+      "prerequisites": [
+        "Hollow Astral Synod mastery"
+      ]
+    },
+    {
+      "id": "RCP-005",
+      "output": {
+        "material_id": "MAT-022",
+        "quantity": 1
+      },
+      "station": "Titan Reliquary",
+      "inputs": [
+        {
+          "material_id": "MAT-003",
+          "quantity": 1500
+        },
+        {
+          "material_id": "MAT-008",
+          "quantity": 50
+        },
+        {
+          "material_id": "MAT-009",
+          "quantity": 5
+        }
+      ],
+      "prerequisites": [
+        "Complete titan-hunt mastery"
+      ]
+    },
+    {
+      "id": "RCP-006",
+      "output": {
+        "material_id": "MAT-023",
+        "quantity": 1
+      },
+      "station": "Infernal Crucible",
+      "inputs": [
+        {
+          "material_id": "MAT-004",
+          "quantity": 1000
+        },
+        {
+          "material_id": "MAT-002",
+          "quantity": 25
+        },
+        {
+          "material_id": "MAT-011",
+          "quantity": 3
+        }
+      ],
+      "prerequisites": [
+        "Survive a high-tier demon court event"
+      ]
+    },
+    {
+      "id": "RCP-007",
+      "output": {
+        "material_id": "MAT-024",
+        "quantity": 1
+      },
+      "station": "Chronarch Loom",
+      "inputs": [
+        {
+          "material_id": "MAT-005",
+          "quantity": 750
+        },
+        {
+          "material_id": "MAT-007",
+          "quantity": 40
+        },
+        {
+          "material_id": "MAT-010",
+          "quantity": 15
+        }
+      ],
+      "prerequisites": [
+        "Court of Broken Hours mastery"
+      ]
+    },
+    {
+      "id": "RCP-008",
+      "output": {
+        "material_id": "MAT-025",
+        "quantity": 1
+      },
+      "station": "Abyssal Forge",
+      "inputs": [
+        {
+          "material_id": "MAT-006",
+          "quantity": 750
+        },
+        {
+          "material_id": "MAT-009",
+          "quantity": 15
+        },
+        {
+          "material_id": "MAT-012",
+          "quantity": 5
+        }
+      ],
+      "prerequisites": [
+        "Complete a leviathan-class encounter"
+      ]
+    },
+    {
+      "id": "RCP-009",
+      "output": {
+        "material_id": "MAT-026",
+        "quantity": 1
+      },
+      "station": "Genesis Foundry",
+      "inputs": [
+        {
+          "material_id": "MAT-007",
+          "quantity": 400
+        },
+        {
+          "material_id": "MAT-010",
+          "quantity": 30
+        },
+        {
+          "material_id": "MAT-011",
+          "quantity": 5
+        }
+      ],
+      "prerequisites": [
+        "Destroy a siege-engine core"
+      ]
+    },
+    {
+      "id": "RCP-010",
+      "output": {
+        "material_id": "MAT-027",
+        "quantity": 1
+      },
+      "station": "Purified Sepulcher",
+      "inputs": [
+        {
+          "material_id": "MAT-008",
+          "quantity": 800
+        },
+        {
+          "material_id": "MAT-009",
+          "quantity": 15
+        },
+        {
+          "material_id": "MAT-011",
+          "quantity": 5
+        }
+      ],
+      "prerequisites": [
+        "Complete a Grave Architect purge"
+      ]
+    },
+    {
+      "id": "RCP-011",
+      "output": {
+        "material_id": "MAT-028",
+        "quantity": 1
+      },
+      "station": "Concord Altar",
+      "inputs": [
+        {
+          "material_id": "MAT-009",
+          "quantity": 60
+        },
+        {
+          "material_id": "MAT-011",
+          "quantity": 12
+        },
+        {
+          "material_id": "MAT-012",
+          "quantity": 12
+        },
+        {
+          "material_id": "MAT-013",
+          "quantity": 3
+        }
+      ],
+      "prerequisites": [
+        "Master multiple mythic ecology branches"
+      ]
+    },
+    {
+      "id": "RCP-012",
+      "output": {
+        "material_id": "MAT-029",
+        "quantity": 1
+      },
+      "station": "Ascendant Forge",
+      "inputs": [
+        {
+          "material_id": "MAT-013",
+          "quantity": 30
+        },
+        {
+          "material_id": "MAT-014",
+          "quantity": 12
+        },
+        {
+          "material_id": "MAT-015",
+          "quantity": 6
+        },
+        {
+          "material_id": "MAT-016",
+          "quantity": 1
+        }
+      ],
+      "prerequisites": [
+        "Absolute progression",
+        "Ascension Trial VIII — Sacrifice"
+      ]
+    },
+    {
+      "id": "RCP-013",
+      "output": {
+        "material_id": "MAT-030",
+        "quantity": 1
+      },
+      "station": "Throne of Zero",
+      "inputs": [
+        {
+          "material_id": "MAT-020",
+          "quantity": 4
+        },
+        {
+          "material_id": "MAT-021",
+          "quantity": 6
+        },
+        {
+          "material_id": "MAT-022",
+          "quantity": 5
+        },
+        {
+          "material_id": "MAT-023",
+          "quantity": 6
+        },
+        {
+          "material_id": "MAT-024",
+          "quantity": 8
+        },
+        {
+          "material_id": "MAT-025",
+          "quantity": 6
+        },
+        {
+          "material_id": "MAT-026",
+          "quantity": 4
+        },
+        {
+          "material_id": "MAT-027",
+          "quantity": 5
+        },
+        {
+          "material_id": "MAT-028",
+          "quantity": 3
+        },
+        {
+          "material_id": "MAT-029",
+          "quantity": 2
+        },
+        {
+          "material_id": "MAT-017",
+          "quantity": 1
+        }
+      ],
+      "prerequisites": [
+        "Zero Candidate prerequisite lattice",
+        "Ascension Trials I–IX complete",
+        "Seed of Zero earned",
+        "The Choosing not yet attempted"
+      ]
+    }
+  ]
+}
