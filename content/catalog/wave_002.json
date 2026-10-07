@@ -1355,7 +1355,8 @@
           "Authority Selection chooses from a curated rule set such as gravity-like movement, projectile pacing, healing interaction, or structure phasing.",
           "Capability expression: rule selection.",
           "Capability expression: bounded authority.",
-          "Capability expression: encounter rewrite."
+          "Capability expression: encounter rewrite.",
+          "Law Fracture Echo briefly leaves a readable residual zone where the previous rule and replacement rule overlap, enabling high-skill timing plays."
         ],
         "counterplay": [
           "One rule at a time; explicit duration; protected mechanics and global systems are immune."
@@ -1475,7 +1476,8 @@
           "Manifest Network shares target priorities and can reposition between qualified allies without becoming independent full player copies.",
           "Capability expression: multiple manifestations.",
           "Capability expression: ally protection.",
-          "Capability expression: multi-front pressure."
+          "Capability expression: multi-front pressure.",
+          "Convergence Order recalls all surviving manifestations into a synchronized strike or defensive formation before they collapse."
         ],
         "counterplay": [
           "Manifestations are weaker, capped in number, and collapse if the primary is disabled."
@@ -1534,7 +1536,8 @@
           "Accept/Reject lets the player preserve approved outcomes while reverting selected recorded positions, cover states, or damage channels.",
           "Capability expression: state recording.",
           "Capability expression: selective restore.",
-          "Capability expression: outcome choice."
+          "Capability expression: outcome choice.",
+          "Anchor Exception lets one deliberately tagged approved state remain unchanged through the rejection, creating strategic asymmetry instead of a full rewind."
         ],
         "counterplay": [
           "Only approved entities/states participate; clear recording duration; protected objectives never revert."
@@ -1654,7 +1657,8 @@
           "Authority Wheel dynamically pages mastered signatures while enforcing per-family lockouts and reduced potency.",
           "Capability expression: mastery synthesis.",
           "Capability expression: multi-class access.",
-          "Capability expression: adaptive loadout."
+          "Capability expression: adaptive loadout.",
+          "Dominion Synergy detects compatible mastered class signatures and unlocks one temporary fusion interaction unavailable to either class alone."
         ],
         "counterplay": [
           "No unmastered skills; protected authorities excluded; strict duration and family cooldowns."
@@ -1713,7 +1717,8 @@
           "Decree Choice offers Annihilate, Restore, Banish, Dominate, Fracture, or Ascend variants with encounter-safe implementations.",
           "Capability expression: decree selection.",
           "Capability expression: massive battlefield resolution.",
-          "Capability expression: once-per-form use."
+          "Capability expression: once-per-form use.",
+          "Judgment Weight scales decree presentation and secondary effects with completed endgame mastery while preserving fixed encounter safety caps."
         ],
         "counterplay": [
           "One use per transformation; long telegraph; bosses and protected objectives have decree-specific safeguards."
@@ -1772,7 +1777,8 @@
           "Director Panel selects approved weather, gravity-like movement, mob aggression, allegiance pressure, hazards, traversal, or dimensional instability presets.",
           "Capability expression: encounter parameter selection.",
           "Capability expression: director state.",
-          "Capability expression: world-event integration."
+          "Capability expression: world-event integration.",
+          "Reality Sequence chains two approved director presets into a staged thirty-second encounter script with a visible transition telegraph."
         ],
         "counterplay": [
           "Only curated presets; 30-second class of duration; protected systems and publication-critical settings remain untouched."
