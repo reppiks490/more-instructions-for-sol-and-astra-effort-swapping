@@ -317,4 +317,44 @@ aeonfall_region_runtime := class():
 
         false
 
+    RemoveMutation(
+        RegionId:string,
+        MutationId:string
+    )<transacts>:logic=
+        if:
+            Old := States[RegionId]
+        then:
+            var UpdatedMutations:[]string = array{}
+            var Removed:logic = false
+
+            for (ExistingId : Old.MutationIds):
+                if (ExistingId = MutationId):
+                    set Removed = true
+                else:
+                    set UpdatedMutations = UpdatedMutations + array{ExistingId}
+
+            if (Removed?):
+                Updated := aeonfall_region_runtime_state:
+                    RegionId := Old.RegionId
+                    ControllingFactionId := Old.ControllingFactionId
+                    FactionInfluence := Old.FactionInfluence
+                    Corruption := Old.Corruption
+                    HostilityTier := Old.HostilityTier
+                    ActiveEventIds := Old.ActiveEventIds
+                    MutationIds := UpdatedMutations
+
+                if:
+                    set States[RegionId] = Updated
+                then:
+                    AEONFALLRuntimeBus.Emit(
+                        aeonfall_runtime_event{
+                            EventType := "region.mutation_removed",
+                            SourceId := RegionId,
+                            TargetId := MutationId
+                        }
+                    )
+                    return true
+
+        false
+
 AEONFALLRegionRuntime:aeonfall_region_runtime = aeonfall_region_runtime{}
