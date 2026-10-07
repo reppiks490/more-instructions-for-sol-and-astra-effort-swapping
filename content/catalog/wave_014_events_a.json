@@ -1,10 +1,10 @@
 {
   "wave": "014",
-  "purpose": "Twenty regional and world-scale dynamic events spanning ecology, factions, weather, raids, exploration, crafting, and Absolute ascension precursors.",
+  "purpose": "Twenty additional regional and world-scale dynamic events extending the already-complete base event catalog.",
   "entity_count": 20,
   "entities": [
     {
-      "id": "EVT-003",
+      "id": "EVT-031",
       "name": "Red Procession",
       "family": "event",
       "tier": "epic",
@@ -67,7 +67,7 @@
       ]
     },
     {
-      "id": "EVT-004",
+      "id": "EVT-032",
       "name": "Skyglass Rain",
       "family": "event",
       "tier": "epic",
@@ -127,7 +127,7 @@
       ]
     },
     {
-      "id": "EVT-005",
+      "id": "EVT-033",
       "name": "Funeral Rail",
       "family": "event",
       "tier": "epic",
@@ -187,7 +187,7 @@
       ]
     },
     {
-      "id": "EVT-006",
+      "id": "EVT-034",
       "name": "Kingmaker Hunt",
       "family": "event",
       "tier": "epic",
@@ -247,7 +247,7 @@
       ]
     },
     {
-      "id": "EVT-007",
+      "id": "EVT-035",
       "name": "Black Rain Census",
       "family": "event",
       "tier": "legendary",
@@ -310,7 +310,7 @@
       ]
     },
     {
-      "id": "EVT-008",
+      "id": "EVT-036",
       "name": "Bellstorm",
       "family": "event",
       "tier": "legendary",
@@ -373,7 +373,7 @@
       ]
     },
     {
-      "id": "EVT-009",
+      "id": "EVT-037",
       "name": "The Great Antler Migration",
       "family": "event",
       "tier": "legendary",
@@ -436,7 +436,7 @@
       ]
     },
     {
-      "id": "EVT-010",
+      "id": "EVT-038",
       "name": "Ember Sea",
       "family": "event",
       "tier": "legendary",
@@ -499,7 +499,7 @@
       ]
     },
     {
-      "id": "EVT-011",
+      "id": "EVT-039",
       "name": "Mirror Eclipse",
       "family": "event",
       "tier": "mythic",
@@ -562,7 +562,7 @@
       ]
     },
     {
-      "id": "EVT-012",
+      "id": "EVT-040",
       "name": "Dead City March",
       "family": "event",
       "tier": "mythic",
@@ -628,7 +628,7 @@
       ]
     },
     {
-      "id": "EVT-013",
+      "id": "EVT-041",
       "name": "Starforge Descent",
       "family": "event",
       "tier": "mythic",
@@ -691,7 +691,7 @@
       ]
     },
     {
-      "id": "EVT-014",
+      "id": "EVT-042",
       "name": "Gravefeeding Ascension",
       "family": "event",
       "tier": "mythic",
@@ -762,7 +762,7 @@
       ]
     },
     {
-      "id": "EVT-015",
+      "id": "EVT-043",
       "name": "Wyrm Season",
       "family": "event",
       "tier": "mythic",
@@ -825,7 +825,7 @@
       ]
     },
     {
-      "id": "EVT-016",
+      "id": "EVT-044",
       "name": "Thronefall War",
       "family": "event",
       "tier": "exotic",
@@ -890,7 +890,7 @@
       ]
     },
     {
-      "id": "EVT-017",
+      "id": "EVT-045",
       "name": "The Thousand Doors",
       "family": "event",
       "tier": "exotic",
@@ -953,7 +953,7 @@
       ]
     },
     {
-      "id": "EVT-018",
+      "id": "EVT-046",
       "name": "Ocean Ascension",
       "family": "event",
       "tier": "god",
@@ -1020,7 +1020,7 @@
       ]
     },
     {
-      "id": "EVT-019",
+      "id": "EVT-047",
       "name": "The Last Dawn",
       "family": "event",
       "tier": "god",
@@ -1087,7 +1087,7 @@
       ]
     },
     {
-      "id": "EVT-020",
+      "id": "EVT-048",
       "name": "Cathedral Eclipse",
       "family": "event",
       "tier": "god",
@@ -1152,7 +1152,7 @@
       ]
     },
     {
-      "id": "EVT-021",
+      "id": "EVT-049",
       "name": "Genesis Storm",
       "family": "event",
       "tier": "absolute",
@@ -1222,7 +1222,7 @@
       ]
     },
     {
-      "id": "EVT-022",
+      "id": "EVT-050",
       "name": "Zero Echo",
       "family": "event",
       "tier": "absolute",
