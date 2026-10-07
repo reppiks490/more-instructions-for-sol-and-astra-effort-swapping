@@ -304,3 +304,116 @@ aeonfall_profile_service := class():
                 MakeAEONFALLPlayerProfile<constructor>(Old)
                 EquippedClassId := ClassId
             SaveProfile(Player, Candidate)
+
+
+    # Atomically commits the durable portion of one first-clear encounter reward.
+    # This is deliberately self-idempotent: even if two completion signals race,
+    # a profile that already contains the boss/event completion is rejected before
+    # any XP, mastery, unlock, or material mutation is constructed.
+    CommitEncounterFirstClearReward(
+        Agent:agent,
+        EncounterId:string,
+        IsBoss:logic,
+        XPReward:int,
+        MasteryReward:int,
+        UnlockIds:[]string,
+        MaterialRewards:[]aeonfall_material_cost
+    )<transacts>:logic=
+        if:
+            EncounterId <> ""
+            XPReward >= 0
+            MasteryReward >= 0
+            Player := player[Agent]
+            Old := AEONFALLPlayerProfiles[Player]
+        then:
+            if (IsBoss?):
+                if:
+                    Old.CompletedBossIds.Find[EncounterId]
+                then:
+                    return false
+            else:
+                if:
+                    Old.CompletedWorldEventIds.Find[EncounterId]
+                then:
+                    return false
+
+            var UpdatedBossIds:[]string = Old.CompletedBossIds
+            var UpdatedEventIds:[]string = Old.CompletedWorldEventIds
+
+            if (IsBoss?):
+                set UpdatedBossIds = Old.CompletedBossIds + array{EncounterId}
+            else:
+                set UpdatedEventIds = Old.CompletedWorldEventIds + array{EncounterId}
+
+            var UpdatedUnlocks:[]string = Old.UnlockedEntityIds
+            for (UnlockId : UnlockIds):
+                if:
+                    UpdatedUnlocks.Find[UnlockId]
+                then:
+                    UnlockId = UnlockId
+                else:
+                    set UpdatedUnlocks = UpdatedUnlocks + array{UnlockId}
+
+            var UpdatedLedger:[string]int = Old.MaterialLedger
+            var Valid:logic = true
+
+            for (Reward : MaterialRewards):
+                if:
+                    Reward.MaterialId <> ""
+                    Reward.Amount > 0
+                then:
+                    var Current:int = 0
+                    if:
+                        Stored := UpdatedLedger[Reward.MaterialId]
+                    then:
+                        set Current = Stored
+
+                    if:
+                        set UpdatedLedger[Reward.MaterialId] =
+                            Current + Reward.Amount
+                    then:
+                        set Valid = Valid
+                    else:
+                        set Valid = false
+                else:
+                    set Valid = false
+
+            if (not Valid?):
+                return false
+
+            NewXP:int = Old.XP + XPReward
+            NewLevel:int = AEONFALLGetLevelForXP(NewXP)
+
+            Candidate := aeonfall_player_profile:
+                MakeAEONFALLPlayerProfile<constructor>(Old)
+                Level := NewLevel
+                XP := NewXP
+                MasteryPoints := Old.MasteryPoints + MasteryReward
+                UnlockedEntityIds := UpdatedUnlocks
+                CompletedBossIds := UpdatedBossIds
+                CompletedWorldEventIds := UpdatedEventIds
+                MaterialLedger := UpdatedLedger
+
+            if:
+                FitsInPlayerMap(Candidate)
+                set AEONFALLPlayerProfiles[Player] = Candidate
+            then:
+                AEONFALLRuntimeBus.Emit(
+                    aeonfall_runtime_event{
+                        EventType := "progression.encounter_first_clear_committed",
+                        SourceId := EncounterId,
+                        Amount := XPReward,
+                        ContextId := "{NewLevel}"
+                    }
+                )
+                return true
+
+            AEONFALLRuntimeBus.Emit(
+                aeonfall_runtime_event{
+                    EventType := "progression.encounter_first_clear_rejected",
+                    SourceId := EncounterId,
+                    ContextId := "profile_commit_failed"
+                }
+            )
+
+        false
