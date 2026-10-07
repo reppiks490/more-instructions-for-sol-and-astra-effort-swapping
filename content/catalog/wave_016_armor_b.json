@@ -1,0 +1,1895 @@
+{
+  "wave": "016",
+  "purpose": "Second original armor expansion from specialized Epic utility through God/Absolute domain systems to a Transcendent-only authority body.",
+  "entity_count": 30,
+  "entities": [
+    {
+      "id": "ARM-035",
+      "name": "Rimewire Scoutskin",
+      "family": "armor",
+      "tier": "epic",
+      "status": "specified",
+      "role": "cold-region reconnaissance armor",
+      "identity": {
+        "fantasy": "A light polar suit that turns deliberate exposure to freezing zones into temporary enemy-trail clarity instead of raw resistance stacking.",
+        "silhouette": "White-gray bodysuit threaded with blue conductive wire and a frost-lens hood.",
+        "lore_hook": "Rime scouts learned the cold was less dangerous once it began drawing maps for them."
+      },
+      "mechanics": {
+        "core": [
+          "cold exposure",
+          "trail clarity",
+          "heat reset"
+        ],
+        "signature": [
+          "Frost Trace builds only while traversing designated cold hazards and reveals recent hostile movement traces in a short radius.",
+          "Warm Reset clears accumulated Frost Trace at heat sources and grants a brief sprint recovery window."
+        ],
+        "counterplay": [
+          "Warm environments remove the information advantage; traces are historical, not live wallhacks."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Blue wire veins brighten as cold exposure accumulates.",
+          "Recent movement appears as faint frost scratches on surfaces."
+        ],
+        "animation": [
+          "Hood lens shutters narrow in deep cold and open fully on Warm Reset."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Crown of Unstorm scout progression."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-036",
+      "name": "Cinder Pilgrim Shell",
+      "family": "armor",
+      "tier": "epic",
+      "status": "specified",
+      "role": "infernal endurance armor",
+      "identity": {
+        "fantasy": "A ceramic pilgrim shell that stores one heat-shock from nearby explosions and vents it into a controlled forward dash.",
+        "silhouette": "Ash-white segmented plates with ember seams and a small furnace pilgrim bell at the waist.",
+        "lore_hook": "Pilgrims crossing Gloamforge stopped praying for cooler roads and learned to spend the heat."
+      },
+      "mechanics": {
+        "core": [
+          "heat shock storage",
+          "vent dash",
+          "ceramic fracture"
+        ],
+        "signature": [
+          "Pilgrim Heat stores one qualifying environmental or explosive heat event within strict caps.",
+          "Vent Step releases stored heat as a short forward mobility burst and temporarily exposes cracked armor seams."
+        ],
+        "counterplay": [
+          "The post-dash cracked state is visibly vulnerable and only one heat charge can be held."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Ceramic seams glow orange after a stored shock.",
+          "Vent Step leaves a brief ash footprint trail."
+        ],
+        "animation": [
+          "Plates flex open like kiln vents before the burst."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Gloamforge pilgrimage chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-037",
+      "name": "Glassreef Diver",
+      "family": "armor",
+      "tier": "epic",
+      "status": "specified",
+      "role": "aquatic traversal armor",
+      "identity": {
+        "fantasy": "A prismatic dive rig that records the direction of strong water or displacement currents and gives the wearer one controlled counter-kick.",
+        "silhouette": "Transparent teal plates, finned boots, and a faceted air collar with tiny reef lights.",
+        "lore_hook": "Glassreef divers survived currents by treating them as instructions written in water."
+      },
+      "mechanics": {
+        "core": [
+          "current memory",
+          "counter-kick",
+          "aquatic visibility"
+        ],
+        "signature": [
+          "Current Memory records the last significant forced-water or displacement vector.",
+          "Reef Kick spends the vector to launch briefly against it, helping recover from environmental pushes."
+        ],
+        "counterplay": [
+          "Memory expires quickly and cannot cancel protected boss displacement."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "A small arrow of trapped bubbles circles the boots in the stored direction.",
+          "Reef Kick flashes a prism wake."
+        ],
+        "animation": [
+          "Boot fins rotate against the remembered vector before the kick."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Thirteen-Tide diving expedition."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-038",
+      "name": "Thornclock Harness",
+      "family": "armor",
+      "tier": "epic",
+      "status": "specified",
+      "role": "timed retaliation armor",
+      "identity": {
+        "fantasy": "A vine-and-clockwork harness that grows one thorn for every well-timed defensive dodge and can spend them on a brief close-range retaliation aura.",
+        "silhouette": "Leather-green harness with a brass clock disk over the sternum and retractable shoulder thorns.",
+        "lore_hook": "Worldroot duelists measured time by how long a thorn had to grow before someone regretted attacking."
+      },
+      "mechanics": {
+        "core": [
+          "timed evasion",
+          "thorn charges",
+          "retaliation aura"
+        ],
+        "signature": [
+          "Clockstep earns a thorn after narrowly avoiding a telegraphed heavy attack.",
+          "Briar Hour consumes stored thorns in a short damaging aura with visible radius."
+        ],
+        "counterplay": [
+          "Poorly timed movement earns nothing; ranged enemies can simply wait out Briar Hour."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "The sternum clock gains one green thorn-hand per charge.",
+          "Briar Hour blooms into a tight circular crown of spectral brambles."
+        ],
+        "animation": [
+          "Shoulder thorns extend one by one and snap back inward on activation."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Worldroot duelist trials."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-039",
+      "name": "Wraithline Courier",
+      "family": "armor",
+      "tier": "epic",
+      "status": "specified",
+      "role": "route-running utility armor",
+      "identity": {
+        "fantasy": "A ghost-thread courier suit that remembers one safe route segment and highlights it during retreat without teleporting the wearer.",
+        "silhouette": "Charcoal running coat with pale route-lines stitched from ankle to shoulder.",
+        "lore_hook": "The first Wraithline couriers delivered messages through cities that were already dead."
+      },
+      "mechanics": {
+        "core": [
+          "route memory",
+          "retreat guidance",
+          "momentum recovery"
+        ],
+        "signature": [
+          "Ghost Route records a bounded path segment after the wearer traverses it without taking damage.",
+          "Return Line highlights the route for a short retreat window and gives modest stamina recovery while following it."
+        ],
+        "counterplay": [
+          "The route is fixed, expires, and can be intercepted by enemies."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "A thin pale footprint line appears only to the wearer along the recorded route.",
+          "Following it causes the coat seams to glow sequentially."
+        ],
+        "animation": [
+          "The coat hem streams backward unnaturally while on the Return Line."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Blackwake courier contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-040",
+      "name": "Ironwake Salvager",
+      "family": "armor",
+      "tier": "epic",
+      "status": "specified",
+      "role": "vehicle wreck recovery armor",
+      "identity": {
+        "fantasy": "A magnetic salvage suit that gains a temporary repair-resource token after interacting with designated wreck objectives during vehicle-heavy encounters.",
+        "silhouette": "Orange-black work armor with magnetic forearm clamps, cable belt, and a welded half-helmet.",
+        "lore_hook": "Ironwake crews considered every wreck a supply crate that had been opened too aggressively."
+      },
+      "mechanics": {
+        "core": [
+          "wreck salvage",
+          "repair token",
+          "vehicle support"
+        ],
+        "signature": [
+          "Strip Wreck converts one eligible encounter wreck interaction into a bounded repair-resource token.",
+          "Field Patch spends the token on supported allied vehicle or objective repair interactions."
+        ],
+        "counterplay": [
+          "Requires authored wrecks and interaction time; it cannot repair arbitrary protected objects."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Metal fragments spiral into the forearm clamps during salvage.",
+          "Field Patch projects a brief orange repair lattice."
+        ],
+        "animation": [
+          "Both magnetic gauntlets lock onto a wreck and tear one glowing component free."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Blackwake salvage union track."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-041",
+      "name": "Mourning Circuit Plate",
+      "family": "armor",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "ally-loss response armor",
+      "identity": {
+        "fantasy": "A black circuit cuirass that activates tactical recovery tools when nearby allied NPCs are defeated, turning loss into repositioning rather than raw revenge damage.",
+        "silhouette": "Gloss-black plate etched with silver circuit epitaphs and small extinguishable lights for squad members.",
+        "lore_hook": "Its maker refused to let a fallen ally become only a number on a ledger."
+      },
+      "mechanics": {
+        "core": [
+          "ally-loss signal",
+          "recovery pulse",
+          "memorial charge"
+        ],
+        "signature": [
+          "Memorial Circuit lights when an eligible allied NPC falls nearby.",
+          "Carry On spends one charge for a brief reload/movement recovery pulse to surviving allies.",
+          "Last Light can instead place a short-lived beacon at the defeat point to aid regrouping."
+        ],
+        "counterplay": [
+          "Charges are capped and only valid allied NPC defeat events count; enemies can pressure the beacon location."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "One silver circuit light goes dark and a memorial line illuminates across the chest.",
+          "Last Light creates a narrow vertical white beacon."
+        ],
+        "animation": [
+          "The wearer taps the darkened circuit before triggering Carry On."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary memorial legion reputation."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-042",
+      "name": "Basilica Runner",
+      "family": "armor",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "sanctuary-to-sanctuary mobility armor",
+      "identity": {
+        "fantasy": "A cathedral runner rig that becomes faster only while moving between authored sanctuary or faction-safe objectives, encouraging route mastery rather than universal speed.",
+        "silhouette": "White-black flexible plate with miniature arch motifs at knees and elbows and a floating doorway sigil behind the back.",
+        "lore_hook": "Basilica runners crossed holy wars by memorizing which doors would still be standing tomorrow."
+      },
+      "mechanics": {
+        "core": [
+          "sanctuary routing",
+          "objective sprint",
+          "door charge"
+        ],
+        "signature": [
+          "Threshold Mark records the last valid sanctuary/objective anchor exited.",
+          "Pilgrim Sprint grants controlled movement efficiency only while traveling toward a different valid anchor.",
+          "Arrive Bearing Light creates a small support pulse on successful arrival and starts a lockout."
+        ],
+        "counterplay": [
+          "No benefit when fleeing randomly; intercept the predictable anchor route."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "A translucent arch frames the destination direction.",
+          "Successful arrival makes white floor tiles ripple outward."
+        ],
+        "animation": [
+          "A doorway sigil folds into the runner's back at departure and unfolds on arrival."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Null Basilica courier trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-043",
+      "name": "Abyssal Crownmail",
+      "family": "armor",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "deep-pressure defense armor",
+      "identity": {
+        "fantasy": "A chain-and-scale suit that builds a pressure crown when the wearer remains near large hostile creatures and spends it on one stagger-resistant brace.",
+        "silhouette": "Dark blue mail beneath giant scale pauldrons with a floating ring of water-pressure beads above the head.",
+        "lore_hook": "Abyssal knights wore crowns because no king would follow them below the light."
+      },
+      "mechanics": {
+        "core": [
+          "proximity pressure",
+          "brace charge",
+          "colossal threat"
+        ],
+        "signature": [
+          "Deep Crown gains beads while within a safe authored radius of leviathan-class threats.",
+          "Pressure Brace spends the crown to resist one eligible displacement/stagger event.",
+          "Surface Debt temporarily reduces mobility after the brace so it cannot be chained."
+        ],
+        "counterplay": [
+          "Force the wearer away from the colossal target or punish the post-brace mobility debt."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Water beads form a crown segment by segment.",
+          "Brace compresses them into a transparent sphere around the torso."
+        ],
+        "animation": [
+          "The wearer plants both feet and scale pauldrons fold forward before bracing."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary abyssal knight order."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-044",
+      "name": "Vesper Hound Harness",
+      "family": "armor",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "aggressive tracking armor",
+      "identity": {
+        "fantasy": "A dusk-hunter harness that converts repeated sightings of the same hostile elite into better pursuit information and a short controlled leap assist.",
+        "silhouette": "Purple-black leather and plate with a mechanical hound skull over one shoulder.",
+        "lore_hook": "Vesper hounds never chased footprints; they chased the places prey had not reached yet."
+      },
+      "mechanics": {
+        "core": [
+          "elite sightings",
+          "pursuit vector",
+          "leap assist"
+        ],
+        "signature": [
+          "Scent of Intent records repeated line-of-sight reacquisitions on one elite target.",
+          "Hound Vector displays a short intercept direction rather than exact future position.",
+          "Break Leash spends full sighting stacks for one bounded directional leap toward the intercept lane."
+        ],
+        "counterplay": [
+          "Break vision for long intervals or force target swaps; leap direction is committed visibly."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "The shoulder hound eyes brighten with each reacquisition.",
+          "Intercept appears as a narrow purple chevron on the ground."
+        ],
+        "animation": [
+          "Mechanical hound jaw opens before Break Leash and snaps shut at landing."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Vesperglass huntmaster track."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-045",
+      "name": "Sigil Bastion",
+      "family": "armor",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "objective-fortification armor",
+      "identity": {
+        "fantasy": "A heavy rune suit that can attach one temporary defensive sigil to an authored objective and gains personal defense only while actively protecting it.",
+        "silhouette": "Squared black stone plates with one removable glowing shield-rune mounted over the spine.",
+        "lore_hook": "Bastion knights carried fortifications because architects rarely arrived before battles."
+      },
+      "mechanics": {
+        "core": [
+          "objective ward",
+          "defender tether",
+          "ward break"
+        ],
+        "signature": [
+          "Place Sigil attaches the back rune to one eligible objective or defend point.",
+          "Oath Radius grants modest defensive benefit while the wearer remains near the warded objective.",
+          "Shatter Oath manually destroys the rune to create a brief knockback pulse and ends the defense state."
+        ],
+        "counterplay": [
+          "Force the wearer away from the objective or destroy the visible sigil."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "The rune grows into a translucent wall emblem above the objective.",
+          "Oath Radius is shown by sparse ground geometry, not an invisible buff."
+        ],
+        "animation": [
+          "The wearer physically removes the spine rune and slams it into the objective."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary fortress defense capstone."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-046",
+      "name": "Storm-Eater Carapace",
+      "family": "armor",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "electric hazard conversion armor",
+      "identity": {
+        "fantasy": "A beetlelike carapace that can absorb one eligible environmental lightning strike and turn it into temporary movement energy.",
+        "silhouette": "Iridescent cobalt shell plates with hornlike lightning rods and a glowing abdomen capacitor.",
+        "lore_hook": "The shell was copied from insects that lived comfortably inside thunderstorms."
+      },
+      "mechanics": {
+        "core": [
+          "lightning capture",
+          "movement energy",
+          "overcharge risk"
+        ],
+        "signature": [
+          "Rod Catch can capture one authored lightning hazard when the wearer deliberately enters its marked area.",
+          "Storm Belly converts the charge into a short movement/reload buff.",
+          "Overfeed triggers if another qualifying strike lands while charged, stunning the wearer briefly and dumping the energy."
+        ],
+        "counterplay": [
+          "Bait the wearer into greedily catching a second strike or wait out the short charge."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Lightning remains visibly crawling across shell grooves while charged.",
+          "Overfeed erupts as a harmless-looking electric shell fracture."
+        ],
+        "animation": [
+          "Back rods extend upward before a catch and collapse after discharge."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Crown of Unstorm insect hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-047",
+      "name": "Eidolon Pilgrim Shell",
+      "family": "armor",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "three-echo traversal armor",
+      "identity": {
+        "fantasy": "A pilgrim suit that records three distinct traversal actions and lets the wearer replay their movement intentions as harmless spectral guides for squadmates.",
+        "silhouette": "Gray-white armor surrounded by three translucent pilgrim silhouettes each frozen in a different movement pose.",
+        "lore_hook": "Eidolon pilgrims never gave directions. They left versions of themselves behind to demonstrate."
+      },
+      "mechanics": {
+        "core": [
+          "movement recording",
+          "spectral guide",
+          "squad traversal"
+        ],
+        "signature": [
+          "Three Steps records three different actions such as mantle, slide, jump, or safe route turn.",
+          "Pilgrim Echo replays spectral guides at the original locations without moving players automatically.",
+          "Follow the Dead grants a small traversal recovery bonus to allies who intentionally complete the demonstrated sequence.",
+          "Erase Footprint clears all echoes early to free the recording slots."
+        ],
+        "counterplay": [
+          "Guides reveal intended routes to enemies as well; sequences can become unsafe if the battlefield changes."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Three pale pilgrim afterimages loop their recorded traversal actions.",
+          "Successful squad follow-through lights a thin white path between them.",
+          "Erase Footprint dissolves the path from end to start."
+        ],
+        "animation": [
+          "Each recorded action leaves a translucent shell peeling off the wearer.",
+          "All echoes bow briefly when the sequence completes."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Eidolon pilgrimage quest."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-048",
+      "name": "Crownless Marshal",
+      "family": "armor",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "faction-command inversion armor",
+      "identity": {
+        "fantasy": "A command suit that gets stronger tactically when the wearer has no active faction champion nearby, letting independent squads function without replacing faction leaders.",
+        "silhouette": "Dark officer armor with an empty crown bracket over the collar and four floating command pennants.",
+        "lore_hook": "The Marshal learned leadership after every king on the battlefield died in the same minute."
+      },
+      "mechanics": {
+        "core": [
+          "leader absence",
+          "independent orders",
+          "squad formation"
+        ],
+        "signature": [
+          "Empty Command activates only when no eligible allied champion is in the local encounter.",
+          "Marshal Order lets the wearer choose one bounded squad tactic: advance, hold, or regroup.",
+          "Uncrowned Standard creates a visible rally point matching the chosen tactic.",
+          "Return the Crown immediately disables the bonuses if a real champion enters range."
+        ],
+        "counterplay": [
+          "Enemy factions can bring champions into the area or force the squad away from its rally point."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Empty crown bracket glows only during independent command state.",
+          "Pennants rearrange into distinct formation symbols.",
+          "A champion entering causes the glow to extinguish visibly."
+        ],
+        "animation": [
+          "The wearer raises an empty hand as if holding a crown before issuing orders.",
+          "Pennants snap into new positions around the shoulders."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic rebellion command campaign."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-049",
+      "name": "Sunken Oracle Weave",
+      "family": "armor",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "hazard-forecast support armor",
+      "identity": {
+        "fantasy": "A drowned oracle suit that previews one upcoming authored environmental hazard and lets the wearer mark a safe preparation zone for allies.",
+        "silhouette": "Sea-green robes over scale armor with closed oracle eyes embroidered across the sleeves.",
+        "lore_hook": "The oracle drowned because seeing the wave did not teach her how to swim. The armor fixed that omission."
+      },
+      "mechanics": {
+        "core": [
+          "hazard forecast",
+          "safe-zone mark",
+          "prediction fatigue"
+        ],
+        "signature": [
+          "Drowned Vision reads one scheduled authored hazard event in the current encounter.",
+          "Safe Omen lets the wearer place a temporary preparation marker outside the projected danger area.",
+          "Shared Prophecy shows the same warning to nearby squadmates after they enter the marker.",
+          "Blind Interval locks forecasting after each use so the armor cannot reveal every mechanic."
+        ],
+        "counterplay": [
+          "Forecasts are limited to authored events; enemies can pressure marked safe areas before the hazard arrives."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Closed sleeve eyes open one at a time before a forecast.",
+          "Projected danger appears as watery transparent geometry.",
+          "Safe Omen glows as a pale dry circle amid waterlike effects."
+        ],
+        "animation": [
+          "The wearer briefly floats as if underwater during Drowned Vision.",
+          "All embroidered eyes close at the start of Blind Interval."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic drowned oracle temple."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-050",
+      "name": "Bone Galaxy Regalia",
+      "family": "armor",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "necromantic constellation armor",
+      "identity": {
+        "fantasy": "A regal bone suit that arranges defeated lesser undead markers into constellation patterns granting different short support effects.",
+        "silhouette": "Ivory rib armor with tiny black stars embedded in each bone and orbiting skull fragments.",
+        "lore_hook": "Necromancers eventually stopped asking what was written in the stars and began writing with the dead."
+      },
+      "mechanics": {
+        "core": [
+          "bone constellations",
+          "pattern choice",
+          "corpse-resource support"
+        ],
+        "signature": [
+          "Star Bone marks eligible defeated undead as temporary constellation points.",
+          "Three Bones can form one of several simple authored patterns: shield, movement, or detection.",
+          "Constellation Burn consumes the pattern for its short squad support effect.",
+          "Dark Sky prevents a new pattern until the previous constellation fully fades."
+        ],
+        "counterplay": [
+          "Deny dense undead kills near the wearer and destroy marked points before a pattern completes."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Marked bones float as black-white stars near the ground.",
+          "Completed patterns draw constellation lines overhead.",
+          "Burn collapses the pattern into a downward shower of pale sparks."
+        ],
+        "animation": [
+          "The wearer conducts bone points into position with both hands.",
+          "Completed constellations rotate slowly with torso movement."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Ossuary Crown astrology rite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-051",
+      "name": "Black Comet Mail",
+      "family": "armor",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "high-speed impact armor",
+      "identity": {
+        "fantasy": "A meteor-mail suit that stores safe descent distance and converts it into one controlled landing shockwave or forward comet dash.",
+        "silhouette": "Black plated mail peppered with glowing crater marks and a tail-like cape of star embers.",
+        "lore_hook": "The armor's first wearer survived falling from the sky and decided the fall had been the useful part."
+      },
+      "mechanics": {
+        "core": [
+          "descent storage",
+          "landing conversion",
+          "comet dash"
+        ],
+        "signature": [
+          "Falling Star stores bounded descent energy from valid non-exploit traversal.",
+          "Crater Choice lets the wearer spend it on either a small landing displacement ring or a forward dash after landing.",
+          "Meteor Guard reduces self-stagger during the chosen landing action but not incoming damage.",
+          "Cold Orbit resets stored descent if held too long."
+        ],
+        "counterplay": [
+          "Force early landings, deny height access, or wait out Cold Orbit."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Crater marks light from boots upward with stored descent.",
+          "Landing ring resembles a miniature black meteor crater.",
+          "Dash leaves a narrow star-ember tail."
+        ],
+        "animation": [
+          "Cape-tail length grows with descent energy.",
+          "Landing choice changes the character's midair bracing pose."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Starfall Reliquary traversal trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-052",
+      "name": "Nine-Lantern Survivor",
+      "family": "armor",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "limited recovery armor",
+      "identity": {
+        "fantasy": "A survival coat carrying nine spectral lanterns that each represent a major recovery milestone across a long activity rather than nine extra lives.",
+        "silhouette": "Long dark coat with nine tiny lanterns floating in an arc from shoulder to shoulder.",
+        "lore_hook": "The Nine-Lantern order measured survival by how many times a person chose to continue, not how many times they died."
+      },
+      "mechanics": {
+        "core": [
+          "milestone lanterns",
+          "recovery choices",
+          "long-session endurance"
+        ],
+        "signature": [
+          "Light Lantern activates one lantern after a qualifying major objective, not ordinary kills.",
+          "Spend Light can convert one active lantern into a modest heal, ammo recovery, or cooldown reset option.",
+          "Dark Passage grants a brief defensive recovery state only after the wearer falls below a health threshold and spends multiple lanterns.",
+          "Last Lantern cannot prevent elimination; instead it unlocks a powerful post-revive recovery if an ally successfully revives the wearer."
+        ],
+        "counterplay": [
+          "Pressure the wearer before objectives build lanterns; forced spending reduces later endurance."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Each earned lantern ignites with a distinct pale flame.",
+          "Spend Light sends one lantern into the chosen resource icon.",
+          "Dark Passage dims the world around the wearer without obscuring enemy silhouettes."
+        ],
+        "animation": [
+          "Lanterns physically move from the arc into the wearer's hands when spent.",
+          "Last Lantern hovers over the downed position until revived or eliminated."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic long-form survival achievement chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-053",
+      "name": "Probability Skin",
+      "family": "armor",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "risk-selection armor",
+      "identity": {
+        "fantasy": "A thin exotic skin projects two visible defensive outcomes before certain major telegraphed hazards and lets the wearer commit to one preparation path.",
+        "silhouette": "Translucent gold skin armor with two offset shadow bodies, one blue and one red.",
+        "lore_hook": "It never changes chance. It simply forces the wearer to admit which risk they are taking."
+      },
+      "mechanics": {
+        "core": [
+          "dual preparation",
+          "risk branch",
+          "commitment penalty"
+        ],
+        "signature": [
+          "Fork Defense offers two authored prep states before an eligible hazard: movement or guard.",
+          "Commit collapses the unused shadow and locks the chosen response until the hazard resolves.",
+          "Wrong Bet applies a short recovery penalty if the chosen preparation was poorly matched.",
+          "Split Again cannot trigger until the previous branch fully resolves."
+        ],
+        "counterplay": [
+          "Both possible states are visible to enemies; bait the wearer into committing early."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Blue and red body shadows preview the two preparations.",
+          "Commit shatters one shadow into glasslike probability fragments.",
+          "Wrong Bet leaves a visible cracked outline."
+        ],
+        "animation": [
+          "The wearer physically leans toward one shadow during selection.",
+          "Chosen shadow snaps onto the real body as armor."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic Oracle probability gauntlet."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-054",
+      "name": "Doorwalker Vestment",
+      "family": "armor",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "threshold mobility armor",
+      "identity": {
+        "fantasy": "A transdimensional vestment interacts with authored doors and thresholds, storing one exit direction and using it for a short post-threshold movement burst.",
+        "silhouette": "Long coat made of layered doorframe shapes with keys orbiting the waist and hinges at the shoulders.",
+        "lore_hook": "Doorwalkers are less interested in where doors lead than in what speed they can leave them."
+      },
+      "mechanics": {
+        "core": [
+          "threshold memory",
+          "exit burst",
+          "door affinity"
+        ],
+        "signature": [
+          "Remember Threshold stores one valid authored doorway crossing and its exit direction.",
+          "Kick the Door grants a short controlled movement burst after crossing a different eligible threshold.",
+          "Wrong House cancels the burst if the exit enters a protected/hazard-invalid space.",
+          "Master Key highlights one nearby authored event door during Thousand Doors events without solving it automatically."
+        ],
+        "counterplay": [
+          "Fight in open spaces or control door exits; the vestment cannot create arbitrary portals."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "A ghost doorframe lingers briefly at remembered exits.",
+          "Kick the Door creates a stack of collapsing frame afterimages.",
+          "Master Key makes one key orbit point toward the eligible event door."
+        ],
+        "animation": [
+          "Shoulder hinges visibly open as the wearer crosses a threshold.",
+          "Burst begins with a physical door-kick motion even when the threshold has no literal door panel."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic Thousand Doors mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "EVT-047"
+      ],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-055",
+      "name": "Appetite of Steel",
+      "family": "armor",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "weapon-adaptive armor",
+      "identity": {
+        "fantasy": "A living metal suit 'tastes' the currently equipped weapon family and reconfigures handling support around that family while reducing benefits when weapon-swapping too often.",
+        "silhouette": "Liquid dark-steel plates with mouthlike seams along the forearms and a constantly changing shoulder profile.",
+        "lore_hook": "The armor does not care who wears it. It cares what they feed it."
+      },
+      "mechanics": {
+        "core": [
+          "weapon-family adaptation",
+          "swap hunger",
+          "handling form"
+        ],
+        "signature": [
+          "Taste Weapon slowly attunes to one supported weapon family after active use.",
+          "Steel Appetite reshapes arm/shoulder support for that family and grants a modest handling specialty.",
+          "Indigestion triggers if the wearer swaps families repeatedly, suppressing benefits until the suit settles.",
+          "Starve forces an immediate neutral reset for players who want to change loadout deliberately."
+        ],
+        "counterplay": [
+          "Force disarms/swaps through encounter mechanics or exploit the visible Indigestion window."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Forearm mouths change tooth geometry by weapon family.",
+          "Attunement flows as liquid metal from the weapon hand into the shoulder.",
+          "Indigestion makes the surface ripple chaotically."
+        ],
+        "animation": [
+          "Armor plates physically migrate between forearms, shoulders, and back during attunement.",
+          "Starve makes all plates flatten to a neutral shell."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic Gloamforge living-metal contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-056",
+      "name": "Mirrorstorm Harness",
+      "family": "armor",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "projectile-lane deception armor",
+      "identity": {
+        "fantasy": "A mirror-and-lightning harness creates several harmless visual movement echoes during storm dashes, making target reading harder without generating independent damage sources.",
+        "silhouette": "Chrome armor with electric blue mirror tiles and a split lightning rod down the spine.",
+        "lore_hook": "Mirrorstorm raiders survived because enemies kept shooting where thunder remembered they had been."
+      },
+      "mechanics": {
+        "core": [
+          "movement echoes",
+          "storm dash",
+          "decoy clarity"
+        ],
+        "signature": [
+          "Storm Step earns one echo charge from authored lightning or rapid traversal objectives.",
+          "Mirror Dash spends a charge to create several non-damaging movement afterimages along the dash lane.",
+          "True Body remains distinguishable through a subtle solid outline to preserve counterplay.",
+          "Shatter Echo manually removes decoys to create a small vision-clearing flash for allies."
+        ],
+        "counterplay": [
+          "Track the solid outline or use area pressure; echoes cannot shoot or body-block."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Afterimages fracture into mirror tiles threaded by blue lightning.",
+          "True body has a thin continuous white edge.",
+          "Shatter Echo sends tiles outward like a broken storm window."
+        ],
+        "animation": [
+          "Spine rod forks during charge and collapses after dash.",
+          "Afterimages copy the exact dash animation with timed decay."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic Mirrorstorm arena."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-057",
+      "name": "Heaven's Refusal",
+      "family": "armor",
+      "tier": "god",
+      "status": "specified",
+      "role": "anti-celestial domain armor",
+      "identity": {
+        "fantasy": "A god-forged armor that can temporarily reject one supported celestial environmental rule in a bounded personal radius—such as solar burn buildup or starfall knockback—without nullifying the encounter.",
+        "silhouette": "Black armor under an inverted white halo whose points face downward like a crown refusing the sky.",
+        "lore_hook": "The armor was forged by a civilization that survived divine judgment and sent the verdict back unopened."
+      },
+      "mechanics": {
+        "core": [
+          "celestial rule resistance",
+          "inverted halo",
+          "bounded refusal"
+        ],
+        "signature": [
+          "Name Judgment identifies one active supported celestial hazard category.",
+          "Refuse Heaven creates a short personal/squad-adjacent zone reducing that category within strict caps.",
+          "Inverted Grace converts a successfully resisted hazard tick into one small support charge.",
+          "Return Verdict spends charges as stagger against an eligible celestial apparatus, never direct immunity-breaking damage.",
+          "Halo Debt increases cooldown each time Refuse Heaven is used in the same encounter."
+        ],
+        "counterplay": [
+          "Swap hazard categories, pressure outside the small refusal radius, and exploit escalating Halo Debt."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "The inverted halo rotates beneath the shoulders instead of above the head.",
+          "Refusal creates a black-white dome whose surface shows the rejected hazard symbol.",
+          "Successful resistances send tiny fragments upward into the halo.",
+          "Return Verdict launches the fragments as a geometric spear.",
+          "Halo Debt visibly adds cracks to the halo."
+        ],
+        "animation": [
+          "The wearer points upward then deliberately turns the hand downward to activate refusal.",
+          "Return Verdict flips the halo vertically and drives its light forward."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier Last Dawn and celestial tribunal progression."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-058",
+      "name": "Leviathan Thronebody",
+      "family": "armor",
+      "tier": "god",
+      "status": "specified",
+      "role": "colossal-aquatic command armor",
+      "identity": {
+        "fantasy": "A divine pressure exosuit that lets the wearer establish one mobile command posture atop colossal aquatic encounters, improving squad traversal and objective handling around leviathan bodies.",
+        "silhouette": "Huge blue-black pressure frame with ribbed shoulder throne, fin banners, and water columns circulating around the legs.",
+        "lore_hook": "The first thronebody was built because admirals kept falling off the monsters they were trying to command from."
+      },
+      "mechanics": {
+        "core": [
+          "colossal traversal",
+          "pressure command",
+          "squad anchor"
+        ],
+        "signature": [
+          "Deck Stance anchors the wearer to designated leviathan/platform surfaces within encounter rules.",
+          "Call Wake creates a short allied traversal lane toward the anchor point.",
+          "Pressure Order improves handling of authored heavy raid objects while anchored.",
+          "Breach Command releases the anchor and creates a controlled leap to another valid surface.",
+          "Drown the Throne deliberately collapses the stance to shield nearby allies from one eligible pressure event at the cost of long cooldown."
+        ],
+        "counterplay": [
+          "Destroy/disable anchor objectives, force surface transitions, and exploit the immobile moments of Deck Stance."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Water columns form a throne-like back structure.",
+          "Call Wake paints a broad spectral ship wake over valid traversal surface.",
+          "Pressure Order creates glowing rib handles on heavy objectives.",
+          "Breach Command launches a giant whale-tail visual behind the wearer."
+        ],
+        "animation": [
+          "The suit locks legs into a broad deck stance.",
+          "Anchor release unfolds fin plates into gliding stabilizers."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier Thirteen-Tide raid covenant."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-059",
+      "name": "Saintless Dominion",
+      "family": "armor",
+      "tier": "god",
+      "status": "specified",
+      "role": "living-biome sovereign armor",
+      "identity": {
+        "fantasy": "A god-tier botanical dominion suit commands only plants the player has cultivated or activated, building a temporary local ecosystem of support roots, hazards, and tameable-beast shelter.",
+        "silhouette": "Regal white bark armor with a crown of empty flower sockets and a living root mantle extending into the ground.",
+        "lore_hook": "The saintless gardeners believed worship was unnecessary if the forest already answered."
+      },
+      "mechanics": {
+        "core": [
+          "cultivated plant network",
+          "biome domain",
+          "beast shelter"
+        ],
+        "signature": [
+          "Plant Vassal activates one authored plant node and binds it to the wearer's local network.",
+          "Root Parliament lets connected nodes vote through simple state rules to produce cover, healing flora, or thorn pressure depending on squad need.",
+          "Beast Sanctuary makes one node a short safe attraction point for eligible tameable wildlife.",
+          "Green Edict converts the network into a temporary aggressive root pattern at the cost of destroying one node.",
+          "Autumn Crown ends the domain and returns a fraction of unused plant resource."
+        ],
+        "counterplay": [
+          "Destroy network nodes, separate the wearer from planted territory, or pressure during slow node activation."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Empty crown sockets fill with flowers matching active node types.",
+          "Root lines glow beneath terrain between valid nodes.",
+          "Sanctuary nodes form soft luminous nests.",
+          "Green Edict sends giant-looking root silhouettes through bounded collision lanes."
+        ],
+        "animation": [
+          "The root mantle physically attaches to activated ground nodes.",
+          "Each domain decision changes the flower crown arrangement."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier Worldroot Sovereignty covenant."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-060",
+      "name": "Atlas of Graves",
+      "family": "armor",
+      "tier": "god",
+      "status": "specified",
+      "role": "death-history tank armor",
+      "identity": {
+        "fantasy": "A god-forged atlas suit maps where major encounter defeats occurred and lets the wearer carry one memorial zone into the next phase as a protective tactical landmark.",
+        "silhouette": "Colossal-looking black atlas pages orbit a heavy stone armor frame, each page embossed with a topographic grave map.",
+        "lore_hook": "The Atlas records every place a battle believed it had ended."
+      },
+      "mechanics": {
+        "core": [
+          "defeat geography",
+          "memorial zone",
+          "phase carryover"
+        ],
+        "signature": [
+          "Grave Map records one eligible major ally/NPC defeat location as a page coordinate.",
+          "Carry the Dead relocates the memorial effect to the next authored phase transition rather than resurrecting anyone.",
+          "Memorial Ground grants modest defense/recovery near the placed landmark.",
+          "Turn the Page consumes the memorial to create a brief anti-add stagger wave.",
+          "Closed Atlas clears all stored death geography at encounter end to prevent cross-event abuse."
+        ],
+        "counterplay": [
+          "Fight away from memorial ground, force early Turn the Page, and deny phase transitions that favor its placement."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Orbiting pages display miniature glowing terrain contours.",
+          "Memorial Ground projects a huge map-pin gravestone glyph.",
+          "Turn the Page sends topographic contour rings outward.",
+          "Closed Atlas slams all pages together behind the wearer."
+        ],
+        "animation": [
+          "The wearer physically pulls a page from orbit and plants it into the ground.",
+          "Phase transition makes the atlas pages flap violently as the landmark relocates."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier Bell After Death raid mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-061",
+      "name": "Zero Hour Vestment",
+      "family": "armor",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "encounter-clock authority armor",
+      "identity": {
+        "fantasy": "An Absolute vestment can spend one earned hourglass charge to delay or accelerate a supported authored encounter timer by a small bounded amount, never freezing players or global simulation.",
+        "silhouette": "Black-white robes with twelve floating hourglass shards arranged as a broken clock around the waist.",
+        "lore_hook": "Zero Hour was invented by generals who wanted one more minute and discovered minutes could negotiate."
+      },
+      "mechanics": {
+        "core": [
+          "authored timer influence",
+          "hourglass charges",
+          "time debt"
+        ],
+        "signature": [
+          "Earn Hour gains a shard only from completing designated phase objectives ahead of their expected window.",
+          "Borrow Minute can extend one supported local objective timer by a tightly capped amount.",
+          "Spend Tomorrow can shorten one optional wait/recovery timer when the squad prefers risk and speed.",
+          "Time Debt increases the next eligible timer's difficulty pressure after any manipulation.",
+          "Midnight Clause prevents use on elimination clocks, matchmaking, storm safety, or protected platform timers.",
+          "Break Clock destroys all stored shards for a one-time squad cooldown-normalization pulse and locks the vestment for the encounter."
+        ],
+        "counterplay": [
+          "Timer authority is earned, capped, announced, and creates Time Debt; opponents can pressure objectives to prevent charge generation."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Hourglass shards orbit as black-white clock numbers.",
+          "Borrow Minute makes the local objective timer visually stretch into a longer ring.",
+          "Spend Tomorrow burns one shard into fast golden sand.",
+          "Time Debt adds a red thirteenth mark to the clock.",
+          "Break Clock freezes the visual clock for one frame, then shatters it outward."
+        ],
+        "animation": [
+          "The wearer turns an hourglass shard by hand for each manipulation.",
+          "Midnight Clause visibly locks protected shards behind a black band.",
+          "Break Clock crushes the central invisible clock between both palms."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute Court of Broken Hours mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-062",
+      "name": "Sovereign Without World",
+      "family": "armor",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "portable faction-neutral domain armor",
+      "identity": {
+        "fantasy": "An Absolute sovereign suit creates a tiny neutral court where faction bonuses are temporarily normalized and the wearer gains authority only through objectives completed inside it.",
+        "silhouette": "Royal armor with no heraldry, transparent cape, and an empty circular throne platform floating behind the feet.",
+        "lore_hook": "The Sovereign lost every kingdom and discovered rulership worked better when there was nothing left to own."
+      },
+      "mechanics": {
+        "core": [
+          "neutral court",
+          "faction normalization",
+          "objective authority"
+        ],
+        "signature": [
+          "No Kingdom establishes a bounded neutral court with explicit visible borders.",
+          "Equal Banners normalizes selected eligible faction-aura modifiers inside the court without changing hostility.",
+          "Earn Authority grants court charges only from objectives completed while all participants are under the same normalization.",
+          "Issue Decree spends charges on one authored court effect such as rally, retreat, or temporary objective shielding.",
+          "Exile sends the wearer out of their own court to end the state early and prevent indefinite occupation.",
+          "Empty Crown wipes all charges if protected encounter rules or ownership states change unexpectedly."
+        ],
+        "counterplay": [
+          "Leave the small court, destroy its throne anchor, or deny objectives so Authority never builds."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "All faction colors desaturate to white at the court boundary.",
+          "An empty transparent throne rises from the floor.",
+          "Earned charges become floating crownless rings.",
+          "Decrees appear as huge simple symbols above the court.",
+          "Exile collapses the cape and throne inward like folded glass."
+        ],
+        "animation": [
+          "The wearer removes every visible heraldic plate when creating the court.",
+          "Decree gestures are regal but performed toward an empty throne.",
+          "Exile forces the wearer backward as the court rejects its own sovereign."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute faction mastery and Thronefall War aftermath."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-063",
+      "name": "The Armor That Refuses History",
+      "family": "armor",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "encounter-memory severance armor",
+      "identity": {
+        "fantasy": "An Absolute shell can temporarily ignore one non-critical legacy modifier carried forward from an earlier phase, at the cost of surrendering one beneficial carryover too.",
+        "silhouette": "Smooth gray armor covered by translucent scenes of previous fight phases that are continually scraped away by white hands.",
+        "lore_hook": "History made the same mistake too many times, so the armor stopped listening."
+      },
+      "mechanics": {
+        "core": [
+          "phase-memory severance",
+          "benefit sacrifice",
+          "clean-state window"
+        ],
+        "signature": [
+          "Read History lists only supported carryover modifiers currently attached to the wearer or encounter.",
+          "Refuse Past selects one eligible negative carryover to suppress temporarily.",
+          "Equal Forgetting requires sacrificing one eligible positive carryover for the same window.",
+          "Blank Page visually marks the clean-state interval and prevents additional history edits.",
+          "Return of History restores both modifiers when the window ends, respecting current validity.",
+          "Burn Chronicle ends the window early and converts the remaining duration into a small neutral recovery pulse."
+        ],
+        "counterplay": [
+          "The wearer always sacrifices a benefit, the selection is visible, and core boss progression cannot be erased."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Earlier-phase scenes move across armor plates like living murals.",
+          "Refused history is scraped away into white dust.",
+          "The sacrificed benefit becomes a black empty mural frame.",
+          "Blank Page makes the suit almost featureless gray.",
+          "Return restores murals in reverse chronological order."
+        ],
+        "animation": [
+          "White spectral hands physically erase selected scenes from the armor.",
+          "Burn Chronicle tears one floating page from the chest and ignites it.",
+          "The Armor That Refuses History uses a bespoke full-body or armor-piece transition for clean-state window so the active state can be read before it resolves."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute multi-era raid mastery and deep lore chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "Premium designation is a design flag only and remains subject to Epic transaction/publication rules."
+      ]
+    },
+    {
+      "id": "ARM-064",
+      "name": "CROWN OF THE LAST REALITY",
+      "family": "armor",
+      "tier": "transcendent_zero",
+      "status": "specified",
+      "role": "Transcendent-only authority body",
+      "identity": {
+        "fantasy": "The final Transcendent armor is not equipment but a temporary authority-body that rebuilds the ascended player as a readable avatar of the active world-bending Authority.",
+        "silhouette": "A humanoid silhouette wrapped in layered black-white-gold armor geometries, with a crown that continuously changes from halo to horizon to throne to impossible symbol.",
+        "lore_hook": "Every previous crown represented rule over something. This crown represents the moment rules become optional—and therefore must be bounded."
+      },
+      "mechanics": {
+        "core": [
+          "authority body",
+          "adaptive visual grammar",
+          "hard cleanup"
+        ],
+        "signature": [
+          "Authority Skin reconstructs the armor presentation around the currently active Transcendent Authority without changing protected ownership or platform rules.",
+          "Axiom Crown exposes the active rule modifier as a giant readable crown symbol so everyone in the encounter knows what has changed.",
+          "World Devourer Body grows continent-scale-looking spectral anatomy around the player while gameplay collision remains tightly bounded.",
+          "Omnipresence Mantle links approved manifestations with one shared armor signature and one authority resource pool.",
+          "Genesis Thronebody becomes a mobile blueprint sovereign form that can authorize only whitelisted temporary structures.",
+          "Last Word Regalia strips unnecessary effects away before a decree so the event remains readable despite extreme spectacle.",
+          "Reality Engine Crown transforms into a rotating interface halo for the final bounded world-parameter choices.",
+          "Zero Dissolution force-cleans every Transcendent armor effect, construct reference, manifestation, and temporary authority state when the timer or validity condition ends."
+        ],
+        "counterplay": [
+          "The form is time-bounded, publicly telegraphed, server-authorized, and cannot persist after Zero Dissolution; each Authority retains encounter-specific counterplay and protected-state exclusions."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "The crown changes geometry instead of merely changing color for each Authority.",
+          "Armor plates contain moving horizon lines, constellations, legal glyphs, and blueprint wireframes tied to active state.",
+          "World Devourer projects colossal spectral limbs and mouths only as bounded cinematic layers.",
+          "Omnipresence draws one giant sigil connecting all approved manifestations.",
+          "Genesis surrounds the wearer with city-scale-looking blueprint architecture that resolves only into whitelisted local assets.",
+          "Last Word collapses the palette toward black and white before a single decree symbol dominates the sky.",
+          "Reality Engine turns the crown into concentric control rings representing only parameters exposed by the runtime.",
+          "Zero Dissolution reverses every visual layer into the player's core silhouette in a deterministic cleanup sequence."
+        ],
+        "animation": [
+          "Every Authority has a separate full-body stance family rather than one universal super-form pose.",
+          "Authority changes disassemble and rebuild the armor around the player's motion.",
+          "Last Word uses a slow decree-selection ritual before any effect resolves.",
+          "Reality Engine floats the player within rotating crown rings while ordinary weapon handling is suspended.",
+          "Zero Dissolution peels crown, mantle, plates, manifestations, and aura away in a fixed reverse-order shutdown."
+        ],
+        "audio": [
+          "Armor audio distinguishes idle state, mechanic arming, activation, break/counter state, and recovery without masking combat-critical sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Never purchasable, craftable, or permanently equippable. Manifested only by the validated Transcendent Zero runtime during an active ascension window."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [
+        "WPN-072"
+      ],
+      "notes": [
+        "Armor gameplay state is separate from cosmetic mesh/skin presentation and must be implemented through supported UEFN/Verse systems.",
+        "This armor exists only as a time-bounded Transcendent manifestation and cannot be sold or permanently equipped."
+      ]
+    }
+  ]
+}
