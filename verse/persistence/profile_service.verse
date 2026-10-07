@@ -417,3 +417,57 @@ aeonfall_profile_service := class():
             )
 
         false
+
+
+    # Marks the permanent outcome of the Choosing.
+    # Persistent TranscendentState uses:
+    # 0 = not unlocked
+    # 1 = Choosing passed / Transcendent Zero activation unlocked
+    # Active/cooldown state is intentionally session-only.
+    CommitChoosingSuccess(Agent:agent)<transacts>:logic=
+        if:
+            Player := player[Agent]
+            Old := AEONFALLPlayerProfiles[Player]
+            Old.IsZeroCandidate?
+            Old.AxiomHeartCrafted?
+            Old.AscensionRank >= 2
+        then:
+            if (Old.TranscendentState = 1):
+                return false
+
+            Candidate := aeonfall_player_profile:
+                MakeAEONFALLPlayerProfile<constructor>(Old)
+                TranscendentState := 1
+
+            if:
+                FitsInPlayerMap(Candidate)
+                set AEONFALLPlayerProfiles[Player] = Candidate
+            then:
+                AEONFALLRuntimeBus.Emit(
+                    aeonfall_runtime_event{
+                        EventType := "transcendent.choosing_committed",
+                        SourceId := "player"
+                    }
+                )
+                return true
+
+        false
+
+    IncrementTranscendentHistory(Agent:agent)<transacts>:logic=
+        if:
+            Player := player[Agent]
+            Old := AEONFALLPlayerProfiles[Player]
+            Old.TranscendentState = 1
+        then:
+            Candidate := aeonfall_player_profile:
+                MakeAEONFALLPlayerProfile<constructor>(Old)
+                TranscendentHistoryCount :=
+                    Old.TranscendentHistoryCount + 1
+
+            if:
+                FitsInPlayerMap(Candidate)
+                set AEONFALLPlayerProfiles[Player] = Candidate
+            then:
+                return true
+
+        false
