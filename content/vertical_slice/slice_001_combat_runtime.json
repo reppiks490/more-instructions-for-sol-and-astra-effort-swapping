@@ -153,13 +153,13 @@
       "id": "ABL-001",
       "name": "Raise Redoubt",
       "owner_entity_id": "SKL-006",
-      "resource_policy": "Meter",
+      "resource_policy": "ExternalClassResource",
       "target_policy": "Position",
       "cooldown_seconds": 0,
       "max_charges": 0,
       "recharge_seconds": 0,
-      "max_meter": 100,
-      "activation_cost": 35,
+      "max_meter": 0,
+      "activation_cost": 0,
       "requires_encounter_context": false,
       "requires_transformation_context": false,
       "allow_while_active": false,
@@ -171,19 +171,22 @@
         "ability.grave_architecture.redoubt"
       ],
       "adapter_id": "grave_architecture_redoubt_adapter",
-      "boss_safe": true
+      "boss_safe": true,
+      "required_class_id": "CLS-006",
+      "class_resource_cost": 35,
+      "class_resource_mode": "SpendOnSuccess"
     },
     {
       "id": "ABL-002",
       "name": "Deadman's Stair",
       "owner_entity_id": "SKL-006",
-      "resource_policy": "Meter",
+      "resource_policy": "ExternalClassResource",
       "target_policy": "Position",
       "cooldown_seconds": 0,
       "max_charges": 0,
       "recharge_seconds": 0,
-      "max_meter": 100,
-      "activation_cost": 50,
+      "max_meter": 0,
+      "activation_cost": 0,
       "requires_encounter_context": false,
       "requires_transformation_context": false,
       "allow_while_active": false,
@@ -195,7 +198,10 @@
         "ability.grave_architecture.stair"
       ],
       "adapter_id": "grave_architecture_stair_adapter",
-      "boss_safe": true
+      "boss_safe": true,
+      "required_class_id": "CLS-006",
+      "class_resource_cost": 50,
+      "class_resource_mode": "SpendOnSuccess"
     },
     {
       "id": "ABL-003",
@@ -219,7 +225,10 @@
         "ability.royal_scent.mark"
       ],
       "adapter_id": "royal_scent_adapter",
-      "boss_safe": true
+      "boss_safe": true,
+      "required_class_id": "CLS-007",
+      "class_resource_cost": 1,
+      "class_resource_mode": "ReserveWhileActive"
     },
     {
       "id": "ABL-004",
@@ -243,7 +252,10 @@
         "ability.guardian_breach.intercept"
       ],
       "adapter_id": "guardian_breach_adapter",
-      "boss_safe": true
+      "boss_safe": true,
+      "required_class_id": "",
+      "class_resource_cost": 0,
+      "class_resource_mode": "None"
     },
     {
       "id": "ABL-005",
@@ -267,7 +279,10 @@
         "ability.grief_gaze.apply"
       ],
       "adapter_id": "grief_gaze_adapter",
-      "boss_safe": true
+      "boss_safe": true,
+      "required_class_id": "",
+      "class_resource_cost": 0,
+      "class_resource_mode": "None"
     },
     {
       "id": "ABL-006",
@@ -291,7 +306,10 @@
         "weapon.ashcoil.vent"
       ],
       "adapter_id": "heat_motion_component",
-      "boss_safe": true
+      "boss_safe": true,
+      "required_class_id": "",
+      "class_resource_cost": 0,
+      "class_resource_mode": "None"
     },
     {
       "id": "ABL-007",
@@ -315,7 +333,10 @@
         "weapon.chronoclast.reprise"
       ],
       "adapter_id": "temporal_duelist_component",
-      "boss_safe": true
+      "boss_safe": true,
+      "required_class_id": "",
+      "class_resource_cost": 0,
+      "class_resource_mode": "None"
     },
     {
       "id": "ABL-008",
@@ -339,7 +360,10 @@
         "weapon.parallax_mercy.link"
       ],
       "adapter_id": "support_sniper_component",
-      "boss_safe": true
+      "boss_safe": true,
+      "required_class_id": "",
+      "class_resource_cost": 0,
+      "class_resource_mode": "None"
     },
     {
       "id": "ABL-009",
@@ -361,7 +385,10 @@
         "weapon.maw.devour_charge"
       ],
       "adapter_id": "status_devour_component",
-      "boss_safe": false
+      "boss_safe": false,
+      "required_class_id": "",
+      "class_resource_cost": 0,
+      "class_resource_mode": "None"
     },
     {
       "id": "ABL-010",
@@ -387,7 +414,10 @@
         "weapon.grave_cartographer.route"
       ],
       "adapter_id": "corpse_route_component",
-      "boss_safe": true
+      "boss_safe": true,
+      "required_class_id": "",
+      "class_resource_cost": 0,
+      "class_resource_mode": "None"
     }
   ]
 }
