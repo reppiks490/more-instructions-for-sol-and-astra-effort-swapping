@@ -6,6 +6,7 @@ on:
       - "content/catalog/**"
       - "content/crafting/**"
       - "content/vertical_slice/**"
+      - "content/world/**"
       - "schemas/**"
       - "tools/validate_catalog.py"
       - "tools/validate_crafting.py"
@@ -15,6 +16,7 @@ on:
       - "tools/validate_quotas.py"
       - "tools/validate_vertical_slice.py"
       - "tools/validate_uefn_bindings.py"
+      - "tools/validate_world_topology.py"
       - "STATUS.md"
       - ".github/workflows/catalog-validation.yml"
   pull_request:
@@ -59,6 +61,9 @@ jobs:
 
       - name: Validate UEFN binding matrix
         run: python tools/validate_uefn_bindings.py
+
+      - name: Validate streamed world topology
+        run: python tools/validate_world_topology.py
 
       - name: Build runtime content index
         run: python tools/build_content_index.py
