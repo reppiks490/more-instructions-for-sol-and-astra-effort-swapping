@@ -1,1321 +1,2511 @@
 {
   "wave": "001",
-  "purpose": "vertical-slice production specification seed",
+  "purpose": "First authored production-design wave migrated to canonical AEONFALL schema.",
   "entity_count": 42,
   "entities": [
     {
       "id": "WPN-001",
-      "family": "weapon",
       "name": "Gravesong Carbine",
-      "tier": "Epic",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
       "role": "precision assault rifle",
-      "concept": "A sentient bone-alloy carbine that stores echoes from defeated hostile creatures and converts them into temporary precision bonuses.",
-      "signature_mechanic": "Echo Chamber stores three kill echoes; consuming them stabilizes recoil and marks the next struck target for allied bonus damage.",
-      "capabilities": [
-        "echo storage",
-        "precision burst",
-        "team mark"
-      ],
-      "counterplay": [
-        "Echo charges expire outside combat; missing the marked shot wastes the strongest window."
-      ],
-      "visual_identity": "Black ivory receiver with thin violet resonance seams and a floating three-notch echo counter.",
-      "animation_profile": "Reload snaps the bone magazine into place while spectral silhouettes spiral into the chamber; full charge adds a brief shoulder sigil.",
-      "vfx_profile": "Low-volume violet soul ribbons on kills, compact muzzle glyphs, and a sharp three-ring mark burst on empowered impact.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Epic faction contract chain or rare necropolis cache.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 8,
-        "vfx_band": "medium",
-        "replication_band": "low",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A sentient bone-alloy carbine that stores echoes from defeated hostile creatures and converts them into temporary precision bonuses.",
+        "silhouette": "Black ivory receiver with thin violet resonance seams and a floating three-notch echo counter.",
+        "lore_hook": "Gravesong Carbine is tied to this acquisition path: Epic faction contract chain or rare necropolis cache."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "echo storage",
+          "precision burst",
+          "team mark"
+        ],
+        "signature": [
+          "Echo Chamber stores three kill echoes; consuming them stabilizes recoil and marks the next struck target for allied bonus damage.",
+          "Capability expression: echo storage.",
+          "Capability expression: precision burst.",
+          "Capability expression: team mark."
+        ],
+        "counterplay": [
+          "Echo charges expire outside combat; missing the marked shot wastes the strongest window."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Low-volume violet soul ribbons on kills, compact muzzle glyphs, and a sharp three-ring mark burst on empowered impact."
+        ],
+        "animation": [
+          "Reload snaps the bone magazine into place while spectral silhouettes spiral into the chamber; full charge adds a brief shoulder sigil."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic faction contract chain or rare necropolis cache."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "WPN-002",
-      "family": "weapon",
       "name": "Heliophage",
-      "tier": "Legendary",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
       "role": "solar beam rifle",
-      "concept": "A long-form energy rifle that feeds on exposure to open sky and converts stored radiance into a drilling beam.",
-      "signature_mechanic": "Solar Reservoir charges while outdoors; alternate fire empties stored radiance into a sustained beam that ramps against a single target.",
-      "capabilities": [
-        "solar charging",
-        "ramping beam",
-        "armor scorch"
-      ],
-      "counterplay": [
-        "Indoor fights deny passive charge; breaking line of sight resets beam ramp."
-      ],
-      "visual_identity": "White-gold spine weapon with rotating heliostat vanes and a captive miniature sun in the stock.",
-      "animation_profile": "Vaned sections unfold before beam fire, hands brace under escalating recoil, and the core visibly dims as charge is spent.",
-      "vfx_profile": "Layered solar corona, refractive heat wake, gold-white drilling beam, and armor-molten impact decals with aggressive LOD falloff.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Legendary solar observatory raid reward.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 4,
-        "vfx_band": "high",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A long-form energy rifle that feeds on exposure to open sky and converts stored radiance into a drilling beam.",
+        "silhouette": "White-gold spine weapon with rotating heliostat vanes and a captive miniature sun in the stock.",
+        "lore_hook": "Heliophage is tied to this acquisition path: Legendary solar observatory raid reward."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "solar charging",
+          "ramping beam",
+          "armor scorch"
+        ],
+        "signature": [
+          "Solar Reservoir charges while outdoors; alternate fire empties stored radiance into a sustained beam that ramps against a single target.",
+          "Capability expression: solar charging.",
+          "Capability expression: ramping beam.",
+          "Capability expression: armor scorch."
+        ],
+        "counterplay": [
+          "Indoor fights deny passive charge; breaking line of sight resets beam ramp."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Layered solar corona, refractive heat wake, gold-white drilling beam, and armor-molten impact decals with aggressive LOD falloff."
+        ],
+        "animation": [
+          "Vaned sections unfold before beam fire, hands brace under escalating recoil, and the core visibly dims as charge is spent."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary solar observatory raid reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "WPN-003",
-      "family": "weapon",
       "name": "Maw of Saint Vanta",
-      "tier": "Mythic",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
       "role": "close-range devourer shotgun",
-      "concept": "A forbidden relic-shotgun whose muzzle resembles a sealed jaw; it grows stronger by devouring status effects from enemies.",
-      "signature_mechanic": "Devour Sigil strips one eligible hostile status effect from a target and converts it into a temporary empowered shell archetype.",
-      "capabilities": [
-        "status theft",
-        "adaptive shells",
-        "close-range burst"
-      ],
-      "counterplay": [
-        "Bosses expose only selected effects; stolen shell power decays quickly and demands close-range commitment."
-      ],
-      "visual_identity": "Obsidian jaw housing bound with silver scripture, opening slightly as it senses afflicted enemies.",
-      "animation_profile": "The weapon recoils like a living bite, teeth flex between shots, and mythic shells are chambered with a ritual hand-over-hand seal.",
-      "vfx_profile": "Black-violet bite arcs, stolen-effect color inheritance, sigil fragments around the muzzle, and a brief predatory eye flare.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Mythic cathedral-undercrypt boss plus relic attunement.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 3,
-        "vfx_band": "high",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A forbidden relic-shotgun whose muzzle resembles a sealed jaw; it grows stronger by devouring status effects from enemies.",
+        "silhouette": "Obsidian jaw housing bound with silver scripture, opening slightly as it senses afflicted enemies.",
+        "lore_hook": "Maw of Saint Vanta is tied to this acquisition path: Mythic cathedral-undercrypt boss plus relic attunement."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "status theft",
+          "adaptive shells",
+          "close-range burst"
+        ],
+        "signature": [
+          "Devour Sigil strips one eligible hostile status effect from a target and converts it into a temporary empowered shell archetype.",
+          "Capability expression: status theft.",
+          "Capability expression: adaptive shells.",
+          "Capability expression: close-range burst."
+        ],
+        "counterplay": [
+          "Bosses expose only selected effects; stolen shell power decays quickly and demands close-range commitment."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Black-violet bite arcs, stolen-effect color inheritance, sigil fragments around the muzzle, and a brief predatory eye flare."
+        ],
+        "animation": [
+          "The weapon recoils like a living bite, teeth flex between shots, and mythic shells are chambered with a ritual hand-over-hand seal."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic cathedral-undercrypt boss plus relic attunement."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "WPN-004",
-      "family": "weapon",
       "name": "Null Meridian",
-      "tier": "Exotic",
+      "family": "weapon",
+      "tier": "exotic",
+      "status": "specified",
       "role": "trajectory-bending marksman rifle",
-      "concept": "An exotic rifle that bends its own shot path around geometry after the user establishes a visible anchor point.",
-      "signature_mechanic": "Meridian Anchor allows the next shot to refract once through a placed spatial anchor, enabling deliberate banked lines of fire.",
-      "capabilities": [
-        "spatial anchor",
-        "single refraction shot",
-        "reposition pressure"
-      ],
-      "counterplay": [
-        "Anchor is visible and destructible; refraction adds charge time and a distinct warning tone."
-      ],
-      "visual_identity": "Thin asymmetrical frame with a floating optic rail and a detached barrel segment suspended by blue-black fields.",
-      "animation_profile": "Firing through an anchor causes the weapon to pivot independently from the player's hands while the barrel segment realigns in midair.",
-      "vfx_profile": "Crisp geometric refraction lines, black-blue lens folds, minimal particles, and a sharp spatial snap at the redirect point.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Exotic cartographer faction mastery reward.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 4,
-        "vfx_band": "high",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "An exotic rifle that bends its own shot path around geometry after the user establishes a visible anchor point.",
+        "silhouette": "Thin asymmetrical frame with a floating optic rail and a detached barrel segment suspended by blue-black fields.",
+        "lore_hook": "Null Meridian is tied to this acquisition path: Exotic cartographer faction mastery reward."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "spatial anchor",
+          "single refraction shot",
+          "reposition pressure"
+        ],
+        "signature": [
+          "Meridian Anchor allows the next shot to refract once through a placed spatial anchor, enabling deliberate banked lines of fire.",
+          "Capability expression: spatial anchor.",
+          "Capability expression: single refraction shot.",
+          "Capability expression: reposition pressure."
+        ],
+        "counterplay": [
+          "Anchor is visible and destructible; refraction adds charge time and a distinct warning tone."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Crisp geometric refraction lines, black-blue lens folds, minimal particles, and a sharp spatial snap at the redirect point."
+        ],
+        "animation": [
+          "Firing through an anchor causes the weapon to pivot independently from the player's hands while the barrel segment realigns in midair."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic cartographer faction mastery reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "WPN-005",
-      "family": "weapon",
       "name": "Thronebreaker Ω",
-      "tier": "God",
+      "family": "weapon",
+      "tier": "god",
+      "status": "specified",
       "role": "anti-colossus cannon",
-      "concept": "A god-tier anti-boss weapon built to attack distributed weak points on skyscraper-scale creatures rather than ordinary targets.",
-      "signature_mechanic": "Judgment Chain links consecutive hits on different boss regions; completing the chain detonates synchronized damage across every linked node.",
-      "capabilities": [
-        "weak-point chaining",
-        "boss stagger",
-        "siege mode"
-      ],
-      "counterplay": [
-        "Heavy movement penalty in siege mode; chain breaks if the player repeats a node or misses the timing window."
-      ],
-      "visual_identity": "Massive cathedral-cannon silhouette with rotating halo rails, chained barrel braces, and a crown-shaped rear reactor.",
-      "animation_profile": "Deployment drives luminous braces into the ground, halo rails rotate into alignment, and recoil ripples through the entire rig like a bell strike.",
-      "vfx_profile": "Cathedral-scale gold shock rings, chained lightning between boss nodes, localized sky darkening, and kilometer-readable judgment markers.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "God-tier raid forge requiring multiple super-boss cores.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 2,
-        "vfx_band": "extreme",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A god-tier anti-boss weapon built to attack distributed weak points on skyscraper-scale creatures rather than ordinary targets.",
+        "silhouette": "Massive cathedral-cannon silhouette with rotating halo rails, chained barrel braces, and a crown-shaped rear reactor.",
+        "lore_hook": "Thronebreaker Ω is tied to this acquisition path: God-tier raid forge requiring multiple super-boss cores."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "weak-point chaining",
+          "boss stagger",
+          "siege mode"
+        ],
+        "signature": [
+          "Judgment Chain links consecutive hits on different boss regions; completing the chain detonates synchronized damage across every linked node.",
+          "Capability expression: weak-point chaining.",
+          "Capability expression: boss stagger.",
+          "Capability expression: siege mode."
+        ],
+        "counterplay": [
+          "Heavy movement penalty in siege mode; chain breaks if the player repeats a node or misses the timing window."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Cathedral-scale gold shock rings, chained lightning between boss nodes, localized sky darkening, and kilometer-readable judgment markers."
+        ],
+        "animation": [
+          "Deployment drives luminous braces into the ground, halo rails rotate into alignment, and recoil ripples through the entire rig like a bell strike."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier raid forge requiring multiple super-boss cores."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "medium",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "WPN-006",
-      "family": "weapon",
       "name": "Eventide Apostate",
-      "tier": "Absolute",
+      "family": "weapon",
+      "tier": "absolute",
+      "status": "specified",
       "role": "rule-shifting weapon platform",
-      "concept": "An Absolute weapon that cycles local combat rules through three authored firing doctrines rather than simply increasing damage.",
-      "signature_mechanic": "Doctrine Rewrite alternates between Gravity, Silence, and Fracture modes, changing projectile behavior, enemy mobility pressure, and cover interaction.",
-      "capabilities": [
-        "gravity shots",
-        "ability-silence field",
-        "fracture rounds"
-      ],
-      "counterplay": [
-        "Each doctrine has a long lock-in period; enemies can adapt once the mode is telegraphed and cannot be changed instantly."
-      ],
-      "visual_identity": "Floating black-metal weapon frame with no physical magazine, surrounded by three orbiting doctrine seals.",
-      "animation_profile": "Orbiting seals slot into the frame to reconfigure its silhouette; each doctrine has a distinct firing posture and reload-like transformation.",
-      "vfx_profile": "Local gravity ripples, desaturated silence bubbles, fracture-line geometry, and authored world-light response kept within encounter bounds.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Absolute ascension forge and three doctrine trials.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "extreme",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "An Absolute weapon that cycles local combat rules through three authored firing doctrines rather than simply increasing damage.",
+        "silhouette": "Floating black-metal weapon frame with no physical magazine, surrounded by three orbiting doctrine seals.",
+        "lore_hook": "Eventide Apostate is tied to this acquisition path: Absolute ascension forge and three doctrine trials."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "gravity shots",
+          "ability-silence field",
+          "fracture rounds"
+        ],
+        "signature": [
+          "Doctrine Rewrite alternates between Gravity, Silence, and Fracture modes, changing projectile behavior, enemy mobility pressure, and cover interaction.",
+          "Capability expression: gravity shots.",
+          "Capability expression: ability-silence field.",
+          "Capability expression: fracture rounds."
+        ],
+        "counterplay": [
+          "Each doctrine has a long lock-in period; enemies can adapt once the mode is telegraphed and cannot be changed instantly."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Local gravity ripples, desaturated silence bubbles, fracture-line geometry, and authored world-light response kept within encounter bounds."
+        ],
+        "animation": [
+          "Orbiting seals slot into the frame to reconfigure its silhouette; each doctrine has a distinct firing posture and reload-like transformation."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute ascension forge and three doctrine trials."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "medium",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "WPN-007",
-      "family": "weapon",
       "name": "Ashcoil Repeater",
-      "tier": "Epic",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
       "role": "mobile incendiary SMG",
-      "concept": "A fast compact weapon that leaves short-lived heated lanes, rewarding players who strafe and shape enemy movement.",
-      "signature_mechanic": "Coilwake paints brief thermal trails behind the wielder while firing; crossing trails ignites a burst that punishes pursuers.",
-      "capabilities": [
-        "thermal lanes",
-        "mobility synergy",
-        "pursuit denial"
-      ],
-      "counterplay": [
-        "Standing still wastes the mechanic; enemies can wait for trails to expire or route around them."
-      ],
-      "visual_identity": "Charcoal-metal SMG with orange coil tubing wrapped around a vented receiver.",
-      "animation_profile": "Coils flex with sustained fire and the stock vents open during overheat recovery.",
-      "vfx_profile": "Short orange wake strips, heat shimmer, and restrained ember bursts designed for high concurrent use.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Epic infernal foundry caches and faction vendors.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 10,
-        "vfx_band": "medium",
-        "replication_band": "low",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A fast compact weapon that leaves short-lived heated lanes, rewarding players who strafe and shape enemy movement.",
+        "silhouette": "Charcoal-metal SMG with orange coil tubing wrapped around a vented receiver.",
+        "lore_hook": "Ashcoil Repeater is tied to this acquisition path: Epic infernal foundry caches and faction vendors."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "thermal lanes",
+          "mobility synergy",
+          "pursuit denial"
+        ],
+        "signature": [
+          "Coilwake paints brief thermal trails behind the wielder while firing; crossing trails ignites a burst that punishes pursuers.",
+          "Capability expression: thermal lanes.",
+          "Capability expression: mobility synergy.",
+          "Capability expression: pursuit denial."
+        ],
+        "counterplay": [
+          "Standing still wastes the mechanic; enemies can wait for trails to expire or route around them."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Short orange wake strips, heat shimmer, and restrained ember bursts designed for high concurrent use."
+        ],
+        "animation": [
+          "Coils flex with sustained fire and the stock vents open during overheat recovery."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic infernal foundry caches and faction vendors."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "high",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "WPN-008",
-      "family": "weapon",
       "name": "Chronoclast Sidearm",
-      "tier": "Legendary",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
       "role": "temporal duelist pistol",
-      "concept": "A dueling pistol that records a target's recent position and can force a localized echo strike at that prior location.",
-      "signature_mechanic": "Afterimage Verdict records one enemy location on hit; secondary fire detonates a temporal echo at that recorded point after a short tell.",
-      "capabilities": [
-        "position recording",
-        "delayed echo strike",
-        "duel pressure"
-      ],
-      "counterplay": [
-        "Recorded point is visible to the target; mobile players can deliberately bait the echo away from allies."
-      ],
-      "visual_identity": "Long-barreled silver pistol with a translucent clockwork cylinder and backward-spinning chamber marks.",
-      "animation_profile": "Every third shot briefly reverses the cylinder animation; Verdict activation snaps the hand backward as if recoil occurs before firing.",
-      "vfx_profile": "Blue-white afterimages, thin clock glyphs, and a clean temporal inversion pulse with no full-screen distortion.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Legendary chronarch duel challenge.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 6,
-        "vfx_band": "high",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A dueling pistol that records a target's recent position and can force a localized echo strike at that prior location.",
+        "silhouette": "Long-barreled silver pistol with a translucent clockwork cylinder and backward-spinning chamber marks.",
+        "lore_hook": "Chronoclast Sidearm is tied to this acquisition path: Legendary chronarch duel challenge."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "position recording",
+          "delayed echo strike",
+          "duel pressure"
+        ],
+        "signature": [
+          "Afterimage Verdict records one enemy location on hit; secondary fire detonates a temporal echo at that recorded point after a short tell.",
+          "Capability expression: position recording.",
+          "Capability expression: delayed echo strike.",
+          "Capability expression: duel pressure."
+        ],
+        "counterplay": [
+          "Recorded point is visible to the target; mobile players can deliberately bait the echo away from allies."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Blue-white afterimages, thin clock glyphs, and a clean temporal inversion pulse with no full-screen distortion."
+        ],
+        "animation": [
+          "Every third shot briefly reverses the cylinder animation; Verdict activation snaps the hand backward as if recoil occurs before firing."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary chronarch duel challenge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "WPN-009",
-      "family": "weapon",
       "name": "Leviathan's Petition",
-      "tier": "Mythic",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
       "role": "tide-control heavy launcher",
-      "concept": "A mythic launcher built from abyssal shell that creates moving pressure waves instead of conventional explosive spam.",
-      "signature_mechanic": "Undertow Round creates a traveling pressure front that pushes lesser enemies, exposes buried targets, and amplifies damage against soaked foes.",
-      "capabilities": [
-        "pressure wave",
-        "soaked synergy",
-        "crowd displacement"
-      ],
-      "counterplay": [
-        "Slow projectile and long reload; anchored elites resist displacement and can punish careless close-range use."
-      ],
-      "visual_identity": "Deep-blue shell launcher with bioluminescent ribs and a rotating pearl chamber.",
-      "animation_profile": "Weapon visibly inhales before firing, ribs compress inward, and reload pours spectral seawater into the chamber.",
-      "vfx_profile": "Rolling translucent pressure wall, bioluminescent foam, refracted caustics, and restrained mist at range.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Mythic leviathan hunt and abyss forge.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 3,
-        "vfx_band": "high",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A mythic launcher built from abyssal shell that creates moving pressure waves instead of conventional explosive spam.",
+        "silhouette": "Deep-blue shell launcher with bioluminescent ribs and a rotating pearl chamber.",
+        "lore_hook": "Leviathan's Petition is tied to this acquisition path: Mythic leviathan hunt and abyss forge."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "pressure wave",
+          "soaked synergy",
+          "crowd displacement"
+        ],
+        "signature": [
+          "Undertow Round creates a traveling pressure front that pushes lesser enemies, exposes buried targets, and amplifies damage against soaked foes.",
+          "Capability expression: pressure wave.",
+          "Capability expression: soaked synergy.",
+          "Capability expression: crowd displacement."
+        ],
+        "counterplay": [
+          "Slow projectile and long reload; anchored elites resist displacement and can punish careless close-range use."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Rolling translucent pressure wall, bioluminescent foam, refracted caustics, and restrained mist at range."
+        ],
+        "animation": [
+          "Weapon visibly inhales before firing, ribs compress inward, and reload pours spectral seawater into the chamber."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic leviathan hunt and abyss forge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "WPN-010",
-      "family": "weapon",
       "name": "Choir of Ruin",
-      "tier": "Exotic",
+      "family": "weapon",
+      "tier": "exotic",
+      "status": "specified",
       "role": "multi-voice burst weapon",
-      "concept": "An exotic rifle that harmonizes successive bursts into escalating sonic patterns whose function depends on firing rhythm.",
-      "signature_mechanic": "Harmonic Sequence recognizes three firing cadences and converts them into stagger, shield fracture, or ally haste pulses.",
-      "capabilities": [
-        "rhythm input",
-        "stagger chord",
-        "shield fracture chord",
-        "ally haste chord"
-      ],
-      "counterplay": [
-        "Incorrect cadence resets the sequence; strong effects require readable timing rather than spam."
-      ],
-      "visual_identity": "Tri-barrel black chrome rifle with suspended tuning forks and a luminous waveform sight.",
-      "animation_profile": "Barrels rotate in measured musical intervals; successful cadences animate the forks into geometric chord shapes.",
-      "vfx_profile": "Visible waveform ribbons, concentric impact rings, and distinct color-coded harmonic signatures with accessible audio tells.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Exotic resonance conservatory questline.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 4,
-        "vfx_band": "high",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "An exotic rifle that harmonizes successive bursts into escalating sonic patterns whose function depends on firing rhythm.",
+        "silhouette": "Tri-barrel black chrome rifle with suspended tuning forks and a luminous waveform sight.",
+        "lore_hook": "Choir of Ruin is tied to this acquisition path: Exotic resonance conservatory questline."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "rhythm input",
+          "stagger chord",
+          "shield fracture chord",
+          "ally haste chord"
+        ],
+        "signature": [
+          "Harmonic Sequence recognizes three firing cadences and converts them into stagger, shield fracture, or ally haste pulses.",
+          "Capability expression: rhythm input.",
+          "Capability expression: stagger chord.",
+          "Capability expression: shield fracture chord.",
+          "Capability expression: ally haste chord."
+        ],
+        "counterplay": [
+          "Incorrect cadence resets the sequence; strong effects require readable timing rather than spam."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Visible waveform ribbons, concentric impact rings, and distinct color-coded harmonic signatures with accessible audio tells."
+        ],
+        "animation": [
+          "Barrels rotate in measured musical intervals; successful cadences animate the forks into geometric chord shapes."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic resonance conservatory questline."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "WPN-011",
-      "family": "weapon",
       "name": "Dreadstar I",
-      "tier": "Legendary",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
       "role": "evolving living rifle",
-      "concept": "The first stage of a living weapon lineage that develops new anatomy and attacks through tracked combat milestones.",
-      "signature_mechanic": "Predation Ledger records elite kills and biome-specific prey, unlocking permanent visual mutations and branching upgrade choices.",
-      "capabilities": [
-        "evolution tracking",
-        "branch upgrades",
-        "elite bonus"
-      ],
-      "counterplay": [
-        "Early stage is intentionally below mythic power; growth requires varied targets rather than repetitive farming."
-      ],
-      "visual_identity": "Dark organic rifle with a closed star-shaped organ embedded where the magazine would sit.",
-      "animation_profile": "Subtle breathing idle, tendon recoil, and mutation-specific reload animations as the star organ opens over progression.",
-      "vfx_profile": "Black-red capillary light, small predatory motes, and mutation VFX layered by evolution stage.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Legendary living-armory quest; evolves through dedicated milestones.",
-      "evolution": "Dreadstar I → Awakened → Godkiller → Dreadstar Ω.",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 5,
-        "vfx_band": "medium",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "The first stage of a living weapon lineage that develops new anatomy and attacks through tracked combat milestones.",
+        "silhouette": "Dark organic rifle with a closed star-shaped organ embedded where the magazine would sit.",
+        "lore_hook": "Dreadstar I is tied to this acquisition path: Legendary living-armory quest; evolves through dedicated milestones."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "evolution tracking",
+          "branch upgrades",
+          "elite bonus"
+        ],
+        "signature": [
+          "Predation Ledger records elite kills and biome-specific prey, unlocking permanent visual mutations and branching upgrade choices.",
+          "Capability expression: evolution tracking.",
+          "Capability expression: branch upgrades.",
+          "Capability expression: elite bonus."
+        ],
+        "counterplay": [
+          "Early stage is intentionally below mythic power; growth requires varied targets rather than repetitive farming."
+        ],
+        "evolution": [
+          "Dreadstar I → Awakened → Godkiller → Dreadstar Ω."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Black-red capillary light, small predatory motes, and mutation VFX layered by evolution stage."
+        ],
+        "animation": [
+          "Subtle breathing idle, tendon recoil, and mutation-specific reload animations as the star organ opens over progression."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary living-armory quest; evolves through dedicated milestones."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "WPN-012",
-      "family": "weapon",
       "name": "Parallax Mercy",
-      "tier": "Mythic",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
       "role": "support sniper",
-      "concept": "A mythic support rifle whose precision hits create temporary safe geometry and rescue lanes rather than purely maximizing damage.",
-      "signature_mechanic": "Mercy Plane converts marked precision impacts into short-lived protective planes that block hostile fire from one direction.",
-      "capabilities": [
-        "precision shield placement",
-        "rescue lane",
-        "ally support"
-      ],
-      "counterplay": [
-        "Planes protect from one facing only, expire rapidly, and can be flanked."
-      ],
-      "visual_identity": "Pearlescent long rifle with a split prism barrel and thin wing-like stabilization surfaces.",
-      "animation_profile": "Precision hits unfold a brief wing gesture along the barrel; deploying a Mercy Plane makes the weapon rotate through a ceremonial half-turn.",
-      "vfx_profile": "Iridescent planar shields, clean prismatic fracture on expiry, and low-noise support pulses to preserve combat readability.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Mythic sanctuary defense achievement chain.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 3,
-        "vfx_band": "high",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A mythic support rifle whose precision hits create temporary safe geometry and rescue lanes rather than purely maximizing damage.",
+        "silhouette": "Pearlescent long rifle with a split prism barrel and thin wing-like stabilization surfaces.",
+        "lore_hook": "Parallax Mercy is tied to this acquisition path: Mythic sanctuary defense achievement chain."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "precision shield placement",
+          "rescue lane",
+          "ally support"
+        ],
+        "signature": [
+          "Mercy Plane converts marked precision impacts into short-lived protective planes that block hostile fire from one direction.",
+          "Capability expression: precision shield placement.",
+          "Capability expression: rescue lane.",
+          "Capability expression: ally support."
+        ],
+        "counterplay": [
+          "Planes protect from one facing only, expire rapidly, and can be flanked."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Iridescent planar shields, clean prismatic fracture on expiry, and low-noise support pulses to preserve combat readability."
+        ],
+        "animation": [
+          "Precision hits unfold a brief wing gesture along the barrel; deploying a Mercy Plane makes the weapon rotate through a ceremonial half-turn."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic sanctuary defense achievement chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "MON-001",
-      "family": "monster",
       "name": "Goreglass Stalker",
-      "tier": "Epic",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
       "role": "ambush predator",
-      "concept": "A tall translucent predator whose internal organs appear as floating red silhouettes, using broken reflections to approach prey.",
-      "signature_mechanic": "Mirror Step lets it teleport only between reflective surfaces it has contaminated, creating positional horror without unrestricted teleport spam.",
-      "capabilities": [
-        "reflective ambush",
-        "bleed claws",
-        "surface contamination"
-      ],
-      "counterplay": [
-        "Players can destroy or avoid contaminated mirrors and force it into ordinary pursuit."
-      ],
-      "visual_identity": "Six-limbed glasslike hunter with visible floating anatomy and a split vertical jaw.",
-      "animation_profile": "Jerky stop-motion prowling transitions into unnaturally smooth mirror emergence; wounded state fractures limbs but does not detach them.",
-      "vfx_profile": "Subtle reflection warping, red internal silhouettes, glass dust on emergence, and localized chromatic fracture.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Spawns in corrupted urban interiors and mirror crypts.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 6,
-        "vfx_band": "medium",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A tall translucent predator whose internal organs appear as floating red silhouettes, using broken reflections to approach prey.",
+        "silhouette": "Six-limbed glasslike hunter with visible floating anatomy and a split vertical jaw.",
+        "lore_hook": "Goreglass Stalker is tied to this acquisition path: Spawns in corrupted urban interiors and mirror crypts."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "reflective ambush",
+          "bleed claws",
+          "surface contamination"
+        ],
+        "signature": [
+          "Mirror Step lets it teleport only between reflective surfaces it has contaminated, creating positional horror without unrestricted teleport spam.",
+          "Capability expression: reflective ambush.",
+          "Capability expression: bleed claws.",
+          "Capability expression: surface contamination."
+        ],
+        "counterplay": [
+          "Players can destroy or avoid contaminated mirrors and force it into ordinary pursuit."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Subtle reflection warping, red internal silhouettes, glass dust on emergence, and localized chromatic fracture."
+        ],
+        "animation": [
+          "Jerky stop-motion prowling transitions into unnaturally smooth mirror emergence; wounded state fractures limbs but does not detach them."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Spawns in corrupted urban interiors and mirror crypts."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "MON-002",
-      "family": "monster",
       "name": "Carrion Parliament",
-      "tier": "Legendary",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
       "role": "cooperative corpse swarm",
-      "concept": "A colony creature formed from dozens of small scavengers that vote through motion and merge into temporary combat shapes.",
-      "signature_mechanic": "Consensus Form reconfigures the swarm into Shield, Hunter, or Devourer formations based on incoming threats and nearby corpses.",
-      "capabilities": [
-        "formation switching",
-        "corpse consumption",
-        "swarm split"
-      ],
-      "counterplay": [
-        "Area denial disrupts formation density; burning remains denies corpse-fueled recovery."
-      ],
-      "visual_identity": "Dozens of pale mask-faced scavengers connected by tendon-thin black threads.",
-      "animation_profile": "Individuals scramble independently until a formation vote triggers a synchronized snap into a larger silhouette.",
-      "vfx_profile": "Black connective filaments, crawling shadow pool, brief white mask flashes when formation changes.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Legendary horde zones after corruption threshold rises.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 3,
-        "vfx_band": "high",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A colony creature formed from dozens of small scavengers that vote through motion and merge into temporary combat shapes.",
+        "silhouette": "Dozens of pale mask-faced scavengers connected by tendon-thin black threads.",
+        "lore_hook": "Carrion Parliament is tied to this acquisition path: Legendary horde zones after corruption threshold rises."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "formation switching",
+          "corpse consumption",
+          "swarm split"
+        ],
+        "signature": [
+          "Consensus Form reconfigures the swarm into Shield, Hunter, or Devourer formations based on incoming threats and nearby corpses.",
+          "Capability expression: formation switching.",
+          "Capability expression: corpse consumption.",
+          "Capability expression: swarm split."
+        ],
+        "counterplay": [
+          "Area denial disrupts formation density; burning remains denies corpse-fueled recovery."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Black connective filaments, crawling shadow pool, brief white mask flashes when formation changes."
+        ],
+        "animation": [
+          "Individuals scramble independently until a formation vote triggers a synchronized snap into a larger silhouette."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary horde zones after corruption threshold rises."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "MON-003",
-      "family": "monster",
       "name": "The Weeping Archon",
-      "tier": "Mythic",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
       "role": "eldritch field controller",
-      "concept": "A levitating cathedral-faced entity that weaponizes line of sight, punishing players who stare too long while protecting allies who look away.",
-      "signature_mechanic": "Grief Gaze builds exposure on viewers; looking away clears exposure but allows the Archon to advance and empower nearby lesser horrors.",
-      "capabilities": [
-        "gaze exposure",
-        "minion empowerment",
-        "levitating advance"
-      ],
-      "counterplay": [
-        "Players manage sightlines and rotate attention; solid cover fully breaks gaze buildup."
-      ],
-      "visual_identity": "Towering robed figure with a cathedral facade instead of a face, windows leaking vertical streams of black light.",
-      "animation_profile": "Moves without walking; robes trail upward against gravity while facade doors slowly open at high exposure.",
-      "vfx_profile": "Black rain moving upward, stained-glass light wounds, localized vignette only for affected players, and choir-reactive danger cues.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Mythic anomaly event in ruined sanctum regions.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 2,
-        "vfx_band": "extreme",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A levitating cathedral-faced entity that weaponizes line of sight, punishing players who stare too long while protecting allies who look away.",
+        "silhouette": "Towering robed figure with a cathedral facade instead of a face, windows leaking vertical streams of black light.",
+        "lore_hook": "The Weeping Archon is tied to this acquisition path: Mythic anomaly event in ruined sanctum regions."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "gaze exposure",
+          "minion empowerment",
+          "levitating advance"
+        ],
+        "signature": [
+          "Grief Gaze builds exposure on viewers; looking away clears exposure but allows the Archon to advance and empower nearby lesser horrors.",
+          "Capability expression: gaze exposure.",
+          "Capability expression: minion empowerment.",
+          "Capability expression: levitating advance."
+        ],
+        "counterplay": [
+          "Players manage sightlines and rotate attention; solid cover fully breaks gaze buildup."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Black rain moving upward, stained-glass light wounds, localized vignette only for affected players, and choir-reactive danger cues."
+        ],
+        "animation": [
+          "Moves without walking; robes trail upward against gravity while facade doors slowly open at high exposure."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic anomaly event in ruined sanctum regions."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "medium",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "MON-004",
-      "family": "monster",
       "name": "Morroweater",
-      "tier": "Exotic",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
       "role": "adaptive cannibal brute",
-      "concept": "A horde apex mutant that evolves by consuming fallen members of its own brood, selecting new anatomy according to what killed them.",
-      "signature_mechanic": "Carrion Adaptation reads recent brood deaths and grows one counter-trait—armor, mobility, ranged spit, or resistance—for a limited phase.",
-      "capabilities": [
-        "cannibal evolution",
-        "adaptive trait",
-        "brood command"
-      ],
-      "counterplay": [
-        "Trait is singular and visibly telegraphed; changing adaptation requires another feeding window that can be interrupted."
-      ],
-      "visual_identity": "Massive asymmetrical brute covered in partially absorbed faces and mismatched limbs that reorganize after feeding.",
-      "animation_profile": "Feeding is a violent full-body fold over a corpse followed by a clearly staged mutation animation with vulnerable recovery frames.",
-      "vfx_profile": "Vein maps ignite during adaptation, bone plates grow through dust bursts, and trait colors remain consistent for readability.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Exotic horde escalation stage four and five.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 3,
-        "vfx_band": "high",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A horde apex mutant that evolves by consuming fallen members of its own brood, selecting new anatomy according to what killed them.",
+        "silhouette": "Massive asymmetrical brute covered in partially absorbed faces and mismatched limbs that reorganize after feeding.",
+        "lore_hook": "Morroweater is tied to this acquisition path: Exotic horde escalation stage four and five."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "cannibal evolution",
+          "adaptive trait",
+          "brood command"
+        ],
+        "signature": [
+          "Carrion Adaptation reads recent brood deaths and grows one counter-trait—armor, mobility, ranged spit, or resistance—for a limited phase.",
+          "Capability expression: cannibal evolution.",
+          "Capability expression: adaptive trait.",
+          "Capability expression: brood command."
+        ],
+        "counterplay": [
+          "Trait is singular and visibly telegraphed; changing adaptation requires another feeding window that can be interrupted."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Vein maps ignite during adaptation, bone plates grow through dust bursts, and trait colors remain consistent for readability."
+        ],
+        "animation": [
+          "Feeding is a violent full-body fold over a corpse followed by a clearly staged mutation animation with vulnerable recovery frames."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic horde escalation stage four and five."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "MON-005",
-      "family": "monster",
       "name": "Nullskin Pilgrim",
-      "tier": "Legendary",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
       "role": "anti-ability hunter",
-      "concept": "A silent humanoid horror wrapped in featureless cloth that tracks repeated player ability use and hunts predictable casters.",
-      "signature_mechanic": "Pattern Hunger marks the most repeated nearby skill category and gains temporary resistance plus a counter-lunge against that category.",
-      "capabilities": [
-        "skill pattern tracking",
-        "counter-lunge",
-        "silence pulse"
-      ],
-      "counterplay": [
-        "Varied ability use prevents strong adaptation; breaking line of sight clears tracking progress."
-      ],
-      "visual_identity": "Featureless tall pilgrim wrapped in matte cloth with a thin moving seam where a face should be.",
-      "animation_profile": "Slow prayer-like idle abruptly becomes a low quadrupedal sprint when Pattern Hunger completes.",
-      "vfx_profile": "Almost particle-free silhouette, muted local audio, thin black seam flashes, and a concise silence ring on counter-lunge.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Legendary void pilgrimage encounters.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 5,
-        "vfx_band": "medium",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A silent humanoid horror wrapped in featureless cloth that tracks repeated player ability use and hunts predictable casters.",
+        "silhouette": "Featureless tall pilgrim wrapped in matte cloth with a thin moving seam where a face should be.",
+        "lore_hook": "Nullskin Pilgrim is tied to this acquisition path: Legendary void pilgrimage encounters."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "skill pattern tracking",
+          "counter-lunge",
+          "silence pulse"
+        ],
+        "signature": [
+          "Pattern Hunger marks the most repeated nearby skill category and gains temporary resistance plus a counter-lunge against that category.",
+          "Capability expression: skill pattern tracking.",
+          "Capability expression: counter-lunge.",
+          "Capability expression: silence pulse."
+        ],
+        "counterplay": [
+          "Varied ability use prevents strong adaptation; breaking line of sight clears tracking progress."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Almost particle-free silhouette, muted local audio, thin black seam flashes, and a concise silence ring on counter-lunge."
+        ],
+        "animation": [
+          "Slow prayer-like idle abruptly becomes a low quadrupedal sprint when Pattern Hunger completes."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary void pilgrimage encounters."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "MON-006",
-      "family": "monster",
       "name": "Saint of Teeth",
-      "tier": "Mythic",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
       "role": "ritual demon elite",
-      "concept": "A ceremonial demon carrying hundreds of hovering teeth that constructs temporary ritual geometry around trapped players.",
-      "signature_mechanic": "Dental Litany places three orbiting tooth pylons; completing the triangle creates a bite-zone that repeatedly snaps inward until one pylon is broken.",
-      "capabilities": [
-        "ritual trap",
-        "orbiting pylons",
-        "bleed curse"
-      ],
-      "counterplay": [
-        "Pylons are individually targetable; destroying one collapses the triangle and staggers the demon."
-      ],
-      "visual_identity": "Elegant horned demon in ruined vestments with a floating halo made entirely of rotating humanlike teeth.",
-      "animation_profile": "Combat alternates between graceful liturgical gestures and sudden animal lunges; pylon casting uses precise three-point hand choreography.",
-      "vfx_profile": "Bone-white glyph triangles, crimson bite-lines, tooth halo trails, and a brief cathedral shadow during successful entrapment.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Mythic demon cathedral incursion.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 2,
-        "vfx_band": "high",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A ceremonial demon carrying hundreds of hovering teeth that constructs temporary ritual geometry around trapped players.",
+        "silhouette": "Elegant horned demon in ruined vestments with a floating halo made entirely of rotating humanlike teeth.",
+        "lore_hook": "Saint of Teeth is tied to this acquisition path: Mythic demon cathedral incursion."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "ritual trap",
+          "orbiting pylons",
+          "bleed curse"
+        ],
+        "signature": [
+          "Dental Litany places three orbiting tooth pylons; completing the triangle creates a bite-zone that repeatedly snaps inward until one pylon is broken.",
+          "Capability expression: ritual trap.",
+          "Capability expression: orbiting pylons.",
+          "Capability expression: bleed curse."
+        ],
+        "counterplay": [
+          "Pylons are individually targetable; destroying one collapses the triangle and staggers the demon."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Bone-white glyph triangles, crimson bite-lines, tooth halo trails, and a brief cathedral shadow during successful entrapment."
+        ],
+        "animation": [
+          "Combat alternates between graceful liturgical gestures and sudden animal lunges; pylon casting uses precise three-point hand choreography."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic demon cathedral incursion."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "MON-007",
-      "family": "monster",
       "name": "Ash Widow Matriarch",
-      "tier": "Epic",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
       "role": "brood artillery spider",
-      "concept": "A giant ash-coated arachnid that creates temporary egg-mines and uses smoke to reposition rather than relying on raw durability.",
-      "signature_mechanic": "Funeral Brood fires egg sacs into terrain; sacs hatch only when players cross their ash sensing radius, enabling controllable ambush fields.",
-      "capabilities": [
-        "egg mines",
-        "smoke relocation",
-        "web slow"
-      ],
-      "counterplay": [
-        "Egg sacs can be spotted and destroyed; wind/clear-space encounters reduce smoke advantage."
-      ],
-      "visual_identity": "Charred spider with elongated funeral-spire abdomen and pale ember eyes.",
-      "animation_profile": "Abdomen opens like a censer for artillery shots; relocation collapses the body into a low smoke crawl before reforming.",
-      "vfx_profile": "Grey ash sheets, tiny ember eyes through smoke, silk lines visible under direct light, and low-cost hatch bursts.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Epic volcanic nest and cremation forest encounters.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 5,
-        "vfx_band": "medium",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A giant ash-coated arachnid that creates temporary egg-mines and uses smoke to reposition rather than relying on raw durability.",
+        "silhouette": "Charred spider with elongated funeral-spire abdomen and pale ember eyes.",
+        "lore_hook": "Ash Widow Matriarch is tied to this acquisition path: Epic volcanic nest and cremation forest encounters."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "egg mines",
+          "smoke relocation",
+          "web slow"
+        ],
+        "signature": [
+          "Funeral Brood fires egg sacs into terrain; sacs hatch only when players cross their ash sensing radius, enabling controllable ambush fields.",
+          "Capability expression: egg mines.",
+          "Capability expression: smoke relocation.",
+          "Capability expression: web slow."
+        ],
+        "counterplay": [
+          "Egg sacs can be spotted and destroyed; wind/clear-space encounters reduce smoke advantage."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Grey ash sheets, tiny ember eyes through smoke, silk lines visible under direct light, and low-cost hatch bursts."
+        ],
+        "animation": [
+          "Abdomen opens like a censer for artillery shots; relocation collapses the body into a low smoke crawl before reforming."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic volcanic nest and cremation forest encounters."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "MON-008",
-      "family": "monster",
       "name": "Ossuary Engineer",
-      "tier": "Legendary",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
       "role": "necromancer constructor",
-      "concept": "A battlefield necromancer that converts nearby remains into temporary bone fortifications, turrets, and bridges for undead allies.",
-      "signature_mechanic": "Grave Architecture spends corpse charges to build one of three structures, forcing players to decide whether to clear constructs or rush the caster.",
-      "capabilities": [
-        "bone barricade",
-        "bone turret",
-        "bone bridge",
-        "corpse economy"
-      ],
-      "counterplay": [
-        "Removing corpses denies charges; the Engineer is fragile while channeling construction."
-      ],
-      "visual_identity": "Thin robed necromancer with drafting instruments, a spine-abacus, and folded skeletal measuring arms.",
-      "animation_profile": "Measures space with snapping bone calipers before structures grow along traced lines; panic state abandons tools and retreats.",
-      "vfx_profile": "White construction lines, rapid ossified growth, dusty skeletal extrusion, and restrained green necrotic anchors.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Legendary necropolis squads and siege events.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 4,
-        "vfx_band": "high",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A battlefield necromancer that converts nearby remains into temporary bone fortifications, turrets, and bridges for undead allies.",
+        "silhouette": "Thin robed necromancer with drafting instruments, a spine-abacus, and folded skeletal measuring arms.",
+        "lore_hook": "Ossuary Engineer is tied to this acquisition path: Legendary necropolis squads and siege events."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "bone barricade",
+          "bone turret",
+          "bone bridge",
+          "corpse economy"
+        ],
+        "signature": [
+          "Grave Architecture spends corpse charges to build one of three structures, forcing players to decide whether to clear constructs or rush the caster.",
+          "Capability expression: bone barricade.",
+          "Capability expression: bone turret.",
+          "Capability expression: bone bridge.",
+          "Capability expression: corpse economy."
+        ],
+        "counterplay": [
+          "Removing corpses denies charges; the Engineer is fragile while channeling construction."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "White construction lines, rapid ossified growth, dusty skeletal extrusion, and restrained green necrotic anchors."
+        ],
+        "animation": [
+          "Measures space with snapping bone calipers before structures grow along traced lines; panic state abandons tools and retreats."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary necropolis squads and siege events."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "MON-009",
-      "family": "monster",
       "name": "The Lantern Below",
-      "tier": "Mythic",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
       "role": "subterranean lure predator",
-      "concept": "A buried eldritch organism that projects a harmless-looking lantern avatar above ground to lure players into its attack radius.",
-      "signature_mechanic": "False Guide presents contextual fake safety cues; damaging or ignoring the lantern reveals buried tendrils and begins the real encounter.",
-      "capabilities": [
-        "lure avatar",
-        "subterranean tendrils",
-        "terrain burst"
-      ],
-      "counterplay": [
-        "Observant players can identify inconsistent lantern behavior and pre-position before triggering the reveal."
-      ],
-      "visual_identity": "Only the lure is visible at first; revealed form is a circular buried maw surrounded by radial armored tendrils.",
-      "animation_profile": "Lantern sways with almost-human hesitation; reveal inverts the lantern downward as the terrain opens into a radial attack rig.",
-      "vfx_profile": "Warm inviting glow abruptly inverts to cold abyssal light, with radial ground cracks and dust-constrained tendril effects.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Mythic hidden encounter in caves and dead roads.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "high",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A buried eldritch organism that projects a harmless-looking lantern avatar above ground to lure players into its attack radius.",
+        "silhouette": "Only the lure is visible at first; revealed form is a circular buried maw surrounded by radial armored tendrils.",
+        "lore_hook": "The Lantern Below is tied to this acquisition path: Mythic hidden encounter in caves and dead roads."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "lure avatar",
+          "subterranean tendrils",
+          "terrain burst"
+        ],
+        "signature": [
+          "False Guide presents contextual fake safety cues; damaging or ignoring the lantern reveals buried tendrils and begins the real encounter.",
+          "Capability expression: lure avatar.",
+          "Capability expression: subterranean tendrils.",
+          "Capability expression: terrain burst."
+        ],
+        "counterplay": [
+          "Observant players can identify inconsistent lantern behavior and pre-position before triggering the reveal."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Warm inviting glow abruptly inverts to cold abyssal light, with radial ground cracks and dust-constrained tendril effects."
+        ],
+        "animation": [
+          "Lantern sways with almost-human hesitation; reveal inverts the lantern downward as the terrain opens into a radial attack rig."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic hidden encounter in caves and dead roads."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "MON-010",
-      "family": "monster",
       "name": "Red Psalm Butcher",
-      "tier": "Exotic",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
       "role": "berserker demon",
-      "concept": "A towering executioner demon whose attack cadence follows a visible ritual meter; skilled players can deliberately force a vulnerable overcommit.",
-      "signature_mechanic": "Psalm Meter escalates through five verses as it lands attacks; Verse Five is catastrophic but leaves the Butcher exposed if avoided.",
-      "capabilities": [
-        "five-verse combo",
-        "execution grab",
-        "rage escalation"
-      ],
-      "counterplay": [
-        "Perfect spacing and mobility can bait Verse Five into terrain, causing a long self-stagger."
-      ],
-      "visual_identity": "Enormous red-black executioner with scripture chains embedded in the torso and a cleaver taller than a player.",
-      "animation_profile": "Each verse adds heavier anticipatory motion and larger recovery; Verse Five uses a full-body overhead cleave with unmistakable windup.",
-      "vfx_profile": "Red scripture bands wrap the arena, cleaver afterimages grow by verse, and Verse Five produces a controlled vertical shock scar.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Exotic infernal tribunal event.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 2,
-        "vfx_band": "high",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A towering executioner demon whose attack cadence follows a visible ritual meter; skilled players can deliberately force a vulnerable overcommit.",
+        "silhouette": "Enormous red-black executioner with scripture chains embedded in the torso and a cleaver taller than a player.",
+        "lore_hook": "Red Psalm Butcher is tied to this acquisition path: Exotic infernal tribunal event."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "five-verse combo",
+          "execution grab",
+          "rage escalation"
+        ],
+        "signature": [
+          "Psalm Meter escalates through five verses as it lands attacks; Verse Five is catastrophic but leaves the Butcher exposed if avoided.",
+          "Capability expression: five-verse combo.",
+          "Capability expression: execution grab.",
+          "Capability expression: rage escalation."
+        ],
+        "counterplay": [
+          "Perfect spacing and mobility can bait Verse Five into terrain, causing a long self-stagger."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Red scripture bands wrap the arena, cleaver afterimages grow by verse, and Verse Five produces a controlled vertical shock scar."
+        ],
+        "animation": [
+          "Each verse adds heavier anticipatory motion and larger recovery; Verse Five uses a full-body overhead cleave with unmistakable windup."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic infernal tribunal event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "MON-011",
-      "family": "monster",
       "name": "Hollow Crown Procession",
-      "tier": "God",
+      "family": "monster",
+      "tier": "god",
+      "status": "specified",
       "role": "roaming composite horror",
-      "concept": "A god-tier roaming procession of linked giants carrying an empty crown between them, behaving as one moving regional encounter.",
-      "signature_mechanic": "Coronation March links multiple bodies to a shared ritual state; destroying bearer anchors changes the formation and unlocks the crown core.",
-      "capabilities": [
-        "multi-body encounter",
-        "formation phases",
-        "regional march",
-        "crown core"
-      ],
-      "counterplay": [
-        "Players can target bearer anchors in any order to alter later phase difficulty; the core is invulnerable until formation conditions are met."
-      ],
-      "visual_identity": "Four immense faceless giants chained to a floating black crown, followed by smaller masked attendants.",
-      "animation_profile": "Giants step in synchronized impossible timing; each lost bearer forces the surviving bodies into a new asymmetrical gait and attack language.",
-      "vfx_profile": "Kilometer-visible crown silhouette, dark procession beams, dust fronts, chained lightning between bearers, and scalable distant impostor effects.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Rare God-tier roaming world event.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "extreme",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A god-tier roaming procession of linked giants carrying an empty crown between them, behaving as one moving regional encounter.",
+        "silhouette": "Four immense faceless giants chained to a floating black crown, followed by smaller masked attendants.",
+        "lore_hook": "Hollow Crown Procession is tied to this acquisition path: Rare God-tier roaming world event."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "multi-body encounter",
+          "formation phases",
+          "regional march",
+          "crown core"
+        ],
+        "signature": [
+          "Coronation March links multiple bodies to a shared ritual state; destroying bearer anchors changes the formation and unlocks the crown core.",
+          "Capability expression: multi-body encounter.",
+          "Capability expression: formation phases.",
+          "Capability expression: regional march.",
+          "Capability expression: crown core."
+        ],
+        "counterplay": [
+          "Players can target bearer anchors in any order to alter later phase difficulty; the core is invulnerable until formation conditions are met."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Kilometer-visible crown silhouette, dark procession beams, dust fronts, chained lightning between bearers, and scalable distant impostor effects."
+        ],
+        "animation": [
+          "Giants step in synchronized impossible timing; each lost bearer forces the surviving bodies into a new asymmetrical gait and attack language."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Rare God-tier roaming world event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "medium",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "MON-012",
-      "family": "monster",
       "name": "Abyssal Taxonomist",
-      "tier": "Absolute",
+      "family": "monster",
+      "tier": "absolute",
+      "status": "specified",
       "role": "reality-classifying eldritch entity",
-      "concept": "An Absolute monster that temporarily reclassifies nearby combatants into authored categories and applies different encounter rules to each.",
-      "signature_mechanic": "Taxonomy Decree assigns temporary labels such as Predator, Prey, Vessel, or Witness, each changing how the encounter targets and pressures that player.",
-      "capabilities": [
-        "role reassignment",
-        "adaptive targeting",
-        "reality decree"
-      ],
-      "counterplay": [
-        "Assignments are telegraphed and can be swapped by completing arena actions; coordinated teams can intentionally manipulate classifications."
-      ],
-      "visual_identity": "Impossible floating cabinet of limbs, eyes, specimen drawers, and rotating labels orbiting a central faceless curator.",
-      "animation_profile": "Drawers open into extra-dimensional gestures, labels stamp onto reality, and limb configurations change with the active taxonomy.",
-      "vfx_profile": "Floating classification glyphs, restrained localized spatial folds, specimen-light projections, and role-specific aura language.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Absolute anomaly chain after completing all regional eldritch archives.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "extreme",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "An Absolute monster that temporarily reclassifies nearby combatants into authored categories and applies different encounter rules to each.",
+        "silhouette": "Impossible floating cabinet of limbs, eyes, specimen drawers, and rotating labels orbiting a central faceless curator.",
+        "lore_hook": "Abyssal Taxonomist is tied to this acquisition path: Absolute anomaly chain after completing all regional eldritch archives."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "role reassignment",
+          "adaptive targeting",
+          "reality decree"
+        ],
+        "signature": [
+          "Taxonomy Decree assigns temporary labels such as Predator, Prey, Vessel, or Witness, each changing how the encounter targets and pressures that player.",
+          "Capability expression: role reassignment.",
+          "Capability expression: adaptive targeting.",
+          "Capability expression: reality decree."
+        ],
+        "counterplay": [
+          "Assignments are telegraphed and can be swapped by completing arena actions; coordinated teams can intentionally manipulate classifications."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Floating classification glyphs, restrained localized spatial folds, specimen-light projections, and role-specific aura language."
+        ],
+        "animation": [
+          "Drawers open into extra-dimensional gestures, labels stamp onto reality, and limb configurations change with the active taxonomy."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute anomaly chain after completing all regional eldritch archives."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "medium",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-001",
-      "family": "npc",
       "name": "Kael Veyr, Rift Warden",
-      "tier": "Epic",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
       "role": "hireable vanguard",
-      "concept": "A disciplined rift soldier who protects the hiring squad by physically intercepting danger lanes and creating short-lived breach cover.",
-      "signature_mechanic": "Guardian Breach teleports Kael to a threatened ally and creates a directional cover plane before counterattacking.",
-      "capabilities": [
-        "ally interception",
-        "directional cover",
-        "rifle pressure"
-      ],
-      "counterplay": [
-        "Long interception cooldown and cannot protect multiple separated allies simultaneously."
-      ],
-      "visual_identity": "Angular midnight armor with a split cyan mantle and compact rift buckler.",
-      "animation_profile": "Combat uses grounded military motion punctuated by a single sharp rift-step and shield-brace animation.",
-      "vfx_profile": "Compact cyan breach plane, geometric teleport cut, restrained shield sparks.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Epic faction reputation hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 2,
-        "vfx_band": "medium",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A disciplined rift soldier who protects the hiring squad by physically intercepting danger lanes and creating short-lived breach cover.",
+        "silhouette": "Angular midnight armor with a split cyan mantle and compact rift buckler.",
+        "lore_hook": "Kael Veyr, Rift Warden is tied to this acquisition path: Epic faction reputation hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "ally interception",
+          "directional cover",
+          "rifle pressure"
+        ],
+        "signature": [
+          "Guardian Breach teleports Kael to a threatened ally and creates a directional cover plane before counterattacking.",
+          "Capability expression: ally interception.",
+          "Capability expression: directional cover.",
+          "Capability expression: rifle pressure."
+        ],
+        "counterplay": [
+          "Long interception cooldown and cannot protect multiple separated allies simultaneously."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Compact cyan breach plane, geometric teleport cut, restrained shield sparks."
+        ],
+        "animation": [
+          "Combat uses grounded military motion punctuated by a single sharp rift-step and shield-brace animation."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic faction reputation hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-002",
-      "family": "npc",
       "name": "Nyx Caldera, Ash Saint",
-      "tier": "Legendary",
+      "family": "npc",
+      "tier": "legendary",
+      "status": "specified",
       "role": "hireable battlefield controller",
-      "concept": "A charismatic infernal renegade who turns burning ground into safe lanes for allies and dangerous funnels for enemies.",
-      "signature_mechanic": "Saintfire Conversion changes selected hostile fire zones into allied ember sanctuaries that heal slightly and accelerate reloads.",
-      "capabilities": [
-        "hazard conversion",
-        "ally sustain",
-        "fire immunity aura"
-      ],
-      "counterplay": [
-        "Conversion has limited charges and cannot affect boss-authored ultimate hazards."
-      ],
-      "visual_identity": "Elegant black-red saint armor, ember veil, asymmetric halo, and ritual sidearm.",
-      "animation_profile": "Nyx traces a circle with her heel before snapping fingers to invert a hazard; reload animations use ember-fed magazine seals.",
-      "vfx_profile": "Fire shifts from red to white-gold inside converted zones, halo expands, and ash rises rather than falls.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Legendary infernal-rebel questline hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "high",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A charismatic infernal renegade who turns burning ground into safe lanes for allies and dangerous funnels for enemies.",
+        "silhouette": "Elegant black-red saint armor, ember veil, asymmetric halo, and ritual sidearm.",
+        "lore_hook": "Nyx Caldera, Ash Saint is tied to this acquisition path: Legendary infernal-rebel questline hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "hazard conversion",
+          "ally sustain",
+          "fire immunity aura"
+        ],
+        "signature": [
+          "Saintfire Conversion changes selected hostile fire zones into allied ember sanctuaries that heal slightly and accelerate reloads.",
+          "Capability expression: hazard conversion.",
+          "Capability expression: ally sustain.",
+          "Capability expression: fire immunity aura."
+        ],
+        "counterplay": [
+          "Conversion has limited charges and cannot affect boss-authored ultimate hazards."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Fire shifts from red to white-gold inside converted zones, halo expands, and ash rises rather than falls."
+        ],
+        "animation": [
+          "Nyx traces a circle with her heel before snapping fingers to invert a hazard; reload animations use ember-fed magazine seals."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary infernal-rebel questline hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-003",
-      "family": "npc",
       "name": "Orion Gravewake",
-      "tier": "Mythic",
+      "family": "npc",
+      "tier": "mythic",
+      "status": "specified",
       "role": "hireable necromantic tactician",
-      "concept": "A mythic necromancer ally who does not flood the field with disposable summons; instead he reconstructs selected defeated enemies as short-lived tactical echoes.",
-      "signature_mechanic": "Gravewake Recall stores one recently defeated non-boss archetype and summons a weakened spectral copy with a limited lifetime.",
-      "capabilities": [
-        "enemy echo summon",
-        "curse rifle",
-        "corpse denial"
-      ],
-      "counterplay": [
-        "Only one echo can exist at once and copied elites lose signature boss mechanics."
-      ],
-      "visual_identity": "Regal bone-black coat, floating vertebrae crown, and a lantern containing captured silhouettes.",
-      "animation_profile": "Summoning pulls a silhouette from the lantern and stitches it into a translucent body with deliberate conductor gestures.",
-      "vfx_profile": "Cold grave mist, blue-black thread stitching, spectral replica shader, and clear despawn countdown rune.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Mythic necromancer covenant mastery hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "high",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A mythic necromancer ally who does not flood the field with disposable summons; instead he reconstructs selected defeated enemies as short-lived tactical echoes.",
+        "silhouette": "Regal bone-black coat, floating vertebrae crown, and a lantern containing captured silhouettes.",
+        "lore_hook": "Orion Gravewake is tied to this acquisition path: Mythic necromancer covenant mastery hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "enemy echo summon",
+          "curse rifle",
+          "corpse denial"
+        ],
+        "signature": [
+          "Gravewake Recall stores one recently defeated non-boss archetype and summons a weakened spectral copy with a limited lifetime.",
+          "Capability expression: enemy echo summon.",
+          "Capability expression: curse rifle.",
+          "Capability expression: corpse denial."
+        ],
+        "counterplay": [
+          "Only one echo can exist at once and copied elites lose signature boss mechanics."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Cold grave mist, blue-black thread stitching, spectral replica shader, and clear despawn countdown rune."
+        ],
+        "animation": [
+          "Summoning pulls a silhouette from the lantern and stitches it into a translucent body with deliberate conductor gestures."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic necromancer covenant mastery hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-004",
-      "family": "npc",
       "name": "Vesper Quill, Impossible Cartographer",
-      "tier": "Exotic",
+      "family": "npc",
+      "tier": "exotic",
+      "status": "specified",
       "role": "hireable exploration specialist",
-      "concept": "An exotic navigator who reveals hidden traversal opportunities and can open temporary shortcuts through otherwise disconnected local spaces.",
-      "signature_mechanic": "Impossible Route creates a temporary one-way squad portal between two authored nearby anchor categories, never arbitrary map-wide teleportation.",
-      "capabilities": [
-        "shortcut portal",
-        "secret detection",
-        "route marking"
-      ],
-      "counterplay": [
-        "Portal endpoints obey authored anchors and have a long cooldown; enemies can see the exit warning."
-      ],
-      "visual_identity": "Long iridescent coat covered in moving map lines, floating compass shards, and a lens-mask with shifting coordinates.",
-      "animation_profile": "Draws portals by sketching in the air with a metal quill while compass shards rotate into the destination bearing.",
-      "vfx_profile": "Prismatic contour lines, folded-map portal surface, coordinate rain, and minimal distortion outside the portal rim.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Exotic cartographer faction grandmaster hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "high",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "An exotic navigator who reveals hidden traversal opportunities and can open temporary shortcuts through otherwise disconnected local spaces.",
+        "silhouette": "Long iridescent coat covered in moving map lines, floating compass shards, and a lens-mask with shifting coordinates.",
+        "lore_hook": "Vesper Quill, Impossible Cartographer is tied to this acquisition path: Exotic cartographer faction grandmaster hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "shortcut portal",
+          "secret detection",
+          "route marking"
+        ],
+        "signature": [
+          "Impossible Route creates a temporary one-way squad portal between two authored nearby anchor categories, never arbitrary map-wide teleportation.",
+          "Capability expression: shortcut portal.",
+          "Capability expression: secret detection.",
+          "Capability expression: route marking."
+        ],
+        "counterplay": [
+          "Portal endpoints obey authored anchors and have a long cooldown; enemies can see the exit warning."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Prismatic contour lines, folded-map portal surface, coordinate rain, and minimal distortion outside the portal rim."
+        ],
+        "animation": [
+          "Draws portals by sketching in the air with a metal quill while compass shards rotate into the destination bearing."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic cartographer faction grandmaster hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-005",
-      "family": "npc",
       "name": "Aurelia Vox, Throne of Storms",
-      "tier": "God",
+      "family": "npc",
+      "tier": "god",
+      "status": "specified",
       "role": "hireable god-tier striker",
-      "concept": "A God-tier hireable whose presence changes outdoor combat through controlled storm lanes, aerial pressure, and high-impact ally rescue.",
-      "signature_mechanic": "Thronefront creates a moving storm wall centered on Aurelia that damages hostile flyers, deflects light projectiles, and periodically launches chain bolts.",
-      "capabilities": [
-        "moving storm domain",
-        "chain lightning",
-        "aerial rescue",
-        "flight"
-      ],
-      "counterplay": [
-        "Domain weakens indoors and has a long recovery after its major discharge."
-      ],
-      "visual_identity": "Regal storm armor with floating crown fragments, luminous cape-cloud, and spear-like lightning focus.",
-      "animation_profile": "Hover locomotion with controlled cape turbulence; major cast assembles crown fragments into a vertical storm throne silhouette.",
-      "vfx_profile": "Layered cloud crown, branching lightning with strict target caps, wind ribbons, and distant storm-column landmark effect.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "God-tier storm covenant, world-boss proof, and high-cost hire contract.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "extreme",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A God-tier hireable whose presence changes outdoor combat through controlled storm lanes, aerial pressure, and high-impact ally rescue.",
+        "silhouette": "Regal storm armor with floating crown fragments, luminous cape-cloud, and spear-like lightning focus.",
+        "lore_hook": "Aurelia Vox, Throne of Storms is tied to this acquisition path: God-tier storm covenant, world-boss proof, and high-cost hire contract."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "moving storm domain",
+          "chain lightning",
+          "aerial rescue",
+          "flight"
+        ],
+        "signature": [
+          "Thronefront creates a moving storm wall centered on Aurelia that damages hostile flyers, deflects light projectiles, and periodically launches chain bolts.",
+          "Capability expression: moving storm domain.",
+          "Capability expression: chain lightning.",
+          "Capability expression: aerial rescue.",
+          "Capability expression: flight."
+        ],
+        "counterplay": [
+          "Domain weakens indoors and has a long recovery after its major discharge."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Layered cloud crown, branching lightning with strict target caps, wind ribbons, and distant storm-column landmark effect."
+        ],
+        "animation": [
+          "Hover locomotion with controlled cape turbulence; major cast assembles crown fragments into a vertical storm throne silhouette."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier storm covenant, world-boss proof, and high-cost hire contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "medium",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-006",
-      "family": "npc",
       "name": "Seraphine Veyra, First Ascendant",
-      "tier": "Absolute",
+      "family": "npc",
+      "tier": "absolute",
+      "status": "specified",
       "role": "hireable absolute support",
-      "concept": "An Absolute support entity who manipulates encounter recovery, temporary allied manifestations, and localized battlefield reconstruction.",
-      "signature_mechanic": "Genesis Rewrite restores selected allied combat state, creates short-lived spectral ally doubles, and deploys authored cover structures in one synchronized cast.",
-      "capabilities": [
-        "combat recovery",
-        "ally doubles",
-        "cover genesis",
-        "celestial support"
-      ],
-      "counterplay": [
-        "Once-per-major-encounter ultimate; doubles inherit reduced power and generated cover is temporary."
-      ],
-      "visual_identity": "Celestial black-and-gold armor with luminous feather geometry, a broken halo, and constellations moving beneath translucent fabric.",
-      "animation_profile": "Movement alternates graceful grounded swordwork with short zero-gravity transitions; Genesis Rewrite is a multi-stage orchestral cast.",
-      "vfx_profile": "Constellation geometry, luminous reconstruction lattices, spectral ally duplication, skyward feather arcs, and localized brightness caps.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Absolute endgame covenant; limited high-cost hire access.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "extreme",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "An Absolute support entity who manipulates encounter recovery, temporary allied manifestations, and localized battlefield reconstruction.",
+        "silhouette": "Celestial black-and-gold armor with luminous feather geometry, a broken halo, and constellations moving beneath translucent fabric.",
+        "lore_hook": "Seraphine Veyra, First Ascendant is tied to this acquisition path: Absolute endgame covenant; limited high-cost hire access."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "combat recovery",
+          "ally doubles",
+          "cover genesis",
+          "celestial support"
+        ],
+        "signature": [
+          "Genesis Rewrite restores selected allied combat state, creates short-lived spectral ally doubles, and deploys authored cover structures in one synchronized cast.",
+          "Capability expression: combat recovery.",
+          "Capability expression: ally doubles.",
+          "Capability expression: cover genesis.",
+          "Capability expression: celestial support."
+        ],
+        "counterplay": [
+          "Once-per-major-encounter ultimate; doubles inherit reduced power and generated cover is temporary."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Constellation geometry, luminous reconstruction lattices, spectral ally duplication, skyward feather arcs, and localized brightness caps."
+        ],
+        "animation": [
+          "Movement alternates graceful grounded swordwork with short zero-gravity transitions; Genesis Rewrite is a multi-stage orchestral cast."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute endgame covenant; limited high-cost hire access."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "medium",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-007",
-      "family": "npc",
       "name": "Astraeus Null, Lawbreaker",
-      "tier": "Absolute",
+      "family": "npc",
+      "tier": "absolute",
+      "status": "specified",
       "role": "hireable absolute controller",
-      "concept": "An Absolute control specialist who temporarily changes local movement and projectile assumptions inside a clearly bounded encounter zone.",
-      "signature_mechanic": "Null Dominion creates a bounded zero-law arena where selected movement, gravity-like impulses, and projectile pacing are replaced by authored encounter rules.",
-      "capabilities": [
-        "bounded rule domain",
-        "projectile suspension",
-        "mobility rewrite",
-        "ability disruption"
-      ],
-      "counterplay": [
-        "Domain has a visible boundary, short duration, and cannot override protected boss mechanics or global island rules."
-      ],
-      "visual_identity": "Black voidplate with white fracture seams, no visible face, and orbiting debris held at impossible angles.",
-      "animation_profile": "Idle debris continuously reorients; Dominion activation unfolds armor plates while the character rises into a rigid axis-cross pose.",
-      "vfx_profile": "Localized monochrome boundary, suspended particles/projectiles where supported, geometric white fractures, and strict VFX culling at edge.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Absolute endgame covenant; limited high-cost hire access.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "extreme",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "An Absolute control specialist who temporarily changes local movement and projectile assumptions inside a clearly bounded encounter zone.",
+        "silhouette": "Black voidplate with white fracture seams, no visible face, and orbiting debris held at impossible angles.",
+        "lore_hook": "Astraeus Null, Lawbreaker is tied to this acquisition path: Absolute endgame covenant; limited high-cost hire access."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "bounded rule domain",
+          "projectile suspension",
+          "mobility rewrite",
+          "ability disruption"
+        ],
+        "signature": [
+          "Null Dominion creates a bounded zero-law arena where selected movement, gravity-like impulses, and projectile pacing are replaced by authored encounter rules.",
+          "Capability expression: bounded rule domain.",
+          "Capability expression: projectile suspension.",
+          "Capability expression: mobility rewrite.",
+          "Capability expression: ability disruption."
+        ],
+        "counterplay": [
+          "Domain has a visible boundary, short duration, and cannot override protected boss mechanics or global island rules."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Localized monochrome boundary, suspended particles/projectiles where supported, geometric white fractures, and strict VFX culling at edge."
+        ],
+        "animation": [
+          "Idle debris continuously reorients; Dominion activation unfolds armor plates while the character rises into a rigid axis-cross pose."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute endgame covenant; limited high-cost hire access."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "medium",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-008",
-      "family": "npc",
       "name": "Mira Sable, Beast-Crown",
-      "tier": "Mythic",
+      "family": "npc",
+      "tier": "mythic",
+      "status": "specified",
       "role": "hireable tamer",
-      "concept": "A mythic beastmaster who dramatically improves taming reliability and can temporarily command one normally hostile elite beast archetype.",
-      "signature_mechanic": "Royal Scent marks one eligible elite creature and opens a short taming challenge instead of immediately converting it.",
-      "capabilities": [
-        "elite tame challenge",
-        "wildlife buffs",
-        "pack coordination"
-      ],
-      "counterplay": [
-        "Bosses and protected mythic entities are never eligible; failed challenge enrages the creature."
-      ],
-      "visual_identity": "Predatory ceremonial armor layered with claws, antlers, feathers, and a living mantle that reacts to nearby beasts.",
-      "animation_profile": "Taming uses low posture, hand signs, and synchronized breath timing; combat animation borrows movement motifs from the active companion species.",
-      "vfx_profile": "Species-colored scent ribbons, crown-shaped taming sigil, subdued animal-spirit silhouettes.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Mythic wild-court reputation hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "high",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A mythic beastmaster who dramatically improves taming reliability and can temporarily command one normally hostile elite beast archetype.",
+        "silhouette": "Predatory ceremonial armor layered with claws, antlers, feathers, and a living mantle that reacts to nearby beasts.",
+        "lore_hook": "Mira Sable, Beast-Crown is tied to this acquisition path: Mythic wild-court reputation hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "elite tame challenge",
+          "wildlife buffs",
+          "pack coordination"
+        ],
+        "signature": [
+          "Royal Scent marks one eligible elite creature and opens a short taming challenge instead of immediately converting it.",
+          "Capability expression: elite tame challenge.",
+          "Capability expression: wildlife buffs.",
+          "Capability expression: pack coordination."
+        ],
+        "counterplay": [
+          "Bosses and protected mythic entities are never eligible; failed challenge enrages the creature."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Species-colored scent ribbons, crown-shaped taming sigil, subdued animal-spirit silhouettes."
+        ],
+        "animation": [
+          "Taming uses low posture, hand signs, and synchronized breath timing; combat animation borrows movement motifs from the active companion species."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic wild-court reputation hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "BOS-001",
-      "family": "boss",
       "name": "Bell-Tower Revenant",
-      "tier": "Epic",
+      "family": "boss",
+      "tier": "epic",
+      "status": "specified",
       "role": "regional miniboss",
-      "concept": "A dead siege knight fused to a walking bell tower; every heavy strike rings the tower and changes nearby undead behavior.",
-      "signature_mechanic": "Funeral Peal cycles three bell tones that respectively rally, frenzy, or recall undead adds.",
-      "capabilities": [
-        "bell-state control",
-        "tower armor",
-        "undead command"
-      ],
-      "counterplay": [
-        "Breaking exposed bell braces disables one tone and permanently simplifies the encounter."
-      ],
-      "visual_identity": "Armored giant carrying a cracked bell tower through its torso, with chains dragging behind.",
-      "animation_profile": "Heavy knight attacks are synchronized to pendulum motion inside the chest; brace destruction changes posture and gait.",
-      "vfx_profile": "Bronze shock rings, ghostly bell resonance, chain sparks, and dust-heavy ground hits.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Regional grave-march event.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "high",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A dead siege knight fused to a walking bell tower; every heavy strike rings the tower and changes nearby undead behavior.",
+        "silhouette": "Armored giant carrying a cracked bell tower through its torso, with chains dragging behind.",
+        "lore_hook": "Bell-Tower Revenant is tied to this acquisition path: Regional grave-march event."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "bell-state control",
+          "tower armor",
+          "undead command"
+        ],
+        "signature": [
+          "Funeral Peal cycles three bell tones that respectively rally, frenzy, or recall undead adds.",
+          "Capability expression: bell-state control.",
+          "Capability expression: tower armor.",
+          "Capability expression: undead command."
+        ],
+        "counterplay": [
+          "Breaking exposed bell braces disables one tone and permanently simplifies the encounter."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Bronze shock rings, ghostly bell resonance, chain sparks, and dust-heavy ground hits."
+        ],
+        "animation": [
+          "Heavy knight attacks are synchronized to pendulum motion inside the chest; brace destruction changes posture and gait."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Regional grave-march event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "BOS-002",
-      "family": "boss",
       "name": "Vorun, Cathedral Devourer",
-      "tier": "Legendary",
+      "family": "boss",
+      "tier": "legendary",
+      "status": "specified",
       "role": "major demon boss",
-      "concept": "A demon the size of a fortress chapel whose ribs form walkable platforms and whose attacks reorganize the arena.",
-      "signature_mechanic": "Living Nave opens sections of Vorun's body as temporary combat spaces; squads must enter, destroy organs, and escape before the ribs close.",
-      "capabilities": [
-        "walkable boss body",
-        "organ objectives",
-        "arena reconfiguration",
-        "demon adds"
-      ],
-      "counterplay": [
-        "Organ windows are telegraphed; exterior weak points can extend escape time for teams struggling inside."
-      ],
-      "visual_identity": "Fortress-scale demon with cathedral ribs, stained-glass membranes, and towers growing from the spine.",
-      "animation_profile": "Boss body doubles as level geometry during phase windows; ribs open mechanically like vast doors while head and arms continue attacking.",
-      "vfx_profile": "Stained-glass internal light, hellish organ pulses, giant shadow sweeps, controlled debris, and distant silhouette LOD.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Legendary raid progression.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "extreme",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A demon the size of a fortress chapel whose ribs form walkable platforms and whose attacks reorganize the arena.",
+        "silhouette": "Fortress-scale demon with cathedral ribs, stained-glass membranes, and towers growing from the spine.",
+        "lore_hook": "Vorun, Cathedral Devourer is tied to this acquisition path: Legendary raid progression."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "walkable boss body",
+          "organ objectives",
+          "arena reconfiguration",
+          "demon adds"
+        ],
+        "signature": [
+          "Living Nave opens sections of Vorun's body as temporary combat spaces; squads must enter, destroy organs, and escape before the ribs close.",
+          "Capability expression: walkable boss body.",
+          "Capability expression: organ objectives.",
+          "Capability expression: arena reconfiguration.",
+          "Capability expression: demon adds."
+        ],
+        "counterplay": [
+          "Organ windows are telegraphed; exterior weak points can extend escape time for teams struggling inside."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Stained-glass internal light, hellish organ pulses, giant shadow sweeps, controlled debris, and distant silhouette LOD."
+        ],
+        "animation": [
+          "Boss body doubles as level geometry during phase windows; ribs open mechanically like vast doors while head and arms continue attacking."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary raid progression."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "medium",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "BOS-003",
-      "family": "boss",
       "name": "Eidolon of the Drowned Moon",
-      "tier": "Mythic",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
       "role": "world-event leviathan",
-      "concept": "A mythic ocean/sky leviathan whose body appears in separate regions as the event progresses, making the encounter feel far larger than one arena.",
-      "signature_mechanic": "Tidal Orbit moves the fight through shoreline, flooded ruins, and elevated moonfall phases while sharing one persistent boss state.",
-      "capabilities": [
-        "multi-region phases",
-        "flood pressure",
-        "moonfall attack",
-        "weak-point migration"
-      ],
-      "counterplay": [
-        "Each phase exposes different counters; failing regional objectives buffs the next phase rather than instantly wiping the team."
-      ],
-      "visual_identity": "Serpentine leviathan with crescent skeletal fins and a luminous drowned-moon organ visible through translucent abyssal skin.",
-      "animation_profile": "Long-form swim/fly motion uses distant spline-like presentation and local attack rigs; phase transitions include enormous breach animations.",
-      "vfx_profile": "Ocean-scale caustics, moonlit fog, controlled water walls, distant body silhouettes, and high-detail local weak-point effects.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Mythic global event chain.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "extreme",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A mythic ocean/sky leviathan whose body appears in separate regions as the event progresses, making the encounter feel far larger than one arena.",
+        "silhouette": "Serpentine leviathan with crescent skeletal fins and a luminous drowned-moon organ visible through translucent abyssal skin.",
+        "lore_hook": "Eidolon of the Drowned Moon is tied to this acquisition path: Mythic global event chain."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "multi-region phases",
+          "flood pressure",
+          "moonfall attack",
+          "weak-point migration"
+        ],
+        "signature": [
+          "Tidal Orbit moves the fight through shoreline, flooded ruins, and elevated moonfall phases while sharing one persistent boss state.",
+          "Capability expression: multi-region phases.",
+          "Capability expression: flood pressure.",
+          "Capability expression: moonfall attack.",
+          "Capability expression: weak-point migration."
+        ],
+        "counterplay": [
+          "Each phase exposes different counters; failing regional objectives buffs the next phase rather than instantly wiping the team."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Ocean-scale caustics, moonlit fog, controlled water walls, distant body silhouettes, and high-detail local weak-point effects."
+        ],
+        "animation": [
+          "Long-form swim/fly motion uses distant spline-like presentation and local attack rigs; phase transitions include enormous breach animations."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic global event chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "medium",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "BOS-004",
-      "family": "boss",
       "name": "The Crownless Continent",
-      "tier": "God",
+      "family": "boss",
+      "tier": "god",
+      "status": "specified",
       "role": "continent-class event boss",
-      "concept": "A God-tier distributed boss presented as a moving landmass-creature whose local body regions become separate raid fronts for squads.",
-      "signature_mechanic": "Sovereign Anatomy divides the creature into simultaneous raid sectors—limbs, armor cities, heart vents, and crown wound—all contributing to shared phase state.",
-      "capabilities": [
-        "distributed raid sectors",
-        "shared boss state",
-        "multi-squad objectives",
-        "continent-scale presentation"
-      ],
-      "counterplay": [
-        "No single sector can finish the phase alone; sectors expose complementary vulnerabilities and recover if abandoned too long."
-      ],
-      "visual_identity": "A mountain-range colossus carrying ruined cities and forests across its back, visible as a world landmark long before combat.",
-      "animation_profile": "Far-distance locomotion is environmental/cinematic; local sectors use bespoke animated body geometry, attack rigs, and traversal sequences.",
-      "vfx_profile": "World-sky silhouette, sector-local shockwaves, atmospheric debris, aurora-like health-state signals, and aggressive distance-based VFX substitution.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "God-tier server/world event unlocked by multi-region prerequisites.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "extreme",
-        "replication_band": "extreme",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A God-tier distributed boss presented as a moving landmass-creature whose local body regions become separate raid fronts for squads.",
+        "silhouette": "A mountain-range colossus carrying ruined cities and forests across its back, visible as a world landmark long before combat.",
+        "lore_hook": "The Crownless Continent is tied to this acquisition path: God-tier server/world event unlocked by multi-region prerequisites."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "distributed raid sectors",
+          "shared boss state",
+          "multi-squad objectives",
+          "continent-scale presentation"
+        ],
+        "signature": [
+          "Sovereign Anatomy divides the creature into simultaneous raid sectors—limbs, armor cities, heart vents, and crown wound—all contributing to shared phase state.",
+          "Capability expression: distributed raid sectors.",
+          "Capability expression: shared boss state.",
+          "Capability expression: multi-squad objectives.",
+          "Capability expression: continent-scale presentation."
+        ],
+        "counterplay": [
+          "No single sector can finish the phase alone; sectors expose complementary vulnerabilities and recover if abandoned too long."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "World-sky silhouette, sector-local shockwaves, atmospheric debris, aurora-like health-state signals, and aggressive distance-based VFX substitution."
+        ],
+        "animation": [
+          "Far-distance locomotion is environmental/cinematic; local sectors use bespoke animated body geometry, attack rigs, and traversal sequences."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier server/world event unlocked by multi-region prerequisites."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "ARM-001",
-      "family": "armor",
       "name": "Void Sovereign Panoply",
-      "tier": "Mythic",
+      "family": "armor",
+      "tier": "mythic",
+      "status": "specified",
       "role": "six-piece caster/control set",
-      "concept": "A mythic armor set built around rift mobility and void-energy recovery, with bonuses that progressively alter class movement and summons.",
-      "signature_mechanic": "Sovereign Form unlocks at full set, granting a brief transformation where rift movement gains an extra authored exit effect and summons inherit void shielding.",
-      "capabilities": [
-        "rift resistance",
-        "void recovery",
-        "extra blink charge",
-        "sovereign form"
-      ],
-      "counterplay": [
-        "Set power depends on coordinated pieces and transformation has a strict cooldown."
-      ],
-      "visual_identity": "Layered black armor with floating plate gaps, violet interior stars, and a crown-like collar.",
-      "animation_profile": "Pieces assemble during Sovereign Form; cloth and plates momentarily lose gravity before snapping into a sharper silhouette.",
-      "vfx_profile": "Violet starfield seams, rift afterimages, orbiting armor fragments during transformation, and strict particle caps.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Mythic void citadel crafting chain.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "high",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A mythic armor set built around rift mobility and void-energy recovery, with bonuses that progressively alter class movement and summons.",
+        "silhouette": "Layered black armor with floating plate gaps, violet interior stars, and a crown-like collar.",
+        "lore_hook": "Void Sovereign Panoply is tied to this acquisition path: Mythic void citadel crafting chain."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "rift resistance",
+          "void recovery",
+          "extra blink charge",
+          "sovereign form"
+        ],
+        "signature": [
+          "Sovereign Form unlocks at full set, granting a brief transformation where rift movement gains an extra authored exit effect and summons inherit void shielding.",
+          "Capability expression: rift resistance.",
+          "Capability expression: void recovery.",
+          "Capability expression: extra blink charge.",
+          "Capability expression: sovereign form."
+        ],
+        "counterplay": [
+          "Set power depends on coordinated pieces and transformation has a strict cooldown."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Violet starfield seams, rift afterimages, orbiting armor fragments during transformation, and strict particle caps."
+        ],
+        "animation": [
+          "Pieces assemble during Sovereign Form; cloth and plates momentarily lose gravity before snapping into a sharper silhouette."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic void citadel crafting chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "ARM-002",
-      "family": "armor",
       "name": "Ashen Seraph Harness",
-      "tier": "Legendary",
+      "family": "armor",
+      "tier": "legendary",
+      "status": "specified",
       "role": "mobility/support set",
-      "concept": "A legendary armor set for players who fight inside hazardous zones, converting controlled environmental risk into squad support.",
-      "signature_mechanic": "Martyr Heat stores limited hazard exposure and releases it as a cleansing pulse when the wearer exits danger.",
-      "capabilities": [
-        "hazard storage",
-        "cleanse pulse",
-        "mobility bonus"
-      ],
-      "counterplay": [
-        "Storage caps quickly and overexposure still damages the wearer; safe play yields no charge."
-      ],
-      "visual_identity": "Charred wing-shaped back plates, white-hot seams, and a half-halo fixed behind one shoulder.",
-      "animation_profile": "Stored heat progressively opens the wing plates; cleanse snaps them fully outward before cooling shut.",
-      "vfx_profile": "White ember feathers, heat shimmer, circular cleanse pulse, and visible charge seams.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Legendary infernal-rebel forge.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "medium",
-        "replication_band": "low",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A legendary armor set for players who fight inside hazardous zones, converting controlled environmental risk into squad support.",
+        "silhouette": "Charred wing-shaped back plates, white-hot seams, and a half-halo fixed behind one shoulder.",
+        "lore_hook": "Ashen Seraph Harness is tied to this acquisition path: Legendary infernal-rebel forge."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "hazard storage",
+          "cleanse pulse",
+          "mobility bonus"
+        ],
+        "signature": [
+          "Martyr Heat stores limited hazard exposure and releases it as a cleansing pulse when the wearer exits danger.",
+          "Capability expression: hazard storage.",
+          "Capability expression: cleanse pulse.",
+          "Capability expression: mobility bonus."
+        ],
+        "counterplay": [
+          "Storage caps quickly and overexposure still damages the wearer; safe play yields no charge."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "White ember feathers, heat shimmer, circular cleanse pulse, and visible charge seams."
+        ],
+        "animation": [
+          "Stored heat progressively opens the wing plates; cleanse snaps them fully outward before cooling shut."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary infernal-rebel forge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "ARM-003",
-      "family": "armor",
       "name": "Chronarch Regent Array",
-      "tier": "God",
+      "family": "armor",
+      "tier": "god",
+      "status": "specified",
       "role": "temporal mastery set",
-      "concept": "A God-tier armor array that rewards precise timing by banking narrowly avoided damage windows and converting them into temporal charges.",
-      "signature_mechanic": "Regent Interval detects authored near-miss conditions and spends accumulated intervals to accelerate one skill cycle without globally speeding the player.",
-      "capabilities": [
-        "near-miss charge",
-        "skill acceleration",
-        "temporal guard"
-      ],
-      "counterplay": [
-        "Requires risky timing; charges are lost on heavy stagger and cannot accelerate Transcendent abilities."
-      ],
-      "visual_identity": "Regal silver armor with rotating clock rings behind joints and a transparent chest chronometer.",
-      "animation_profile": "Near-misses briefly desynchronize limb afterimages; full charge aligns every ring before a single sharp time-snap gesture.",
-      "vfx_profile": "Layered afterimages, concentric clock rings, clean time-snap shock, no persistent full-screen distortion.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "God-tier chronarch trials and raid forge.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "extreme",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A God-tier armor array that rewards precise timing by banking narrowly avoided damage windows and converting them into temporal charges.",
+        "silhouette": "Regal silver armor with rotating clock rings behind joints and a transparent chest chronometer.",
+        "lore_hook": "Chronarch Regent Array is tied to this acquisition path: God-tier chronarch trials and raid forge."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "near-miss charge",
+          "skill acceleration",
+          "temporal guard"
+        ],
+        "signature": [
+          "Regent Interval detects authored near-miss conditions and spends accumulated intervals to accelerate one skill cycle without globally speeding the player.",
+          "Capability expression: near-miss charge.",
+          "Capability expression: skill acceleration.",
+          "Capability expression: temporal guard."
+        ],
+        "counterplay": [
+          "Requires risky timing; charges are lost on heavy stagger and cannot accelerate Transcendent abilities."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Layered afterimages, concentric clock rings, clean time-snap shock, no persistent full-screen distortion."
+        ],
+        "animation": [
+          "Near-misses briefly desynchronize limb afterimages; full charge aligns every ring before a single sharp time-snap gesture."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier chronarch trials and raid forge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "ARM-004",
-      "family": "armor",
       "name": "Axiom Vestment",
-      "tier": "Absolute",
+      "family": "armor",
+      "tier": "absolute",
+      "status": "specified",
       "role": "ascension armor",
-      "concept": "An Absolute armor system that visually and mechanically reconfigures according to which authored encounter doctrine the player activates.",
-      "signature_mechanic": "Axiom Mantle swaps between Bastion, Pursuit, and Dominion configurations, each changing defensive, movement, and authority-support behavior.",
-      "capabilities": [
-        "three armor configurations",
-        "encounter doctrine synergy",
-        "absolute transformation"
-      ],
-      "counterplay": [
-        "Configuration locks for a meaningful duration; swapping is disabled during certain boss ultimate windows."
-      ],
-      "visual_identity": "Black-white ceremonial armor whose plates are separated by impossible negative space and orbit a luminous core.",
-      "animation_profile": "Full-body transformation rebuilds plate topology in stages, changing stance and locomotion accents for each configuration.",
-      "vfx_profile": "White geometric law-lines, black negative-space cuts, orbiting plate trails, and localized environment response within authored bounds.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Absolute ascension crafting and doctrine mastery.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "extreme",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "An Absolute armor system that visually and mechanically reconfigures according to which authored encounter doctrine the player activates.",
+        "silhouette": "Black-white ceremonial armor whose plates are separated by impossible negative space and orbit a luminous core.",
+        "lore_hook": "Axiom Vestment is tied to this acquisition path: Absolute ascension crafting and doctrine mastery."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "three armor configurations",
+          "encounter doctrine synergy",
+          "absolute transformation"
+        ],
+        "signature": [
+          "Axiom Mantle swaps between Bastion, Pursuit, and Dominion configurations, each changing defensive, movement, and authority-support behavior.",
+          "Capability expression: three armor configurations.",
+          "Capability expression: encounter doctrine synergy.",
+          "Capability expression: absolute transformation."
+        ],
+        "counterplay": [
+          "Configuration locks for a meaningful duration; swapping is disabled during certain boss ultimate windows."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "White geometric law-lines, black negative-space cuts, orbiting plate trails, and localized environment response within authored bounds."
+        ],
+        "animation": [
+          "Full-body transformation rebuilds plate topology in stages, changing stance and locomotion accents for each configuration."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute ascension crafting and doctrine mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "medium",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "EVT-001",
-      "family": "event",
       "name": "Night of a Million Teeth",
-      "tier": "Mythic",
+      "family": "event",
+      "tier": "mythic",
+      "status": "specified",
       "role": "regional horror invasion",
-      "concept": "A timed invasion where tooth-bearing horrors emerge from architecture, wildlife dens, sewers, and battlefield remains while players defend moving sanctuary zones.",
-      "signature_mechanic": "Predation Index tracks regional fear pressure; aggressive successful defense lowers mutation quality while failed objectives unlock nastier enemy combinations.",
-      "capabilities": [
-        "regional invasion",
-        "moving sanctuary",
-        "mutation escalation",
-        "dynamic spawn tables"
-      ],
-      "counterplay": [
-        "Players can recover a failing event by destroying ritual anchors and escorting sanctuary beacons."
-      ],
-      "visual_identity": "The affected region gains tooth-like architectural growths, black rain, and moving sanctuary lights.",
-      "animation_profile": "World props pulse subtly with the spawn rhythm; sanctuary beacons physically unfold as defense objectives move.",
-      "vfx_profile": "Scalable black rain, tooth-growth material swaps, sanctuary columns, and event-wide sky treatment with platform-safe fallbacks.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Rare mythic world-event scheduler.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "extreme",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A timed invasion where tooth-bearing horrors emerge from architecture, wildlife dens, sewers, and battlefield remains while players defend moving sanctuary zones.",
+        "silhouette": "The affected region gains tooth-like architectural growths, black rain, and moving sanctuary lights.",
+        "lore_hook": "Night of a Million Teeth is tied to this acquisition path: Rare mythic world-event scheduler."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "regional invasion",
+          "moving sanctuary",
+          "mutation escalation",
+          "dynamic spawn tables"
+        ],
+        "signature": [
+          "Predation Index tracks regional fear pressure; aggressive successful defense lowers mutation quality while failed objectives unlock nastier enemy combinations.",
+          "Capability expression: regional invasion.",
+          "Capability expression: moving sanctuary.",
+          "Capability expression: mutation escalation.",
+          "Capability expression: dynamic spawn tables."
+        ],
+        "counterplay": [
+          "Players can recover a failing event by destroying ritual anchors and escorting sanctuary beacons."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Scalable black rain, tooth-growth material swaps, sanctuary columns, and event-wide sky treatment with platform-safe fallbacks."
+        ],
+        "animation": [
+          "World props pulse subtly with the spawn rhythm; sanctuary beacons physically unfold as defense objectives move."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Rare mythic world-event scheduler."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "medium",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "EVT-002",
-      "family": "event",
       "name": "The Choosing of Zero",
-      "tier": "Transcendent Zero",
+      "family": "event",
+      "tier": "transcendent_zero",
+      "status": "specified",
       "role": "endgame ascension event",
-      "concept": "An ultra-rare endgame event entered only by qualified Zero Candidates, combining combat, resource management, navigation, puzzle logic, and individual mastery.",
-      "signature_mechanic": "The Choosing dynamically scores multiple authored disciplines and culminates in a final candidate-specific trial; completion grants eligibility for Transcendent Zero rather than a simple loot drop.",
-      "capabilities": [
-        "multi-discipline trials",
-        "candidate-specific finale",
-        "ascension registry",
-        "world announcement"
-      ],
-      "counterplay": [
-        "Failure preserves most prerequisite progress but imposes a retry lock and consumes selected ascension resources."
-      ],
-      "visual_identity": "An impossible arena assembled from fragments of every major biome around a central black-white zero monolith.",
-      "animation_profile": "Biome fragments rotate and reconfigure between trials; final success triggers a long-form ascension sequence with armor reconstruction and sky fracture.",
-      "vfx_profile": "World-scale but bounded zero sigil, biome transition wipes, black-white sky fractures, constellation collapse, and a heavily LOD-managed global announcement effect.",
-      "audio_profile": "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues.",
-      "acquisition": "Only available to authenticated Zero Candidates who complete all prerequisite systems.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "extreme",
-        "replication_band": "extreme",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "An ultra-rare endgame event entered only by qualified Zero Candidates, combining combat, resource management, navigation, puzzle logic, and individual mastery.",
+        "silhouette": "An impossible arena assembled from fragments of every major biome around a central black-white zero monolith.",
+        "lore_hook": "The Choosing of Zero is tied to this acquisition path: Only available to authenticated Zero Candidates who complete all prerequisite systems."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "multi-discipline trials",
+          "candidate-specific finale",
+          "ascension registry",
+          "world announcement"
+        ],
+        "signature": [
+          "The Choosing dynamically scores multiple authored disciplines and culminates in a final candidate-specific trial; completion grants eligibility for Transcendent Zero rather than a simple loot drop.",
+          "Capability expression: multi-discipline trials.",
+          "Capability expression: candidate-specific finale.",
+          "Capability expression: ascension registry.",
+          "Capability expression: world announcement."
+        ],
+        "counterplay": [
+          "Failure preserves most prerequisite progress but imposes a retry lock and consumes selected ascension resources."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "World-scale but bounded zero sigil, biome transition wipes, black-white sky fractures, constellation collapse, and a heavily LOD-managed global announcement effect."
+        ],
+        "animation": [
+          "Biome fragments rotate and reconfigure between trials; final success triggers a long-form ascension sequence with armor reconstruction and sky fracture."
+        ],
+        "audio": [
+          "Tier-scaled positional audio with signature activation, impact, danger, and cooldown cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Only available to authenticated Zero Candidates who complete all prerequisite systems."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 001 legacy schema without discarding original design intent."
+      ]
     }
   ]
 }
