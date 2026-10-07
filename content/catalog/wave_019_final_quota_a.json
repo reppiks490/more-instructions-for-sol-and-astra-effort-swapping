@@ -1,0 +1,3108 @@
+{
+  "wave": "019",
+  "purpose": "First final-quota wave: 21 weapons, 6 armor pieces, 19 monsters, and 4 bosses focused exclusively on the remaining under-target families.",
+  "entity_count": 50,
+  "entities": [
+    {
+      "id": "WPN-139",
+      "name": "Ash Meridian",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "heat-lane rifle",
+      "identity": {
+        "fantasy": "A rifle that draws short-lived heated meridians between consecutive impact points, turning deliberate shot placement into temporary area denial.",
+        "silhouette": "Charcoal rifle with a glowing brass survey arc mounted over the barrel.",
+        "lore_hook": "Forged by expedition engineers who learned to survey volcanic ground with ammunition."
+      },
+      "mechanics": {
+        "core": [
+          "impact linking",
+          "heat lanes",
+          "precision placement"
+        ],
+        "signature": [
+          "Consecutive hits on surfaces create a visible Ash Meridian between them that lightly burns lesser enemies crossing the line.",
+          "A third impact can close a triangle, consuming the oldest line to create a brief central heat pulse."
+        ],
+        "counterplay": [
+          "Lines are short-lived, fully visible, and vanish if impacts are spaced too far apart."
+        ],
+        "evolution": [
+          "Ash Meridian upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Ash Meridian uses a bespoke visual language tied directly to impact linking, heat lanes, precision placement; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Ash Meridian has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Ash Meridian uses a unique activation and recovery sequence built around heat-lane rifle; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Ash Meridian changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Ash Meridian has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic volcanic survey contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-140",
+      "name": "Hushglass Repeater",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "silence-window repeater",
+      "identity": {
+        "fantasy": "A glass-barreled repeater that becomes more accurate after the player spends a short interval without firing.",
+        "silhouette": "Clear smoky barrel with floating glass beads that settle during silence.",
+        "lore_hook": "Assassins discovered patience could be chambered like ammunition."
+      },
+      "mechanics": {
+        "core": [
+          "silence charge",
+          "precision burst",
+          "tempo"
+        ],
+        "signature": [
+          "Not firing for a short authored interval settles Hushglass beads and primes the next burst for improved stability.",
+          "Taking damage rattles the beads and shortens the stored silence benefit without erasing it completely."
+        ],
+        "counterplay": [
+          "Sustained pressure prevents full settling and the ready state is visible."
+        ],
+        "evolution": [
+          "Hushglass Repeater upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Hushglass Repeater uses a bespoke visual language tied directly to silence charge, precision burst, tempo; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Hushglass Repeater has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Hushglass Repeater uses a unique activation and recovery sequence built around silence-window repeater; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Hushglass Repeater changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Hushglass Repeater has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic silent chapel challenge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-141",
+      "name": "Mireline Verdict",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "terrain-mark handcannon",
+      "identity": {
+        "fantasy": "A handcannon that marks wet or soft terrain and lets the next impact kick a small directional wave of mud or water from that location.",
+        "silhouette": "Heavy green-black pistol with a liquid compass vial.",
+        "lore_hook": "Swamp judges used it to move crowds without building roads."
+      },
+      "mechanics": {
+        "core": [
+          "terrain mark",
+          "directional wave",
+          "utility"
+        ],
+        "signature": [
+          "A shot into eligible wet terrain stores a Mire Mark.",
+          "The next direct enemy hit can consume the stored mark to launch a small directional pressure wave from the marked terrain toward the target."
+        ],
+        "counterplay": [
+          "Dry arenas deny the terrain interaction and the stored mark is obvious on the weapon vial."
+        ],
+        "evolution": [
+          "Mireline Verdict upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Mireline Verdict uses a bespoke visual language tied directly to terrain mark, directional wave, utility; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Mireline Verdict has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Mireline Verdict uses a unique activation and recovery sequence built around terrain-mark handcannon; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Mireline Verdict changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Mireline Verdict has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic mire tribunal bounty."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-142",
+      "name": "Bellwether Scatter",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "formation shotgun",
+      "identity": {
+        "fantasy": "A shotgun that briefly reveals which lesser enemy in a nearby group is acting as the formation leader and rewards breaking that link.",
+        "silhouette": "Bronze scattergun with a small bell sight and flock-pattern engravings.",
+        "lore_hook": "Herders turned crowd control into battlefield doctrine."
+      },
+      "mechanics": {
+        "core": [
+          "leader reveal",
+          "formation break",
+          "shotgun"
+        ],
+        "signature": [
+          "A full pellet connection against a grouped lesser enemy reveals the current formation leader when one exists.",
+          "Damaging the revealed leader weakens nearby follower pathing cohesion for a short window."
+        ],
+        "counterplay": [
+          "Ungrouped enemies and bosses gain no formation penalty; leader marks are temporary."
+        ],
+        "evolution": [
+          "Bellwether Scatter upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Bellwether Scatter uses a bespoke visual language tied directly to leader reveal, formation break, shotgun; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Bellwether Scatter has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Bellwether Scatter uses a unique activation and recovery sequence built around formation shotgun; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Bellwether Scatter changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Bellwether Scatter has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic frontier militia reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-143",
+      "name": "Gravetide Needle",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "corpse-current SMG",
+      "identity": {
+        "fantasy": "An SMG that creates short directional currents between recent corpse locations, nudging lesser enemies along the battlefield aftermath.",
+        "silhouette": "Thin black SMG with tide fins made from polished bone.",
+        "lore_hook": "Necropolis scavengers used the dead as tide gauges."
+      },
+      "mechanics": {
+        "core": [
+          "corpse anchors",
+          "micro-current",
+          "mob pressure"
+        ],
+        "signature": [
+          "Two recent eligible corpse positions form a Gravetide current with a clear directional arrow.",
+          "Lesser enemies inside the current receive a small movement bias toward the second anchor, enabling setup rather than hard crowd control."
+        ],
+        "counterplay": [
+          "Destroying or clearing corpse anchors removes the current and elites resist the displacement."
+        ],
+        "evolution": [
+          "Gravetide Needle upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Gravetide Needle uses a bespoke visual language tied directly to corpse anchors, micro-current, mob pressure; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Gravetide Needle has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Gravetide Needle uses a unique activation and recovery sequence built around corpse-current SMG; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Gravetide Needle changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Gravetide Needle has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic necropolis scavenger chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-144",
+      "name": "Sunless Courier",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "message-burst carbine",
+      "identity": {
+        "fantasy": "A carbine whose burst can carry one tactical mark from the shooter to an ally by striking terrain near that ally.",
+        "silhouette": "Compact black carbine with a sealed messenger capsule under the receiver.",
+        "lore_hook": "Built for armies that distrusted radios near eldritch storms."
+      },
+      "mechanics": {
+        "core": [
+          "mark delivery",
+          "ally utility",
+          "burst fire"
+        ],
+        "signature": [
+          "A completed burst loads one Courier Mark based on the last eligible enemy type struck.",
+          "Firing the loaded burst into valid terrain near an ally grants a short informational mark such as elite reveal, summon warning, or hazard emphasis rather than raw damage."
+        ],
+        "counterplay": [
+          "Courier Marks expire quickly and require deliberate delivery."
+        ],
+        "evolution": [
+          "Sunless Courier upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Sunless Courier uses a bespoke visual language tied directly to mark delivery, ally utility, burst fire; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Sunless Courier has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Sunless Courier uses a unique activation and recovery sequence built around message-burst carbine; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Sunless Courier changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Sunless Courier has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic courier faction contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-145",
+      "name": "Crownless Winter",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "frost-state rifle",
+      "identity": {
+        "fantasy": "A rifle that builds frost only while the user remains mobile, rewarding moving marksmanship instead of stationary suppression.",
+        "silhouette": "Long white-black rifle with icy crown prongs broken off at different lengths.",
+        "lore_hook": "Its first bearer refused a frozen throne and carried winter into exile."
+      },
+      "mechanics": {
+        "core": [
+          "movement charge",
+          "frost state",
+          "mobile precision"
+        ],
+        "signature": [
+          "Moving while landing accurate hits builds Winter Pace.",
+          "Stopping for too long melts Winter Pace but reloads faster, forcing a mobility-versus-reset decision.",
+          "At full Winter Pace the next critical hit creates a short frost ribbon that allies can slide across."
+        ],
+        "counterplay": [
+          "Forcing the wielder into cover or stationary defense resets the strongest state."
+        ],
+        "evolution": [
+          "Crownless Winter upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Crownless Winter uses a bespoke visual language tied directly to movement charge, frost state, mobile precision; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Crownless Winter has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Crownless Winter uses a unique activation and recovery sequence built around frost-state rifle; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Crownless Winter changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Crownless Winter has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary rime-court exile quest."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-146",
+      "name": "Index of Teeth",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "monster-taxonomy rifle",
+      "identity": {
+        "fantasy": "A rifle that identifies broad monster anatomy classes and changes its utility shot according to the current class.",
+        "silhouette": "Ivory rifle with rotating anatomical plates along the top rail.",
+        "lore_hook": "Hunters stopped carrying books once the books learned to shoot."
+      },
+      "mechanics": {
+        "core": [
+          "taxonomy scan",
+          "adaptive utility",
+          "monster hunting"
+        ],
+        "signature": [
+          "Sustained aim classifies eligible monsters into armored, swift, caster, swarm, or colossal categories.",
+          "The secondary shot changes utility by category, such as exposing armor seams or interrupting lesser casts.",
+          "Scanning a new class clears the old profile and briefly reveals the classification to the squad."
+        ],
+        "counterplay": [
+          "Classification takes time and complex bosses expose only authored categories."
+        ],
+        "evolution": [
+          "Index of Teeth upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Index of Teeth uses a bespoke visual language tied directly to taxonomy scan, adaptive utility, monster hunting; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Index of Teeth has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Index of Teeth uses a unique activation and recovery sequence built around monster-taxonomy rifle; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Index of Teeth changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Index of Teeth has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary monster-taxonomist mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-147",
+      "name": "Red Cathedral Engine",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "siege pulse launcher",
+      "identity": {
+        "fantasy": "A launcher that builds a temporary nave-like safe firing lane after repeated impacts on the same fortified target.",
+        "silhouette": "Red-black launcher with miniature buttress rails along both sides.",
+        "lore_hook": "Siege priests designed it after deciding artillery needed architecture."
+      },
+      "mechanics": {
+        "core": [
+          "siege buildup",
+          "safe lane",
+          "fortification pressure"
+        ],
+        "signature": [
+          "Repeated hits on an eligible fortified target build Nave progress visible to both teams.",
+          "At threshold, a narrow Cathedral Lane forms behind the shooter, reducing incoming lesser projectile clutter without granting invulnerability.",
+          "Relocating breaks the lane early but refunds part of the buildup as faster reload."
+        ],
+        "counterplay": [
+          "The shooter becomes positionally predictable and the lane has open flanks."
+        ],
+        "evolution": [
+          "Red Cathedral Engine upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Red Cathedral Engine uses a bespoke visual language tied directly to siege buildup, safe lane, fortification pressure; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Red Cathedral Engine has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Red Cathedral Engine uses a unique activation and recovery sequence built around siege pulse launcher; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Red Cathedral Engine changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Red Cathedral Engine has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary siege-cathedral raid reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-148",
+      "name": "Elsewhere Choir",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "multi-angle support rifle",
+      "identity": {
+        "fantasy": "A rifle that records where squadmates recently fired from and can project harmless targeting echoes from those positions.",
+        "silhouette": "Silver rifle surrounded by three dim floating choir masks.",
+        "lore_hook": "The weapon never duplicates bullets, only the memory of where confidence came from."
+      },
+      "mechanics": {
+        "core": [
+          "ally position memory",
+          "targeting echoes",
+          "team coordination"
+        ],
+        "signature": [
+          "Recent allied firing positions become temporary Choir Anchors.",
+          "Secondary fire projects a visible targeting beam from one anchor to the user's marked enemy, improving squad spatial awareness.",
+          "Using three distinct anchors creates a brief triangulation outline around the marked target."
+        ],
+        "counterplay": [
+          "Anchors expire, deal no independent damage, and reveal squad firing geometry to observant enemies."
+        ],
+        "evolution": [
+          "Elsewhere Choir upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Elsewhere Choir uses a bespoke visual language tied directly to ally position memory, targeting echoes, team coordination; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Elsewhere Choir has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Elsewhere Choir uses a unique activation and recovery sequence built around multi-angle support rifle; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Elsewhere Choir changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Elsewhere Choir has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary signal-choir mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-149",
+      "name": "Leviathan Bell",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "mass-response cannon",
+      "identity": {
+        "fantasy": "A heavy cannon whose recoil and projectile arc change based on the mass class of the target it is locked onto.",
+        "silhouette": "Massive navy-black cannon with a hanging bronze bell counterweight.",
+        "lore_hook": "Whalers learned the same shot should not feel identical against a sailor and a leviathan."
+      },
+      "mechanics": {
+        "core": [
+          "target mass",
+          "adaptive recoil",
+          "heavy stagger"
+        ],
+        "signature": [
+          "Locking a light target configures a fast shallow shot with strong knock but low area effect.",
+          "Locking a heavy or colossal target configures a slow braced shot with higher stagger and reduced knock.",
+          "Changing mass class rings the bell and forces a short reconfiguration rather than instant switching."
+        ],
+        "counterplay": [
+          "The current mode is audible, slow to change, and ordinary enemies cannot generate boss-scale stagger."
+        ],
+        "evolution": [
+          "Leviathan Bell upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Leviathan Bell uses a bespoke visual language tied directly to target mass, adaptive recoil, heavy stagger; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Leviathan Bell has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Leviathan Bell uses a unique activation and recovery sequence built around mass-response cannon; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Leviathan Bell changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Leviathan Bell has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary abyssal artillery trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-150",
+      "name": "Merciful Algorithm",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "threat-balancing sidearm",
+      "identity": {
+        "fantasy": "A sidearm that identifies which ally is under the most pressure and turns precision hits into short tactical relief for that ally.",
+        "silhouette": "White pistol with a small rotating balance wheel under the sight.",
+        "lore_hook": "It was the first battlefield algorithm written to ask who needed help instead of who deserved damage."
+      },
+      "mechanics": {
+        "core": [
+          "threat assessment",
+          "precision support",
+          "ally relief"
+        ],
+        "signature": [
+          "The weapon highlights one nearby ally experiencing the highest eligible lesser-enemy threat.",
+          "Precision hits against enemies pressuring that ally add Relief marks.",
+          "Three Relief marks trigger a brief threat-drop pulse around the ally rather than a damage burst."
+        ],
+        "counterplay": [
+          "Only lesser-AI threat is affected; bosses and player targeting remain authoritative."
+        ],
+        "evolution": [
+          "Merciful Algorithm upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Merciful Algorithm uses a bespoke visual language tied directly to threat assessment, precision support, ally relief; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Merciful Algorithm has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Merciful Algorithm uses a unique activation and recovery sequence built around threat-balancing sidearm; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Merciful Algorithm changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Merciful Algorithm has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary field-medic intelligence quest."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-151",
+      "name": "Chronicle of the Last Shot",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "last-round memory rifle",
+      "identity": {
+        "fantasy": "A mythic rifle whose final round records its exact tactical context and lets the next magazine inherit one bounded property.",
+        "silhouette": "Chrome-black rifle with a single illuminated final-round chamber visible through the stock.",
+        "lore_hook": "Chronarchs considered the last bullet more truthful than the first."
+      },
+      "mechanics": {
+        "core": [
+          "last-round memory",
+          "magazine inheritance",
+          "tempo planning"
+        ],
+        "signature": [
+          "The final round records whether it struck an elite, weak point, hazard object, or support target.",
+          "The next magazine inherits a small utility tied to that context, such as clearer weak-point outlines or faster object damage.",
+          "Deliberately ejecting the final round stores no memory and grants a quicker reload as the alternate choice."
+        ],
+        "counterplay": [
+          "Only one bounded memory persists and switching weapons clears it."
+        ],
+        "evolution": [
+          "Chronicle of the Last Shot upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Chronicle of the Last Shot uses a bespoke visual language tied directly to last-round memory, magazine inheritance, tempo planning; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Chronicle of the Last Shot has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Chronicle of the Last Shot uses a unique activation and recovery sequence built around last-round memory rifle; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Chronicle of the Last Shot changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Chronicle of the Last Shot has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Chronarch archive trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-152",
+      "name": "Garden That Hunts",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "mobile flora launcher",
+      "identity": {
+        "fantasy": "A mythic launcher that grows temporary predatory plants which uproot and relocate once instead of remaining static traps.",
+        "silhouette": "Dark botanical cannon with folded jaw-like petals around the muzzle.",
+        "lore_hook": "The garden became dangerous when it learned waiting was optional."
+      },
+      "mechanics": {
+        "core": [
+          "mobile trap",
+          "flora AI",
+          "relocation"
+        ],
+        "signature": [
+          "Seed shot grows a small Hunt Bloom that attacks eligible lesser enemies in a short radius.",
+          "If no enemy enters range, the Bloom may uproot once and move toward the nearest authored hunt lane.",
+          "Manual Recall collapses the Bloom into a seed that partially refunds the launcher resource."
+        ],
+        "counterplay": [
+          "Blooms are destructible, relocation is slow, and only a small number can exist."
+        ],
+        "evolution": [
+          "Garden That Hunts upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Garden That Hunts uses a bespoke visual language tied directly to mobile trap, flora AI, relocation; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Garden That Hunts has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Garden That Hunts uses a unique activation and recovery sequence built around mobile flora launcher; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Garden That Hunts changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Garden That Hunts has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic black-orchard evolution trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-153",
+      "name": "Null Pilgrim",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "hazard-crossing marksman",
+      "identity": {
+        "fantasy": "A mythic marksman rifle that charges by deliberately crossing dangerous authored zones and spends that charge on spatially stable shots.",
+        "silhouette": "Long matte-black rifle with white footprint glyphs running down the barrel.",
+        "lore_hook": "Its order believed every dangerous place deserved to be crossed once."
+      },
+      "mechanics": {
+        "core": [
+          "hazard traversal",
+          "stability charge",
+          "precision"
+        ],
+        "signature": [
+          "Crossing an eligible hazard boundary without taking a critical failure grants Pilgrim Steps.",
+          "Pilgrim Steps reduce aim disruption on the next charged shot.",
+          "Spending maximum Steps leaves a short safe breadcrumb trail showing the crossed route to allies."
+        ],
+        "counterplay": [
+          "Steps cannot be farmed from harmless repeated crossings and expire outside combat."
+        ],
+        "evolution": [
+          "Null Pilgrim upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Null Pilgrim uses a bespoke visual language tied directly to hazard traversal, stability charge, precision; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Null Pilgrim has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Null Pilgrim uses a unique activation and recovery sequence built around hazard-crossing marksman; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Null Pilgrim changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Null Pilgrim has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic hazard-pilgrim chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-154",
+      "name": "Aureate Parasite",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "buff-host rifle",
+      "identity": {
+        "fantasy": "A mythic rifle that attaches a temporary golden parasite to one eligible allied buff source, altering how that buff distributes without increasing its total budget.",
+        "silhouette": "Gold-white rifle with a small living halo organism wrapped around the stock.",
+        "lore_hook": "Celestial engineers learned parasitism could be ethical if the host volunteered."
+      },
+      "mechanics": {
+        "core": [
+          "buff redistribution",
+          "support parasite",
+          "resource conservation"
+        ],
+        "signature": [
+          "Attach the Aureate Parasite to one eligible allied support source.",
+          "The parasite can narrow the source radius to strengthen positional clarity or widen it while reducing per-target intensity.",
+          "Detaching early converts the remaining support budget into a brief visible pickup rather than deleting it."
+        ],
+        "counterplay": [
+          "Only whitelisted support effects are compatible and total output remains capped."
+        ],
+        "evolution": [
+          "Aureate Parasite upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Aureate Parasite uses a bespoke visual language tied directly to buff redistribution, support parasite, resource conservation; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Aureate Parasite has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Aureate Parasite uses a unique activation and recovery sequence built around buff-host rifle; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Aureate Parasite changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Aureate Parasite has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic celestial symbiote quest."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-155",
+      "name": "Funeral Lighthouse",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "beacon artillery rifle",
+      "identity": {
+        "fantasy": "A mythic rifle that marks one defeated elite location as a lighthouse, using it to guide later long-range support fire.",
+        "silhouette": "Tall black rifle with a rotating lighthouse lens above the chamber.",
+        "lore_hook": "The dead could not warn ships, so artillery learned to do it for them."
+      },
+      "mechanics": {
+        "core": [
+          "elite beacon",
+          "guided support",
+          "long range"
+        ],
+        "signature": [
+          "Defeating an eligible elite creates a Funeral Beacon at that location.",
+          "Shots fired near the beacon gain a visible guidance line toward marked hazards or lesser enemies.",
+          "The beacon can spend its remaining duration to call one low-damage high-stagger warning shell into a nearby lane."
+        ],
+        "counterplay": [
+          "Only one beacon exists, it is visible, and no beacon is created from trivial enemies."
+        ],
+        "evolution": [
+          "Funeral Lighthouse upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Funeral Lighthouse uses a bespoke visual language tied directly to elite beacon, guided support, long range; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Funeral Lighthouse has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Funeral Lighthouse uses a unique activation and recovery sequence built around beacon artillery rifle; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Funeral Lighthouse changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Funeral Lighthouse has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic grave-coast campaign."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-156",
+      "name": "Probability Orchard",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "branching projectile launcher",
+      "identity": {
+        "fantasy": "A mythic launcher whose projectile selects one of several visible future branches, and the player can influence which branch survives.",
+        "silhouette": "Silver-green launcher with three translucent branch rails around the projectile path.",
+        "lore_hook": "Orchard mathematicians cultivated futures the way farmers pruned trees."
+      },
+      "mechanics": {
+        "core": [
+          "visible branches",
+          "trajectory choice",
+          "prediction"
+        ],
+        "signature": [
+          "Charged shots display three possible branch arcs before release.",
+          "A quick input during charge prunes one branch, increasing likelihood of the other two.",
+          "Perfect timing can collapse the shot to a single chosen branch but increases charge exposure."
+        ],
+        "counterplay": [
+          "All branches are visible to enemies and longer certainty requires longer commitment."
+        ],
+        "evolution": [
+          "Probability Orchard upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Probability Orchard uses a bespoke visual language tied directly to visible branches, trajectory choice, prediction; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Probability Orchard has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Probability Orchard uses a unique activation and recovery sequence built around branching projectile launcher; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Probability Orchard changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Probability Orchard has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic probability orchard trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-157",
+      "name": "The Second Horizon",
+      "family": "weapon",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "dual-range rifle",
+      "identity": {
+        "fantasy": "An exotic rifle with two simultaneous effective ranges: the visible muzzle shot and a delayed horizon echo farther along the same line.",
+        "silhouette": "Extremely long rifle split by a floating gap halfway down the barrel.",
+        "lore_hook": "Explorers found one horizon and decided a weapon deserved another."
+      },
+      "mechanics": {
+        "core": [
+          "dual range",
+          "delayed echo",
+          "lane control"
+        ],
+        "signature": [
+          "Primary fire creates the normal projectile and a visible future echo point farther downrange.",
+          "After a short delay the echo point emits a weaker continuation shot along the same lane.",
+          "Secondary mode shortens the gap for indoor use while reducing the echo benefit."
+        ],
+        "counterplay": [
+          "Echo points are clearly visible and lane-bound; moving off-line avoids the delayed pressure."
+        ],
+        "evolution": [
+          "The Second Horizon upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "The Second Horizon uses a bespoke visual language tied directly to dual range, delayed echo, lane control; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "The Second Horizon has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "The Second Horizon uses a unique activation and recovery sequence built around dual-range rifle; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "The Second Horizon changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "The Second Horizon has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic horizon survey capstone."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-158",
+      "name": "Black Mercy Engine",
+      "family": "weapon",
+      "tier": "god",
+      "status": "specified",
+      "role": "squad sacrifice engine",
+      "identity": {
+        "fantasy": "A God-tier weapon that lets the squad voluntarily sacrifice temporary advantages to construct powerful but bounded team-wide relief effects.",
+        "silhouette": "Huge black-white engine rifle with six empty reliquary sockets hovering around it.",
+        "lore_hook": "The engine was built around one question: what can a team willingly give up before the world takes it anyway?"
+      },
+      "mechanics": {
+        "core": [
+          "voluntary sacrifice",
+          "team relief",
+          "god resource"
+        ],
+        "signature": [
+          "A player may offer a temporary overshield state to charge the Protection socket.",
+          "A player may offer an active mobility boon to charge the Passage socket.",
+          "A player may offer a temporary damage boon to charge the Restraint socket.",
+          "Three different charged sockets enable Mercy Field, a short squad recovery domain with no damage amplification."
+        ],
+        "counterplay": [
+          "Sacrifices are voluntary, temporary, and cannot consume permanent unlocks; the domain is visible and bounded."
+        ],
+        "evolution": [
+          "Black Mercy Engine upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Black Mercy Engine uses a bespoke visual language tied directly to voluntary sacrifice, team relief, god resource; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Black Mercy Engine has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Black Mercy Engine uses a unique activation and recovery sequence built around squad sacrifice engine; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Black Mercy Engine changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Black Mercy Engine has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier Mercy Engine pilgrimage."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-159",
+      "name": "Law of the Empty Hand",
+      "family": "weapon",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "disarm-domain weapon",
+      "identity": {
+        "fantasy": "An Absolute armament that creates a tiny domain where selected temporary constructs and summoned tools lose function before living combatants do.",
+        "silhouette": "A featureless white-black gauntlet with a floating open palm larger than the wielder.",
+        "lore_hook": "The oldest law of war was written before weapons: nothing held is truly yours."
+      },
+      "mechanics": {
+        "core": [
+          "construct suppression",
+          "domain law",
+          "absolute control"
+        ],
+        "signature": [
+          "Edict of Release disables eligible temporary autonomous constructs inside the domain after a clear warning.",
+          "Edict of Burden slows the deployment of new eligible summons within the boundary.",
+          "Open Palm can eject one non-boss temporary object from the domain edge instead of destroying it.",
+          "Closing Argument ends the domain early to refund part of the law resource if no suppression occurred."
+        ],
+        "counterplay": [
+          "Players and permanent equipment are never forcibly disarmed; boss mechanics use explicit exceptions and the boundary is small."
+        ],
+        "evolution": [
+          "Law of the Empty Hand upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Law of the Empty Hand uses a bespoke visual language tied directly to construct suppression, domain law, absolute control; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Law of the Empty Hand has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Law of the Empty Hand uses a unique activation and recovery sequence built around disarm-domain weapon; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Law of the Empty Hand changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Law of the Empty Hand has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute Empty-Hand tribunal."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-109",
+      "name": "Hollow Lantern Cuirass",
+      "family": "armor",
+      "tier": "epic",
+      "status": "specified",
+      "role": "dark-zone scouting armor",
+      "identity": {
+        "fantasy": "Armor that stores light gathered outside darkness and spends it to briefly outline hazards after entering a dark region.",
+        "silhouette": "Black cuirass with a single caged lantern embedded in the sternum.",
+        "lore_hook": "Scouts carried daylight into places that considered it trespassing."
+      },
+      "mechanics": {
+        "core": [
+          "light storage",
+          "hazard outline",
+          "scouting"
+        ],
+        "signature": [
+          "Bright-area exposure charges the Hollow Lantern.",
+          "Entering a dark authored zone automatically spends part of the charge to outline nearby hazard geometry for a short window."
+        ],
+        "counterplay": [
+          "Charge is finite and the effect reveals hazards without neutralizing them."
+        ],
+        "evolution": [
+          "Hollow Lantern Cuirass upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Hollow Lantern Cuirass uses a bespoke visual language tied directly to light storage, hazard outline, scouting; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Hollow Lantern Cuirass has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Hollow Lantern Cuirass uses a unique activation and recovery sequence built around dark-zone scouting armor; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Hollow Lantern Cuirass changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Hollow Lantern Cuirass has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic undercity scout contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-110",
+      "name": "Storm Jury Harness",
+      "family": "armor",
+      "tier": "epic",
+      "status": "specified",
+      "role": "shock-decision armor",
+      "identity": {
+        "fantasy": "Armor that records whether the wearer avoided or endured the last shock hazard and offers a different next benefit based on that choice.",
+        "silhouette": "Dark conductive harness with two opposing lightning scales on the shoulders.",
+        "lore_hook": "Its makers thought survival decisions deserved a verdict."
+      },
+      "mechanics": {
+        "core": [
+          "shock history",
+          "choice reward",
+          "hazard armor"
+        ],
+        "signature": [
+          "Avoiding an eligible shock hazard primes Evasion Verdict for a short movement benefit.",
+          "Enduring a bounded shock event primes Endurance Verdict for brief stagger stability instead."
+        ],
+        "counterplay": [
+          "Only one verdict can be stored and repeated trivial hazards do not qualify."
+        ],
+        "evolution": [
+          "Storm Jury Harness upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Storm Jury Harness uses a bespoke visual language tied directly to shock history, choice reward, hazard armor; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Storm Jury Harness has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Storm Jury Harness uses a unique activation and recovery sequence built around shock-decision armor; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Storm Jury Harness changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Storm Jury Harness has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic storm jury challenge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-111",
+      "name": "Grave Orchard Mail",
+      "family": "armor",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "corpse-zone support armor",
+      "identity": {
+        "fantasy": "Armor that turns recent elite death locations into short-lived team waypoints instead of permanent power sources.",
+        "silhouette": "Bone-and-bark mail with small black fruit knots along the shoulders.",
+        "lore_hook": "Grave gardeners taught soldiers to remember where danger had already been paid for."
+      },
+      "mechanics": {
+        "core": [
+          "elite waypoint",
+          "team navigation",
+          "corpse utility"
+        ],
+        "signature": [
+          "An eligible elite defeat creates a Grave Fruit waypoint visible to the squad.",
+          "Passing through the waypoint grants brief movement stabilization and objective direction clarity.",
+          "The waypoint can be harvested early to reveal nearby corpse-fed monster growth instead of granting movement."
+        ],
+        "counterplay": [
+          "Only one or two waypoints can exist and they expire quickly."
+        ],
+        "evolution": [
+          "Grave Orchard Mail upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Grave Orchard Mail uses a bespoke visual language tied directly to elite waypoint, team navigation, corpse utility; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Grave Orchard Mail has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Grave Orchard Mail uses a unique activation and recovery sequence built around corpse-zone support armor; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Grave Orchard Mail changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Grave Orchard Mail has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary grave orchard reputation capstone."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-112",
+      "name": "Parallax Bastion",
+      "family": "armor",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "multi-angle defense armor",
+      "identity": {
+        "fantasy": "Mythic armor that projects two offset defensive afterimages and lets the wearer commit to one angle when a heavy attack is telegraphed.",
+        "silhouette": "Silver armor with two translucent duplicate shoulder sets floating beside the body.",
+        "lore_hook": "The Bastion survives by deciding which version of itself should be struck."
+      },
+      "mechanics": {
+        "core": [
+          "defensive afterimages",
+          "angle choice",
+          "heavy attack response"
+        ],
+        "signature": [
+          "Heavy telegraphs create two Parallax Guard options around the wearer.",
+          "Choosing one option grants brief directional mitigation from that side while exposing the opposite side normally.",
+          "A correct choice stores one Bastion charge that can later reduce knockback for a nearby ally."
+        ],
+        "counterplay": [
+          "Wrong-angle commitment offers no protection and the selected side is visible."
+        ],
+        "evolution": [
+          "Parallax Bastion upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Parallax Bastion uses a bespoke visual language tied directly to defensive afterimages, angle choice, heavy attack response; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Parallax Bastion has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Parallax Bastion uses a unique activation and recovery sequence built around multi-angle defense armor; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Parallax Bastion changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Parallax Bastion has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic parallax fortress trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-113",
+      "name": "Cathedral of Rain",
+      "family": "armor",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "weather-support armor",
+      "identity": {
+        "fantasy": "Mythic armor that converts sustained rain exposure into temporary architectural support effects for a squad.",
+        "silhouette": "Dark blue plate with miniature flying buttresses that channel water into glowing seams.",
+        "lore_hook": "A drowned architect built a church that only existed during storms and later wore its blueprint."
+      },
+      "mechanics": {
+        "core": [
+          "weather charge",
+          "support architecture",
+          "rain"
+        ],
+        "signature": [
+          "Rain exposure fills Cathedral Charge.",
+          "Spend charge to grow a short-lived cover buttress from valid terrain.",
+          "Spend charge instead to create a narrow rain gutter lane that improves allied movement through storm zones."
+        ],
+        "counterplay": [
+          "Dry spaces prevent charging and only a few temporary structures can exist."
+        ],
+        "evolution": [
+          "Cathedral of Rain upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Cathedral of Rain uses a bespoke visual language tied directly to weather charge, support architecture, rain; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Cathedral of Rain has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Cathedral of Rain uses a unique activation and recovery sequence built around weather-support armor; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Cathedral of Rain changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Cathedral of Rain has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic drowned cathedral pilgrimage."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-114",
+      "name": "Vestment of the Uncounted",
+      "family": "armor",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "anti-swarm law armor",
+      "identity": {
+        "fantasy": "Absolute armor that creates a small domain where overwhelming lesser-enemy quantity is converted into readable waves instead of simultaneous pressure.",
+        "silhouette": "White-black robes covered in numerals that erase themselves near crowds.",
+        "lore_hook": "The Vestment does not reduce enemies; it refuses to count them all at once."
+      },
+      "mechanics": {
+        "core": [
+          "swarm pacing",
+          "domain queue",
+          "absolute defense"
+        ],
+        "signature": [
+          "Law of Sequence delays a capped subset of eligible lesser-enemy attacks so they resolve in readable waves.",
+          "Law of Interval creates brief spacing between repeated identical swarm attacks inside the domain.",
+          "Uncounted Mark highlights enemies waiting in the sequence so players can prepare.",
+          "Collapse Sequence releases any remaining delayed actions safely over a short authored interval instead of deleting them."
+        ],
+        "counterplay": [
+          "Bosses and elite signature attacks are excluded; domain duration and queue size are strictly capped."
+        ],
+        "evolution": [
+          "Vestment of the Uncounted upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Vestment of the Uncounted uses a bespoke visual language tied directly to swarm pacing, domain queue, absolute defense; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Vestment of the Uncounted has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Vestment of the Uncounted uses a unique activation and recovery sequence built around anti-swarm law armor; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Vestment of the Uncounted changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Vestment of the Uncounted has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute swarm tribunal."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-133",
+      "name": "Ashmouth Jackal",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "ember-scavenging pack predator",
+      "identity": {
+        "fantasy": "A lean jackal that eats dying fire hazards and carries the heat into its next pounce.",
+        "silhouette": "Charred canine with a furnace-orange throat and ash streaming from its paws.",
+        "lore_hook": "It hunts the places where fires are almost finished."
+      },
+      "mechanics": {
+        "core": [
+          "hazard feeding",
+          "pack pounce",
+          "heat carry"
+        ],
+        "signature": [
+          "Feeding on an eligible fading fire zone charges Ember Pounce.",
+          "A charged pounce leaves a small ash burst that can ignite another dying hazard."
+        ],
+        "counterplay": [
+          "Extinguish hazards completely or interrupt the feeding animation."
+        ],
+        "evolution": [
+          "Ashmouth Jackal upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Ashmouth Jackal uses a bespoke visual language tied directly to hazard feeding, pack pounce, heat carry; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Ashmouth Jackal has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Ashmouth Jackal uses a unique activation and recovery sequence built around ember-scavenging pack predator; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Ashmouth Jackal changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Ashmouth Jackal has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic ashland roaming encounter."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-134",
+      "name": "Bellskin Eel",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "sonic ambush swimmer",
+      "identity": {
+        "fantasy": "An eel-like monster that hides in shallow water and rings bone bells along its body before breaching.",
+        "silhouette": "Long pale eel with rib-bells protruding from translucent skin.",
+        "lore_hook": "Fisherfolk learned the water rings before the monster does."
+      },
+      "mechanics": {
+        "core": [
+          "water ambush",
+          "sonic warning",
+          "breach"
+        ],
+        "signature": [
+          "Submerged movement is hidden except for faint bell ripples.",
+          "A full bell sequence telegraphs the breach direction and grants the eel a short knock wave."
+        ],
+        "counterplay": [
+          "Read the bell sequence and leave the projected breach lane."
+        ],
+        "evolution": [
+          "Bellskin Eel upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Bellskin Eel uses a bespoke visual language tied directly to water ambush, sonic warning, breach; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Bellskin Eel has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Bellskin Eel uses a unique activation and recovery sequence built around sonic ambush swimmer; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Bellskin Eel changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Bellskin Eel has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic drowned-marsh encounter."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-135",
+      "name": "Moth of the Red Ledger",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "resource-marking flyer",
+      "identity": {
+        "fantasy": "A large moth that tags whichever player most recently consumed a healing item and guides lesser predators toward them.",
+        "silhouette": "Crimson moth with parchment-pattern wings and glowing account marks.",
+        "lore_hook": "Infernal collectors bred it to find anyone who had recently gained something."
+      },
+      "mechanics": {
+        "core": [
+          "resource scent",
+          "target marking",
+          "flying support"
+        ],
+        "signature": [
+          "Recent healing use can trigger a visible Ledger Scent mark.",
+          "Nearby eligible lesser monsters receive a temporary navigation preference toward the marked player."
+        ],
+        "counterplay": [
+          "The mark is visible, short, and ends immediately if the moth is defeated."
+        ],
+        "evolution": [
+          "Moth of the Red Ledger upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Moth of the Red Ledger uses a bespoke visual language tied directly to resource scent, target marking, flying support; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Moth of the Red Ledger has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Moth of the Red Ledger uses a unique activation and recovery sequence built around resource-marking flyer; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Moth of the Red Ledger changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Moth of the Red Ledger has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic infernal patrol encounter."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-136",
+      "name": "Glassroot Boar",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "crystalline charger",
+      "identity": {
+        "fantasy": "A heavy boar whose crystal tusks grow longer as it breaks destructible environment pieces during charges.",
+        "silhouette": "Black boar with transparent root-like tusks and stone bark armor.",
+        "lore_hook": "It learned architecture was only another kind of underbrush."
+      },
+      "mechanics": {
+        "core": [
+          "environment break",
+          "tusk growth",
+          "charge"
+        ],
+        "signature": [
+          "Breaking eligible environment props during a charge adds temporary Tusk Growth.",
+          "Longer tusks widen the next charge lane but increase the windup and turning penalty."
+        ],
+        "counterplay": [
+          "Fight in open terrain or punish the slower overgrown charge."
+        ],
+        "evolution": [
+          "Glassroot Boar upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Glassroot Boar uses a bespoke visual language tied directly to environment break, tusk growth, charge; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Glassroot Boar has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Glassroot Boar uses a unique activation and recovery sequence built around crystalline charger; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Glassroot Boar changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Glassroot Boar has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic crystal forest hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-137",
+      "name": "Cinder Page Monk",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "fire-script caster",
+      "identity": {
+        "fantasy": "A monk that writes short attack instructions in burning pages and throws the pages into the world as delayed zones.",
+        "silhouette": "Hooded ash figure with six floating book pages burning at their edges.",
+        "lore_hook": "Its monastery wrote every prayer on something already burning."
+      },
+      "mechanics": {
+        "core": [
+          "written hazards",
+          "page resource",
+          "caster"
+        ],
+        "signature": [
+          "Each floating page displays a pictogram for line, ring, or burst before being thrown.",
+          "Destroyed pages permanently reduce the available pattern set for the encounter.",
+          "When only one page remains, the monk gains speed but loses complex area control."
+        ],
+        "counterplay": [
+          "Read and destroy pages before casts; late phase becomes simpler but faster."
+        ],
+        "evolution": [
+          "Cinder Page Monk upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Cinder Page Monk uses a bespoke visual language tied directly to written hazards, page resource, caster; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Cinder Page Monk has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Cinder Page Monk uses a unique activation and recovery sequence built around fire-script caster; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Cinder Page Monk changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Cinder Page Monk has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary cinder monastery encounter."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-138",
+      "name": "Tidecourt Mantis",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "water-lane duelist",
+      "identity": {
+        "fantasy": "A mantis that creates narrow water lanes and gains different attacks depending on whether it stands inside or outside them.",
+        "silhouette": "Tall pearl mantis with blade forearms shaped like breaking waves.",
+        "lore_hook": "Tidecourt duelists copied it badly; the creature copied no one."
+      },
+      "mechanics": {
+        "core": [
+          "water lane",
+          "stance switch",
+          "duelist"
+        ],
+        "signature": [
+          "Wave Cut creates a narrow water lane across terrain.",
+          "Inside a lane, the mantis favors fast lateral slashes.",
+          "Outside all lanes, it prepares slower long-range pressure cuts."
+        ],
+        "counterplay": [
+          "Force it between states and avoid fighting where multiple lanes overlap."
+        ],
+        "evolution": [
+          "Tidecourt Mantis upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Tidecourt Mantis uses a bespoke visual language tied directly to water lane, stance switch, duelist; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Tidecourt Mantis has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Tidecourt Mantis uses a unique activation and recovery sequence built around water-lane duelist; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Tidecourt Mantis changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Tidecourt Mantis has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary tidecourt hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-139",
+      "name": "Null Orchard Crow",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "anti-summon scavenger",
+      "identity": {
+        "fantasy": "A giant crow that steals unused temporary summon resources and drops corrupted seeds that hatch into hostile copies of the resource type.",
+        "silhouette": "Black crow with fruit-like void sacs hanging beneath each wing.",
+        "lore_hook": "It eats abandoned intentions and nests in unfinished rituals."
+      },
+      "mechanics": {
+        "core": [
+          "resource theft",
+          "corrupt seed",
+          "flying scavenger"
+        ],
+        "signature": [
+          "Nearby expired or abandoned eligible summon resources feed a Void Sac.",
+          "A filled sac becomes a Corrupt Seed on the ground.",
+          "If not destroyed, the seed spawns a simplified hostile analogue with a strict lifetime."
+        ],
+        "counterplay": [
+          "Clean up temporary resources and destroy sacs or seeds quickly."
+        ],
+        "evolution": [
+          "Null Orchard Crow upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Null Orchard Crow uses a bespoke visual language tied directly to resource theft, corrupt seed, flying scavenger; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Null Orchard Crow has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Null Orchard Crow uses a unique activation and recovery sequence built around anti-summon scavenger; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Null Orchard Crow changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Null Orchard Crow has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary null orchard event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-140",
+      "name": "Hourglass Hyena",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "cooldown-hunting pack beast",
+      "identity": {
+        "fantasy": "A hyena that becomes aggressive toward players with many abilities currently on cooldown and retreats from fully ready targets.",
+        "silhouette": "Lean bronze hyena with glass sand chambers along its spine.",
+        "lore_hook": "It laughs loudest when the future is unavailable."
+      },
+      "mechanics": {
+        "core": [
+          "cooldown sensing",
+          "target selection",
+          "pack behavior"
+        ],
+        "signature": [
+          "The hyena scores nearby players by eligible active cooldown count.",
+          "It prioritizes the highest score and gains a short pursuit burst when that score increases.",
+          "Breaking one hourglass spine chamber lowers its sensing range and pursuit duration."
+        ],
+        "counterplay": [
+          "Rotate threat, save abilities, and target the visible spine chambers."
+        ],
+        "evolution": [
+          "Hourglass Hyena upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Hourglass Hyena uses a bespoke visual language tied directly to cooldown sensing, target selection, pack behavior; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Hourglass Hyena has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Hourglass Hyena uses a unique activation and recovery sequence built around cooldown-hunting pack beast; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Hourglass Hyena changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Hourglass Hyena has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary chronowaste hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-141",
+      "name": "Saintless Heron",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "support-zone spear hunter",
+      "identity": {
+        "fantasy": "A huge heron that stalks the edges of healing fields and spears players who linger at predictable support positions.",
+        "silhouette": "Tall white-black bird with a reliquary-like beak and torn halo feathers.",
+        "lore_hook": "It learned temples always had wounded people standing in circles."
+      },
+      "mechanics": {
+        "core": [
+          "support zone predation",
+          "edge stalking",
+          "precision strike"
+        ],
+        "signature": [
+          "The heron circles active eligible support zones just outside their boundary.",
+          "Remaining in the same support zone too long creates a visible Spear Prediction line.",
+          "Leaving the zone before the strike causes the heron to overextend and expose its wings."
+        ],
+        "counterplay": [
+          "Rotate support positions and punish failed spear dives."
+        ],
+        "evolution": [
+          "Saintless Heron upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Saintless Heron uses a bespoke visual language tied directly to support zone predation, edge stalking, precision strike; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Saintless Heron has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Saintless Heron uses a unique activation and recovery sequence built around support-zone spear hunter; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Saintless Heron changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Saintless Heron has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary saintless marsh hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-142",
+      "name": "Mirrorback Gorilla",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "damage-angle bruiser",
+      "identity": {
+        "fantasy": "A mythic gorilla whose mirrored back plates store the broad direction of heavy attacks and return that information as directional shockwaves.",
+        "silhouette": "Massive black gorilla with silver mirror slabs across shoulders and spine.",
+        "lore_hook": "Hunters discovered it never forgets where pain came from."
+      },
+      "mechanics": {
+        "core": [
+          "direction memory",
+          "shockwave",
+          "bruiser"
+        ],
+        "signature": [
+          "Heavy hits record one of four broad attack directions in the back plates.",
+          "Ground Slam sends a shockwave toward the most frequently recorded direction.",
+          "Breaking a recorded plate erases that direction and creates a temporary safe side."
+        ],
+        "counterplay": [
+          "Vary attack angles and break loaded mirror plates before the slam."
+        ],
+        "evolution": [
+          "Mirrorback Gorilla upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Mirrorback Gorilla uses a bespoke visual language tied directly to direction memory, shockwave, bruiser; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Mirrorback Gorilla has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Mirrorback Gorilla uses a unique activation and recovery sequence built around damage-angle bruiser; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Mirrorback Gorilla changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Mirrorback Gorilla has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic mirror jungle hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-143",
+      "name": "Choir of Little Suns",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "celestial swarm collective",
+      "identity": {
+        "fantasy": "A swarm of small star organisms that orbit one shared dark core and reorganize into attack constellations.",
+        "silhouette": "Dozens of fist-sized suns orbiting a black sphere with no visible surface.",
+        "lore_hook": "Astronomers first catalogued them as a constellation until the constellation moved indoors."
+      },
+      "mechanics": {
+        "core": [
+          "swarm constellation",
+          "shared core",
+          "celestial"
+        ],
+        "signature": [
+          "The swarm forms Line, Ring, or Spear constellations with distinct attack patterns.",
+          "Destroying enough orbiters forces the core to expose itself and rebuild the constellation.",
+          "Damaging the core changes the next formation choice rather than only reducing health."
+        ],
+        "counterplay": [
+          "Read formations, clear orbiters, then focus the exposed core."
+        ],
+        "evolution": [
+          "Choir of Little Suns upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Choir of Little Suns uses a bespoke visual language tied directly to swarm constellation, shared core, celestial; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Choir of Little Suns has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Choir of Little Suns uses a unique activation and recovery sequence built around celestial swarm collective; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Choir of Little Suns changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Choir of Little Suns has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic starfall incursion."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-144",
+      "name": "Grave Weather Ox",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "necrotic storm beast",
+      "identity": {
+        "fantasy": "A huge ox carrying a localized grave storm that intensifies when corpses remain near its path.",
+        "silhouette": "Building-sized dark ox with a black rain cloud chained between its horns.",
+        "lore_hook": "Necromancers stopped summoning rain once the ox learned to bring its own."
+      },
+      "mechanics": {
+        "core": [
+          "corpse-fed weather",
+          "storm aura",
+          "charge"
+        ],
+        "signature": [
+          "Nearby eligible corpses feed the Horn Storm.",
+          "More storm charge expands the rain aura and adds bone-hail bursts.",
+          "A successful charge through a corpse cluster consumes the cluster for a temporary armor phase."
+        ],
+        "counterplay": [
+          "Deny corpse clusters and break horn chains to reduce storm radius."
+        ],
+        "evolution": [
+          "Grave Weather Ox upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Grave Weather Ox uses a bespoke visual language tied directly to corpse-fed weather, storm aura, charge; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Grave Weather Ox has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Grave Weather Ox uses a unique activation and recovery sequence built around necrotic storm beast; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Grave Weather Ox changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Grave Weather Ox has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic gravefront world hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-145",
+      "name": "The Clerk Under Water",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "abyssal obligation caster",
+      "identity": {
+        "fantasy": "A drowned bureaucratic entity that assigns simple movement obligations to players inside its water domain.",
+        "silhouette": "Long-robed drowned figure carrying a desk chained to its waist.",
+        "lore_hook": "The office sank; the paperwork did not."
+      },
+      "mechanics": {
+        "core": [
+          "movement obligation",
+          "water domain",
+          "caster"
+        ],
+        "signature": [
+          "Issues a visible Swim, Surface, or Regroup obligation to marked players.",
+          "Completing the obligation grants a brief water-mobility boon.",
+          "Failure empowers the Clerk's next ink-wave attack rather than applying unavoidable punishment."
+        ],
+        "counterplay": [
+          "Read and complete the simple obligation or prepare for the empowered attack."
+        ],
+        "evolution": [
+          "The Clerk Under Water upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "The Clerk Under Water uses a bespoke visual language tied directly to movement obligation, water domain, caster; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "The Clerk Under Water has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "The Clerk Under Water uses a unique activation and recovery sequence built around abyssal obligation caster; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "The Clerk Under Water changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "The Clerk Under Water has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic drowned archive encounter."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-146",
+      "name": "Infernal Glassmaker",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "terrain-shaping demon",
+      "identity": {
+        "fantasy": "A demon artisan that melts battlefield debris into temporary glass walls, lenses, and cutting floors.",
+        "silhouette": "Tall furnace demon with molten glass arms and a blowpipe spine.",
+        "lore_hook": "Hell discovered transparency made fortifications more frightening, not less."
+      },
+      "mechanics": {
+        "core": [
+          "debris conversion",
+          "glass terrain",
+          "demon artisan"
+        ],
+        "signature": [
+          "Consumes eligible destroyed debris to create a clear Glass Wall.",
+          "Can reshape a wall into a Lens that bends one authored projectile lane.",
+          "Can shatter its own construction into a short cutting floor hazard."
+        ],
+        "counterplay": [
+          "Deny debris, break glass during reshaping, and move off shatter floors."
+        ],
+        "evolution": [
+          "Infernal Glassmaker upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Infernal Glassmaker uses a bespoke visual language tied directly to debris conversion, glass terrain, demon artisan; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Infernal Glassmaker has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Infernal Glassmaker uses a unique activation and recovery sequence built around terrain-shaping demon; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Infernal Glassmaker changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Infernal Glassmaker has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic infernal foundry encounter."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-147",
+      "name": "Moonclock Stag",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "lunar timing beast",
+      "identity": {
+        "fantasy": "A celestial stag whose antlers rotate like a clock and change its movement pattern at quarter turns.",
+        "silhouette": "Giant silver stag with circular antler dial containing a miniature moon.",
+        "lore_hook": "Travelers once told time by its silhouette until it began hunting them."
+      },
+      "mechanics": {
+        "core": [
+          "quarter-turn phases",
+          "movement pattern",
+          "lunar beast"
+        ],
+        "signature": [
+          "At the first quarter the stag favors straight charges.",
+          "At the second it creates lateral crescent leaps.",
+          "At the third it slows and summons small moonwell zones.",
+          "At full turn it performs a highly telegraphed antler sweep and resets."
+        ],
+        "counterplay": [
+          "Track the visible antler clock and prepare for each quarter pattern."
+        ],
+        "evolution": [
+          "Moonclock Stag upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Moonclock Stag uses a bespoke visual language tied directly to quarter-turn phases, movement pattern, lunar beast; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Moonclock Stag has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Moonclock Stag uses a unique activation and recovery sequence built around lunar timing beast; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Moonclock Stag changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Moonclock Stag has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic lunar wilderness hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-148",
+      "name": "Paradox Widow",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "position-copy spider",
+      "identity": {
+        "fantasy": "An exotic spider that leaves behind one alternate position whenever it dodges and can later choose which position becomes real.",
+        "silhouette": "Long-legged black spider with two translucent duplicate abdomens trailing behind.",
+        "lore_hook": "Hunters kept missing because they were aiming at the correct spider at the wrong time."
+      },
+      "mechanics": {
+        "core": [
+          "position copies",
+          "delayed choice",
+          "ambush"
+        ],
+        "signature": [
+          "Each successful evasive move leaves a visible Paradox Husk at the old position.",
+          "The Widow may swap to one recent Husk after a short tell.",
+          "Destroying Husks reduces its options and briefly slows it."
+        ],
+        "counterplay": [
+          "Clear Husks and watch the swap tell rather than tracking only the current body."
+        ],
+        "evolution": [
+          "Paradox Widow upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Paradox Widow uses a bespoke visual language tied directly to position copies, delayed choice, ambush; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Paradox Widow has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Paradox Widow uses a unique activation and recovery sequence built around position-copy spider; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Paradox Widow changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Paradox Widow has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic paradox cavern hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-149",
+      "name": "Crown-Eating Seraph",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "hierarchy-hunting celestial predator",
+      "identity": {
+        "fantasy": "An exotic fallen seraph that prioritizes leaders, commanders, and high-rank summoned units and temporarily steals their command aura.",
+        "silhouette": "Tall winged predator with a mouth-like halo and ceremonial armor fragments.",
+        "lore_hook": "It fell when it discovered authority had a taste."
+      },
+      "mechanics": {
+        "core": [
+          "leader targeting",
+          "aura theft",
+          "celestial predator"
+        ],
+        "signature": [
+          "Detects eligible leadership-tagged NPCs, summons, or command units.",
+          "A successful Crown Bite steals a normalized version of one command aura for a short time.",
+          "Breaking the mouth-halo immediately purges the stolen aura."
+        ],
+        "counterplay": [
+          "Protect leaders, bait the bite, and target the visible mouth-halo."
+        ],
+        "evolution": [
+          "Crown-Eating Seraph upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Crown-Eating Seraph uses a bespoke visual language tied directly to leader targeting, aura theft, celestial predator; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Crown-Eating Seraph has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Crown-Eating Seraph uses a unique activation and recovery sequence built around hierarchy-hunting celestial predator; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Crown-Eating Seraph changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Crown-Eating Seraph has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic fallen-seraph hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-150",
+      "name": "The Staircase Animal",
+      "family": "monster",
+      "tier": "god",
+      "status": "specified",
+      "role": "regional geometry beast",
+      "identity": {
+        "fantasy": "A God-tier creature that manifests as enormous moving staircases crossing multiple zones, with attack organs hidden at landings.",
+        "silhouette": "Horizon-scale stair structures connected by glimpses of a many-legged creature beneath them.",
+        "lore_hook": "No culture agrees what the beast looks like because everyone only sees how it climbs."
+      },
+      "mechanics": {
+        "core": [
+          "regional traversal",
+          "landing organs",
+          "god geometry"
+        ],
+        "signature": [
+          "Stair Arms create temporary routes between separated encounter sectors.",
+          "Each Landing contains an attack organ controlling one hazard family.",
+          "Broken Landings change the orientation of future stair routes.",
+          "Descent Phase reverses every active staircase and exposes the central spinal route."
+        ],
+        "counterplay": [
+          "Teams split across Landings, preserve needed traversal routes, and coordinate before Descent."
+        ],
+        "evolution": [
+          "The Staircase Animal upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "The Staircase Animal uses a bespoke visual language tied directly to regional traversal, landing organs, god geometry; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "The Staircase Animal has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "The Staircase Animal uses a unique activation and recovery sequence built around regional geometry beast; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "The Staircase Animal changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "The Staircase Animal has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier impossible architecture event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-151",
+      "name": "The Silence After Thunder",
+      "family": "monster",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "storm-absence entity",
+      "identity": {
+        "fantasy": "An Absolute entity that appears not as a storm but as the unnatural absence immediately after one, suppressing motion and sound in bounded waves.",
+        "silhouette": "A humanlike gap in rain and lightning, visible only because weather stops around it.",
+        "lore_hook": "Ancient storm gods feared the thing that arrived when even thunder had nothing left to say."
+      },
+      "mechanics": {
+        "core": [
+          "silence waves",
+          "motion suppression",
+          "absolute weather"
+        ],
+        "signature": [
+          "After nearby loud or storm effects, Quiet Front expands from the entity with a visible boundary.",
+          "Inside the front, selected lesser projectiles and temporary summons move more slowly rather than stopping.",
+          "Stillness Nodes appear at the edge and can be destroyed to reopen normal motion.",
+          "Breaking enough Nodes causes Rebound Thunder, a player-beneficial movement window.",
+          "Final Quiet compresses all remaining fronts into one predictable corridor."
+        ],
+        "counterplay": [
+          "Use edge Nodes and Rebound windows; accessibility-critical audio/visual telegraphs are never suppressed."
+        ],
+        "evolution": [
+          "The Silence After Thunder upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "The Silence After Thunder uses a bespoke visual language tied directly to silence waves, motion suppression, absolute weather; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "The Silence After Thunder has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "The Silence After Thunder uses a unique activation and recovery sequence built around storm-absence entity; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "The Silence After Thunder changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "The Silence After Thunder has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute storm-absence anomaly."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "BOS-073",
+      "name": "The Bell That Hunts Bells",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "resonance raid boss",
+      "identity": {
+        "fantasy": "A mythic boss that attacks active sound-producing objectives, forcing squads to decide which bells, alarms, and support devices to keep alive.",
+        "silhouette": "Towering bronze predator made from nested bells and hooked legs.",
+        "lore_hook": "It began as a warning system and evolved a hatred for competition."
+      },
+      "mechanics": {
+        "core": [
+          "sound-source hunting",
+          "objective pressure",
+          "resonance"
+        ],
+        "signature": [
+          "The boss marks the loudest eligible active objective device as Prey.",
+          "Reaching Prey lets it consume that source and unlock a matching sonic attack.",
+          "Players can activate Decoy Bells to redirect the hunt.",
+          "Destroying consumed resonance plates removes the copied sonic attack."
+        ],
+        "counterplay": [
+          "Manage sound-source priority and protect critical objectives with decoys."
+        ],
+        "evolution": [
+          "The Bell That Hunts Bells upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "The Bell That Hunts Bells uses a bespoke visual language tied directly to sound-source hunting, objective pressure, resonance; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "The Bell That Hunts Bells has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "The Bell That Hunts Bells uses a unique activation and recovery sequence built around resonance raid boss; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "The Bell That Hunts Bells changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "The Bell That Hunts Bells has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic resonance cathedral raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "BOS-074",
+      "name": "Queen Marrowglass",
+      "family": "boss",
+      "tier": "god",
+      "status": "specified",
+      "role": "skeletal mirror sovereign",
+      "identity": {
+        "fantasy": "A God-tier sovereign whose palace of bone and glass reflects squad positioning into mirrored enemy formations.",
+        "silhouette": "Colossal queen in translucent bone armor seated within a moving mirror throne.",
+        "lore_hook": "She ruled the dead so long that eventually their reflections asked for citizenship."
+      },
+      "mechanics": {
+        "core": [
+          "position reflection",
+          "formation copies",
+          "god sovereign"
+        ],
+        "signature": [
+          "Mirror Court records broad squad positions at phase transitions.",
+          "The next phase spawns lesser mirrored formations occupying those recorded positions.",
+          "Breaking throne mirrors removes one recorded formation slot.",
+          "Royal Refraction rotates the arena's mirror geometry without moving players."
+        ],
+        "counterplay": [
+          "Intentionally feed safe formation layouts before phase changes and destroy throne mirrors."
+        ],
+        "evolution": [
+          "Queen Marrowglass upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Queen Marrowglass uses a bespoke visual language tied directly to position reflection, formation copies, god sovereign; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Queen Marrowglass has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Queen Marrowglass uses a unique activation and recovery sequence built around skeletal mirror sovereign; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Queen Marrowglass changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Queen Marrowglass has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier marrowglass palace raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "BOS-075",
+      "name": "Orun's Dreaming Tooth",
+      "family": "boss",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "continent-organ boss",
+      "identity": {
+        "fantasy": "An Absolute boss encountered as one living tooth of the continent Orun, containing an entire dream-biome inside its root.",
+        "silhouette": "Mountain-sized black-white tooth erupting from terrain with glowing root caverns beneath.",
+        "lore_hook": "Continents dream slowly; their teeth dream of being mountains."
+      },
+      "mechanics": {
+        "core": [
+          "interior biome",
+          "root objectives",
+          "continent organ"
+        ],
+        "signature": [
+          "Exterior phase requires severing four Root Nerves in separate surface sectors.",
+          "Entering the exposed root transitions teams into a dream-biome with altered traversal.",
+          "Dream Enamel recreates simplified echoes of earlier regional hazards.",
+          "Pain Signal sends synchronized warnings to the overworld, changing Orun's external behavior.",
+          "Final Extraction requires teams inside and outside to complete objectives simultaneously."
+        ],
+        "counterplay": [
+          "Coordinate surface and interior squads; dream hazards are echoes with learnable, simplified patterns."
+        ],
+        "evolution": [
+          "Orun's Dreaming Tooth upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Orun's Dreaming Tooth uses a bespoke visual language tied directly to interior biome, root objectives, continent organ; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "Orun's Dreaming Tooth has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "Orun's Dreaming Tooth uses a unique activation and recovery sequence built around continent-organ boss; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "Orun's Dreaming Tooth changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "Orun's Dreaming Tooth has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute Orun endgame chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "BOS-076",
+      "name": "The Choir That Names Nothing",
+      "family": "boss",
+      "tier": "transcendent_zero",
+      "status": "specified",
+      "role": "Zero trial choir",
+      "identity": {
+        "fantasy": "A Transcendent trial composed of many faceless singers whose attacks only gain meaning when the candidate assigns priorities through action.",
+        "silhouette": "A ring of identical white-black figures around an empty central conductor position.",
+        "lore_hook": "The choir knows every word except the one that tells it what matters."
+      },
+      "mechanics": {
+        "core": [
+          "priority assignment",
+          "trial interpretation",
+          "transcendent evaluation"
+        ],
+        "signature": [
+          "The candidate's first defended ally defines the Protection voice for the phase.",
+          "The first destroyed hazard defines the Ruin voice.",
+          "The first completed objective defines the Purpose voice.",
+          "The first deliberately ignored optional mechanic defines the Silence voice.",
+          "The final phase recombines only the voices the candidate actually created, producing a personalized but deterministic mastery check."
+        ],
+        "counterplay": [
+          "The trial is learnable, records explicit choices, and never grants success through raw gear power or payment."
+        ],
+        "evolution": [
+          "The Choir That Names Nothing upgrades by altering mechanic relationships, decision windows, or battlefield geometry rather than only increasing health, damage, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "The Choir That Names Nothing uses a bespoke visual language tied directly to priority assignment, trial interpretation, transcendent evaluation; telegraphs are readable at combat distance, simplify through authored LOD tiers, and preserve the mechanic silhouette even when particle density is reduced.",
+          "The Choir That Names Nothing has a separate empowered-state treatment with geometry, light, decal, or trail changes that communicate timing and counterplay before the strongest effect resolves."
+        ],
+        "animation": [
+          "The Choir That Names Nothing uses a unique activation and recovery sequence built around Zero trial choir; anticipation frames remain intact so the mechanic can be learned, interrupted, or avoided instead of becoming spectacle without counterplay.",
+          "The Choir That Names Nothing changes stance, moving parts, or body posture when its signature resource is ready, giving players a readable animation cue before the next state transition."
+        ],
+        "audio": [
+          "The Choir That Names Nothing has layered positional cues for activation, resource-ready state, danger timing, impact, failure, and cooldown, with a reduced distant mix so large encounters remain intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Transcendent Zero mastery trial after the Choosing."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 019 authored specification; runtime implementation must preserve deterministic cleanup, bounded concurrency, readable counterplay, and platform-safe fallbacks."
+      ]
+    }
+  ]
+}
