@@ -56,6 +56,8 @@ aeonfall_ability_runtime_state := class:
     CooldownRemainingSeconds:float = 0.0
     ChargeRechargeRemainingSeconds:float = 0.0
     Active:logic = false
+    Pending:logic = false
+    PendingRequestId:string = ""
     Locked:logic = false
 
 aeonfall_ability_context_flags := class:
