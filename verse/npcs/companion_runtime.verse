@@ -350,4 +350,41 @@ aeonfall_companion_runtime := class():
 
         false
 
+    ReleaseByCompanionKey(
+        CompanionKey:string,
+        Reason:string
+    )<transacts>:logic=
+        if:
+            Binding := Bindings[CompanionKey]
+        then:
+            ReleaseCompanion(
+                Binding.OwnerKey,
+                CompanionKey,
+                Reason
+            )
+        else:
+            false
+
+    ReleaseAllForOwner(
+        OwnerKey:string,
+        Reason:string
+    )<transacts>:void=
+        var CompanionKeys:[]string = array{}
+
+        for (CompanionKey -> Binding : Bindings):
+            if:
+                Binding.OwnerKey = OwnerKey
+                Binding.Active?
+            then:
+                set CompanionKeys = CompanionKeys + array{CompanionKey}
+
+        for (CompanionKey : CompanionKeys):
+            Released := ReleaseCompanion(
+                OwnerKey,
+                CompanionKey,
+                Reason
+            )
+            if (Released?):
+                Released = true
+
 AEONFALLCompanionRuntime:aeonfall_companion_runtime = aeonfall_companion_runtime{}
