@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "slice_id": "SLICE-001",
+  "ability_id": "ABL-003",
+  "required_class_id": "CLS-007",
+  "species": [
+    {
+      "species_id": "WLD-001",
+      "name": "Mirrorhorn Hart",
+      "steps": [
+        "Approach",
+        "Calm",
+        "Track"
+      ],
+      "max_challenge_seconds": 55,
+      "failure_event_id": "taming.failure.mirrorhorn_enraged",
+      "success_event_id": "taming.success.mirrorhorn"
+    },
+    {
+      "species_id": "WLD-006",
+      "name": "Marrow Hound",
+      "steps": [
+        "DenyCorpse",
+        "Evade",
+        "Calm"
+      ],
+      "max_challenge_seconds": 50,
+      "failure_event_id": "taming.failure.marrow_hound_enraged",
+      "success_event_id": "taming.success.marrow_hound"
+    },
+    {
+      "species_id": "WLD-007",
+      "name": "Tombshell Beetle",
+      "steps": [
+        "Feed",
+        "Protect",
+        "Calm"
+      ],
+      "max_challenge_seconds": 70,
+      "failure_event_id": "taming.failure.tombshell_withdraws",
+      "success_event_id": "taming.success.tombshell"
+    },
+    {
+      "species_id": "WLD-008",
+      "name": "Ossuary Crane",
+      "steps": [
+        "Track",
+        "Approach",
+        "Calm"
+      ],
+      "max_challenge_seconds": 60,
+      "failure_event_id": "taming.failure.ossuary_crane_flees",
+      "success_event_id": "taming.success.ossuary_crane"
+    },
+    {
+      "species_id": "WLD-009",
+      "name": "Graveburrow Mole",
+      "steps": [
+        "Track",
+        "Feed",
+        "Protect"
+      ],
+      "max_challenge_seconds": 65,
+      "failure_event_id": "taming.failure.graveburrow_retreats",
+      "success_event_id": "taming.success.graveburrow"
+    },
+    {
+      "species_id": "WLD-010",
+      "name": "Reliquary Stag",
+      "steps": [
+        "Approach",
+        "Protect",
+        "Calm",
+        "Track"
+      ],
+      "max_challenge_seconds": 85,
+      "failure_event_id": "taming.failure.reliquary_stag_rampage",
+      "success_event_id": "taming.success.reliquary_stag"
+    }
+  ]
+}
