@@ -33,6 +33,7 @@ aeonfall_status_runtime := class():
             Existing := GetStatuses(TargetKey)
             var Updated:[]aeonfall_status_instance = array{}
             var Found:logic = false
+            var Changed:logic = false
 
             for (Instance : Existing):
                 if (Instance.StatusId = Definition.StatusId):
@@ -40,7 +41,9 @@ aeonfall_status_runtime := class():
 
                     if (Definition.StackRule = aeonfall_status_stack_rule.RejectDuplicate):
                         set Updated = Updated + array{Instance}
+
                     else if (Definition.StackRule = aeonfall_status_stack_rule.RefreshDuration):
+                        set Changed = true
                         set Updated = Updated + array{
                             aeonfall_status_instance{
                                 StatusId := Instance.StatusId,
@@ -50,12 +53,17 @@ aeonfall_status_runtime := class():
                                 RemainingSeconds := Definition.BaseDurationSeconds
                             }
                         }
+
                     else if (Definition.StackRule = aeonfall_status_stack_rule.AddStack):
                         NewStacks:int =
                             if (Instance.StackCount + 1 > Definition.MaxStacks):
                                 Definition.MaxStacks
                             else:
                                 Instance.StackCount + 1
+
+                        # Even at the stack cap, a valid reapplication refreshes
+                        # duration and source/magnitude by design.
+                        set Changed = true
                         set Updated = Updated + array{
                             aeonfall_status_instance{
                                 StatusId := Instance.StatusId,
@@ -65,27 +73,32 @@ aeonfall_status_runtime := class():
                                 RemainingSeconds := Definition.BaseDurationSeconds
                             }
                         }
+
                     else:
-                        NewMagnitude:int =
-                            if (Magnitude > Instance.Magnitude):
-                                Magnitude
-                            else:
-                                Instance.Magnitude
-                        set Updated = Updated + array{
-                            aeonfall_status_instance{
-                                StatusId := Instance.StatusId,
-                                SourceId := SourceId,
-                                StackCount := Instance.StackCount,
-                                Magnitude := NewMagnitude,
-                                RemainingSeconds := Definition.BaseDurationSeconds
+                        # ReplaceIfStronger is a true compare-and-replace rule.
+                        # A weaker/equal reapplication is rejected so the
+                        # calling ability does not spend resources for no
+                        # effective status change.
+                        if (Magnitude > Instance.Magnitude):
+                            set Changed = true
+                            set Updated = Updated + array{
+                                aeonfall_status_instance{
+                                    StatusId := Instance.StatusId,
+                                    SourceId := SourceId,
+                                    StackCount := Instance.StackCount,
+                                    Magnitude := Magnitude,
+                                    RemainingSeconds := Definition.BaseDurationSeconds
+                                }
                             }
-                        }
+                        else:
+                            set Updated = Updated + array{Instance}
                 else:
                     set Updated = Updated + array{Instance}
 
             if:
                 not Found?
             then:
+                set Changed = true
                 set Updated = Updated + array{
                     aeonfall_status_instance{
                         StatusId := Definition.StatusId,
@@ -97,6 +110,7 @@ aeonfall_status_runtime := class():
                 }
 
             if:
+                Changed?
                 set StatusesByTarget[TargetKey] = Updated
             then:
                 AEONFALLRuntimeBus.Emit(
@@ -109,6 +123,16 @@ aeonfall_status_runtime := class():
                     }
                 )
                 return true
+
+            AEONFALLRuntimeBus.Emit(
+                aeonfall_runtime_event{
+                    EventType := "status.application_rejected",
+                    SourceId := SourceId,
+                    TargetId := TargetKey,
+                    ContextId := Definition.StatusId,
+                    Amount := Magnitude
+                }
+            )
 
         false
 
