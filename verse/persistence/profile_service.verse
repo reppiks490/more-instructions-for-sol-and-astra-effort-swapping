@@ -280,3 +280,14 @@ aeonfall_profile_service := class():
                 MaterialLedger := NewLedger
                 UnlockedEntityIds := UpdatedUnlocks
             SaveProfile(Player, Candidate)
+
+
+    SetEquippedClass(Agent:agent, ClassId:string)<transacts>:void=
+        if:
+            Player := player[Agent]
+            Old := AEONFALLPlayerProfiles[Player]
+        then:
+            Candidate := aeonfall_player_profile:
+                MakeAEONFALLPlayerProfile<constructor>(Old)
+                EquippedClassId := ClassId
+            SaveProfile(Player, Candidate)
