@@ -188,6 +188,7 @@ def main() -> int:
     seen_ids: dict[str, Path] = {}
     seen_names: dict[str, Path] = {}
     files = sorted(CATALOG.rglob("*.json"))
+    all_entities: list[tuple[Path, dict]] = []
 
     for path in files:
         try:
@@ -202,6 +203,20 @@ def main() -> int:
                 fail(errors, path, f"entry {index} is not an object")
                 continue
             validate_entity(path, entity, seen_ids, seen_names, errors)
+            all_entities.append((path, entity))
+
+        if isinstance(payload, dict) and "entity_count" in payload:
+            declared = payload.get("entity_count")
+            if declared != len(entities):
+                fail(errors, path, f"entity_count metadata mismatch: declared {declared}, actual {len(entities)}")
+
+    for path, entity in all_entities:
+        entity_id = entity.get("id")
+        for dependency in entity.get("dependencies", []):
+            if dependency == entity_id:
+                fail(errors, path, f"{entity_id} cannot depend on itself")
+            if isinstance(dependency, str) and ID_RE.match(dependency) and dependency not in seen_ids:
+                fail(errors, path, f"{entity_id} references missing dependency {dependency}")
 
     if errors:
         print("AEONFALL catalog validation FAILED")
