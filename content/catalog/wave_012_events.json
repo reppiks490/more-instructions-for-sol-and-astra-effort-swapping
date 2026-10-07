@@ -1,0 +1,1756 @@
+{
+  "wave": "012",
+  "purpose": "Complete the 30-event minimum with regional invasions, world effects, faction wars, mythical migrations, eldritch catastrophes, and Absolute doctrine events.",
+  "entity_count": 28,
+  "entities": [
+    {
+      "id": "EVT-003",
+      "name": "Ashfall Procession",
+      "family": "event",
+      "tier": "epic",
+      "status": "specified",
+      "role": "regional caravan siege",
+      "identity": {
+        "fantasy": "An immense Cinder March convoy crosses a hostile frontier while horde packs, raiders, and environmental hazards attack different sections of the moving line.",
+        "silhouette": "World-event presentation for Ashfall Procession is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Ashfall Procession is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "moving convoy",
+          "escort sectors",
+          "repair objectives"
+        ],
+        "signature": [
+          "Convoy Spine divides the procession into engine, civilian, forge, and rear-guard sectors with independent health states.",
+          "Marching Route chooses between authored forks with different threat/reward profiles.",
+          "Emergency Forge lets squads spend collected salvage to repair one failing sector."
+        ],
+        "counterplay": [
+          "Players can abandon low-value side objectives to preserve critical convoy sectors; enemy pressure escalates only where defenses collapse."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Kilometer-long ash trail, moving furnace lights, convoy banners visible across ridges, and orange distress flares over damaged sectors."
+        ],
+        "animation": [
+          "Vehicles, walkers, and banner teams move in staggered formation; damaged wagons visibly slow and repair crews animate around restored sections."
+        ],
+        "audio": [
+          "Marching drums, forge hammers, horn calls shifting by sector status, and distant wheel/track thunder."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-004",
+      "name": "Black Atlas Breach",
+      "family": "event",
+      "tier": "epic",
+      "status": "specified",
+      "role": "hidden-route world event",
+      "identity": {
+        "fantasy": "The Meridian Null Cartel opens a temporary impossible route network through several POIs, creating shortcuts, ambush routes, and smuggling objectives.",
+        "silhouette": "World-event presentation for Black Atlas Breach is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Black Atlas Breach is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "temporary routes",
+          "smuggling objectives",
+          "route control"
+        ],
+        "signature": [
+          "Atlas Nodes activate authored hidden doors and traversal seams across a region.",
+          "Contraband Flow spawns timed cargo paths whose value rises with route difficulty.",
+          "Route Compromise lets hostile factions discover and contest overused shortcuts."
+        ],
+        "counterplay": [
+          "Using the safest shortcut repeatedly increases compromise pressure; alternate routes remain viable."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Black compass roses appear on walls, erased seams reopen as flat mirror cuts, and route intensity is shown by moving coordinate lines."
+        ],
+        "animation": [
+          "Doors slide into impossible wall angles, floor panels fold into ramps, and smugglers physically reroute cargo at junctions."
+        ],
+        "audio": [
+          "Pen scratches, coordinate clicks, soft spatial tears, and rising alert tones as compromise builds."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-005",
+      "name": "Bloom War",
+      "family": "event",
+      "tier": "epic",
+      "status": "specified",
+      "role": "living-biome territorial event",
+      "identity": {
+        "fantasy": "The Verdant Teeth and an invasive corruption fight for control of a forest region while living cover, thorn lanes, and tameable predators change allegiance.",
+        "silhouette": "World-event presentation for Bloom War is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Bloom War is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "biome growth",
+          "predator allegiance",
+          "territory nodes"
+        ],
+        "signature": [
+          "Seedfront grows authored cover or traversal structures from captured nodes.",
+          "Predator Accord shifts eligible wildlife disposition based on which side controls feeding grounds.",
+          "Root Siege closes or opens route lanes as territory changes."
+        ],
+        "counterplay": [
+          "Burning or overharvesting the biome weakens both friendly and hostile growth, allowing a neutral recovery path."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Bioluminescent root lines spread across terrain, giant flowers mark node control, and predator crests change color with allegiance."
+        ],
+        "animation": [
+          "Vines visibly climb structures, roots lift debris into cover, and wildlife packs reposition around controlled feeding grounds."
+        ],
+        "audio": [
+          "Insect harmonics, deep wooden groans, animal calls, and rhythmic seed-pod pops during territory flips."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-006",
+      "name": "Bell Judgment",
+      "family": "event",
+      "tier": "epic",
+      "status": "specified",
+      "role": "corruption purge event",
+      "identity": {
+        "fantasy": "The Cathedral of Iron Mercy rings a mobile sanctification bell through a corrupted district, forcing players to defend it while deciding which zones to cleanse or contain.",
+        "silhouette": "World-event presentation for Bell Judgment is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Bell Judgment is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "mobile sanctuary",
+          "corruption choices",
+          "defense waves"
+        ],
+        "signature": [
+          "Judgment Bell projects a moving cleanse radius around the procession.",
+          "Mercy Choice lets squads purify, quarantine, or harvest selected corruption nodes for different consequences.",
+          "Containment Failure mutates later waves if ignored zones become unstable."
+        ],
+        "counterplay": [
+          "Players can intentionally quarantine difficult sectors instead of cleansing everything; choices affect rewards and later regional state."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Silver cleanse waves expand from the bell, corruption burns into white ash, and quarantined zones gain red iron boundary sigils."
+        ],
+        "animation": [
+          "Bell carriage advances in deliberate stages, wardens hammer seals into roads, and corrupted structures visibly shrink or harden based on choice."
+        ],
+        "audio": [
+          "Deep iron tolls, scripture hiss, warding hammers, and distorted choir layers that resolve as zones are cleansed."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-007",
+      "name": "Drowned Transit Reopening",
+      "family": "event",
+      "tier": "epic",
+      "status": "specified",
+      "role": "underwater infrastructure event",
+      "identity": {
+        "fantasy": "The Blacktide Dominion attempts to reopen a submerged transit artery, requiring pressure management, salvage, and defense against abyssal wildlife.",
+        "silhouette": "World-event presentation for Drowned Transit Reopening is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Drowned Transit Reopening is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "underwater route",
+          "pressure stations",
+          "salvage defense"
+        ],
+        "signature": [
+          "Transit Locks require synchronized activation across flooded chambers.",
+          "Pressure Budget tracks safe route efficiency rather than pure combat speed.",
+          "Salvage Train moves rare cargo once the line is partially restored."
+        ],
+        "counterplay": [
+          "Players can vent optional chambers to create safer paths at the cost of salvage opportunities."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Blue-white transit lines illuminate beneath water, pressure doors bloom with condensation, and old station signage flickers back to life."
+        ],
+        "animation": [
+          "Flood gates open in stages, air pockets visibly refill, and the salvage train crawls through tunnels while divers escort it."
+        ],
+        "audio": [
+          "Muffled alarms, sonar knocks, hydraulic groans, and a rising transit chime as stations reconnect."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-008",
+      "name": "Court of Seven Seconds",
+      "family": "event",
+      "tier": "epic",
+      "status": "specified",
+      "role": "timing challenge event",
+      "identity": {
+        "fantasy": "A regional Court of Broken Hours trial asks squads to complete linked objectives on a repeating seven-second cadence while enemies exploit missed beats.",
+        "silhouette": "World-event presentation for Court of Seven Seconds is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Court of Seven Seconds is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "timing loop",
+          "synchronized objectives",
+          "cadence enemies"
+        ],
+        "signature": [
+          "Seven Count broadcasts a clear shared cadence across the event.",
+          "Perfect Measure rewards objectives completed inside their assigned beat windows.",
+          "Missed Hour spawns additional complications rather than resetting progress."
+        ],
+        "counterplay": [
+          "Teams can recover from missed beats by sacrificing optional rewards to widen the next timing window."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Seven luminous clock marks rotate over the event space, objectives flash silver on their beat, and missed marks crack into black fragments."
+        ],
+        "animation": [
+          "Doors, platforms, and enemy formations shift on synchronized counts; players see large environmental pendulums marking cadence."
+        ],
+        "audio": [
+          "Seven-note metronome, layered ticking, clean success chimes, and dull off-beat impacts for missed windows."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-009",
+      "name": "Star Battery Alignment",
+      "family": "event",
+      "tier": "epic",
+      "status": "specified",
+      "role": "astral artillery preparation event",
+      "identity": {
+        "fantasy": "The Hollow Astral Synod powers a chain of observatories, letting players choose which regional support system becomes available for the next major encounter.",
+        "silhouette": "World-event presentation for Star Battery Alignment is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Star Battery Alignment is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "observatory capture",
+          "power routing",
+          "support choice"
+        ],
+        "signature": [
+          "Battery Nodes collect energy through defense and puzzle objectives.",
+          "Alignment Vote routes completed charge toward artillery, traversal, or detection support.",
+          "Sky Window opens only after enough nodes are synchronized."
+        ],
+        "counterplay": [
+          "Hostile teams can disable individual nodes; losing a node reduces support strength rather than invalidating the entire event."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Constellation lines connect observatories across the sky, astrolabes rotate above rooftops, and the chosen support constellation brightens last."
+        ],
+        "animation": [
+          "Observatory dishes, rings, and lenses physically realign toward a shared sky point; failed nodes sputter and fold."
+        ],
+        "audio": [
+          "Celestial ticking, deep electric hum, alignment chimes, and a regional sky-tone when the network locks."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-010",
+      "name": "Gate Oath Convocation",
+      "family": "event",
+      "tier": "epic",
+      "status": "specified",
+      "role": "rescue mastery event",
+      "identity": {
+        "fantasy": "The Last Gate Imperium stages a massive rescue drill that turns into a real siege, rewarding squads for extraction, escort, and defensive discipline.",
+        "silhouette": "World-event presentation for Gate Oath Convocation is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Gate Oath Convocation is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "rescue scoring",
+          "moving bastions",
+          "civilian escort"
+        ],
+        "signature": [
+          "Oath Ledger tracks meaningful rescues, protected NPCs, and defended objectives.",
+          "Moving Bastions deploy temporary cover corridors toward threatened groups.",
+          "Last Gate closes the event with a final extraction wave whose difficulty reflects earlier losses."
+        ],
+        "counterplay": [
+          "Players can trade optional loot objectives for safer rescue routes; successful protection reduces the final siege."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Translucent gate outlines rise around rescue corridors, saved names illuminate on bastion shields, and evacuation beacons cast ivory columns."
+        ],
+        "animation": [
+          "Bastions unfold and retreat dynamically, NPC groups move behind cover teams, and final gates physically close as the last evac reaches safety."
+        ],
+        "audio": [
+          "Command horns, shield impacts, shouted route calls, and monumental gate-closing thunder."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-011",
+      "name": "Grave Market Eclipse",
+      "family": "event",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "necromantic economy event",
+      "identity": {
+        "fantasy": "Necromancers establish a temporary corpse market where multiple factions bid, steal, cleanse, or weaponize battlefield remains.",
+        "silhouette": "World-event presentation for Grave Market Eclipse is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Grave Market Eclipse is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "corpse economy",
+          "faction bidding",
+          "resource denial",
+          "market raid"
+        ],
+        "signature": [
+          "Corpse Lots collect eligible remains into contested resource piles.",
+          "Black Auction lets AI factions spend influence to purchase lots and spawn corresponding assets.",
+          "Clean Ledger allows players to destroy or sanctify lots before sale.",
+          "Market Crash begins if enough value is denied, turning merchants and guards hostile."
+        ],
+        "counterplay": [
+          "Players choose between profit, denial, or cleansing; high-value lots draw more dangerous bidders."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Black coin sigils hover above corpse lots, auction banners flicker between faction colors, and market collapse turns every ledger symbol red."
+        ],
+        "animation": [
+          "Bone porters drag lots into stalls, bidders gesture and exchange glowing tokens, and a crash causes tents and cages to unfold into combat structures."
+        ],
+        "audio": [
+          "Bone coins, whispered bids, chain rattles, auction gavel strikes, and chaotic ledger-tearing during Market Crash."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-012",
+      "name": "Infernal Court Conclave",
+      "family": "event",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "demon diplomacy catastrophe",
+      "identity": {
+        "fantasy": "Representatives of multiple demon courts gather under temporary truce, offering dangerous contracts while rival courts attempt assassinations and rule manipulation.",
+        "silhouette": "World-event presentation for Infernal Court Conclave is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Infernal Court Conclave is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "contract choices",
+          "court rivalries",
+          "assassination waves",
+          "rule bargains"
+        ],
+        "signature": [
+          "Court Offers present readable authored bargains with clear costs and benefits.",
+          "Breach Pressure rises when players violate accepted terms or attack protected delegates.",
+          "Assassination Windows let squads expose rival schemes for reputation and rare rewards.",
+          "Conclave Collapse triggers a multi-court battle if diplomacy fails."
+        ],
+        "counterplay": [
+          "No bargain is mandatory; players can reject all offers and defend a neutral extraction route."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Each court projects distinct heraldic geometry, contracts burn in midair, and failed diplomacy fractures the central treaty seal into competing colors."
+        ],
+        "animation": [
+          "Delegates perform ceremonial arrivals, contract seals physically assemble between parties, and assassination attempts erupt from scripted court entrances."
+        ],
+        "audio": [
+          "Layered court motifs, legalistic whispers, ritual drums, wax seals, and a massive treaty-shatter sound if the conclave collapses."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-013",
+      "name": "Rime Crown Migration",
+      "family": "event",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "mythical megafauna migration",
+      "identity": {
+        "fantasy": "A vast herd of frost megafauna and Rimewolves crosses mountain passes while hunters, predators, and weather fronts alter the migration route.",
+        "silhouette": "World-event presentation for Rime Crown Migration is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Rime Crown Migration is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "herd migration",
+          "route choice",
+          "predator defense",
+          "weather pressure"
+        ],
+        "signature": [
+          "Migration Front moves through several authored mountain sectors.",
+          "Herd Trust changes based on nonlethal protection and route decisions.",
+          "Avalanche Risk increases on aggressive shortcuts but can expose rare resources.",
+          "Alpha Escort grants temporary pack support if key animals survive."
+        ],
+        "counterplay": [
+          "Players may choose slower safe routes, risky resource routes, or defensive detours around apex predators."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Snow dust columns mark the herd from kilometers away, frost trails connect pack groups, and aurora ribbons appear over high-trust routes."
+        ],
+        "animation": [
+          "Large animals move in layered herd formations, wolves circle injured members, and avalanches use staged terrain/VFX sequences rather than uncontrolled physics."
+        ],
+        "audio": [
+          "Deep herd calls, snow rumble, wolf coordination howls, and distant ice cracks signaling route danger."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-014",
+      "name": "The False Coast",
+      "family": "event",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "eldritch navigation event",
+      "identity": {
+        "fantasy": "A False Lighthouse appears inland and gradually rewrites local navigation cues, forcing players to decode its beam before safe routes become lethal traps.",
+        "silhouette": "World-event presentation for The False Coast is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "The False Coast is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "false landmark",
+          "navigation puzzle",
+          "route corruption",
+          "exposure phase"
+        ],
+        "signature": [
+          "Harbor Promise marks an apparently safe regional route.",
+          "Wrong Coast adds increasingly obvious anomalies to over-trusted paths.",
+          "Beacon Cipher transmits a learnable light sequence revealing the genuine route.",
+          "Low Tide exposes hidden roots and a final combat objective after the cipher is solved."
+        ],
+        "counterplay": [
+          "Players can ignore the brightest path and use environmental clues; the event never removes all route information."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Volumetric fog bends around the beam, fake shoreline reflections appear on inland surfaces, and exposed roots heave beneath roads like buried ribs."
+        ],
+        "animation": [
+          "The distant lighthouse neck subtly bends, signage rotates toward false routes, and solved cipher sequences cause the landmark body to surface in stages."
+        ],
+        "audio": [
+          "Foghorn, reversed gull calls, inland surf, glass-eye rotation, and a massive stone eyelid scrape during exposure."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-015",
+      "name": "Parallax Pilgrimage",
+      "family": "event",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "perspective traversal event",
+      "identity": {
+        "fantasy": "A traveling eldritch phenomenon distorts apparent distance along a chain of landmarks, creating a region-wide navigation trial with stable measurement anchors.",
+        "silhouette": "World-event presentation for Parallax Pilgrimage is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Parallax Pilgrimage is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "distance deception",
+          "measurement anchors",
+          "moving route",
+          "perspective hazards"
+        ],
+        "signature": [
+          "Pilgrim Markers establish truthful survey anchors along the route.",
+          "False Distance alters apparent scale between anchors without changing actual travel time.",
+          "Horizon Tax spawns hazards when teams repeatedly trust visual distance over measurements.",
+          "Measured Arrival rewards completing sectors using anchor data rather than brute-force traversal."
+        ],
+        "counterplay": [
+          "Shadows, anchor tones, and objective timers remain truthful throughout the event."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Roads visually stretch and compress, distant towers remain nearly constant in screen size, and rigid white survey grids cut through the distortion."
+        ],
+        "animation": [
+          "Landmarks slide through parallax layers while physical collision routes remain stable; anchor pylons rotate to point toward true geometry."
+        ],
+        "audio": [
+          "Accurate distance pings contrast with misleading ambient echoes, low perspective drones, and clean arrival tones at honest anchors."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-016",
+      "name": "Aurora Skyhunt",
+      "family": "event",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "aerial regional hunt",
+      "identity": {
+        "fantasy": "An Aurora Roc flock enters the region, turning the sky into moving dive lanes, updraft corridors, and aerial predator objectives.",
+        "silhouette": "World-event presentation for Aurora Skyhunt is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Aurora Skyhunt is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "air lanes",
+          "updraft traversal",
+          "nest objectives",
+          "aerial hunt"
+        ],
+        "signature": [
+          "Polar Lanes rotate safe and dangerous flight corridors across the region.",
+          "Feather Wake creates temporary updraft routes usable by players and wildlife.",
+          "Nest Signals reveal optional high-altitude objectives with rare rewards.",
+          "Matriarch Shadow increases event pressure if too many nests are disturbed."
+        ],
+        "counterplay": [
+          "Players can hunt, observe, or protect nests; aggressive play can escalate toward a boss encounter."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Kilometer-long aurora trails, giant moving shadows, feather storms, and vertical updraft columns paint the sky."
+        ],
+        "animation": [
+          "Flocks bank in large formations, dive lanes sweep between mountain anchors, and nests animate with defensive flock movement."
+        ],
+        "audio": [
+          "Thunderous wingbeats, polar wind harmonics, distant roc calls, and fast Doppler dives."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-017",
+      "name": "The Walking District",
+      "family": "event",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "mobile city incursion",
+      "identity": {
+        "fantasy": "A necrotic district detaches from a ruined city and begins crawling toward a populated region, creating moving street-sector objectives before full City That Crawls conditions emerge.",
+        "silhouette": "World-event presentation for The Walking District is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "The Walking District is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "mobile streets",
+          "district sabotage",
+          "evacuation clock",
+          "organ buildings"
+        ],
+        "signature": [
+          "Street Shift changes authored internal routes as the district moves.",
+          "Organ Building objectives reveal biological roles hidden inside familiar structures.",
+          "Evacuation Clock advances while the district remains mobile.",
+          "Civic Sabotage slows or redirects the district when key service-organs are destroyed."
+        ],
+        "counterplay": [
+          "Teams can prioritize locomotion sectors to buy time instead of attempting to clear every building."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Roads flex like tendons, building windows pulse, bone legs appear under city edges, and sabotaged blocks dim one neighborhood at a time."
+        ],
+        "animation": [
+          "Street intersections tilt in staged motion, buildings lean with stride cycles, and distant leg fields move beneath stabilized combat surfaces."
+        ],
+        "audio": [
+          "Traffic ambience warped into heartbeat rhythm, sirens, structural groans, and enormous footfield rumble."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-018",
+      "name": "Leviathan Red Weather",
+      "family": "event",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "storm-ocean crisis event",
+      "identity": {
+        "fantasy": "A Storm-Maw hunting front enters the coast, swallowing weather cells and causing lightning-fed breach attacks across ports and islands.",
+        "silhouette": "World-event presentation for Leviathan Red Weather is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Leviathan Red Weather is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "storm capture",
+          "coastal breaches",
+          "weather routing",
+          "evacuation"
+        ],
+        "signature": [
+          "Weather Nodes can be protected, redirected, or deliberately sacrificed.",
+          "Red Forecast previews which coastal sectors are likely to be breached.",
+          "Storm Drain objectives reduce stored atmospheric energy before the next attack cycle.",
+          "Calm Corridor opens a temporary safe maritime route after successful node management."
+        ],
+        "counterplay": [
+          "Players choose which sectors to save; sacrificing one storm node may protect another route."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Clouds spiral toward offshore shapes, red forecast lines trace coastlines, lightning runs under water, and calm corridors become mirror-smooth lanes."
+        ],
+        "animation": [
+          "Storm fronts visibly funnel into the sea, evacuation craft follow moving safe lanes, and breach shadows cross shorelines before impacts."
+        ],
+        "audio": [
+          "Swallowed thunder, coastal warning horns, heavy rain, underwater booms, and sudden silence in Calm Corridor."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-019",
+      "name": "Seven-Seal Tribunal",
+      "family": "event",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "contract-law combat event",
+      "identity": {
+        "fantasy": "Seven infernal clauses govern an arena for a sequence of trials; obeying rules exposes seals while strategic violations create harder but more rewarding branches.",
+        "silhouette": "World-event presentation for Seven-Seal Tribunal is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Seven-Seal Tribunal is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "seven clauses",
+          "seal objectives",
+          "violation branches",
+          "judgment waves"
+        ],
+        "signature": [
+          "Clause Cycle announces one clear rule at a time with icon/audio redundancy.",
+          "Good Standing exposes the active seal after successful compliance.",
+          "Violation Path empowers the next enemy wave but raises optional reward quality.",
+          "Final Appeal combines previously learned clauses into a closing trial without adding unseen rules."
+        ],
+        "counterplay": [
+          "Players can deliberately violate a clause to pursue a harder reward path, but every cost is visible in advance."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Seven wax seals orbit the arena, contract text burns across boundary walls, violation stamps appear above offenders, and destroyed seals release ash-paper birds."
+        ],
+        "animation": [
+          "Seals rotate into central judgment position, arena props reconfigure by clause, and Final Appeal locks all surviving seals into a large courtroom lattice."
+        ],
+        "audio": [
+          "Legal cadences, wax pops, gavel impacts, clear clause tones, and layered objections during violation branches."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-020",
+      "name": "Moonhorn Crossing",
+      "family": "event",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "mythical ridge traversal event",
+      "identity": {
+        "fantasy": "A Moonhorn Wyrm migration creates temporary luminous bridges among mountain peaks while predators, hunters, and unstable lunar currents contest the route.",
+        "silhouette": "World-event presentation for Moonhorn Crossing is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Moonhorn Crossing is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "light bridges",
+          "ridge objectives",
+          "migration escort",
+          "lunar hazards"
+        ],
+        "signature": [
+          "Silver Span generates temporary authored bridges between compatible peaks.",
+          "Antler Current changes bridge timing based on moon-charge state.",
+          "Predator Intercept spawns threats at selected high-value crossings.",
+          "Dawn Fade gradually removes route options as the event nears completion."
+        ],
+        "counterplay": [
+          "Players can use bridges for exploration, protect the Wyrms, or hunt them; dawn forces route planning rather than instant failure."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Silver light bridges arc between peaks, antlers glow like constellations, and moon dust streams along active crossings."
+        ],
+        "animation": [
+          "Wyrms climb rock faces and stretch across gaps, bridge light pulses in timed waves, and dawn visibly drains antler brightness."
+        ],
+        "audio": [
+          "Crystalline horn resonance, mountain wind, deep flute calls, and bridge hum fading toward sunrise."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-021",
+      "name": "Mnemonic Blackout",
+      "family": "event",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "regional memory-horror event",
+      "identity": {
+        "fantasy": "A Mnemonic Moth swarm steals recent noncritical encounter cues and replays degraded copies across a region while players protect truth-beacon anchors.",
+        "silhouette": "World-event presentation for Mnemonic Blackout is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Mnemonic Blackout is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "cue theft",
+          "false replays",
+          "truth beacons",
+          "swarm sectors"
+        ],
+        "signature": [
+          "Cue Harvest records selected noncritical regional signals.",
+          "False Litany replays them from incorrect locations without suppressing real critical telemetry.",
+          "Truth Beacons emit stable source markers and reduce false-cue density in their radius.",
+          "Page Storm sectors must be cleared to restore normal regional communication."
+        ],
+        "counterplay": [
+          "Accessibility-linked critical cues remain truthful; beacon placement and source direction distinguish real signals."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Paper-wing clouds form stained-glass patterns over POIs, false objective flares appear faded, and truth beacons project clean white columns through the swarm."
+        ],
+        "animation": [
+          "Swarm sheets fold across skies, signs and holograms flicker with copied messages, and cleared sectors visibly shed paper clouds downwind."
+        ],
+        "audio": [
+          "Page storms, degraded copies of recent ambience, beacon tones, and clean unprocessed cues attached only to real critical events."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "global_event"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-022",
+      "name": "Taxonomy Collapse",
+      "family": "event",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "classification world event",
+      "identity": {
+        "fantasy": "An eldritch taxonomy storm temporarily assigns visible categories to creatures, hazards, and objectives, changing specific interaction rules across linked encounters.",
+        "silhouette": "World-event presentation for Taxonomy Collapse is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Taxonomy Collapse is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "category rules",
+          "classification anchors",
+          "interaction shifts",
+          "taxonomy puzzles"
+        ],
+        "signature": [
+          "Provisional Names assign clear symbolic categories to supported entities.",
+          "Category Law announces one interaction rule for the current phase.",
+          "Name Anchors let teams stabilize selected categories in each sector.",
+          "Final Definition rewards reconstructing the target taxonomy across all sectors."
+        ],
+        "counterplay": [
+          "Icons, audio tones, and text redundancies keep categories readable; protected ownership and core team rules never change."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Large category symbols hang in the sky, labels pin themselves beside creatures, anchor pylons write white glyphs, and stabilized sectors regain normal colors."
+        ],
+        "animation": [
+          "Entities perform short classification poses when labels change, anchor rings sort into category stacks, and final stabilization writes a huge clean symbol over the region."
+        ],
+        "audio": [
+          "Index cards, measurement scratches, distinct category tones, almost-spoken labels, and a strong definition-lock chord."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "global_event"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-023",
+      "name": "Black Noon",
+      "family": "event",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "regional absence eclipse",
+      "identity": {
+        "fantasy": "An artificial black sun moves across a region, creating shifting sectors where healing, buffs, lighting, and enemy behavior are modified under authored safe rules.",
+        "silhouette": "World-event presentation for Black Noon is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Black Noon is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "moving eclipse",
+          "support pressure",
+          "halo objectives",
+          "sector rotation"
+        ],
+        "signature": [
+          "Umbra Track moves the primary eclipse zone through authored regional sectors.",
+          "Hollow Benediction reduces supported healing effectiveness inside the zone but never disables recovery.",
+          "Golden Rim objectives expose stabilizer nodes along the eclipse edge.",
+          "Sunbreak creates brief normal-light windows when enough rim nodes are secured."
+        ],
+        "counterplay": [
+          "Track the eclipse path, conserve support resources, and complete rim objectives to create recovery windows."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Color drains beneath the moving shadow, gold rim light sweeps across terrain, support VFX visibly thin, and Sunbreak erupts in controlled sunrise shafts."
+        ],
+        "animation": [
+          "Large shadow bands travel over POIs, environmental lights dim in staged groups, and stabilizer nodes unfold along the rim path."
+        ],
+        "audio": [
+          "Near-silence under deep umbra, missing-frequency choir, solar wind, and explosive full-spectrum sound during Sunbreak."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "global_event"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-024",
+      "name": "The City Remembers You",
+      "family": "event",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "adaptive district memory event",
+      "identity": {
+        "fantasy": "A haunted megacity records squad behavior across several encounters and temporarily reconfigures patrols, hazards, and shortcuts around repeated tactics.",
+        "silhouette": "World-event presentation for The City Remembers You is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "The City Remembers You is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "behavior memory",
+          "district adaptation",
+          "shortcut tradeoffs",
+          "city director"
+        ],
+        "signature": [
+          "Memory Ledger tracks a small authored set of repeated squad behaviors, never personal identity beyond gameplay state.",
+          "Street Counter chooses one of several preset district adaptations against the dominant tactic.",
+          "Forgotten Alley opens alternate routes when squads deliberately diversify behavior.",
+          "Amnesty Reset lets players complete a civic objective to clear one adaptation state."
+        ],
+        "counterplay": [
+          "Change tactics or perform Amnesty objectives; no adaptation can remove all viable strategies."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Street signs rewrite themselves, patrol lights shift color by adaptation, ghost routes appear in old alleys, and memory towers display abstract tactic symbols."
+        ],
+        "animation": [
+          "Barricades redeploy, doors change active states, patrol formations rotate, and reset events sweep lights block-by-block through the district."
+        ],
+        "audio": [
+          "City announcements, changing patrol radio motifs, street-sign clicks, and a deep civic bell during Amnesty Reset."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "global_event"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-025",
+      "name": "Impossible Warfront",
+      "family": "event",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "multi-faction regional war",
+      "identity": {
+        "fantasy": "Several major factions collide over one strategic region, with simultaneous fronts, alliance decisions, logistics objectives, and roaming elite commanders.",
+        "silhouette": "World-event presentation for Impossible Warfront is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Impossible Warfront is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "multi-front war",
+          "faction alliances",
+          "logistics",
+          "commander hunts"
+        ],
+        "signature": [
+          "War Map divides the region into live fronts whose states affect available routes and services.",
+          "Field Oath lets squads temporarily support one faction objective without permanently locking their reputation.",
+          "Logistics Spine makes supply convoys and repair depots strategically important.",
+          "Commander Break removes a faction-specific battlefield modifier when its elite leader is defeated or negotiated with."
+        ],
+        "counterplay": [
+          "Players can switch fronts, sabotage logistics, or negotiate limited ceasefires; no single faction must be eliminated."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Faction banners and tracer colors dominate separate horizons, supply routes glow on tactical maps, and front shifts trigger large but localized sky signals."
+        ],
+        "animation": [
+          "Convoys, bastions, beast packs, and artillery teams move between fronts; captured depots physically change occupants and defensive layout."
+        ],
+        "audio": [
+          "Overlapping faction motifs, radio/war horns, convoy rumble, distant artillery, and clean territory-change fanfares."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "global_event"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-026",
+      "name": "Leviathan Gravewake",
+      "family": "event",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "ocean corpse-ecology event",
+      "identity": {
+        "fantasy": "A dead colossal sea creature drifts ashore, becoming a contested ecosystem for necromancers, scavenger wildlife, Blacktide salvagers, and horde evolution.",
+        "silhouette": "World-event presentation for Leviathan Gravewake is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Leviathan Gravewake is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "colossal carcass",
+          "corpse economy",
+          "salvage layers",
+          "ecosystem escalation"
+        ],
+        "signature": [
+          "Carcass Sectors expose different resource organs over time.",
+          "Scavenger Pressure changes wildlife and horde composition based on what remains unclaimed.",
+          "Salvage Rights let factions establish temporary camps on secured sectors.",
+          "Grave Bloom begins if necromantic biomass crosses a threshold, converting the carcass into a new threat zone."
+        ],
+        "counterplay": [
+          "Harvest, cleanse, or defend organs to control which faction/ecology benefits from the carcass."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Massive ribs form traversable landmarks, bioluminescent organs glow through torn hide, scavenger flocks circle kilometers overhead, and Grave Bloom turns veins black-red."
+        ],
+        "animation": [
+          "Carcass settles in staged tide movements, camps grow around secured organs, scavenger packs animate across distant ribs, and bloom roots expand visibly."
+        ],
+        "audio": [
+          "Ocean surf through bones, distant whale-like residual tones, scavenger calls, salvage machinery, and deep necrotic heartbeat during Grave Bloom."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "global_event"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-027",
+      "name": "Red Crown Ascension",
+      "family": "event",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "horde apex birth event",
+      "identity": {
+        "fantasy": "A regional necrotic outbreak attempts to create a Crowned Hunger; players can prevent, redirect, or deliberately allow controlled maturation for rarer rewards.",
+        "silhouette": "World-event presentation for Red Crown Ascension is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Red Crown Ascension is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "biomass threshold",
+          "apex maturation",
+          "mutation choice",
+          "risk reward"
+        ],
+        "signature": [
+          "Biomass Meter rises from unattended corpses and successful horde feeding.",
+          "Counter-Mutation previews which apex adaptation will form from dominant player tactics.",
+          "Starve Route lets squads deny biomass and end the event early.",
+          "Crown Route permits controlled maturation into a harder boss branch with higher rewards."
+        ],
+        "counterplay": [
+          "Players explicitly choose whether to suppress or escalate; mutation previews remain visible before commitment."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Red biomass veins spread through streets, a crown silhouette forms above the growth site, mutation organs light by adaptation, and starvation causes veins to gray out."
+        ],
+        "animation": [
+          "Lesser horde drag corpses inward, the central cocoon grows in visible stages, and controlled maturation tears the crown open in a scripted reveal."
+        ],
+        "audio": [
+          "Regional hunger pulse, corpse-drag scraping, rising bone creaks, mutation-specific heartbeats, and a colossal birth roar on Crown Route."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-028",
+      "name": "Weather Eater Migration",
+      "family": "event",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "living-weather world event",
+      "identity": {
+        "fantasy": "A herd of juvenile sky organisms crosses multiple biomes, swallowing local weather and releasing altered climate pockets along the route.",
+        "silhouette": "World-event presentation for Weather Eater Migration is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Weather Eater Migration is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "weather consumption",
+          "moving climate",
+          "migration path",
+          "adaptive hazards"
+        ],
+        "signature": [
+          "Atmosphere Feed lets each creature absorb one supported local weather family.",
+          "Climate Wake leaves temporary altered-weather pockets behind the herd.",
+          "Migration Fork chooses which biome the herd enters next based on player intervention.",
+          "Empty Sky creates a rare calm resource window after enough weather has been consumed."
+        ],
+        "counterplay": [
+          "Guide the herd toward manageable climates, force releases before dangerous storage accumulates, or avoid the route entirely."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Cloud streams feed upward into floating creatures, colored storm organs glow through translucent bodies, and climate pockets spiral along the migration trail."
+        ],
+        "animation": [
+          "Sky-beasts swim slowly through air, fins rigidify before release, and entire weather fronts visibly stretch toward feeding mouths."
+        ],
+        "audio": [
+          "Atmospheric whale calls, internal thunder, rain-on-membrane, heat shimmer drones, and huge wind rushes during migration turns."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-029",
+      "name": "Sovereign Tidefall",
+      "family": "event",
+      "tier": "god",
+      "status": "specified",
+      "role": "world-scale coastal doctrine event",
+      "identity": {
+        "fantasy": "The Sovereign of Thirteen Tides exerts influence over multiple coasts at once, assigning distinct tidal doctrines to regions until teams complete synchronized branch objectives.",
+        "silhouette": "World-event presentation for Sovereign Tidefall is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Sovereign Tidefall is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "multi-region tides",
+          "thirteen doctrines",
+          "synchronized objectives",
+          "ocean traversal"
+        ],
+        "signature": [
+          "Doctrine Map assigns different authored tide rules to active coastal sectors.",
+          "Branch Echo creates local manifestations of selected antler doctrines rather than requiring the full boss everywhere.",
+          "Hoof Islands raise temporary traversal platforms along predicted routes.",
+          "Synchronized Break requires teams in multiple sectors to complete objectives within a shared window to weaken the world event."
+        ],
+        "counterplay": [
+          "Teams coordinate branch priorities; sectors can be stabilized individually even if full synchronization fails."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Thirteen tide constellations stretch across the sky, ocean levels shift through authored transitions, temporary islands rise in giant rings, and synchronized success sends aurora-like water columns upward."
+        ],
+        "animation": [
+          "Distant antler silhouettes move along horizons, branch manifestations animate locally, coastlines pulse in timed tide cycles, and islands rise/settle in staged motion."
+        ],
+        "audio": [
+          "Thirteen tonal motifs, regional whale song, continent-scale surf rumble, and a massive harmonic drop on synchronized breaks."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "global_event"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    },
+    {
+      "id": "EVT-030",
+      "name": "Axiom Storm: Four Broken Laws",
+      "family": "event",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "absolute world-director event",
+      "identity": {
+        "fantasy": "A rare Absolute event replaces four local encounter doctrines in rotating regions, forcing squads to learn and repair each law before a final combined phase.",
+        "silhouette": "World-event presentation for Axiom Storm: Four Broken Laws is region-scale and communicates state through landmarks, sky/terrain signals, objective geometry, and faction/ecology changes rather than one permanent actor.",
+        "lore_hook": "Axiom Storm: Four Broken Laws is a systemic AEONFALL event whose outcome changes regional progression, faction/ecology state, or later encounter availability."
+      },
+      "mechanics": {
+        "core": [
+          "doctrine rotation",
+          "four broken laws",
+          "regional repair",
+          "combined finale"
+        ],
+        "signature": [
+          "Broken Weight swaps supported movement presets in one bounded region with clear icon/audio notice.",
+          "Broken Mercy changes authored recovery interactions without disabling resurrection or violating protected states.",
+          "Broken Trajectory modifies selected projectile pacing and hazard motion through preset encounter systems.",
+          "Broken Allegiance changes relationships among designated event adds only, never player teams or protected ownership.",
+          "Restoration Sequence asks squads to repair all four doctrine anchors before a final phase combining two previously learned laws."
+        ],
+        "counterplay": [
+          "Every law is tutorialized before escalation, only event-scoped systems are affected, and restoring an anchor returns ordinary behavior immediately."
+        ],
+        "evolution": [
+          "Event outcomes persist or feed authored regional state where supported, while transient combat actors clean up deterministically."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Four enormous geometric symbols appear over active regions, white-black rule lines crawl across terrain, projectiles/hazards use doctrine-specific presentation, and repaired laws fracture into luminous equations."
+        ],
+        "animation": [
+          "Region props and actors shift into distinct movement language by doctrine, anchors rotate like giant theorem machines, and the finale locks two symbols together over the central arena."
+        ],
+        "audio": [
+          "Four distinct doctrine chords, temporary ambience suppression for clarity, theorem-machine impacts, restoration tones, and a hard world-scale silence-pop when the final law resets."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered by authored regional state, scheduled world conditions, player progression, or prerequisite event chains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "global_event"
+      },
+      "dependencies": [],
+      "notes": [
+        "Event is built from streamed regional controllers, pooled actors, and bounded VFX rather than globally simulating every conceptual participant.",
+        "Failure should mutate later conditions or rewards instead of blindly resetting long event chains."
+      ]
+    }
+  ]
+}
