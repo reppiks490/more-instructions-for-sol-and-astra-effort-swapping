@@ -173,7 +173,7 @@ aeonfall_status_runtime := class():
         if:
             set StatusesByTarget[TargetKey] = Updated
         then:
-
+            return
     ClearTarget(TargetKey:string):void=
         if:
             set StatusesByTarget[TargetKey] = array{}
