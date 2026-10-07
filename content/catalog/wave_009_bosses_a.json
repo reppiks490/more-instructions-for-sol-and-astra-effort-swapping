@@ -1,0 +1,1262 @@
+{
+  "wave": "009",
+  "purpose": "Boss hierarchy expansion from miniboss through Absolute-class distributed encounters.",
+  "entity_count": 20,
+  "entities": [
+    {
+      "id": "BOS-005",
+      "name": "Gore-Mason Red Hand",
+      "family": "boss",
+      "tier": "epic",
+      "status": "specified",
+      "role": "mini boss — necrotic builder champion",
+      "identity": {
+        "fantasy": "A Grave Architect champion that fights while rapidly constructing blood-brick cover, corpse ramps, and attack funnels around itself.",
+        "silhouette": "Eight-foot cadaver in red masonry apron, one enormous brick-shaped hand, five smaller tool arms, tooth-brick mask.",
+        "lore_hook": "The Red Hand earned its title by building an entire fortress from one battlefield before the blood had dried."
+      },
+      "mechanics": {
+        "core": [
+          "combat construction",
+          "arena funneling",
+          "corpse resource"
+        ],
+        "signature": [
+          "Red Wall raises a short destructible barricade from available corpse resource.",
+          "Mortar Fist slams a ground lane and hardens nearby flesh structures.",
+          "Deadman's Stair creates a temporary elevated route for reinforcements.",
+          "Foreman's Whistle orders lesser builders to repair one chosen structure."
+        ],
+        "counterplay": [
+          "Destroy fresh structures before they cure; deny corpses and punish the long Mortar Fist windup."
+        ],
+        "evolution": [
+          "Boss phase escalation changes mechanics, objectives, or arena state rather than only increasing health/damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Red blueprint lines appear before structures rise, blood-brick surfaces steam as they cure, and the oversized hand glows with masonry sigils during slams."
+        ],
+        "animation": [
+          "Multiple arms build independently while the large hand remains combat-ready; walls are placed with fast brick-laying motions and full-body hammer blows."
+        ],
+        "audio": [
+          "Brick knocks, wet mortar scrapes, foreman whistle blasts, and a deep masonry crack during Mortar Fist."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered through its authored encounter, raid, region state, or progression prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Large-scale presentation uses distributed encounter controllers and streaming-safe visual shells."
+      ]
+    },
+    {
+      "id": "BOS-006",
+      "name": "Saint-Eater Grin",
+      "family": "boss",
+      "tier": "epic",
+      "status": "specified",
+      "role": "mini boss — anti-support demon",
+      "identity": {
+        "fantasy": "A lean infernal predator that targets active healing and protective effects, biting visible support zones to temporarily corrupt them.",
+        "silhouette": "Tall hyena-like demon in stolen reliquary chains, jaw lined with tiny halo fragments, pale gold saliva.",
+        "lore_hook": "It does not hate saints; it simply discovered sanctified power tastes better."
+      },
+      "mechanics": {
+        "core": [
+          "support-zone predation",
+          "holy theft",
+          "mobility pounce"
+        ],
+        "signature": [
+          "Blessing Scent marks the strongest nearby support zone or healing source.",
+          "Halo Bite temporarily corrupts one eligible support field after a telegraphed pounce.",
+          "Relic Spit ejects stolen power as a short hostile cone.",
+          "Grinning Escape leaps away after feeding, exposing its back for a damage window."
+        ],
+        "counterplay": [
+          "Move or cancel support zones before the pounce lands; punish the escape recovery rather than chasing blindly."
+        ],
+        "evolution": [
+          "Boss phase escalation changes mechanics, objectives, or arena state rather than only increasing health/damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Gold-black scent ribbons connect it to support fields, stolen halo shards light in its teeth, and corrupted zones gain obvious jagged edge effects."
+        ],
+        "animation": [
+          "Low prowling gait, jaw-first leaps, violent head shake after feeding, then a long stretched landing during escape."
+        ],
+        "audio": [
+          "Hyena laughter blended with broken choir notes, chain rattles, wet halo crunches, and a bright chime when stolen power is released."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered through its authored encounter, raid, region state, or progression prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Large-scale presentation uses distributed encounter controllers and streaming-safe visual shells."
+      ]
+    },
+    {
+      "id": "BOS-007",
+      "name": "Brass Warden K-77",
+      "family": "boss",
+      "tier": "epic",
+      "status": "specified",
+      "role": "mini boss — siege automaton",
+      "identity": {
+        "fantasy": "A compact Brass Court automaton designed to lock down doorways with rotating shield plates and piston-driven counterattacks.",
+        "silhouette": "Nine-foot brass humanoid, three rotating shield petals around torso, hammer-arm, furnace key protruding from back.",
+        "lore_hook": "K-77 has guarded a door for centuries despite the building, city, and original reason for the door being gone."
+      },
+      "mechanics": {
+        "core": [
+          "rotating shield",
+          "counter hammer",
+          "furnace key weak point"
+        ],
+        "signature": [
+          "Petal Guard rotates one shield plate toward the highest incoming threat lane.",
+          "Piston Verdict counters repeated frontal attacks with a timed hammer burst.",
+          "Key Vent opens the rear furnace after enough blocked damage, exposing the key weak point.",
+          "Door Doctrine enrages if players cross its designated threshold, changing its attack pattern."
+        ],
+        "counterplay": [
+          "Split angles to force plate rotation; attack the furnace key during vent windows."
+        ],
+        "evolution": [
+          "Boss phase escalation changes mechanics, objectives, or arena state rather than only increasing health/damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Brass petals leave gear-shaped light trails, blocked shots fill furnace tubes orange, and the rear key glows white during vulnerability."
+        ],
+        "animation": [
+          "Mechanical quarter-turn footwork, shield-petal rotations synchronized with torso pivots, piston arm compressions visible well before counters."
+        ],
+        "audio": [
+          "Clockwork ratchets, furnace pressure, bronze gong blocks, and a loud key-winding scream during vent."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered through its authored encounter, raid, region state, or progression prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Large-scale presentation uses distributed encounter controllers and streaming-safe visual shells."
+      ]
+    },
+    {
+      "id": "BOS-008",
+      "name": "Morrowfang Alpha",
+      "family": "boss",
+      "tier": "epic",
+      "status": "specified",
+      "role": "mini boss — corrupted pack apex",
+      "identity": {
+        "fantasy": "A massive wolf whose body has adapted to three biomes, switching movement traits based on where the fight travels.",
+        "silhouette": "House-sized black wolf with frost mane, thorn flank plating, and ember cracks along legs.",
+        "lore_hook": "Morrowfang survived three ecological purges and carries each region's answer in its body."
+      },
+      "mechanics": {
+        "core": [
+          "biome adaptation",
+          "pack call",
+          "territorial chase"
+        ],
+        "signature": [
+          "Frost Prowl gains traction and leaves slow trails on cold terrain.",
+          "Thorn Brace grows temporary flank armor in vegetation-heavy sectors.",
+          "Ember Bound performs explosive leaps in hot sectors.",
+          "Alpha Recall summons only surviving pack members, making earlier pack control meaningful."
+        ],
+        "counterplay": [
+          "Choose the arena sector that produces the least dangerous adaptation for the squad."
+        ],
+        "evolution": [
+          "Boss phase escalation changes mechanics, objectives, or arena state rather than only increasing health/damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Body coloration shifts subtly by sector, adaptation plates grow in real time, and pack calls create visible scent arcs toward surviving wolves."
+        ],
+        "animation": [
+          "Locomotion changes per adaptation: low sliding frost run, armored shoulder pushes in thorn form, long elastic leaps in ember form."
+        ],
+        "audio": [
+          "Three layered wolf calls, environment-specific footstep textures, crackling ember breaths, and icy tooth resonance."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered through its authored encounter, raid, region state, or progression prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Large-scale presentation uses distributed encounter controllers and streaming-safe visual shells."
+      ]
+    },
+    {
+      "id": "BOS-009",
+      "name": "Vesperglass Widow",
+      "family": "boss",
+      "tier": "epic",
+      "status": "specified",
+      "role": "mini boss — mirror ambusher",
+      "identity": {
+        "fantasy": "A giant spider-like mirror creature that hides parts of its body in reflections and attacks from whichever reflected limb remains unseen.",
+        "silhouette": "Silver-black arachnid with eight mirror-pane legs, faceted abdomen reflecting incorrect versions of the room.",
+        "lore_hook": "Some mirrors show a spider. The dangerous mirrors show one leg fewer than they should."
+      },
+      "mechanics": {
+        "core": [
+          "reflection hiding",
+          "limb ambush",
+          "mirror shatter"
+        ],
+        "signature": [
+          "Missing Leg hides one limb inside a nearby reflective surface.",
+          "Widow Step attacks from the hidden limb's mirror after a directional cue.",
+          "False Room reflects a safe-looking but incorrect hazard layout across its abdomen.",
+          "Silver Break exposes the core when players destroy the mirror holding the hidden limb."
+        ],
+        "counterplay": [
+          "Count visible legs and track the directional audio cue to identify the active mirror."
+        ],
+        "evolution": [
+          "Boss phase escalation changes mechanics, objectives, or arena state rather than only increasing health/damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Mirror legs disappear into flat surfaces, reflections lag by half a beat, and shattering the correct mirror sends silver cracks across the abdomen."
+        ],
+        "animation": [
+          "Spider movement is smooth until an attack, when hidden limbs unfold from impossible flat angles; core exposure curls all legs inward."
+        ],
+        "audio": [
+          "Glass scratching, delayed foot taps from reflections, a sharp directional ping before ambush, and layered shatter on core exposure."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered through its authored encounter, raid, region state, or progression prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Large-scale presentation uses distributed encounter controllers and streaming-safe visual shells."
+      ]
+    },
+    {
+      "id": "BOS-010",
+      "name": "Thorn-Crown Hart",
+      "family": "boss",
+      "tier": "epic",
+      "status": "specified",
+      "role": "mini boss — territorial megafauna guardian",
+      "identity": {
+        "fantasy": "A gigantic stag bound to a living grove, using root lines, antler charges, and protective wildlife calls to defend its territory.",
+        "silhouette": "Thirty-foot emerald stag with tree-root legs, crown of flowering antlers, birds nesting in its shoulder bark.",
+        "lore_hook": "The grove does not consider the Hart its king; it considers the Hart its immune system."
+      },
+      "mechanics": {
+        "core": [
+          "root lanes",
+          "wildlife call",
+          "antler charge"
+        ],
+        "signature": [
+          "Root Map telegraphs growing root walls across the arena before they rise.",
+          "Crown Charge shatters one root wall and changes route topology.",
+          "Grove Call summons non-corrupted wildlife that can be avoided rather than killed.",
+          "Mercy Bloom creates a noncombat opening if players complete the grove protection objective."
+        ],
+        "counterplay": [
+          "Use Crown Charge to open routes; unnecessary wildlife kills strengthen later root growth."
+        ],
+        "evolution": [
+          "Boss phase escalation changes mechanics, objectives, or arena state rather than only increasing health/damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Flowers bloom and close across antlers with phase state, root paths glow before eruption, and Mercy Bloom floods the arena with green-gold pollen."
+        ],
+        "animation": [
+          "Hoof stamps propagate root motion, antlers lower slowly before charge, and the Hart kneels rather than collapses during Mercy Bloom."
+        ],
+        "audio": [
+          "Deep deer calls layered with wood creaks, root rumble, birds reacting to phase changes, and warm chimes during mercy state."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered through its authored encounter, raid, region state, or progression prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Large-scale presentation uses distributed encounter controllers and streaming-safe visual shells."
+      ]
+    },
+    {
+      "id": "BOS-011",
+      "name": "King Without Pulse",
+      "family": "boss",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "boss — necromancer sovereign",
+      "identity": {
+        "fantasy": "A regal corpse commander who runs multiple corpse economies simultaneously, taxing deaths, raising infrastructure, and buying stronger minions with battlefield remains.",
+        "silhouette": "Ten-foot king in decayed black regalia, empty rib throne carried on his back, crown made of clenched skeletal hands.",
+        "lore_hook": "He conquered death only to discover administration continued afterward."
+      },
+      "mechanics": {
+        "core": [
+          "corpse economy",
+          "necromancer command",
+          "resource bidding",
+          "royal phases"
+        ],
+        "signature": [
+          "Royal Tax marks corpses as crown property unless players cleanse or burn them.",
+          "Dead Treasury converts stored corpse value into stronger summons or fortifications.",
+          "Black Decree selects one regional corpse rule for the phase: preserve, consume, or weaponize.",
+          "Bankruptcy Phase begins when players deny enough resources, exposing the King while his crown-hands fight independently."
+        ],
+        "counterplay": [
+          "Deny corpse income aggressively; different Decrees require different corpse-management responses."
+        ],
+        "evolution": [
+          "Boss phase escalation changes mechanics, objectives, or arena state rather than only increasing health/damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Black coins rise from corpses, the rib throne fills with visible red ledgers, crown hands point toward taxed remains, and Bankruptcy strips regal color from the entire boss model."
+        ],
+        "animation": [
+          "Measured kingly pacing, one-hand decrees while throne ribs animate behind him, summoning motions like counting money, and frantic crown-hand defense during Bankruptcy."
+        ],
+        "audio": [
+          "Coin-like bone clacks, whispered tax rolls, throne creaks, deep royal commands, and a huge empty-purse rush when Bankruptcy begins."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered through its authored encounter, raid, region state, or progression prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Large-scale presentation uses distributed encounter controllers and streaming-safe visual shells."
+      ]
+    },
+    {
+      "id": "BOS-012",
+      "name": "Duke Vellum of False Mercy",
+      "family": "boss",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "boss — Velvet Court deception lord",
+      "identity": {
+        "fantasy": "A demon noble who offers apparent safe zones, healing bargains, and surrender windows that are sometimes genuine and sometimes traps governed by learnable court rules.",
+        "silhouette": "Elegant crimson duke with parchment-white skin, mirrored cane-sword, velvet cape lined with hundreds of tiny smiling masks.",
+        "lore_hook": "The Duke never breaks a promise. The danger is noticing exactly what he promised."
+      },
+      "mechanics": {
+        "core": [
+          "conditional bargains",
+          "safe-zone deception",
+          "court rules",
+          "duel phase"
+        ],
+        "signature": [
+          "Mercy Contract offers one of several clearly worded temporary bargains with distinct costs.",
+          "Velvet Sanctuary creates two safe-looking zones, only one consistent with the active contract wording.",
+          "Fine Print reveals a learnable visual clause that determines which attacks ignore the bargain.",
+          "Duel of Courtesy disables bargains and becomes a direct fencing phase after enough contracts are correctly solved."
+        ],
+        "counterplay": [
+          "Read contract text/icons carefully; correct interpretation weakens the Duke rather than merely avoiding damage."
+        ],
+        "evolution": [
+          "Boss phase escalation changes mechanics, objectives, or arena state rather than only increasing health/damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Floating parchment clauses orbit the arena, masks smile or frown based on contract state, sanctuary zones use subtle mirrored particle direction, and Duel phase burns all contracts into red butterflies."
+        ],
+        "animation": [
+          "Formal bows before every bargain, precise cane fencing, finger snaps to change clauses, and a furious cape tear when forced into direct duel."
+        ],
+        "audio": [
+          "Polite spoken cadences, paper turns, velvet swishes, tiny mask laughter, and sharp dueling steel once contracts end."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered through its authored encounter, raid, region state, or progression prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Large-scale presentation uses distributed encounter controllers and streaming-safe visual shells."
+      ]
+    },
+    {
+      "id": "BOS-013",
+      "name": "Storm-Maw Leviathan",
+      "family": "boss",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "boss — oceanic weather predator",
+      "identity": {
+        "fantasy": "A colossal sea predator that swallows active storm cells and attacks coastal sectors with lightning-fed breaches.",
+        "silhouette": "Whale-serpent body, circular jaw lined with lightning rods, storm cloud trapped beneath translucent dorsal skin.",
+        "lore_hook": "It follows hurricanes the way ordinary predators follow migrating herds."
+      },
+      "mechanics": {
+        "core": [
+          "storm feeding",
+          "coastal breach",
+          "lightning digestion",
+          "waterline phases"
+        ],
+        "signature": [
+          "Storm Swallow consumes one active weather node, removing it from the sky and charging the body.",
+          "Maw Breach erupts through an authored coastal sector with a long water-shadow telegraph.",
+          "Lightning Gut discharges stored storm power through dorsal weak points.",
+          "Calm Window begins when players rupture enough dorsal sacs, creating a low-weather damage phase."
+        ],
+        "counterplay": [
+          "Break charged dorsal sacs before the Leviathan converts all storm energy into breaches."
+        ],
+        "evolution": [
+          "Boss phase escalation changes mechanics, objectives, or arena state rather than only increasing health/damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Clouds visibly funnel into the jaw, lightning crawls under translucent skin, water shadows show breach trajectories, and ruptured sacs explode into localized rain curtains."
+        ],
+        "animation": [
+          "Only local body sectors animate near players while distant shell motion stays slow; jaw expansion precedes weather intake, dorsal arcs whip during discharge."
+        ],
+        "audio": [
+          "Oceanic sub-bass, swallowed thunder muffled inside flesh, shoreline evacuation horns, and huge water-column impacts."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered through its authored encounter, raid, region state, or progression prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Large-scale presentation uses distributed encounter controllers and streaming-safe visual shells."
+      ]
+    },
+    {
+      "id": "BOS-014",
+      "name": "Ossuary Engine IX",
+      "family": "boss",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "boss — necromantic war machine",
+      "identity": {
+        "fantasy": "A walking bone refinery built by Grave Architects that consumes corpses, prints skeletal soldiers, and rebuilds damaged armor from its own output.",
+        "silhouette": "Four-legged bone factory the size of a warehouse, rib smokestacks, rotating spine conveyor, skull-stamped armor plates.",
+        "lore_hook": "Eight earlier engines failed because they ran out of dead. Engine IX learned to manufacture demand."
+      },
+      "mechanics": {
+        "core": [
+          "corpse refinery",
+          "minion printing",
+          "self repair",
+          "factory sabotage"
+        ],
+        "signature": [
+          "Intake Maw consumes nearby corpse resources through conveyor tendrils.",
+          "Bone Press prints specialized adds based on the current phase.",
+          "Armor Recast spends stored biomass to rebuild one destroyed plate.",
+          "Factory Jam lets players overload a press with cleansing material, creating an internal damage event."
+        ],
+        "counterplay": [
+          "Deny intake, sabotage presses, and force expensive self-repairs until the biomass bank collapses."
+        ],
+        "evolution": [
+          "Boss phase escalation changes mechanics, objectives, or arena state rather than only increasing health/damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Bone conveyor lines pulse red, rib stacks vent white marrow steam, printed skeletons assemble visibly on moving belts, and jam events flash clean silver through the factory body."
+        ],
+        "animation": [
+          "Industrial quadruped gait, conveyors and presses animate continuously, damaged plates are physically reassembled by skeletal arms, jam causes whole-body recoil."
+        ],
+        "audio": [
+          "Factory clatter made from bones, piston-like vertebrae, steam shrieks, assembly-line chants, and explosive press jams."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered through its authored encounter, raid, region state, or progression prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Large-scale presentation uses distributed encounter controllers and streaming-safe visual shells."
+      ]
+    },
+    {
+      "id": "BOS-015",
+      "name": "The Drowned Auditor",
+      "family": "boss",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "boss — abyssal pressure judge",
+      "identity": {
+        "fantasy": "An ancient Blacktide construct that audits player movement through flooded chambers, punishing wasteful oxygen routes and rewarding efficient pressure management.",
+        "silhouette": "Towering barnacle-covered diving suit with no diver inside, ledger lantern hanging from one hand, anchor-pen spear in the other.",
+        "lore_hook": "The Dominion built it to measure cargo losses. It eventually decided people were cargo."
+      },
+      "mechanics": {
+        "core": [
+          "pressure audit",
+          "route scoring",
+          "flood control",
+          "anchor spear"
+        ],
+        "signature": [
+          "Depth Ledger tracks time spent in dangerous pressure bands rather than ordinary damage dealt.",
+          "Audit Flood changes which chamber routes are submerged during each phase.",
+          "Red Ink marks inefficient routes and spawns pressure hazards along repeated mistakes.",
+          "Balanced Books exposes the empty suit core when the squad completes a phase under the target pressure budget."
+        ],
+        "counterplay": [
+          "Plan routes, share oxygen/support resources, and avoid repeating marked inefficient paths."
+        ],
+        "evolution": [
+          "Boss phase escalation changes mechanics, objectives, or arena state rather than only increasing health/damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Red ledger lines trace underwater paths, lantern numbers update in real time, flood gates glow before transitions, and core exposure drains water into a perfect suspended sphere."
+        ],
+        "animation": [
+          "Heavy underwater suit movement, spear writes symbols through water, ledger lantern swings with pressure changes, and the empty helmet turns toward path mistakes."
+        ],
+        "audio": [
+          "Muffled metal steps, sonar accounting pings, bubbling pen scratches, pressure groans, and a clear approval bell at Balanced Books."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered through its authored encounter, raid, region state, or progression prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Large-scale presentation uses distributed encounter controllers and streaming-safe visual shells."
+      ]
+    },
+    {
+      "id": "BOS-016",
+      "name": "Crowned Hunger: Eater of Choirs",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "super boss — cannibal horde apex",
+      "identity": {
+        "fantasy": "A fully matured Crowned Hunger that devours lesser brood and necromancers to steal one ability family at a time, forcing squads to manage what it is allowed to eat.",
+        "silhouette": "Skyscraper-sized quadrupedal flesh crown, multiple armored mouths along its spine, trophies of consumed necromancer masks embedded in hide.",
+        "lore_hook": "It learned that eating servants grants strength. Then it learned eating commanders grants strategy."
+      },
+      "mechanics": {
+        "core": [
+          "ability theft",
+          "biomass choice",
+          "horde command",
+          "counter mutation"
+        ],
+        "signature": [
+          "Royal Feast consumes one eligible elite or necromancer and inherits a reduced signature ability family.",
+          "Cannibal Census marks which adds would grant which future mutation if eaten.",
+          "Crown Command reorganizes surviving hordes around the currently stolen power.",
+          "Starvation Break opens major weak points if players deny all eligible meals through an entire phase."
+        ],
+        "counterplay": [
+          "Kill or isolate dangerous meal targets before the boss reaches them; intentionally leave harmless meals when useful."
+        ],
+        "evolution": [
+          "Boss phase escalation changes mechanics, objectives, or arena state rather than only increasing health/damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Consumed masks ignite inside spinal mouths, stolen power changes crown silhouette, biomass veins light across the arena, and Starvation Break cracks the crown into exposed glowing seams."
+        ],
+        "animation": [
+          "Massive four-point locomotion, spine mouths independently reach for meal targets, crown posture changes by stolen family, and starvation causes increasingly desperate ground tearing."
+        ],
+        "audio": [
+          "Regional hunger roar, layered stolen ability sounds distorted through flesh, necromancer voices swallowed mid-phrase, and violent stomach-collapse thunder during starvation."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered through its authored encounter, raid, region state, or progression prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Large-scale presentation uses distributed encounter controllers and streaming-safe visual shells."
+      ]
+    },
+    {
+      "id": "BOS-017",
+      "name": "Apostle of the Hollow Sun",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "super boss — anti-light / absence colossus",
+      "identity": {
+        "fantasy": "A giant humanoid carrying a black sun where its head should be, projecting moving regions where selected buffs, light, and healing behaviors weaken.",
+        "silhouette": "Two-hundred-foot ivory figure in torn priest robes, head replaced by a perfectly black eclipsed sphere with thin gold rim.",
+        "lore_hook": "The Apostle preaches that every source of light is only evidence of a larger darkness waiting around it."
+      },
+      "mechanics": {
+        "core": [
+          "moving absence domain",
+          "eclipse beams",
+          "buff erosion",
+          "halo weak points"
+        ],
+        "signature": [
+          "Black Noon projects a moving eclipse sector where supported healing and buff duration are reduced, never removed entirely.",
+          "Penumbra Beam sweeps a visible lane that erases temporary environmental supports it contacts.",
+          "Golden Rim fragments into targetable halo nodes after players complete light-routing objectives.",
+          "Sunless Sermon summons absence echoes that copy only movement, forcing target-priority discipline."
+        ],
+        "counterplay": [
+          "Use light-routing objectives to expose rim nodes; rotate out of the moving domain and preserve support cooldowns."
+        ],
+        "evolution": [
+          "Boss phase escalation changes mechanics, objectives, or arena state rather than only increasing health/damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Local color drains under Black Noon, gold rim casts impossible backlight, support VFX thin visibly rather than disappearing, and broken halo nodes release violent sunrise rays."
+        ],
+        "animation": [
+          "Colossal slow gestures, black sun remains perfectly stable as body moves, beam cast uses two-handed prayer posture, and exposed halo phase bends the body backward like an eclipse ending."
+        ],
+        "audio": [
+          "Near-silence inside domain, distant sermon murmurs, low solar wind, and explosive full-spectrum sound when halo nodes break."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered through its authored encounter, raid, region state, or progression prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Large-scale presentation uses distributed encounter controllers and streaming-safe visual shells."
+      ]
+    },
+    {
+      "id": "BOS-018",
+      "name": "Parallax Bishop",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "super boss — distance and perspective raid boss",
+      "identity": {
+        "fantasy": "A cathedral-robed eldritch entity that manipulates apparent distance across arena lanes, requiring players to trust shadows, timing, and anchored measurements.",
+        "silhouette": "Enormous bishop silhouette whose staff and body remain nearly same apparent size from many positions, robe covered in horizon lines.",
+        "lore_hook": "It does not move players through space. It convinces space to become an unreliable witness."
+      },
+      "mechanics": {
+        "core": [
+          "distance deception",
+          "lane scaling",
+          "measurement anchors",
+          "perspective attacks"
+        ],
+        "signature": [
+          "False Nave makes one corridor appear shorter or longer while objective travel time remains truthful.",
+          "Shadow Mass preserves accurate distance information through boss shadows and anchor markers.",
+          "Perspective Spear attacks along a lane whose visual length lies but travel time does not.",
+          "Measured Heresy lets players activate fixed survey anchors to temporarily force honest scale in one sector."
+        ],
+        "counterplay": [
+          "Use anchors and shadows rather than visual boss size; attack during honest-scale windows."
+        ],
+        "evolution": [
+          "Boss phase escalation changes mechanics, objectives, or arena state rather than only increasing health/damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Horizon lines bend across the arena, the Bishop's shadow remains physically correct, survey anchors draw rigid white grids, and false corridors stretch without texture distortion clues except designed markers."
+        ],
+        "animation": [
+          "Slow staff gestures produce large visual scale shifts, robe folds slide at mismatched parallax, and honest-scale windows snap the body into its true massive perspective."
+        ],
+        "audio": [
+          "Footsteps use true distance, choir pitch changes with false scale, survey anchors emit metronome pings, and spear travel has accurate Doppler cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered through its authored encounter, raid, region state, or progression prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Large-scale presentation uses distributed encounter controllers and streaming-safe visual shells."
+      ]
+    },
+    {
+      "id": "BOS-019",
+      "name": "Aurora Roc Matriarch",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "super boss — aerial regional guardian",
+      "identity": {
+        "fantasy": "The matriarch of the Aurora Rocs controls vast sky lanes, nesting currents, and charged feather storms across multiple elevated objectives.",
+        "silhouette": "Mountain-sized dark roc with cathedral-wide wings, crown feathers forming permanent aurora curtains, talons wrapped in storm ice.",
+        "lore_hook": "The sky around her nest behaves like an extension of her nervous system."
+      },
+      "mechanics": {
+        "core": [
+          "multi-platform air raid",
+          "aurora lanes",
+          "nest defense",
+          "feather storms"
+        ],
+        "signature": [
+          "Polar Sovereignty divides the sky into rotating dive and updraft lanes.",
+          "Nest Heart objectives on separate peaks weaken specific wing attack families.",
+          "Feather Tempest releases readable storm walls that squads traverse using captured updrafts.",
+          "Matriarch Descent begins a ground-accessible damage phase only after synchronized nest objectives are completed."
+        ],
+        "counterplay": [
+          "Split teams across peaks, preserve traversal updrafts, and time synchronized objectives to force descent."
+        ],
+        "evolution": [
+          "Boss phase escalation changes mechanics, objectives, or arena state rather than only increasing health/damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Region-spanning aurora wing trails, immense shadow passes, prismatic feather storms visible from distant cells, and descent pulls aurora curtains down around the arena like walls."
+        ],
+        "animation": [
+          "Distant visual shell glides slowly while local wing sectors handle attacks; talon passes and head strikes are separate encounter actors tied to shared phase state."
+        ],
+        "audio": [
+          "Thunderous wingbeats delayed by distance, polar wind chorus, massive eagle calls, and sky-cracking dive sounds localized to active sectors."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered through its authored encounter, raid, region state, or progression prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Large-scale presentation uses distributed encounter controllers and streaming-safe visual shells."
+      ]
+    },
+    {
+      "id": "BOS-020",
+      "name": "The City That Crawls",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "world boss — mobile necrotic settlement",
+      "identity": {
+        "fantasy": "An entire abandoned district fused into a crawling necrotic organism; squads fight through streets, organs, and moving building sectors while it migrates.",
+        "silhouette": "City-blocks mounted on thousands of bone legs, streets bending across a fleshy underside, central tower functioning as a visible spine.",
+        "lore_hook": "No one agrees whether the city became alive or whether the creature merely learned architecture as camouflage."
+      },
+      "mechanics": {
+        "core": [
+          "mobile multi-sector raid",
+          "street organs",
+          "district objectives",
+          "migration threat"
+        ],
+        "signature": [
+          "Walking Districts shift relative routes between phases while preserving authored safe transitions.",
+          "Organ Blocks hide biological weak points inside recognizable building roles: heart station, lung factory, nerve tower.",
+          "Civic Hunger spawns residents-as-echoes that defend specific services rather than generic adds.",
+          "Evacuation Clock forces teams to complete regional sabotage before the city reaches a protected settlement."
+        ],
+        "counterplay": [
+          "Coordinate district objectives; sector progress matters more than raw shell damage."
+        ],
+        "evolution": [
+          "Boss phase escalation changes mechanics, objectives, or arena state rather than only increasing health/damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Buildings pulse subtly like organs, road lines flex with locomotion, thousands of distant bone legs create moving horizons, and sabotaged districts dim one neighborhood at a time."
+        ],
+        "animation": [
+          "Movement is conveyed through sector motion, leaning buildings, street flex, and distant leg fields; local combat remains on stabilized authored surfaces."
+        ],
+        "audio": [
+          "City ambience mixed with biological heartbeat, distant traffic sounds from nowhere, structural groans, evacuation sirens, and enormous footfield rumble."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered through its authored encounter, raid, region state, or progression prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Large-scale presentation uses distributed encounter controllers and streaming-safe visual shells."
+      ]
+    },
+    {
+      "id": "BOS-021",
+      "name": "Sovereign of Thirteen Tides",
+      "family": "boss",
+      "tier": "god",
+      "status": "specified",
+      "role": "god-class regional ocean colossus",
+      "identity": {
+        "fantasy": "An elder form of the Abyss Stag whose thirteen antler branches each control a distinct coastal rule, forcing multiple teams to disable tidal doctrines simultaneously.",
+        "silhouette": "Mountain-tall black-blue stag walking across ocean and cliffs, thirteen coral crowns branching into separate glowing constellations.",
+        "lore_hook": "Legends of the lesser Tide Stag were only observations of its descendants."
+      },
+      "mechanics": {
+        "core": [
+          "thirteen doctrine sectors",
+          "ocean traversal",
+          "multi-team antlers",
+          "mercy route"
+        ],
+        "signature": [
+          "Thirteen Doctrines assign separate tidal mechanics to coastal sectors based on intact antler branches.",
+          "Sovereign Step raises moving island platforms beneath hoof paths, turning traversal into a timed objective.",
+          "Branch War requires different teams to attack synchronized antler manifestations in separate sectors.",
+          "Ocean's Mercy offers an alternate protection objective that can disable one doctrine without destroying its branch."
+        ],
+        "counterplay": [
+          "Coordinate branch priorities across teams; use mercy objectives and hoof platforms instead of treating all sectors as DPS races."
+        ],
+        "evolution": [
+          "Boss phase escalation changes mechanics, objectives, or arena state rather than only increasing health/damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Each antler branch projects a unique tide constellation into the sky, ocean levels shift only through authored sector transitions, hoof platforms rise like temporary islands, and synchronized breaks send aurora-like water columns upward."
+        ],
+        "animation": [
+          "Distant shell uses slow monumental stride; local leg and antler sectors animate independently, with sector-specific attacks and synchronized crown recoil when branches fall."
+        ],
+        "audio": [
+          "Regional whale-song chords, thirteen distinct branch tones, continent-like surf rumble, and a massive harmonic drop whenever synchronized branches break."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered through its authored encounter, raid, region state, or progression prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "global_event"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Large-scale presentation uses distributed encounter controllers and streaming-safe visual shells."
+      ]
+    },
+    {
+      "id": "BOS-022",
+      "name": "Mother of Unmade Names",
+      "family": "boss",
+      "tier": "god",
+      "status": "specified",
+      "role": "god-class eldritch classification catastrophe",
+      "identity": {
+        "fantasy": "A colossal entity that removes or reassigns combat classifications, forcing the raid to rebuild a shared taxonomy of what counts as ally, enemy, hazard, and objective.",
+        "silhouette": "Floating continent-sized veil covered in blank labels, enormous hands made from index cards, central face represented only by an empty nameplate.",
+        "lore_hook": "She is not nameless. She is the reason some things were never successfully named."
+      },
+      "mechanics": {
+        "core": [
+          "classification catastrophe",
+          "raid taxonomy",
+          "role reassignment",
+          "name anchors"
+        ],
+        "signature": [
+          "Unnaming temporarily strips selected encounter labels and replaces them with readable symbolic categories.",
+          "Mother Tongue assigns new interaction rules between current categories for the phase.",
+          "Name Anchor objectives let teams restore one canonical category at a time.",
+          "Final Definition exposes the core only after the raid reconstructs the required taxonomy sequence."
+        ],
+        "counterplay": [
+          "Communicate category rules across teams, protect Name Anchors, and never rely solely on color or text—icons and audio redundancies remain available."
+        ],
+        "evolution": [
+          "Boss phase escalation changes mechanics, objectives, or arena state rather than only increasing health/damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Blank labels fall like snow, massive symbol constellations replace names, restored categories ignite as clean white glyphs, and the core appears as a single word-shaped absence only at Final Definition."
+        ],
+        "animation": [
+          "Hands sort enormous label stacks across the sky, veil folds alter category layouts, and each successful anchor causes one immense deliberate writing motion."
+        ],
+        "audio": [
+          "Paper oceans, whispered almost-words, accessibility-linked category tones, giant index-card snaps, and a clear voiced harmonic when definitions lock."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered through its authored encounter, raid, region state, or progression prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "global_event"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Large-scale presentation uses distributed encounter controllers and streaming-safe visual shells."
+      ]
+    },
+    {
+      "id": "BOS-023",
+      "name": "Brass Cathedral Primarch",
+      "family": "boss",
+      "tier": "god",
+      "status": "specified",
+      "role": "god-class infernal siege city",
+      "identity": {
+        "fantasy": "The command-form Brass Cathedral Walker: a mobile infernal city whose towers, foundries, bells, and leg districts operate as simultaneous raid fronts.",
+        "silhouette": "Walking mountain of brass architecture, multiple bell towers, furnace rivers, chain bridges, and an emperor-like cathedral face in the central nave.",
+        "lore_hook": "Where ordinary Walkers are sentenced cities, the Primarch is the city that wrote the sentence."
+      },
+      "mechanics": {
+        "core": [
+          "multi-front city raid",
+          "foundry economy",
+          "bell doctrines",
+          "moving regional threat"
+        ],
+        "signature": [
+          "Imperial Procession advances across the world route while independent districts run simultaneous objectives.",
+          "Bell Law assigns one global raid modifier until teams silence the corresponding tower.",
+          "Foundry Tribute continuously manufactures siege adds unless production sectors are sabotaged.",
+          "Primarch Abdication opens the central nave only after enough districts revolt through completed objectives."
+        ],
+        "counterplay": [
+          "Split teams intelligently, prioritize the most dangerous Bell Law, and sabotage production rather than farming endless adds."
+        ],
+        "evolution": [
+          "Boss phase escalation changes mechanics, objectives, or arena state rather than only increasing health/damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Kilometer-scale brass skyline visible across cells, bell shockfronts cross the environment, foundry rivers pulse through streets, and district victories extinguish entire tower neighborhoods."
+        ],
+        "animation": [
+          "Macro walker motion remains slow while tower, bridge, foundry, and leg sector controllers animate local gameplay; central face opens like monumental doors in final phase."
+        ],
+        "audio": [
+          "Region-wide bell notes, foundry thunder, chain-bridge groans, marching city percussion, and a deafening silent beat before Primarch Abdication."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered through its authored encounter, raid, region state, or progression prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "global_event"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Large-scale presentation uses distributed encounter controllers and streaming-safe visual shells."
+      ]
+    },
+    {
+      "id": "BOS-024",
+      "name": "Axiom Serpent, Eater of Rules",
+      "family": "boss",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "absolute-class authored rule encounter",
+      "identity": {
+        "fantasy": "A world-serpent that does not merely attack players; each phase replaces one local encounter doctrine with a clearly announced alternative until squads break the corresponding axiom scale.",
+        "silhouette": "Sky-spanning white-black serpent covered in floating geometric scales, each scale containing a different symbol for gravity, healing, motion, projectiles, structures, or allegiance.",
+        "lore_hook": "It is said the Serpent feeds on laws only after civilizations become arrogant enough to call them permanent."
+      },
+      "mechanics": {
+        "core": [
+          "local doctrine replacement",
+          "axiom scales",
+          "multi-phase rule combat",
+          "world-serpent sectors"
+        ],
+        "signature": [
+          "Law of Weight replaces ordinary movement in one bounded sector with authored low/high-gravity movement presets while the Weight Scale remains intact.",
+          "Law of Motion changes selected projectile or dash pacing under a fully telegraphed phase preset.",
+          "Law of Mercy alters supported healing interactions without disabling recovery entirely.",
+          "Law of Allegiance changes selected add relationships according to visible faction sigils until the Allegiance Scale is broken.",
+          "Axiom Cascade combines two previously learned doctrines in the final phase, but never introduces an unseen rule."
+        ],
+        "counterplay": [
+          "Every replacement is announced with icon, audio, and tutorialized first use; break the corresponding scale to restore normal local doctrine."
+        ],
+        "evolution": [
+          "Boss phase escalation changes mechanics, objectives, or arena state rather than only increasing health/damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Geometric scales detach into kilometer-wide symbols, local physics-like presentation shifts through controlled VFX and movement systems, the serpent body crosses the sky as a streaming visual shell, and broken axioms fracture into white-black equations."
+        ],
+        "animation": [
+          "Macro body movement remains distant and slow; active scale sectors manifest as local encounter entities, each doctrine change includes a deliberate coil-and-shed animation readable from the arena."
+        ],
+        "audio": [
+          "Each axiom has a unique tonal motif, doctrine changes silence unrelated ambience for clarity, serpent movement creates vast atmospheric pressure, and broken scales resolve into clean rule-restoration chords."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Triggered through its authored encounter, raid, region state, or progression prerequisite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "global_event"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Large-scale presentation uses distributed encounter controllers and streaming-safe visual shells."
+      ]
+    }
+  ]
+}
