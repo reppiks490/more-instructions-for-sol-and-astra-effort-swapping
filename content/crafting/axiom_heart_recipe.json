@@ -1,8 +1,8 @@
 {
   "version": 1,
   "root_material_id": "MAT-030",
-  "declared_raw_acquisition_total": 57515,
-  "design_rule": "The Axiom Heart requires broad game mastery and 57,515 raw acquisitions after recursive recipe expansion; refined intermediates prevent one-screen inventory clutter.",
+  "declared_raw_acquisition_total": 68420,
+  "design_rule": "The Axiom Heart requires broad game mastery and 68,420 raw acquisitions after recursive recipe expansion; refined intermediates prevent one-screen inventory clutter and no single farm can substitute for broad progression.",
   "recipes": [
     {
       "id": "RCP-001",
@@ -352,6 +352,10 @@
         {
           "material_id": "MAT-017",
           "quantity": 1
+        },
+        {
+          "material_id": "MAT-031",
+          "quantity": 1
         }
       ],
       "prerequisites": [
@@ -360,7 +364,70 @@
         "Seed of Zero earned",
         "The Choosing not yet attempted"
       ]
+    },
+    {
+      "id": "RCP-014",
+      "output": {
+        "material_id": "MAT-031",
+        "quantity": 1
+      },
+      "station": "Axiom Forge",
+      "inputs": [
+        {
+          "material_id": "MAT-001",
+          "quantity": 2000
+        },
+        {
+          "material_id": "MAT-002",
+          "quantity": 1500
+        },
+        {
+          "material_id": "MAT-003",
+          "quantity": 1500
+        },
+        {
+          "material_id": "MAT-004",
+          "quantity": 1000
+        },
+        {
+          "material_id": "MAT-005",
+          "quantity": 1000
+        },
+        {
+          "material_id": "MAT-006",
+          "quantity": 1000
+        },
+        {
+          "material_id": "MAT-007",
+          "quantity": 750
+        },
+        {
+          "material_id": "MAT-008",
+          "quantity": 750
+        },
+        {
+          "material_id": "MAT-010",
+          "quantity": 700
+        },
+        {
+          "material_id": "MAT-009",
+          "quantity": 500
+        },
+        {
+          "material_id": "MAT-011",
+          "quantity": 200
+        },
+        {
+          "material_id": "MAT-016",
+          "quantity": 5
+        }
+      ],
+      "prerequisites": [
+        "Broad ecology mastery",
+        "Ascension Trial II — Collection",
+        "Ascension Trial III — Hunter"
+      ]
     }
   ],
-  "minimum_raw_acquisitions": 50000
+  "minimum_raw_acquisitions": 65000
 }
