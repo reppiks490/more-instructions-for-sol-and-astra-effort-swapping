@@ -12,10 +12,10 @@ aeonfall_profile_bootstrap_device := class(creative_device):
 
         GetPlayspace().PlayerAddedEvent().Subscribe(OnPlayerAdded)
 
-    OnPlayerAdded(Player:player):void=
+    OnPlayerAdded(Player:player)<transacts>:void=
         EnsureProfile(Player)
 
-    EnsureProfile(Player:player):void=
+    EnsureProfile(Player:player)<transacts>:void=
         if:
             not AEONFALLPlayerProfiles[Player]
             set AEONFALLPlayerProfiles[Player] = aeonfall_player_profile{}
