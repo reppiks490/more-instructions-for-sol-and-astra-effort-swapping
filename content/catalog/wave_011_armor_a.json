@@ -22,7 +22,8 @@
           "heat routing"
         ],
         "signature": [
-          "Heat routing stores brief hazard exposure and converts it into a short sprint-recovery window after leaving the zone."
+          "Heat routing stores brief hazard exposure and converts it into a short sprint-recovery window after leaving the zone.",
+          "Cinderstride converts a fully charged exit sprint into one short hazard-resistant traversal step, then empties the stored heat."
         ],
         "counterplay": [
           "Repeated exposure past the storage cap grants no extra benefit; cold-control effects reset the stored heat."
@@ -79,7 +80,8 @@
           "ambush opening"
         ],
         "signature": [
-          "Stillwater Focus gradually reveals recent hostile movement traces in a short radius while the wearer remains crouched and stationary."
+          "Stillwater Focus gradually reveals recent hostile movement traces in a short radius while the wearer remains crouched and stationary.",
+          "Mireglass Trace lets the first accurate hit after a full Stillwater Focus tag the target's recent movement direction for the squad."
         ],
         "counterplay": [
           "Movement breaks the scan immediately; fast enemies can outrun old traces."
@@ -136,7 +138,8 @@
           "ally opening"
         ],
         "signature": [
-          "First Bell triggers once per encounter when the wearer is the first squad member to damage an elite, granting a brief defensive window to nearby allies."
+          "First Bell triggers once per encounter when the wearer is the first squad member to damage an elite, granting a brief defensive window to nearby allies.",
+          "Second Chime triggers when the wearer successfully protects the initially engaged ally, granting that ally a brief movement-recovery pulse."
         ],
         "counterplay": [
           "The trigger is single-use per encounter and weak if the squad is scattered."
@@ -193,7 +196,8 @@
           "exploration marking"
         ],
         "signature": [
-          "Constellation Path records a limited chain of visited safe nodes and can highlight the nearest recorded retreat point during combat."
+          "Constellation Path records a limited chain of visited safe nodes and can highlight the nearest recorded retreat point during combat.",
+          "Star Return highlights a single validated retreat route only after the wearer reaches critical pressure, preventing constant route spam."
         ],
         "counterplay": [
           "It does not teleport; invalidated or corrupted nodes disappear and the route chain has a strict limit."
@@ -251,7 +255,8 @@
         ],
         "signature": [
           "Perfect Guard writes one active Verse after narrowly avoiding or mitigating a heavy telegraphed attack.",
-          "Recitation releases the stored Verse as a short nearby squad resistance pulse and clears it."
+          "Recitation releases the stored Verse as a short nearby squad resistance pulse and clears it.",
+          "Third Psalm changes the next stored Verse into a directional ward if the wearer successfully protects an ally during Recitation."
         ],
         "counterplay": [
           "Poor timing stores nothing; Verse effects are short and cannot stack indefinitely."
@@ -311,7 +316,8 @@
         ],
         "signature": [
           "Courier Charge accumulates through sprinting, sliding, mantling, and vehicle exits without rewarding idle circles.",
-          "Blue Dispatch spends stored charge on a short directional burst that cannot pass protected barriers."
+          "Blue Dispatch spends stored charge on a short directional burst that cannot pass protected barriers.",
+          "Storm Ledger refunds a small portion of spent movement charge when Blue Dispatch ends beside an objective or downed ally rather than in empty space."
         ],
         "counterplay": [
           "Roots and slows suppress charging; burst direction is committed at activation."
@@ -371,7 +377,8 @@
         ],
         "signature": [
           "Undertow converts a capped portion of sudden burst damage into a short delayed health debt displayed clearly to the wearer.",
-          "Surface Breath reduces part of remaining debt if the wearer avoids new damage for a full recovery interval."
+          "Surface Breath reduces part of remaining debt if the wearer avoids new damage for a full recovery interval.",
+          "Low Tide converts fully repaid health debt into a short movement-stability bonus, rewarding successful disengagement instead of passive tanking."
         ],
         "counterplay": [
           "Sustained pressure prevents recovery; delayed damage cannot be infinitely deferred or transferred."
@@ -431,7 +438,8 @@
         ],
         "signature": [
           "Bloodfruit buds after sustained close-range combat and can be harvested only outside the immediate attack animation.",
-          "Harvest can consume a fruit for a small heal or crush it into a brief thorn-damage aura."
+          "Harvest can consume a fruit for a small heal or crush it into a brief thorn-damage aura.",
+          "Orchard Guard lets an unharvested Bloodfruit absorb one small crowd-control pulse before bursting, sacrificing the resource for protection."
         ],
         "counterplay": [
           "Ranged kiting denies fruit generation; harvesting creates a short vulnerable interaction."
