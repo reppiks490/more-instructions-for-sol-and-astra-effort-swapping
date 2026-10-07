@@ -1,0 +1,32 @@
+name: AEONFALL Crafting Validation
+
+on:
+  push:
+    paths:
+      - "content/crafting/**"
+      - "tools/validate_crafting.py"
+      - ".github/workflows/crafting-validation.yml"
+  pull_request:
+    paths:
+      - "content/crafting/**"
+      - "tools/validate_crafting.py"
+      - ".github/workflows/crafting-validation.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-crafting:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate Axiom Heart recipe graph
+        run: python tools/validate_crafting.py
