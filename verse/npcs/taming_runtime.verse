@@ -1,3 +1,5 @@
+using { /Verse.org/Simulation }
+
 # Species-specific taming challenge runtime.
 # Project-bound NPC behaviors/devices report challenge actions; this service
 # verifies the authored sequence and owns the Crown Bond handoff.
@@ -82,6 +84,28 @@ aeonfall_taming_runtime := class():
                     return true
 
         false
+
+    WatchTimeout(
+        TargetKey:string,
+        RequestId:string,
+        DurationSeconds:float
+    )<suspends>:void=
+        if (DurationSeconds <= 0.0):
+            return
+
+        Sleep(DurationSeconds)
+
+        if:
+            Challenge := Challenges[TargetKey]
+            Challenge.Active?
+            Challenge.RequestId = RequestId
+        then:
+            TimedOut := FailChallenge(
+                TargetKey,
+                "challenge_timeout"
+            )
+            if (TimedOut?):
+                TimedOut = true
 
     CompleteStep(
         OwnerKey:string,
