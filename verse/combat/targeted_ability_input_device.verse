@@ -14,12 +14,6 @@ aeonfall_targeted_ability_input_device := class(creative_device):
     @editable
     Magnitude:int = 0
 
-    @editable
-    EncounterActive:logic = false
-
-    @editable
-    TransformationActive:logic = false
-
     OnBegin<override>()<suspends>:void=
         Input.PressedEvent.Subscribe(OnPressed)
 
@@ -28,14 +22,16 @@ aeonfall_targeted_ability_input_device := class(creative_device):
             OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
             Selection := AEONFALLTargetingRuntime.GetSelection[OwnerKey]
         then:
+            Flags := AEONFALLActorContextRuntime.GetFlags(OwnerKey)
+
             Activated := AEONFALLAbilityActivationService.TryActivate(
                 Agent,
                 AbilityId,
                 Selection.TargetKey,
                 Selection.ContextId,
                 Magnitude,
-                EncounterActive,
-                TransformationActive
+                Flags.EncounterActive,
+                Flags.TransformationActive
             )
 
             if (Activated?):
