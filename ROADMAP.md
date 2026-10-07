@@ -12,14 +12,16 @@
 
 ## Gate 1 — Core Runtime
 - [x] canonical runtime content-index generator
-- [ ] project-bound Verse entity registry
+- [x] canonical Verse content/entity registries and generated bootstrap data
+- [ ] actual UEFN asset/prefab/Character Definition binding
 - [x] typed runtime event bus scaffold
 - [x] shared status-effect contract
 - [x] shared ability/resource contract
-- [ ] project-bound ability execution service
+- [x] two-phase ability activation/execution coordinator + publish-safe adapter bridges
+- [ ] project-bound physical effect graphs for every declared adapter
 - [x] boss encounter state machine scaffold
 - [x] world-event state machine scaffold
-- [ ] cooldown/resource execution runtime
+- [x] cooldown / charge / meter / external-class / transformation resource runtime
 - [x] progression service scaffold
 - [x] persistent player profile
 - [x] persistent profile service
@@ -49,11 +51,14 @@ One production-quality region containing:
 - [x] world event selected + director binding specified
 - [ ] world event implemented/tested
 - [x] atomic crafting transaction scaffold + validated first-slice recipes
-- [ ] crafting UI/device binding and UEFN playtest
-- [ ] class skill runtime loop
+- [x] crafting transaction + recipe-button runtime scaffold
+- [ ] crafting UI/device placement and UEFN playtest
+- [x] class resource/runtime loop + generated first-slice class bootstrap
+- [ ] project-bound class ability effect graphs and UEFN playtest
 - [ ] persistent progression compiled in UEFN
 - [x] first shop specification: Grave Market Quartermaster
-- [ ] shop UI/device/payment-or-currency adapter binding
+- [x] in-island shop offer + unlock-delivery runtime scaffold
+- [ ] UEFN shop UI/device placement and any current-policy-compliant monetization integration
 - [x] 13-region streamed world topology + event-shell architecture specified and CI validated
 - [ ] Spatial Profiler / Memory Snapshot validation in bound UEFN project
 
@@ -84,29 +89,33 @@ Targets:
 - World-event/special-map-effect entities: 30
 
 ## Gate 5 — Living World
-- [ ] multi-faction territory state
-- [ ] aggression escalation
+- [x] first-region faction conflict/territory runtime scaffold
+- [x] first-region regional escalation runtime scaffold
 - [x] shared companion + AI behavior contracts and first-slice binding matrix
-- [ ] project-bound taming/hiring execution runtime
+- [x] taming + hiring execution runtimes and generated first-slice bootstraps
+- [ ] UEFN Character Definition/NPC Spawner binding and playtest
 - [x] world-event lifecycle contract
 - [x] shared world-event state machine scaffold
-- [ ] project-bound dynamic invasion/spawn director
+- [x] invasion + spawn-group runtime scaffolds
+- [ ] UEFN NPC spawner/device binding and soak test
 - [x] five-tier cannibal horde evolution specified
 - [x] necromancer ecosystem baseline specified
 - [x] roaming mythic threat baseline specified
-- [ ] faction wars
+- [x] first-region faction conflict runtime scaffold
 - [ ] regional mutation/corruption runtime
 
 ## Gate 6 — Endgame
-- [ ] God runtime
-- [ ] Absolute runtime
+- [x] God Form session runtime (45s active / 120s exhaustion) + 5 exact-ID world-bending abilities
+- [x] Absolute Form session runtime (30s active / 240s exhaustion) + 5 exact-ID rule-bending abilities
 - [x] Zero Candidate qualification specification/scaffold
-- [ ] 10 Ascension Trials runtime
+- [x] 10 sequential Ascension Trials data/registry/runtime + canonical generator
 - [x] Axiom Heart 68,420+ raw-acquisition crafting graph
-- [ ] Choosing runtime
-- [ ] Transcendent Zero runtime
-- [x] seven Authorities + Reality Engine specified
-- [ ] Hall of Ascendants
+- [x] one-time Choosing contract/runtime + persistent completion commit
+- [x] Transcendent Zero session runtime with 8 Authorities / 24 exact-ID abilities / history gates
+- [x] 8 canonical Authorities including Reality Engine specified, generated, registered, and adapter-covered
+- [x] session Hall of Ascendants derived from connected players' persistent progression
+- [x] 16-case transformation Launch Session acceptance matrix
+- [ ] bind 34 God/Absolute/Transcendent effect graphs in UEFN and pass the transformation acceptance matrix
 
 ## Gate 7 — Production
 - [ ] UEFN project binding
