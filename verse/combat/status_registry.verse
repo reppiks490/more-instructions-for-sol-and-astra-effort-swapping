@@ -26,12 +26,12 @@ aeonfall_status_registry := class():
             if:
                 set Definitions[Definition.StatusId] = Definition
             then:
-            AEONFALLRuntimeBus.Emit(
-                aeonfall_runtime_event{
-                    EventType := "status.definition_registered",
-                    SourceId := Definition.StatusId
-                }
-            )
+                AEONFALLRuntimeBus.Emit(
+                    aeonfall_runtime_event{
+                        EventType := "status.definition_registered",
+                        SourceId := Definition.StatusId
+                    }
+                )
                 return true
 
         false
