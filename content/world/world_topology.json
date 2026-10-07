@@ -1,0 +1,232 @@
+{
+  "version": 1,
+  "world_name": "AEONFALL",
+  "world_strategy": "One large World Partition experience composed of strongly themed streamed regions plus temporary event shells. Region borders should feel geographic, while event shells may visually span multiple regions without keeping full boss bodies loaded everywhere.",
+  "streaming": {
+    "required": true,
+    "spatially_loaded_by_default": true,
+    "use_hlod_for_distant_region_silhouettes": true,
+    "global_always_loaded_systems": [
+      "persistent profile bootstrap",
+      "runtime event bus",
+      "world-event director state",
+      "minimal HUD/state services"
+    ],
+    "never_global_by_default": [
+      "ordinary monsters",
+      "ordinary wildlife",
+      "hireable bodies",
+      "boss body parts",
+      "temporary VFX",
+      "projectiles",
+      "destructible encounter props",
+      "loot actors"
+    ]
+  },
+  "regions": [
+    {
+      "id": "REG-001",
+      "name": "The Ossuary March",
+      "theme": "necrotic frontier, blackwater reliquaries, corpse-fed ecology",
+      "role": "first vertical slice / onboarding frontier",
+      "neighbors": [
+        "REG-002",
+        "REG-004",
+        "REG-007"
+      ],
+      "streaming_band": "medium",
+      "vertical_slice": true
+    },
+    {
+      "id": "REG-002",
+      "name": "Black Sun Meridian",
+      "theme": "eclipse deserts, solar ruins, moving umbra",
+      "role": "radiance and absence campaign",
+      "neighbors": [
+        "REG-001",
+        "REG-003",
+        "REG-009"
+      ],
+      "streaming_band": "high",
+      "vertical_slice": false
+    },
+    {
+      "id": "REG-003",
+      "name": "Crownless Tempest",
+      "theme": "storm citadels, airborne routes, lightning ecology",
+      "role": "weather sovereignty and aerial combat",
+      "neighbors": [
+        "REG-002",
+        "REG-004",
+        "REG-010"
+      ],
+      "streaming_band": "high",
+      "vertical_slice": false
+    },
+    {
+      "id": "REG-004",
+      "name": "Leviathan Red Coast",
+      "theme": "black tides, drowned infrastructure, leviathan migration",
+      "role": "oceanic campaign and amphibious traversal",
+      "neighbors": [
+        "REG-001",
+        "REG-003",
+        "REG-005"
+      ],
+      "streaming_band": "high",
+      "vertical_slice": false
+    },
+    {
+      "id": "REG-005",
+      "name": "Worldroot Cathedral",
+      "theme": "living megaforest, root architecture, beast courts",
+      "role": "taming, traversal, living-terrain campaign",
+      "neighbors": [
+        "REG-004",
+        "REG-006",
+        "REG-011"
+      ],
+      "streaming_band": "medium",
+      "vertical_slice": false
+    },
+    {
+      "id": "REG-006",
+      "name": "Court of Broken Hours",
+      "theme": "temporal city, repeating districts, chrono anomalies",
+      "role": "timing, memory, causality campaign",
+      "neighbors": [
+        "REG-005",
+        "REG-007",
+        "REG-012"
+      ],
+      "streaming_band": "high",
+      "vertical_slice": false
+    },
+    {
+      "id": "REG-007",
+      "name": "Infernal Ledgerlands",
+      "theme": "demon courts, furnace roads, contract fortresses",
+      "role": "infernal factions, contracts, siege campaign",
+      "neighbors": [
+        "REG-001",
+        "REG-006",
+        "REG-008"
+      ],
+      "streaming_band": "high",
+      "vertical_slice": false
+    },
+    {
+      "id": "REG-008",
+      "name": "Glass Wyrm Expanse",
+      "theme": "crystal badlands, mythic migration routes, mirror ravines",
+      "role": "megafauna hunting and reflective hazards",
+      "neighbors": [
+        "REG-007",
+        "REG-009",
+        "REG-011"
+      ],
+      "streaming_band": "medium",
+      "vertical_slice": false
+    },
+    {
+      "id": "REG-009",
+      "name": "Hollow Astral Synod",
+      "theme": "star observatories, broken moons, celestial machinery",
+      "role": "astral progression and god-tier preparation",
+      "neighbors": [
+        "REG-002",
+        "REG-008",
+        "REG-010"
+      ],
+      "streaming_band": "high",
+      "vertical_slice": false
+    },
+    {
+      "id": "REG-010",
+      "name": "Null Cartography",
+      "theme": "impossible roads, dimensional survey stations, moving borders",
+      "role": "spatial puzzles, portals, exotic traversal",
+      "neighbors": [
+        "REG-003",
+        "REG-009",
+        "REG-012"
+      ],
+      "streaming_band": "high",
+      "vertical_slice": false
+    },
+    {
+      "id": "REG-011",
+      "name": "Titan's Last Orchard",
+      "theme": "colossus grave-gardens, giant bones, predatory flora",
+      "role": "anti-colossus preparation and siege crafting",
+      "neighbors": [
+        "REG-005",
+        "REG-008",
+        "REG-012"
+      ],
+      "streaming_band": "high",
+      "vertical_slice": false
+    },
+    {
+      "id": "REG-012",
+      "name": "The Axiom Scar",
+      "theme": "reality fractures, law storms, Absolute trials",
+      "role": "late-game Absolute progression hub",
+      "neighbors": [
+        "REG-006",
+        "REG-010",
+        "REG-011",
+        "REG-013"
+      ],
+      "streaming_band": "cinematic",
+      "vertical_slice": false
+    },
+    {
+      "id": "REG-013",
+      "name": "Threshold of Zero",
+      "theme": "minimal black-white ascension landscape, impossible geometry",
+      "role": "Zero Candidate trials, Choosing, Hall of Ascendants",
+      "neighbors": [
+        "REG-012"
+      ],
+      "streaming_band": "cinematic",
+      "vertical_slice": false
+    }
+  ],
+  "event_shells": [
+    {
+      "id": "SHELL-001",
+      "name": "The Devouring Moon",
+      "purpose": "Five-stage Gravefeeding escalation projected over eligible regions.",
+      "load_policy": "Only current stage projection actors and local gameplay organs load near active participants."
+    },
+    {
+      "id": "SHELL-002",
+      "name": "Orun — The Walking Continent",
+      "purpose": "Continent-class encounter represented by region objectives, terrain shells, horizon silhouettes, and interior phase spaces.",
+      "load_policy": "Never instantiate one continent-sized always-loaded boss actor; distribute state through regional controllers."
+    },
+    {
+      "id": "SHELL-003",
+      "name": "Mouth Behind the Moon",
+      "purpose": "Sky-scale eldritch event with projected tendrils and local organs.",
+      "load_policy": "Sky shell is presentation; damageable gameplay bodies remain regional."
+    },
+    {
+      "id": "SHELL-004",
+      "name": "The Last Necropolis",
+      "purpose": "Moving city-fortress event assembled from streamed district segments.",
+      "load_policy": "Activate only nearby district geometry and objective actors; distant city state uses HLOD/presentation shells."
+    }
+  ],
+  "profiling_gates": [
+    "Launch Session traversal from every neighboring region pair",
+    "World Partition streaming behavior verified around borders and teleports",
+    "HLOD visual continuity inspected for each skyline landmark",
+    "Spatial Profiler samples recorded for dense combat, vehicles, bosses, and world events",
+    "Memory Snapshot reviewed for high-cost assets on locally launched PC session",
+    "actor/entity counts reviewed together with game update and render time",
+    "event cleanup proves temporary actors, entities, and VFX leave memory after deactivation",
+    "mobile/portable and console-oriented profiles tested before production status"
+  ]
+}
