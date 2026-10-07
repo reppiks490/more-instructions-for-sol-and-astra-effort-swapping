@@ -14,6 +14,9 @@ REQUIRED_TOKENS = {
         "AEONFALLPositionTargetingRuntime.TickAll",
         "AEONFALLSpawnRuntime.TickAll",
         "AEONFALLUnlockDeliveryService.TickAll",
+        "AEONFALLAscensionTrialRuntime.TickAll",
+        "AEONFALLChoosingRuntime.TickAll",
+        "AEONFALLTranscendentRuntime.TickAll",
     ],
     "verse/core/actor_registry.verse": [
         "AEONFALLActivationCoordinator.ClearOwnerPending",
@@ -27,6 +30,9 @@ REQUIRED_TOKENS = {
         "AEONFALLStatusRuntime.ClearTarget",
         "AEONFALLAbilityRuntime.ClearOwner",
         "AEONFALLClassRuntime.ClearOwner",
+        "AEONFALLAscensionTrialRuntime.ClearOwner",
+        "AEONFALLChoosingRuntime.ClearOwner",
+        "AEONFALLTranscendentRuntime.ClearOwner",
     ],
     "verse/combat/activation_coordinator.verse": [
         "PendingActivations",
@@ -98,6 +104,20 @@ REQUIRED_TOKENS = {
     "verse/combat/targeted_ability_input_device.verse": [
         "AEONFALLActorContextRuntime.GetFlags",
         "AEONFALLTargetingRuntime.GetSelection",
+    ],
+    "verse/transcendent/choosing_runtime.verse": [
+        "CommitChoosingSuccess",
+        "TickAll",
+        "ClearOwner",
+    ],
+    "verse/transcendent/transcendent_runtime.verse": [
+        "ProfileService.IncrementTranscendentHistory",
+        "AEONFALLActorContextRuntime.SetTransformation",
+        "StopAuthorityAbilities",
+        "AEONFALLActivationCoordinator.CancelPending",
+        "AEONFALLActivationCoordinator.EndActivation",
+        "TickAll",
+        "ClearOwner",
     ],
 }
 
