@@ -1,0 +1,1781 @@
+{
+  "wave": "004",
+  "purpose": "Wildlife and tameable ecology wave 1 of 2.",
+  "entity_count": 30,
+  "entities": [
+    {
+      "id": "WLD-001",
+      "name": "Mirrorhorn Hart",
+      "family": "wildlife",
+      "tier": "rare",
+      "status": "specified",
+      "role": "tameable scout mount",
+      "identity": {
+        "fantasy": "A cautious reflective stag that memorizes safe paths through Vesperglass and can guide bonded players around selected ambush zones.",
+        "silhouette": "Tall black-glass antlers split into mirrored forks; coat shifts between smoke-grey and reflected environment tones.",
+        "lore_hook": "Mirrorhorn Hart is native to a specific AEONFALL ecology and tied to this acquisition path: Tame through a no-weapon tracking challenge in Vesperglass Dominion."
+      },
+      "mechanics": {
+        "core": [
+          "path memory",
+          "ambush sensing",
+          "bonded sprint"
+        ],
+        "signature": [
+          "Refraction Memory briefly highlights one recently traveled safe route and grants the bonded rider steadier movement along it.",
+          "Capability expression: path memory.",
+          "Capability expression: ambush sensing.",
+          "Capability expression: bonded sprint."
+        ],
+        "counterplay": [
+          "Antlers flare before detecting danger; loud attacks frighten it and cancel guidance."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Soft reflection shimmer along antlers, narrow route glints, and tiny glass-dust motes only during sensing."
+        ],
+        "animation": [
+          "Long cautious steps, sudden side-hop threat response, then confident low-head sprint after full bond."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Tame through a no-weapon tracking challenge in Vesperglass Dominion."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-002",
+      "name": "Prismfang Lynx",
+      "family": "wildlife",
+      "tier": "epic",
+      "status": "specified",
+      "role": "tameable ambush predator",
+      "identity": {
+        "fantasy": "A territorial crystal lynx that stalks from refracted cover and becomes a precision pounce companion after a successful hunt ritual.",
+        "silhouette": "Low feline silhouette with translucent prism shoulder blades and a split-color tail tip.",
+        "lore_hook": "Prismfang Lynx is native to a specific AEONFALL ecology and tied to this acquisition path: Defeat its decoy trail without striking the real lynx, then offer a crafted glass lure."
+      },
+      "mechanics": {
+        "core": [
+          "ambush pounce",
+          "reflective camouflage",
+          "marked prey"
+        ],
+        "signature": [
+          "Prism Pounce gains one refracted afterimage on a marked target, confusing lesser enemies without creating a true duplicate.",
+          "Capability expression: ambush pounce.",
+          "Capability expression: reflective camouflage.",
+          "Capability expression: marked prey."
+        ],
+        "counterplay": [
+          "Camouflage breaks under sustained damage; pounce direction flashes a moment before launch."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Short rainbow edge refraction, single afterimage streak, sharp prism fracture on pounce impact."
+        ],
+        "animation": [
+          "Slow shoulder-roll stalking, compressed hind-leg launch, midair body twist, and low landing crouch."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Defeat its decoy trail without striking the real lynx, then offer a crafted glass lure."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-003",
+      "name": "Shardwing Moth",
+      "family": "wildlife",
+      "tier": "uncommon",
+      "status": "specified",
+      "role": "ambient resource wildlife",
+      "identity": {
+        "fantasy": "A huge nocturnal moth that feeds on damaged reflective structures and leaves useful glass-silk behind.",
+        "silhouette": "Broad translucent wings with chipped geometric edges and softly glowing vein lines.",
+        "lore_hook": "Shardwing Moth is native to a specific AEONFALL ecology and tied to this acquisition path: Attract with non-hostile light sources in Vesperglass alleys."
+      },
+      "mechanics": {
+        "core": [
+          "glass-silk shedding",
+          "light attraction",
+          "repair feeding"
+        ],
+        "signature": [
+          "Lantern Drift causes nearby moths to circle safe light sources and slowly shed collectible silk when undisturbed.",
+          "Capability expression: glass-silk shedding.",
+          "Capability expression: light attraction.",
+          "Capability expression: repair feeding."
+        ],
+        "counterplay": [
+          "Sudden explosions scatter the flock and pause shedding."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Low-cost wing iridescence, small drifting flakes, and faint light halos."
+        ],
+        "animation": [
+          "Slow hovering figure-eights, wall clings, and gentle synchronized flock turns."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Attract with non-hostile light sources in Vesperglass alleys."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "high",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-004",
+      "name": "Glassback Tortoise",
+      "family": "wildlife",
+      "tier": "rare",
+      "status": "specified",
+      "role": "defensive tameable pack animal",
+      "identity": {
+        "fantasy": "A heavy tortoise whose shell stores fragments of nearby reflective debris and can provide temporary physical cover.",
+        "silhouette": "Wide low shell made from layered smoky glass plates with a dull cyan core under the rim.",
+        "lore_hook": "Glassback Tortoise is native to a specific AEONFALL ecology and tied to this acquisition path: Tame by repairing shell fractures with Vesperglass resin rather than defeating it."
+      },
+      "mechanics": {
+        "core": [
+          "portable cover",
+          "debris storage",
+          "slow carry"
+        ],
+        "signature": [
+          "Shell Brace lets a bonded tortoise lock in place and raise outer plates into a short directional cover wall.",
+          "Capability expression: portable cover.",
+          "Capability expression: debris storage.",
+          "Capability expression: slow carry."
+        ],
+        "counterplay": [
+          "Very slow repositioning; exposed head and rear remain vulnerable; cover has a fixed duration."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Plate edges glow cyan during brace, with restrained shard lift and settle effects."
+        ],
+        "animation": [
+          "Deliberate heavy crawl, shell-plate fan opening, head tuck, and full-body settle when braced."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Tame by repairing shell fractures with Vesperglass resin rather than defeating it."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-005",
+      "name": "Echojackal",
+      "family": "wildlife",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "tameable tracking predator",
+      "identity": {
+        "fantasy": "A legendary jackal that remembers the sound signature of one hunted enemy archetype and helps a squad track matching threats.",
+        "silhouette": "Lean charcoal canine with hollow crystalline ears and a chest cavity that pulses like a resonance chamber.",
+        "lore_hook": "Echojackal is native to a specific AEONFALL ecology and tied to this acquisition path: Complete a silent hunt sequence and return the jackal to its pack without triggering alarms."
+      },
+      "mechanics": {
+        "core": [
+          "sound tracking",
+          "prey memory",
+          "warning howl"
+        ],
+        "signature": [
+          "Echo Quarry records one eligible monster-family call and periodically triangulates nearby matching threats through three audible direction pings.",
+          "Capability expression: sound tracking.",
+          "Capability expression: prey memory.",
+          "Capability expression: warning howl."
+        ],
+        "counterplay": [
+          "Tracking is family-specific, local, and disrupted by silence fields or overwhelming noise events."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Concentric ear pulses, three directional sound rings, faint throat waveform before a successful lock."
+        ],
+        "animation": [
+          "Head cocks through exact triangulation angles, followed by a low sprint and elevated alert stance."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Complete a silent hunt sequence and return the jackal to its pack without triggering alarms."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-006",
+      "name": "Marrow Hound",
+      "family": "wildlife",
+      "tier": "epic",
+      "status": "specified",
+      "role": "tameable corpse-denial hunter",
+      "identity": {
+        "fantasy": "A pale scavenger hound that consumes necromantic residue before hostile casters can reuse it.",
+        "silhouette": "Long-legged ivory canine with visible dark marrow channels and a jaw protected by bone plates.",
+        "lore_hook": "Marrow Hound is native to a specific AEONFALL ecology and tied to this acquisition path: Earn trust by defending a hound pack from a necromancer without harvesting any remains."
+      },
+      "mechanics": {
+        "core": [
+          "corpse cleanse",
+          "necromancy sensing",
+          "guard howl"
+        ],
+        "signature": [
+          "Marrow Cleanse consumes one eligible residue source and grants a short anti-necromancy aura to its bonded squad.",
+          "Capability expression: corpse cleanse.",
+          "Capability expression: necromancy sensing.",
+          "Capability expression: guard howl."
+        ],
+        "counterplay": [
+          "Only one residue can be consumed per cooldown; ordinary corpses give no combat buff."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Pale marrow lines brighten during cleanse, followed by a tight white ring and dark residue collapse."
+        ],
+        "animation": [
+          "Fast sniff-circle investigation, controlled feeding crouch, then rigid guardian stance during aura."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earn trust by defending a hound pack from a necromancer without harvesting any remains."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-007",
+      "name": "Tombshell Beetle",
+      "family": "wildlife",
+      "tier": "uncommon",
+      "status": "specified",
+      "role": "harvest companion",
+      "identity": {
+        "fantasy": "A large docile beetle that burrows through grave soil and exposes small caches without disturbing dangerous sealed tombs.",
+        "silhouette": "Rounded bronze-black shell covered with natural keyhole-like markings and shovel forelegs.",
+        "lore_hook": "Tombshell Beetle is native to a specific AEONFALL ecology and tied to this acquisition path: Feed ossuary fungus repeatedly without startling it."
+      },
+      "mechanics": {
+        "core": [
+          "safe excavation",
+          "soil sensing",
+          "cache reveal"
+        ],
+        "signature": [
+          "Gravesense identifies one nearby low-tier buried cache and digs it up over a vulnerable channel.",
+          "Capability expression: safe excavation.",
+          "Capability expression: soil sensing.",
+          "Capability expression: cache reveal."
+        ],
+        "counterplay": [
+          "Cannot open protected tombs; damage interrupts digging and frightens it away."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Small soil ripples, faint bronze ground ping, and low-cost dust during excavation."
+        ],
+        "animation": [
+          "Rhythmic foreleg digging, shell vibration, and a quick defensive curl when threatened."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Feed ossuary fungus repeatedly without startling it."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "high",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-008",
+      "name": "Ossuary Crane",
+      "family": "wildlife",
+      "tier": "rare",
+      "status": "specified",
+      "role": "ritual-warning wildlife",
+      "identity": {
+        "fantasy": "A tall grave crane that roosts near active death rituals and reacts before necromantic events begin.",
+        "silhouette": "Bone-white bird with impossibly long black legs and a red thread-like crest trailing behind the head.",
+        "lore_hook": "Ossuary Crane is native to a specific AEONFALL ecology and tied to this acquisition path: Bond by following its migration route without disturbing marked graves."
+      },
+      "mechanics": {
+        "core": [
+          "ritual warning",
+          "high perch scouting",
+          "corpse avoidance"
+        ],
+        "signature": [
+          "Red Thread Display points its crest toward the strongest nearby eligible ritual source before that event activates.",
+          "Capability expression: ritual warning.",
+          "Capability expression: high perch scouting.",
+          "Capability expression: corpse avoidance."
+        ],
+        "counterplay": [
+          "Only indicates direction, not exact distance or type; panics under sustained gunfire."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Thin red crest trail, brief white feather pulse, subtle directional shimmer."
+        ],
+        "animation": [
+          "Slow ceremonial steps, sudden spear-like takeoff, high circling glide, and directional neck lock."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Bond by following its migration route without disturbing marked graves."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-009",
+      "name": "Graveburrow Mole",
+      "family": "wildlife",
+      "tier": "common",
+      "status": "specified",
+      "role": "ambient ecosystem digger",
+      "identity": {
+        "fantasy": "A giant near-blind mole that aerates necropolis soil and unintentionally uncovers low-value crafting material veins.",
+        "silhouette": "Compact dark body, oversized ivory digging claws, and dust-coated sensory whiskers.",
+        "lore_hook": "Graveburrow Mole is native to a specific AEONFALL ecology and tied to this acquisition path: Non-hostile ambient species; can be gently redirected with fungus bait."
+      },
+      "mechanics": {
+        "core": [
+          "burrowing",
+          "material exposure",
+          "tunnel distraction"
+        ],
+        "signature": [
+          "Burrow Wake leaves a short line of loosened soil that may expose minor bone-salt or fungus materials.",
+          "Capability expression: burrowing.",
+          "Capability expression: material exposure.",
+          "Capability expression: tunnel distraction."
+        ],
+        "counterplay": [
+          "Uncontrollable route; easily frightened; no combat value."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Simple soil wake and small dust puffs designed for many concurrent instances."
+        ],
+        "animation": [
+          "Powerful alternating claw digs, short surface sniff, immediate dive when startled."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Non-hostile ambient species; can be gently redirected with fungus bait."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "high",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-010",
+      "name": "Reliquary Stag",
+      "family": "wildlife",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "tameable sanctuary carrier",
+      "identity": {
+        "fantasy": "A rare ossuary stag whose antlers naturally collect harmless memory-lights from cleansed graves and can project a brief anti-fear sanctuary.",
+        "silhouette": "Massive pale stag with antlers containing tiny suspended lantern-like memory lights.",
+        "lore_hook": "Reliquary Stag is native to a specific AEONFALL ecology and tied to this acquisition path: Cleanse a chain of forgotten graves and escort the stag through the final memorial."
+      },
+      "mechanics": {
+        "core": [
+          "fear cleanse",
+          "memory collection",
+          "sanctuary pulse"
+        ],
+        "signature": [
+          "Reliquary Bloom releases stored grave-lights into a bounded sanctuary that suppresses selected fear/panic effects for allies.",
+          "Capability expression: fear cleanse.",
+          "Capability expression: memory collection.",
+          "Capability expression: sanctuary pulse."
+        ],
+        "counterplay": [
+          "Requires previously collected cleansed memories; sanctuary is short and stationary."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Warm memory lanterns leave the antlers in slow arcs, forming a soft ivory-gold dome."
+        ],
+        "animation": [
+          "Measured royal walk, kneeling antler-lowering ritual, then still guardian posture during sanctuary."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Cleanse a chain of forgotten graves and escort the stag through the final memorial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-011",
+      "name": "Sunmane Ibex",
+      "family": "wildlife",
+      "tier": "epic",
+      "status": "specified",
+      "role": "tameable cliff traversal beast",
+      "identity": {
+        "fantasy": "A radiant mountain ibex adapted to heliostat ruins, capable of traversing steep authored routes and charging solar barriers.",
+        "silhouette": "Muscular white-gold ibex with curved translucent horns containing moving bands of sunlight.",
+        "lore_hook": "Sunmane Ibex is native to a specific AEONFALL ecology and tied to this acquisition path: Complete a sunlight-following climb without using vehicles, then offer a solar salt block."
+      },
+      "mechanics": {
+        "core": [
+          "cliff traversal",
+          "solar charge",
+          "barrier ram"
+        ],
+        "signature": [
+          "Helio Ram spends stored sunlight to break one eligible weakened solar barrier or stagger lesser shielded enemies.",
+          "Capability expression: cliff traversal.",
+          "Capability expression: solar charge.",
+          "Capability expression: barrier ram."
+        ],
+        "counterplay": [
+          "Charge requires open-sky exposure; cannot break protected structures."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Gold horn fill, brief sun flare on impact, restrained heat shimmer around hooves."
+        ],
+        "animation": [
+          "Precise cliff hops, horn-lowering charge windup, heavy four-hoof landing."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Complete a sunlight-following climb without using vehicles, then offer a solar salt block."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-012",
+      "name": "Heliowasp Queenlet",
+      "family": "wildlife",
+      "tier": "rare",
+      "status": "specified",
+      "role": "swarm-support tameable",
+      "identity": {
+        "fantasy": "A hand-sized queen-class solar wasp that can command a tiny capped cloud of workers for scouting and resource pollination.",
+        "silhouette": "Golden segmented wasp with miniature sun-disk abdomen and four transparent wings.",
+        "lore_hook": "Heliowasp Queenlet is native to a specific AEONFALL ecology and tied to this acquisition path: Protect a hive through a solar-storm event and recover an unbroken queen cell."
+      },
+      "mechanics": {
+        "core": [
+          "micro-swarm scout",
+          "pollination",
+          "heat sensing"
+        ],
+        "signature": [
+          "Solar Buzz sends a capped worker cloud toward one marked point and reports nearby heat-active entities through a brief return pattern.",
+          "Capability expression: micro-swarm scout.",
+          "Capability expression: pollination.",
+          "Capability expression: heat sensing."
+        ],
+        "counterplay": [
+          "Tiny range, fragile workers, and no direct damage role."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Small gold specks, heat-outline flickers, compact swarm arc with aggressive distance culling."
+        ],
+        "animation": [
+          "Precise hover, sharp darting waypoint motion, synchronized worker orbit on return."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Protect a hive through a solar-storm event and recover an unbroken queen cell."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-013",
+      "name": "Radiant Sandcat",
+      "family": "wildlife",
+      "tier": "rare",
+      "status": "specified",
+      "role": "tameable stealth companion",
+      "identity": {
+        "fantasy": "A small desert cat that hides in heliostat shadows and helps reveal safe timing windows between sweeping solar hazards.",
+        "silhouette": "Long-eared gold-furred feline with black mirror patches over the shoulders.",
+        "lore_hook": "Radiant Sandcat is native to a specific AEONFALL ecology and tied to this acquisition path: Gain trust by crossing a heliostat field using only its behavioral cues."
+      },
+      "mechanics": {
+        "core": [
+          "hazard timing",
+          "stealth scouting",
+          "shade affinity"
+        ],
+        "signature": [
+          "Shadow Clock reacts to rotating light hazards and signals the next safe crossing window with ear and tail posture.",
+          "Capability expression: hazard timing.",
+          "Capability expression: stealth scouting.",
+          "Capability expression: shade affinity."
+        ],
+        "counterplay": [
+          "Only works on authored light-cycle hazards; combat interrupts the signal."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Minimal warm edge glow and a thin shadow-timing line on the ground."
+        ],
+        "animation": [
+          "Low stalking, long ear tracking, tail ticking in measured intervals before a safe window."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Gain trust by crossing a heliostat field using only its behavioral cues."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-014",
+      "name": "Furnace Gecko",
+      "family": "wildlife",
+      "tier": "common",
+      "status": "specified",
+      "role": "ambient heat-cleaner",
+      "identity": {
+        "fantasy": "A broad gecko that feeds on excess forge heat and reduces tiny environmental heat pockets around its nest.",
+        "silhouette": "Flat black-orange lizard with heat-sink fins running along the spine.",
+        "lore_hook": "Furnace Gecko is native to a specific AEONFALL ecology and tied to this acquisition path: Ambient non-hostile species; can be relocated using heatstone bait."
+      },
+      "mechanics": {
+        "core": [
+          "heat feeding",
+          "wall climb",
+          "nest cooling"
+        ],
+        "signature": [
+          "Heat Sip visibly cools one minor ambient vent while the gecko feeds, sometimes exposing a crafting insect cache.",
+          "Capability expression: heat feeding.",
+          "Capability expression: wall climb.",
+          "Capability expression: nest cooling."
+        ],
+        "counterplay": [
+          "No effect on combat hazards or major forge systems."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Small orange-to-blue temperature fade and faint wall-cling dust."
+        ],
+        "animation": [
+          "Quick wall scuttle, full-body flatten, rhythmic throat pulse during feeding."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Ambient non-hostile species; can be relocated using heatstone bait."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "high",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-015",
+      "name": "Solwing Roclet",
+      "family": "wildlife",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "tameable aerial courier",
+      "identity": {
+        "fantasy": "A juvenile solar roc large enough for short authored carry hops and aerial delivery missions but not unrestricted flight.",
+        "silhouette": "Broad gold-white bird with glasslike primary feathers and a solar lens crest.",
+        "lore_hook": "Solwing Roclet is native to a specific AEONFALL ecology and tied to this acquisition path: Raise from a rescued egg through a multi-step heliostat nesting quest."
+      },
+      "mechanics": {
+        "core": [
+          "short carry flight",
+          "aerial delivery",
+          "sunburst retreat"
+        ],
+        "signature": [
+          "Sunbound Carry transports one bonded player between approved aerial perches and releases a defensive flash on landing.",
+          "Capability expression: short carry flight.",
+          "Capability expression: aerial delivery.",
+          "Capability expression: sunburst retreat."
+        ],
+        "counterplay": [
+          "Routes are authored; cannot free-fly anywhere; flash has long cooldown."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Bright feather-edge corona, compact landing flare, trailing sun motes with distance fallback."
+        ],
+        "animation": [
+          "Powerful three-beat takeoff, stable glide, talon-release landing, protective wing wrap after arrival."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Raise from a rescued egg through a multi-step heliostat nesting quest."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-016",
+      "name": "Stormfin Ray",
+      "family": "wildlife",
+      "tier": "epic",
+      "status": "specified",
+      "role": "tameable water-glide mount",
+      "identity": {
+        "fantasy": "A broad amphibious ray that glides over water surfaces and stores small amounts of storm charge for burst traversal.",
+        "silhouette": "Dark blue manta silhouette with luminous lightning veins and hooked forward fins.",
+        "lore_hook": "Stormfin Ray is native to a specific AEONFALL ecology and tied to this acquisition path: Ride out a Blacktide storm beside the herd without attacking predators."
+      },
+      "mechanics": {
+        "core": [
+          "water glide",
+          "storm burst",
+          "shore launch"
+        ],
+        "signature": [
+          "Tempest Skim spends stored charge to surge across water and leap onto an approved shoreline landing zone.",
+          "Capability expression: water glide.",
+          "Capability expression: storm burst.",
+          "Capability expression: shore launch."
+        ],
+        "counterplay": [
+          "Charge generation requires storm/rain exposure; weak on dry land."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Blue vein pulses, thin water wake, one bright surge line during Tempest Skim."
+        ],
+        "animation": [
+          "Smooth surface glide, fin-fold launch, heavy wet slide on land."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Ride out a Blacktide storm beside the herd without attacking predators."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-017",
+      "name": "Abyss Kelpbeast",
+      "family": "wildlife",
+      "tier": "rare",
+      "status": "specified",
+      "role": "harvest/tank tameable",
+      "identity": {
+        "fantasy": "A slow six-legged herbivore covered in living kelp that can carry cargo and briefly obscure allies with released fronds.",
+        "silhouette": "Broad amphibious body under a mantle of dark green-blue kelp strands and coral-like horns.",
+        "lore_hook": "Abyss Kelpbeast is native to a specific AEONFALL ecology and tied to this acquisition path: Clear parasites from a herd instead of hunting it."
+      },
+      "mechanics": {
+        "core": [
+          "cargo carry",
+          "concealment fronds",
+          "amphibious movement"
+        ],
+        "signature": [
+          "Kelp Veil releases a short low-visibility frond cloud around allies without granting full invisibility.",
+          "Capability expression: cargo carry.",
+          "Capability expression: concealment fronds.",
+          "Capability expression: amphibious movement."
+        ],
+        "counterplay": [
+          "Slow speed; veil affects ally visibility too and disperses quickly."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Floating kelp strips, dark green mist, restrained bubble trails in water."
+        ],
+        "animation": [
+          "Heavy six-beat walk, body shake to release veil, slow submersion and resurfacing."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Clear parasites from a herd instead of hunting it."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-018",
+      "name": "Lantern Crab",
+      "family": "wildlife",
+      "tier": "uncommon",
+      "status": "specified",
+      "role": "ambient navigation wildlife",
+      "identity": {
+        "fantasy": "A large crab that migrates along safe tidal shelves while carrying a naturally luminous shell lantern.",
+        "silhouette": "Wide dark shell with one pale blue bioluminescent chimney growing from the back.",
+        "lore_hook": "Lantern Crab is native to a specific AEONFALL ecology and tied to this acquisition path: Ambient species; can be coaxed along paths with shellfruit."
+      },
+      "mechanics": {
+        "core": [
+          "safe-shelf migration",
+          "light source",
+          "tide warning"
+        ],
+        "signature": [
+          "Tide Lantern brightens and changes pulse speed before nearby authored tide hazards rise.",
+          "Capability expression: safe-shelf migration.",
+          "Capability expression: light source.",
+          "Capability expression: tide warning."
+        ],
+        "counterplay": [
+          "Only warns; does not protect players; can hide under shell when startled."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Soft blue lantern pulse and tiny wet reflections on nearby ground."
+        ],
+        "animation": [
+          "Sideways scuttle, shell tuck, claw tapping matching tide pulse rhythm."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Ambient species; can be coaxed along paths with shellfruit."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "high",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-019",
+      "name": "Brinehorn Elk",
+      "family": "wildlife",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "tameable coastal guardian",
+      "identity": {
+        "fantasy": "A massive salt-crusted elk that can brace against wave pressure and create a short sheltered lee for nearby allies.",
+        "silhouette": "Towering dark elk with antlers resembling branching white coral and salt armor over shoulders.",
+        "lore_hook": "Brinehorn Elk is native to a specific AEONFALL ecology and tied to this acquisition path: Defend a migrating herd through a storm-surge event."
+      },
+      "mechanics": {
+        "core": [
+          "wave brace",
+          "ally shelter",
+          "shore charge"
+        ],
+        "signature": [
+          "Breakwater Stance anchors the elk and creates a directional low-pressure zone behind its body during selected water hazards.",
+          "Capability expression: wave brace.",
+          "Capability expression: ally shelter.",
+          "Capability expression: shore charge."
+        ],
+        "counterplay": [
+          "Stationary while active; only protects from one direction and eligible hazard types."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "White salt lines glow, water curls around the body, coral antlers shed tiny droplets."
+        ],
+        "animation": [
+          "Wide four-leg brace, antlers lowered into current, slow recovery shake after hazard passes."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Defend a migrating herd through a storm-surge event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-020",
+      "name": "Riftfin Serpent",
+      "family": "wildlife",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "rare tameable abyss traversal beast",
+      "identity": {
+        "fantasy": "A mythic sea serpent that can slip through a small set of dimensional current gates hidden beneath Blacktide.",
+        "silhouette": "Long black-blue serpent with luminous ring fins spaced down the body and a masklike pale face.",
+        "lore_hook": "Riftfin Serpent is native to a specific AEONFALL ecology and tied to this acquisition path: Complete an abyssal rescue chain and release rather than harvest three captured juveniles."
+      },
+      "mechanics": {
+        "core": [
+          "dimensional current travel",
+          "abyss sensing",
+          "shock coil"
+        ],
+        "signature": [
+          "Current Slip traverses between paired authored deep-water gates and discharges a defensive coil on exit.",
+          "Capability expression: dimensional current travel.",
+          "Capability expression: abyss sensing.",
+          "Capability expression: shock coil."
+        ],
+        "counterplay": [
+          "Gate endpoints are fixed; serpent cannot bypass protected progression; exit is visibly telegraphed."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Dark-water tunnel ring, violet-blue fin halos, compressed exit shock, distant serpent silhouette LOD."
+        ],
+        "animation": [
+          "Long wave-like swim, full-body ring alignment before gate entry, coiled defensive exit posture."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Complete an abyssal rescue chain and release rather than harvest three captured juveniles."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-021",
+      "name": "Foldwing Ray",
+      "family": "wildlife",
+      "tier": "epic",
+      "status": "specified",
+      "role": "tameable anomaly glider",
+      "identity": {
+        "fantasy": "A floating manta-like creature that folds through small spatial seams and can carry a player across specific broken ravines.",
+        "silhouette": "Paper-thin black manta with white geometric fold lines and no visible eyes.",
+        "lore_hook": "Foldwing Ray is native to a specific AEONFALL ecology and tied to this acquisition path: Follow a sequence of false landmarks without attacking the ray."
+      },
+      "mechanics": {
+        "core": [
+          "ravine glide",
+          "spatial fold",
+          "anomaly sensing"
+        ],
+        "signature": [
+          "Crease Leap collapses the ray into a line and reopens it at an approved nearby air anchor.",
+          "Capability expression: ravine glide.",
+          "Capability expression: spatial fold.",
+          "Capability expression: anomaly sensing."
+        ],
+        "counterplay": [
+          "Only works between authored anchors; seam destabilization cancels transit."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "White fold-lines, instant line-collapse visual, controlled geometric reopen."
+        ],
+        "animation": [
+          "Silent undulating hover, origami-like body fold, wide soft landing flare."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Follow a sequence of false landmarks without attacking the ray."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-022",
+      "name": "Witness Hare",
+      "family": "wildlife",
+      "tier": "rare",
+      "status": "specified",
+      "role": "eldritch-warning wildlife",
+      "identity": {
+        "fantasy": "A pale hare that stares at threats ordinary perception does not yet reveal, acting as an eerie early-warning companion.",
+        "silhouette": "Long white hare with oversized black eyes and shadow that points in a different direction than its body.",
+        "lore_hook": "Witness Hare is native to a specific AEONFALL ecology and tied to this acquisition path: Gain trust by following three warning freezes and surviving without harming nearby wildlife."
+      },
+      "mechanics": {
+        "core": [
+          "hidden-threat warning",
+          "silent scouting",
+          "anomaly reaction"
+        ],
+        "signature": [
+          "Witness Freeze locks the hare's gaze on one nearby eligible hidden anomaly and refuses movement until it is resolved.",
+          "Capability expression: hidden-threat warning.",
+          "Capability expression: silent scouting.",
+          "Capability expression: anomaly reaction."
+        ],
+        "counterplay": [
+          "Provides direction only; fear effects can cause false freezes during major events."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Minimal shadow mismatch, faint black eye ring, tiny anomaly ripple around ears."
+        ],
+        "animation": [
+          "Quick hops abruptly ending in statue-still stare; head rotates without moving body."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Gain trust by following three warning freezes and surviving without harming nearby wildlife."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-023",
+      "name": "Möbius Serpent",
+      "family": "wildlife",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "tameable looping predator",
+      "identity": {
+        "fantasy": "A ribbon-bodied predator whose path loops back into itself, allowing brief patrol around a bonded player without obvious turning.",
+        "silhouette": "Flat silver-black serpent forming impossible loop shapes around rocks and trees.",
+        "lore_hook": "Möbius Serpent is native to a specific AEONFALL ecology and tied to this acquisition path: Complete a loop puzzle using its natural patrol path, then offer a paradox lure."
+      },
+      "mechanics": {
+        "core": [
+          "loop patrol",
+          "projectile warning",
+          "coiled intercept"
+        ],
+        "signature": [
+          "Möbius Guard circles the bonded player on a closed path and intercepts one eligible lesser projectile before uncoiling.",
+          "Capability expression: loop patrol.",
+          "Capability expression: projectile warning.",
+          "Capability expression: coiled intercept."
+        ],
+        "counterplay": [
+          "Single intercept per cooldown; heavy/beam attacks ignore it."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Thin looping afterimage, silver seam, brief closed-ring flash on intercept."
+        ],
+        "animation": [
+          "Continuous ribbon locomotion with no visible turning point; abrupt straightening to intercept."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Complete a loop puzzle using its natural patrol path, then offer a paradox lure."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-024",
+      "name": "False Deer",
+      "family": "wildlife",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "dangerous pseudo-wildlife tameable",
+      "identity": {
+        "fantasy": "An eldritch organism pretending to be a deer; its disguise is imperfect and becomes a powerful anomaly companion if the player survives its truth-test.",
+        "silhouette": "Almost normal deer except joints bend a fraction too late and antlers cast star-shaped shadows.",
+        "lore_hook": "False Deer is native to a specific AEONFALL ecology and tied to this acquisition path: Pass a noncombat truth-test encounter in the Maw Between Stars."
+      },
+      "mechanics": {
+        "core": [
+          "disguise",
+          "truth test",
+          "fear pulse",
+          "anomaly lure"
+        ],
+        "signature": [
+          "Unmasking Trial forces the creature through three increasingly wrong forms; successful calm interactions stabilize it into a bonded state.",
+          "Capability expression: disguise.",
+          "Capability expression: truth test.",
+          "Capability expression: fear pulse.",
+          "Capability expression: anomaly lure."
+        ],
+        "counterplay": [
+          "Attacking during the trial resets trust and triggers hostile phase; cannot be rushed with damage."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Subtle geometry slips escalating to star-shadow distortions, then stabilizing into a calm pale aura after bonding."
+        ],
+        "animation": [
+          "Normal deer gait slowly desynchronizes, limbs over-rotate during truth forms, then resolve into deliberately graceful movement."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Pass a noncombat truth-test encounter in the Maw Between Stars."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-025",
+      "name": "Parallax Crow",
+      "family": "wildlife",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "tameable scouting familiar",
+      "identity": {
+        "fantasy": "An exotic crow that appears from slightly different angles to different observers and can mark one route that only the bonded squad can see.",
+        "silhouette": "Black crow with prismatic eye facets and wing edges that never align perfectly with its shadow.",
+        "lore_hook": "Parallax Crow is native to a specific AEONFALL ecology and tied to this acquisition path: Complete the Cartographers' impossible-perch challenge and earn its voluntary bond."
+      },
+      "mechanics": {
+        "core": [
+          "private route marking",
+          "scout perch",
+          "angle warning"
+        ],
+        "signature": [
+          "Parallax Route paints a temporary squad-only path toward one discovered objective while showing danger angles rather than exact enemies.",
+          "Capability expression: private route marking.",
+          "Capability expression: scout perch.",
+          "Capability expression: angle warning."
+        ],
+        "counterplay": [
+          "Requires an already discovered objective; route expires quickly and offers no wallhack."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Prismatic wing-edge split, squad-only route shards, small angle chevrons."
+        ],
+        "animation": [
+          "Perch-to-flight transitions leave one delayed ghost angle; route cast uses three circling passes."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Complete the Cartographers' impossible-perch challenge and earn its voluntary bond."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-026",
+      "name": "Cinder Drake",
+      "family": "wildlife",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "tameable volcanic apex beast",
+      "identity": {
+        "fantasy": "A juvenile drake adapted to ash storms that alternates short glides, heat-resistant ground charges, and controlled flame lanes.",
+        "silhouette": "Black-red drake with obsidian scale plates, furnace throat, and torn ember membranes.",
+        "lore_hook": "Cinder Drake is native to a specific AEONFALL ecology and tied to this acquisition path: Raise from a rescued clutch and complete three volcanic bond trials."
+      },
+      "mechanics": {
+        "core": [
+          "short glide",
+          "flame lane",
+          "heat resistance",
+          "ground charge"
+        ],
+        "signature": [
+          "Cinder Run lays one controlled flame lane behind a charging glide, shaping pursuit routes without covering an entire arena.",
+          "Capability expression: short glide.",
+          "Capability expression: flame lane.",
+          "Capability expression: heat resistance.",
+          "Capability expression: ground charge."
+        ],
+        "counterplay": [
+          "Water/frost suppresses flame lane; glide duration short; exposed throat before breath."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Obsidian sparks, bounded flame ribbon, furnace throat glow, ash wake with strict particle cap."
+        ],
+        "animation": [
+          "Four-limbed sprint into wing-assisted leap, throat expansion tell, heavy talon skid landing."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Raise from a rescued clutch and complete three volcanic bond trials."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-027",
+      "name": "Pyre Boar",
+      "family": "wildlife",
+      "tier": "epic",
+      "status": "specified",
+      "role": "tameable siege beast",
+      "identity": {
+        "fantasy": "A heavily armored boar that stores heat in tusks and can break lesser barricades or scatter small monster packs.",
+        "silhouette": "Massive charcoal boar with copper tusks, ember cracks, and layered volcanic shoulder plates.",
+        "lore_hook": "Pyre Boar is native to a specific AEONFALL ecology and tied to this acquisition path: Cool an overheated injured boar, then defend it from demon hunters."
+      },
+      "mechanics": {
+        "core": [
+          "barrier ram",
+          "pack scatter",
+          "heat storage"
+        ],
+        "signature": [
+          "Kiln Charge converts recent heat exposure into one empowered directional ram against eligible obstacles or lesser enemies.",
+          "Capability expression: barrier ram.",
+          "Capability expression: pack scatter.",
+          "Capability expression: heat storage."
+        ],
+        "counterplay": [
+          "Predictable straight-line charge; walls and frost effects can stop it."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Copper tusk glow, short ember wake, directional impact fan."
+        ],
+        "animation": [
+          "Ground paw windup, low-head sprint, shoulder roll recovery after impact."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Cool an overheated injured boar, then defend it from demon hunters."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-028",
+      "name": "Magma Ram",
+      "family": "wildlife",
+      "tier": "rare",
+      "status": "specified",
+      "role": "tameable cliff utility beast",
+      "identity": {
+        "fantasy": "A sure-footed volcanic ram whose stone hooves can trigger selected pressure plates and cross hot rock routes safely.",
+        "silhouette": "Compact red-brown ram with basalt hooves and glowing mineral horns.",
+        "lore_hook": "Magma Ram is native to a specific AEONFALL ecology and tied to this acquisition path: Guide a herd across a lava-shelf migration route without losing one."
+      },
+      "mechanics": {
+        "core": [
+          "hot-ground traversal",
+          "pressure trigger",
+          "knockback"
+        ],
+        "signature": [
+          "Basalt Step safely activates designated heavy pressure mechanisms and grants the rider a brief heat-safe crossing window.",
+          "Capability expression: hot-ground traversal.",
+          "Capability expression: pressure trigger.",
+          "Capability expression: knockback."
+        ],
+        "counterplay": [
+          "Utility is route-specific; ordinary attacks remain modest."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Small basalt glow, hot-foot prints that cool quickly, mineral horn shimmer."
+        ],
+        "animation": [
+          "Confident cliff hops, deliberate heavy stomp, short horn shove."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Guide a herd across a lava-shelf migration route without losing one."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-029",
+      "name": "Ashbat Colony",
+      "family": "wildlife",
+      "tier": "uncommon",
+      "status": "specified",
+      "role": "ambient swarm wildlife",
+      "identity": {
+        "fantasy": "A colony of ash bats that roosts inside cooled vents and reacts to approaching large predators before players can see them.",
+        "silhouette": "Dozens of tiny grey-black bats with ember-red throat specks moving as one cloud.",
+        "lore_hook": "Ashbat Colony is native to a specific AEONFALL ecology and tied to this acquisition path: Ambient species; can be encouraged to roost near camps using cooled emberfruit."
+      },
+      "mechanics": {
+        "core": [
+          "predator warning",
+          "vent roosting",
+          "swarm distraction"
+        ],
+        "signature": [
+          "Panic Bloom erupts from a roost when a qualifying large predator enters range, revealing its approach direction through flock movement.",
+          "Capability expression: predator warning.",
+          "Capability expression: vent roosting.",
+          "Capability expression: swarm distraction."
+        ],
+        "counterplay": [
+          "Swarm can be startled by players and produce false alarms."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Low-cost flock silhouettes, tiny ember throat dots, restrained ash trail."
+        ],
+        "animation": [
+          "Boid-like cloud turns, sudden directional burst, spiral roost return."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Ambient species; can be encouraged to roost near camps using cooled emberfruit."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "high",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    },
+    {
+      "id": "WLD-030",
+      "name": "Furnace Beetle",
+      "family": "wildlife",
+      "tier": "common",
+      "status": "specified",
+      "role": "forge ecology scavenger",
+      "identity": {
+        "fantasy": "A palm-sized armored beetle that feeds on metal slag and carries trace minerals useful to early crafting loops.",
+        "silhouette": "Round black beetle with brass shell seams and tiny shovel mandibles.",
+        "lore_hook": "Furnace Beetle is native to a specific AEONFALL ecology and tied to this acquisition path: Ambient Ember Throne species; can be gathered only through nonlethal lure traps."
+      },
+      "mechanics": {
+        "core": [
+          "slag feeding",
+          "minor mineral drop",
+          "heat tolerance"
+        ],
+        "signature": [
+          "Slag Cleanse slowly consumes small noncritical forge debris piles and can expose a minor mineral fragment.",
+          "Capability expression: slag feeding.",
+          "Capability expression: minor mineral drop.",
+          "Capability expression: heat tolerance."
+        ],
+        "counterplay": [
+          "No combat role; large hazards kill or scatter it."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Very small brass seam glow and tiny spark when a mineral is exposed."
+        ],
+        "animation": [
+          "Quick six-leg crawl, shell lift, mandible scrape, defensive roll."
+        ],
+        "audio": [
+          "Species-specific idle, threat, tame-success, injured, and retreat cues tuned for positional readability without masking combat warnings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Ambient Ember Throne species; can be gathered only through nonlethal lure traps."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "high",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Wildlife design includes taming or ecology behavior and must remain subordinate to regional AI concurrency budgets."
+      ]
+    }
+  ]
+}
