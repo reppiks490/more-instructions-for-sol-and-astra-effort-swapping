@@ -13,6 +13,7 @@ REQUIRED_TOKENS = {
         "AEONFALLTargetingRuntime.TickAll",
         "AEONFALLPositionTargetingRuntime.TickAll",
         "AEONFALLSpawnRuntime.TickAll",
+        "AEONFALLUnlockDeliveryService.TickAll",
     ],
     "verse/core/actor_registry.verse": [
         "AEONFALLActivationCoordinator.ClearOwnerPending",
@@ -22,6 +23,7 @@ REQUIRED_TOKENS = {
         "AEONFALLActorContextRuntime.Clear",
         "AEONFALLPositionTargetingRuntime.ClearOwner",
         "AEONFALLSpawnRuntime.ClearOwner",
+        "AEONFALLUnlockDeliveryService.ClearOwner",
         "AEONFALLStatusRuntime.ClearTarget",
         "AEONFALLAbilityRuntime.ClearOwner",
         "AEONFALLClassRuntime.ClearOwner",
@@ -82,6 +84,13 @@ REQUIRED_TOKENS = {
         "ClearOwner",
         "TickAll",
         "MaxPerOwner",
+    ],
+    "verse/economy/unlock_delivery_service.verse": [
+        "Request",
+        "Resolve",
+        "ClearOwner",
+        "TickAll",
+        "UnlockDeliveryRequested",
     ],
     "verse/combat/ability_activation_service.verse": [
         "AEONFALLActorContextRuntime.GetFlags",
