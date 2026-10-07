@@ -7,6 +7,7 @@ on:
       - "content/crafting/**"
       - "content/vertical_slice/**"
       - "content/world/**"
+      - "verse/**"
       - "verse/generated/**"
       - "schemas/**"
       - "tools/validate_catalog.py"
@@ -30,6 +31,7 @@ on:
       - "tools/build_slice_hireable_registry.py"
       - "tools/validate_slice_classes.py"
       - "tools/build_slice_registry.py"
+      - "tools/validate_verse_static.py"
       - "STATUS.md"
       - ".github/workflows/catalog-validation.yml"
   pull_request:
@@ -96,6 +98,9 @@ jobs:
 
       - name: Validate first-slice class runtime data
         run: python tools/validate_slice_classes.py
+
+      - name: Validate Verse static safety
+        run: python tools/validate_verse_static.py
 
       - name: Build first-slice combat Verse registry
         run: python tools/build_slice_combat_registry.py
