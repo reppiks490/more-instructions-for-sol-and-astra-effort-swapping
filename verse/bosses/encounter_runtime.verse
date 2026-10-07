@@ -158,6 +158,18 @@ aeonfall_boss_encounter_service := class():
                         SourceId := BossId
                     }
                 )
+
+                Awarded:int = AEONFALLEncounterRewardService.AwardRegistered(
+                    BossId
+                )
+
+                AEONFALLRuntimeBus.Emit(
+                    aeonfall_runtime_event{
+                        EventType := "boss.rewards_resolved",
+                        SourceId := BossId,
+                        Amount := Awarded
+                    }
+                )
                 return true
 
         false
@@ -184,6 +196,10 @@ aeonfall_boss_encounter_service := class():
                         EventType := "boss.failed",
                         SourceId := BossId
                     }
+                )
+
+                AEONFALLEncounterParticipation.ClearEncounter(
+                    BossId
                 )
                 return true
 
