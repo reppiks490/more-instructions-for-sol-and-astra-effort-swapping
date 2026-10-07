@@ -32,9 +32,10 @@ aeonfall_ability_activation_service := class():
             if (not Initialized?):
                 return false
 
-            Context := aeonfall_ability_context_flags:
-                EncounterActive := EncounterActive
-                TransformationActive := TransformationActive
+            # Resolve authoritative context from the registered owner instead
+            # of trusting caller-provided booleans. The legacy parameters remain
+            # for source compatibility with current input devices.
+            Context := AEONFALLActorContextRuntime.GetFlags(OwnerKey)
 
             RequestId:string = MakeRequestId(
                 OwnerKey,
