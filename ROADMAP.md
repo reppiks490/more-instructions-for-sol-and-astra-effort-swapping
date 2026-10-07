@@ -21,7 +21,7 @@
 - [x] persistent profile service
 - [x] material ledger
 - [x] recipe/refinement graph specification + validation
-- [ ] faction/reputation service
+- [x] faction/reputation service
 - [x] Zero Candidate qualification scaffold
 
 ## Gate 2 — Vertical Slice
@@ -51,7 +51,7 @@ One production-quality region containing:
 - [x] tier-complexity validation
 
 ## Gate 4 — 800 Major Entities
-Current target-counted status: **400 / 800 (50.0%)**
+Current target-counted status: **624 / 800 (78.0%)**
 
 Targets:
 - Weapons: 180
