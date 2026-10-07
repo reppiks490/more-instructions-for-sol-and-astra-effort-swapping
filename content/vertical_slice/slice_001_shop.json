@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "slice_id": "SLICE-001",
+  "shop_id": "SHOP-001",
+  "name": "The Grave Market Quartermaster",
+  "payment_model": "in_world_materials_only",
+  "real_money_enabled": false,
+  "faction_id": "FAC-002",
+  "notes": [
+    "The vertical slice deliberately validates progression economics without real-money purchase dependencies.",
+    "All offers are durable unlocks; repeated purchase attempts must fail before spending resources.",
+    "Physical item/prefab delivery is a retry-safe adapter step after durable profile commit."
+  ],
+  "offers": [
+    {
+      "id": "OFFER-001",
+      "output_entity_id": "WPN-001",
+      "costs": [
+        {
+          "material_id": "MAT-008",
+          "amount": 45
+        }
+      ],
+      "required_reputation": 0,
+      "required_unlock_ids": []
+    },
+    {
+      "id": "OFFER-002",
+      "output_entity_id": "WPN-007",
+      "costs": [
+        {
+          "material_id": "MAT-008",
+          "amount": 75
+        },
+        {
+          "material_id": "MAT-003",
+          "amount": 15
+        }
+      ],
+      "required_reputation": 50,
+      "required_unlock_ids": []
+    },
+    {
+      "id": "OFFER-003",
+      "output_entity_id": "WPN-122",
+      "costs": [
+        {
+          "material_id": "MAT-008",
+          "amount": 140
+        },
+        {
+          "material_id": "MAT-003",
+          "amount": 35
+        }
+      ],
+      "required_reputation": 100,
+      "required_unlock_ids": [
+        "WPN-001"
+      ]
+    },
+    {
+      "id": "OFFER-004",
+      "output_entity_id": "ARM-002",
+      "costs": [
+        {
+          "material_id": "MAT-008",
+          "amount": 225
+        },
+        {
+          "material_id": "MAT-003",
+          "amount": 120
+        },
+        {
+          "material_id": "MAT-011",
+          "amount": 1
+        }
+      ],
+      "required_reputation": 200,
+      "required_unlock_ids": [
+        "WPN-122"
+      ]
+    },
+    {
+      "id": "OFFER-005",
+      "output_entity_id": "VEH-010",
+      "costs": [
+        {
+          "material_id": "MAT-003",
+          "amount": 350
+        },
+        {
+          "material_id": "MAT-008",
+          "amount": 250
+        },
+        {
+          "material_id": "MAT-011",
+          "amount": 2
+        }
+      ],
+      "required_reputation": 300,
+      "required_unlock_ids": [
+        "ARM-002"
+      ]
+    }
+  ]
+}
