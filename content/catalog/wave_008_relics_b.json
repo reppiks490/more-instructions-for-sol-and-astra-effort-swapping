@@ -1,0 +1,1346 @@
+{
+  "wave": "008",
+  "purpose": "Relic and artifact wave 2 of 2; completes 45-relic target and Axiom Heart chain.",
+  "entity_count": 22,
+  "entities": [
+    {
+      "id": "REL-024",
+      "name": "Ashen Seraph Feather",
+      "family": "relic",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "hazard-conversion relic",
+      "identity": {
+        "fantasy": "A metallic white feather from an Ash Saint transformation that stores the last compatible fire-hazard signature encountered.",
+        "silhouette": "Long white-gold feather with charred black tip and ember script running along shaft.",
+        "lore_hook": "Ashen Seraph Feather is tied to this acquisition path: Legendary Ashen Synod saint trial."
+      },
+      "mechanics": {
+        "core": [
+          "fire signature memory",
+          "hazard conversion synergy",
+          "cleanse key"
+        ],
+        "signature": [
+          "Seraph Memory lets compatible Ashen gear pre-attune to one eligible fire hazard family before entering it.",
+          "Capability expression: fire signature memory.",
+          "Capability expression: hazard conversion synergy.",
+          "Capability expression: cleanse key."
+        ],
+        "counterplay": [
+          "Only one family stored; no immunity; high-tier boss hazards ignore pre-attunement."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "White ember edge, stored hazard glyph, soft ash rising upward."
+        ],
+        "animation": [
+          "Feather floats upright, burns white from tip to base, then reseals into charred state."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Ashen Synod saint trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    },
+    {
+      "id": "REL-025",
+      "name": "Nullskin Shroud",
+      "family": "relic",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "anti-ability detection relic",
+      "identity": {
+        "fantasy": "A folded strip of impossible cloth taken from a defeated Nullskin Pilgrim that reacts when a player repeats one ability pattern too often.",
+        "silhouette": "Matte black cloth that appears flat from every viewing angle, with one moving seam.",
+        "lore_hook": "Nullskin Shroud is tied to this acquisition path: Mythic Nullskin hunt chain."
+      },
+      "mechanics": {
+        "core": [
+          "pattern warning",
+          "silence resistance cue",
+          "anti-adaptation"
+        ],
+        "signature": [
+          "Pattern Alarm tightens around the wrist when the user's recent skill repetition would make them vulnerable to adaptive hunters.",
+          "Capability expression: pattern warning.",
+          "Capability expression: silence resistance cue.",
+          "Capability expression: anti-adaptation."
+        ],
+        "counterplay": [
+          "Warning only; does not erase enemy adaptation or block silence."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Almost no VFX: one black seam glint and brief white wrist mark."
+        ],
+        "animation": [
+          "Cloth silently wraps itself tighter in three stages, then loosens after pattern diversity returns."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Nullskin hunt chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [
+          "MON-005"
+        ],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    },
+    {
+      "id": "REL-026",
+      "name": "Rosary of the Hundred Teeth",
+      "family": "relic",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "ritual-break relic",
+      "identity": {
+        "fantasy": "A loop of tiny sanctified teeth used to identify and disrupt triangular demon ritual geometry.",
+        "silhouette": "Bone-white rosary with three larger red-stained teeth spaced evenly around the loop.",
+        "lore_hook": "Rosary of the Hundred Teeth is tied to this acquisition path: Mythic Saint of Teeth encounter relic."
+      },
+      "mechanics": {
+        "core": [
+          "ritual geometry detection",
+          "pylon disruption",
+          "demon resistance"
+        ],
+        "signature": [
+          "Third Tooth points toward the weakest active pylon in one eligible triangular ritual and improves disruption interaction speed.",
+          "Capability expression: ritual geometry detection.",
+          "Capability expression: pylon disruption.",
+          "Capability expression: demon resistance."
+        ],
+        "counterplay": [
+          "Only triangular supported rituals; does not damage the demon directly."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Three bone lights rotate, weakest pylon receives a narrow white outline, crimson thread pulse."
+        ],
+        "animation": [
+          "Rosary spins around one finger then snaps into a triangle shape before pointing."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Saint of Teeth encounter relic."
+        ],
+        "crafting_links": [],
+        "boss_links": [
+          "MON-006"
+        ],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    },
+    {
+      "id": "REL-027",
+      "name": "Pearl of the Drowned Moon",
+      "family": "relic",
+      "tier": "god",
+      "status": "specified",
+      "role": "leviathan phase relic",
+      "identity": {
+        "fantasy": "A god-tier abyssal pearl containing a miniature drowned moon used to stabilize multi-region leviathan progression between phases.",
+        "silhouette": "Large black pearl with a luminous crescent floating inside liquid beneath its shell.",
+        "lore_hook": "Pearl of the Drowned Moon is tied to this acquisition path: God-tier Drowned Moon mastery achievement."
+      },
+      "mechanics": {
+        "core": [
+          "phase attunement",
+          "flood-route key",
+          "raid recovery"
+        ],
+        "signature": [
+          "Moon Recall preserves one earned regional leviathan objective state through an authorized raid transition or reconnect checkpoint.",
+          "Capability expression: phase attunement.",
+          "Capability expression: flood-route key.",
+          "Capability expression: raid recovery."
+        ],
+        "counterplay": [
+          "Only designated raid states; cannot preserve damage or bypass failed objectives."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Miniature moon turns inside pearl, blue-black tide ring, distant crescent reflection."
+        ],
+        "animation": [
+          "Pearl opens like an iris to reveal its moon, then seals during phase commit."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier Drowned Moon mastery achievement."
+        ],
+        "crafting_links": [],
+        "boss_links": [
+          "BOS-003"
+        ],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    },
+    {
+      "id": "REL-028",
+      "name": "Vial of Borrowed Sand",
+      "family": "relic",
+      "tier": "epic",
+      "status": "specified",
+      "role": "temporal puzzle consumable-relic",
+      "identity": {
+        "fantasy": "A sealed vial containing sand removed from an Hourglass Scorpion at the exact instant a hazard cycle changed.",
+        "silhouette": "Small bronze vial with sand flowing upward and downward simultaneously.",
+        "lore_hook": "Vial of Borrowed Sand is tied to this acquisition path: Epic Chronarch Scar timing challenge."
+      },
+      "mechanics": {
+        "core": [
+          "timing reference",
+          "hazard calibration",
+          "Chronarch crafting"
+        ],
+        "signature": [
+          "Borrowed Cycle replays one short visible timing interval from a supported puzzle as a practice ghost.",
+          "Capability expression: timing reference.",
+          "Capability expression: hazard calibration.",
+          "Capability expression: Chronarch crafting."
+        ],
+        "counterplay": [
+          "Practice ghost only; no live hazard pause or combat rewind."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Gold sand loop, faint ghost timer arc, no world distortion."
+        ],
+        "animation": [
+          "Vial flips itself once while sand traces a circular loop before settling."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Chronarch Scar timing challenge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    },
+    {
+      "id": "REL-029",
+      "name": "Heartwood Sigil",
+      "family": "relic",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "primordial fortress catalyst",
+      "identity": {
+        "fantasy": "A carved disk cut from naturally shed Worldroot heartwood that stores one grove network identity.",
+        "silhouette": "Thick dark-green medallion with living growth rings and luminous sap center.",
+        "lore_hook": "Heartwood Sigil is tied to this acquisition path: Mythic Worldroot guardian trial."
+      },
+      "mechanics": {
+        "core": [
+          "grove network key",
+          "structure recovery",
+          "root attunement"
+        ],
+        "signature": [
+          "Heartwood Recall lets one destroyed compatible temporary Worldroot node regrow at reduced strength if its parent grove survives.",
+          "Capability expression: grove network key.",
+          "Capability expression: structure recovery.",
+          "Capability expression: root attunement."
+        ],
+        "counterplay": [
+          "One node per grove; regrown node weaker; no infinite chain."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Green growth rings expand outward, sap line reconnects, root ghost becomes solid."
+        ],
+        "animation": [
+          "Sigil presses into ground and sends one visible root pulse to the parent grove."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Worldroot guardian trial."
+        ],
+        "crafting_links": [
+          "SKL-003"
+        ],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    },
+    {
+      "id": "REL-030",
+      "name": "Seed of the Black Sun",
+      "family": "relic",
+      "tier": "god",
+      "status": "specified",
+      "role": "eclipse-domain catalyst",
+      "identity": {
+        "fantasy": "A dense black seed containing a dormant corona, used to begin the highest Eclipse Sovereign domain rites.",
+        "silhouette": "Perfect black sphere with razor-thin gold equator that glows only in shadow.",
+        "lore_hook": "Seed of the Black Sun is tied to this acquisition path: God-tier Eclipse Sovereign coronation."
+      },
+      "mechanics": {
+        "core": [
+          "domain seeding",
+          "phase forecast",
+          "eclipse mastery"
+        ],
+        "signature": [
+          "Dormant Corona preloads the next Eclipse domain's first phase and reveals its counter-objectives before activation.",
+          "Capability expression: domain seeding.",
+          "Capability expression: phase forecast.",
+          "Capability expression: eclipse mastery."
+        ],
+        "counterplay": [
+          "Does not change the selected phase or remove counterplay; one preload per domain."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Gold equator opens into a thin corona disk, surrounding light bends inward slightly."
+        ],
+        "animation": [
+          "Seed rises above palm, splits into two hemispheres around a miniature dark sun, then reseals."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier Eclipse Sovereign coronation."
+        ],
+        "crafting_links": [
+          "SKL-004"
+        ],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    },
+    {
+      "id": "REL-031",
+      "name": "Meridian Key",
+      "family": "relic",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "spatial lock relic",
+      "identity": {
+        "fantasy": "An exotic key with no teeth that opens only route locks defined by relative angle rather than physical shape.",
+        "silhouette": "Black iridescent rod with floating ring that always points toward a hidden geometric normal.",
+        "lore_hook": "Meridian Key is tied to this acquisition path: Exotic Cartographer Meridian vault."
+      },
+      "mechanics": {
+        "core": [
+          "angle lock",
+          "route access",
+          "spatial puzzle"
+        ],
+        "signature": [
+          "Normal Alignment opens one eligible Cartographer lock when the player matches the key's required orientation and position.",
+          "Capability expression: angle lock.",
+          "Capability expression: route access.",
+          "Capability expression: spatial puzzle."
+        ],
+        "counterplay": [
+          "No brute force; incorrect alignment resets the lock; cannot open unrelated doors."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Prismatic normal vector, ring snap, thin geometric door fracture."
+        ],
+        "animation": [
+          "Player rotates entire key-body through three axes until ring and lock align."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic Cartographer Meridian vault."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    },
+    {
+      "id": "REL-032",
+      "name": "Reliquary Memory Glass",
+      "family": "relic",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "lore-state recording relic",
+      "identity": {
+        "fantasy": "A black crystal plate able to store one authored memory scene, boss echo, or faction testimony for later viewing.",
+        "silhouette": "Flat dark glass shard with faint silhouettes moving beneath the surface.",
+        "lore_hook": "Reliquary Memory Glass is tied to this acquisition path: Legendary archive completion reward."
+      },
+      "mechanics": {
+        "core": [
+          "memory storage",
+          "lore replay",
+          "quest proof"
+        ],
+        "signature": [
+          "Witness Record captures one approved narrative memory event and makes it replayable at sanctuary archives.",
+          "Capability expression: memory storage.",
+          "Capability expression: lore replay.",
+          "Capability expression: quest proof."
+        ],
+        "counterplay": [
+          "Narrative-only; cannot record live arbitrary player footage or hidden encounter states."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Silhouette layers within glass, soft scene projection, thin archive frame."
+        ],
+        "animation": [
+          "Glass unfolds into a floating rectangular memory plane then collapses back into shard."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary archive completion reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    },
+    {
+      "id": "REL-033",
+      "name": "Halo Rail of Thronebreaker",
+      "family": "relic",
+      "tier": "god",
+      "status": "specified",
+      "role": "anti-colossus weapon relic",
+      "identity": {
+        "fantasy": "A detached halo segment from the Thronebreaker cannon used to align raid shots across multiple boss weak points.",
+        "silhouette": "Curved gold-black rail segment engraved with tiny linked-node symbols.",
+        "lore_hook": "Halo Rail of Thronebreaker is tied to this acquisition path: God-tier Thronebreaker mastery forge."
+      },
+      "mechanics": {
+        "core": [
+          "weak-point alignment",
+          "raid weapon catalyst",
+          "stagger timing"
+        ],
+        "signature": [
+          "Judgment Geometry previews the allowed order of three eligible distributed boss nodes for the next Thronebreaker chain.",
+          "Capability expression: weak-point alignment.",
+          "Capability expression: raid weapon catalyst.",
+          "Capability expression: stagger timing."
+        ],
+        "counterplay": [
+          "Sequence is advisory, not automatic; changes if phase state changes."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Three gold node lines arc through space, rail glows at each valid transition."
+        ],
+        "animation": [
+          "Rail unfolds from a crescent into a three-point aiming frame beside the weapon."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier Thronebreaker mastery forge."
+        ],
+        "crafting_links": [
+          "WPN-005"
+        ],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    },
+    {
+      "id": "REL-034",
+      "name": "Tear of the Weeping Archon",
+      "family": "relic",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "gaze-system relic",
+      "identity": {
+        "fantasy": "A crystallized upward-falling tear that can store one unit of Grief exposure and discharge it harmlessly at a sanctuary.",
+        "silhouette": "Black glass droplet that continually tries to fall upward from its chain.",
+        "lore_hook": "Tear of the Weeping Archon is tied to this acquisition path: Exotic Weeping Archon research chain."
+      },
+      "mechanics": {
+        "core": [
+          "gaze exposure storage",
+          "fear research",
+          "eldritch key"
+        ],
+        "signature": [
+          "Stored Grief absorbs one small portion of eligible exposure buildup and locks until cleansed at a safe archive.",
+          "Capability expression: gaze exposure storage.",
+          "Capability expression: fear research.",
+          "Capability expression: eldritch key."
+        ],
+        "counterplay": [
+          "Tiny capacity; does not prevent full gaze mechanics; unusable while already charged."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Upward black droplet trail, stained-glass glint, small exposure rune."
+        ],
+        "animation": [
+          "Tear jerks upward against chain when absorbing and becomes completely still while full."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic Weeping Archon research chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [
+          "MON-003"
+        ],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    },
+    {
+      "id": "REL-035",
+      "name": "Parliament Mask",
+      "family": "relic",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "swarm-form analysis relic",
+      "identity": {
+        "fantasy": "A white mask shed by a Carrion Parliament consensus form that helps identify which formation it is preparing.",
+        "silhouette": "Blank porcelain half-mask with tiny black thread holes along its edge.",
+        "lore_hook": "Parliament Mask is tied to this acquisition path: Legendary Carrion Parliament hunt reward."
+      },
+      "mechanics": {
+        "core": [
+          "formation prediction",
+          "swarm research",
+          "corpse denial clue"
+        ],
+        "signature": [
+          "Consensus Read displays one symbol representing the Parliament's next eligible formation after enough individuals have been observed.",
+          "Capability expression: formation prediction.",
+          "Capability expression: swarm research.",
+          "Capability expression: corpse denial clue."
+        ],
+        "counterplay": [
+          "Requires observation time; formation can change if battlefield conditions change drastically."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "One black symbol blooms across mask, thread holes pulse in sequence."
+        ],
+        "animation": [
+          "Mask turns itself toward the swarm and tilts to mirror the next formation posture."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Carrion Parliament hunt reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [
+          "MON-002"
+        ],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    },
+    {
+      "id": "REL-036",
+      "name": "Adaptive Spine of Morrow",
+      "family": "relic",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "mutation research relic",
+      "identity": {
+        "fantasy": "A preserved segment from a Morroweater that records one counter-mutation trait and can be used to craft anti-adaptation equipment.",
+        "silhouette": "Twisted black-red vertebra chain with one growing bone plate still moving slightly.",
+        "lore_hook": "Adaptive Spine of Morrow is tied to this acquisition path: Mythic Morroweater apex hunt."
+      },
+      "mechanics": {
+        "core": [
+          "mutation record",
+          "anti-adaptation crafting",
+          "horde research"
+        ],
+        "signature": [
+          "Trait Capture permanently records one eligible Morroweater adaptation category into the relic until consumed in a recipe.",
+          "Capability expression: mutation record.",
+          "Capability expression: anti-adaptation crafting.",
+          "Capability expression: horde research."
+        ],
+        "counterplay": [
+          "One trait only; capturing requires defeating the mutated form; relic provides no passive immunity."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Vein color matches captured trait, bone plate shifts once during lock-in."
+        ],
+        "animation": [
+          "Spine arches violently at capture then hardens into a fixed shape."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Morroweater apex hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [
+          "MON-004"
+        ],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    },
+    {
+      "id": "REL-037",
+      "name": "Axiom Prism",
+      "family": "relic",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "law-compression component",
+      "identity": {
+        "fantasy": "An Absolute crystal that compresses several compatible doctrine signatures into one stable Axiom crafting component.",
+        "silhouette": "Black-white tetrahedral prism with impossible internal reflections showing different laws on each face.",
+        "lore_hook": "Axiom Prism is tied to this acquisition path: Absolute Axiom Forge recipe."
+      },
+      "mechanics": {
+        "core": [
+          "doctrine compression",
+          "Axiom crafting",
+          "law stabilization"
+        ],
+        "signature": [
+          "Fourfold Compression accepts four approved doctrine fragments and stabilizes them into one noncombat crafting state.",
+          "Capability expression: doctrine compression.",
+          "Capability expression: Axiom crafting.",
+          "Capability expression: law stabilization."
+        ],
+        "counterplay": [
+          "Forge-only; wrong fragment family rejects without consuming; no field combat activation."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Four law glyphs collapse into center, prism turns transparent-black, white edge flare."
+        ],
+        "animation": [
+          "Prism rotates through four axes and briefly appears as multiple shapes before stabilizing."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute Axiom Forge recipe."
+        ],
+        "crafting_links": [
+          "REL-011"
+        ],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    },
+    {
+      "id": "REL-038",
+      "name": "Reality Anchor",
+      "family": "relic",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "reality-stability component",
+      "identity": {
+        "fantasy": "A colossal-concept artifact miniaturized into a carryable anchor used to stabilize high-tier crafted states and prevent trial collapse.",
+        "silhouette": "Heavy black-white anchor spike with concentric rings and a central fixed star point.",
+        "lore_hook": "Reality Anchor is tied to this acquisition path: Absolute multi-region trial component."
+      },
+      "mechanics": {
+        "core": [
+          "state stabilization",
+          "Axiom crafting",
+          "trial checkpoint"
+        ],
+        "signature": [
+          "Anchor Commit locks one approved trial/crafting stage so temporary environmental instability cannot invalidate the completed objective.",
+          "Capability expression: state stabilization.",
+          "Capability expression: Axiom crafting.",
+          "Capability expression: trial checkpoint."
+        ],
+        "counterplay": [
+          "Only authorized checkpoints; no combat invulnerability; consumed or disabled by some trials."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Concentric white rings freeze in place, surrounding distortion settles, fixed star remains motionless."
+        ],
+        "animation": [
+          "Anchor unfolds from compact spike and drives into an authored socket with heavy mechanical recoil."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute multi-region trial component."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    },
+    {
+      "id": "REL-039",
+      "name": "Primordial Key",
+      "family": "relic",
+      "tier": "god",
+      "status": "specified",
+      "role": "Axiom gate component",
+      "identity": {
+        "fantasy": "A God-tier key grown rather than forged, required to open one class of Axiom Forge chamber.",
+        "silhouette": "Living dark-metal key with rootlike teeth and a tiny star trapped in its bow.",
+        "lore_hook": "Primordial Key is tied to this acquisition path: God-tier cross-class mastery reward."
+      },
+      "mechanics": {
+        "core": [
+          "Axiom gate",
+          "class mastery proof",
+          "forge access"
+        ],
+        "signature": [
+          "Living Wards reshape the key teeth only after verifying a required mastery proof stored by the forge system.",
+          "Capability expression: Axiom gate.",
+          "Capability expression: class mastery proof.",
+          "Capability expression: forge access."
+        ],
+        "counterplay": [
+          "Cannot be traded as a shortcut to missing mastery; verification remains server-authoritative."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Root-metal teeth grow into correct shape, star pulses once, gate lines awaken."
+        ],
+        "animation": [
+          "Key writhes like a root, hardens, then inserts itself into the forge gate."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier cross-class mastery reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    },
+    {
+      "id": "REL-040",
+      "name": "Sovereign Sigil",
+      "family": "relic",
+      "tier": "god",
+      "status": "specified",
+      "role": "Axiom authority component",
+      "identity": {
+        "fantasy": "A God-tier seal proving the bearer has completed one sovereign-scale boss or faction authority chain.",
+        "silhouette": "Thick black-gold sigil disk whose center changes emblem according to earned authority source.",
+        "lore_hook": "Sovereign Sigil is tied to this acquisition path: Earn from qualifying sovereign boss/faction mastery chain."
+      },
+      "mechanics": {
+        "core": [
+          "authority proof",
+          "boss/faction certification",
+          "Axiom recipe"
+        ],
+        "signature": [
+          "Sovereign Witness binds one completed qualifying authority achievement into a non-transferable crafting proof.",
+          "Capability expression: authority proof.",
+          "Capability expression: boss/faction certification.",
+          "Capability expression: Axiom recipe."
+        ],
+        "counterplay": [
+          "Achievement is validated independently; sigil cannot duplicate or substitute unearned authority."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Gold authority emblem burns into black disk, thin crown ring closes around it."
+        ],
+        "animation": [
+          "Disk hovers over hand while selected achievement emblem engraves itself layer by layer."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earn from qualifying sovereign boss/faction mastery chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    },
+    {
+      "id": "REL-041",
+      "name": "Seed of Zero",
+      "family": "relic",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "unique ascension catalyst",
+      "identity": {
+        "fantasy": "A nearly inert black-white seed that appears only after every hidden prerequisite branch for Zero Candidate status has converged.",
+        "silhouette": "Small matte seed with a perfect circular hole through its center and one gold vein.",
+        "lore_hook": "Seed of Zero is tied to this acquisition path: Hidden Zero Candidate convergence reward."
+      },
+      "mechanics": {
+        "core": [
+          "Zero prerequisite proof",
+          "Axiom Heart catalyst",
+          "hidden progression"
+        ],
+        "signature": [
+          "Convergence Wake responds only when all hidden prerequisite families are satisfied, activating the final Axiom Heart recipe branch.",
+          "Capability expression: Zero prerequisite proof.",
+          "Capability expression: Axiom Heart catalyst.",
+          "Capability expression: hidden progression."
+        ],
+        "counterplay": [
+          "Cannot be bought, traded, duplicated, or activated before server-validated prerequisites."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Gold vein slowly completes a ring, surrounding colors desaturate briefly, no large combat VFX."
+        ],
+        "animation": [
+          "Seed remains inert until validation, then opens like a tiny iris around its central hole."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Hidden Zero Candidate convergence reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    },
+    {
+      "id": "REL-042",
+      "name": "Axiom Heart Frame",
+      "family": "relic",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "ascension subassembly",
+      "identity": {
+        "fantasy": "The structural shell that physically houses the final Axiom Heart and accepts multiple reality-stable component families.",
+        "silhouette": "Open black-white polyhedral cage with seven empty sockets and a central void.",
+        "lore_hook": "Axiom Heart Frame is tied to this acquisition path: Crafted at the Axiom Forge after Absolute progression."
+      },
+      "mechanics": {
+        "core": [
+          "component housing",
+          "recipe gating",
+          "forge checkpoint"
+        ],
+        "signature": [
+          "Sevenfold Socket validates seven required component families and permanently records completed socket groups for the active candidate.",
+          "Capability expression: component housing.",
+          "Capability expression: recipe gating.",
+          "Capability expression: forge checkpoint."
+        ],
+        "counterplay": [
+          "Forge-bound; cannot accept incorrect families; completion does not itself grant ascension."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Seven socket lights, geometric cage expansion, white validation lines."
+        ],
+        "animation": [
+          "Frame opens one segment at a time as components are installed, central void remaining empty."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Crafted at the Axiom Forge after Absolute progression."
+        ],
+        "crafting_links": [
+          "REL-037",
+          "REL-038",
+          "REL-039",
+          "REL-040"
+        ],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    },
+    {
+      "id": "REL-043",
+      "name": "Axiom Heart Core",
+      "family": "relic",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "ascension energy subassembly",
+      "identity": {
+        "fantasy": "The compressed energy core formed from enormous refined material quantities, boss essences, event cores, and mastery catalysts.",
+        "silhouette": "Brilliant white-black sphere with layered internal rings moving at different impossible speeds.",
+        "lore_hook": "Axiom Heart Core is tied to this acquisition path: Axiom Forge massive crafting milestone after tens-of-thousands resource collection."
+      },
+      "mechanics": {
+        "core": [
+          "material compression",
+          "boss essence binding",
+          "event-core fusion"
+        ],
+        "signature": [
+          "Mass Convergence consumes validated high-volume material ledgers and converts them into one persistent candidate-bound core state.",
+          "Capability expression: material compression.",
+          "Capability expression: boss essence binding.",
+          "Capability expression: event-core fusion."
+        ],
+        "counterplay": [
+          "Requires all ledger quantities; forge validates ownership and consumption; no partial combat benefit."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Thousands of symbolic material sparks collapse into sphere, rings ignite sequentially, forge chamber darkens."
+        ],
+        "animation": [
+          "Core forms in staged compression pulses while seven stabilizer arms close around it."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Axiom Forge massive crafting milestone after tens-of-thousands resource collection."
+        ],
+        "crafting_links": [
+          "REL-037",
+          "REL-038",
+          "REL-039",
+          "REL-040"
+        ],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    },
+    {
+      "id": "REL-044",
+      "name": "Throne of Zero Seal",
+      "family": "relic",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "Choosing access artifact",
+      "identity": {
+        "fantasy": "A final authorization seal created only after the Axiom Heart assembly and ten Ascension Trials are complete.",
+        "silhouette": "Thin black-white crown ring that floats flat above the palm with no physical support.",
+        "lore_hook": "Throne of Zero Seal is tied to this acquisition path: Created automatically at the Zero Reliquary after full pre-Choosing validation."
+      },
+      "mechanics": {
+        "core": [
+          "Choosing access",
+          "trial completion proof",
+          "candidate registry"
+        ],
+        "signature": [
+          "Final Authorization requests a server-validated check of Axiom Heart completion, all ten trials, and Zero Candidate state before opening the Choosing route.",
+          "Capability expression: Choosing access.",
+          "Capability expression: trial completion proof.",
+          "Capability expression: candidate registry."
+        ],
+        "counterplay": [
+          "No partial access; failure reveals only broad missing category, preserving hidden requirements."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Black-white crown ring, ten tiny trial points, one central zero glyph on successful validation."
+        ],
+        "animation": [
+          "Ring rotates through ten trial points then stands upright like a doorway if approved."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Created automatically at the Zero Reliquary after full pre-Choosing validation."
+        ],
+        "crafting_links": [
+          "REL-042",
+          "REL-043",
+          "REL-041"
+        ],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    },
+    {
+      "id": "REL-045",
+      "name": "The Axiom Heart",
+      "family": "relic",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "final Transcendent ascension artifact",
+      "identity": {
+        "fantasy": "The completed reality-stable heart required to enter the Choosing and become eligible for Transcendent Zero; it represents mastery of the entire world rather than a purchasable item.",
+        "silhouette": "Palm-sized black-white heart geometry with seven orbiting rings, a gold zero core, and traces of every major region embedded in its surfaces.",
+        "lore_hook": "The Axiom Heart is tied to this acquisition path: Final Axiom Forge craft after tens of thousands of materials, Absolute progression, and all required proofs."
+      },
+      "mechanics": {
+        "core": [
+          "ascension prerequisite",
+          "world mastery proof",
+          "Choosing key",
+          "authority vessel"
+        ],
+        "signature": [
+          "World Synthesis binds the candidate's validated trials, boss proofs, faction mastery, class mastery, and massive crafting ledger into one non-transferable artifact state.",
+          "Capability expression: ascension prerequisite.",
+          "Capability expression: world mastery proof.",
+          "Capability expression: Choosing key.",
+          "Capability expression: authority vessel."
+        ],
+        "counterplay": [
+          "Possession grants no automatic Transcendent power; the Choosing can still be failed; Heart is candidate-bound and non-purchasable."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Seven orbiting law rings, region-colored microtextures, gold zero pulse, carefully bounded ascension halo, no routine combat spam."
+        ],
+        "animation": [
+          "Heart assembles in a long multi-stage forge sequence; rings lock one by one, then the artifact synchronizes to the candidate's heartbeat."
+        ],
+        "audio": [
+          "Relic-specific activation, warning, attunement, failure, and completion cues with strict priority below boss-critical telegraphs."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Final Axiom Forge craft after tens of thousands of materials, Absolute progression, and all required proofs."
+        ],
+        "crafting_links": [
+          "REL-041",
+          "REL-042",
+          "REL-043",
+          "REL-044"
+        ],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic is designed as an authored system key/catalyst, not a generic permanent stat boost."
+      ]
+    }
+  ]
+}
