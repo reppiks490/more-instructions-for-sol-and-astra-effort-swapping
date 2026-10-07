@@ -9,10 +9,11 @@ CATALOG = ROOT / "content" / "catalog"
 SLICE = ROOT / "content" / "vertical_slice" / "slice_001_ossuary_march.json"
 DATA = ROOT / "content" / "vertical_slice" / "slice_001_combat_runtime.json"
 
-RESOURCE_POLICIES = {"Cooldown","Charges","Meter","EncounterOnly","TransformationOnly"}
+RESOURCE_POLICIES = {"Cooldown","Charges","Meter","EncounterOnly","TransformationOnly","ExternalClassResource"}
 TARGET_POLICIES = {"Self","Ally","Enemy","Position","Direction","Area","AuthoredObjective"}
 STACK_RULES = {"RefreshDuration","AddStack","ReplaceIfStronger","RejectDuplicate"}
 STATUS_CATEGORIES = {"Buff","Debuff","CrowdControl","DamageOverTime","HealingOverTime","Reveal","Mark","Environmental"}
+CLASS_RESOURCE_MODES = {"None","SpendOnSuccess","ReserveWhileActive"}
 
 def load_catalog():
     result={}
@@ -56,6 +57,24 @@ def main()->int:
         if policy not in RESOURCE_POLICIES: errors.append(f"{aid}: invalid resource policy {policy}")
         if a.get("target_policy") not in TARGET_POLICIES: errors.append(f"{aid}: invalid target policy {a.get('target_policy')}")
         if not str(a.get("adapter_id","")).strip(): errors.append(f"{aid}: missing publish-path adapter")
+
+        class_mode=a.get("class_resource_mode","None")
+        class_id=a.get("required_class_id","")
+        class_cost=a.get("class_resource_cost",0)
+        if class_mode not in CLASS_RESOURCE_MODES:
+            errors.append(f"{aid}: invalid class resource mode {class_mode}")
+        if class_mode=="None":
+            if class_id or class_cost!=0:
+                errors.append(f"{aid}: None class resource mode must have empty class and zero cost")
+        else:
+            if class_id not in catalog or catalog[class_id].get("family")!="class":
+                errors.append(f"{aid}: invalid required class {class_id}")
+            if class_cost<=0:
+                errors.append(f"{aid}: class resource mode {class_mode} requires positive class_resource_cost")
+        if policy=="ExternalClassResource" and class_mode=="None":
+            errors.append(f"{aid}: ExternalClassResource requires class resource mode")
+        if policy=="ExternalClassResource" and a.get("activation_cost",0)!=0:
+            errors.append(f"{aid}: ExternalClassResource cannot also use ability meter activation_cost")
 
         for sid in a.get("status_ids",[]):
             if sid not in status_ids: errors.append(f"{aid}: missing referenced status {sid}")
