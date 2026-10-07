@@ -15,6 +15,7 @@ aeonfall_ascension_gate_service := class():
         Profile.IsZeroCandidate?
         Profile.AxiomHeartCrafted?
         Profile.AscensionRank >= RequiredAbsoluteRank
+        Profile.TranscendentState = 0
 
     # TranscendentState:
     # 0 = dormant / not currently available
