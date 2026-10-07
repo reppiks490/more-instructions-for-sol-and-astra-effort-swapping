@@ -51,7 +51,7 @@ One production-quality region containing:
 - [x] tier-complexity validation
 
 ## Gate 4 — 800 Major Entities
-Current target-counted status: **624 / 800 (78.0%)**
+Current target-counted status: **684 / 800 (85.5%)**
 
 Targets:
 - Weapons: 180
