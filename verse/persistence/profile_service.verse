@@ -15,13 +15,13 @@ aeonfall_profile_service := class():
             set Result = MakeAEONFALLPlayerProfile(Saved)
         Result
 
-    SaveProfile(Player:player, Candidate:aeonfall_player_profile):void=
+    SaveProfile(Player:player, Candidate:aeonfall_player_profile)<transacts>:void=
         if:
             FitsInPlayerMap(Candidate)
         then:
             set AEONFALLPlayerProfiles[Player] = Candidate
 
-    GrantXP(Agent:agent, Amount:int):void=
+    GrantXP(Agent:agent, Amount:int)<transacts>:void=
         if:
             Amount > 0
             Player := player[Agent]
@@ -32,7 +32,7 @@ aeonfall_profile_service := class():
                 XP := Old.XP + Amount
             SaveProfile(Player, Candidate)
 
-    GrantMasteryPoints(Agent:agent, Amount:int):void=
+    GrantMasteryPoints(Agent:agent, Amount:int)<transacts>:void=
         if:
             Amount > 0
             Player := player[Agent]
@@ -43,7 +43,7 @@ aeonfall_profile_service := class():
                 MasteryPoints := Old.MasteryPoints + Amount
             SaveProfile(Player, Candidate)
 
-    UnlockEntity(Agent:agent, EntityId:string):void=
+    UnlockEntity(Agent:agent, EntityId:string)<transacts>:void=
         if:
             Player := player[Agent]
             Old := AEONFALLPlayerProfiles[Player]
@@ -58,7 +58,7 @@ aeonfall_profile_service := class():
                     UnlockedEntityIds := Old.UnlockedEntityIds + array{EntityId}
                 SaveProfile(Player, Candidate)
 
-    MasterClass(Agent:agent, ClassId:string):void=
+    MasterClass(Agent:agent, ClassId:string)<transacts>:void=
         if:
             Player := player[Agent]
             Old := AEONFALLPlayerProfiles[Player]
@@ -73,7 +73,7 @@ aeonfall_profile_service := class():
                     MasteredClassIds := Old.MasteredClassIds + array{ClassId}
                 SaveProfile(Player, Candidate)
 
-    CompleteBoss(Agent:agent, BossId:string):void=
+    CompleteBoss(Agent:agent, BossId:string)<transacts>:void=
         if:
             Player := player[Agent]
             Old := AEONFALLPlayerProfiles[Player]
@@ -88,7 +88,7 @@ aeonfall_profile_service := class():
                     CompletedBossIds := Old.CompletedBossIds + array{BossId}
                 SaveProfile(Player, Candidate)
 
-    CompleteWorldEvent(Agent:agent, EventId:string):void=
+    CompleteWorldEvent(Agent:agent, EventId:string)<transacts>:void=
         if:
             Player := player[Agent]
             Old := AEONFALLPlayerProfiles[Player]
@@ -103,7 +103,7 @@ aeonfall_profile_service := class():
                     CompletedWorldEventIds := Old.CompletedWorldEventIds + array{EventId}
                 SaveProfile(Player, Candidate)
 
-    CompleteTrial(Agent:agent, TrialId:string):void=
+    CompleteTrial(Agent:agent, TrialId:string)<transacts>:void=
         if:
             Player := player[Agent]
             Old := AEONFALLPlayerProfiles[Player]
@@ -118,7 +118,7 @@ aeonfall_profile_service := class():
                     CompletedTrialIds := Old.CompletedTrialIds + array{TrialId}
                 SaveProfile(Player, Candidate)
 
-    DiscoverPoi(Agent:agent, PoiId:string):void=
+    DiscoverPoi(Agent:agent, PoiId:string)<transacts>:void=
         if:
             Player := player[Agent]
             Old := AEONFALLPlayerProfiles[Player]
@@ -133,7 +133,7 @@ aeonfall_profile_service := class():
                     DiscoveredPoiIds := Old.DiscoveredPoiIds + array{PoiId}
                 SaveProfile(Player, Candidate)
 
-    UnlockHireable(Agent:agent, NpcId:string):void=
+    UnlockHireable(Agent:agent, NpcId:string)<transacts>:void=
         if:
             Player := player[Agent]
             Old := AEONFALLPlayerProfiles[Player]
@@ -148,7 +148,7 @@ aeonfall_profile_service := class():
                     HireableUnlockIds := Old.HireableUnlockIds + array{NpcId}
                 SaveProfile(Player, Candidate)
 
-    RecordTamedSpecies(Agent:agent, SpeciesId:string):void=
+    RecordTamedSpecies(Agent:agent, SpeciesId:string)<transacts>:void=
         if:
             Player := player[Agent]
             Old := AEONFALLPlayerProfiles[Player]
@@ -163,7 +163,7 @@ aeonfall_profile_service := class():
                     TamedSpeciesIds := Old.TamedSpeciesIds + array{SpeciesId}
                 SaveProfile(Player, Candidate)
 
-    SetMaterialCount(Agent:agent, MaterialId:string, NewCount:int):void=
+    SetMaterialCount(Agent:agent, MaterialId:string, NewCount:int)<transacts>:void=
         if:
             NewCount >= 0
             Player := player[Agent]
@@ -178,7 +178,7 @@ aeonfall_profile_service := class():
                     MaterialLedger := UpdatedLedger
                 SaveProfile(Player, Candidate)
 
-    SetFactionReputation(Agent:agent, FactionId:string, Reputation:int):void=
+    SetFactionReputation(Agent:agent, FactionId:string, Reputation:int)<transacts>:void=
         if:
             Reputation >= 0
             Player := player[Agent]
@@ -198,7 +198,7 @@ aeonfall_profile_service := class():
         ArmorIds:[]string,
         WeaponIds:[]string,
         RelicIds:[]string
-    ):void=
+    )<transacts>:void=
         if:
             Player := player[Agent]
             Old := AEONFALLPlayerProfiles[Player]
@@ -210,7 +210,7 @@ aeonfall_profile_service := class():
                 EquippedRelicIds := RelicIds
             SaveProfile(Player, Candidate)
 
-    SetAscensionRank(Agent:agent, NewRank:int):void=
+    SetAscensionRank(Agent:agent, NewRank:int)<transacts>:void=
         if:
             NewRank >= 0
             Player := player[Agent]
@@ -221,7 +221,7 @@ aeonfall_profile_service := class():
                 AscensionRank := NewRank
             SaveProfile(Player, Candidate)
 
-    SetAxiomHeartCrafted(Agent:agent, IsCrafted:logic):void=
+    SetAxiomHeartCrafted(Agent:agent, IsCrafted:logic)<transacts>:void=
         if:
             Player := player[Agent]
             Old := AEONFALLPlayerProfiles[Player]
@@ -231,7 +231,7 @@ aeonfall_profile_service := class():
                 AxiomHeartCrafted := IsCrafted
             SaveProfile(Player, Candidate)
 
-    SetZeroCandidate(Agent:agent, IsCandidate:logic):void=
+    SetZeroCandidate(Agent:agent, IsCandidate:logic)<transacts>:void=
         if:
             Player := player[Agent]
             Old := AEONFALLPlayerProfiles[Player]
@@ -245,7 +245,7 @@ aeonfall_profile_service := class():
     # Replaces the complete sparse material ledger in one profile write.
     # Multi-cost crafting/shop transactions build and validate a candidate map
     # first, then call this once to avoid partial per-material persistence.
-    SetMaterialLedger(Agent:agent, NewLedger:[string]int):void=
+    SetMaterialLedger(Agent:agent, NewLedger:[string]int)<transacts>:void=
         if:
             Player := player[Agent]
             Old := AEONFALLPlayerProfiles[Player]
@@ -262,7 +262,7 @@ aeonfall_profile_service := class():
         Agent:agent,
         NewLedger:[string]int,
         UnlockEntityId:string
-    ):void=
+    )<transacts>:void=
         if:
             Player := player[Agent]
             Old := AEONFALLPlayerProfiles[Player]
