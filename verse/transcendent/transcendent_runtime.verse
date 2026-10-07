@@ -256,50 +256,51 @@ aeonfall_transcendent_runtime := class():
                     set ExpiredActiveOwners =
                         ExpiredActiveOwners + array{OwnerKey}
 
-            else if (State.Phase = aeonfall_transcendent_phase.Exhausted):
-                Remaining:float =
-                    State.ExhaustionRemainingSeconds - DeltaSeconds
-
-                if (Remaining > 0.0):
-                    Next := aeonfall_transcendent_runtime_state:
-                        OwnerKey := State.OwnerKey
-                        AuthorityId := State.AuthorityId
-                        Phase := aeonfall_transcendent_phase.Exhausted
-                        ActiveRemainingSeconds := 0.0
-                        ExhaustionRemainingSeconds := Remaining
-                        SessionActivationCount := State.SessionActivationCount
-
-                    if:
-                        set Updated[OwnerKey] = Next
-                    then:
-                        set Updated = Updated
-                else:
-                    Ready := aeonfall_transcendent_runtime_state:
-                        OwnerKey := State.OwnerKey
-                        AuthorityId := ""
-                        Phase := aeonfall_transcendent_phase.Dormant
-                        ActiveRemainingSeconds := 0.0
-                        ExhaustionRemainingSeconds := 0.0
-                        SessionActivationCount := State.SessionActivationCount
-
-                    if:
-                        set Updated[OwnerKey] = Ready
-                    then:
-                        set Updated = Updated
-
-                    AEONFALLRuntimeBus.Emit(
-                        aeonfall_runtime_event{
-                            EventType := "transcendent.exhaustion_ended",
-                            SourceId := OwnerKey,
-                            TargetId := State.AuthorityId
-                        }
-                    )
-
             else:
-                if:
-                    set Updated[OwnerKey] = State
-                then:
-                    set Updated = Updated
+                if (State.Phase = aeonfall_transcendent_phase.Exhausted):
+                    Remaining:float =
+                        State.ExhaustionRemainingSeconds - DeltaSeconds
+
+                    if (Remaining > 0.0):
+                        Next := aeonfall_transcendent_runtime_state:
+                            OwnerKey := State.OwnerKey
+                            AuthorityId := State.AuthorityId
+                            Phase := aeonfall_transcendent_phase.Exhausted
+                            ActiveRemainingSeconds := 0.0
+                            ExhaustionRemainingSeconds := Remaining
+                            SessionActivationCount := State.SessionActivationCount
+
+                        if:
+                            set Updated[OwnerKey] = Next
+                        then:
+                            set Updated = Updated
+                    else:
+                        Ready := aeonfall_transcendent_runtime_state:
+                            OwnerKey := State.OwnerKey
+                            AuthorityId := ""
+                            Phase := aeonfall_transcendent_phase.Dormant
+                            ActiveRemainingSeconds := 0.0
+                            ExhaustionRemainingSeconds := 0.0
+                            SessionActivationCount := State.SessionActivationCount
+
+                        if:
+                            set Updated[OwnerKey] = Ready
+                        then:
+                            set Updated = Updated
+
+                        AEONFALLRuntimeBus.Emit(
+                            aeonfall_runtime_event{
+                                EventType := "transcendent.exhaustion_ended",
+                                SourceId := OwnerKey,
+                                TargetId := State.AuthorityId
+                            }
+                        )
+
+                else:
+                    if:
+                        set Updated[OwnerKey] = State
+                    then:
+                        set Updated = Updated
 
         set StatesByOwner = Updated
 
