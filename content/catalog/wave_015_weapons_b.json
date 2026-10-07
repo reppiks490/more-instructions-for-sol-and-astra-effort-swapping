@@ -1,0 +1,1892 @@
+{
+  "wave": "015",
+  "purpose": "Second original weapon expansion, escalating from tactical Epic designs through God/Absolute systems to a single Transcendent-only manifestation.",
+  "entity_count": 30,
+  "entities": [
+    {
+      "id": "WPN-043",
+      "name": "Sable Vector",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "predictive burst rifle",
+      "identity": {
+        "fantasy": "A black tactical rifle that learns one enemy strafe rhythm at a time and lets the wielder fire a short predictive burst into the next likely lane.",
+        "silhouette": "Matte triangular rifle with a sliding white vector rail above the barrel and three tiny direction fins.",
+        "lore_hook": "Built for hunters who considered aiming at where a target is to be an embarrassing delay."
+      },
+      "mechanics": {
+        "core": [
+          "strafe sampling",
+          "predictive lane",
+          "burst commitment"
+        ],
+        "signature": [
+          "Vector Sample records a short left-right movement rhythm from a continuously tracked hostile target.",
+          "Lead Burst paints one narrow predicted lane before firing a committed three-round burst into that lane."
+        ],
+        "counterplay": [
+          "Break movement rhythm or stop before the predictive lane locks; the burst cannot retarget after commitment."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "A thin white vector ribbon traces sampled lateral motion and resolves into one sharply outlined future lane.",
+          "Sable Vector gives predictive lane a distinct readable visual language with distance-aware LOD and a clear shutdown state."
+        ],
+        "animation": [
+          "The top rail slides physically toward the predicted side before Lead Burst."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic reconnaissance contract chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-044",
+      "name": "Rotglass Harpoon",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "corruption tether launcher",
+      "identity": {
+        "fantasy": "A compact harpoon gun that pins a temporary corruption vial to lesser monsters and lets players drag its influence away from allies.",
+        "silhouette": "Short green-black launcher with a glass canister chamber, hooked cable reel, and bone needle muzzle.",
+        "lore_hook": "Designed by plague surgeons who wanted infection to stay attached to something they could move."
+      },
+      "mechanics": {
+        "core": [
+          "harpoon tether",
+          "corruption relocation",
+          "position control"
+        ],
+        "signature": [
+          "Rotpin attaches one eligible lesser target to a short cable and marks its current hazard influence.",
+          "Reel Blight pulls the target or, against heavier enemies, pulls the wielder toward the target while relocating the hazard center."
+        ],
+        "counterplay": [
+          "Tether range is short, can break on geometry, and elites resist direct displacement."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Green corruption particles travel visibly along the cable toward the pinned vial.",
+          "Rotglass Harpoon gives corruption relocation a distinct readable visual language with distance-aware LOD and a clear shutdown state."
+        ],
+        "animation": [
+          "Cable reel bucks under tension and changes handling posture depending on which side is being pulled."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic plague-vault salvage and field-surgeon crafting."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-045",
+      "name": "Stormscript SMG",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "movement-combo submachine gun",
+      "identity": {
+        "fantasy": "A compact storm weapon that writes lightning glyphs through successive movement actions and cashes them into a brief accuracy surge.",
+        "silhouette": "Blue-gray SMG with rune keys under the receiver and a thin electric ribbon wrapped around the magazine.",
+        "lore_hook": "Storm couriers turned their route notation into a firing language."
+      },
+      "mechanics": {
+        "core": [
+          "movement glyphs",
+          "combo cadence",
+          "accuracy cashout"
+        ],
+        "signature": [
+          "Script Step records distinct sprint, slide, mantle, or jump actions into a short glyph chain.",
+          "Read Storm consumes a varied chain to stabilize the next magazine and add a small electric stagger to its opening burst."
+        ],
+        "counterplay": [
+          "Repeating the same movement gives weak script value; crowd control can break the chain."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Movement leaves tiny blue glyph stamps that spiral into the receiver when Read Storm triggers.",
+          "Stormscript SMG gives combo cadence a distinct readable visual language with distance-aware LOD and a clear shutdown state."
+        ],
+        "animation": [
+          "Rune keys depress themselves in sequence during a valid movement chain."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Stormcourier progression reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-046",
+      "name": "Bone Orchard Harvester",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "corpse-zone scattergun",
+      "identity": {
+        "fantasy": "A brutal scattergun that plants short-lived bone sprouts where lesser hostile creatures fall and can shatter them into controlled shrapnel lanes.",
+        "silhouette": "Rust-black shotgun with antler pump, seed sockets in the stock, and pale growth lines along the barrel.",
+        "lore_hook": "The Orchard's gardeners found firearms easier to prune than trees."
+      },
+      "mechanics": {
+        "core": [
+          "bone sprouts",
+          "death-zone setup",
+          "shrapnel harvest"
+        ],
+        "signature": [
+          "Seed Shot causes eligible lesser kills to leave a fragile bone sprout instead of extra loot power.",
+          "Harvest Rack detonates nearby owned sprouts in visible directional fans after a windup."
+        ],
+        "counterplay": [
+          "Sprouts are destructible and expire quickly; spreading out limits fan overlap."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Bone sprouts grow as pale antler clusters with clear owner markings.",
+          "Bone Orchard Harvester gives death-zone setup a distinct readable visual language with distance-aware LOD and a clear shutdown state."
+        ],
+        "animation": [
+          "The pump action snaps one seed socket open whenever a sprout is created."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Red Orchard faction contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-047",
+      "name": "Pale Current",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "chain-support pistol",
+      "identity": {
+        "fantasy": "A sidearm whose harmless secondary pulse jumps between nearby allies, briefly improving reload handling while its primary fire remains conventional.",
+        "silhouette": "Pearl pistol with a water-ring barrel and three small floating droplets orbiting the grip.",
+        "lore_hook": "Drowned scouts built it after learning a squad can move like one current without sharing one mind."
+      },
+      "mechanics": {
+        "core": [
+          "ally chain pulse",
+          "reload support",
+          "close formation"
+        ],
+        "signature": [
+          "Current Link identifies up to three nearby allies in line of sight without forcing formation.",
+          "Tide Tap spends the support charge to send a brief reload/handling pulse through the chain."
+        ],
+        "counterplay": [
+          "Chain range is short and broken by cover; the support pulse has a clear cooldown."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Soft pale water arcs connect allies for less than a second during Tide Tap.",
+          "Pale Current gives reload support a distinct readable visual language with distance-aware LOD and a clear shutdown state."
+        ],
+        "animation": [
+          "Floating droplets leap from the grip one by one along the chain."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic drowned-expedition quartermaster reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-048",
+      "name": "Grief Compass",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "revenge-tracking marksman rifle",
+      "identity": {
+        "fantasy": "A marksman rifle that briefly points toward the hostile source of a teammate's recent heavy damage, creating a retaliatory information window rather than free damage.",
+        "silhouette": "Long brass rifle with a compass rose scope and a black needle that rotates independently of aim.",
+        "lore_hook": "The first Grief Compass was made for someone who cared less about where north was than where the murderer went."
+      },
+      "mechanics": {
+        "core": [
+          "damage-source tracking",
+          "retaliation mark",
+          "information window"
+        ],
+        "signature": [
+          "Grief Needle rotates toward a recent qualifying damage source against a nearby ally.",
+          "Answer Shot can apply a brief visible retaliation mark if the tracked source is struck before the memory expires."
+        ],
+        "counterplay": [
+          "Break line of sight and wait out the short memory; the compass does not reveal hidden targets indefinitely."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "The scope compass burns one red bearing line toward the remembered source.",
+          "Grief Compass gives retaliation mark a distinct readable visual language with distance-aware LOD and a clear shutdown state."
+        ],
+        "animation": [
+          "The independent needle snaps into alignment only after qualifying ally damage."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic memorial questline and hunter's lodge reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-049",
+      "name": "Basilisk Lens",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "gaze-charging precision rifle",
+      "identity": {
+        "fantasy": "A glass-eyed rifle that charges while the wielder maintains visual contact and converts that attention into a petrifying-looking stagger shot against eligible enemies.",
+        "silhouette": "Silver rifle with a reptilian glass lens in place of the optic and scale shutters around the barrel.",
+        "lore_hook": "The original basilisk was dangerous because it looked at you. This one is dangerous because you keep looking back."
+      },
+      "mechanics": {
+        "core": [
+          "visual lock",
+          "attention charge",
+          "stagger shot"
+        ],
+        "signature": [
+          "Unbroken Gaze accumulates charge only while the target remains actually visible.",
+          "Stone Blink consumes charge for a high-stagger precision shot rather than a literal permanent petrification.",
+          "Scale Shutter can intentionally dump partial charge to gain a brief recoil-control window."
+        ],
+        "counterplay": [
+          "Break sightlines, use cover, or force target swaps to drain charge."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "The lens iris narrows and the target gains progressively denser stone-outline particles.",
+          "Stone Blink flashes a short grayscale fracture pattern over the impact zone."
+        ],
+        "animation": [
+          "Scale shutters close around the barrel as visual lock strengthens."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Mirror Marsh basilisk hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-050",
+      "name": "Funeral Engine",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "momentum heavy rifle",
+      "identity": {
+        "fantasy": "A coffin-shaped rifle that gains firing stability from deliberate slow movement and converts stationary discipline into a crushing opening volley.",
+        "silhouette": "Long rectangular black rifle resembling a miniature coffin with brass pallbearer handles.",
+        "lore_hook": "It was designed for soldiers who believed every firing position should already look like a grave."
+      },
+      "mechanics": {
+        "core": [
+          "slow-march charge",
+          "opening volley",
+          "reposition penalty"
+        ],
+        "signature": [
+          "Pallbearer Pace builds stability while walking without sprinting or jumping.",
+          "Final Salute empowers the first burst after full Pace with armor stagger and near-zero recoil.",
+          "Break Procession clears the buff but grants a short emergency movement burst when the wielder chooses to sprint."
+        ],
+        "counterplay": [
+          "Force rapid repositioning or vertical movement; the weapon loses its strongest state under chase pressure."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Brass handles glow one by one as Pace builds.",
+          "Final Salute releases a flat black funeral-banner muzzle flash."
+        ],
+        "animation": [
+          "The wielder carries the rifle lower and more ceremonially at full Pace.",
+          "Breaking Procession snaps the coffin stock open to vent stored pressure."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary funeral-march raid reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-051",
+      "name": "Meridian Splitter",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "line-control beam rifle",
+      "identity": {
+        "fantasy": "A beam rifle that draws one bright meridian across the battlefield, then rewards alternating shots from opposite sides of that line.",
+        "silhouette": "White-black rifle split perfectly down its center with two independently lit half-barrels.",
+        "lore_hook": "Its makers believed every battlefield had a correct dividing line and were willing to manufacture one."
+      },
+      "mechanics": {
+        "core": [
+          "meridian line",
+          "side alternation",
+          "beam discipline"
+        ],
+        "signature": [
+          "Draw Meridian places a temporary visible line through the first charged impact.",
+          "East Shot gains a small handling bonus when fired from one side after a valid West-side hit.",
+          "West Shot mirrors the rule, creating a deliberate crossing rhythm rather than passive damage stacking."
+        ],
+        "counterplay": [
+          "Pressure the wielder away from the line or hold one side so alternation becomes impractical."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "A brilliant thin meridian line persists across valid ground and fades from the ends inward.",
+          "Alternating hits send white-black pulses toward the line center."
+        ],
+        "animation": [
+          "The two half-barrels swap which side sits forward after each valid alternation."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary cartographer citadel challenge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-052",
+      "name": "Crownspike Repeater",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "elite-command disruptor",
+      "identity": {
+        "fantasy": "A repeating rifle that plants visible crown spikes around an elite enemy and weakens one authored command aura when the pattern is completed.",
+        "silhouette": "Dark red repeater with crown-tooth iron sights and a rotating ring magazine shaped like a broken coronet.",
+        "lore_hook": "Rebels discovered the easiest way to remove a crown was to give it too many points."
+      },
+      "mechanics": {
+        "core": [
+          "elite marking",
+          "command aura pressure",
+          "pattern completion"
+        ],
+        "signature": [
+          "Spike Mark places one of three visible crown points through qualifying hits on an elite commander.",
+          "Broken Crown completes after three spatially varied hits and suppresses one eligible minor command bonus briefly.",
+          "Regicide Reload clears unfinished marks to reload faster, trading setup for tempo."
+        ],
+        "counterplay": [
+          "Commanders can move to make varied hit angles difficult; protected boss mechanics are immune."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Red crown spikes appear around the target at each qualifying angle.",
+          "Broken Crown collapses them inward with a sharp metallic halo break."
+        ],
+        "animation": [
+          "Ring magazine rotates one crown tooth per mark and shatters its visual alignment on completion."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary rebellion faction capstone."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-053",
+      "name": "Witchrail",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "rune-routing sniper",
+      "identity": {
+        "fantasy": "A long sniper system that places temporary rune relays on valid surfaces and can route one shot through a single relay for unusual but readable angles.",
+        "silhouette": "Very long black rifle with a glowing copper rail and detachable rune disks stored along the stock.",
+        "lore_hook": "Witches learned railguns were more cooperative after teaching the rails geometry."
+      },
+      "mechanics": {
+        "core": [
+          "surface relay",
+          "single-bend shot",
+          "setup sniping"
+        ],
+        "signature": [
+          "Rune Nail places one short-lived relay disk on a valid visible surface.",
+          "Bent Rail routes the next charged shot from muzzle to relay and then forward along the previewed exit line.",
+          "Recall Rune removes the relay voluntarily and refunds part of the setup cooldown."
+        ],
+        "counterplay": [
+          "Relay disks are visible and destructible; the exit line previews before the shot fires."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Copper energy travels from rifle to relay before the second beam segment ignites.",
+          "The relay draws a bright arrow showing exit direction."
+        ],
+        "animation": [
+          "The rifle rail physically kinks in glowing projection toward the active rune."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary witch-engine foundry loot."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-054",
+      "name": "Leviathan Hymn",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "pressure-wave launcher",
+      "identity": {
+        "fantasy": "A low-frequency launcher that builds oceanic pressure through successive impacts and releases it as a broad non-lethal displacement wave.",
+        "silhouette": "Blue-black launcher with whale-rib fins and a liquid pressure gauge running the full receiver.",
+        "lore_hook": "Sailors once used the Hymn to ask leviathans to move. It was never clear whether they obeyed or complained."
+      },
+      "mechanics": {
+        "core": [
+          "pressure stacking",
+          "displacement wave",
+          "area shaping"
+        ],
+        "signature": [
+          "Depth Charge adds one pressure stack to a bounded local area rather than the target itself.",
+          "Hymn Release consumes area pressure to push lesser enemies away from the center and add stagger to elites.",
+          "Sounding Line previews the displacement radius before release so allies can position intentionally."
+        ],
+        "counterplay": [
+          "Leave the pressurized area before release or destroy the launcher wielder's setup tempo."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Waterlike compression rings sink visually into the ground with each stack.",
+          "Release erupts as a translucent deep-sea pressure dome."
+        ],
+        "animation": [
+          "Rib fins flex inward as local pressure increases and spring open on release."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary abyssal expedition reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-055",
+      "name": "Eden's Teeth",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "living botanical rifle",
+      "identity": {
+        "fantasy": "A living rifle that grows different thorn ammunition according to the biome and nearby plant life, making it adapt through ecology rather than a menu.",
+        "silhouette": "Ivory root-stock wrapped in green-black vines with a flower jaw replacing the muzzle.",
+        "lore_hook": "Eden rejected the first gardener. The teeth were its second attempt at boundaries."
+      },
+      "mechanics": {
+        "core": [
+          "biome adaptation",
+          "living ammo",
+          "rooted overgrowth"
+        ],
+        "signature": [
+          "Biome Taste selects one of several authored thorn behaviors from the current region.",
+          "Root Magazine slowly regrows a limited reserve while the weapon remains holstered near compatible vegetation.",
+          "Garden Bite spends the reserve in a short burst that leaves temporary destructible thorn cover.",
+          "Prune lets the wielder destroy owned thorn cover to refund a fraction of growth energy."
+        ],
+        "counterplay": [
+          "Urban/sterile regions reduce regrowth; thorn cover is fragile and clearly owned."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Muzzle flower changes species and color by biome.",
+          "Root Magazine visibly grows rounds as seed pods.",
+          "Garden Bite erupts into fast, bounded vine geometry."
+        ],
+        "animation": [
+          "The weapon visibly roots into the wielder's forearm during high reserve.",
+          "Prune causes vines to retract violently back into the stock."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Worldroot covenant progression."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-056",
+      "name": "Pale Comet",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "orbital trajectory cannon",
+      "identity": {
+        "fantasy": "A precision cannon that lets players predeclare a curved flight path for one slow luminous projectile, turning geometry planning into its main skill test.",
+        "silhouette": "White-blue shoulder cannon with three orbit rings suspended around a floating projectile chamber.",
+        "lore_hook": "The comet was considered a bad omen until someone installed sights on it."
+      },
+      "mechanics": {
+        "core": [
+          "curved trajectory",
+          "orbit planning",
+          "delayed impact"
+        ],
+        "signature": [
+          "Orbit Draft selects one of several safe authored curve profiles around visible geometry.",
+          "Comet Cast launches a slow projectile that follows the previewed curve rather than homing.",
+          "Periapsis rewards a planned pass close to an eligible elite with added stagger at final impact.",
+          "Abort Orbit dissolves the projectile early to avoid friendly positional disruption."
+        ],
+        "counterplay": [
+          "The entire curve is previewed; move outside the impact window or pressure the wielder during drafting."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Three orbital rings draw the chosen trajectory in the air.",
+          "The comet sheds pale ice-star fragments along the curve.",
+          "Periapsis flashes a tight blue lens ring near the elite."
+        ],
+        "animation": [
+          "Orbit rings physically tilt into the chosen curve before launch.",
+          "The cannon recoils slowly as if releasing a satellite."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic celestial observatory challenge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-057",
+      "name": "Necrostatic Choir",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "corpse-field arc weapon",
+      "identity": {
+        "fantasy": "A necromantic arc rifle that turns eligible corpse markers into temporary electrical choir nodes, creating chain patterns players can deliberately dismantle.",
+        "silhouette": "Black coil rifle with jawbone capacitors and tiny singing skulls embedded along the top rail.",
+        "lore_hook": "The dead were poor singers until someone discovered voltage improved pitch."
+      },
+      "mechanics": {
+        "core": [
+          "corpse nodes",
+          "arc chaining",
+          "node sacrifice"
+        ],
+        "signature": [
+          "Choir Node awakens an eligible corpse marker as a temporary arc point.",
+          "Antiphon fires through up to a limited number of owned nodes along a visible chain.",
+          "Cut Verse destroys one owned node to create a short local silence/stagger pulse against lesser undead.",
+          "Final Chord consumes the full chain in one stronger elite-stagger shot."
+        ],
+        "counterplay": [
+          "Destroy or move away from nodes; the chain route is fully visible before Antiphon."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Nodes rise as tiny spectral skull-coils humming violet electricity.",
+          "Arc routes draw musical-staff lines between nodes.",
+          "Final Chord collapses every note into a single white-violet beam."
+        ],
+        "animation": [
+          "Embedded skulls open their jaws one by one as nodes join the choir.",
+          "Final Chord snaps every jaw shut simultaneously."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic necromancer laboratory raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-058",
+      "name": "Mirrorborn Oath",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "reflection-duel rifle",
+      "identity": {
+        "fantasy": "A dueling rifle that records the wielder's last successful shot angle and offers a mirrored-angle follow-up if a valid surface relationship exists.",
+        "silhouette": "Polished silver rifle duplicated by a translucent inverse copy attached along the left side.",
+        "lore_hook": "Mirrorborn duelists swore never to fire the same truth twice."
+      },
+      "mechanics": {
+        "core": [
+          "shot reflection memory",
+          "angle pair",
+          "duel sequencing"
+        ],
+        "signature": [
+          "Oath Record stores the last valid precision ray direction for a few seconds.",
+          "Mirror Answer previews one opposite-side follow-up lane around an authored reflection anchor.",
+          "Two Truths rewards landing both original and mirrored shots with a short handling burst.",
+          "Broken Oath clears the state if the player repeats the same angle without using the mirror option."
+        ],
+        "counterplay": [
+          "Move away from reflection anchors and vary elevation; mirrored lanes are previewed before firing."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "A translucent inverse rifle fires a ghost preview along the potential follow-up lane.",
+          "Two Truths creates crossing silver lines that form an X at the target.",
+          "Mirrorborn Oath gives duel sequencing a distinct readable visual language with distance-aware LOD and a clear shutdown state."
+        ],
+        "animation": [
+          "The inverse copy rotates through the player to the opposite shoulder for Mirror Answer.",
+          "Broken Oath makes the copy crack and disappear."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic mirror-temple duelist line."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-059",
+      "name": "Blackwake Sovereign",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "abyssal command cannon",
+      "identity": {
+        "fantasy": "A ship-cannon weapon that lays short black-water wake lanes which allied NPCs can use as aggressive approach routes.",
+        "silhouette": "Compact naval cannon with a black liquid barrel interior and brass command wheel under the grip.",
+        "lore_hook": "It was removed from a flagship after sailors noticed the wake continued across dry land."
+      },
+      "mechanics": {
+        "core": [
+          "wake lane",
+          "ally route support",
+          "broadside burst"
+        ],
+        "signature": [
+          "Black Wake paints a temporary path on valid ground without modifying collision.",
+          "Boarding Order encourages eligible allied NPCs to prefer the wake for a short push.",
+          "Dry Broadside fires a heavy shot whose recoil lengthens the current wake.",
+          "Scuttle erases the wake early and grants a small defensive smoke-water burst."
+        ],
+        "counterplay": [
+          "Wake lanes are visible and predictable; enemies can pre-aim the approach or force allies off-path."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Black water flows across ground without depth simulation.",
+          "Command wheel glows brass during Boarding Order.",
+          "Broadside produces a ghost-ship muzzle silhouette."
+        ],
+        "animation": [
+          "The player spins the small command wheel before issuing Boarding Order.",
+          "Recoil physically drags a longer wake behind the wielder."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Grave Tide admiral raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [
+          "BOS-040"
+        ],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-060",
+      "name": "Star-Knife Covenant",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "constellation blade launcher",
+      "identity": {
+        "fantasy": "A rifle that fires short-lived star knives into surfaces and lets the player connect them into one geometric slash field.",
+        "silhouette": "Narrow midnight rifle with a transparent magazine of floating star-shaped blades.",
+        "lore_hook": "The Covenant mapped constellations by asking which stars could cut each other."
+      },
+      "mechanics": {
+        "core": [
+          "star anchors",
+          "constellation geometry",
+          "slash field"
+        ],
+        "signature": [
+          "Star Knife embeds up to a limited number of visible anchors in valid surfaces.",
+          "Covenant Line connects anchors into non-crossing luminous edges.",
+          "Constellation Sever activates the completed shape once, damaging lesser enemies crossing edges and adding stagger to elites.",
+          "Fallen Star retrieves one unused nearby anchor to preserve ammunition."
+        ],
+        "counterplay": [
+          "Anchors are destructible; leave the outlined polygon before Sever activates."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Anchors resemble small bright stars with thin constellation lines.",
+          "Completed shapes fill with faint night-sky texture.",
+          "Sever turns each edge into a fast white slash."
+        ],
+        "animation": [
+          "Magazine stars orbit faster as more anchors are deployed.",
+          "Activation uses a sweeping hand gesture that closes the constellation."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic astral covenant quest."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-061",
+      "name": "Cathedral Lance",
+      "family": "weapon",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "architectural beam weapon",
+      "identity": {
+        "fantasy": "A lance-like rifle that builds temporary stained-glass firing windows in the air and changes beam properties depending on which window it passes through.",
+        "silhouette": "Long gothic lance with a white beam core and folded stained-glass fins near the muzzle.",
+        "lore_hook": "The architects wanted a cathedral that could follow soldiers. The soldiers wanted it to shoot."
+      },
+      "mechanics": {
+        "core": [
+          "air window",
+          "beam filtering",
+          "window sequencing"
+        ],
+        "signature": [
+          "Raise Window creates one temporary airborne stained-glass frame at a valid nearby location.",
+          "Filtered Lance changes one supported beam property when fired through the frame, such as width or stagger emphasis.",
+          "Rose Sequence rewards firing through two differently colored windows in a planned order without stacking unbounded power.",
+          "Shatter Nave destroys all owned windows to create harmless cover-obscuring glass light."
+        ],
+        "counterplay": [
+          "Windows are visible, destructible, and stationary; move outside their firing geometry."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Stained-glass windows assemble from luminous shards in midair.",
+          "Beam changes color and geometry after crossing a window.",
+          "Rose Sequence creates a huge but local cathedral rose pattern behind the target."
+        ],
+        "animation": [
+          "Glass fins unfold to match the active window color.",
+          "Shatter Nave sends the fins snapping closed as every window breaks."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic moving-cathedral challenge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-062",
+      "name": "Null Bloom",
+      "family": "weapon",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "anti-effect flower cannon",
+      "identity": {
+        "fantasy": "A bizarre cannon that grows black flowers on supported lingering hazard fields and lets players collapse those fields early at the cost of releasing a smaller neutral shock.",
+        "silhouette": "Bone-white launcher with a black blossom chamber and long petal vents along the barrel.",
+        "lore_hook": "Null Bloom does not kill magic. It pollinates endings."
+      },
+      "mechanics": {
+        "core": [
+          "hazard seeding",
+          "field collapse",
+          "neutral shock"
+        ],
+        "signature": [
+          "Black Seed can attach only to eligible authored lingering fields, not arbitrary engine effects.",
+          "Bloom Clock visibly grows petals while waiting for the collapse window.",
+          "Petal Zero ends the supported field early and produces a small neutral displacement ring.",
+          "Dead Garden prevents immediately reseeding the same source category."
+        ],
+        "counterplay": [
+          "Destroy the blossom before full growth or simply leave the seeded field before collapse."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Black flowers visibly root into the edge of the affected field.",
+          "Petals count down by opening one at a time.",
+          "Petal Zero desaturates the field into a flat white ring."
+        ],
+        "animation": [
+          "The cannon chamber physically blossoms wider as the seed matures.",
+          "Collapse snaps every petal backward into the weapon."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic Null Garden expedition."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-063",
+      "name": "Heretic's Compass",
+      "family": "weapon",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "anti-domain navigation sidearm",
+      "identity": {
+        "fantasy": "A sidearm whose compass points toward the nearest exit or weak anchor of certain hostile domain effects instead of north.",
+        "silhouette": "Black-gold pistol with a huge rotating compass rose mounted beneath the barrel.",
+        "lore_hook": "Heretics rarely agree on doctrine but are excellent at locating exits."
+      },
+      "mechanics": {
+        "core": [
+          "domain navigation",
+          "anchor indication",
+          "escape shot"
+        ],
+        "signature": [
+          "False North detects an eligible hostile domain boundary or anchor within a bounded radius.",
+          "Needle Heresy points to the nearest valid escape/anchor route without revealing unrelated secrets.",
+          "Exit Wound empowers one shot against a revealed domain anchor after the player crosses the indicated route.",
+          "Apostasy clears the guidance voluntarily to avoid stale navigation."
+        ],
+        "counterplay": [
+          "Domain owners can reposition or defend anchors; the compass does not reveal players or hidden loot."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Compass needle burns red-gold and projects a short ground bearing.",
+          "Exit Wound leaves a broken compass rose on the anchor.",
+          "Heretic's Compass gives escape shot a distinct readable visual language with distance-aware LOD and a clear shutdown state."
+        ],
+        "animation": [
+          "The compass spins violently before settling on a valid route.",
+          "Apostasy makes the player flip the pistol upside down to reset the rose."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic heretic pilgrimage reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-064",
+      "name": "Causal Chalice",
+      "family": "weapon",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "damage-sequence reversal rifle",
+      "identity": {
+        "fantasy": "A ceremonial rifle that records a short sequence of its own nonlethal hits and lets the player reverse only the order of its follow-up status pulses, not time itself.",
+        "silhouette": "Gold-white rifle with a cup-shaped chamber holding floating bullets in a vertical column.",
+        "lore_hook": "The Chalice never rewinds a wound. It merely serves consequences in a different order."
+      },
+      "mechanics": {
+        "core": [
+          "hit sequence",
+          "status ordering",
+          "causal puzzle"
+        ],
+        "signature": [
+          "Pour Memory records up to three qualifying hit tags in order.",
+          "Reverse Cup inverts the order of the weapon's next eligible status pulses.",
+          "Spill clears the sequence for a brief reload bonus if the planned reversal is no longer useful.",
+          "Last Sip rewards completing a full reversed sequence with modest elite stagger."
+        ],
+        "counterplay": [
+          "Sequence tags are visible on the target and expire quickly; cleanse or disengage before completion."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Floating bullets stack vertically in the chamber as hits are recorded.",
+          "Reverse Cup flips the liquid-light column upside down.",
+          "Last Sip draws three reversed rings through the target."
+        ],
+        "animation": [
+          "The player tilts the cup chamber physically before reversal.",
+          "Spill pours the stored light out through the muzzle."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic causality chapel trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-065",
+      "name": "Worldspike",
+      "family": "weapon",
+      "tier": "god",
+      "status": "specified",
+      "role": "titan anchoring rail cannon",
+      "identity": {
+        "fantasy": "A god-forged rail cannon that plants colossal visual anchor spikes into authored boss regions and lets squads build stagger objectives around them.",
+        "silhouette": "Massive black-gold rail weapon with three floating spearheads orbiting a central magnetic spine.",
+        "lore_hook": "Worldspike was made for enemies so large that hitting them was less useful than pinning the battlefield to them."
+      },
+      "mechanics": {
+        "core": [
+          "boss-region anchors",
+          "squad stagger objective",
+          "rail culmination"
+        ],
+        "signature": [
+          "First Spike plants a visible encounter anchor into an eligible colossal weak-point region rather than physically pinning the boss.",
+          "Second Spike creates a linked objective lane where allied damage contributes bonus stagger within safe caps.",
+          "Third Spike completes a triangular restraint glyph and opens a short team coordination window.",
+          "World Nail consumes all three anchors in one rail discharge that converts accumulated objective progress into stagger, never bypassing phase immunity.",
+          "Uproot lets the squad abandon the setup early and recover part of the weapon resource."
+        ],
+        "counterplay": [
+          "Boss attacks can destroy anchors; setup is slow, location-bound, and useless against protected phases."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Each spike appears skyscraper-scale in perspective while collision remains bounded.",
+          "Linked spikes form giant gold lines across the boss surface.",
+          "Third Spike creates a luminous triangular sigil visible across the raid arena.",
+          "World Nail pulls every line into one black-gold rail corridor."
+        ],
+        "animation": [
+          "Floating spearheads slam forward one at a time with full-body recoil.",
+          "World Nail locks the wielder into a braced siege frame before discharge."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier titan raid forge requiring multiple colossal-boss cores."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-066",
+      "name": "God's Last Equation",
+      "family": "weapon",
+      "tier": "god",
+      "status": "specified",
+      "role": "adaptive mathematical weapon",
+      "identity": {
+        "fantasy": "A divine weapon that solves one bounded combat variable at a time—range, cadence, armor, or crowd density—and changes its firing form to answer that problem.",
+        "silhouette": "White geometric rifle made from floating numbered plates with no permanent barrel shape.",
+        "lore_hook": "The equation was found written on the inside of a dead god's skull. The equal sign was missing."
+      },
+      "mechanics": {
+        "core": [
+          "combat-variable solve",
+          "form adaptation",
+          "solution decay"
+        ],
+        "signature": [
+          "Observe samples one supported battlefield variable for a short analysis window.",
+          "Solve Range reshapes the weapon into a long precision form when distance is the dominant problem.",
+          "Solve Density becomes a broad suppression form when lesser-enemy concentration dominates.",
+          "Solve Armor becomes a slow stagger-focused form against eligible armored elites.",
+          "Undefined triggers if the combat state changes too rapidly, collapsing all forms into a weak neutral mode until recalculation."
+        ],
+        "counterplay": [
+          "Change engagement conditions to invalidate its current solution and force Undefined."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Floating plates display abstract numerals and reorganize into entirely different weapon silhouettes.",
+          "Each solution projects a huge translucent equation behind the wielder.",
+          "Undefined drops the numbers to zero and turns all geometry gray.",
+          "Recalculation sends lines of white math racing across nearby surfaces."
+        ],
+        "animation": [
+          "Weapon assembly completely reconfigures per solution.",
+          "Undefined makes the plates fall apart and orbit loosely before rebuilding."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier logic temple and celestial mathematician raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-067",
+      "name": "Thronefall Ordinance",
+      "family": "weapon",
+      "tier": "god",
+      "status": "specified",
+      "role": "sovereign siege launcher",
+      "identity": {
+        "fantasy": "A divine launcher that targets command structures, elite banners, boss apparatus, and other authored sovereignty objects rather than simply multiplying damage against characters.",
+        "silhouette": "Regal black cannon with a broken throne frame as its shoulder stock and a crown-shaped loading cage.",
+        "lore_hook": "Thronefall was outlawed by every monarch simultaneously, which its engineers considered perfect market validation."
+      },
+      "mechanics": {
+        "core": [
+          "sovereignty-object targeting",
+          "structure siege",
+          "rebel rally"
+        ],
+        "signature": [
+          "Claim Target highlights one eligible command object or boss apparatus within encounter rules.",
+          "First Rebellion fires a slow siege projectile that strips part of the object's authored shield or stagger layer.",
+          "Bannerbreak creates a short squad rally zone after a valid command object is disabled.",
+          "Vacant Throne temporarily reduces eligible lesser AI command cohesion in the local encounter.",
+          "No Successor consumes the rally state for one final apparatus-stagger shot during a valid boss window."
+        ],
+        "counterplay": [
+          "The weapon is inefficient without command objects; slow projectiles and explicit target rules prevent generic dominance."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Eligible command objects receive giant cracked-crown outlines.",
+          "Siege shots trail fragments of broken royal architecture.",
+          "Bannerbreak plants a spectral rebel standard.",
+          "Vacant Throne creates an empty throne silhouette in the sky above the encounter."
+        ],
+        "animation": [
+          "The stock-throne physically fractures further as sovereignty objectives fall.",
+          "No Successor reconstructs every broken fragment into one final projectile cage."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier rebellion culmination and sovereign-boss materials."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-068",
+      "name": "Celestial Guillotine",
+      "family": "weapon",
+      "tier": "god",
+      "status": "specified",
+      "role": "orbital execution apparatus",
+      "identity": {
+        "fantasy": "A god-tier rifle that earns an orbital-looking blade strike only by completing an authored weak-point sequence on a boss or elite target.",
+        "silhouette": "Slim white rifle beneath a hovering crescent blade halo that grows more complete with each valid weak-point hit.",
+        "lore_hook": "The heavens did not invent judgment. They invented height."
+      },
+      "mechanics": {
+        "core": [
+          "weak-point sequence",
+          "orbital blade",
+          "execution window"
+        ],
+        "signature": [
+          "Sentence One records the first authored weak-point category struck during a valid encounter.",
+          "Sentence Two requires a different designated weak point and completes half the blade halo.",
+          "Final Evidence requires a phase objective or third weak point rather than simple repeated fire.",
+          "Guillotine Window marks one bounded strike zone after all evidence is satisfied.",
+          "Heaven Falls drops a colossal visual crescent through that zone, converting the sequence into stagger/phase damage strictly within encounter caps."
+        ],
+        "counterplay": [
+          "Break the sequence by forcing phase changes, protecting required weak points, or moving out of the highly telegraphed strike zone."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Crescent halo assembles piece by piece over the wielder.",
+          "Evidence hits paint enormous judicial glyphs over boss anatomy.",
+          "The strike zone becomes a white circle with a slowly descending shadow.",
+          "Heaven Falls uses a massive sky-to-ground blade illusion with bounded gameplay collision."
+        ],
+        "animation": [
+          "The wielder raises the rifle like a judge's staff as each halo segment locks.",
+          "Final activation lowers the weapon while the celestial blade—not the muzzle—becomes the focus."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier celestial tribunal raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-069",
+      "name": "The Weapon That Remembers Tomorrow",
+      "family": "weapon",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "future-state precision weapon",
+      "identity": {
+        "fantasy": "An Absolute rifle that previews a tiny set of authored near-future encounter states and lets the player commit to one tactical preparation without truly predicting uncontrolled player behavior.",
+        "silhouette": "Transparent rifle with three complete future versions of itself floating a fraction of a second ahead of the real weapon.",
+        "lore_hook": "It does not see the future. It remembers the futures the world has already agreed are possible."
+      },
+      "mechanics": {
+        "core": [
+          "authored future preview",
+          "branch commitment",
+          "future recoil"
+        ],
+        "signature": [
+          "Tomorrow Window reads only scheduled authored encounter events such as boss telegraphs, moving hazards, or objective rotations.",
+          "Choose Tomorrow lets the wielder preselect one supported preparation—mobility, guard, or precision—before that event arrives.",
+          "Remembered Shot gains a contextual property only if the predicted authored event actually occurs.",
+          "False Memory safely cancels the preparation if the encounter changes or the event becomes invalid.",
+          "Future Recoil imposes a meaningful cooldown after a successful prepared response so foresight cannot chain indefinitely."
+        ],
+        "counterplay": [
+          "Its knowledge is limited to authored event signals; opponents can change local positioning even when the global event is known."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Three ghost rifles show different prepared poses ahead of the real weapon.",
+          "Upcoming authored hazards appear as thin time-outline silhouettes only to the wielder.",
+          "Successful commitment causes one future rifle to collapse backward into the real one.",
+          "False Memory dissolves all future copies into sandlike clock particles.",
+          "Future Recoil leaves a black temporal crack along the stock until cooldown ends."
+        ],
+        "animation": [
+          "Branch selection moves the character through three faint future stances before locking one.",
+          "Remembered Shot begins with the ghost version firing a fraction before the physical recoil.",
+          "Cooldown visibly drags the future copies behind the real weapon instead of ahead."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute Chronarch endgame mastery; never a random world drop."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-070",
+      "name": "Lawless Horizon",
+      "family": "weapon",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "bounded battlefield-rule projector",
+      "identity": {
+        "fantasy": "An Absolute projector that creates a local horizon band where one carefully supported combat parameter behaves differently for everyone inside.",
+        "silhouette": "No conventional barrel—two floating black horizon plates frame a thin white line extending far beyond the grip.",
+        "lore_hook": "The Horizon is lawless only because every law becomes negotiable at sufficient distance."
+      },
+      "mechanics": {
+        "core": [
+          "local rule band",
+          "symmetric modifier",
+          "horizon collapse"
+        ],
+        "signature": [
+          "Draw Horizon establishes one bounded elongated combat band with highly visible edges.",
+          "Law of Weight selects an authored knockback/gravity-response modifier applied symmetrically inside the band.",
+          "Law of Velocity selects one supported projectile-speed or movement-tempo modifier within safe caps.",
+          "Law of Shelter changes only designated cover/structure interaction rules rather than deleting geometry.",
+          "Appeal exposes destructible horizon anchors that enemies can attack to shorten the rule state.",
+          "Sunset collapses the band voluntarily and converts remaining duration into one neutral displacement wave."
+        ],
+        "counterplay": [
+          "The band is stationary and explicit, effects are symmetric where intended, anchors are attackable, and protected boss rules override it."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "A razor-straight white horizon cuts through the local arena regardless of terrain undulation.",
+          "Selected law changes the color-space and particle motion only within the band.",
+          "Anchor towers appear as black vertical slits at each endpoint.",
+          "Appeal damage cracks the horizon line into segments.",
+          "Sunset makes the line sink visually through the ground before releasing one expanding ring."
+        ],
+        "animation": [
+          "The wielder physically separates the two horizon plates to deploy the band.",
+          "Law selection rotates the plates into different geometric alignments.",
+          "Sunset slams the plates together and extinguishes the line."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute Axiom Tribunal reward and multi-class rule-mastery chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-071",
+      "name": "Omniforge Testament",
+      "family": "weapon",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "temporary weapon-authoring engine",
+      "identity": {
+        "fantasy": "An Absolute forge-weapon that assembles one of several pre-authored temporary weapon forms from components earned during the current encounter.",
+        "silhouette": "A floating furnace core surrounded by dozens of disconnected weapon fragments, grips, blades, coils, and barrels in constant orbit.",
+        "lore_hook": "The Omniforge rejects the idea that a weapon must decide what it is before the battle starts."
+      },
+      "mechanics": {
+        "core": [
+          "encounter component capture",
+          "temporary form assembly",
+          "forge exhaustion"
+        ],
+        "signature": [
+          "Salvage Law earns bounded forge components only from designated encounter objectives, not arbitrary player inventory.",
+          "Forge Spear assembles a precision anti-weak-point form.",
+          "Forge Choir assembles a crowd-control/suppression form.",
+          "Forge Bastion assembles a defensive support projector.",
+          "Hybrid Testament combines two forms briefly only after a rare encounter milestone.",
+          "Quench destroys the current form early and refunds a fraction of forge heat while imposing exhaustion."
+        ],
+        "counterplay": [
+          "Forms require encounter-earned components, assembly is telegraphed, and Quench/exhaustion prevents unrestricted switching."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Weapon fragments orbit the furnace core in recognizable families.",
+          "Each form assembly pulls dozens of pieces into a completely new silhouette.",
+          "Hybrid Testament creates a huge forge-circle schematic around the wielder.",
+          "Heat appears as white cracks across every fragment.",
+          "Quench releases a cloud of cold metallic vapor and drops the orbit speed."
+        ],
+        "animation": [
+          "Assembly is a full mid-combat construction sequence rather than a mesh swap.",
+          "The wielder catches the newly forged grip only when the final fragment locks.",
+          "Quench opens both hands and lets the weapon explode back into orbit."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute Genesis Forge lineage plus raid-component mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Premium designation is design intent only and remains subject to Epic in-island transaction and publication rules."
+      ]
+    },
+    {
+      "id": "WPN-072",
+      "name": "UNWRITTEN",
+      "family": "weapon",
+      "tier": "transcendent_zero",
+      "status": "specified",
+      "role": "Transcendent-only manifestation weapon",
+      "identity": {
+        "fantasy": "A Transcendent Zero manifestation that has no permanent weapon class: it becomes a bounded expression of whichever Authority the ascended player invokes and disappears when the form ends.",
+        "silhouette": "A weapon-shaped gap in reality bordered by changing symbols; its outline continuously shifts between blade, rifle, staff, cannon, and impossible geometric forms.",
+        "lore_hook": "There is no record of UNWRITTEN being forged because every record begins after it has already been used."
+      },
+      "mechanics": {
+        "core": [
+          "authority manifestation",
+          "form mutation",
+          "reality-safe expression"
+        ],
+        "signature": [
+          "Axiom Form manifests a rule-themed configuration whose effects are limited to the supported Authority runtime and current encounter permissions.",
+          "World Devourer Form becomes a massive visual anti-horde/anti-boss projector whose gameplay footprint remains bounded and telegraphed.",
+          "Omnipresence Form creates synchronized weapon afterimages attached to approved Transcendent manifestations rather than independent uncontrolled players.",
+          "Genesis Form changes into a construction scepter that authorizes temporary prebuilt battlefield assets from the Genesis library.",
+          "Last Word Form becomes a one-use decree focus and can only activate the current Transcendent session's permitted decree.",
+          "Reality Engine Form does not attack directly; it becomes the interface focus for the bounded world-parameter choices exposed by the final Authority runtime.",
+          "Zero Collapse destroys every active UNWRITTEN manifestation instantly when the Transcendent timer, eligibility, encounter, or safety state ends."
+        ],
+        "counterplay": [
+          "UNWRITTEN exists only during a time-bounded Transcendent state; every Authority effect is encounter-bounded, highly telegraphed, and subject to hard server-side permissions and cleanup."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Its silhouette rewrites itself continuously in black-white-gold symbolic strokes.",
+          "Authority changes replace the surrounding particle grammar rather than simply recoloring the weapon.",
+          "World Devourer creates continent-scale-looking perspective effects with local validated collision.",
+          "Omnipresence produces multiple synchronized afterimage weapons connected by one shared authority sigil.",
+          "Genesis emits gigantic wireframe blueprints that resolve only into approved temporary assets.",
+          "Last Word removes nearly all ambient color before one decree symbol occupies the sky.",
+          "Zero Collapse sucks every active symbol back into a single point in the wielder's palm."
+        ],
+        "animation": [
+          "The wielder never performs a normal reload; form changes are full-body authority gestures.",
+          "Each Authority has a distinct stance family and weapon-shape transition.",
+          "Last Word requires a deliberate decree-selection pose before the one-use activation.",
+          "Reality Engine suspends the weapon as a rotating control glyph rather than holding it conventionally.",
+          "Zero Collapse ends with the player briefly empty-handed before ordinary equipment is restored."
+        ],
+        "audio": [
+          "Layered weapon audio separates ordinary fire, mechanic readiness, signature activation, danger windows, and cooldown recovery so high-tier spectacle remains readable."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Never purchasable or lootable. Manifested only by the validated Transcendent Zero runtime during an active ascension window."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [
+        "EVT-050"
+      ],
+      "notes": [
+        "Original AEONFALL weapon. Mechanics must map to supported UEFN/Verse systems; presentation scale may exceed collision scale but not gameplay authority.",
+        "Transcendent manifestation cannot be purchased, permanently equipped, or granted outside the final ascension runtime."
+      ]
+    }
+  ]
+}
