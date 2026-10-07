@@ -240,3 +240,43 @@ aeonfall_profile_service := class():
                 MakeAEONFALLPlayerProfile<constructor>(Old)
                 IsZeroCandidate := IsCandidate
             SaveProfile(Player, Candidate)
+
+
+    # Replaces the complete sparse material ledger in one profile write.
+    # Multi-cost crafting/shop transactions build and validate a candidate map
+    # first, then call this once to avoid partial per-material persistence.
+    SetMaterialLedger(Agent:agent, NewLedger:[string]int):void=
+        if:
+            Player := player[Agent]
+            Old := AEONFALLPlayerProfiles[Player]
+        then:
+            Candidate := aeonfall_player_profile:
+                MakeAEONFALLPlayerProfile<constructor>(Old)
+                MaterialLedger := NewLedger
+            SaveProfile(Player, Candidate)
+
+    # Commits a material-ledger mutation and one canonical unlock together.
+    # Inventory delivery remains a separate project-bound adapter, but durable
+    # progression sees one candidate profile rather than partially applied costs.
+    CommitMaterialAndUnlock(
+        Agent:agent,
+        NewLedger:[string]int,
+        UnlockEntityId:string
+    ):void=
+        if:
+            Player := player[Agent]
+            Old := AEONFALLPlayerProfiles[Player]
+        then:
+            var UpdatedUnlocks:[]string = Old.UnlockedEntityIds
+            if:
+                Old.UnlockedEntityIds.Find[UnlockEntityId]
+            then:
+                set UpdatedUnlocks = Old.UnlockedEntityIds
+            else:
+                set UpdatedUnlocks = Old.UnlockedEntityIds + array{UnlockEntityId}
+
+            Candidate := aeonfall_player_profile:
+                MakeAEONFALLPlayerProfile<constructor>(Old)
+                MaterialLedger := NewLedger
+                UnlockedEntityIds := UpdatedUnlocks
+            SaveProfile(Player, Candidate)
