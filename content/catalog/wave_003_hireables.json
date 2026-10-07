@@ -1,10 +1,10 @@
 {
-  "wave": "003",
-  "purpose": "Expanded hireable roster: 12 Epic, 6 Legendary, 5 Mythic, 3 Exotic, 2 God. Final three entries are premium-designated.",
+  "wave": "003B",
+  "purpose": "Second expanded hireable roster: preserved alongside the original interrupted Wave 003 roster; 12 Epic, 6 Legendary, 5 Mythic, 3 Exotic, 2 God. Final three entries are premium-designated.",
   "entity_count": 28,
   "entities": [
     {
-      "id": "NPC-009",
+      "id": "NPC-037",
       "name": "Ashen Valehound",
       "family": "npc",
       "tier": "epic",
@@ -65,7 +65,7 @@
       ]
     },
     {
-      "id": "NPC-010",
+      "id": "NPC-038",
       "name": "Rook Hexmarch",
       "family": "npc",
       "tier": "epic",
@@ -126,7 +126,7 @@
       ]
     },
     {
-      "id": "NPC-011",
+      "id": "NPC-039",
       "name": "Nyra Stormglass",
       "family": "npc",
       "tier": "epic",
@@ -187,7 +187,7 @@
       ]
     },
     {
-      "id": "NPC-012",
+      "id": "NPC-040",
       "name": "Kael Vantablade",
       "family": "npc",
       "tier": "epic",
@@ -248,7 +248,7 @@
       ]
     },
     {
-      "id": "NPC-013",
+      "id": "NPC-041",
       "name": "Sable Meridian",
       "family": "npc",
       "tier": "epic",
@@ -309,7 +309,7 @@
       ]
     },
     {
-      "id": "NPC-014",
+      "id": "NPC-042",
       "name": "Orin Dreadwake",
       "family": "npc",
       "tier": "epic",
@@ -370,7 +370,7 @@
       ]
     },
     {
-      "id": "NPC-015",
+      "id": "NPC-043",
       "name": "Vexa Thorncoil",
       "family": "npc",
       "tier": "epic",
@@ -431,7 +431,7 @@
       ]
     },
     {
-      "id": "NPC-016",
+      "id": "NPC-044",
       "name": "Thane Ironsaint",
       "family": "npc",
       "tier": "epic",
@@ -492,7 +492,7 @@
       ]
     },
     {
-      "id": "NPC-017",
+      "id": "NPC-045",
       "name": "Mira Riftborne",
       "family": "npc",
       "tier": "epic",
@@ -553,7 +553,7 @@
       ]
     },
     {
-      "id": "NPC-018",
+      "id": "NPC-046",
       "name": "Cassian Bloodstar",
       "family": "npc",
       "tier": "epic",
@@ -614,7 +614,7 @@
       ]
     },
     {
-      "id": "NPC-019",
+      "id": "NPC-047",
       "name": "Ilyra Moonscar",
       "family": "npc",
       "tier": "epic",
@@ -675,7 +675,7 @@
       ]
     },
     {
-      "id": "NPC-020",
+      "id": "NPC-048",
       "name": "Droven Blacktide",
       "family": "npc",
       "tier": "epic",
@@ -736,7 +736,7 @@
       ]
     },
     {
-      "id": "NPC-021",
+      "id": "NPC-049",
       "name": "Seraph Korr, the Sunless Banner",
       "family": "npc",
       "tier": "legendary",
@@ -799,7 +799,7 @@
       ]
     },
     {
-      "id": "NPC-022",
+      "id": "NPC-050",
       "name": "Valkyra Nocturne",
       "family": "npc",
       "tier": "legendary",
@@ -862,7 +862,7 @@
       ]
     },
     {
-      "id": "NPC-023",
+      "id": "NPC-051",
       "name": "Orryx Bone-Crown",
       "family": "npc",
       "tier": "legendary",
@@ -925,7 +925,7 @@
       ]
     },
     {
-      "id": "NPC-024",
+      "id": "NPC-052",
       "name": "Eidolon Vesper",
       "family": "npc",
       "tier": "legendary",
@@ -988,7 +988,7 @@
       ]
     },
     {
-      "id": "NPC-025",
+      "id": "NPC-053",
       "name": "Maelis Star-Render",
       "family": "npc",
       "tier": "legendary",
@@ -1051,7 +1051,7 @@
       ]
     },
     {
-      "id": "NPC-026",
+      "id": "NPC-054",
       "name": "Torvane, the Ninth Ember",
       "family": "npc",
       "tier": "legendary",
@@ -1114,7 +1114,7 @@
       ]
     },
     {
-      "id": "NPC-027",
+      "id": "NPC-055",
       "name": "Calistra, Queen of Ruined Hours",
       "family": "npc",
       "tier": "mythic",
@@ -1178,7 +1178,7 @@
       ]
     },
     {
-      "id": "NPC-028",
+      "id": "NPC-056",
       "name": "Rhazek, Mawbound Prince",
       "family": "npc",
       "tier": "mythic",
@@ -1242,7 +1242,7 @@
       ]
     },
     {
-      "id": "NPC-029",
+      "id": "NPC-057",
       "name": "Aureon, the Last Dawn",
       "family": "npc",
       "tier": "mythic",
@@ -1306,7 +1306,7 @@
       ]
     },
     {
-      "id": "NPC-030",
+      "id": "NPC-058",
       "name": "Nemea Void-Sister",
       "family": "npc",
       "tier": "mythic",
@@ -1370,7 +1370,7 @@
       ]
     },
     {
-      "id": "NPC-031",
+      "id": "NPC-059",
       "name": "Malachar, Saint of Chains",
       "family": "npc",
       "tier": "mythic",
@@ -1434,7 +1434,7 @@
       ]
     },
     {
-      "id": "NPC-032",
+      "id": "NPC-060",
       "name": "Juno Wildfire Kestrel",
       "family": "npc",
       "tier": "exotic",
@@ -1498,7 +1498,7 @@
       ]
     },
     {
-      "id": "NPC-033",
+      "id": "NPC-061",
       "name": "Zyrella Prism-Fang",
       "family": "npc",
       "tier": "exotic",
@@ -1562,7 +1562,7 @@
       ]
     },
     {
-      "id": "NPC-034",
+      "id": "NPC-062",
       "name": "Bront Hexdrive",
       "family": "npc",
       "tier": "exotic",
@@ -1626,7 +1626,7 @@
       ]
     },
     {
-      "id": "NPC-035",
+      "id": "NPC-063",
       "name": "Azura Sol, Goddess of the Burning Tide",
       "family": "npc",
       "tier": "god",
@@ -1691,7 +1691,7 @@
       ]
     },
     {
-      "id": "NPC-036",
+      "id": "NPC-064",
       "name": "Kharon Imperator, Lord of the Last Gate",
       "family": "npc",
       "tier": "god",
