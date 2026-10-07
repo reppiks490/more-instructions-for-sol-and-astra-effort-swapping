@@ -19,3 +19,7 @@ aeonfall_profile_bootstrap_device := class(creative_device):
         if:
             not AEONFALLPlayerProfiles[Player]
             set AEONFALLPlayerProfiles[Player] = aeonfall_player_profile{}
+
+        Refreshed := AEONFALLHallOfAscendants.RefreshIfReady(Player)
+        if (Refreshed?):
+            Refreshed = true
