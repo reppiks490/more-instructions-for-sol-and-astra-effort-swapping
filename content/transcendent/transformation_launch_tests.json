@@ -126,7 +126,7 @@
       "action": "activate AUTH-001",
       "expect": [
         "TRANSCENDENT_ZERO::AUTH-001 context active",
-        "persistent TranscendentHistoryCount increments once",
+        "persistent TranscendentHistoryCount does not increment merely for starting the Authority",
         "TZA-001..003 accepted",
         "other Authority abilities rejected by exact transformation ID"
       ]
@@ -144,6 +144,7 @@
         "pending request canceled",
         "active ability ended",
         "transformation context cleared",
+        "persistent TranscendentHistoryCount increments exactly once because the Authority reached natural duration expiry",
         "Authority exhaustion begins",
         "late adapter result cannot commit ability state"
       ]
@@ -185,8 +186,9 @@
       "action": "activate AUTH-008",
       "expect": [
         "activation succeeds",
-        "history increments exactly once",
-        "only TZA-022..024 pass exact transformation gate"
+        "history does not increment at activation start",
+        "only TZA-022..024 pass exact transformation gate",
+        "natural duration completion increments history exactly once"
       ]
     },
     {
@@ -200,7 +202,8 @@
         "pending activation reservations cleared",
         "form/Authority abilities stopped where addressable",
         "Choosing/Ascension/transform runtime state removed",
-        "actor transformation context removed"
+        "actor transformation context removed",
+        "teardown does not award Transcendent history"
       ]
     },
     {
