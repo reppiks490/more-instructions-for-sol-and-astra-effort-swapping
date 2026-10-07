@@ -12,6 +12,7 @@ aeonfall_runtime_event := class:
     Flag:logic = false
 
 aeonfall_ability_effect_request := class:
+    RequestId:string = ""
     OwnerKey:string = ""
     AbilityId:string = ""
     AdapterId:string = ""
@@ -20,6 +21,7 @@ aeonfall_ability_effect_request := class:
     Magnitude:int = 0
 
 aeonfall_adapter_result := class:
+    RequestId:string = ""
     OwnerKey:string = ""
     AbilityId:string = ""
     AdapterId:string = ""
