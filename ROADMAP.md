@@ -17,6 +17,8 @@
 - [x] shared status-effect contract
 - [x] shared ability/resource contract
 - [ ] project-bound ability execution service
+- [x] boss encounter state machine scaffold
+- [x] world-event state machine scaffold
 - [ ] cooldown/resource execution runtime
 - [x] progression service scaffold
 - [x] persistent player profile
@@ -50,7 +52,8 @@ One production-quality region containing:
 - [ ] crafting UI/device binding and UEFN playtest
 - [ ] class skill runtime loop
 - [ ] persistent progression compiled in UEFN
-- [ ] first shop
+- [x] first shop specification: Grave Market Quartermaster
+- [ ] shop UI/device/payment-or-currency adapter binding
 - [x] 13-region streamed world topology + event-shell architecture specified and CI validated
 - [ ] Spatial Profiler / Memory Snapshot validation in bound UEFN project
 
@@ -58,7 +61,7 @@ One production-quality region containing:
 - [x] authored entity schema
 - [x] generator for status dashboards
 - [x] canonical runtime content-index generator
-- [ ] generator for Verse registration data where practical
+- [x] first-slice Verse registration generator
 - [ ] asset/VFX/animation checklists
 - [ ] balance linting
 - [x] duplicate-name / repeated-signature audit
@@ -86,7 +89,8 @@ Targets:
 - [x] shared companion + AI behavior contracts and first-slice binding matrix
 - [ ] project-bound taming/hiring execution runtime
 - [x] world-event lifecycle contract
-- [ ] project-bound dynamic invasion director
+- [x] shared world-event state machine scaffold
+- [ ] project-bound dynamic invasion/spawn director
 - [x] five-tier cannibal horde evolution specified
 - [x] necromancer ecosystem baseline specified
 - [x] roaming mythic threat baseline specified
