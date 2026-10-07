@@ -194,7 +194,38 @@ def main() -> int:
                 f"{path.relative_to(ROOT)}: adapter does not report two-phase result"
             )
 
-    workflow = (ROOT / ".github/workflows/catalog-validation.yml").read_text(
+    # Transcendent history policy: never award on activation start.
+    # Award must occur inside EndActive, after the Active -> Exhausted map write,
+    # and only for natural duration expiry.
+    transcendent_path = ROOT / "verse/transcendent/transcendent_runtime.verse"
+    transcendent_text = transcendent_path.read_text(encoding="utf-8")
+    activate_pos = transcendent_text.find("    Activate(")
+    end_active_pos = transcendent_text.find("    EndActive(")
+    history_pos = transcendent_text.find("ProfileService.IncrementTranscendentHistory")
+    exhausted_write_pos = transcendent_text.find(
+        "set StatesByOwner[OwnerKey] = Exhausted"
+    )
+
+    if min(activate_pos, end_active_pos, history_pos, exhausted_write_pos) < 0:
+        errors.append("transcendent history policy markers are incomplete")
+    else:
+        if activate_pos < history_pos < end_active_pos:
+            errors.append(
+                "transcendent history policy violation: history increments during Activate"
+            )
+        if history_pos < exhausted_write_pos:
+            errors.append(
+                "transcendent history policy violation: history is awarded before Exhausted state commits"
+            )
+
+    if 'Reason = "duration_expired"' not in transcendent_text:
+        errors.append(
+            "transcendent history policy violation: natural-duration guard missing"
+        )
+    if "transcendent.history_awarded" not in transcendent_text:
+        errors.append("transcendent history award observability event missing")
+
+        workflow = (ROOT / ".github/workflows/catalog-validation.yml").read_text(
         encoding="utf-8"
     )
     if '"verse/**"' not in workflow:
