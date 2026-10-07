@@ -47,6 +47,7 @@ on:
       - "tools/validate_runtime_invariants.py"
       - "tools/build_transcendent_authority_registry.py"
       - "tools/validate_transcendent_authorities.py"
+      - "tools/validate_transcendent_adapter_bindings.py"
       - "tools/validate_launch_test_plan.py"
       - "STATUS.md"
       - ".github/workflows/catalog-validation.yml"
@@ -56,6 +57,8 @@ on:
       - "content/crafting/**"
       - "content/vertical_slice/**"
       - "content/world/**"
+      - "content/transcendent/**"
+      - "verse/**"
       - "verse/generated/**"
       - "schemas/**"
       - "tools/validate_*.py"
@@ -168,6 +171,9 @@ jobs:
 
       - name: Validate Transcendent Zero Authorities
         run: python tools/validate_transcendent_authorities.py
+
+      - name: Validate Transcendent Authority adapter bindings
+        run: python tools/validate_transcendent_adapter_bindings.py
 
       - name: Build Transcendent Authority Verse registry
         run: python tools/build_transcendent_authority_registry.py
