@@ -27,6 +27,7 @@ aeonfall_runtime_tick_device := class(creative_device):
             AEONFALLSpawnRuntime.TickAll(Interval)
             AEONFALLUnlockDeliveryService.TickAll(Interval)
             AEONFALLInvasionRuntime.TickAll(Interval)
+            AEONFALLAscensionTrialRuntime.TickAll(Interval)
 
             AEONFALLRuntimeBus.Emit(
                 aeonfall_runtime_event{
