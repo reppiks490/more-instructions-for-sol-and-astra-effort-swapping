@@ -2,9 +2,9 @@ using { /Fortnite.com/AI }
 using { /Verse.org/Simulation }
 
 # Minimal project-bound NPC lifecycle behavior.
-# Attach this only as a foundation or subclass it with movement/combat logic.
-# Editable canonical/profile IDs are configured in the Character Definition or
-# NPC Spawner so runtime events remain linked to the catalog.
+# Character Definitions / NPC Spawners supply canonical/profile IDs. Every
+# spawned NPC receives a unique session RuntimeKey so statuses and abilities
+# target an instance rather than every NPC that shares the same catalog ID.
 aeonfall_npc_lifecycle_behavior<public> := class(npc_behavior):
 
     @editable
@@ -19,21 +19,50 @@ aeonfall_npc_lifecycle_behavior<public> := class(npc_behavior):
     @editable
     BossControlled:logic = false
 
+    var RuntimeKey:string = ""
+
     OnBegin<override>()<suspends>:void=
-        AEONFALLRuntimeBus.Emit(
-            aeonfall_runtime_event{
-                EventType := "npc.spawned",
-                SourceId := CanonicalId,
-                ContextId := BehaviorProfileId,
-                Flag := CompanionCapable
-            }
-        )
+        if:
+            Agent := GetAgent[]
+            RegisteredKey := AEONFALLActorRegistry.Register[CanonicalId, Agent]
+        then:
+            set RuntimeKey = RegisteredKey
+
+            AEONFALLRuntimeBus.Emit(
+                aeonfall_runtime_event{
+                    EventType := "npc.spawned",
+                    SourceId := CanonicalId,
+                    TargetId := RuntimeKey,
+                    ContextId := BehaviorProfileId,
+                    Flag := CompanionCapable
+                }
+            )
+        else:
+            AEONFALLRuntimeBus.Emit(
+                aeonfall_runtime_event{
+                    EventType := "npc.runtime_identity_failed",
+                    SourceId := CanonicalId,
+                    ContextId := BehaviorProfileId
+                }
+            )
 
     OnEnd<override>():void=
+        if (RuntimeKey <> ""):
+            Removed := AEONFALLActorRegistry.Unregister(RuntimeKey)
+            if (not Removed?):
+                AEONFALLRuntimeBus.Emit(
+                    aeonfall_runtime_event{
+                        EventType := "npc.runtime_identity_cleanup_failed",
+                        SourceId := CanonicalId,
+                        TargetId := RuntimeKey
+                    }
+                )
+
         AEONFALLRuntimeBus.Emit(
             aeonfall_runtime_event{
                 EventType := "npc.removed",
                 SourceId := CanonicalId,
+                TargetId := RuntimeKey,
                 ContextId := BehaviorProfileId,
                 Flag := BossControlled
             }
