@@ -1,0 +1,3110 @@
+{
+  "wave": "020",
+  "purpose": "Quota-closing wave completing the original minimum allocations for weapons, armor, monsters, and bosses without adding filler mechanics.",
+  "entity_count": 50,
+  "entities": [
+    {
+      "id": "WPN-160",
+      "name": "Pale Meridian Choir",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "lane-harmony rifle",
+      "identity": {
+        "fantasy": "A rifle that turns two consecutive firing lanes into a temporary harmonic crossing, rewarding deliberate crossfire geometry.",
+        "silhouette": "Pale rifle with twin floating tuning rails that point along the last two shot lanes.",
+        "lore_hook": "Choir engineers learned two lines could sing even when no one did."
+      },
+      "mechanics": {
+        "core": [
+          "crossfire geometry",
+          "lane memory",
+          "harmony"
+        ],
+        "signature": [
+          "Two accurate bursts preserve their broad firing lanes as visible Meridian Lines.",
+          "Where the lines cross, lesser enemies entering the intersection receive a short stagger pulse before the geometry expires."
+        ],
+        "counterplay": [
+          "The lines are visible and short-lived, and moving the fight away from the intersection removes the advantage."
+        ],
+        "evolution": [
+          "Pale Meridian Choir evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Pale Meridian Choir has a dedicated visual grammar for crossfire geometry, lane memory, harmony with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Pale Meridian Choir distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Pale Meridian Choir uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its lane-harmony rifle identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Pale Meridian Choir includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Pale Meridian Choir has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Pale Choir contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "WPN-161",
+      "name": "Thunder Reliquary",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "stored-shock shotgun",
+      "identity": {
+        "fantasy": "A shotgun that stores one nearby lightning or shock event inside a reliquary chamber and releases it as utility on the next reload.",
+        "silhouette": "Bronze-black shotgun with a glass saint-box surrounding the chamber.",
+        "lore_hook": "Storm monks preserved thunder the way other orders preserved bones."
+      },
+      "mechanics": {
+        "core": [
+          "shock capture",
+          "reload utility",
+          "close range"
+        ],
+        "signature": [
+          "An eligible nearby shock event can charge the Reliquary once.",
+          "The next reload releases the stored charge as a brief anti-summon static pulse around the wielder."
+        ],
+        "counterplay": [
+          "Only one event can be stored and the ready chamber is visibly illuminated."
+        ],
+        "evolution": [
+          "Thunder Reliquary evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Thunder Reliquary has a dedicated visual grammar for shock capture, reload utility, close range with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Thunder Reliquary distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Thunder Reliquary uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its stored-shock shotgun identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Thunder Reliquary includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Thunder Reliquary has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic storm reliquary challenge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "WPN-162",
+      "name": "Heliostat Grave",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "light-bounce marksman",
+      "identity": {
+        "fantasy": "A marksman weapon that places one reflective grave marker and can bounce a weak information beam from it to reveal movement.",
+        "silhouette": "White-gold rifle with a tiny mirrored tombstone folded beneath the barrel.",
+        "lore_hook": "Solar hunters buried mirrors so the dead could keep watch."
+      },
+      "mechanics": {
+        "core": [
+          "reflective marker",
+          "movement reveal",
+          "precision"
+        ],
+        "signature": [
+          "Secondary fire places one destructible Heliostat Grave on valid terrain.",
+          "A precision hit can bounce a harmless scan beam from the grave, briefly outlining the struck target's movement direction to the squad."
+        ],
+        "counterplay": [
+          "Only one marker exists, it is visible, and the scan provides direction rather than wall-penetrating vision."
+        ],
+        "evolution": [
+          "Heliostat Grave evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Heliostat Grave has a dedicated visual grammar for reflective marker, movement reveal, precision with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Heliostat Grave distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Heliostat Grave uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its light-bounce marksman identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Heliostat Grave includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Heliostat Grave has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic solar cemetery contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "WPN-163",
+      "name": "Red Orchard Compass",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "seed-route pistol",
+      "identity": {
+        "fantasy": "A pistol that plants two blood-red seed markers and rewards pushing enemies from one marker toward the other.",
+        "silhouette": "Red-black long pistol with a compass rose containing two seed sockets.",
+        "lore_hook": "Orchard wardens stopped fencing predators and started giving them directions."
+      },
+      "mechanics": {
+        "core": [
+          "seed markers",
+          "directional pressure",
+          "sidearm"
+        ],
+        "signature": [
+          "Two impact seeds define a short Compass Route.",
+          "Knock or stagger effects against eligible lesser enemies are slightly biased along the route direction."
+        ],
+        "counterplay": [
+          "The route is short, visible, and does not force bosses or players."
+        ],
+        "evolution": [
+          "Red Orchard Compass evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Red Orchard Compass has a dedicated visual grammar for seed markers, directional pressure, sidearm with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Red Orchard Compass distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Red Orchard Compass uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its seed-route pistol identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Red Orchard Compass includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Red Orchard Compass has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic red orchard patrol reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "WPN-164",
+      "name": "Null Tax Collector",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "temporary-buff sidearm",
+      "identity": {
+        "fantasy": "A sidearm that marks temporary buffs on lesser enemies and turns their expiration into tactical information.",
+        "silhouette": "Matte black pistol with a tiny receipt printer strip beneath the grip.",
+        "lore_hook": "The Null Court decided even stolen power should expire on schedule."
+      },
+      "mechanics": {
+        "core": [
+          "buff expiry",
+          "information mark",
+          "sidearm"
+        ],
+        "signature": [
+          "Hitting an eligible buffed lesser enemy records the buff's remaining state as a Tax Mark.",
+          "When the marked buff expires naturally, nearby squadmates receive a brief source-direction ping."
+        ],
+        "counterplay": [
+          "The weapon cannot remove the buff and unbuffed enemies provide no tax value."
+        ],
+        "evolution": [
+          "Null Tax Collector evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Null Tax Collector has a dedicated visual grammar for buff expiry, information mark, sidearm with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Null Tax Collector distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Null Tax Collector uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its temporary-buff sidearm identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Null Tax Collector includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Null Tax Collector has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Null Court audit bounty."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "WPN-165",
+      "name": "Blackwater Testament",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "wake-writing carbine",
+      "identity": {
+        "fantasy": "A carbine that writes short blackwater wakes on wet surfaces and lets allies use them as directional movement cues.",
+        "silhouette": "Dark navy carbine with scripture etched beneath a transparent water channel.",
+        "lore_hook": "Drowned soldiers left instructions where ink could not survive."
+      },
+      "mechanics": {
+        "core": [
+          "wet-surface wake",
+          "team routing",
+          "carbine"
+        ],
+        "signature": [
+          "Shots into eligible wet terrain create a short directional Testament Wake.",
+          "Allies crossing with the wake gain brief movement stabilization while crossing against it gains no benefit."
+        ],
+        "counterplay": [
+          "Dry terrain disables the wake and each line fades quickly."
+        ],
+        "evolution": [
+          "Blackwater Testament evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Blackwater Testament has a dedicated visual grammar for wet-surface wake, team routing, carbine with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Blackwater Testament distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Blackwater Testament uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its wake-writing carbine identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Blackwater Testament includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Blackwater Testament has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic drowned legion contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "WPN-166",
+      "name": "Wound Cartographer",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "weak-point mapping rifle",
+      "identity": {
+        "fantasy": "A rifle that maps separate weak-point hits into a temporary route showing squads the intended order of attack.",
+        "silhouette": "Long bone-white rifle with a folding topographic optic and red pin lights.",
+        "lore_hook": "The best maps were drawn on things too dangerous to stand still."
+      },
+      "mechanics": {
+        "core": [
+          "weak-point map",
+          "attack order",
+          "team clarity"
+        ],
+        "signature": [
+          "Distinct authored weak-point hits place numbered Wound Pins.",
+          "Three pins connect into a visible suggested attack route without increasing damage.",
+          "Completing the route grants a short reload-and-reposition cue to the squad and then clears the map."
+        ],
+        "counterplay": [
+          "Bosses define which weak points are eligible and pins expire if the squad abandons the sequence."
+        ],
+        "evolution": [
+          "Wound Cartographer evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Wound Cartographer has a dedicated visual grammar for weak-point map, attack order, team clarity with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Wound Cartographer distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Wound Cartographer uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its weak-point mapping rifle identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Wound Cartographer includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Wound Cartographer has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary colossus survey mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "WPN-167",
+      "name": "Lantern of Last Range",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "range-threshold sniper",
+      "identity": {
+        "fantasy": "A sniper that rewards firing near the edge of its authored effective range by lighting a lantern that guides the next reposition.",
+        "silhouette": "Black sniper with a warm lantern suspended under the muzzle by a short chain.",
+        "lore_hook": "The last safe distance was never written on maps, so the rifle carried its own light."
+      },
+      "mechanics": {
+        "core": [
+          "range threshold",
+          "reposition guide",
+          "sniper"
+        ],
+        "signature": [
+          "A hit near the weapon's authored range threshold lights Last Range.",
+          "While lit, the optic displays one nearby safer reposition arc rather than a damage bonus.",
+          "Taking that arc before the lantern fades grants temporary aim stabilization on the next shot."
+        ],
+        "counterplay": [
+          "The arc is advisory, visible only briefly, and close-range pressure prevents setup."
+        ],
+        "evolution": [
+          "Lantern of Last Range evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Lantern of Last Range has a dedicated visual grammar for range threshold, reposition guide, sniper with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Lantern of Last Range distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Lantern of Last Range uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its range-threshold sniper identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Lantern of Last Range includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Lantern of Last Range has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary long-watch pilgrimage."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "WPN-168",
+      "name": "Crownspike Memory",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "cover-history repeater",
+      "identity": {
+        "fantasy": "A repeater that remembers the last two pieces of cover an enemy used and marks the gap between them as a predicted transit lane.",
+        "silhouette": "Steel repeater with crown-shaped memory spikes along a narrow data rail.",
+        "lore_hook": "Royal guards discovered people repeat routes even when bullets are involved."
+      },
+      "mechanics": {
+        "core": [
+          "cover history",
+          "transit prediction",
+          "repeater"
+        ],
+        "signature": [
+          "Striking the same eligible enemy near two different cover objects stores both Cover Memories.",
+          "The weapon draws a visible predicted transit corridor between those memories.",
+          "Firing into the corridor before the target enters it primes a small stagger shot but reveals the prediction."
+        ],
+        "counterplay": [
+          "Taking an unexpected third route clears the oldest memory and defeats the prediction."
+        ],
+        "evolution": [
+          "Crownspike Memory evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Crownspike Memory has a dedicated visual grammar for cover history, transit prediction, repeater with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Crownspike Memory distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Crownspike Memory uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its cover-history repeater identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Crownspike Memory includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Crownspike Memory has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary royal guard challenge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "WPN-169",
+      "name": "Choir of Broken Weather",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "multi-weather rifle",
+      "identity": {
+        "fantasy": "A rifle that records the last three distinct weather states experienced and blends them into a short tactical shot.",
+        "silhouette": "Asymmetrical rifle with three cracked weather vanes orbiting the receiver.",
+        "lore_hook": "The choir only became beautiful after the climate stopped agreeing with itself."
+      },
+      "mechanics": {
+        "core": [
+          "weather memory",
+          "three-state blend",
+          "adaptive utility"
+        ],
+        "signature": [
+          "Rain, ash, frost, static, or wind can each fill one distinct Weather Note.",
+          "Three distinct Notes unlock a Blend Shot whose utility depends on the combination rather than simply adding elemental damage.",
+          "Firing the Blend clears all Notes and briefly displays the recipe to nearby allies."
+        ],
+        "counterplay": [
+          "Repeated weather states cannot fill multiple slots and indoor fights may prevent setup."
+        ],
+        "evolution": [
+          "Choir of Broken Weather evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Choir of Broken Weather has a dedicated visual grammar for weather memory, three-state blend, adaptive utility with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Choir of Broken Weather distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Choir of Broken Weather uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its multi-weather rifle identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Choir of Broken Weather includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Choir of Broken Weather has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary weather choir mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "WPN-170",
+      "name": "Iron Psalm Relay",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "armor-break relay rifle",
+      "identity": {
+        "fantasy": "A rifle that passes an armor-pressure mark between squad members, rewarding alternating attacks rather than one-player focus fire.",
+        "silhouette": "Dark iron rifle with relay chains running through three numbered hymn plates.",
+        "lore_hook": "Siege hymns were written for multiple voices because no wall feared a soloist."
+      },
+      "mechanics": {
+        "core": [
+          "squad alternation",
+          "armor pressure",
+          "relay"
+        ],
+        "signature": [
+          "A hit on an eligible armored target creates Psalm Mark I.",
+          "A different squad member hitting the target advances the mark to II, and a third contributor advances it to III.",
+          "Psalm III reveals one authored armor seam for a short window, then the relay resets."
+        ],
+        "counterplay": [
+          "The sequence requires distinct contributors and cannot expose undeclared boss weak points."
+        ],
+        "evolution": [
+          "Iron Psalm Relay evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Iron Psalm Relay has a dedicated visual grammar for squad alternation, armor pressure, relay with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Iron Psalm Relay distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Iron Psalm Relay uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its armor-break relay rifle identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Iron Psalm Relay includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Iron Psalm Relay has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary iron psalm warfront reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "WPN-171",
+      "name": "Ocean Between Chambers",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "pressure-cycle shotgun",
+      "identity": {
+        "fantasy": "A shotgun with two pressure chambers separated by a visible liquid gap, alternating push and pull effects on lesser enemies.",
+        "silhouette": "Pearl-black shotgun with two floating barrels separated by a ribbon of suspended seawater.",
+        "lore_hook": "Abyssal engineers put an ocean inside the only space a shotgun had left."
+      },
+      "mechanics": {
+        "core": [
+          "push-pull cycle",
+          "pressure chambers",
+          "shotgun"
+        ],
+        "signature": [
+          "Odd shots create a mild outward pressure on eligible lesser enemies.",
+          "Even shots create a mild inward pressure toward the impact center.",
+          "Completing a full push-pull cycle without reloading primes a short water-step speed burst for the wielder."
+        ],
+        "counterplay": [
+          "The cycle is predictable, effects are modest, and bosses resist displacement."
+        ],
+        "evolution": [
+          "Ocean Between Chambers evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Ocean Between Chambers has a dedicated visual grammar for push-pull cycle, pressure chambers, shotgun with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Ocean Between Chambers distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Ocean Between Chambers uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its pressure-cycle shotgun identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Ocean Between Chambers includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Ocean Between Chambers has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary abyssal chamber trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "WPN-172",
+      "name": "The Mercy Calculus",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "triage computation rifle",
+      "identity": {
+        "fantasy": "A mythic support rifle that chooses among protection, rescue, and pressure relief based on explicitly visible squad-state inputs.",
+        "silhouette": "White-gold rifle surrounded by floating calculation rings and three mercy symbols.",
+        "lore_hook": "Its makers refused to automate compassion without showing their work."
+      },
+      "mechanics": {
+        "core": [
+          "triage state",
+          "support choice",
+          "visible calculation"
+        ],
+        "signature": [
+          "The weapon displays which nearby ally currently qualifies for Protection, Rescue, or Pressure Relief.",
+          "Precision hits build a shared Mercy Sum that can be spent on exactly one displayed option.",
+          "Choosing an option locks the other two briefly, preventing one resource from solving every problem."
+        ],
+        "counterplay": [
+          "The calculation is visible, resource-capped, and never replaces normal revive or healing rules."
+        ],
+        "evolution": [
+          "The Mercy Calculus evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "The Mercy Calculus has a dedicated visual grammar for triage state, support choice, visible calculation with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "The Mercy Calculus distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "The Mercy Calculus uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its triage computation rifle identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "The Mercy Calculus includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "The Mercy Calculus has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic hospice theorem quest."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "WPN-173",
+      "name": "Graveyard of Seconds",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "expired-cooldown launcher",
+      "identity": {
+        "fantasy": "A mythic launcher that creates tactical effects from cooldowns that just finished rather than those currently active.",
+        "silhouette": "Black launcher with small clock gravestones rotating around the chamber.",
+        "lore_hook": "Chronomancers eventually found a cemetery where dead seconds went."
+      },
+      "mechanics": {
+        "core": [
+          "cooldown expiry",
+          "time graves",
+          "launcher"
+        ],
+        "signature": [
+          "When an eligible player cooldown completes nearby, a short-lived Second Grave can appear.",
+          "The launcher can consume a Grave to create a brief acceleration lane or reload-support pulse.",
+          "Unused Graves expire harmlessly and cannot be stockpiled across encounters."
+        ],
+        "counterplay": [
+          "Effects depend on natural cooldown completions and visible Graves can be denied by movement."
+        ],
+        "evolution": [
+          "Graveyard of Seconds evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Graveyard of Seconds has a dedicated visual grammar for cooldown expiry, time graves, launcher with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Graveyard of Seconds distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Graveyard of Seconds uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its expired-cooldown launcher identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Graveyard of Seconds includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Graveyard of Seconds has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Court of Broken Hours reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "WPN-174",
+      "name": "Mirror Tribunal",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "reflection-judgment rifle",
+      "identity": {
+        "fantasy": "A mythic rifle that records whether enemies repeatedly block, dodge, or absorb attacks and selects a corresponding counterplay tool.",
+        "silhouette": "Silver-black rifle with three judge masks reflected in a floating optic.",
+        "lore_hook": "The Tribunal never judged guilt, only defensive habits."
+      },
+      "mechanics": {
+        "core": [
+          "defense history",
+          "adaptive counterplay",
+          "rifle"
+        ],
+        "signature": [
+          "Repeated blocks fill the Break mask and prime a high-stagger low-damage shot.",
+          "Repeated dodges fill the Pursuit mask and prime a short movement-prediction line.",
+          "Repeated absorption effects fill the Empty mask and prime an effect-source reveal."
+        ],
+        "counterplay": [
+          "Changing defensive behavior prevents any mask from filling and the active mask is visible."
+        ],
+        "evolution": [
+          "Mirror Tribunal evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Mirror Tribunal has a dedicated visual grammar for defense history, adaptive counterplay, rifle with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Mirror Tribunal distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Mirror Tribunal uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its reflection-judgment rifle identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Mirror Tribunal includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Mirror Tribunal has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic mirror tribunal trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "WPN-175",
+      "name": "Starved Atlas",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "map-resource cannon",
+      "identity": {
+        "fantasy": "A mythic cannon that grows more useful as fewer map objectives remain unresolved, turning campaign progress into tactical clarity rather than raw scaling.",
+        "silhouette": "Huge dark cannon wrapped in an incomplete glowing world map.",
+        "lore_hook": "The Atlas was hungry because every completed journey removed a piece of its world."
+      },
+      "mechanics": {
+        "core": [
+          "objective state",
+          "map clarity",
+          "campaign utility"
+        ],
+        "signature": [
+          "While multiple local objectives remain, the cannon emphasizes route and objective markers.",
+          "As objectives are completed, unused map layers collapse into improved hazard and weak-object visibility.",
+          "On the final local objective, Atlas Shot can create one temporary squad rally route to the objective without increasing damage."
+        ],
+        "counterplay": [
+          "Benefits are informational and session-bound; completed long-term content does not create permanent combat scaling."
+        ],
+        "evolution": [
+          "Starved Atlas evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Starved Atlas has a dedicated visual grammar for objective state, map clarity, campaign utility with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Starved Atlas distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Starved Atlas uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its map-resource cannon identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Starved Atlas includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Starved Atlas has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic world-cartographer campaign."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "WPN-176",
+      "name": "Godfall Draft",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "anti-air trajectory weapon",
+      "identity": {
+        "fantasy": "A mythic launcher that sketches a falling trajectory before firing, letting squads plan around aerial and giant targets.",
+        "silhouette": "Tall slate launcher with a vertical drafting plane hovering beside it.",
+        "lore_hook": "Siege architects learned gods still obeyed lines if the lines were large enough."
+      },
+      "mechanics": {
+        "core": [
+          "trajectory drafting",
+          "anti-air",
+          "team planning"
+        ],
+        "signature": [
+          "Charging sketches the full falling path of the projectile in world space.",
+          "Allies can see the draft and mark the intended impact corridor before release.",
+          "Canceling the shot erases the draft and refunds part of the charge resource, enabling feints against mobile bosses."
+        ],
+        "counterplay": [
+          "The path is obvious to enemies, charge time is long, and mobile targets can leave the corridor."
+        ],
+        "evolution": [
+          "Godfall Draft evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Godfall Draft has a dedicated visual grammar for trajectory drafting, anti-air, team planning with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Godfall Draft distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Godfall Draft uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its anti-air trajectory weapon identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Godfall Draft includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Godfall Draft has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic sky-siege mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "WPN-177",
+      "name": "The Weapon Beneath Names",
+      "family": "weapon",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "identity-stripping rifle",
+      "identity": {
+        "fantasy": "An exotic rifle that temporarily removes nonessential title and rank presentation from marked enemies so squads must read silhouette and behavior.",
+        "silhouette": "Featureless dark rifle whose own nameplate appears blank until equipped.",
+        "lore_hook": "Its creators believed titles were the first armor every tyrant wore."
+      },
+      "mechanics": {
+        "core": [
+          "presentation stripping",
+          "behavior reading",
+          "exotic challenge"
+        ],
+        "signature": [
+          "Marking an eligible elite hides noncritical rank/title presentation for a short challenge window while preserving accessibility and objective icons.",
+          "During the window, the squad gains stronger animation-state readability cues rather than damage bonuses.",
+          "Completing the challenge without mis-targeting grants a brief weak-point direction ping."
+        ],
+        "counterplay": [
+          "Critical information is never removed, bosses require explicit support, and the challenge can be declined by not activating the mark."
+        ],
+        "evolution": [
+          "The Weapon Beneath Names evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "The Weapon Beneath Names has a dedicated visual grammar for presentation stripping, behavior reading, exotic challenge with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "The Weapon Beneath Names distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "The Weapon Beneath Names uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its identity-stripping rifle identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "The Weapon Beneath Names includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "The Weapon Beneath Names has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic nameless duelist trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "WPN-178",
+      "name": "Sovereign Interval",
+      "family": "weapon",
+      "tier": "god",
+      "status": "specified",
+      "role": "time-window command weapon",
+      "identity": {
+        "fantasy": "A God-tier weapon that defines short sovereign intervals in which squads coordinate one chosen action category for a shared tactical payoff.",
+        "silhouette": "Regal black-gold rifle with a rotating clock crown and four command hands.",
+        "lore_hook": "The sovereign ruled no land, only the seconds everyone agreed to share."
+      },
+      "mechanics": {
+        "core": [
+          "shared timing",
+          "command interval",
+          "god coordination"
+        ],
+        "signature": [
+          "Declare Interval of Movement and reward synchronized repositioning with a short traversal route.",
+          "Declare Interval of Guard and reward coordinated protection with a temporary team stability pulse.",
+          "Declare Interval of Assault and reward distinct-player hits on one marked weak point with a reveal window.",
+          "Declare Interval of Rescue and reward coordinated support actions with shorter recovery from the next environmental slow."
+        ],
+        "counterplay": [
+          "Only one interval exists at a time, every requirement is visible, and failing the coordination grants no punishment beyond lost opportunity."
+        ],
+        "evolution": [
+          "Sovereign Interval evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Sovereign Interval has a dedicated visual grammar for shared timing, command interval, god coordination with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Sovereign Interval distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Sovereign Interval uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its time-window command weapon identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Sovereign Interval includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Sovereign Interval has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier sovereign clock pilgrimage."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "WPN-179",
+      "name": "Axiom of the Last Distance",
+      "family": "weapon",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "range-law weapon",
+      "identity": {
+        "fantasy": "An Absolute weapon that defines a bounded local rule about distance, making spacing itself the encounter mechanic.",
+        "silhouette": "White-black lance with concentric range rings floating along an impossibly long line.",
+        "lore_hook": "The Axiom does not ask how far away something is; it asks which distances are allowed to matter."
+      },
+      "mechanics": {
+        "core": [
+          "distance law",
+          "bounded domain",
+          "absolute geometry"
+        ],
+        "signature": [
+          "Law of Near makes selected lesser projectile attacks lose force near the domain center while preserving melee threat.",
+          "Law of Far makes eligible temporary summons weaker beyond a visible outer ring.",
+          "Law of Equal creates one intermediate ring where ally movement stabilizes but damage is unchanged.",
+          "Recast shifts the ring radii only after a long telegraph, preventing instant trapping."
+        ],
+        "counterplay": [
+          "The domain is small, ring boundaries are explicit, and boss mechanics use authored exceptions."
+        ],
+        "evolution": [
+          "Axiom of the Last Distance evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Axiom of the Last Distance has a dedicated visual grammar for distance law, bounded domain, absolute geometry with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Axiom of the Last Distance distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Axiom of the Last Distance uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its range-law weapon identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Axiom of the Last Distance includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Axiom of the Last Distance has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute Distance Tribunal."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "WPN-180",
+      "name": "Zero's Unfinished Sentence",
+      "family": "weapon",
+      "tier": "transcendent_zero",
+      "status": "specified",
+      "role": "Ascendant syntax weapon",
+      "identity": {
+        "fantasy": "A Transcendent Zero weapon that assembles its function from a limited sequence of authored verbs chosen during combat rather than carrying a fixed attack identity.",
+        "silhouette": "A floating line of black-white glyphs extending from the Ascendant's hand, ending in a permanently unfinished symbol.",
+        "lore_hook": "Zero never finished the sentence because finishing would have made only one future true."
+      },
+      "mechanics": {
+        "core": [
+          "verb sequence",
+          "authored syntax",
+          "ascendant weapon"
+        ],
+        "signature": [
+          "Verb MOVE converts the next supported action into a bounded spatial displacement effect.",
+          "Verb BIND converts the next supported action into a short control or anchoring effect against eligible targets.",
+          "Verb REVEAL converts the next supported action into weak-point, hazard, or path information.",
+          "Verb SHELTER converts the next supported action into a temporary defensive construct or pulse.",
+          "Verb END can only follow an authored encounter vulnerability and converts the current syntax into a once-per-transformation finisher state."
+        ],
+        "counterplay": [
+          "Verbs have strict resources, explicit compatible actions, boss immunities, destination validation, and no syntax can invent unsupported mechanics at runtime."
+        ],
+        "evolution": [
+          "Zero's Unfinished Sentence evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Zero's Unfinished Sentence has a dedicated visual grammar for verb sequence, authored syntax, ascendant weapon with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Zero's Unfinished Sentence distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Zero's Unfinished Sentence uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its Ascendant syntax weapon identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Zero's Unfinished Sentence includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Zero's Unfinished Sentence has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Bound only to a qualified Transcendent Zero Ascendant after the final syntax trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "ARM-115",
+      "name": "Bellweather Exosoul",
+      "family": "armor",
+      "tier": "epic",
+      "status": "specified",
+      "role": "hazard-warning armor",
+      "identity": {
+        "fantasy": "Armor that rings a visible soul-bell when the wearer crosses into a new environmental hazard category.",
+        "silhouette": "Slim iron armor with a translucent bell floating behind the sternum.",
+        "lore_hook": "Miners wore bells underground until the bells began warning them before the tunnels did."
+      },
+      "mechanics": {
+        "core": [
+          "hazard category",
+          "warning bell",
+          "exploration"
+        ],
+        "signature": [
+          "Entering a newly detected authored hazard category rings the Exosoul and highlights the exit boundary briefly.",
+          "Repeated exposure to the same hazard suppresses redundant warnings so combat audio remains readable."
+        ],
+        "counterplay": [
+          "The armor warns but never neutralizes hazards and only supports authored categories."
+        ],
+        "evolution": [
+          "Bellweather Exosoul evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Bellweather Exosoul has a dedicated visual grammar for hazard category, warning bell, exploration with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Bellweather Exosoul distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Bellweather Exosoul uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its hazard-warning armor identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Bellweather Exosoul includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Bellweather Exosoul has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic hazard survey reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "ARM-116",
+      "name": "Ashen Parallax Mantle",
+      "family": "armor",
+      "tier": "epic",
+      "status": "specified",
+      "role": "evasion-afterimage armor",
+      "identity": {
+        "fantasy": "A mantle that leaves one ash afterimage after a perfect evasive move and lets that image absorb a single lesser targeting query.",
+        "silhouette": "Dark gray mantle whose hem separates into two smoky silhouettes during dodges.",
+        "lore_hook": "Ash remembers shape just long enough to lie."
+      },
+      "mechanics": {
+        "core": [
+          "perfect evade",
+          "decoy afterimage",
+          "threat break"
+        ],
+        "signature": [
+          "A precise dodge creates one short-lived Ash Double.",
+          "One eligible lesser AI may briefly target the Double before it collapses."
+        ],
+        "counterplay": [
+          "Only one Double exists and player/boss targeting is unaffected."
+        ],
+        "evolution": [
+          "Ashen Parallax Mantle evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Ashen Parallax Mantle has a dedicated visual grammar for perfect evade, decoy afterimage, threat break with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Ashen Parallax Mantle distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Ashen Parallax Mantle uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its evasion-afterimage armor identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Ashen Parallax Mantle includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Ashen Parallax Mantle has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic parallax scout challenge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "ARM-117",
+      "name": "Leviathan Pilgrim Shell",
+      "family": "armor",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "pressure-traversal armor",
+      "identity": {
+        "fantasy": "Armor that learns repeated water-pressure transitions and helps the wearer cross them more cleanly.",
+        "silhouette": "Pearl-black shell armor with layered gill plates along ribs and thighs.",
+        "lore_hook": "Pilgrims wore pieces of leviathans because the sea respected familiar shapes."
+      },
+      "mechanics": {
+        "core": [
+          "pressure transition",
+          "water traversal",
+          "adaptation"
+        ],
+        "signature": [
+          "Crossing from air to deep water records a Descent pattern.",
+          "Crossing from water to air records an Ascent pattern.",
+          "Alternating the two cleanly grants a temporary traversal stabilization state and visibly opens the shell gills."
+        ],
+        "counterplay": [
+          "The benefit requires repeated transitions and provides little value in dry encounters."
+        ],
+        "evolution": [
+          "Leviathan Pilgrim Shell evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Leviathan Pilgrim Shell has a dedicated visual grammar for pressure transition, water traversal, adaptation with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Leviathan Pilgrim Shell distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Leviathan Pilgrim Shell uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its pressure-traversal armor identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Leviathan Pilgrim Shell includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Leviathan Pilgrim Shell has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary leviathan pilgrimage."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "ARM-118",
+      "name": "Mirrorroot Aegis",
+      "family": "armor",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "terrain-reflection defense",
+      "identity": {
+        "fantasy": "Mythic armor that grows temporary root plates shaped by the last terrain material the wearer deliberately defended from.",
+        "silhouette": "Silver-bark plate with reflective roots crawling over the limbs.",
+        "lore_hook": "The worldroot learned armor by watching fortresses reflected in rain."
+      },
+      "mechanics": {
+        "core": [
+          "terrain memory",
+          "root plating",
+          "adaptive defense"
+        ],
+        "signature": [
+          "Bracing near stone grows dense stagger-resistant root plates.",
+          "Bracing near vegetation grows flexible thorn-response plates.",
+          "Bracing near water grows smoother movement-oriented reed plates."
+        ],
+        "counterplay": [
+          "Only one terrain adaptation is active and changing it creates a visible regrowth gap."
+        ],
+        "evolution": [
+          "Mirrorroot Aegis evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Mirrorroot Aegis has a dedicated visual grammar for terrain memory, root plating, adaptive defense with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Mirrorroot Aegis distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Mirrorroot Aegis uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its terrain-reflection defense identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Mirrorroot Aegis includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Mirrorroot Aegis has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic worldroot mirror quest."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "ARM-119",
+      "name": "Absolute Choirless Crown",
+      "family": "armor",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "signal-priority law armor",
+      "identity": {
+        "fantasy": "Absolute armor that creates a small domain where critical combat telegraphs are prioritized over nonessential spectacle rather than suppressing mechanics.",
+        "silhouette": "White-black crown armor surrounded by a silent ring of empty note symbols.",
+        "lore_hook": "The Crown's greatest power is deciding which warnings deserve to be heard first."
+      },
+      "mechanics": {
+        "core": [
+          "signal priority",
+          "domain clarity",
+          "absolute defense"
+        ],
+        "signature": [
+          "Law of Warning boosts presentation priority for authored lethal telegraphs inside the domain.",
+          "Law of Silence reduces only noncritical ambient presentation density within the boundary.",
+          "Law of Chorus groups repeated lesser hazard cues into one readable shared rhythm.",
+          "Crown Break ends the domain early and restores full ambient presentation before releasing a short ally awareness pulse."
+        ],
+        "counterplay": [
+          "No gameplay effect is deleted; domain is small and the system must preserve accessibility channels."
+        ],
+        "evolution": [
+          "Absolute Choirless Crown evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Absolute Choirless Crown has a dedicated visual grammar for signal priority, domain clarity, absolute defense with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Absolute Choirless Crown distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Absolute Choirless Crown uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its signal-priority law armor identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Absolute Choirless Crown includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Absolute Choirless Crown has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute signal tribunal."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "ARM-120",
+      "name": "Mantle Beyond the Final Crown",
+      "family": "armor",
+      "tier": "transcendent_zero",
+      "status": "specified",
+      "role": "Ascendant interpretation armor",
+      "identity": {
+        "fantasy": "The final Transcendent Zero mantle, changing defensive interpretation according to the Ascendant's chosen Authority without stacking all Authorities simultaneously.",
+        "silhouette": "An impossible mantle that takes on one precise symbolic geometry at a time while the remaining Authorities appear as dormant black seals.",
+        "lore_hook": "Beyond the final crown there is no higher throne, only responsibility for which law is allowed to exist."
+      },
+      "mechanics": {
+        "core": [
+          "Authority interpretation",
+          "mutually exclusive defense",
+          "Ascendant state"
+        ],
+        "signature": [
+          "Space interpretation emphasizes validated phase paths and spatial escape rather than raw mitigation.",
+          "Time interpretation emphasizes one bounded recovery echo without rewinding full encounter state.",
+          "Matter interpretation emphasizes stagger stability and temporary terrain anchoring.",
+          "Mind interpretation emphasizes clarity against eligible fear, lure, or perception effects.",
+          "Law interpretation emphasizes one small authored defensive rule domain and forces every other Authority seal dormant."
+        ],
+        "counterplay": [
+          "Only one Authority interpretation is active, all effects are resource-bound and encounter-safe, and the mantle provides no automatic immunity to boss mechanics."
+        ],
+        "evolution": [
+          "Mantle Beyond the Final Crown evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Mantle Beyond the Final Crown has a dedicated visual grammar for Authority interpretation, mutually exclusive defense, Ascendant state with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Mantle Beyond the Final Crown distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Mantle Beyond the Final Crown uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its Ascendant interpretation armor identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Mantle Beyond the Final Crown includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Mantle Beyond the Final Crown has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Bound to a qualified Transcendent Zero Ascendant after Authority attunement."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "MON-152",
+      "name": "Inkreef Wolf",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "shoreline ambush predator",
+      "identity": {
+        "fantasy": "A black amphibious wolf that paints temporary ink reefs across shallow water and uses them as hidden approach lanes.",
+        "silhouette": "Lean wolf with coral-like black fins and ink dripping from paws.",
+        "lore_hook": "Coastal hunters first mistook its trails for oil until the oil started circling them."
+      },
+      "mechanics": {
+        "core": [
+          "ink reef",
+          "water ambush",
+          "pack"
+        ],
+        "signature": [
+          "Running through shallow water creates short opaque Ink Reefs.",
+          "The wolf can re-enter one recent Reef and emerge from another nearby section after a visible ripple."
+        ],
+        "counterplay": [
+          "Leave shallow water or watch the reef ripple before emergence."
+        ],
+        "evolution": [
+          "Inkreef Wolf evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Inkreef Wolf has a dedicated visual grammar for ink reef, water ambush, pack with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Inkreef Wolf distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Inkreef Wolf uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its shoreline ambush predator identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Inkreef Wolf includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Inkreef Wolf has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic black-coast hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "MON-153",
+      "name": "Cathedral Beetle",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "mobile cover insect",
+      "identity": {
+        "fantasy": "A huge beetle whose shell resembles a miniature cathedral and opens into cover for smaller monsters.",
+        "silhouette": "Wagon-sized bronze beetle with stained-glass shell panels.",
+        "lore_hook": "Pilgrims built a shrine on one and only later discovered it was walking."
+      },
+      "mechanics": {
+        "core": [
+          "mobile cover",
+          "shell opening",
+          "insect support"
+        ],
+        "signature": [
+          "The beetle can brace and open its shell into a small cover arch for lesser allies.",
+          "Breaking stained shell panels reduces the available cover sectors."
+        ],
+        "counterplay": [
+          "Flank the opened shell or break panels before it braces."
+        ],
+        "evolution": [
+          "Cathedral Beetle evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Cathedral Beetle has a dedicated visual grammar for mobile cover, shell opening, insect support with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Cathedral Beetle distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Cathedral Beetle uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its mobile cover insect identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Cathedral Beetle includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Cathedral Beetle has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic cathedral wilderness encounter."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "MON-154",
+      "name": "Gravetide Widow",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "corpse-current spider",
+      "identity": {
+        "fantasy": "A spider that stretches web lines between recent corpse locations and travels rapidly along them.",
+        "silhouette": "Large bone-white spider with wet black silk trailing from its abdomen.",
+        "lore_hook": "It considers battlefields already furnished."
+      },
+      "mechanics": {
+        "core": [
+          "corpse web",
+          "rapid traversal",
+          "ambush"
+        ],
+        "signature": [
+          "Two eligible corpse sites can become linked by a visible Gravetide Web.",
+          "The Widow moves rapidly along the web but must slow while placing or replacing anchors."
+        ],
+        "counterplay": [
+          "Clear corpse anchors or attack during web placement."
+        ],
+        "evolution": [
+          "Gravetide Widow evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Gravetide Widow has a dedicated visual grammar for corpse web, rapid traversal, ambush with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Gravetide Widow distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Gravetide Widow uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its corpse-current spider identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Gravetide Widow includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Gravetide Widow has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic necropolis shoreline hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "MON-155",
+      "name": "Clock Orchard Raven",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "timed-seed flyer",
+      "identity": {
+        "fantasy": "A raven that drops clockwork seeds which hatch into harmless distractions or hostile thornlings depending on when players destroy them.",
+        "silhouette": "Large black raven with brass fruit hanging from its tail feathers.",
+        "lore_hook": "The orchard learned timing from birds and regret from people."
+      },
+      "mechanics": {
+        "core": [
+          "timed seeds",
+          "choice hazard",
+          "flying"
+        ],
+        "signature": [
+          "Dropped Clock Seeds display a clear countdown ring.",
+          "Destroying a seed early creates a harmless smoke decoy while letting it mature releases a short-lived thornling."
+        ],
+        "counterplay": [
+          "Prioritize seeds when space is safe or deliberately accept thornlings when other threats matter more."
+        ],
+        "evolution": [
+          "Clock Orchard Raven evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Clock Orchard Raven has a dedicated visual grammar for timed seeds, choice hazard, flying with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Clock Orchard Raven distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Clock Orchard Raven uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its timed-seed flyer identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Clock Orchard Raven includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Clock Orchard Raven has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic chronogarden patrol."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "MON-156",
+      "name": "Hellglass Stag",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "infernal reflection charger",
+      "identity": {
+        "fantasy": "A demonic stag whose glass antlers reflect hazard telegraphs onto nearby surfaces before charging through one of them.",
+        "silhouette": "Tall crimson stag with transparent branching antlers containing fire.",
+        "lore_hook": "Demon hunters learned the antlers lie less often than the creature."
+      },
+      "mechanics": {
+        "core": [
+          "telegraph reflection",
+          "charge selection",
+          "infernal beast"
+        ],
+        "signature": [
+          "Antlers project three reflected charge lanes onto nearby terrain.",
+          "Only one lane becomes real, announced by a final internal flare.",
+          "Breaking an antler reduces the number of false reflected lanes."
+        ],
+        "counterplay": [
+          "Wait for the internal flare rather than reacting to every projection."
+        ],
+        "evolution": [
+          "Hellglass Stag evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Hellglass Stag has a dedicated visual grammar for telegraph reflection, charge selection, infernal beast with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Hellglass Stag distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Hellglass Stag uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its infernal reflection charger identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Hellglass Stag includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Hellglass Stag has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary infernal glasswood hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "MON-157",
+      "name": "Memory Leech",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "recent-action parasite",
+      "identity": {
+        "fantasy": "A floating parasite that feeds on repeated player action categories and becomes vulnerable when the player deliberately changes behavior.",
+        "silhouette": "Pale translucent leech with small scene-like images moving through its body.",
+        "lore_hook": "It feeds on habits because habits are easier to digest than thoughts."
+      },
+      "mechanics": {
+        "core": [
+          "action repetition",
+          "parasite growth",
+          "behavior change"
+        ],
+        "signature": [
+          "Repeated sprint, fire, guard, or ability actions feed the matching Memory Sac.",
+          "A full Sac grants the leech one simple counter behavior.",
+          "Changing action category drains the stored Sac and briefly exposes the core."
+        ],
+        "counterplay": [
+          "Vary behavior and strike during the exposure window."
+        ],
+        "evolution": [
+          "Memory Leech evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Memory Leech has a dedicated visual grammar for action repetition, parasite growth, behavior change with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Memory Leech distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Memory Leech uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its recent-action parasite identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Memory Leech includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Memory Leech has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary mnemonic marsh anomaly."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "MON-158",
+      "name": "Sunken Bell Ape",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "underwater resonance brute",
+      "identity": {
+        "fantasy": "A giant ape carrying a ship bell fused into its chest, using water depth to change the bell's shockwave shape.",
+        "silhouette": "Broad drowned ape with green-bronze bell ribs and anchor-chain arms.",
+        "lore_hook": "The ship sank around it, but the bell kept a new crew."
+      },
+      "mechanics": {
+        "core": [
+          "depth response",
+          "sonic shockwave",
+          "brute"
+        ],
+        "signature": [
+          "In shallow water the chest bell sends a wide low shockwave.",
+          "In deep water the bell sends a narrow vertical pressure column.",
+          "On dry ground the bell is weaker but the ape gains faster chain swings."
+        ],
+        "counterplay": [
+          "Choose the terrain state that best fits the squad's strengths and punish bell windups."
+        ],
+        "evolution": [
+          "Sunken Bell Ape evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Sunken Bell Ape has a dedicated visual grammar for depth response, sonic shockwave, brute with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Sunken Bell Ape distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Sunken Bell Ape uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its underwater resonance brute identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Sunken Bell Ape includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Sunken Bell Ape has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary drowned harbor encounter."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "MON-159",
+      "name": "Rift Shepherd",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "portal-herding caster",
+      "identity": {
+        "fantasy": "A crooked eldritch shepherd that creates tiny rifts to redirect lesser monsters rather than teleporting itself.",
+        "silhouette": "Thin black figure carrying a staff forked into two rectangular portals.",
+        "lore_hook": "It does not command the flock; it moves the field beneath them."
+      },
+      "mechanics": {
+        "core": [
+          "mob redirection",
+          "micro-rifts",
+          "support caster"
+        ],
+        "signature": [
+          "Places paired micro-rifts on eligible lesser-monster travel lanes.",
+          "Lesser allies crossing one exit from the other with preserved momentum.",
+          "Destroying either rift causes nearby redirected monsters to hesitate briefly."
+        ],
+        "counterplay": [
+          "Break rifts before large packs reach them and focus the Shepherd while it redraws routes."
+        ],
+        "evolution": [
+          "Rift Shepherd evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Rift Shepherd has a dedicated visual grammar for mob redirection, micro-rifts, support caster with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Rift Shepherd distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Rift Shepherd uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its portal-herding caster identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Rift Shepherd includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Rift Shepherd has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary rift pasture anomaly."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "MON-160",
+      "name": "Corpse Choir Lantern",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "necromantic beacon creature",
+      "identity": {
+        "fantasy": "A floating lantern creature that gathers whispers from corpses and uses them to guide nearby undead toward isolated targets.",
+        "silhouette": "Iron funeral lantern with many small jaw-like shutters and no visible carrier.",
+        "lore_hook": "Necromancers built a lamp and accidentally gave the dead a lighthouse."
+      },
+      "mechanics": {
+        "core": [
+          "corpse whispers",
+          "target guidance",
+          "necromantic support"
+        ],
+        "signature": [
+          "Nearby eligible corpses add Whisper charges.",
+          "At threshold the lantern identifies the most isolated nearby player with a visible beam.",
+          "Undead receive a temporary navigation preference toward that player until the lantern is broken."
+        ],
+        "counterplay": [
+          "Clear corpses, regroup, or destroy the fragile lantern body."
+        ],
+        "evolution": [
+          "Corpse Choir Lantern evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Corpse Choir Lantern has a dedicated visual grammar for corpse whispers, target guidance, necromantic support with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Corpse Choir Lantern distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Corpse Choir Lantern uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its necromantic beacon creature identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Corpse Choir Lantern includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Corpse Choir Lantern has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary necropolis procession."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "MON-161",
+      "name": "Null Antler Hound",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "domain-tracking predator",
+      "identity": {
+        "fantasy": "A hound whose branching antlers grow toward active player-created domains and temporary constructs.",
+        "silhouette": "Black canine with white antlers bent into compass-like forks.",
+        "lore_hook": "The Null Court bred hunters that could smell rules."
+      },
+      "mechanics": {
+        "core": [
+          "domain scent",
+          "construct tracking",
+          "predator"
+        ],
+        "signature": [
+          "Active eligible domains create visible scent lines along the antlers.",
+          "The hound prioritizes the strongest nearby temporary construct or domain source.",
+          "Breaking antler branches removes scent directions and forces ordinary pursuit behavior."
+        ],
+        "counterplay": [
+          "Rotate domain placement, destroy antlers, or deliberately bait the hound away."
+        ],
+        "evolution": [
+          "Null Antler Hound evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Null Antler Hound has a dedicated visual grammar for domain scent, construct tracking, predator with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Null Antler Hound distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Null Antler Hound uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its domain-tracking predator identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Null Antler Hound includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Null Antler Hound has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Null Court hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "MON-162",
+      "name": "Red Weather Harpy",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "storm-stealing aerial caster",
+      "identity": {
+        "fantasy": "A harpy that tears strips from active weather cells and wears them as temporary attack wings.",
+        "silhouette": "Crimson-black harpy whose wings change material between rain, ash, frost, and lightning.",
+        "lore_hook": "She does not predict weather; she steals whatever arrives first."
+      },
+      "mechanics": {
+        "core": [
+          "weather theft",
+          "wing modes",
+          "aerial combat"
+        ],
+        "signature": [
+          "Rain creates fast water-feather volleys.",
+          "Ash creates obscuring dive trails.",
+          "Frost creates slower sweeping wing arcs.",
+          "Lightning creates highly telegraphed vertical strike feathers."
+        ],
+        "counterplay": [
+          "Fight outside active weather or target wing nodes after a theft animation."
+        ],
+        "evolution": [
+          "Red Weather Harpy evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Red Weather Harpy has a dedicated visual grammar for weather theft, wing modes, aerial combat with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Red Weather Harpy distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Red Weather Harpy uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its storm-stealing aerial caster identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Red Weather Harpy includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Red Weather Harpy has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic red weather event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "MON-163",
+      "name": "Saint-Eater Crab",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "support-zone armored scavenger",
+      "identity": {
+        "fantasy": "A massive crab that carries stolen support effects inside shell reliquaries and releases them as hostile terrain.",
+        "silhouette": "Tank-sized ivory crab with broken halos trapped under translucent shell plates.",
+        "lore_hook": "It learned sanctity was easier to carry than understand."
+      },
+      "mechanics": {
+        "core": [
+          "support theft",
+          "shell reliquary",
+          "terrain conversion"
+        ],
+        "signature": [
+          "Standing in an eligible support zone fills one Halo Plate.",
+          "A filled plate can release a corrupted ground patch with a clearly altered visual language.",
+          "Breaking the filled plate cleanses the stored effect and exposes a soft shell seam."
+        ],
+        "counterplay": [
+          "Move support zones, target filled plates, and use the seam window."
+        ],
+        "evolution": [
+          "Saint-Eater Crab evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Saint-Eater Crab has a dedicated visual grammar for support theft, shell reliquary, terrain conversion with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Saint-Eater Crab distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Saint-Eater Crab uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its support-zone armored scavenger identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Saint-Eater Crab includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Saint-Eater Crab has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic saintless coast hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "MON-164",
+      "name": "Horizon Worm",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "long-lane burrower",
+      "identity": {
+        "fantasy": "A giant worm that moves only along very long straight burrow lines and becomes vulnerable whenever forced to turn.",
+        "silhouette": "Train-length pale worm with a perfectly straight black dorsal stripe.",
+        "lore_hook": "It learned distance but never learned corners."
+      },
+      "mechanics": {
+        "core": [
+          "straight burrow",
+          "turn vulnerability",
+          "lane hazard"
+        ],
+        "signature": [
+          "The worm declares a long Burrow Horizon before traveling underground.",
+          "Terrain or objective blockers can force a Turn Event at authored junctions.",
+          "During Turn Event the dorsal armor opens and the worm becomes vulnerable before choosing a new horizon."
+        ],
+        "counterplay": [
+          "Use junction objectives to force turns rather than chasing the protected body."
+        ],
+        "evolution": [
+          "Horizon Worm evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Horizon Worm has a dedicated visual grammar for straight burrow, turn vulnerability, lane hazard with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Horizon Worm distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Horizon Worm uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its long-lane burrower identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Horizon Worm includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Horizon Worm has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic desert horizon hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "MON-165",
+      "name": "Mirror Witch Hound",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "curse-reflection pack beast",
+      "identity": {
+        "fantasy": "A witch-bred hound that stores one eligible curse applied nearby and projects a weaker copy onto its own pack.",
+        "silhouette": "Silver-black wolf with mirror shards growing through a rune-covered muzzle.",
+        "lore_hook": "The witches wanted guard dogs; the dogs wanted spellbooks."
+      },
+      "mechanics": {
+        "core": [
+          "curse memory",
+          "pack sharing",
+          "witch beast"
+        ],
+        "signature": [
+          "One nearby eligible status effect can be captured in the muzzle mirrors.",
+          "Captured effect becomes a normalized short pack aura.",
+          "Breaking the muzzle mirror removes the aura and causes a brief confusion state among the pack."
+        ],
+        "counterplay": [
+          "Avoid applying exploitable effects near the hound or shatter the visible mirror muzzle."
+        ],
+        "evolution": [
+          "Mirror Witch Hound evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Mirror Witch Hound has a dedicated visual grammar for curse memory, pack sharing, witch beast with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Mirror Witch Hound distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Mirror Witch Hound uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its curse-reflection pack beast identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Mirror Witch Hound includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Mirror Witch Hound has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic witchwood hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "MON-166",
+      "name": "Worldroot Basilisk",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "terrain-petrifying serpent",
+      "identity": {
+        "fantasy": "A giant basilisk that petrifies patches of living terrain into temporary stone routes and barriers.",
+        "silhouette": "Long green-black serpent with root antlers and stone scales growing behind its gaze.",
+        "lore_hook": "Where it looks, forests remember being mountains."
+      },
+      "mechanics": {
+        "core": [
+          "terrain petrification",
+          "route creation",
+          "gaze"
+        ],
+        "signature": [
+          "Gaze turns eligible vegetation terrain into short-lived stone strips.",
+          "Stone strips can block or redirect lesser monsters and serve as traversal routes.",
+          "Breaking root antlers causes future strips to crack early and create predictable openings."
+        ],
+        "counterplay": [
+          "Use the created routes, stay out of the gaze lane, and target antlers."
+        ],
+        "evolution": [
+          "Worldroot Basilisk evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Worldroot Basilisk has a dedicated visual grammar for terrain petrification, route creation, gaze with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Worldroot Basilisk distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Worldroot Basilisk uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its terrain-petrifying serpent identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Worldroot Basilisk includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Worldroot Basilisk has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic worldroot hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "MON-167",
+      "name": "Choir of Empty Doors",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "portal-swarm collective",
+      "identity": {
+        "fantasy": "An exotic swarm of freestanding doors that moves as one organism, opening different members to attack, flee, or misdirect.",
+        "silhouette": "A procession of mismatched doors walking on thin shadow legs around an invisible center.",
+        "lore_hook": "Travelers kept opening them until the doors learned to travel instead."
+      },
+      "mechanics": {
+        "core": [
+          "door swarm",
+          "distributed body",
+          "portal deception"
+        ],
+        "signature": [
+          "Only one door at a time exposes the vulnerable core behind its frame.",
+          "Other doors open onto harmless false interiors or short lesser-monster routes.",
+          "Destroying false doors reduces the swarm's reposition options but makes the core door change faster."
+        ],
+        "counterplay": [
+          "Read the core tell and decide whether to thin mobility or focus vulnerability windows."
+        ],
+        "evolution": [
+          "Choir of Empty Doors evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Choir of Empty Doors has a dedicated visual grammar for door swarm, distributed body, portal deception with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Choir of Empty Doors distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Choir of Empty Doors uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its portal-swarm collective identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Choir of Empty Doors includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Choir of Empty Doors has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic Thousand Doors anomaly."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "MON-168",
+      "name": "Titan Psalm Bear",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "siege-hymn megafauna",
+      "identity": {
+        "fantasy": "A skyscraper-small bear-like titan whose roar writes visible rhythmic shock lanes into terrain.",
+        "silhouette": "Enormous black bear with gold scripture bands circling its shoulders and throat.",
+        "lore_hook": "Mountain cults called its roars scripture because every valley remembered them."
+      },
+      "mechanics": {
+        "core": [
+          "rhythmic shock lanes",
+          "megafauna",
+          "siege roar"
+        ],
+        "signature": [
+          "Psalm Roar writes three timed shock lanes across the arena.",
+          "The lanes trigger in a visible rhythmic order rather than simultaneously.",
+          "Striking throat scripture between beats can remove one lane from the next cycle."
+        ],
+        "counterplay": [
+          "Read the rhythm, move between lanes, and target throat bands during silence beats."
+        ],
+        "evolution": [
+          "Titan Psalm Bear evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Titan Psalm Bear has a dedicated visual grammar for rhythmic shock lanes, megafauna, siege roar with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Titan Psalm Bear distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Titan Psalm Bear uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its siege-hymn megafauna identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Titan Psalm Bear includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Titan Psalm Bear has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic titan wilderness event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "MON-169",
+      "name": "The Rain That Walks",
+      "family": "monster",
+      "tier": "god",
+      "status": "specified",
+      "role": "regional weather organism",
+      "identity": {
+        "fantasy": "A God-tier organism experienced as a traveling wall of rain whose internal organs appear as temporary silhouettes inside storms.",
+        "silhouette": "A horizon-wide rain front with giant humanoid and animal organ-shapes flickering inside.",
+        "lore_hook": "There was no creature behind the storm; the storm was the creature learning legs."
+      },
+      "mechanics": {
+        "core": [
+          "regional weather body",
+          "organ silhouettes",
+          "traveling boss"
+        ],
+        "signature": [
+          "The rain front moves between regions and changes local visibility and traversal.",
+          "Organ Silhouettes periodically condense into attackable projection bodies.",
+          "Destroying a projection changes the behavior of the next regional rain phase.",
+          "Lightning Veins reveal the path toward the current Heart Cloud objective."
+        ],
+        "counterplay": [
+          "Use Lightning Veins to navigate, attack projections, and avoid treating the entire weather front as a damage target."
+        ],
+        "evolution": [
+          "The Rain That Walks evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "The Rain That Walks has a dedicated visual grammar for regional weather body, organ silhouettes, traveling boss with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "The Rain That Walks distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "The Rain That Walks uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its regional weather organism identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "The Rain That Walks includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "The Rain That Walks has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier living weather event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "MON-170",
+      "name": "The Beast Outside Sequence",
+      "family": "monster",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "order-breaking entity",
+      "identity": {
+        "fantasy": "An Absolute entity that appears to perform encounter actions out of normal sequence, while still exposing an underlying deterministic rule players can learn.",
+        "silhouette": "A many-limbed black-white beast whose animation poses appear slightly before or after their bodies.",
+        "lore_hook": "It does not live outside time; it lives outside the order everyone agreed time should use."
+      },
+      "mechanics": {
+        "core": [
+          "sequence permutation",
+          "deterministic puzzle",
+          "absolute entity"
+        ],
+        "signature": [
+          "The beast announces a visible four-symbol action sequence but executes a consistent permutation rather than the displayed order.",
+          "Breaking one Sequence Node changes the permutation rule for the next phase and displays the new mapping.",
+          "Prediction Anchors let players lock one action into its displayed position.",
+          "Perfectly solving a phase creates a long vulnerability interval instead of bonus burst damage."
+        ],
+        "counterplay": [
+          "Track the permutation, use Anchors selectively, and avoid reacting only to displayed order."
+        ],
+        "evolution": [
+          "The Beast Outside Sequence evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "The Beast Outside Sequence has a dedicated visual grammar for sequence permutation, deterministic puzzle, absolute entity with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "The Beast Outside Sequence distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "The Beast Outside Sequence uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its order-breaking entity identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "The Beast Outside Sequence includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "The Beast Outside Sequence has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute sequence anomaly."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "BOS-077",
+      "name": "The King in Twelve Graves",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "multi-body necromancer sovereign",
+      "identity": {
+        "fantasy": "A mythic king whose consciousness moves among twelve prepared grave bodies, forcing squads to learn which bodies control which arena systems.",
+        "silhouette": "Twelve royal sarcophagi surrounding one moving spectral crown.",
+        "lore_hook": "He considered death a succession problem and solved it bureaucratically."
+      },
+      "mechanics": {
+        "core": [
+          "body transfer",
+          "grave systems",
+          "necromancer boss"
+        ],
+        "signature": [
+          "The Crown occupies one of twelve bodies, each tied to a distinct arena subsystem.",
+          "Destroying an empty body disables its subsystem but removes one future place the Crown could flee.",
+          "Forcing three transfers in one phase opens the central Crown to direct damage.",
+          "Late phases activate two partial bodies simultaneously while only one contains the true Crown."
+        ],
+        "counterplay": [
+          "Choose which grave systems to remove and track transfer tells rather than destroying bodies blindly."
+        ],
+        "evolution": [
+          "The King in Twelve Graves evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "The King in Twelve Graves has a dedicated visual grammar for body transfer, grave systems, necromancer boss with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "The King in Twelve Graves distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "The King in Twelve Graves uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its multi-body necromancer sovereign identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "The King in Twelve Graves includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "The King in Twelve Graves has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic twelve-grave royal raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "BOS-078",
+      "name": "Saint of the Broken Map",
+      "family": "boss",
+      "tier": "god",
+      "status": "specified",
+      "role": "regional pilgrimage boss",
+      "identity": {
+        "fantasy": "A God-tier saint whose moving relic-map divides a world region into routes of faith, doubt, and exile with different objectives.",
+        "silhouette": "Mountain-tall pilgrim carrying a shattered glowing map like a cloak.",
+        "lore_hook": "The saint became lost on purpose and made everyone else prove they deserved directions."
+      },
+      "mechanics": {
+        "core": [
+          "regional routes",
+          "route choice",
+          "god pilgrimage"
+        ],
+        "signature": [
+          "Faith routes emphasize team protection objectives.",
+          "Doubt routes emphasize puzzle and hazard-reading objectives.",
+          "Exile routes emphasize difficult traversal and isolation challenges.",
+          "Completing one route changes the boss phase and permanently closes another route for that encounter."
+        ],
+        "counterplay": [
+          "Squads choose a route matching their strengths; all route consequences are visible before commitment."
+        ],
+        "evolution": [
+          "Saint of the Broken Map evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Saint of the Broken Map has a dedicated visual grammar for regional routes, route choice, god pilgrimage with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Saint of the Broken Map distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Saint of the Broken Map uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its regional pilgrimage boss identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Saint of the Broken Map includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Saint of the Broken Map has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier broken-map pilgrimage."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "BOS-079",
+      "name": "The Absolute Menagerie",
+      "family": "boss",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "multi-ecology synthesis boss",
+      "identity": {
+        "fantasy": "An Absolute boss made from fragments of many mastered ecologies, selecting combinations based on which systems the squad relies on most.",
+        "silhouette": "A vast black-white menagerie frame containing shifting silhouettes of beasts, demons, constructs, and eldritch forms.",
+        "lore_hook": "The Menagerie is what happens when the world stops cataloguing species and starts cataloguing solutions."
+      },
+      "mechanics": {
+        "core": [
+          "ecology synthesis",
+          "system response",
+          "absolute raid"
+        ],
+        "signature": [
+          "The frame selects two ecology aspects at a time, such as leviathan pressure plus necromantic corpse logic.",
+          "Squad behavior influences which compatible pair is likely to appear next, but the pair is announced before activation.",
+          "Defeating aspect organs prevents that exact combination from returning.",
+          "Menagerie Break forces three previously defeated aspects to appear only as harmless traversal or visual echoes during the final vulnerability phase."
+        ],
+        "counterplay": [
+          "Rotate squad systems, target aspect organs, and use the announced combination to prepare rather than reacting after it starts."
+        ],
+        "evolution": [
+          "The Absolute Menagerie evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "The Absolute Menagerie has a dedicated visual grammar for ecology synthesis, system response, absolute raid with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "The Absolute Menagerie distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "The Absolute Menagerie uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its multi-ecology synthesis boss identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "The Absolute Menagerie includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "The Absolute Menagerie has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute ecology mastery raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    },
+    {
+      "id": "BOS-080",
+      "name": "Zero's Final Witness",
+      "family": "boss",
+      "tier": "transcendent_zero",
+      "status": "specified",
+      "role": "final Ascendant validation encounter",
+      "identity": {
+        "fantasy": "The final Transcendent Zero witness does not attempt to overpower the Ascendant; it observes whether the player can exercise overwhelming systems with restraint, precision, and team awareness.",
+        "silhouette": "A single calm black-white figure whose body contains tiny reflections of every major AEONFALL region.",
+        "lore_hook": "The Witness exists because power that cannot choose not to act is not transcendence."
+      },
+      "mechanics": {
+        "core": [
+          "restraint test",
+          "system mastery",
+          "final validation"
+        ],
+        "signature": [
+          "Witness of Force rewards solving a phase without using the strongest available finisher.",
+          "Witness of Shelter rewards protecting vulnerable objectives while maintaining personal survival.",
+          "Witness of Choice presents two valid objectives and records the consequence of the one deliberately left undone.",
+          "Witness of Company scores companion, squad, or faction preservation where the encounter supports allies.",
+          "Final Witness removes all score UI and asks the Ascendant to recognize the established mechanic pattern without a new power increase."
+        ],
+        "counterplay": [
+          "The encounter is deterministic, explicitly non-pay-to-skip, and success depends on mastery and restraint rather than maximum damage output."
+        ],
+        "evolution": [
+          "Zero's Final Witness evolves through new interactions, constraints, and battlefield relationships instead of merely increasing damage, health, radius, or duration."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Zero's Final Witness has a dedicated visual grammar for restraint test, system mastery, final validation with clear pre-impact telegraphs, resource-ready cues, distance-scaled LOD, and simplified fallback geometry that preserves mechanic readability on lower presentation budgets.",
+          "Zero's Final Witness distinguishes normal, primed, failure, and recovery states through silhouette, emissive pattern, trail shape, decal language, or environmental response rather than relying on color alone."
+        ],
+        "animation": [
+          "Zero's Final Witness uses bespoke anticipation, activation, recovery, and interruption motion appropriate to its final Ascendant validation encounter identity, with moving parts or body posture exposing the mechanic state before the strongest effect resolves.",
+          "Zero's Final Witness includes a readable resource-ready or phase-transition pose so players can learn the encounter rhythm without depending on UI text."
+        ],
+        "audio": [
+          "Zero's Final Witness has separate positional activation, resource-ready, danger, impact, failure, and cooldown motifs, with a reduced distant mix and priority rules intended to keep crowded encounters intelligible."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Final Transcendent Zero validation after Authority mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL Wave 020 quota-closing specification; final UEFN implementation requires project-bound assets, compile verification, memory profiling, launch-session testing, and balance passes."
+      ]
+    }
+  ]
+}
