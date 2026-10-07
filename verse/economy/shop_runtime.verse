@@ -5,6 +5,7 @@ using { /Verse.org/Simulation }
 # Real-money purchase delivery is intentionally not part of this runtime.
 
 aeonfall_shop_offer := class:
+    ShopId:string = ""
     OfferId:string = ""
     OutputEntityId:string = ""
     Costs:[]aeonfall_material_cost = array{}
