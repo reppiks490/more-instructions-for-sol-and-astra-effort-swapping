@@ -6,6 +6,7 @@ aeonfall_unlock_delivery_state := class:
     EntityId:string = ""
     SourceId:string = ""
     RemainingSeconds:float = 0.0
+    AttemptsRemaining:int = 0
 
 # Post-commit delivery coordinator.
 # Durable profile state is authoritative. Physical inventory/device delivery is
@@ -42,7 +43,8 @@ aeonfall_unlock_delivery_service := class():
                 OwnerKey := OwnerKey
                 EntityId := EntityId
                 SourceId := SourceId
-                RemainingSeconds := 8.0
+                RemainingSeconds := 2.0
+                AttemptsRemaining := 3
 
             if:
                 set Pending[RequestId] = State
@@ -138,20 +140,52 @@ aeonfall_unlock_delivery_service := class():
                     EntityId := State.EntityId
                     SourceId := State.SourceId
                     RemainingSeconds := Remaining
+                    AttemptsRemaining := State.AttemptsRemaining
 
                 if:
                     set Updated[RequestId] = Next
                 then:
                     set Updated = Updated
             else:
-                AEONFALLRuntimeBus.Emit(
-                    aeonfall_runtime_event{
-                        EventType := "unlock.delivery_timed_out",
-                        SourceId := State.OwnerKey,
-                        TargetId := State.EntityId,
-                        ContextId := State.RequestId
-                    }
-                )
+                if (State.AttemptsRemaining > 0):
+                    Retry := aeonfall_unlock_delivery_state:
+                        RequestId := State.RequestId
+                        OwnerKey := State.OwnerKey
+                        EntityId := State.EntityId
+                        SourceId := State.SourceId
+                        RemainingSeconds := 2.0
+                        AttemptsRemaining := State.AttemptsRemaining - 1
+
+                    if:
+                        set Updated[RequestId] = Retry
+                    then:
+                        AEONFALLRuntimeBus.RequestUnlockDelivery(
+                            aeonfall_unlock_delivery_request{
+                                RequestId := Retry.RequestId,
+                                OwnerKey := Retry.OwnerKey,
+                                EntityId := Retry.EntityId,
+                                SourceId := Retry.SourceId
+                            }
+                        )
+
+                        AEONFALLRuntimeBus.Emit(
+                            aeonfall_runtime_event{
+                                EventType := "unlock.delivery_retried",
+                                SourceId := Retry.OwnerKey,
+                                TargetId := Retry.EntityId,
+                                ContextId := Retry.RequestId,
+                                Amount := Retry.AttemptsRemaining
+                            }
+                        )
+                else:
+                    AEONFALLRuntimeBus.Emit(
+                        aeonfall_runtime_event{
+                            EventType := "unlock.delivery_timed_out",
+                            SourceId := State.OwnerKey,
+                            TargetId := State.EntityId,
+                            ContextId := State.RequestId
+                        }
+                    )
 
         set Pending = Updated
 
