@@ -73,14 +73,16 @@ aeonfall_ability_activation_service := class():
         if:
             OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
         then:
+            Flags := AEONFALLActorContextRuntime.GetFlags(OwnerKey)
+
             TryActivate(
                 Agent,
                 AbilityId,
                 OwnerKey,
                 RuntimeContextId,
                 Magnitude,
-                false,
-                false
+                Flags.EncounterActive,
+                Flags.TransformationActive
             )
         else:
             false
