@@ -1,0 +1,291 @@
+{
+  "version": 1,
+  "slice_id": "SLICE-001",
+  "uefn_assumptions": {
+    "custom_items_inventory": "Beta-capable Scene Graph item/inventory path; keep adapter-isolated for API evolution.",
+    "weapon_templates": [
+      "assault_rifle_template",
+      "sub_machine_gun_template",
+      "pistol_template",
+      "shotgun_template",
+      "held_item_template"
+    ],
+    "npc_character_definition": "Use Character Definitions plus Verse npc_behavior. Guard base retained where hiring/equipment behavior is valuable.",
+    "source_of_truth": "Canonical IDs in content/catalog remain independent from UEFN asset names."
+  },
+  "weapons": [
+    {
+      "id": "WPN-001",
+      "prefab": "PF_WPN_001_GravesongCarbine",
+      "template": "assault_rifle_template",
+      "adapter": "gravesong_echo_component"
+    },
+    {
+      "id": "WPN-003",
+      "prefab": "PF_WPN_003_MawSaintVanta",
+      "template": "shotgun_template",
+      "adapter": "status_devour_component"
+    },
+    {
+      "id": "WPN-007",
+      "prefab": "PF_WPN_007_AshcoilRepeater",
+      "template": "sub_machine_gun_template",
+      "adapter": "heat_motion_component"
+    },
+    {
+      "id": "WPN-008",
+      "prefab": "PF_WPN_008_ChronoclastSidearm",
+      "template": "pistol_template",
+      "adapter": "temporal_duelist_component"
+    },
+    {
+      "id": "WPN-011",
+      "prefab": "PF_WPN_011_DreadstarI",
+      "template": "assault_rifle_template",
+      "adapter": "living_weapon_evolution_component"
+    },
+    {
+      "id": "WPN-012",
+      "prefab": "PF_WPN_012_ParallaxMercy",
+      "template": "assault_rifle_template",
+      "adapter": "support_sniper_component"
+    },
+    {
+      "id": "WPN-122",
+      "prefab": "PF_WPN_122_MorrowChain",
+      "template": "assault_rifle_template",
+      "adapter": "linked_displacement_component"
+    },
+    {
+      "id": "WPN-124",
+      "prefab": "PF_WPN_124_GraveCartographer",
+      "template": "assault_rifle_template",
+      "adapter": "corpse_route_component"
+    },
+    {
+      "id": "WPN-126",
+      "prefab": "PF_WPN_126_SaintsBankruptcy",
+      "template": "shotgun_template",
+      "adapter": "shield_redistribution_component"
+    },
+    {
+      "id": "WPN-143",
+      "prefab": "PF_WPN_143_GravetideNeedle",
+      "template": "sub_machine_gun_template",
+      "adapter": "corpse_current_component"
+    },
+    {
+      "id": "WPN-166",
+      "prefab": "PF_WPN_166_WoundCartographer",
+      "template": "assault_rifle_template",
+      "adapter": "weakpoint_route_component"
+    },
+    {
+      "id": "WPN-173",
+      "prefab": "PF_WPN_173_GraveyardSeconds",
+      "template": "held_item_template",
+      "adapter": "cooldown_grave_launcher_component"
+    }
+  ],
+  "hireables": [
+    {
+      "id": "NPC-003",
+      "character_type": "Guard",
+      "definition": "CD_NPC_003_OrionGravewake",
+      "behavior": "hireable_necromancer_tactician"
+    },
+    {
+      "id": "NPC-008",
+      "character_type": "Guard",
+      "definition": "CD_NPC_008_MiraSable",
+      "behavior": "hireable_beast_commander"
+    },
+    {
+      "id": "NPC-009",
+      "character_type": "Guard",
+      "definition": "CD_NPC_009_RookAshbreaker",
+      "behavior": "hireable_breach_specialist"
+    },
+    {
+      "id": "NPC-010",
+      "character_type": "Guard",
+      "definition": "CD_NPC_010_SeraNineLives",
+      "behavior": "hireable_medic"
+    },
+    {
+      "id": "NPC-012",
+      "character_type": "Guard",
+      "definition": "CD_NPC_012_IlyraMosswake",
+      "behavior": "hireable_scout"
+    },
+    {
+      "id": "NPC-016",
+      "character_type": "Guard",
+      "definition": "CD_NPC_016_OrrenPike",
+      "behavior": "hireable_monster_hunter"
+    },
+    {
+      "id": "NPC-023",
+      "character_type": "Guard",
+      "definition": "CD_NPC_023_LucentMarrow",
+      "behavior": "hireable_anti_undead"
+    },
+    {
+      "id": "NPC-051",
+      "character_type": "Guard",
+      "definition": "CD_NPC_051_OrryxBoneCrown",
+      "behavior": "hireable_necromantic_tactician"
+    }
+  ],
+  "tameables": [
+    {
+      "id": "WLD-001",
+      "character_type": "Custom",
+      "definition": "CD_WLD_001_MirrorhornHart",
+      "behavior": "custom_tameable_scout_mount"
+    },
+    {
+      "id": "WLD-006",
+      "character_type": "Wildlife",
+      "subtype": "Wolf",
+      "definition": "CD_WLD_006_MarrowHound",
+      "behavior": "tameable_corpse_denial_wolf"
+    },
+    {
+      "id": "WLD-007",
+      "character_type": "Custom",
+      "definition": "CD_WLD_007_TombshellBeetle",
+      "behavior": "custom_tameable_harvest_companion"
+    },
+    {
+      "id": "WLD-008",
+      "character_type": "Custom",
+      "definition": "CD_WLD_008_OssuaryCrane",
+      "behavior": "custom_tameable_warning_companion"
+    },
+    {
+      "id": "WLD-009",
+      "character_type": "Custom",
+      "definition": "CD_WLD_009_GraveburrowMole",
+      "behavior": "custom_tameable_resource_digger"
+    },
+    {
+      "id": "WLD-010",
+      "character_type": "Custom",
+      "definition": "CD_WLD_010_ReliquaryStag",
+      "behavior": "custom_tameable_sanctuary_mount"
+    }
+  ],
+  "monsters": [
+    {
+      "id": "MON-001",
+      "definition": "CD_MON_001_GoreglassStalker",
+      "behavior": "ambush_predator"
+    },
+    {
+      "id": "MON-002",
+      "definition": "CD_MON_002_CarrionParliament",
+      "behavior": "cooperative_corpse_swarm"
+    },
+    {
+      "id": "MON-007",
+      "definition": "CD_MON_007_AshWidowMatriarch",
+      "behavior": "brood_artillery"
+    },
+    {
+      "id": "MON-008",
+      "definition": "CD_MON_008_OssuaryEngineer",
+      "behavior": "necromancer_constructor"
+    },
+    {
+      "id": "MON-043",
+      "definition": "CD_MON_043_CarrionSeed",
+      "behavior": "gravefeeding_tier1"
+    },
+    {
+      "id": "MON-044",
+      "definition": "CD_MON_044_Broodmaw",
+      "behavior": "gravefeeding_tier2"
+    },
+    {
+      "id": "MON-048",
+      "definition": "CD_MON_048_OssuaryBishop",
+      "behavior": "necromancer_support"
+    },
+    {
+      "id": "MON-049",
+      "definition": "CD_MON_049_MarrowTaxonomist",
+      "behavior": "adaptive_necromancer"
+    },
+    {
+      "id": "MON-050",
+      "definition": "CD_MON_050_FuneralCartographer",
+      "behavior": "territory_necromancer"
+    },
+    {
+      "id": "MON-053",
+      "definition": "CD_MON_053_EyeBeneathSoil",
+      "behavior": "subterranean_ambusher"
+    },
+    {
+      "id": "MON-058",
+      "definition": "CD_MON_058_FurnaceHound",
+      "behavior": "infernal_pursuit"
+    },
+    {
+      "id": "MON-133",
+      "definition": "CD_MON_133_AshmouthJackal",
+      "behavior": "hazard_feeding_pack"
+    }
+  ],
+  "encounters": [
+    {
+      "id": "BOS-005",
+      "definition": "CD_BOS_005_GoreMasonRedHand",
+      "behavior": "boss_necrotic_builder",
+      "controller": "EC_BOS_005"
+    },
+    {
+      "id": "BOS-006",
+      "definition": "CD_BOS_006_SaintEaterGrin",
+      "behavior": "boss_anti_support_demon",
+      "controller": "EC_BOS_006"
+    },
+    {
+      "id": "BOS-011",
+      "definition": "CD_BOS_011_KingWithoutPulse",
+      "behavior": "boss_necromancer_sovereign",
+      "controller": "EC_BOS_011"
+    }
+  ],
+  "world_event": {
+    "id": "EVT-011",
+    "director": "WD_EVT_011_GraveMarketEclipse"
+  },
+  "armor": [
+    {
+      "id": "ARM-001",
+      "prefab_family": "PF_ARM_001_VoidSovereign",
+      "adapter": "void_sovereign_set_runtime"
+    },
+    {
+      "id": "ARM-002",
+      "prefab_family": "PF_ARM_002_AshenSeraph",
+      "adapter": "ashen_seraph_set_runtime"
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "VEH-001",
+      "binding": "VB_VEH_001_RiftRunner"
+    },
+    {
+      "id": "VEH-002",
+      "binding": "VB_VEH_002_IronSaintConvoy"
+    },
+    {
+      "id": "VEH-010",
+      "binding": "VB_VEH_010_OssuaryBoneHauler"
+    }
+  ]
+}
