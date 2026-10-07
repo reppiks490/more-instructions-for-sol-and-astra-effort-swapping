@@ -70,6 +70,7 @@ aeonfall_actor_registry := class():
             if (ClearedTarget?):
                 ClearedTarget = true
 
+            AEONFALLActorContextRuntime.Clear(RuntimeKey)
             AEONFALLStatusRuntime.ClearTarget(RuntimeKey)
             AEONFALLAbilityRuntime.ClearOwner(RuntimeKey)
             AEONFALLClassRuntime.ClearOwner(RuntimeKey)
