@@ -105,6 +105,12 @@ aeonfall_ability_runtime := class():
             then:
                 return false
 
+            if:
+                Definition.RequiredTransformationId <> ""
+                Context.TransformationId <> Definition.RequiredTransformationId
+            then:
+                return false
+
             if (Definition.ResourcePolicy = aeonfall_resource_policy.Cooldown):
                 return State.CooldownRemainingSeconds <= 0.0
 
