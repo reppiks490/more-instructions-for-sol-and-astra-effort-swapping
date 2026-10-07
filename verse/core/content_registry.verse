@@ -25,14 +25,15 @@ aeonfall_content_registry := class():
             if:
                 set Definitions[Definition.CanonicalId] = Definition
             then:
-            AEONFALLRuntimeBus.Emit(
-                aeonfall_runtime_event{
-                    EventType := "content.definition_registered",
-                    SourceId := Definition.CanonicalId,
-                    ContextId := Definition.RuntimeBindingId
-                }
-            )
+                AEONFALLRuntimeBus.Emit(
+                    aeonfall_runtime_event{
+                        EventType := "content.definition_registered",
+                        SourceId := Definition.CanonicalId,
+                        ContextId := Definition.RuntimeBindingId
+                    }
+                )
                 return true
+
         false
 
     RegisterBinding(Binding:aeonfall_runtime_binding)<transacts>:logic=
@@ -53,14 +54,15 @@ aeonfall_content_registry := class():
             if:
                 set Bindings[Binding.CanonicalId] = Binding
             then:
-            AEONFALLRuntimeBus.Emit(
-                aeonfall_runtime_event{
-                    EventType := "content.binding_registered",
-                    SourceId := Binding.CanonicalId,
-                    ContextId := Binding.RuntimeBindingId
-                }
-            )
+                AEONFALLRuntimeBus.Emit(
+                    aeonfall_runtime_event{
+                        EventType := "content.binding_registered",
+                        SourceId := Binding.CanonicalId,
+                        ContextId := Binding.RuntimeBindingId
+                    }
+                )
                 return true
+
         false
 
     GetDefinition(CanonicalId:string)<decides><transacts>:aeonfall_content_definition=
