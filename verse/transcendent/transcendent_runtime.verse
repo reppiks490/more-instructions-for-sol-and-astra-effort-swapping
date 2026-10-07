@@ -58,18 +58,6 @@ aeonfall_transcendent_runtime := class():
             if (not TransformationSet?):
                 return false
 
-            HistoryCommitted := ProfileService.IncrementTranscendentHistory(Agent)
-
-            if (not HistoryCommitted?):
-                RolledBack := AEONFALLActorContextRuntime.SetTransformation(
-                    OwnerKey,
-                    false,
-                    "TRANSCENDENT_ZERO::" + AuthorityId
-                )
-                if (RolledBack?):
-                    RolledBack = true
-                return false
-
             ActiveState := aeonfall_transcendent_runtime_state:
                 OwnerKey := OwnerKey
                 AuthorityId := AuthorityId
@@ -143,6 +131,31 @@ aeonfall_transcendent_runtime := class():
                 OwnerKey,
                 Definition
             )
+
+            if (Reason = "duration_expired"):
+                if:
+                    Agent := AEONFALLActorRegistry.GetAgent[OwnerKey]
+                then:
+                    HistoryAwarded := ProfileService.IncrementTranscendentHistory(
+                        Agent
+                    )
+
+                    if (HistoryAwarded?):
+                        AEONFALLRuntimeBus.Emit(
+                            aeonfall_runtime_event{
+                                EventType := "transcendent.history_awarded",
+                                SourceId := OwnerKey,
+                                TargetId := Old.AuthorityId
+                            }
+                        )
+                    else:
+                        AEONFALLRuntimeBus.Emit(
+                            aeonfall_runtime_event{
+                                EventType := "transcendent.history_award_failed",
+                                SourceId := OwnerKey,
+                                TargetId := Old.AuthorityId
+                            }
+                        )
 
             TransformationCleared := AEONFALLActorContextRuntime.SetTransformation(
                 OwnerKey,
