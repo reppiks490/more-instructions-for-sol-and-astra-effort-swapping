@@ -32,7 +32,7 @@ aeonfall_zero_candidate_manager := class():
         Profile.AscensionRank >= RequiredAscensionRank
         Profile.AxiomHeartCrafted?
 
-    EvaluateCandidate(Agent:agent):void=
+    EvaluateCandidate(Agent:agent)<transacts>:void=
         if:
             MeetsRequirements[Agent]
         then:
