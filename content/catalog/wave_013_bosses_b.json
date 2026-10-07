@@ -22,7 +22,8 @@
           "bell interrupt"
         ],
         "signature": [
-          "Open Side rotates one coffin face toward the squad and prepares a role-specific undead spawn."
+          "Open Side rotates one coffin face toward the squad and prepares a role-specific undead spawn.",
+          "Bellmother Casket adds a separate single-spawn pressure interaction: the state is visibly telegraphed, changes player decision-making, and creates a distinct punish or recovery window instead of only modifying statistics."
         ],
         "counterplay": [
           "Shoot the bell during its exposed toll window to cancel the next spawn and force a stagger."
@@ -81,7 +82,8 @@
           "duel pressure"
         ],
         "signature": [
-          "Pilgrim's Lesson marks the most-used attack direction and moves one halo to punish that approach."
+          "Pilgrim's Lesson marks the most-used attack direction and moves one halo to punish that approach.",
+          "Razor Saint Ilyr adds a separate halo blades interaction: the state is visibly telegraphed, changes player decision-making, and creates a distinct punish or recovery window instead of only modifying statistics."
         ],
         "counterplay": [
           "Rotate firing angles and force the halos to redistribute instead of stacking one side."
@@ -140,7 +142,8 @@
           "hook throw"
         ],
         "signature": [
-          "Break Ground tears up one authored stone chunk and chooses to throw, stack, or stand on it."
+          "Break Ground tears up one authored stone chunk and chooses to throw, stack, or stand on it.",
+          "Quarry Devil Threx adds a separate cover conversion interaction: the state is visibly telegraphed, changes player decision-making, and creates a distinct punish or recovery window instead of only modifying statistics."
         ],
         "counterplay": [
           "Destroy weakened chunks before Threx converts them into high ground or cover."
@@ -199,7 +202,8 @@
           "attack tell"
         ],
         "signature": [
-          "Courtesy Step leaves movement-copy doubles while the real body prepares a distinct attack pose."
+          "Courtesy Step leaves movement-copy doubles while the real body prepares a distinct attack pose.",
+          "Madam Nullglass adds a separate mirror relocation interaction: the state is visibly telegraphed, changes player decision-making, and creates a distinct punish or recovery window instead of only modifying statistics."
         ],
         "counterplay": [
           "Track the body with the unique pre-attack posture rather than following movement echoes."
@@ -258,7 +262,8 @@
           "garden zoning"
         ],
         "signature": [
-          "Plant Heir turns one eligible corpse into a growing bone sapling that later becomes either cover or a spear burst."
+          "Plant Heir turns one eligible corpse into a growing bone sapling that later becomes either cover or a spear burst.",
+          "Bone Orchard Duke adds a separate harvest choice interaction: the state is visibly telegraphed, changes player decision-making, and creates a distinct punish or recovery window instead of only modifying statistics."
         ],
         "counterplay": [
           "Destroy saplings before harvest or bait the Duke into harvesting the less useful form."
@@ -317,7 +322,8 @@
           "charge feint"
         ],
         "signature": [
-          "Blue Bellow projects a long cone after visible throat charging; a horn scrape beforehand may be a feint into a sideways charge."
+          "Blue Bellow projects a long cone after visible throat charging; a horn scrape beforehand may be a feint into a sideways charge.",
+          "Thundertongue Ox adds a separate directional bellow interaction: the state is visibly telegraphed, changes player decision-making, and creates a distinct punish or recovery window instead of only modifying statistics."
         ],
         "counterplay": [
           "Watch throat plates instead of horns to distinguish real bellow from charge feint."
@@ -376,7 +382,8 @@
           "resource pressure"
         ],
         "signature": [
-          "Claimed Goods places a destructible wax seal over one eligible dropped event-resource cluster."
+          "Claimed Goods places a destructible wax seal over one eligible dropped event-resource cluster.",
+          "Hunger Clerk adds a separate seal weakpoints interaction: the state is visibly telegraphed, changes player decision-making, and creates a distinct punish or recovery window instead of only modifying statistics."
         ],
         "counterplay": [
           "Break the seal or ignore the resource until the claim expires; core inventory is never removed."
@@ -435,7 +442,8 @@
           "trail reset"
         ],
         "signature": [
-          "Black Trail visualizes recent high-speed routes and the Huntsman throws ahead of the most consistent path."
+          "Black Trail visualizes recent high-speed routes and the Huntsman throws ahead of the most consistent path.",
+          "Sable Huntsman adds a separate prediction spear interaction: the state is visibly telegraphed, changes player decision-making, and creates a distinct punish or recovery window instead of only modifying statistics."
         ],
         "counterplay": [
           "Break patterns with vertical movement, pauses, or route changes to force prediction errors."
@@ -495,7 +503,8 @@
         ],
         "signature": [
           "Appoint Courtier consumes one eligible bone cache to fill a throne niche with a support role.",
-          "Royal Vacancy exposes Virelia when players destroy a courtier and before she can appoint another."
+          "Royal Vacancy exposes Virelia when players destroy a courtier and before she can appoint another.",
+          "Queen Virelia, Marrow Regent adds a separate regent phases interaction: the state is visibly telegraphed, changes player decision-making, and creates a distinct punish or recovery window instead of only modifying statistics."
         ],
         "counterplay": [
           "Choose which court role to remove first and burst during the vacancy window."
@@ -557,7 +566,8 @@
         ],
         "signature": [
           "Offer Terms presents one optional encounter boon with an explicit drawback.",
-          "Breach Penalty empowers Malkor briefly only if a player accepts terms and violates the stated condition."
+          "Breach Penalty empowers Malkor briefly only if a player accepts terms and violates the stated condition.",
+          "Malkor the Ledger adds a separate contract break interaction: the state is visibly telegraphed, changes player decision-making, and creates a distinct punish or recovery window instead of only modifying statistics."
         ],
         "counterplay": [
           "Decline bad contracts or follow accepted conditions; contracts never hide their penalties."
@@ -619,7 +629,8 @@
         ],
         "signature": [
           "Mirage Breach raises multiple glass segments that bend sightlines while exposing specific matte facets.",
-          "Sandwake predicts the next emergence path with a huge visible dune ripple."
+          "Sandwake predicts the next emergence path with a huge visible dune ripple.",
+          "Urom, Glass Leviathan adds a separate facet breaks interaction: the state is visibly telegraphed, changes player decision-making, and creates a distinct punish or recovery window instead of only modifying statistics."
         ],
         "counterplay": [
           "Attack matte facets and use Sandwake to reposition before emergence."
@@ -681,7 +692,8 @@
         ],
         "signature": [
           "Feast on Rhythm detects repeated high-impact ability cadence and fills one missing clock wedge.",
-          "Borrowed Hour spends completed wedges for a short boss haste phase."
+          "Borrowed Hour spends completed wedges for a short boss haste phase.",
+          "Chronophage Knight adds a separate duel timing interaction: the state is visibly telegraphed, changes player decision-making, and creates a distinct punish or recovery window instead of only modifying statistics."
         ],
         "counterplay": [
           "Stagger major ability timing across the squad and break clock wedges during their exposed charging state."
@@ -743,7 +755,8 @@
         ],
         "signature": [
           "Design Offspring selects two active organ racks and visibly previews the resulting add archetype.",
-          "Maternal Recall dismantles surviving offspring to reclaim one organ if players leave them alive too long."
+          "Maternal Recall dismantles surviving offspring to reclaim one organ if players leave them alive too long.",
+          "Mother Architect of Carrion adds a separate rack objectives interaction: the state is visibly telegraphed, changes player decision-making, and creates a distinct punish or recovery window instead of only modifying statistics."
         ],
         "counterplay": [
           "Destroy or disable key organ racks to limit available recipes; finish dangerous adds before Recall."
@@ -805,7 +818,8 @@
         ],
         "signature": [
           "March of Walls moves the shoulder fortress through the arena while artillery and defenders remain active.",
-          "Knee Bastion exposes sabotage points that slow the colossus without directly damaging its core."
+          "Knee Bastion exposes sabotage points that slow the colossus without directly damaging its core.",
+          "Moon-Siege Colossus adds a separate on-body objectives interaction: the state is visibly telegraphed, changes player decision-making, and creates a distinct punish or recovery window instead of only modifying statistics."
         ],
         "counterplay": [
           "Board the fortress, disable artillery, and coordinate limb sabotage rather than shooting the stone body endlessly."
