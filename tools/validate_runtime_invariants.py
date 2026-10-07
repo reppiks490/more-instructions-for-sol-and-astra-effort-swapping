@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -108,8 +109,39 @@ FORBIDDEN_TOKENS = {
     ],
 }
 
+def check_runtime_clock(text: str) -> list[str]:
+    """Guard elapsed-time wiring; this is source validation, not Verse execution."""
+    errors: list[str] = []
+    code = "\n".join(line.split("#", 1)[0] for line in text.splitlines())
+    required = [
+        "var PreviousTime:float = GetSimulationElapsedTime()",
+        "CurrentTime:float = GetSimulationElapsedTime()",
+        "DeltaSeconds:float = CurrentTime - PreviousTime",
+        "set PreviousTime = CurrentTime",
+        "if (DeltaSeconds > 0.0):",
+        "OnEnd<override>():void=",
+        "set Running = false",
+    ]
+    for token in required:
+        if token not in code:
+            errors.append(f"runtime clock missing {token!r}")
+    sleep = code.find("Sleep(Interval)")
+    guard = code.find("if (not Running?):", sleep)
+    advance = code.find("AdvanceRuntime(DeltaSeconds)", sleep)
+    if sleep < 0 or guard < sleep or advance < guard:
+        errors.append("runtime clock must check shutdown after Sleep and before advance")
+    for service in REQUIRED_TOKENS["verse/core/runtime_tick_device.verse"]:
+        if f"{service}(DeltaSeconds)" not in code:
+            errors.append(f"runtime clock must pass measured delta to {service}")
+        if f"{service}(Interval)" in code:
+            errors.append(f"runtime clock must not use requested sleep for {service}")
+    return errors
+
 def main() -> int:
     errors: list[str] = []
+    clock_path = ROOT / "verse/core/runtime_tick_device.verse"
+    if clock_path.exists():
+        errors.extend(check_runtime_clock(clock_path.read_text(encoding="utf-8")))
 
     for rel, tokens in REQUIRED_TOKENS.items():
         path = ROOT / rel
@@ -149,8 +181,11 @@ def main() -> int:
     workflow = (ROOT / ".github/workflows/catalog-validation.yml").read_text(
         encoding="utf-8"
     )
-    if '"verse/**"' not in workflow:
-        errors.append("validation workflow does not watch verse/**")
+    for event in ("push", "pull_request"):
+        # Path entries have six spaces; stop at the next event/top-level stanza.
+        match = re.search(rf"(?ms)^  {event}:\n(.*?)(?=^  [a-z_]+:|^[a-z_]+:|\Z)", workflow)
+        if not match or '"verse/**"' not in match.group(1):
+            errors.append(f"validation workflow {event} does not watch verse/**")
     if "python tools/validate_verse_static.py" not in workflow:
         errors.append("validation workflow does not run static Verse validation")
     if "python tools/validate_runtime_invariants.py" not in workflow:

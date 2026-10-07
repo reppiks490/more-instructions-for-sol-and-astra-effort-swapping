@@ -42,6 +42,7 @@ on:
       - ".github/workflows/catalog-validation.yml"
   pull_request:
     paths:
+      - "verse/**"
       - "content/catalog/**"
       - "content/crafting/**"
       - "content/vertical_slice/**"

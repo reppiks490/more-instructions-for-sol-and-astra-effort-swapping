@@ -332,6 +332,33 @@
         "Color is not the sole identifier for critical state.",
         "No HUD/status bridge removes accessibility-critical warnings."
       ]
+    },
+    {
+      "id": "LT-023",
+      "category": "performance",
+      "name": "Runtime clock under delayed frames",
+      "steps": [
+        "Set the runtime tick interval to 0.25 seconds; create a finite status, cooldown, target selection, pending activation, spawn reservation, and delivery request. Record their initial durations and simulation timestamps.",
+        "Under a profiled dense encounter, record the simulation timestamps of consecutive runtime ticks including a delayed resume longer than 0.25 seconds. Inspect each remaining duration and timeout event. Repeat with the tick interval changed while the session is running."
+      ],
+      "pass": [
+        "Each service advances by the measured simulation-time delta, not the configured sleep interval; a delayed resume catches up in one advance.",
+        "Expired finite states and adapter/delivery timeouts resolve once on the first tick past their deadlines; persistent zero-duration statuses remain active.",
+        "No catch-up burst of multiple runtime.tick events occurs for one wake-up; nonpositive deltas do not advance state."
+      ]
+    },
+    {
+      "id": "LT-024",
+      "category": "teardown",
+      "name": "Runtime clock ends with session",
+      "steps": [
+        "With finite runtime state active, end the session while the runtime tick device is suspended in Sleep.",
+        "Observe the Verse log and runtime event listener during teardown, then start a fresh session with the same authored device."
+      ],
+      "pass": [
+        "A sleeper that resumes after OnEnd does not advance runtime services or emit runtime.tick.",
+        "The fresh session samples a new simulation-time baseline and does not subtract the previous session time from its timers."
+      ]
     }
   ]
 }
