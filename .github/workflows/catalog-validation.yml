@@ -33,6 +33,7 @@ on:
       - "tools/validate_slice_classes.py"
       - "tools/build_slice_registry.py"
       - "tools/validate_verse_static.py"
+      - "tools/validate_runtime_invariants.py"
       - "STATUS.md"
       - ".github/workflows/catalog-validation.yml"
   pull_request:
@@ -105,6 +106,9 @@ jobs:
 
       - name: Validate Verse static safety
         run: python tools/validate_verse_static.py
+
+      - name: Validate AEONFALL runtime invariants
+        run: python tools/validate_runtime_invariants.py
 
       - name: Build first-slice combat Verse registry
         run: python tools/build_slice_combat_registry.py
