@@ -1,0 +1,376 @@
+{
+  "version": 1,
+  "name": "Axiom Heart Ascension Craft",
+  "final_material_id": "MAT-040",
+  "rules": [
+    "The Axiom Heart cannot be purchased directly.",
+    "All quantities are persistent ledger counters rather than spawned inventory actors.",
+    "Seed of Zero is a unique eligibility-gated acquisition and is never a routine farm drop.",
+    "Absolute Relics, Primordial Keys, Reality Anchors, Boss Souls, and World Event Cores come from distinct endgame activities to prevent single-route farming.",
+    "Final crafting is gated by Zero Candidate eligibility and the Ascension Trial chain in addition to material ownership."
+  ],
+  "recipes": [
+    {
+      "output": "MAT-018",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-001",
+          "count": 25
+        }
+      ]
+    },
+    {
+      "output": "MAT-019",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-018",
+          "count": 20
+        },
+        {
+          "material_id": "MAT-010",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "output": "MAT-020",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-002",
+          "count": 25
+        }
+      ]
+    },
+    {
+      "output": "MAT-021",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-020",
+          "count": 20
+        },
+        {
+          "material_id": "MAT-009",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "output": "MAT-022",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-003",
+          "count": 50
+        }
+      ]
+    },
+    {
+      "output": "MAT-023",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-022",
+          "count": 10
+        },
+        {
+          "material_id": "MAT-011",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "output": "MAT-024",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-004",
+          "count": 50
+        }
+      ]
+    },
+    {
+      "output": "MAT-025",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-024",
+          "count": 10
+        },
+        {
+          "material_id": "MAT-012",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "output": "MAT-026",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-005",
+          "count": 50
+        }
+      ]
+    },
+    {
+      "output": "MAT-027",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-026",
+          "count": 10
+        },
+        {
+          "material_id": "MAT-010",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "output": "MAT-028",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-006",
+          "count": 50
+        }
+      ]
+    },
+    {
+      "output": "MAT-029",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-028",
+          "count": 10
+        },
+        {
+          "material_id": "MAT-011",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "output": "MAT-030",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-008",
+          "count": 50
+        }
+      ]
+    },
+    {
+      "output": "MAT-031",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-030",
+          "count": 10
+        },
+        {
+          "material_id": "MAT-013",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "output": "MAT-032",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-009",
+          "count": 10
+        },
+        {
+          "material_id": "MAT-011",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "output": "MAT-033",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-010",
+          "count": 100
+        },
+        {
+          "material_id": "MAT-007",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "output": "MAT-034",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-012",
+          "count": 10
+        },
+        {
+          "material_id": "MAT-013",
+          "count": 5
+        },
+        {
+          "material_id": "MAT-033",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "output": "MAT-035",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-013",
+          "count": 20
+        },
+        {
+          "material_id": "MAT-014",
+          "count": 5
+        },
+        {
+          "material_id": "MAT-033",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "output": "MAT-036",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-014",
+          "count": 10
+        },
+        {
+          "material_id": "MAT-015",
+          "count": 5
+        },
+        {
+          "material_id": "MAT-016",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "output": "MAT-037",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-015",
+          "count": 5
+        },
+        {
+          "material_id": "MAT-016",
+          "count": 5
+        },
+        {
+          "material_id": "MAT-033",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "output": "MAT-038",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-017",
+          "count": 1
+        },
+        {
+          "material_id": "MAT-036",
+          "count": 3
+        },
+        {
+          "material_id": "MAT-037",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "output": "MAT-039",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-019",
+          "count": 30
+        },
+        {
+          "material_id": "MAT-021",
+          "count": 24
+        },
+        {
+          "material_id": "MAT-023",
+          "count": 18
+        },
+        {
+          "material_id": "MAT-025",
+          "count": 18
+        },
+        {
+          "material_id": "MAT-027",
+          "count": 18
+        },
+        {
+          "material_id": "MAT-029",
+          "count": 16
+        },
+        {
+          "material_id": "MAT-031",
+          "count": 16
+        },
+        {
+          "material_id": "MAT-032",
+          "count": 12
+        },
+        {
+          "material_id": "MAT-034",
+          "count": 10
+        },
+        {
+          "material_id": "MAT-035",
+          "count": 8
+        },
+        {
+          "material_id": "MAT-038",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "output": "MAT-040",
+      "amount": 1,
+      "inputs": [
+        {
+          "material_id": "MAT-039",
+          "count": 1
+        },
+        {
+          "material_id": "MAT-036",
+          "count": 2
+        },
+        {
+          "material_id": "MAT-037",
+          "count": 2
+        },
+        {
+          "material_id": "MAT-034",
+          "count": 3
+        },
+        {
+          "material_id": "MAT-035",
+          "count": 3
+        }
+      ]
+    }
+  ]
+}
