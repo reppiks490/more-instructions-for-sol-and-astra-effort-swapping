@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "materials": [
+    {
+      "id": "MAT-001",
+      "name": "Void Shard",
+      "kind": "raw",
+      "source": "eldritch anomalies, void pockets, Hollow Astral contracts"
+    },
+    {
+      "id": "MAT-002",
+      "name": "Celestial Fragment",
+      "kind": "raw",
+      "source": "astral observatories, starfall events, celestial elites"
+    },
+    {
+      "id": "MAT-003",
+      "name": "Titan Bone",
+      "kind": "raw",
+      "source": "titan-class creatures, megafauna hunts, colossus remains"
+    },
+    {
+      "id": "MAT-004",
+      "name": "Infernal Ember",
+      "kind": "raw",
+      "source": "demon courts, infernal incursions, furnace objectives"
+    },
+    {
+      "id": "MAT-005",
+      "name": "Chrono Crystal",
+      "kind": "raw",
+      "source": "Court of Broken Hours trials, temporal anomalies"
+    },
+    {
+      "id": "MAT-006",
+      "name": "Leviathan Scale",
+      "kind": "raw",
+      "source": "ocean bosses, drowned expeditions, leviathan carcasses"
+    },
+    {
+      "id": "MAT-007",
+      "name": "Ancient Machine Core",
+      "kind": "raw",
+      "source": "siege constructs, machine ruins, Brass Court war engines"
+    },
+    {
+      "id": "MAT-008",
+      "name": "Necrotic Essence",
+      "kind": "raw",
+      "source": "necromancers, Gravefeeding ecology, corruption purges"
+    },
+    {
+      "id": "MAT-009",
+      "name": "Mythic Beast Heart",
+      "kind": "raw",
+      "source": "rare mythical hunts and apex wildlife encounters"
+    },
+    {
+      "id": "MAT-010",
+      "name": "Dimensional Catalyst",
+      "kind": "raw",
+      "source": "rift routes, dimensional pockets, portal stabilization objectives"
+    },
+    {
+      "id": "MAT-011",
+      "name": "Boss Soul",
+      "kind": "raw",
+      "source": "designated boss and raid completions"
+    },
+    {
+      "id": "MAT-012",
+      "name": "World Event Core",
+      "kind": "raw",
+      "source": "successful high-tier regional and world events"
+    },
+    {
+      "id": "MAT-013",
+      "name": "Sovereign Sigil",
+      "kind": "raw",
+      "source": "mythic/god raid mastery, faction sovereign challenges"
+    },
+    {
+      "id": "MAT-014",
+      "name": "Absolute Relic Fragment",
+      "kind": "raw",
+      "source": "sacrificed Absolute relics and endgame dismantling rites"
+    },
+    {
+      "id": "MAT-015",
+      "name": "Primordial Key Fragment",
+      "kind": "raw",
+      "source": "hidden primordial trials and deep-world exploration"
+    },
+    {
+      "id": "MAT-016",
+      "name": "Reality Anchor",
+      "kind": "raw",
+      "source": "late Ascension Trials and Absolute world-rule encounters"
+    },
+    {
+      "id": "MAT-017",
+      "name": "Seed of Zero",
+      "kind": "raw",
+      "source": "unique endgame prerequisite earned after the Path of Zero preconditions"
+    },
+    {
+      "id": "MAT-018",
+      "name": "Void Cluster",
+      "kind": "refined",
+      "source": "Axiom Forge refinement"
+    },
+    {
+      "id": "MAT-019",
+      "name": "Condensed Singularity",
+      "kind": "refined",
+      "source": "Axiom Forge refinement"
+    },
+    {
+      "id": "MAT-020",
+      "name": "Black Star Core",
+      "kind": "refined",
+      "source": "Axiom Forge high-energy refinement"
+    },
+    {
+      "id": "MAT-021",
+      "name": "Celestial Prism",
+      "kind": "refined",
+      "source": "Astral Crucible refinement"
+    },
+    {
+      "id": "MAT-022",
+      "name": "Titan Ossuary",
+      "kind": "refined",
+      "source": "Titan Reliquary refinement"
+    },
+    {
+      "id": "MAT-023",
+      "name": "Infernal Sunstone",
+      "kind": "refined",
+      "source": "Infernal Crucible refinement"
+    },
+    {
+      "id": "MAT-024",
+      "name": "Chrono Matrix",
+      "kind": "refined",
+      "source": "Chronarch Loom refinement"
+    },
+    {
+      "id": "MAT-025",
+      "name": "Leviathan Crown",
+      "kind": "refined",
+      "source": "Abyssal Forge refinement"
+    },
+    {
+      "id": "MAT-026",
+      "name": "Machine Genesis Core",
+      "kind": "refined",
+      "source": "Genesis Foundry refinement"
+    },
+    {
+      "id": "MAT-027",
+      "name": "Necrotic Crown Pearl",
+      "kind": "refined",
+      "source": "Purified Sepulcher refinement"
+    },
+    {
+      "id": "MAT-028",
+      "name": "Mythic Concord",
+      "kind": "refined",
+      "source": "Concord Altar refinement"
+    },
+    {
+      "id": "MAT-029",
+      "name": "Sovereign Crucible",
+      "kind": "refined",
+      "source": "Ascendant Forge refinement"
+    },
+    {
+      "id": "MAT-030",
+      "name": "Axiom Heart",
+      "kind": "apex",
+      "source": "Throne of Zero final craft"
+    }
+  ]
+}
