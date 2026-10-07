@@ -250,7 +250,9 @@
       "category": "world_event",
       "name": "Grave Market Eclipse success/failure cleanup",
       "steps": [
-        "Run EVT-011 once to success and once to failure on separate sessions/profiles."
+        "Run EVT-011 through all four stages to a successful completion path and record the final regional outcome.",
+        "Start a separate Launch Session/profile and intentionally drive EVT-011 into its authored failure path.",
+        "Inspect actor, prop, weather, presentation, and persisted regional state after both runs."
       ],
       "pass": [
         "Stage indexes remain contiguous.",
@@ -321,7 +323,9 @@
       "category": "accessibility",
       "name": "Redundant lethal telegraphs",
       "steps": [
-        "Exercise each lethal boss/event mechanic with audio reduced and again with visual noise reduced."
+        "Exercise every lethal Slice 001 boss and world-event mechanic with game audio reduced enough that visual telegraphs must carry the warning.",
+        "Repeat the same mechanics with presentation noise reduced or competing VFX active so audio and shape/motion cues must remain readable.",
+        "Check critical states for color-independent symbols, silhouettes, timing cues, or HUD reinforcement."
       ],
       "pass": [
         "Critical mechanics retain at least two readable channels where practical.",
