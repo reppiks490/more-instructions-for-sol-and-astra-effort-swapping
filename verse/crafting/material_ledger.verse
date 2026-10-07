@@ -21,10 +21,10 @@ aeonfall_material_ledger := class():
             set Result = Stored
         Result
 
-    SetCount(Agent:agent, MaterialId:string, Count:int):void=
+    SetCount(Agent:agent, MaterialId:string, Count:int)<transacts>:void=
         ProfileService.SetMaterialCount(Agent, MaterialId, Count)
 
-    Add(Agent:agent, MaterialId:string, Amount:int):void=
+    Add(Agent:agent, MaterialId:string, Amount:int)<transacts>:void=
         if:
             Amount > 0
         then:
