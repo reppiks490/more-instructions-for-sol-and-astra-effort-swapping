@@ -11,6 +11,7 @@ on:
       - "tools/build_status.py"
       - "tools/build_content_index.py"
       - "tools/quality_audit.py"
+      - "tools/validate_quotas.py"
       - "STATUS.md"
       - ".github/workflows/catalog-validation.yml"
   pull_request:
@@ -46,6 +47,9 @@ jobs:
 
       - name: Audit content diversity
         run: python tools/quality_audit.py
+
+      - name: Enforce original family minimums
+        run: python tools/validate_quotas.py
 
       - name: Build runtime content index
         run: python tools/build_content_index.py
