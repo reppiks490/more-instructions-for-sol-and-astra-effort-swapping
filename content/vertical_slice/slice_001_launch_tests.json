@@ -1,0 +1,333 @@
+{
+  "version": 1,
+  "slice_id": "SLICE-001",
+  "harness": "aeonfall_slice_001_dev_harness_device",
+  "production_rule": "Developer harness must remain Enabled=false in any production/publish configuration.",
+  "tests": [
+    {
+      "id": "LT-001",
+      "category": "bootstrap",
+      "name": "Registries initialize once",
+      "steps": [
+        "Start fresh Launch Session.",
+        "Observe bootstrap events for status, ability, class, shop, recipe, taming, and hireable registries.",
+        "Trigger no gameplay input."
+      ],
+      "pass": [
+        "No registration_failed event.",
+        "No duplicate canonical IDs.",
+        "Actor registry creates one runtime key per player."
+      ]
+    },
+    {
+      "id": "LT-002",
+      "category": "persistence",
+      "name": "Profile leave/rejoin",
+      "steps": [
+        "Seed economy using dev harness.",
+        "Purchase or craft one durable unlock.",
+        "Leave session and rejoin with persistence enabled."
+      ],
+      "pass": [
+        "Unlock remains present.",
+        "Material ledger retains post-transaction counts.",
+        "No duplicate persistent weak_map roots."
+      ]
+    },
+    {
+      "id": "LT-003",
+      "category": "shop",
+      "name": "Successful shop purchase",
+      "steps": [
+        "Seed economy.",
+        "Interact with OFFER-001 button."
+      ],
+      "pass": [
+        "Materials decrease exactly once.",
+        "WPN-001 unlock persists.",
+        "Success HUD appears.",
+        "Physical delivery request is emitted."
+      ]
+    },
+    {
+      "id": "LT-004",
+      "category": "shop",
+      "name": "Repeated shop interaction is idempotent",
+      "steps": [
+        "Complete LT-003.",
+        "Interact with OFFER-001 again."
+      ],
+      "pass": [
+        "Second interaction is rejected.",
+        "No additional materials are consumed.",
+        "No second durable unlock is written."
+      ]
+    },
+    {
+      "id": "LT-005",
+      "category": "crafting",
+      "name": "Recipe prerequisite and atomic spend",
+      "steps": [
+        "Attempt SLR-003 before WPN-001 is unlocked.",
+        "Unlock WPN-001.",
+        "Attempt SLR-003 again."
+      ],
+      "pass": [
+        "First attempt consumes nothing.",
+        "Second attempt spends exact coalesced costs.",
+        "WPN-122 unlock commits once."
+      ]
+    },
+    {
+      "id": "LT-006",
+      "category": "delivery",
+      "name": "Item Granter weapon delivery",
+      "steps": [
+        "Bind WPN-001 delivery adapter to configured Item Granter.",
+        "Complete OFFER-001."
+      ],
+      "pass": [
+        "GrantItem dispatch occurs for purchasing agent.",
+        "Delivery result resolves pending record.",
+        "Persistent ownership remains valid if the physical item is later removed."
+      ]
+    },
+    {
+      "id": "LT-007",
+      "category": "delivery",
+      "name": "Missing delivery binding timeout",
+      "steps": [
+        "Temporarily omit one non-production delivery adapter.",
+        "Commit an eligible unlock."
+      ],
+      "pass": [
+        "Durable unlock remains committed.",
+        "Pending delivery times out.",
+        "No materials are recharged or refunded automatically.",
+        "Timeout event is emitted for diagnostics."
+      ]
+    },
+    {
+      "id": "LT-008",
+      "category": "ability_self",
+      "name": "Self ability two-phase commit",
+      "steps": [
+        "Initialize ABL-007.",
+        "Trigger Chronoclast Reprise input."
+      ],
+      "pass": [
+        "Ability enters pending before adapter result.",
+        "Cooldown starts only after successful adapter result.",
+        "STS-011 applies and later expires."
+      ]
+    },
+    {
+      "id": "LT-009",
+      "category": "ability_targeted",
+      "name": "Targeted actor ability",
+      "steps": [
+        "Select an eligible registered target.",
+        "Trigger ABL-005."
+      ],
+      "pass": [
+        "Target key resolves through actor registry.",
+        "STS-007 applies to selected target.",
+        "Target expires/clears cleanly."
+      ]
+    },
+    {
+      "id": "LT-010",
+      "category": "ability_position",
+      "name": "Position ability snapshot",
+      "steps": [
+        "Activate CLS-006.",
+        "Aim at valid placement area.",
+        "Trigger ABL-001."
+      ],
+      "pass": [
+        "Position context is created from view snapshot.",
+        "Class resource is reserved before adapter result.",
+        "Successful adapter spends resource once.",
+        "Position context expires/cleans."
+      ]
+    },
+    {
+      "id": "LT-011",
+      "category": "ability_timeout",
+      "name": "Adapter timeout rollback",
+      "steps": [
+        "Use a test ability with no responding adapter.",
+        "Request activation."
+      ],
+      "pass": [
+        "Pending request times out near configured timeout.",
+        "Ability state is unblocked.",
+        "Class reservation is released.",
+        "ability.adapter_timeout is emitted."
+      ]
+    },
+    {
+      "id": "LT-012",
+      "category": "class_resource",
+      "name": "ReserveWhileActive Crown Bond",
+      "steps": [
+        "Activate CLS-007.",
+        "Start successful Royal Scent taming flow.",
+        "Complete taming challenge."
+      ],
+      "pass": [
+        "One Crown Bond is reserved.",
+        "Reservation transfers from ability request to companion bond.",
+        "Bond remains held while tameable is active.",
+        "Release companion frees bond."
+      ]
+    },
+    {
+      "id": "LT-013",
+      "category": "taming",
+      "name": "Taming timeout",
+      "steps": [
+        "Start a tame challenge.",
+        "Do not complete the required sequence."
+      ],
+      "pass": [
+        "Challenge fails at species timeout.",
+        "Royal Scent active state ends.",
+        "Monster Tracked status is removed.",
+        "No Crown Bond remains reserved."
+      ]
+    },
+    {
+      "id": "LT-014",
+      "category": "hireable",
+      "name": "Hire limits and allowed orders",
+      "steps": [
+        "Hire one Slice 001 NPC.",
+        "Issue allowed and disallowed orders.",
+        "Attempt to exceed per-NPC or class companion limit."
+      ],
+      "pass": [
+        "Allowed order is accepted.",
+        "Disallowed order is rejected.",
+        "Squad/per-NPC limit is enforced.",
+        "Release removes runtime binding."
+      ]
+    },
+    {
+      "id": "LT-015",
+      "category": "boss",
+      "name": "BOS-005 phase progression",
+      "steps": [
+        "Start Gore-Mason encounter.",
+        "Complete corpse-denial objective.",
+        "Destroy stair anchors.",
+        "Defeat boss."
+      ],
+      "pass": [
+        "Phases advance only forward.",
+        "Weak-point/objective events do not double-count.",
+        "Phase cleanup removes construction.",
+        "Completion state emits once."
+      ]
+    },
+    {
+      "id": "LT-016",
+      "category": "boss",
+      "name": "BOS-011 cleanup and reward",
+      "steps": [
+        "Run all four King Without Pulse phases.",
+        "Complete final phase."
+      ],
+      "pass": [
+        "Dead Treasury and purchased minions are cleared.",
+        "Encounter corpse treasury is zeroed.",
+        "Reward unlock/material grant occurs once.",
+        "No phase hazards persist after completion."
+      ]
+    },
+    {
+      "id": "LT-017",
+      "category": "world_event",
+      "name": "Grave Market Eclipse success/failure cleanup",
+      "steps": [
+        "Run EVT-011 once to success and once to failure on separate sessions/profiles."
+      ],
+      "pass": [
+        "Stage indexes remain contiguous.",
+        "Event-only actors/stalls/cages clean up.",
+        "Weather/presentation clears.",
+        "Regional outcome persists only where authored."
+      ]
+    },
+    {
+      "id": "LT-018",
+      "category": "teardown",
+      "name": "Player unregister full cleanup",
+      "steps": [
+        "Create statuses, ability state, class reservation, target, position context, spawn reservation, delivery request, and companion bond.",
+        "Leave session."
+      ],
+      "pass": [
+        "Actor unregister clears every session-owned state.",
+        "Tame bond reservation is released.",
+        "No pending adapter or delivery request remains for old runtime key."
+      ]
+    },
+    {
+      "id": "LT-019",
+      "category": "teardown",
+      "name": "NPC despawn cleanup",
+      "steps": [
+        "Bind an NPC as companion and apply status.",
+        "Despawn/remove NPC."
+      ],
+      "pass": [
+        "Companion binding releases.",
+        "Tame status clears.",
+        "Actor runtime key unregisters.",
+        "Owner companion count decreases."
+      ]
+    },
+    {
+      "id": "LT-020",
+      "category": "streaming",
+      "name": "Ossuary March border traversal",
+      "steps": [
+        "Traverse each REG-001 neighbor border repeatedly with and without combat.",
+        "Return to dense encounter area."
+      ],
+      "pass": [
+        "World Partition loads/unloads without missing collision or navigation.",
+        "No temporary event actors survive outside intended region.",
+        "Distant HLOD silhouettes transition acceptably."
+      ]
+    },
+    {
+      "id": "LT-021",
+      "category": "performance",
+      "name": "Dense slice profiling",
+      "steps": [
+        "Run Grave Market Eclipse with maximum candidate AI cap and active companions.",
+        "Record Spatial Profiler and Memory Snapshot."
+      ],
+      "pass": [
+        "No unbounded actor/entity growth.",
+        "Temporary VFX/actors return toward baseline after cleanup.",
+        "Observed bottlenecks are recorded before production status."
+      ]
+    },
+    {
+      "id": "LT-022",
+      "category": "accessibility",
+      "name": "Redundant lethal telegraphs",
+      "steps": [
+        "Exercise each lethal boss/event mechanic with audio reduced and again with visual noise reduced."
+      ],
+      "pass": [
+        "Critical mechanics retain at least two readable channels where practical.",
+        "Color is not the sole identifier for critical state.",
+        "No HUD/status bridge removes accessibility-critical warnings."
+      ]
+    }
+  ]
+}
