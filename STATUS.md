@@ -36,48 +36,26 @@ This file is generated from the canonical catalog by `tools/build_status.py`.
 - Premium designation is a design flag only; implementation must use Epic-supported entitlement/transaction systems and publication rules.
 
 ## Integrity Gates
-- canonical ID uniqueness: **passing in GitHub Actions**
-- canonical dependency existence: enforced by CI
-- declared per-wave entity counts: enforced by CI
-- tier depth / presentation requirements: enforced by CI
-- normalized-name and repeated-signature diversity audit: enforced by CI
-- runtime content index generation: executed by CI
-- original family minimums: protected by `tools/validate_quotas.py`
-- Axiom Heart crafting graph: validated independently and in unified CI
-- Axiom Heart recursive raw acquisition burden: **68,420**
+- canonical ID uniqueness / dependencies / per-wave counts: enforced by CI
+- tier depth and presentation requirements: enforced by CI
+- original family minimums: enforced by quota guard
+- normalized-name / repeated-signature diversity checks: enforced by CI
+- Verse static safety and runtime lifecycle invariants: enforced by CI
+- generated registries are regenerated and drift-checked in CI
+- Axiom Heart recursive crafting graph: validated in CI
+- transformation data, adapter coverage, and Launch Session acceptance matrix: validated in CI
 
-## Current Milestone
-- **All original 800-entity family minimums are met.**
-- 832 target-counted major entities are specified, with intentional overage in hireables and world events.
-- 840 total major definitions including factions.
-- Wave 019: validation success.
-- Wave 020: validation success.
-- core persistence, progression, material ledger, atomic crafting, faction reputation, Zero Candidate, Ascension gate, typed event bus, status/ability contracts, boss state machine, world-event state machine, companion contract, AI archetype contract, and configurable NPC lifecycle behavior scaffolds exist in Verse.
-- five-stage cannibal horde, necromancer ecology, eldritch, infernal, mythical, skyscraper-class, continent-class, God, Absolute, and Transcendent Zero content are represented.
-
-## Validated Vertical Slice — SLICE-001
-- region: **The Ossuary March**
-- 12 monsters, 6 tameables, 8 hireables, 12 weapons, 2 armor families, 3 vehicles
-- 2 minibosses + 1 major boss
-- world event: **EVT-011 Grave Market Eclipse**
-- dungeon structure: **The Ossuary Exchange**
-- first shop specification: **The Grave Market Quartermaster**
-- 6 first-slice crafting recipes with batch material validation
-- UEFN binding matrix validated against the slice manifest
-- 10 authored boss phases + 4 authored world-event stages
-- 13-region world topology and 4 world-scale event shells validated
-- first-slice Verse registry generator executes in CI
-- current limitation: Verse has not yet been compiled inside the actual UEFN project, so runtime files remain scaffolds rather than production-verified implementation.
-
-## Next Production Priority
-Quantity is no longer the bottleneck. The priority is now:
-1. core runtime services and data binding;
-2. one complete vertical-slice region;
-3. UEFN asset/device/Scene Graph binding;
-4. Verse compile + Launch Session verification;
-5. VFX/animation/audio production and optimization;
-6. encounter, persistence, balance, accessibility, and platform validation.
+## Endgame Runtime
+- Ascension Trials authored: **10**
+- canonical God/Absolute forms: **2** with **10** registered transformation abilities
+- Transcendent Zero Authorities: **8** with **24** registered Authority abilities
+- declared project effect bindings: **34** (10 God/Absolute + 24 Transcendent)
+- transformation Launch Session acceptance cases: **16**
+- endgame session runtime files present: **5 / 5** (Trials, Choosing, God/Absolute, Transcendent, Hall)
+- transformation identity is explicit, so God/Absolute/Authority abilities cannot satisfy one another's context gates.
+- active transformation/exhaustion state is session-only; permanent eligibility/history stays in the persistent profile.
+- Hall of Ascendants is currently an honest session registry derived from connected players' persistent progress, not a claimed global leaderboard.
 
 ## Production Boundary
-Catalog specification is not equivalent to a finished Fortnite island.
-Final implementation requires the actual UEFN project, project-specific asset references, generated digests, Verse compilation, Launch Session testing, memory calculations, spatial profiling, VFX/animation production, balance passes, and Epic publication/compliance review.
+Repository runtime scaffolding and CI validation are not equivalent to a finished Fortnite island.
+Project-bound effect graphs, prefabs, Character Definitions, VFX/animation/audio assets, Verse compilation inside the actual UEFN project, multiplayer Launch Session tests, memory/spatial profiling, platform validation, balance, and Epic publication/compliance review still remain.
