@@ -53,6 +53,27 @@ aeonfall_actor_registry := class():
         if:
             Agent := AgentByKey[RuntimeKey]
         then:
+            # Release dependent runtime state while the key is still resolvable.
+            AEONFALLActivationCoordinator.ClearOwnerPending(RuntimeKey)
+            AEONFALLCompanionRuntime.ReleaseAllForOwner(
+                RuntimeKey,
+                "owner_unregistered"
+            )
+            ReleasedAsCompanion := AEONFALLCompanionRuntime.ReleaseByCompanionKey(
+                RuntimeKey,
+                "companion_unregistered"
+            )
+            if (ReleasedAsCompanion?):
+                ReleasedAsCompanion = true
+
+            ClearedTarget := AEONFALLTargetingRuntime.Clear(RuntimeKey)
+            if (ClearedTarget?):
+                ClearedTarget = true
+
+            AEONFALLStatusRuntime.ClearTarget(RuntimeKey)
+            AEONFALLAbilityRuntime.ClearOwner(RuntimeKey)
+            AEONFALLClassRuntime.ClearOwner(RuntimeKey)
+
             var UpdatedAgents:[string]agent = map{}
             var UpdatedKeys:[agent]string = map{}
             var UpdatedCanonical:[string]string = map{}
@@ -90,7 +111,6 @@ aeonfall_actor_registry := class():
                 set KeyByAgent = UpdatedKeys
                 set CanonicalByKey = UpdatedCanonical
 
-                AEONFALLStatusRuntime.ClearTarget(RuntimeKey)
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{
                         EventType := "actor.unregistered",
