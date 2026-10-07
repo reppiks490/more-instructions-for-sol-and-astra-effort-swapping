@@ -69,7 +69,10 @@ def main()->int:
             f"        RequiresEncounterContext := {logic(a['requires_encounter_context'])},",
             f"        RequiresTransformationContext := {logic(a['requires_transformation_context'])},",
             f"        AllowWhileActive := {logic(a['allow_while_active'])},",
-            f"        StatusIds := {arr(a['status_ids'])},",
+            f"        RequiredClassId := {q(a.get('required_class_id', ''))},",
+            f"        ClassResourceCost := {a.get('class_resource_cost', 0)},",
+            f"        ClassResourceMode := aeonfall_class_resource_mode.{a.get('class_resource_mode', 'None')},",
+            f"        StatusIds := {arr(a['status_ids'])},"
             f"        SpawnIds := {arr(a['spawn_ids'])},",
             f"        EventIds := {arr(a['event_ids'])},",
             '        PresentationId := "",',
