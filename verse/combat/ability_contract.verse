@@ -8,6 +8,12 @@ aeonfall_resource_policy := enum:
     Meter
     EncounterOnly
     TransformationOnly
+    ExternalClassResource
+
+aeonfall_class_resource_mode := enum:
+    None
+    SpendOnSuccess
+    ReserveWhileActive
 
 aeonfall_target_policy := enum:
     Self
@@ -41,6 +47,13 @@ aeonfall_ability_definition := class:
     RequiresTransformationContext:logic = false
     AllowWhileActive:logic = false
 
+    # Optional class-resource gate. ExternalClassResource means this is the
+    # primary ability resource; other policies may combine cooldown/charges
+    # with class bandwidth through the coordinator.
+    RequiredClassId:string = ""
+    ClassResourceCost:int = 0
+    ClassResourceMode:aeonfall_class_resource_mode = aeonfall_class_resource_mode.None
+
     StatusIds:[]string = array{}
     SpawnIds:[]string = array{}
     EventIds:[]string = array{}
@@ -56,6 +69,7 @@ aeonfall_ability_runtime_state := class:
     CooldownRemainingSeconds:float = 0.0
     ChargeRechargeRemainingSeconds:float = 0.0
     Active:logic = false
+    ActiveRequestId:string = ""
     Pending:logic = false
     PendingRequestId:string = ""
     Locked:logic = false
