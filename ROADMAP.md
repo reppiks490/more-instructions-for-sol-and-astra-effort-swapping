@@ -11,11 +11,13 @@
 - [x] canonical status dashboard
 
 ## Gate 1 — Core Runtime
-- [ ] entity registry runtime (canonical JSON index generator complete)
-- [ ] event bus
-- [ ] status-effect model
-- [ ] ability runtime
-- [ ] cooldown/resource runtime
+- [x] canonical runtime content-index generator
+- [ ] project-bound Verse entity registry
+- [x] typed runtime event bus scaffold
+- [x] shared status-effect contract
+- [x] shared ability/resource contract
+- [ ] project-bound ability execution service
+- [ ] cooldown/resource execution runtime
 - [x] progression service scaffold
 - [x] persistent player profile
 - [x] persistent profile service
@@ -26,20 +28,31 @@
 
 ## Gate 2 — Vertical Slice
 One production-quality region containing:
-- [ ] 12+ implemented monsters
-- [ ] 6+ implemented tameable wildlife
-- [ ] 8+ implemented hireables
-- [ ] 12+ implemented original weapons
-- [ ] 2 implemented armor sets
-- [ ] 1 dungeon
-- [ ] 2 minibosses
-- [ ] 1 major boss
-- [ ] 1 world event
-- [ ] crafting/refinement runtime loop
+- [x] 12-monster slice manifest + Character Definition binding plan
+- [ ] 12+ implemented/compiled monsters
+- [x] 6-tameable slice manifest + Character Definition binding plan
+- [ ] 6+ implemented/compiled tameables
+- [x] 8-hireable slice manifest + Guard Character Definition binding plan
+- [ ] 8+ implemented/compiled hireables
+- [x] 12-weapon slice manifest + custom weapon template binding plan
+- [ ] 12+ implemented/compiled custom weapons
+- [x] 2-armor slice manifest + binding plan
+- [ ] 2 implemented/compiled armor sets
+- [x] first dungeon structure specified: The Ossuary Exchange
+- [ ] dungeon built and Launch Session tested
+- [x] 2 minibosses selected + encounter bindings specified
+- [ ] 2 minibosses implemented/tested
+- [x] major boss selected + encounter binding specified
+- [ ] major boss implemented/tested
+- [x] world event selected + director binding specified
+- [ ] world event implemented/tested
+- [x] atomic crafting transaction scaffold + validated first-slice recipes
+- [ ] crafting UI/device binding and UEFN playtest
 - [ ] class skill runtime loop
 - [ ] persistent progression compiled in UEFN
 - [ ] first shop
-- [ ] performance/streaming validation
+- [x] 13-region streamed world topology + event-shell architecture specified and CI validated
+- [ ] Spatial Profiler / Memory Snapshot validation in bound UEFN project
 
 ## Gate 3 — Content Factory
 - [x] authored entity schema
@@ -70,8 +83,10 @@ Targets:
 ## Gate 5 — Living World
 - [ ] multi-faction territory state
 - [ ] aggression escalation
-- [ ] taming/hiring runtime (shared companion contract complete)
-- [ ] dynamic invasions (world-event lifecycle contract complete)
+- [x] shared companion + AI behavior contracts and first-slice binding matrix
+- [ ] project-bound taming/hiring execution runtime
+- [x] world-event lifecycle contract
+- [ ] project-bound dynamic invasion director
 - [x] five-tier cannibal horde evolution specified
 - [x] necromancer ecosystem baseline specified
 - [x] roaming mythic threat baseline specified
