@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "slice_id": "SLICE-001",
+  "rewards": [
+    {
+      "encounter_id": "BOS-005",
+      "kind": "boss",
+      "xp": 5000,
+      "mastery_points": 1,
+      "unlock_entity_ids": [
+        "WPN-122"
+      ],
+      "material_rewards": [
+        {
+          "material_id": "MAT-008",
+          "amount": 30
+        }
+      ],
+      "first_clear_only": true
+    },
+    {
+      "encounter_id": "BOS-006",
+      "kind": "boss",
+      "xp": 6500,
+      "mastery_points": 1,
+      "unlock_entity_ids": [
+        "WPN-126"
+      ],
+      "material_rewards": [
+        {
+          "material_id": "MAT-004",
+          "amount": 40
+        }
+      ],
+      "first_clear_only": true
+    },
+    {
+      "encounter_id": "BOS-011",
+      "kind": "boss",
+      "xp": 20000,
+      "mastery_points": 5,
+      "unlock_entity_ids": [
+        "WPN-124",
+        "ARM-002"
+      ],
+      "material_rewards": [
+        {
+          "material_id": "MAT-011",
+          "amount": 1
+        },
+        {
+          "material_id": "MAT-008",
+          "amount": 100
+        }
+      ],
+      "first_clear_only": true
+    },
+    {
+      "encounter_id": "EVT-011",
+      "kind": "world_event",
+      "xp": 8000,
+      "mastery_points": 2,
+      "unlock_entity_ids": [],
+      "material_rewards": [
+        {
+          "material_id": "MAT-008",
+          "amount": 50
+        },
+        {
+          "material_id": "MAT-003",
+          "amount": 25
+        }
+      ],
+      "first_clear_only": true
+    }
+  ]
+}
