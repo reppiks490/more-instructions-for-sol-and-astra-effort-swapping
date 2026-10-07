@@ -1,0 +1,3085 @@
+{
+  "wave": "010",
+  "purpose": "Advanced armory expansion: highly differentiated weapons and armor with escalating mechanics, animation language, VFX, and Ascendant-bound apex gear.",
+  "entity_count": 48,
+  "entities": [
+    {
+      "id": "WPN-013",
+      "name": "Graviton Widow",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "gravity repeater",
+      "identity": {
+        "fantasy": "A compact rifle that tags enemies with micro-gravity wells, causing successive hits to tug them toward the last impact point.",
+        "silhouette": "Needle-thin black frame with three orbiting tungsten rings.",
+        "lore_hook": "Built by void salvagers who learned to turn recoil into localized gravity debt."
+      },
+      "mechanics": {
+        "core": [
+          "gravity tagging",
+          "repeater fire",
+          "position control"
+        ],
+        "signature": [
+          "Three-hit Anchor Knot pulls tagged targets several meters toward the third impact.",
+          "Alternate fire collapses all active tags into a brief low-gravity snare."
+        ],
+        "counterplay": [
+          "Tags are visible and expire quickly; spreading fire across multiple targets prevents a full knot."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Blue-black lensing around hit tags.",
+          "Three concentric rings snap shut on Anchor Knot."
+        ],
+        "animation": [
+          "Orbit rings accelerate with each tag.",
+          "Collapse fire kicks the stock downward as if the weapon suddenly becomes massive."
+        ],
+        "audio": [
+          "Dense sub-bass pops and a metallic orbital whine."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic gravitic foundry contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-014",
+      "name": "Choirbreaker",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "anti-caster burst rifle",
+      "identity": {
+        "fantasy": "A burst rifle that disrupts ability channels and punishes enemies using sustained powers.",
+        "silhouette": "Silver receiver wrapped in broken tuning forks and black cloth.",
+        "lore_hook": "Made to hunt cult choirs whose spells required uninterrupted harmonics."
+      },
+      "mechanics": {
+        "core": [
+          "burst fire",
+          "channel disruption",
+          "silence pressure"
+        ],
+        "signature": [
+          "Landing a full burst during an enemy channel adds Resonance Fracture, lengthening that channel's recovery.",
+          "Perfectly timed interrupts emit a short cone that weakens nearby summoned entities."
+        ],
+        "counterplay": [
+          "Poor timing provides ordinary rifle value only; elites can fake-cast to bait the fracture shot."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "White waveform fractures on interrupt.",
+          "Summoned targets shed glassy note shards."
+        ],
+        "animation": [
+          "Tuning forks vibrate before a disruption burst.",
+          "Successful interrupt snaps the weapon sideways with a tuning-strike flourish."
+        ],
+        "audio": [
+          "Broken-choir sting and hard ceramic crack."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic reliquary hunter reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-015",
+      "name": "Ashline Reclaimer",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "thermal salvage shotgun",
+      "identity": {
+        "fantasy": "A pump weapon that turns burning terrain and defeated fire creatures into temporary incendiary shell charges.",
+        "silhouette": "Charred steel pump with ember reservoir under the barrel.",
+        "lore_hook": "A scavenger weapon born in cities where streets themselves stayed on fire for years."
+      },
+      "mechanics": {
+        "core": [
+          "heat salvage",
+          "shotgun burst",
+          "terrain interaction"
+        ],
+        "signature": [
+          "Walking through eligible flame zones charges Ash Cells used by alternate-fire incendiary slugs.",
+          "Defeating burning enemies refunds part of the next Ash Cell."
+        ],
+        "counterplay": [
+          "Water, frost, and sealed interiors deny the salvage loop."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Ember siphon trails crawl from fires into the reservoir.",
+          "Charged slugs leave a molten line and brief ash crown."
+        ],
+        "animation": [
+          "Pump vents incandescent ash after charge gain.",
+          "Alternate fire braces with a low shoulder shove."
+        ],
+        "audio": [
+          "Coal inhale, furnace thump, glassy ember hiss."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic ashland survival chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-016",
+      "name": "Harrowglass Needle",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "precision curse pistol",
+      "identity": {
+        "fantasy": "A long pistol that plants translucent curse needles which amplify the next melee or creature strike against the target.",
+        "silhouette": "Clear-black frame with floating needle magazine.",
+        "lore_hook": "An assassin's sidearm designed to make monsters finish the job."
+      },
+      "mechanics": {
+        "core": [
+          "precision mark",
+          "curse priming",
+          "synergy"
+        ],
+        "signature": [
+          "Critical hits embed Harrow Needles; the next allied melee or tameable hit shatters all needles for bonus stagger.",
+          "Needles on non-boss enemies briefly reveal their movement vector through cover."
+        ],
+        "counterplay": [
+          "Ranged follow-up does not shatter needles; bosses cap stored needles."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Thin violet glass needles remain visibly embedded.",
+          "Needle shatter creates a spiderweb flash around the target."
+        ],
+        "animation": [
+          "Magazine floats apart during reload.",
+          "Critical shot makes the pistol recoil in a precise wrist rotation."
+        ],
+        "audio": [
+          "Crystal tick, whispering aim tone, sharp shatter."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic witch-hunter bounty line."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-017",
+      "name": "Cinder Orbit",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "boomerang disc launcher",
+      "identity": {
+        "fantasy": "A launcher firing heated cutting discs that orbit a marked location before returning.",
+        "silhouette": "Circular bronze weapon with rotating crescent rails.",
+        "lore_hook": "Originally a mining cutter adapted for siege fighting in volcanic tunnels."
+      },
+      "mechanics": {
+        "core": [
+          "returning projectile",
+          "area orbit",
+          "heat buildup"
+        ],
+        "signature": [
+          "Hold fire to place an Orbit Point; launched discs circle it once before returning through enemies.",
+          "Catching a returning disc without being hit grants a brief reload-speed surge."
+        ],
+        "counterplay": [
+          "Orbit Points are visible and the disc path is predictable after placement."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Orange ring path is drawn before launch.",
+          "Returning disc sheds a comet-tail shower."
+        ],
+        "animation": [
+          "Launcher opens like an iris to release discs.",
+          "Catch animation sweeps the disc into the chamber."
+        ],
+        "audio": [
+          "Sawing air whine and heavy magnetic catch."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic magma quarry challenge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-018",
+      "name": "Ravenous Psalm",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "living burst SMG",
+      "identity": {
+        "fantasy": "A fleshy SMG that becomes steadier when the player rotates targets instead of tunneling one enemy.",
+        "silhouette": "Dark organic housing with six whispering mouth vents.",
+        "lore_hook": "Cult weapon bred to reward indiscriminate hunger rather than obsession."
+      },
+      "mechanics": {
+        "core": [
+          "target rotation",
+          "burst SMG",
+          "living weapon"
+        ],
+        "signature": [
+          "Feeding Rhythm grants stability stacks for hitting three different hostile targets in sequence.",
+          "At full rhythm the next reload spits a short fear pulse at lesser mobs."
+        ],
+        "counterplay": [
+          "Focusing one target resets the rhythm; bosses do not count as multiple targets."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Mouth vents glow in sequence as rhythm builds.",
+          "Fear reload emits a ring of pale jaw silhouettes."
+        ],
+        "animation": [
+          "The weapon twitches toward nearby targets.",
+          "Reload compresses the living magazine with both hands."
+        ],
+        "audio": [
+          "Layered whispers, wet mechanical clicks, pulse growl."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic fleshmarket faction contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-019",
+      "name": "Chronosear Array",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "temporal burst rifle",
+      "identity": {
+        "fantasy": "A rifle that stores a short record of its own last burst and can replay the trajectory a moment later as spectral fire.",
+        "silhouette": "Split chrome frame with a transparent time spool.",
+        "lore_hook": "Recovered from a laboratory that tested ammunition against events that had not happened yet."
+      },
+      "mechanics": {
+        "core": [
+          "temporal echo",
+          "burst rifle",
+          "delayed crossfire"
+        ],
+        "signature": [
+          "Echo Record stores the path of the last accurate burst.",
+          "Recall Shot replays spectral rounds along the stored path after a configurable delay.",
+          "Crossfire Paradox deals extra stagger when live and recalled rounds hit from different angles."
+        ],
+        "counterplay": [
+          "Enemies can move out of the recorded lane; replay timing is telegraphed by a visible spool countdown."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Cyan afterimages remain along recorded trajectories.",
+          "Recall rounds appear as translucent duplicates from the past."
+        ],
+        "animation": [
+          "Time spool ratchets backward after recording.",
+          "Recall fire animates without normal recoil, as if the gun is remembering."
+        ],
+        "audio": [
+          "Reverse-shell clicks, delayed crack, tape-rewind shimmer."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary chronolab raid cache."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-020",
+      "name": "Kingsfall Mortar",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "portable anti-elite mortar",
+      "identity": {
+        "fantasy": "A shoulder mortar that rewards coordinated marking of large targets before dropping a delayed vertical strike.",
+        "silhouette": "Heavy ivory tube with royal fracture motifs and target crown projector.",
+        "lore_hook": "Built from siege guns used to execute giants from behind their own walls."
+      },
+      "mechanics": {
+        "core": [
+          "target marking",
+          "delayed strike",
+          "anti-elite"
+        ],
+        "signature": [
+          "Crown Mark attaches a visible strike crown to elites and bosses.",
+          "Royal Descent launches a shell high above the crown before a delayed vertical impact.",
+          "Squad hits on the crowned target accelerate descent up to a safe cap."
+        ],
+        "counterplay": [
+          "The crown announces the strike; bosses can reposition or force the squad to choose between pressure and safety."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Gold crown reticle projects above marked enemies.",
+          "Falling shell creates a narrow sun-column before impact."
+        ],
+        "animation": [
+          "Tube unfolds a stabilizer foot before launch.",
+          "Impact confirmation snaps the crown projector shut."
+        ],
+        "audio": [
+          "Distant artillery howl, brass bell warning, colossal impact."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary siege monastery reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-021",
+      "name": "Mirrorwolf",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "reactive duelist carbine",
+      "identity": {
+        "fantasy": "A carbine that learns the last damage type received and briefly converts part of its output to the counter-element.",
+        "silhouette": "Angular mirrored plating with a wolf-jaw muzzle.",
+        "lore_hook": "Duelists carried it into arenas where opponents changed weapons every round."
+      },
+      "mechanics": {
+        "core": [
+          "adaptive element",
+          "duelist pressure",
+          "counter damage"
+        ],
+        "signature": [
+          "Mirror Bite samples the last eligible damage type suffered.",
+          "Countercoat temporarily adds the opposing elemental/status property to shots.",
+          "Perfect retaliation within the sample window grants a short movement burst."
+        ],
+        "counterplay": [
+          "Taking mixed damage can overwrite the desired sample; adaptive windows are brief and visible."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Receiver mirrors the sampled color then flips to its counter hue.",
+          "Successful retaliation emits a spectral wolf snap."
+        ],
+        "animation": [
+          "Mirror plates rotate after being hit.",
+          "Perfect retaliation includes a forward shoulder lean and fang flash."
+        ],
+        "audio": [
+          "Metallic howl harmonized to sampled damage type."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary duelist arena mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-022",
+      "name": "Black Orchard",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "seed mine launcher",
+      "identity": {
+        "fantasy": "A launcher that plants dormant black seeds which bloom into attack flora when enemies enter linked zones.",
+        "silhouette": "Branchlike launcher with seed chambers and obsidian petals.",
+        "lore_hook": "An agricultural weapon from a colony that taught its crops to defend themselves."
+      },
+      "mechanics": {
+        "core": [
+          "trap seeding",
+          "linked zones",
+          "hostile flora"
+        ],
+        "signature": [
+          "Plant up to three Orchard Seeds that link into a triangular threat field.",
+          "A triggered seed blooms into thorn lashes while untriggered linked seeds gain temporary charge.",
+          "Destroying one seed redistributes part of its stored charge to survivors."
+        ],
+        "counterplay": [
+          "Seeds are visible, destructible, and limited; large enemies can intentionally trigger them to clear routes."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Black root lines connect planted seeds.",
+          "Triggered bloom erupts with ink-dark petals and red thorn arcs."
+        ],
+        "animation": [
+          "Launcher branches unfold to eject seeds.",
+          "Destroyed-network feedback makes remaining chambers pulse."
+        ],
+        "audio": [
+          "Root crackle, seed heartbeat, thorn-whip snaps."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary black-garden expedition chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-023",
+      "name": "Warden of Rain",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "storm-control rifle",
+      "identity": {
+        "fantasy": "A rifle whose impacts accumulate static in a local column of air, enabling a player-triggered lightning descent.",
+        "silhouette": "Gunmetal rifle with hanging rain-chain conductors.",
+        "lore_hook": "Storm wardens used it to bring weather indoors one target at a time."
+      },
+      "mechanics": {
+        "core": [
+          "static stacking",
+          "lightning call",
+          "area denial"
+        ],
+        "signature": [
+          "Hits build Storm Debt above a target or surface.",
+          "Call Rain discharges stored debt as a vertical lightning strike and short rain field.",
+          "Wet targets build debt faster but broadcast crackling warning effects."
+        ],
+        "counterplay": [
+          "Static stacks decay and are obvious; shelter breaks line-of-sky damage amplification."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Cloudlet forms over heavily indebted targets.",
+          "Discharge draws a white-blue column with radial rain needles."
+        ],
+        "animation": [
+          "Conductors lift during high debt.",
+          "Call Rain slams the rifle butt into a grounded stance."
+        ],
+        "audio": [
+          "Rain hiss, capacitor chatter, thunder with distance rolloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary tempest shrine trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-024",
+      "name": "Bone Parliament",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "summoner support shotgun",
+      "identity": {
+        "fantasy": "A shotgun that stores bone votes from defeated lesser monsters and spends them to summon a brief skeletal firing line.",
+        "silhouette": "Ivory multi-barrel with tiny seated skulls around the chamber.",
+        "lore_hook": "Necromancers called it democracy because the dead always voted the same way."
+      },
+      "mechanics": {
+        "core": [
+          "kill resource",
+          "temporary summons",
+          "support burst"
+        ],
+        "signature": [
+          "Lesser monster defeats add Bone Votes up to a cap.",
+          "Spend Votes to raise a short-lived skeletal firing line facing the targeted lane.",
+          "Unspent Votes slightly tighten shotgun spread but are lost on elimination."
+        ],
+        "counterplay": [
+          "Summons are fragile and telegraphed; boss kills do not provide huge vote spikes."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Tiny skull lights fill one by one.",
+          "Summoned firing line rises as white bone silhouettes before solidifying."
+        ],
+        "animation": [
+          "Chamber rotates like a council wheel.",
+          "Summon cast points the barrel like a conductor's baton."
+        ],
+        "audio": [
+          "Bone clacks, whispered vote count, synchronized rifle cracks."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary ossuary contract reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-025",
+      "name": "Saint of Zero Distance",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "blink shotgun",
+      "identity": {
+        "fantasy": "A mythic shotgun that trades range for controlled micro-teleports tied to its firing cadence.",
+        "silhouette": "Compact white-black shotgun with a broken halo sight.",
+        "lore_hook": "An execution weapon built for warriors who believed distance itself was cowardice."
+      },
+      "mechanics": {
+        "core": [
+          "blink fire",
+          "close-range burst",
+          "position chaining"
+        ],
+        "signature": [
+          "First shot places a return sigil at the firing point.",
+          "Second empowered shot may blink the wielder a short safe distance toward the crosshair.",
+          "Third shot can snap back to the return sigil if it remains valid.",
+          "A full three-step chain grants brief stagger resistance."
+        ],
+        "counterplay": [
+          "Blink distance is capped, destination validation can fail, and the return sigil is visible to enemies."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "White line folds between origin and destination.",
+          "Broken halo becomes complete for the third-shot return.",
+          "Successful chain leaves three fading silhouettes."
+        ],
+        "animation": [
+          "Firing posture compresses before each blink.",
+          "Return animation yanks the character backward through a halo tear."
+        ],
+        "audio": [
+          "Vacuum pop, close thunder, crystalline halo ring."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic zero-chapel boss attunement."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-026",
+      "name": "Leviathan's Receipt",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "debt harpoon cannon",
+      "identity": {
+        "fantasy": "A massive harpoon weapon that records damage dealt to a tethered large enemy and converts a portion into a delayed rupture when the line is broken deliberately.",
+        "silhouette": "Ship-scale harpoon compressed into a wearable frame with chain-coil spine.",
+        "lore_hook": "Hunters joked that every monster eventually paid what it owed."
+      },
+      "mechanics": {
+        "core": [
+          "harpoon tether",
+          "damage ledger",
+          "delayed rupture"
+        ],
+        "signature": [
+          "Harpoon large enemies to begin a visible Damage Debt ledger.",
+          "Squad damage while tethered increases the ledger under a strict cap.",
+          "Manual Break cashes out part of the ledger as rupture stagger.",
+          "Reeling while the target is staggered grants a short traversal pull instead."
+        ],
+        "counterplay": [
+          "The tether can be severed; premature enemy break reduces payout; small targets receive only a mobility effect."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Spectral tally marks climb the chain.",
+          "Debt cashout sends a red-gold fracture wave through the tether.",
+          "Leviathan-scale glyph appears beneath capped targets."
+        ],
+        "animation": [
+          "Whole-body brace on fire.",
+          "Manual Break uses a two-handed chain snap.",
+          "Traversal reel drags the character into a low forward stance."
+        ],
+        "audio": [
+          "Chain groan, whale-low resonance, ledger clicks, rupture boom."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic leviathan hunt chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-027",
+      "name": "Eclipse Grammar",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "mode-writing battle rifle",
+      "identity": {
+        "fantasy": "A rifle with three ordered fire words; firing them in different sequences produces distinct battlefield effects.",
+        "silhouette": "Long black rifle inscribed with movable luminous glyph blocks.",
+        "lore_hook": "Its makers claimed combat was only a sentence waiting for the correct punctuation."
+      },
+      "mechanics": {
+        "core": [
+          "combo sequencing",
+          "three fire words",
+          "adaptive effect"
+        ],
+        "signature": [
+          "SUN shot applies Radiance.",
+          "MOON shot applies Veil.",
+          "VOID shot applies Weight.",
+          "Specific three-word sequences trigger authored combo effects such as Radiant Break, Umbra Step, or Gravity Clause."
+        ],
+        "counterplay": [
+          "Enemies can read the visible glyph order; mis-sequencing consumes charges without combo payoff."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Glyph blocks illuminate in sequence.",
+          "Completed words write a giant fleeting sigil in the air.",
+          "Each combo has a unique color geometry."
+        ],
+        "animation": [
+          "Glyph blocks physically slide between shots.",
+          "Combo completion locks the rifle straight for a ritual recoil beat."
+        ],
+        "audio": [
+          "Spoken synthetic syllables, page-turn clicks, combo chord."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic eclipse archive puzzle-raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-028",
+      "name": "Seraph Engine IX",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "aerial support cannon",
+      "identity": {
+        "fantasy": "A shoulder cannon that creates temporary airborne support nodes that heal, shield, or bombard based on ammunition mode.",
+        "silhouette": "White mechanical wing frame with nine rotating feather barrels.",
+        "lore_hook": "The ninth engine was the first one its builders admitted was designed for war."
+      },
+      "mechanics": {
+        "core": [
+          "support drones",
+          "mode selection",
+          "air control"
+        ],
+        "signature": [
+          "Launch Seraph Nodes that hover for a short duration.",
+          "Mercy mode emits pulsed healing within a small radius.",
+          "Aegis mode grants intermittent overshield packets.",
+          "Wrath mode fires marked bombardment bolts at hostile targets.",
+          "Only a limited number of nodes can exist simultaneously and modes share a resource."
+        ],
+        "counterplay": [
+          "Nodes can be destroyed; mode swaps have lockout; stacked support is capped."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Mechanical feather trails on deployment.",
+          "Node halos change geometry per mode.",
+          "Wrath bolts descend as thin lances from node to target."
+        ],
+        "animation": [
+          "Wing frame unfolds over the shoulder.",
+          "Each mode reconfigures feather barrels differently."
+        ],
+        "audio": [
+          "Choir-engine hum, wing servos, distinct three-mode chimes."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic celestial foundry raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-029",
+      "name": "The Hungry Horizon",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "expanding rift launcher",
+      "identity": {
+        "fantasy": "A launcher firing a slow rift projectile that grows when it absorbs enemy projectiles and collapses into crowd-control pressure.",
+        "silhouette": "Ring-shaped launcher with a miniature starless aperture.",
+        "lore_hook": "It was first discovered already firing at something no one could see."
+      },
+      "mechanics": {
+        "core": [
+          "rift projectile",
+          "projectile absorption",
+          "collapse control"
+        ],
+        "signature": [
+          "Slow Horizon sphere absorbs a limited number of eligible hostile projectiles.",
+          "Each absorbed projectile increases sphere radius and pull strength.",
+          "Manual collapse converts remaining capacity into a directional knock.",
+          "Against bosses the sphere becomes a projectile shield rather than hard crowd control."
+        ],
+        "counterplay": [
+          "Sphere is slow, capacity-limited, and loudly telegraphed; melee enemies ignore projectile absorption."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Starless sphere with distorted rim.",
+          "Absorbed shots orbit as tiny colored streaks.",
+          "Collapse forms a brief tunnel of bent light."
+        ],
+        "animation": [
+          "Launcher rings separate before firing.",
+          "Manual collapse clenches the rings together in one violent motion."
+        ],
+        "audio": [
+          "Subsonic vacuum, swallowed projectile chirps, collapsing bass crack."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic void observatory world event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-030",
+      "name": "Apostate's Compass",
+      "family": "weapon",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "direction-reversal rifle",
+      "identity": {
+        "fantasy": "An exotic rifle that can reverse the movement impulse of tagged enemies, turning lunges and knockbacks against them.",
+        "silhouette": "Compass-rose receiver with floating cardinal blades.",
+        "lore_hook": "A navigation cult built it after deciding north was merely an opinion."
+      },
+      "mechanics": {
+        "core": [
+          "motion tagging",
+          "impulse inversion",
+          "mobility counter"
+        ],
+        "signature": [
+          "Compass Tag records the direction of an enemy's next major movement impulse.",
+          "Reverse North flips one eligible recorded impulse in the opposite direction.",
+          "Cardinal Trap creates a tiny zone where dashes exit from the opposite edge.",
+          "Direction Echo leaves a false movement trail that can mislead lesser AI."
+        ],
+        "counterplay": [
+          "Boss movement cannot be fully reversed; tagged targets receive a cardinal warning; trap duration is short."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Cardinal arrows orbit tagged targets.",
+          "Reversed movement draws a snapped compass-line.",
+          "Trap zone resembles a folding map grid."
+        ],
+        "animation": [
+          "Compass blades point toward predicted motion.",
+          "Reverse North rotates the weapon 180 degrees in the hands.",
+          "Trap placement uses a downward compass stamp."
+        ],
+        "audio": [
+          "Compass clicks, spatial snap, reversed whoosh."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic cartographer sovereign contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-031",
+      "name": "Murder of Suns",
+      "family": "weapon",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "orbiting micro-star weapon",
+      "identity": {
+        "fantasy": "A weapon that creates tiny orbiting solar charges around the user and spends them as independently aimed projectiles.",
+        "silhouette": "Black-gold staff-rifle with six empty orbital sockets.",
+        "lore_hook": "The weapon's name is both collective noun and warning."
+      },
+      "mechanics": {
+        "core": [
+          "orbit resource",
+          "multi-angle fire",
+          "heat risk"
+        ],
+        "signature": [
+          "Critical hits create Micro-Suns up to a strict cap.",
+          "Normal fire can spend suns to attack from offset angles.",
+          "Solar Conjunction spends all suns on one target for a staged multi-angle strike.",
+          "Overheat causes remaining suns to flare harmlessly rather than explode on the user."
+        ],
+        "counterplay": [
+          "Orbiting suns expose resource state; conjunction has a long tell; heat management limits burst."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Tiny suns orbit at different inclinations.",
+          "Conjunction draws six gold arcs toward the target.",
+          "Overheat sheds harmless corona ribbons."
+        ],
+        "animation": [
+          "Weapon traces orbital paths with the off hand.",
+          "Conjunction locks character posture while sockets flare.",
+          "Murder of Suns uses a bespoke transition animation for phase 3, with anticipation frames preserved for counterplay."
+        ],
+        "audio": [
+          "Solar crackle, orbital hum, six-note conjunction chord."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic heliophage mastery quest."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-032",
+      "name": "Mercy Is a Weapon",
+      "family": "weapon",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "damage-conversion support sidearm",
+      "identity": {
+        "fantasy": "An exotic sidearm that can bank part of damage dealt and later convert the bank into healing for an ally instead of further offense.",
+        "silhouette": "Ivory pistol with a red transparent reservoir and split trigger.",
+        "lore_hook": "A battlefield medic designed it after deciding every wound should finance another life."
+      },
+      "mechanics": {
+        "core": [
+          "damage bank",
+          "ally heal",
+          "resource choice"
+        ],
+        "signature": [
+          "Eligible damage fills a Mercy Reservoir.",
+          "Secondary fire transfers stored Mercy into a nearby ally as staged healing pulses.",
+          "Selfish Fire can instead consume Mercy for armor penetration but locks healing briefly.",
+          "Perfect Rescue on a critically low ally refunds part of the reservoir."
+        ],
+        "counterplay": [
+          "Reservoir caps low; healing requires line of sight; offensive conversion creates a visible lockout."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Red reservoir fills with liquid light.",
+          "Healing forms ribbon-like sutures around the ally.",
+          "Selfish Fire turns reservoir light black-gold."
+        ],
+        "animation": [
+          "Split trigger changes finger position by mode.",
+          "Perfect Rescue uses a brief two-handed blessing gesture.",
+          "Mercy Is a Weapon uses a bespoke transition animation for phase 3, with anticipation frames preserved for counterplay."
+        ],
+        "audio": [
+          "Heartbeat reservoir, soft suture chimes, harsh selfish-fire crack."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic battlefield hospice reputation capstone."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-033",
+      "name": "Thronebreaker Omega",
+      "family": "weapon",
+      "tier": "god",
+      "status": "specified",
+      "role": "anti-colossus rail cannon",
+      "identity": {
+        "fantasy": "A God-tier rail cannon designed around weak-point sequencing against enormous bosses rather than ordinary enemies.",
+        "silhouette": "Cathedral-length visual profile compressed by folding rails, with crown-shaped magnetic vanes.",
+        "lore_hook": "Forged from the ruins of seven siege engines that failed to kill the same god."
+      },
+      "mechanics": {
+        "core": [
+          "weak-point sequencing",
+          "rail charge",
+          "anti-colossus"
+        ],
+        "signature": [
+          "Sovereign Scan reveals one authored boss weak-point chain when encounter rules allow.",
+          "Crown Charge builds power only while the player maintains aim on the correct weak-point sequence.",
+          "Thronebreak shot gains stagger rather than raw damage against continent-class bosses.",
+          "Squad Synchrony reduces charge time when allies damage linked weak points.",
+          "Missed sequence collapses charge safely but resets the chain."
+        ],
+        "counterplay": [
+          "Ordinary enemies receive heavily normalized output; scan telegraphs the user's intent; movement breaks long charges."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Giant crown lattice appears around eligible boss weak points.",
+          "Rail tunnel forms behind the user during full charge.",
+          "Impact produces a horizon-wide white line with aggressive distance LOD.",
+          "Correct sequence paints linked weak points with gold fractures."
+        ],
+        "animation": [
+          "Folding rails extend over several beats.",
+          "Full charge plants the user's stance and drives stabilizers into the ground.",
+          "Firing throws a visible shockwave through clothing and nearby dust."
+        ],
+        "audio": [
+          "Cathedral bell charge, magnet scream, continent-scale distant boom."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier colossus slayer pilgrimage."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-034",
+      "name": "Book of Falling Stars",
+      "family": "weapon",
+      "tier": "god",
+      "status": "specified",
+      "role": "ritual meteor codex",
+      "identity": {
+        "fantasy": "A God-tier weapon-codex that writes temporary constellations over an arena and calls different stellar effects from their shapes.",
+        "silhouette": "Floating metal scripture with pages made of night sky.",
+        "lore_hook": "An astronomer imprisoned a dead constellation inside a book and taught soldiers to read it."
+      },
+      "mechanics": {
+        "core": [
+          "constellation drawing",
+          "arena ritual",
+          "stellar calls"
+        ],
+        "signature": [
+          "Star Script places up to four sky anchors.",
+          "Triangle script calls a focused meteor.",
+          "Square script creates a falling-star perimeter.",
+          "Line script opens a traversal comet lane.",
+          "Closed-loop script briefly weakens summoned/eldritch entities.",
+          "Final Page consumes all anchors for a large but highly telegraphed stellar descent."
+        ],
+        "counterplay": [
+          "Anchors are visible and destructible; scripts require setup time; indoor spaces reduce some effects."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Night-sky pages unfold above the player.",
+          "Anchors project upward into visible constellation lines.",
+          "Each script has a distinct celestial geometry.",
+          "Final Page darkens the local sky before the descent."
+        ],
+        "animation": [
+          "Off-hand draws star lines in the air.",
+          "Pages orbit faster as scripts close.",
+          "Final Page slams the codex shut before impact."
+        ],
+        "audio": [
+          "Quill scratches, stellar choir, descending meteor roar."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier astral archive completion."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-035",
+      "name": "Law Without Witness",
+      "family": "weapon",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "local-rule dominion weapon",
+      "identity": {
+        "fantasy": "An Absolute-tier armament that temporarily changes one authored combat rule inside a small domain instead of functioning as a conventional gun.",
+        "silhouette": "Featureless black-white lance with symbols that only appear when rules are selected.",
+        "lore_hook": "Judges of the old world carried no witnesses because the weapon itself defined what had happened."
+      },
+      "mechanics": {
+        "core": [
+          "domain selection",
+          "rule alteration",
+          "limited authority"
+        ],
+        "signature": [
+          "Choose one unlocked Edict before activation.",
+          "Edict of Weight increases gravity-like movement pressure on hostile jumps/dashes.",
+          "Edict of Silence suppresses selected non-boss ability triggers for a short window.",
+          "Edict of Return bends eligible hostile projectiles back toward the domain edge.",
+          "Edict of Witness marks all damage sources inside the domain for squad visibility.",
+          "Final Injunction collapses the domain into a stagger pulse proportional to rules successfully enforced."
+        ],
+        "counterplay": [
+          "Domain is small, duration-limited, loudly announced, and bosses obey authored exceptions rather than blanket suppression."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Monochrome boundary forms with rotating legal glyphs.",
+          "Each Edict recolors only its symbol while the world stays desaturated.",
+          "Projectile Return traces perfect geometric arcs.",
+          "Final Injunction stamps a giant seal under the domain.",
+          "Domain collapse sends vertical paper-like shards upward."
+        ],
+        "animation": [
+          "Weapon unfolds into a judge's staff.",
+          "Edict selection rotates floating symbols around the user's hand.",
+          "Activation plants the staff into the ground.",
+          "Final Injunction tears the staff free with a full-body motion."
+        ],
+        "audio": [
+          "Deep spoken edict syllables, paper thunder, geometric chimes."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute ascension tribunal and Axiom Forge recipe."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-036",
+      "name": "Zero's First Question",
+      "family": "weapon",
+      "tier": "transcendent_zero",
+      "status": "specified",
+      "role": "Ascendant-bound paradox arm",
+      "identity": {
+        "fantasy": "A Transcendent Zero armament that changes function based on which impossible question the Ascendant asks of the current encounter.",
+        "silhouette": "A floating black polyhedron that refuses a stable silhouette, orbiting the wielder rather than being held.",
+        "lore_hook": "The first Ascendant did not ask how to win. They asked why losing was permitted to exist."
+      },
+      "mechanics": {
+        "core": [
+          "question state",
+          "encounter reinterpretation",
+          "ascendant authority"
+        ],
+        "signature": [
+          "Question of Distance turns shots into short spatial folds that strike from authored offset angles.",
+          "Question of Time records one brief firing sequence and permits a single replay ghost.",
+          "Question of Mass converts a charged shot into regional knock/stagger pressure with boss-safe scaling.",
+          "Question of Allegiance temporarily charms only explicitly eligible lesser entities struck by the pulse.",
+          "Question of Form swaps the weapon between precision, spread, and beam-like supported modes.",
+          "Question of Ending unlocks a once-per-transformation finisher against authored vulnerable states.",
+          "Reality Refusal cancels the weapon's own active question and refunds part of its resource if the user aborts before resolution."
+        ],
+        "counterplay": [
+          "All Questions obey strict cooldown/resource caps, boss immunities, destination validation, and event-authored exceptions; Transcendent access itself is ultra-restricted."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Polyhedron constantly changes impossible edge count.",
+          "Each Question rewrites the local HUD frame around the reticle.",
+          "Spatial shots leave non-Euclidean afterimages.",
+          "Time replay appears as a delayed monochrome ghost.",
+          "Mass shot bends nearby particles inward before release.",
+          "Ending finisher removes ambient color for one beat then restores it explosively."
+        ],
+        "animation": [
+          "The object never reloads conventionally; it reconfigures around the hand.",
+          "Question selection separates the polyhedron into orbiting planes.",
+          "Time replay animates a second spectral firing pose beside the player.",
+          "Mass charge lifts the character slightly before grounding them.",
+          "Ending finisher freezes the pose for a single ceremonial frame before release."
+        ],
+        "audio": [
+          "Question-specific synthetic choir, inverted gunshot transients, one unmistakable Zero activation tone."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Bound only to a fully qualified Transcendent Zero Ascendant through the endgame authority system."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-005",
+      "name": "Grave-Mason Harness",
+      "family": "armor",
+      "tier": "epic",
+      "status": "specified",
+      "role": "necrotic construction armor",
+      "identity": {
+        "fantasy": "Armor that converts nearby defeated lesser monsters into temporary barricade charges.",
+        "silhouette": "Asymmetrical red-black work armor with bone-brick plates.",
+        "lore_hook": "Copied from the Gore-Masons' battlefield architecture rigs."
+      },
+      "mechanics": {
+        "core": [
+          "corpse salvage",
+          "temporary cover",
+          "frontline sustain"
+        ],
+        "signature": [
+          "Collect Grave Charges near eligible defeated mobs and spend them to raise a short fragile bone wall.",
+          "Breaking your own wall early refunds a fraction of charge."
+        ],
+        "counterplay": [
+          "Walls are clearly telegraphed and fragile; charge cannot be farmed from summoned allies."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Bone mortar crawls across the gauntlets.",
+          "Wall placement shows red blueprint planes."
+        ],
+        "animation": [
+          "Gauntlets perform fast masonry gestures.",
+          "Chest vents release dust when charge is full."
+        ],
+        "audio": [
+          "Brick clacks and bone rasp."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Grave Architect reputation."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-006",
+      "name": "Stormskin Mantle",
+      "family": "armor",
+      "tier": "epic",
+      "status": "specified",
+      "role": "mobility storm armor",
+      "identity": {
+        "fantasy": "Armor that banks a small movement bonus while traversing through rain, electrified zones, or storm effects.",
+        "silhouette": "Dark mantle threaded with conductive silver veins.",
+        "lore_hook": "Worn by scouts who ran messages through weather no vehicle could survive."
+      },
+      "mechanics": {
+        "core": [
+          "weather synergy",
+          "mobility charge",
+          "shock resistance"
+        ],
+        "signature": [
+          "Storm Exposure builds Charge while moving through eligible weather.",
+          "Spend Charge on a short grounded sprint burst that resists light knockback."
+        ],
+        "counterplay": [
+          "Dry interiors stop charge gain; charge decays out of combat."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Silver veins pulse with rain impact.",
+          "Sprint leaves thin lightning footprints."
+        ],
+        "animation": [
+          "Cape fibers lift before the burst.",
+          "Boots strike a brief grounded launch pose."
+        ],
+        "audio": [
+          "Rain hiss, low static, thunderstep."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic tempest scout chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-007",
+      "name": "Mirror-Bone Cuirass",
+      "family": "armor",
+      "tier": "epic",
+      "status": "specified",
+      "role": "reactive defense armor",
+      "identity": {
+        "fantasy": "A chest piece that temporarily highlights the direction of repeated incoming damage and grants minor directional mitigation.",
+        "silhouette": "Polished ivory plates with mirrored black ribs.",
+        "lore_hook": "Built from creatures whose bones remembered every predator that struck them."
+      },
+      "mechanics": {
+        "core": [
+          "direction memory",
+          "defense telegraph",
+          "duelist armor"
+        ],
+        "signature": [
+          "Repeated hits from one direction fill a Direction Memory arc.",
+          "At full arc the armor grants brief directional mitigation and highlights the attacker."
+        ],
+        "counterplay": [
+          "Changing attack angles defeats the mitigation; no omnidirectional protection."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Black rib reflections align toward threat.",
+          "Full arc creates a narrow mirrored crescent."
+        ],
+        "animation": [
+          "Torso plates cant toward repeated impacts.",
+          "Threat reveal snaps ribs outward."
+        ],
+        "audio": [
+          "Glass-bone clicks and warning scrape."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic hunter forge recipe."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-008",
+      "name": "Pilgrim's Embermail",
+      "family": "armor",
+      "tier": "epic",
+      "status": "specified",
+      "role": "attrition fire armor",
+      "identity": {
+        "fantasy": "Armor that rewards staying near dangerous heat without making the wearer immune to it.",
+        "silhouette": "Layered dark mail with ember prayer tabs.",
+        "lore_hook": "Pilgrims crossed the Ash March by treating every burn as a countdown rather than a failure."
+      },
+      "mechanics": {
+        "core": [
+          "heat proximity",
+          "resource buildup",
+          "risk reward"
+        ],
+        "signature": [
+          "Standing near eligible hazard heat builds Pilgrim Resolve.",
+          "Spend Resolve to cleanse one light slow or grant a brief reload boost."
+        ],
+        "counterplay": [
+          "Direct hazard damage still matters; resolve caps quickly."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Prayer tabs glow one by one.",
+          "Cleanse sheds ash in a circular burst."
+        ],
+        "animation": [
+          "Tabs flutter upward before cleanse.",
+          "Shoulders vent sparks at full resolve."
+        ],
+        "audio": [
+          "Low prayer murmur and ember hiss."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Ash March pilgrimage."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-009",
+      "name": "Hourglass Bastion",
+      "family": "armor",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "temporal tank armor",
+      "identity": {
+        "fantasy": "Heavy armor that records a small fraction of recent shield loss and can restore part of it after a delay if the wearer survives.",
+        "silhouette": "Bronze-black plate with sand flowing upward inside chest channels.",
+        "lore_hook": "A fortress order learned to defend moments instead of walls."
+      },
+      "mechanics": {
+        "core": [
+          "damage record",
+          "delayed restoration",
+          "survival timing"
+        ],
+        "signature": [
+          "Temporal Reservoir records a capped fraction of shield damage.",
+          "After surviving a danger window, Reversal Pulse restores part of recorded shield.",
+          "Emergency Break spends the reservoir early for stagger resistance instead of healing."
+        ],
+        "counterplay": [
+          "Burst damage can exceed the cap; elimination or certain purge effects erase the reservoir."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Upward sand glows with recorded damage.",
+          "Reversal Pulse shows a ghost of shattered shield panels reforming."
+        ],
+        "animation": [
+          "Chest plates briefly show their previous unbroken position.",
+          "Emergency Break locks shoulders forward into a brace."
+        ],
+        "audio": [
+          "Reverse glass chime, sand rush, shield reform chord."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary chronofort raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-010",
+      "name": "Choir of Knives",
+      "family": "armor",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "orbiting counter armor",
+      "identity": {
+        "fantasy": "Armor that manifests spectral blades after perfectly timed dodges and can spend them on defensive interception.",
+        "silhouette": "Slim black coat with metallic feather seams.",
+        "lore_hook": "An assassin order wore no shields; they let missed attacks become shields instead."
+      },
+      "mechanics": {
+        "core": [
+          "perfect dodge",
+          "blade orbit",
+          "interception"
+        ],
+        "signature": [
+          "Perfectly timed evasions generate Spectral Knives.",
+          "Knives can intercept a limited number of eligible projectiles.",
+          "Spend all knives for a short radial slash that pushes lesser mobs."
+        ],
+        "counterplay": [
+          "Late dodges generate nothing; interception count is small and visible."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Silver knives orbit at shoulder height.",
+          "Intercepted shots burst into thin feather fragments."
+        ],
+        "animation": [
+          "Dodges include a sharp shoulder turn.",
+          "Radial spend crosses both arms before knives release."
+        ],
+        "audio": [
+          "Knife whispers, feather cuts, clean parry ping."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary assassin choir mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-011",
+      "name": "Root-King Exoskin",
+      "family": "armor",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "terrain-adaptive armor",
+      "identity": {
+        "fantasy": "Living armor that grows different temporary defenses based on the terrain category the wearer remains in.",
+        "silhouette": "Dark bark-metal plates with moving root seams.",
+        "lore_hook": "The Root-Kings never conquered biomes; they wore them."
+      },
+      "mechanics": {
+        "core": [
+          "terrain adaptation",
+          "defensive mode",
+          "root growth"
+        ],
+        "signature": [
+          "Forest-like terrain grows thorn retaliation.",
+          "Stone/urban terrain grows stagger-resistant plating.",
+          "Wet terrain grows movement-friendly reed channels.",
+          "Changing terrain triggers a short vulnerable regrowth period."
+        ],
+        "counterplay": [
+          "Adaptations are modest and mutually exclusive; rapid biome switching causes downtime."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Armor sprouts category-specific organic geometry.",
+          "Regrowth peels old plates away as glowing roots redraw them."
+        ],
+        "animation": [
+          "Plates physically unfurl from seams.",
+          "Terrain swap makes the character briefly shed old growth."
+        ],
+        "audio": [
+          "Wood groan, stone knock, reed whistle by mode."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Root-King covenant."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-012",
+      "name": "Helix Ward",
+      "family": "armor",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "status-resistance armor",
+      "identity": {
+        "fantasy": "Armor with two rotating ward layers that can each absorb one eligible status category before needing recharge.",
+        "silhouette": "White-violet armor with twin helix bands around torso.",
+        "lore_hook": "Designed for explorers who entered anomalies with no idea what rules applied inside."
+      },
+      "mechanics": {
+        "core": [
+          "status ward",
+          "two layers",
+          "adaptive defense"
+        ],
+        "signature": [
+          "Outer Helix blocks one eligible movement-control effect.",
+          "Inner Helix blocks one eligible damage-over-time effect.",
+          "If both remain intact long enough, they synchronize and briefly accelerate stamina recovery."
+        ],
+        "counterplay": [
+          "Each layer has a visible independent cooldown; hard boss mechanics bypass generic blocking when authored."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Twin helix bands rotate in opposite directions.",
+          "Blocked effects shatter one band into motes."
+        ],
+        "animation": [
+          "Torso twists slightly as helixes exchange positions.",
+          "Synchronization lifts both bands over the shoulders."
+        ],
+        "audio": [
+          "Dual harmonic hum, shatter tone, sync chord."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary anomaly expedition reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-013",
+      "name": "Starved Halo Panoply",
+      "family": "armor",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "resource-sacrifice armor",
+      "identity": {
+        "fantasy": "Mythic armor that lets the wearer sacrifice temporary shields to empower the next class skill.",
+        "silhouette": "White-gold armor with an incomplete black halo floating behind the head.",
+        "lore_hook": "Its saints became powerful by deciding protection was merely stored violence."
+      },
+      "mechanics": {
+        "core": [
+          "shield sacrifice",
+          "skill empowerment",
+          "risk conversion"
+        ],
+        "signature": [
+          "Offer converts a capped portion of current shield into Halo Charge.",
+          "Next eligible class skill consumes charge for a bespoke enhancement.",
+          "Martyr Window grants brief damage resistance only after the empowered skill resolves.",
+          "If the skill is canceled, much of the sacrificed shield is lost."
+        ],
+        "counterplay": [
+          "Requires meaningful shield investment and timing; enhancement is capped per skill."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Halo fills with black-gold segments as shield is offered.",
+          "Empowered skill inherits a thin celestial rim.",
+          "Martyr Window creates falling feather motes."
+        ],
+        "animation": [
+          "Offering animation opens both arms while halo rotates.",
+          "Skill release snaps the halo closed into a complete ring."
+        ],
+        "audio": [
+          "Distant choir inhale, shield drain tone, halo snap."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic saint-eater cathedral chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-014",
+      "name": "Mawplate of Oth",
+      "family": "armor",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "predatory melee armor",
+      "identity": {
+        "fantasy": "Mythic armor with a living chest maw that stores stagger inflicted at close range and releases it as a fear roar.",
+        "silhouette": "Layered red-black plates around a sealed vertical chest jaw.",
+        "lore_hook": "Oth was executed three times before anyone realized the armor was the one returning."
+      },
+      "mechanics": {
+        "core": [
+          "melee stagger",
+          "stored roar",
+          "predator pressure"
+        ],
+        "signature": [
+          "Close-range stagger fills Hunger.",
+          "At full Hunger the chest maw can release Dread Roar against eligible lesser enemies.",
+          "Roar also exposes a temporary weak seam on the wearer, increasing risk.",
+          "Successful executions after Roar partially reseal the seam."
+        ],
+        "counterplay": [
+          "Bosses resist fear; roar creates a deliberate vulnerability window."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Chest seam glows like teeth behind smoke.",
+          "Roar projects a giant translucent jaw cone.",
+          "Reseal pulls red threads across the opening."
+        ],
+        "animation": [
+          "Chest maw physically opens during roar.",
+          "Melee finishers make armor lean forward as if feeding."
+        ],
+        "audio": [
+          "Sub-bass growl, metal teeth, inhaling vacuum."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic demon-hunt ascension."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-015",
+      "name": "Twelvefold Aegis",
+      "family": "armor",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "rotating ward armor",
+      "identity": {
+        "fantasy": "Mythic armor with twelve small orbiting plates that redistribute protection toward recently threatened body sectors.",
+        "silhouette": "Ivory armor with twelve floating shield petals.",
+        "lore_hook": "The original suit guarded a king who survived twelve assassination methods in one evening."
+      },
+      "mechanics": {
+        "core": [
+          "orbiting plates",
+          "threat redistribution",
+          "defense state"
+        ],
+        "signature": [
+          "Recent damage direction attracts nearby Aegis petals.",
+          "A concentrated petal cluster grants temporary directional mitigation.",
+          "Command Scatter sends petals outward to intercept selected projectiles before slowly reforming.",
+          "Perfect Scatter against a heavy projectile briefly marks the attacker."
+        ],
+        "counterplay": [
+          "Flanks become weaker while petals cluster; Scatter leaves a recovery gap."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Twelve petals orbit in layered rings.",
+          "Clustered petals fuse into a luminous directional shield.",
+          "Scatter leaves twelve distinct comet arcs."
+        ],
+        "animation": [
+          "Petals snap between body sectors.",
+          "Scatter uses a forceful outward arm gesture."
+        ],
+        "audio": [
+          "Shield-petal chimes, orbital hum, heavy interception gong."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic royal crypt defense trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-016",
+      "name": "Cathedral of One",
+      "family": "armor",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "solo fortress armor",
+      "identity": {
+        "fantasy": "Mythic armor that becomes stronger when isolated from allies but can convert its solo stacks into a team sanctuary.",
+        "silhouette": "Tall gothic plate with miniature buttresses along shoulders.",
+        "lore_hook": "Built for a knight who was ordered to hold a cathedral after everyone else had already fled."
+      },
+      "mechanics": {
+        "core": [
+          "solo scaling",
+          "sanctuary conversion",
+          "fortress"
+        ],
+        "signature": [
+          "Isolation builds Bastion stacks when no ally is nearby.",
+          "Stacks improve stagger resistance and limited overshield recovery.",
+          "Sanctuary spends all stacks to create a short-lived protective zone for nearby allies.",
+          "Leaving the zone early prevents immediate stack rebuilding."
+        ],
+        "counterplay": [
+          "Strongest state requires isolation; group utility consumes personal advantage."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Tiny buttresses glow one by one.",
+          "Sanctuary projects a translucent nave around the wearer.",
+          "Spent stacks fall as stained-glass motes."
+        ],
+        "animation": [
+          "Shoulder buttresses rise as stacks accumulate.",
+          "Sanctuary kneels and drives a gauntlet into the floor."
+        ],
+        "audio": [
+          "Stone choir, stained-glass chimes, deep kneeling impact."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic lone-cathedral challenge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-017",
+      "name": "Paradox Hide",
+      "family": "armor",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "position-reversal armor",
+      "identity": {
+        "fantasy": "Exotic armor that records one safe position and allows a single short-range return if the wearer takes a heavy hit.",
+        "silhouette": "Flexible black-blue suit with duplicated edge outlines.",
+        "lore_hook": "The suit was outlawed because witnesses could not agree where its wearer had been shot."
+      },
+      "mechanics": {
+        "core": [
+          "position record",
+          "emergency return",
+          "spatial defense"
+        ],
+        "signature": [
+          "Anchor Step records a valid nearby position after deliberate activation.",
+          "Taking a qualifying heavy hit arms Return.",
+          "Trigger Return to move back to the anchor if still valid.",
+          "Return leaves a decoy afterimage that lesser AI may briefly target."
+        ],
+        "counterplay": [
+          "Anchor is visible to attentive enemies, range-limited, and invalidated by unsafe geometry."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Blue-black duplicate outline remains at anchor.",
+          "Return tears a flat rectangular seam through space.",
+          "Decoy flickers with delayed movement."
+        ],
+        "animation": [
+          "Activation taps the ground with one foot.",
+          "Return jerks the body backward into the stored pose.",
+          "Decoy peels off the character during reentry."
+        ],
+        "audio": [
+          "Spatial zipper, anchor pulse, hollow duplicate footsteps."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic paradox courier chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-018",
+      "name": "Basilisk Crownmail",
+      "family": "armor",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "gaze-control armor",
+      "identity": {
+        "fantasy": "Exotic armor that weaponizes enemy attention: prolonged direct aim from lesser enemies builds a petrifying retaliation pulse.",
+        "silhouette": "Dark green-gold mail with a crown of articulated eye shutters.",
+        "lore_hook": "Worn by tyrants who believed being watched should be punishable."
+      },
+      "mechanics": {
+        "core": [
+          "attention meter",
+          "retaliation pulse",
+          "aggro control"
+        ],
+        "signature": [
+          "Hostile lesser AI aiming directly at the wearer builds Gaze Pressure.",
+          "At threshold, Crown Glare briefly slows and hardens eligible lesser enemies into brittle states.",
+          "Breaking brittle enemies creates shards that reduce nearby mob accuracy.",
+          "Bosses contribute pressure but are not petrified."
+        ],
+        "counterplay": [
+          "Players can reposition to avoid feeding pressure; pulse has a clear crown-open tell."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Eye shutters glow as attention rises.",
+          "Glare casts green-gold rays in a narrow fan.",
+          "Brittle targets gain stone-vein overlays."
+        ],
+        "animation": [
+          "Crown shutters progressively open.",
+          "Pulse throws the head back while all shutters flare.",
+          "Basilisk Crownmail uses a bespoke transition animation for phase 3, with anticipation frames preserved for counterplay."
+        ],
+        "audio": [
+          "Stone hiss, eyelid metal clicks, basilisk shriek."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic basilisk sovereign hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-019",
+      "name": "Debt of Feathers",
+      "family": "armor",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "revival economy armor",
+      "identity": {
+        "fantasy": "Exotic support armor that accrues feather debt when protecting allies and can spend it to improve a future revive, but punishes hoarding.",
+        "silhouette": "Black-white feathered coat with floating tally quills.",
+        "lore_hook": "Its order taught that every life saved created a debt to be repaid by action."
+      },
+      "mechanics": {
+        "core": [
+          "ally protection",
+          "revive enhancement",
+          "debt decay"
+        ],
+        "signature": [
+          "Shielding or healing allies generates Feather Debt.",
+          "Spend Debt during revive to shorten one stage and grant brief post-revive protection.",
+          "Excess unspent Debt periodically sheds as hostile-visible light, revealing the wearer.",
+          "Perfectly timed ally saves reduce the reveal penalty."
+        ],
+        "counterplay": [
+          "Cannot infinitely bank support value; reveal mechanic makes greedy hoarding dangerous."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Feather tally grows behind the wearer.",
+          "Enhanced revive forms a cocoon of black-white wings.",
+          "Overcap debt sheds bright falling quills."
+        ],
+        "animation": [
+          "Protective actions flick feathers from shoulders.",
+          "Enhanced revive wraps arms around a spectral wing shell.",
+          "Debt of Feathers uses a bespoke transition animation for phase 3, with anticipation frames preserved for counterplay."
+        ],
+        "audio": [
+          "Feather rush, soft tolling, debt warning whisper."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic hospice order capstone."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-020",
+      "name": "Crown of the Deep Engine",
+      "family": "armor",
+      "tier": "god",
+      "status": "specified",
+      "role": "domain-machine armor",
+      "identity": {
+        "fantasy": "God-tier armor that deploys a limited mechanical domain around the wearer, changing traversal and defense rules for the squad.",
+        "silhouette": "Massive brass-black crown harness with floating engine segments behind the spine.",
+        "lore_hook": "The Deep Engine was never a machine under the world; it was the idea that the world should have gears."
+      },
+      "mechanics": {
+        "core": [
+          "mechanical domain",
+          "squad traversal",
+          "defense control"
+        ],
+        "signature": [
+          "Deploy Gear Domain centered on the wearer.",
+          "Within domain, allied reload and mantle actions gain authored timing bonuses.",
+          "Enemy dash-like movement leaves visible gear scars that allies can exploit.",
+          "Rotate Domain selects one of three configurations: Bastion, Pursuit, or Siege.",
+          "Overclock briefly enhances the chosen configuration at the cost of domain duration."
+        ],
+        "counterplay": [
+          "Domain is bounded, highly visible, configuration swap has cooldown, and boss movement obeys authored exceptions."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Huge translucent gears phase through terrain.",
+          "Configuration changes alter gear orientation and symbol language.",
+          "Enemy movement scars appear as luminous toothed arcs.",
+          "Overclock fills every gear tooth with white heat."
+        ],
+        "animation": [
+          "Back engine unfolds into a crown lattice.",
+          "Configuration swap rotates the whole harness around the wearer.",
+          "Overclock forces a braced stance as gears accelerate."
+        ],
+        "audio": [
+          "Industrial choir, giant gear teeth, turbine bass."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier Deep Engine pilgrimage."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-021",
+      "name": "Vestments of the Last Storm",
+      "family": "armor",
+      "tier": "god",
+      "status": "specified",
+      "role": "weather-sovereign armor",
+      "identity": {
+        "fantasy": "God-tier vestments that build authority from surviving multiple environmental hazards and spend it to create a temporary storm mantle.",
+        "silhouette": "Long black-blue coat with cloud bands orbiting the shoulders and lightning sewn into the hem.",
+        "lore_hook": "The Last Storm did not end. It learned to wear a person."
+      },
+      "mechanics": {
+        "core": [
+          "hazard mastery",
+          "storm mantle",
+          "environment authority"
+        ],
+        "signature": [
+          "Surviving distinct hazard categories builds Storm Names.",
+          "Three unique Names unlock Mantle of the Last Storm.",
+          "Mantle periodically discharges controlled lightning at marked hostile targets.",
+          "Mantle grants enhanced air control and fall mitigation.",
+          "Storm Names are lost if the wearer remains safe too long."
+        ],
+        "counterplay": [
+          "Requires active hazard exposure; lightning targeting is capped and telegraphed; indoor areas reduce visual range."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Cloud bands thicken with each Name.",
+          "Mantle turns the coat hem into a rotating storm front.",
+          "Lightning writes temporary names in the clouds.",
+          "Air movement leaves rain ribbons."
+        ],
+        "animation": [
+          "Shoulder clouds physically expand.",
+          "Mantle activation lifts the coat and hair in sustained wind.",
+          "Landing during Mantle kneels into a thunder impact."
+        ],
+        "audio": [
+          "Named thunder syllables, rain wall, close lightning detonation."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier storm pilgrimage."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-022",
+      "name": "Axiom Skin",
+      "family": "armor",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "local-law armor",
+      "identity": {
+        "fantasy": "Absolute armor that allows one chosen defensive law to govern a limited nearby space for a short duration.",
+        "silhouette": "Seamless pale armor covered in moving black axioms with no visible fasteners.",
+        "lore_hook": "It was not forged; a theorem was convinced to become wearable."
+      },
+      "mechanics": {
+        "core": [
+          "defensive law",
+          "domain state",
+          "absolute authority"
+        ],
+        "signature": [
+          "Law of Continuance prevents one eligible lethal hit by converting it into a severe debuff and temporary one-health state.",
+          "Law of Rest reduces repeated knockback and forced-movement effects within the domain.",
+          "Law of Measure caps one burst instance from eligible lesser enemies while increasing sustained chip pressure.",
+          "Law of Boundary prevents selected lesser summons from crossing the domain edge.",
+          "Law of Reciprocity reflects a small authored fraction of blocked damage as stagger pressure.",
+          "Proof Collapse ends the active law early to create a brief defensive pulse for allies."
+        ],
+        "counterplay": [
+          "Only one law at a time, strict cooldowns, boss mechanics use explicit exceptions, and the domain is deliberately small."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Moving equations crawl across armor plates.",
+          "Each law projects a distinct geometric boundary.",
+          "Continuance freezes a lethal-hit silhouette for one frame.",
+          "Boundary creates vertical axiom bars at the perimeter.",
+          "Proof Collapse shatters all equations into white-black shards."
+        ],
+        "animation": [
+          "Armor surface retiles itself when laws change.",
+          "Continuance makes the body lock upright before recovering.",
+          "Proof Collapse crosses both arms then tears them apart through the equation field.",
+          "Axiom Skin uses a bespoke transition animation for phase 4, with anticipation frames preserved for counterplay."
+        ],
+        "audio": [
+          "Spoken theorem tones, dry geometric snaps, low proof-collapse boom."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute tribunal and Axiom Forge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-023",
+      "name": "Mantle of the Unauthored",
+      "family": "armor",
+      "tier": "transcendent_zero",
+      "status": "specified",
+      "role": "Ascendant-bound reality mantle",
+      "identity": {
+        "fantasy": "A Transcendent Zero mantle whose defensive behavior is selected from mutually exclusive reality interpretations rather than conventional armor stats.",
+        "silhouette": "A silhouette-changing mantle of black glass, stars, paper, smoke, and impossible cloth depending on the active interpretation.",
+        "lore_hook": "The mantle is said to be woven from everything the world forgot to decide."
+      },
+      "mechanics": {
+        "core": [
+          "reality interpretation",
+          "ascendant defense",
+          "world-state response"
+        ],
+        "signature": [
+          "Interpretation: Unfallen converts one eligible lethal event per transformation into a cinematic survival state with severe temporary weakness.",
+          "Interpretation: Unseen reduces hostile AI perception after a deliberate non-attack interval.",
+          "Interpretation: Unbound enhances traversal by treating selected authored barriers as temporary phase gates.",
+          "Interpretation: Unbroken converts controlled stagger into stored Resolve.",
+          "Interpretation: Unmade allows one self-purge of eligible hostile statuses at major resource cost.",
+          "Interpretation: Unwritten lets the Ascendant choose one previously unlocked interpretation after seeing the encounter's opening phase.",
+          "Final Interpretation combines none of them; it instead grants a brief squad-wide resistance pulse when the Transcendent state expires."
+        ],
+        "counterplay": [
+          "Interpretations are mutually exclusive, heavily cooldown-bound, boss-safe, and only available while the ultra-restricted Transcendent state is active."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Mantle material changes completely per interpretation.",
+          "Unfallen freezes the wearer as a black silhouette before color returns.",
+          "Unseen erases particle trails and reduces visual noise around the wearer.",
+          "Unbound creates page-like tears through eligible phase gates.",
+          "Unmade burns hostile status glyphs into ash.",
+          "Final Interpretation turns the mantle into a starless banner visible across the encounter."
+        ],
+        "animation": [
+          "Each interpretation changes idle and locomotion accents.",
+          "Unfallen has a unique collapse-and-rise sequence.",
+          "Unbound steps through a vertical fold rather than conventional dodge.",
+          "Unmade tears a spectral layer off the body.",
+          "Final Interpretation spreads the mantle into wing-like geometry before dissolving."
+        ],
+        "audio": [
+          "Distinct six-part interpretation motif, silence beat on Unfallen, starless banner chord."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Bound only to a fully qualified Transcendent Zero Ascendant."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-024",
+      "name": "Citadel of Teeth",
+      "family": "armor",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "summon-defense armor",
+      "identity": {
+        "fantasy": "Armor that grows temporary tooth-like plates when surrounded by hostile mobs and can shed them as caltrop hazards.",
+        "silhouette": "Bone-white fortress plate with interlocking tooth battlements.",
+        "lore_hook": "It was designed for soldiers expected to be surrounded and resented the idea of rescue."
+      },
+      "mechanics": {
+        "core": [
+          "mob pressure",
+          "temporary plating",
+          "hazard shed"
+        ],
+        "signature": [
+          "Nearby hostile count builds Citadel Plates up to a cap.",
+          "Plates grant light directional mitigation.",
+          "Shed Wall ejects stored plates into a short-lived caltrop ring that slows lesser enemies."
+        ],
+        "counterplay": [
+          "Solo bosses do not feed plate count; shedding removes defense."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Teeth visibly grow along shoulders.",
+          "Shed Wall scatters glowing ivory spikes."
+        ],
+        "animation": [
+          "Armor hunches as plates grow.",
+          "Shed action violently shakes plates outward."
+        ],
+        "audio": [
+          "Teeth chatter, armor grind, scatter clatter."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary horde bastion challenge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-025",
+      "name": "Void Cartographer Rig",
+      "family": "armor",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "spatial scouting armor",
+      "identity": {
+        "fantasy": "Armor that reveals temporary traversal vectors after the player crosses dangerous gaps or survives displacement effects.",
+        "silhouette": "Slim black rig with floating map plates around hips and shoulders.",
+        "lore_hook": "Void cartographers mapped places by surviving being thrown through them."
+      },
+      "mechanics": {
+        "core": [
+          "route memory",
+          "traversal vector",
+          "displacement mastery"
+        ],
+        "signature": [
+          "Surviving a forced displacement records the vector.",
+          "Recorded vectors can create a one-use return lane for the wearer.",
+          "Crossing a large safe gap records a short squad waypoint boost.",
+          "Three different vectors unlock Survey Pulse that reveals nearby traversal anchors."
+        ],
+        "counterplay": [
+          "Recorded lanes expire quickly and require valid destinations; no teleport through forbidden geometry."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Floating plates draw bright vector arrows.",
+          "Return lane appears as a narrow black-blue ribbon.",
+          "Survey Pulse sketches wireframe traversal points."
+        ],
+        "animation": [
+          "Map plates rearrange after each displacement.",
+          "Return lane launch leans the body into a compass-like snap."
+        ],
+        "audio": [
+          "Pencil-scratch synth, vector chirps, spatial rush."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic void-cartographer master survey."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-026",
+      "name": "Red Mercy Shell",
+      "family": "armor",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "berserker-healer armor",
+      "identity": {
+        "fantasy": "Armor that converts a portion of close-range damage dealt into a temporary healing reserve that can only be given to allies.",
+        "silhouette": "Crimson armor with transparent heart-vials along the ribs.",
+        "lore_hook": "A war surgeon built it to make violence pay medical debt."
+      },
+      "mechanics": {
+        "core": [
+          "damage reserve",
+          "ally-only healing",
+          "close-range risk"
+        ],
+        "signature": [
+          "Close-range damage fills Mercy Vials up to a cap.",
+          "Touch or short-range pulse transfers stored healing to allies.",
+          "Overfill converts excess reserve into temporary movement speed rather than self-healing.",
+          "Reviving an ally empties one vial for brief post-revive overshield."
+        ],
+        "counterplay": [
+          "Wearer cannot directly heal self from the reserve; ranged farming is inefficient."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Heart-vials fill visibly with red light.",
+          "Healing transfer draws arterial ribbons that turn gold on contact.",
+          "Overfill vents red mist from back plates."
+        ],
+        "animation": [
+          "Rib vials pulse with attacks.",
+          "Healing pulse crosses both forearms over the chest then opens outward."
+        ],
+        "audio": [
+          "Heartbeat percussion, fluid glass, warm pulse chord."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic war-surgeon covenant."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-027",
+      "name": "Night Parliament Regalia",
+      "family": "armor",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "summon-command armor",
+      "identity": {
+        "fantasy": "Exotic command armor that lets the wearer issue one of several tactical orders to eligible hired NPCs and tameables.",
+        "silhouette": "Black formal armor with twelve floating mask tokens.",
+        "lore_hook": "A ruler unable to trust advisors replaced each with a command word carved into a mask."
+      },
+      "mechanics": {
+        "core": [
+          "hireable command",
+          "formation orders",
+          "pet tactics"
+        ],
+        "signature": [
+          "Order: Hunt focuses eligible companions on a marked target.",
+          "Order: Guard collapses companions toward an ally or location.",
+          "Order: Scatter sends companions to authored flank positions.",
+          "Order: Recall forces immediate disengagement and return.",
+          "Order: Feast allows eligible tameables to consume nearby valid resources for a short buff."
+        ],
+        "counterplay": [
+          "Orders share cooldown, companion AI may refuse invalid navigation, and bosses cannot be trivialized by focus commands."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Mask token corresponding to order lights up.",
+          "Command lines briefly connect companions to objectives.",
+          "Feast order gives tameables a red-gold jaw aura."
+        ],
+        "animation": [
+          "Wearer points differently for each formation.",
+          "Masks orbit faster during order issue.",
+          "Recall uses a clenched-fist pull gesture."
+        ],
+        "audio": [
+          "Formal command voice filter, mask clacks, companion acknowledgement pings."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic faction commander capstone."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-028",
+      "name": "Black Sun Carapace",
+      "family": "armor",
+      "tier": "god",
+      "status": "specified",
+      "role": "eclipse armor",
+      "identity": {
+        "fantasy": "God-tier armor that cycles between radiance and shadow states based on exposure, then creates an eclipse when both are mastered.",
+        "silhouette": "Massive black-gold plate with a sun disk embedded behind the back.",
+        "lore_hook": "Its makers believed light and darkness were merely two halves of the same siege engine."
+      },
+      "mechanics": {
+        "core": [
+          "dual-state armor",
+          "eclipse state",
+          "environment mastery"
+        ],
+        "signature": [
+          "Radiance state builds in open bright areas and enhances ally-visible threat marking.",
+          "Umbra state builds in darkness/interiors and enhances evasive recovery.",
+          "Balancing both meters unlocks Eclipse State.",
+          "Eclipse State creates a local dimmed domain where marked enemies cast visible shadow duplicates.",
+          "Striking a shadow duplicate transfers reduced stagger to its owner.",
+          "Solar Blackout ends Eclipse early for a squad concealment pulse."
+        ],
+        "counterplay": [
+          "State building depends on environment, Eclipse duration is limited, and shadow duplicates are support targets rather than full damage copies."
+        ],
+        "evolution": [
+          "Higher upgrade states alter timing, targeting, resource flow, or battlefield geometry rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Back sun alternates gold and black corona.",
+          "Eclipse produces a dramatic ringed-sun sky projection locally.",
+          "Enemy shadow duplicates stretch toward the wearer.",
+          "Blackout extinguishes all armor light then releases a dark-gold pulse."
+        ],
+        "animation": [
+          "Back disk rotates through state transitions.",
+          "Eclipse activation raises the wearer slightly while plates separate.",
+          "Blackout closes the disk like an iris."
+        ],
+        "audio": [
+          "Solar roar, deep eclipse hum, shadow-step echoes."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier eclipse pilgrimage."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Authored for AEONFALL wave 010; implementation must preserve gameplay readability, counterplay, and performance fallbacks."
+      ]
+    }
+  ]
+}
