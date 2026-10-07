@@ -116,3 +116,6 @@ aeonfall_shop_service := class():
                 return true
 
         false
+
+
+AEONFALLShopService:aeonfall_shop_service = aeonfall_shop_service{}
