@@ -225,7 +225,7 @@ def main() -> int:
     if "transcendent.history_awarded" not in transcendent_text:
         errors.append("transcendent history award observability event missing")
 
-        workflow = (ROOT / ".github/workflows/catalog-validation.yml").read_text(
+    workflow = (ROOT / ".github/workflows/catalog-validation.yml").read_text(
         encoding="utf-8"
     )
     if '"verse/**"' not in workflow:
