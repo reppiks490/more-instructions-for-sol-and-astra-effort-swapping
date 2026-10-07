@@ -23,6 +23,8 @@ on:
       - "tools/validate_slice_shop.py"
       - "tools/validate_slice_combat.py"
       - "tools/build_slice_combat_registry.py"
+      - "tools/build_slice_class_registry.py"
+      - "tools/validate_slice_classes.py"
       - "tools/build_slice_registry.py"
       - "STATUS.md"
       - ".github/workflows/catalog-validation.yml"
@@ -30,9 +32,13 @@ on:
     paths:
       - "content/catalog/**"
       - "content/crafting/**"
+      - "content/vertical_slice/**"
+      - "content/world/**"
+      - "verse/generated/**"
       - "schemas/**"
-      - "tools/validate_catalog.py"
-      - "tools/validate_crafting.py"
+      - "tools/validate_*.py"
+      - "tools/build_*.py"
+      - "STATUS.md"
       - ".github/workflows/catalog-validation.yml"
 
 permissions:
@@ -84,11 +90,20 @@ jobs:
       - name: Validate first-slice combat runtime data
         run: python tools/validate_slice_combat.py
 
+      - name: Validate first-slice class runtime data
+        run: python tools/validate_slice_classes.py
+
       - name: Build first-slice combat Verse registry
         run: python tools/build_slice_combat_registry.py
 
       - name: Check generated first-slice combat bootstrap
         run: git diff --exit-code -- verse/generated/slice_001_combat_bootstrap.verse
+
+      - name: Build first-slice class Verse registry
+        run: python tools/build_slice_class_registry.py
+
+      - name: Check generated first-slice class bootstrap
+        run: git diff --exit-code -- verse/generated/slice_001_class_bootstrap.verse
 
       - name: Build runtime content index
         run: python tools/build_content_index.py
