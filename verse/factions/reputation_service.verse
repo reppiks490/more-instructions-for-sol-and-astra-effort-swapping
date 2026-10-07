@@ -15,13 +15,13 @@ aeonfall_reputation_service := class():
             set Result = Stored
         Result
 
-    SetReputation(Agent:agent, FactionId:string, Reputation:int):void=
+    SetReputation(Agent:agent, FactionId:string, Reputation:int)<transacts>:void=
         if:
             Reputation >= 0
         then:
             ProfileService.SetFactionReputation(Agent, FactionId, Reputation)
 
-    AddReputation(Agent:agent, FactionId:string, Amount:int):void=
+    AddReputation(Agent:agent, FactionId:string, Amount:int)<transacts>:void=
         if:
             Amount > 0
         then:
