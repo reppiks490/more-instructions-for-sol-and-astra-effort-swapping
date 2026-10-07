@@ -76,6 +76,7 @@ aeonfall_actor_registry := class():
                 RuntimeKey,
                 "owner_unregistered"
             )
+            AEONFALLUnlockDeliveryService.ClearOwner(RuntimeKey)
             AEONFALLStatusRuntime.ClearTarget(RuntimeKey)
             AEONFALLAbilityRuntime.ClearOwner(RuntimeKey)
             AEONFALLClassRuntime.ClearOwner(RuntimeKey)
