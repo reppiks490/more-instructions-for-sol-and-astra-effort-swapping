@@ -1,8 +1,10 @@
 # Publish-safe AEONFALL ability resource runtime.
 #
 # This file deliberately does not import Epic's Experimental Ability API.
-# It owns canonical activation/resource state only. Project-bound adapters
-# receive runtime events and perform actual Fortnite/Scene Graph/device effects.
+# Activation is two-phase:
+# 1. RequestActivation reserves the ability without spending resources.
+# 2. A project-bound adapter executes/preflights the effect and reports a result.
+# 3. ResolveActivation commits cooldown/charges/meter only on success.
 
 aeonfall_ability_runtime := class():
 
@@ -39,6 +41,8 @@ aeonfall_ability_runtime := class():
                     CooldownRemainingSeconds := 0.0
                     ChargeRechargeRemainingSeconds := 0.0
                     Active := false
+                    Pending := false
+                    PendingRequestId := ""
                     Locked := false
 
                 if:
@@ -71,6 +75,9 @@ aeonfall_ability_runtime := class():
             State := GetState[OwnerKey, Definition.AbilityId]
         then:
             if (State.Locked?):
+                return false
+
+            if (State.Pending?):
                 return false
 
             if:
@@ -108,15 +115,98 @@ aeonfall_ability_runtime := class():
 
         false
 
-    BeginActivation(
+    RequestActivation(
+        RequestId:string,
         OwnerKey:string,
         Definition:aeonfall_ability_definition,
-        Context:aeonfall_ability_context_flags
+        Context:aeonfall_ability_context_flags,
+        TargetKey:string,
+        RuntimeContextId:string,
+        Magnitude:int
     )<transacts>:logic=
         if:
+            RequestId <> ""
+            Definition.AdapterId <> ""
             CanActivate(OwnerKey, Definition, Context)?
             Old := GetState[OwnerKey, Definition.AbilityId]
         then:
+            Reserved := aeonfall_ability_runtime_state:
+                AbilityId := Old.AbilityId
+                CurrentCharges := Old.CurrentCharges
+                CurrentMeter := Old.CurrentMeter
+                CooldownRemainingSeconds := Old.CooldownRemainingSeconds
+                ChargeRechargeRemainingSeconds := Old.ChargeRechargeRemainingSeconds
+                Active := Old.Active
+                Pending := true
+                PendingRequestId := RequestId
+                Locked := Old.Locked
+
+            Key := MakeStateKey(OwnerKey, Definition.AbilityId)
+            if:
+                set States[Key] = Reserved
+            then:
+                AEONFALLRuntimeBus.Emit(
+                    aeonfall_runtime_event{
+                        EventType := "ability.effect_requested",
+                        SourceId := OwnerKey,
+                        TargetId := Definition.AbilityId,
+                        ContextId := RequestId
+                    }
+                )
+
+                AEONFALLRuntimeBus.RequestAbilityEffect(
+                    aeonfall_ability_effect_request{
+                        RequestId := RequestId,
+                        OwnerKey := OwnerKey,
+                        AbilityId := Definition.AbilityId,
+                        AdapterId := Definition.AdapterId,
+                        TargetKey := TargetKey,
+                        ContextId := RuntimeContextId,
+                        Magnitude := Magnitude
+                    }
+                )
+                return true
+
+        false
+
+    ResolveActivation(
+        Definition:aeonfall_ability_definition,
+        Result:aeonfall_adapter_result
+    )<transacts>:logic=
+        if:
+            Result.RequestId <> ""
+            Result.AbilityId = Definition.AbilityId
+            Result.AdapterId = Definition.AdapterId
+            Old := GetState[Result.OwnerKey, Result.AbilityId]
+            Old.Pending?
+            Old.PendingRequestId = Result.RequestId
+        then:
+            if (not Result.Succeeded?):
+                Cancelled := aeonfall_ability_runtime_state:
+                    AbilityId := Old.AbilityId
+                    CurrentCharges := Old.CurrentCharges
+                    CurrentMeter := Old.CurrentMeter
+                    CooldownRemainingSeconds := Old.CooldownRemainingSeconds
+                    ChargeRechargeRemainingSeconds := Old.ChargeRechargeRemainingSeconds
+                    Active := Old.Active
+                    Pending := false
+                    PendingRequestId := ""
+                    Locked := Old.Locked
+
+                Key := MakeStateKey(Result.OwnerKey, Result.AbilityId)
+                if:
+                    set States[Key] = Cancelled
+                then:
+                    AEONFALLRuntimeBus.Emit(
+                        aeonfall_runtime_event{
+                            EventType := "ability.effect_rejected",
+                            SourceId := Result.OwnerKey,
+                            TargetId := Result.AbilityId,
+                            ContextId := Result.ResultCode
+                        }
+                    )
+                    return true
+
             var Charges:int = Old.CurrentCharges
             var Meter:int = Old.CurrentMeter
             var Cooldown:float = Old.CooldownRemainingSeconds
@@ -136,25 +226,65 @@ aeonfall_ability_runtime := class():
             if (Definition.ResourcePolicy = aeonfall_resource_policy.Meter):
                 set Meter = Old.CurrentMeter - Definition.ActivationCost
 
-            Updated := aeonfall_ability_runtime_state:
+            Committed := aeonfall_ability_runtime_state:
                 AbilityId := Old.AbilityId
                 CurrentCharges := Charges
                 CurrentMeter := Meter
                 CooldownRemainingSeconds := Cooldown
                 ChargeRechargeRemainingSeconds := Recharge
                 Active := true
+                Pending := false
+                PendingRequestId := ""
                 Locked := Old.Locked
 
-            Key := MakeStateKey(OwnerKey, Definition.AbilityId)
+            Key := MakeStateKey(Result.OwnerKey, Result.AbilityId)
+            if:
+                set States[Key] = Committed
+            then:
+                AEONFALLRuntimeBus.Emit(
+                    aeonfall_runtime_event{
+                        EventType := "ability.activation_committed",
+                        SourceId := Result.OwnerKey,
+                        TargetId := Result.AbilityId,
+                        ContextId := Result.RequestId,
+                        Amount := Meter
+                    }
+                )
+                return true
+
+        false
+
+    CancelPending(
+        OwnerKey:string,
+        AbilityId:string,
+        RequestId:string
+    )<transacts>:logic=
+        if:
+            Old := GetState[OwnerKey, AbilityId]
+            Old.Pending?
+            Old.PendingRequestId = RequestId
+        then:
+            Updated := aeonfall_ability_runtime_state:
+                AbilityId := Old.AbilityId
+                CurrentCharges := Old.CurrentCharges
+                CurrentMeter := Old.CurrentMeter
+                CooldownRemainingSeconds := Old.CooldownRemainingSeconds
+                ChargeRechargeRemainingSeconds := Old.ChargeRechargeRemainingSeconds
+                Active := Old.Active
+                Pending := false
+                PendingRequestId := ""
+                Locked := Old.Locked
+
+            Key := MakeStateKey(OwnerKey, AbilityId)
             if:
                 set States[Key] = Updated
             then:
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{
-                        EventType := "ability.activation_requested",
+                        EventType := "ability.pending_cancelled",
                         SourceId := OwnerKey,
-                        TargetId := Definition.AbilityId,
-                        Amount := Meter
+                        TargetId := AbilityId,
+                        ContextId := RequestId
                     }
                 )
                 return true
@@ -172,6 +302,8 @@ aeonfall_ability_runtime := class():
                 CooldownRemainingSeconds := Old.CooldownRemainingSeconds
                 ChargeRechargeRemainingSeconds := Old.ChargeRechargeRemainingSeconds
                 Active := false
+                Pending := Old.Pending
+                PendingRequestId := Old.PendingRequestId
                 Locked := Old.Locked
 
             Key := MakeStateKey(OwnerKey, AbilityId)
@@ -211,6 +343,8 @@ aeonfall_ability_runtime := class():
                 CooldownRemainingSeconds := Old.CooldownRemainingSeconds
                 ChargeRechargeRemainingSeconds := Old.ChargeRechargeRemainingSeconds
                 Active := Old.Active
+                Pending := Old.Pending
+                PendingRequestId := Old.PendingRequestId
                 Locked := Old.Locked
 
             Key := MakeStateKey(OwnerKey, Definition.AbilityId)
@@ -223,6 +357,49 @@ aeonfall_ability_runtime := class():
                         SourceId := OwnerKey,
                         TargetId := Definition.AbilityId,
                         Amount := NewMeter
+                    }
+                )
+                return true
+
+        false
+
+    AddCharge(
+        OwnerKey:string,
+        Definition:aeonfall_ability_definition,
+        Amount:int
+    )<transacts>:logic=
+        if:
+            Amount > 0
+            Definition.ResourcePolicy = aeonfall_resource_policy.Charges
+            Old := GetState[OwnerKey, Definition.AbilityId]
+        then:
+            NewCharges:int =
+                if (Old.CurrentCharges + Amount > Definition.MaxCharges):
+                    Definition.MaxCharges
+                else:
+                    Old.CurrentCharges + Amount
+
+            Updated := aeonfall_ability_runtime_state:
+                AbilityId := Old.AbilityId
+                CurrentCharges := NewCharges
+                CurrentMeter := Old.CurrentMeter
+                CooldownRemainingSeconds := Old.CooldownRemainingSeconds
+                ChargeRechargeRemainingSeconds := Old.ChargeRechargeRemainingSeconds
+                Active := Old.Active
+                Pending := Old.Pending
+                PendingRequestId := Old.PendingRequestId
+                Locked := Old.Locked
+
+            Key := MakeStateKey(OwnerKey, Definition.AbilityId)
+            if:
+                set States[Key] = Updated
+            then:
+                AEONFALLRuntimeBus.Emit(
+                    aeonfall_runtime_event{
+                        EventType := "ability.charges_changed",
+                        SourceId := OwnerKey,
+                        TargetId := Definition.AbilityId,
+                        Amount := NewCharges
                     }
                 )
                 return true
@@ -244,6 +421,8 @@ aeonfall_ability_runtime := class():
                 CooldownRemainingSeconds := Old.CooldownRemainingSeconds
                 ChargeRechargeRemainingSeconds := Old.ChargeRechargeRemainingSeconds
                 Active := Old.Active
+                Pending := Old.Pending
+                PendingRequestId := Old.PendingRequestId
                 Locked := Locked
 
             Key := MakeStateKey(OwnerKey, AbilityId)
@@ -295,6 +474,8 @@ aeonfall_ability_runtime := class():
                 CooldownRemainingSeconds := Cooldown
                 ChargeRechargeRemainingSeconds := Recharge
                 Active := Old.Active
+                Pending := Old.Pending
+                PendingRequestId := Old.PendingRequestId
                 Locked := Old.Locked
 
             Key := MakeStateKey(OwnerKey, Definition.AbilityId)
