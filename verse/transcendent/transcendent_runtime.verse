@@ -132,31 +132,6 @@ aeonfall_transcendent_runtime := class():
                 Definition
             )
 
-            if (Reason = "duration_expired"):
-                if:
-                    Agent := AEONFALLActorRegistry.GetAgent[OwnerKey]
-                then:
-                    HistoryAwarded := ProfileService.IncrementTranscendentHistory(
-                        Agent
-                    )
-
-                    if (HistoryAwarded?):
-                        AEONFALLRuntimeBus.Emit(
-                            aeonfall_runtime_event{
-                                EventType := "transcendent.history_awarded",
-                                SourceId := OwnerKey,
-                                TargetId := Old.AuthorityId
-                            }
-                        )
-                    else:
-                        AEONFALLRuntimeBus.Emit(
-                            aeonfall_runtime_event{
-                                EventType := "transcendent.history_award_failed",
-                                SourceId := OwnerKey,
-                                TargetId := Old.AuthorityId
-                            }
-                        )
-
             TransformationCleared := AEONFALLActorContextRuntime.SetTransformation(
                 OwnerKey,
                 false,
@@ -177,6 +152,33 @@ aeonfall_transcendent_runtime := class():
             if:
                 set StatesByOwner[OwnerKey] = Exhausted
             then:
+                # History is awarded only after the Active -> Exhausted state
+                # transition has committed. A retry can no longer re-award it.
+                if (Reason = "duration_expired"):
+                    if:
+                        Agent := AEONFALLActorRegistry.GetAgent[OwnerKey]
+                    then:
+                        HistoryAwarded := ProfileService.IncrementTranscendentHistory(
+                            Agent
+                        )
+
+                        if (HistoryAwarded?):
+                            AEONFALLRuntimeBus.Emit(
+                                aeonfall_runtime_event{
+                                    EventType := "transcendent.history_awarded",
+                                    SourceId := OwnerKey,
+                                    TargetId := Old.AuthorityId
+                                }
+                            )
+                        else:
+                            AEONFALLRuntimeBus.Emit(
+                                aeonfall_runtime_event{
+                                    EventType := "transcendent.history_award_failed",
+                                    SourceId := OwnerKey,
+                                    TargetId := Old.AuthorityId
+                                }
+                            )
+
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{
                         EventType := "transcendent.authority_ended",
