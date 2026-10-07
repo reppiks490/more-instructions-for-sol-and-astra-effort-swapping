@@ -1,0 +1,1538 @@
+{
+  "wave": "006",
+  "purpose": "Complete initial 25-vehicle advanced variant allocation.",
+  "entity_count": 25,
+  "entities": [
+    {
+      "id": "VEH-001",
+      "name": "Rift Runner",
+      "family": "vehicle",
+      "tier": "epic",
+      "status": "specified",
+      "role": "high-mobility anomaly racer",
+      "identity": {
+        "fantasy": "A racing platform tuned for vertical traversal, wall riding, and short authored rift boosts between track anchors.",
+        "silhouette": "Low black wedge racer with cyan split fins and a glowing rift spine.",
+        "lore_hook": "Rift Runner is tied to this acquisition path: Epic Rift Warden vehicle trial."
+      },
+      "mechanics": {
+        "core": [
+          "high-speed boost",
+          "wall ride",
+          "rift anchor jump"
+        ],
+        "signature": [
+          "Breach Boost consumes a full boost meter to snap through one paired route anchor without preserving invulnerability.",
+          "Capability expression: high-speed boost.",
+          "Capability expression: wall ride.",
+          "Capability expression: rift anchor jump."
+        ],
+        "counterplay": [
+          "Anchor routes are fixed; exiting boost leaves a brief traction penalty."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Cyan split trail, compact rift cut, wall-grip sparks."
+        ],
+        "animation": [
+          "Suspension compresses before breach, fins open during wall ride, chassis twists on aerial recovery."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Rift Warden vehicle trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "RR Vehicle Spawner"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-002",
+      "name": "Iron Saint Convoy",
+      "family": "vehicle",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "armored team transport",
+      "identity": {
+        "fantasy": "A heavy armored transport built to move squads through horde fronts while deploying directional side shields.",
+        "silhouette": "Cathedral-faced armored carrier with slab sides, saint-icon grille, and roof command mast.",
+        "lore_hook": "Iron Saint Convoy is tied to this acquisition path: Legendary sanctuary logistics quest."
+      },
+      "mechanics": {
+        "core": [
+          "squad transport",
+          "directional side shield",
+          "ram resistance"
+        ],
+        "signature": [
+          "Procession Guard alternates one protected side at a time, forcing the driver to orient against incoming fire.",
+          "Capability expression: squad transport.",
+          "Capability expression: directional side shield.",
+          "Capability expression: ram resistance."
+        ],
+        "counterplay": [
+          "Slow turning; only one side shielded; rear remains vulnerable."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Gold-white shield panel, heavy dust wake, controlled armor sparks."
+        ],
+        "animation": [
+          "Side plates hinge outward during guard mode; suspension visibly loads under rams."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary sanctuary logistics quest."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "Armored Transport or Armored Battle Bus foundation"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-003",
+      "name": "Vesperglass Fang",
+      "family": "vehicle",
+      "tier": "epic",
+      "status": "specified",
+      "role": "reflection-themed pursuit car",
+      "identity": {
+        "fantasy": "A fast pursuit car whose handling system rewards threading through reflective gates for temporary traction and targeting bonuses.",
+        "silhouette": "Black mirror sports coupe with prismatic wheel wells and shardlike rear fins.",
+        "lore_hook": "Vesperglass Fang is tied to this acquisition path: Epic Vesperglass courier contract."
+      },
+      "mechanics": {
+        "core": [
+          "gate chaining",
+          "traction boost",
+          "pursuit marking"
+        ],
+        "signature": [
+          "Mirrorline chains marked city gates; each clean pass improves grip and briefly highlights the pursued route ahead.",
+          "Capability expression: gate chaining.",
+          "Capability expression: traction boost.",
+          "Capability expression: pursuit marking."
+        ],
+        "counterplay": [
+          "Missing a gate resets the chain; no combat bonus outside authored pursuit events."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Prismatic tire traces, mirror-gate ripple, short route highlight."
+        ],
+        "animation": [
+          "Rear fins flare at each gate and fold flat when the chain breaks."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Vesperglass courier contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "Sports Car or Fang foundation"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-004",
+      "name": "Solar Helion",
+      "family": "vehicle",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "solar drift striker",
+      "identity": {
+        "fantasy": "A solar-powered drift car that charges a bounded radiant pulse through sustained clean driving under open sky.",
+        "silhouette": "White-gold drift coupe with heliostat roof petals and luminous turbine hubs.",
+        "lore_hook": "Solar Helion is tied to this acquisition path: Legendary Helios Sepulcher racing shrine."
+      },
+      "mechanics": {
+        "core": [
+          "drift charge",
+          "solar pulse",
+          "open-sky bonus"
+        ],
+        "signature": [
+          "Helios Drift stores charge from uninterrupted drift arcs and releases one forward radiant wave that clears lesser road hazards.",
+          "Capability expression: drift charge.",
+          "Capability expression: solar pulse.",
+          "Capability expression: open-sky bonus."
+        ],
+        "counterplay": [
+          "Indoor routes charge slowly; collisions dump stored energy."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Gold drift ribbon, heliostat flare, forward corona sheet."
+        ],
+        "animation": [
+          "Roof petals track sun direction; wheel hubs brighten progressively through charge stages."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Helios Sepulcher racing shrine."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "Nitro Drifter or Sports Car foundation"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-005",
+      "name": "Blacktide Skimmer",
+      "family": "vehicle",
+      "tier": "epic",
+      "status": "specified",
+      "role": "storm-water traversal craft",
+      "identity": {
+        "fantasy": "A fast coastal craft designed for rough water events and squad extraction from flooded encounter zones.",
+        "silhouette": "Low dark hydrofoil with luminous blue fins and raised rescue rails.",
+        "lore_hook": "Blacktide Skimmer is tied to this acquisition path: Epic Blacktide coastguard reputation."
+      },
+      "mechanics": {
+        "core": [
+          "water sprint",
+          "storm stability",
+          "rescue pickup"
+        ],
+        "signature": [
+          "Undertow Cut gains a short handling surge when crossing authored wave fronts at the correct angle.",
+          "Capability expression: water sprint.",
+          "Capability expression: storm stability.",
+          "Capability expression: rescue pickup."
+        ],
+        "counterplay": [
+          "Wrong-angle wave hits reduce speed and can spin the craft."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Blue hydrofoil wake, storm spray, short surge line."
+        ],
+        "animation": [
+          "Foils visibly adjust angle, bow lifts on wave-cut, rescue rails unfold on pickup."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Blacktide coastguard reputation."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "Boat-capable vehicle foundation"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-006",
+      "name": "Crownless Siege Crawler",
+      "family": "vehicle",
+      "tier": "god",
+      "status": "specified",
+      "role": "colossus assault platform",
+      "identity": {
+        "fantasy": "A God-tier multi-seat siege platform used during continent-class encounters to attack distributed weak points and carry raid equipment.",
+        "silhouette": "Enormous low armored crawler with crown-shaped artillery frame and modular raid racks.",
+        "lore_hook": "Crownless Siege Crawler is tied to this acquisition path: God-tier Crownless Continent raid construction."
+      },
+      "mechanics": {
+        "core": [
+          "raid transport",
+          "heavy turret",
+          "weak-point artillery",
+          "support rack"
+        ],
+        "signature": [
+          "Sovereign Salvo requires multiple crew actions to arm, aim, and fire one synchronized anti-colossus shot.",
+          "Capability expression: raid transport.",
+          "Capability expression: heavy turret.",
+          "Capability expression: weak-point artillery.",
+          "Capability expression: support rack."
+        ],
+        "counterplay": [
+          "Very slow; obvious artillery tell; requires crew coordination; vulnerable while deploying."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Kilometer-readable crown barrel silhouette, gold impact chain, heavy controlled dust and shock rings."
+        ],
+        "animation": [
+          "Deploying braces drive into the ground, crown frame elevates in stages, recoil rocks the whole chassis."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier Crownless Continent raid construction."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [
+        "Tank/War Bus/Siege Cannon device composition"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-007",
+      "name": "Worldroot Vineclimber",
+      "family": "vehicle",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "vertical jungle traversal racer",
+      "identity": {
+        "fantasy": "An exotic mobility vehicle tuned for steep living surfaces and temporary vine-track routes.",
+        "silhouette": "Green-black compact racer with root-tread wheels and leaflike spoiler vanes.",
+        "lore_hook": "Worldroot Vineclimber is tied to this acquisition path: Exotic Worldroot traversal trial."
+      },
+      "mechanics": {
+        "core": [
+          "vertical grip",
+          "vine track affinity",
+          "root jump"
+        ],
+        "signature": [
+          "Canopy Cling grants extreme traction only on authored Worldroot climb surfaces and decays immediately elsewhere.",
+          "Capability expression: vertical grip.",
+          "Capability expression: vine track affinity.",
+          "Capability expression: root jump."
+        ],
+        "counterplay": [
+          "No special grip on ordinary walls; vulnerable on open roads."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Green sap tire lines, leaf bursts, root contact flashes."
+        ],
+        "animation": [
+          "Wheel assemblies rotate to match climb plane; spoiler vanes flatten during vertical travel."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic Worldroot traversal trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "RR Vehicle Spawner"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-008",
+      "name": "Chronarch Echo Buggy",
+      "family": "vehicle",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "checkpoint-state racing vehicle",
+      "identity": {
+        "fantasy": "A mythic racer that records one safe checkpoint state and can restore selected vehicle condition after a failed route segment.",
+        "silhouette": "Bronze-silver buggy with twin offset ghost frames and clock-dial wheels.",
+        "lore_hook": "Chronarch Echo Buggy is tied to this acquisition path: Mythic Chronarch race circuit."
+      },
+      "mechanics": {
+        "core": [
+          "checkpoint record",
+          "condition restore",
+          "temporal racing"
+        ],
+        "signature": [
+          "Echo Reset restores the vehicle to one approved recent checkpoint position/condition during supported races, consuming a major charge.",
+          "Capability expression: checkpoint record.",
+          "Capability expression: condition restore.",
+          "Capability expression: temporal racing."
+        ],
+        "counterplay": [
+          "Race-only; one stored checkpoint; cannot undo combat objective state."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Ghost chassis overlay, reverse tire particles, clock-ring snap."
+        ],
+        "animation": [
+          "Vehicle briefly overlays its recorded frame before snapping back; wheels spin backward during reset cue."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Chronarch race circuit."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "RR Vehicle Spawner"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-009",
+      "name": "Axis Rider",
+      "family": "vehicle",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "rule-lane precision racer",
+      "identity": {
+        "fantasy": "A Null Basilica racer that can switch between authored handling doctrines for straight-line speed, turning, or vertical grip.",
+        "silhouette": "Monochrome angular coupe with three illuminated axis rails.",
+        "lore_hook": "Axis Rider is tied to this acquisition path: Exotic Null Basilica doctrine license."
+      },
+      "mechanics": {
+        "core": [
+          "handling doctrine",
+          "precision lanes",
+          "axis boost"
+        ],
+        "signature": [
+          "Axis Doctrine locks one handling profile for a full sector and rewards matching the district's active road law.",
+          "Capability expression: handling doctrine.",
+          "Capability expression: precision lanes.",
+          "Capability expression: axis boost."
+        ],
+        "counterplay": [
+          "Cannot swap mid-sector; wrong doctrine creates severe handling disadvantage."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "White axis rails, black wake, geometric corner markers."
+        ],
+        "animation": [
+          "Chassis wheel geometry visibly reconfigures at doctrine lock."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic Null Basilica doctrine license."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "RR Vehicle Spawner"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-010",
+      "name": "Ossuary Bone Hauler",
+      "family": "vehicle",
+      "tier": "epic",
+      "status": "specified",
+      "role": "corpse-economy utility truck",
+      "identity": {
+        "fantasy": "A heavy necropolis hauler used to move remains, materials, and cleanse equipment between siege zones.",
+        "silhouette": "Dark six-wheel truck with bone-cage cargo bed and pale lantern worklights.",
+        "lore_hook": "Ossuary Bone Hauler is tied to this acquisition path: Epic Ossuary quartermaster access."
+      },
+      "mechanics": {
+        "core": [
+          "heavy cargo",
+          "corpse transport",
+          "cleanse station"
+        ],
+        "signature": [
+          "Sanctified Bed can temporarily store eligible remains so nearby necromancers cannot claim them while cargo is secured.",
+          "Capability expression: heavy cargo.",
+          "Capability expression: corpse transport.",
+          "Capability expression: cleanse station."
+        ],
+        "counterplay": [
+          "Slow and conspicuous; cargo protection ends if the vehicle is destroyed."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Pale containment lattice over cargo, bone-cage glow, dust-heavy road wake."
+        ],
+        "animation": [
+          "Cargo cage locks in segmented steps; rear shrine folds open during unloading."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Ossuary quartermaster access."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "Big Rig or Pickup Truck foundation"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-011",
+      "name": "Ash Furnace Rig",
+      "family": "vehicle",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "mobile forge truck",
+      "identity": {
+        "fantasy": "A volcanic heavy truck whose rear module acts as a limited field repair and material-refinement station during long expeditions.",
+        "silhouette": "Black-red big rig with furnace box, copper exhaust crowns, and lava-resistant tires.",
+        "lore_hook": "Ash Furnace Rig is tied to this acquisition path: Legendary Ember Throne foundry contract."
+      },
+      "mechanics": {
+        "core": [
+          "field repair",
+          "material refine",
+          "heat resistance"
+        ],
+        "signature": [
+          "Rolling Forge converts one approved raw material batch while parked and powered, forcing the squad to defend the vehicle during refinement.",
+          "Capability expression: field repair.",
+          "Capability expression: material refine.",
+          "Capability expression: heat resistance."
+        ],
+        "counterplay": [
+          "Must remain stationary; process broadcasts position; limited recipes."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Furnace glow, copper sparks, bounded smoke columns, molten progress gauge."
+        ],
+        "animation": [
+          "Rear furnace unfolds on stabilizers; exhaust stacks flare through refinement stages."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Ember Throne foundry contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "Big Rig + Vehicle Service Station composition"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-012",
+      "name": "Wild Court Beastwagon",
+      "family": "vehicle",
+      "tier": "epic",
+      "status": "specified",
+      "role": "taming expedition transport",
+      "identity": {
+        "fantasy": "A rugged expedition vehicle configured to safely carry injured tameable creatures and support beast-rescue contracts.",
+        "silhouette": "Green-brown armored utility wagon with open living-wood rescue cradle and scent mast.",
+        "lore_hook": "Wild Court Beastwagon is tied to this acquisition path: Epic Wild Court rescue certification."
+      },
+      "mechanics": {
+        "core": [
+          "beast transport",
+          "taming support",
+          "scent lure"
+        ],
+        "signature": [
+          "Calm Cradle reduces aggression recovery for one eligible rescued wildlife passenger during transport.",
+          "Capability expression: beast transport.",
+          "Capability expression: taming support.",
+          "Capability expression: scent lure."
+        ],
+        "counterplay": [
+          "No effect on bosses or hostile humanoid NPCs; carrying a beast reduces top speed."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Soft green cradle aura, scent ribbon, leaf suspension accents."
+        ],
+        "animation": [
+          "Rescue cradle expands around passenger; vehicle ride height lowers under load."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Wild Court rescue certification."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "SUV or Pickup Truck foundation"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-013",
+      "name": "Eclipse Nightcar",
+      "family": "vehicle",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "stealth-domain pursuit car",
+      "identity": {
+        "fantasy": "A mythic pursuit vehicle that creates a small moving low-visibility wake for evasion missions rather than full invisibility.",
+        "silhouette": "Long black coupe with thin gold crescent headlights and almost no visible grille.",
+        "lore_hook": "Eclipse Nightcar is tied to this acquisition path: Mythic Eclipse Sovereign pursuit challenge."
+      },
+      "mechanics": {
+        "core": [
+          "visibility wake",
+          "marked target pursuit",
+          "night handling"
+        ],
+        "signature": [
+          "Umbral Wake reduces distant detection quality behind the car for a short duration after a perfect drift.",
+          "Capability expression: visibility wake.",
+          "Capability expression: marked target pursuit.",
+          "Capability expression: night handling."
+        ],
+        "counterplay": [
+          "Close enemies still see it; wake does not hide objectives or passengers at short range."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Black-gold drift shadow, crescent light smear, controlled low-contrast haze."
+        ],
+        "animation": [
+          "Headlights narrow during wake state; body appears to flatten visually on drift initiation."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Eclipse Sovereign pursuit challenge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "Sports Car foundation"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-014",
+      "name": "Parallax Taxi",
+      "family": "vehicle",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "route-bending urban transport",
+      "identity": {
+        "fantasy": "An exotic taxi that chooses between two authored destination routes when passing a spatial fork, enabling strange city traversal.",
+        "silhouette": "Classic taxi silhouette split by an iridescent seam, with destination sign showing two locations at once.",
+        "lore_hook": "Parallax Taxi is tied to this acquisition path: Exotic Cartographers contract."
+      },
+      "mechanics": {
+        "core": [
+          "route fork",
+          "urban shortcut",
+          "passenger utility"
+        ],
+        "signature": [
+          "Elsewhere Fare selects one of two paired route exits at approved intersection gates.",
+          "Capability expression: route fork.",
+          "Capability expression: urban shortcut.",
+          "Capability expression: passenger utility."
+        ],
+        "counterplay": [
+          "Only mapped intersections; cannot arbitrary teleport; exit is telegraphed."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Prismatic seam split, two destination glyphs, fold-out route portal."
+        ],
+        "animation": [
+          "Taxi body visually doubles for a moment at the fork then resolves into selected lane."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic Cartographers contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "Taxi foundation"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-015",
+      "name": "Leviathan Hunter",
+      "family": "vehicle",
+      "tier": "god",
+      "status": "specified",
+      "role": "multi-seat abyss gunboat",
+      "identity": {
+        "fantasy": "A God-tier raid boat carrying harpoon systems and weak-point sonar for mythic ocean bosses.",
+        "silhouette": "Heavy black-blue gunboat with crescent harpoon towers, sonar fins, and reinforced bow cage.",
+        "lore_hook": "Leviathan Hunter is tied to this acquisition path: God-tier Blacktide leviathan raid forge."
+      },
+      "mechanics": {
+        "core": [
+          "harpoon anchor",
+          "weak-point sonar",
+          "raid transport",
+          "wave brace"
+        ],
+        "signature": [
+          "Moonspike Harpoon anchors to one eligible leviathan raid node, creating a temporary damage/traversal objective for the squad.",
+          "Capability expression: harpoon anchor.",
+          "Capability expression: weak-point sonar.",
+          "Capability expression: raid transport.",
+          "Capability expression: wave brace."
+        ],
+        "counterplay": [
+          "Harpoon has long reload; boss can break line; only authored nodes accept anchors."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Blue sonar sweeps, moon-white harpoon trail, tether lightning, large controlled wake."
+        ],
+        "animation": [
+          "Harpoon tower unfolds and recoils; hull ballast visibly shifts during wave brace."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier Blacktide leviathan raid forge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [
+        "Boat vehicle + turret/device composition"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-016",
+      "name": "Hammerhead Warden",
+      "family": "vehicle",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "rescue helicopter",
+      "identity": {
+        "fantasy": "A reinforced helicopter specialized for squad extraction, airborne rescue, and carrying one external objective sling.",
+        "silhouette": "Angular dark rescue chopper with cyan underside shield and hammerhead sensor nose.",
+        "lore_hook": "Hammerhead Warden is tied to this acquisition path: Legendary Rift Warden airwing access."
+      },
+      "mechanics": {
+        "core": [
+          "air rescue",
+          "objective sling",
+          "threat scan"
+        ],
+        "signature": [
+          "Warden Hover creates a short stabilized extraction window with reduced drift and a visible pickup zone.",
+          "Capability expression: air rescue.",
+          "Capability expression: objective sling.",
+          "Capability expression: threat scan."
+        ],
+        "counterplay": [
+          "Stationary hover is vulnerable; no offensive immunity."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Cyan pickup column, rotor wash, sensor sweep arcs."
+        ],
+        "animation": [
+          "Landing gear widens during hover-lock; sling winch deploys in stages."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Rift Warden airwing access."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "Hammerhead Choppa or Helicopter Spawner"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-017",
+      "name": "Zero Trialcraft",
+      "family": "vehicle",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "endgame doctrine vehicle",
+      "identity": {
+        "fantasy": "An Absolute trial vehicle used only in bounded endgame routes where handling laws change between sectors.",
+        "silhouette": "Black-white levitating racer with detached wheel-rings and a central zero aperture.",
+        "lore_hook": "Zero Trialcraft is tied to this acquisition path: Absolute Zero Reliquary trial unlock."
+      },
+      "mechanics": {
+        "core": [
+          "doctrine handling",
+          "trial adaptation",
+          "bounded phase shift"
+        ],
+        "signature": [
+          "Law Engine loads one approved vehicle-rule preset per trial sector and visibly reconfigures controls and handling response.",
+          "Capability expression: doctrine handling.",
+          "Capability expression: trial adaptation.",
+          "Capability expression: bounded phase shift."
+        ],
+        "counterplay": [
+          "Endgame trial-only; presets fixed by encounter; no global rule override."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Monochrome ring trails, zero aperture pulse, geometric reconfiguration lines."
+        ],
+        "animation": [
+          "Wheel-rings detach and rotate into new axes between sectors; chassis floats into alignment."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute Zero Reliquary trial unlock."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "RR Vehicle Spawner + authored control zones"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-018",
+      "name": "War Choir Resonance Bus",
+      "family": "vehicle",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "mobile squad buff fortress",
+      "identity": {
+        "fantasy": "A mythic armored bus that broadcasts one rotating support cadence while moving through siege events.",
+        "silhouette": "Armored bus with huge tuning-fork roof rails and speaker-shield plates.",
+        "lore_hook": "War Choir Resonance Bus is tied to this acquisition path: Mythic Resonance Choir war contract."
+      },
+      "mechanics": {
+        "core": [
+          "mobile support aura",
+          "squad transport",
+          "ram"
+        ],
+        "signature": [
+          "Battle Cadence rotates Guard, Haste, and Focus support pulses on a fixed audible cycle.",
+          "Capability expression: mobile support aura.",
+          "Capability expression: squad transport.",
+          "Capability expression: ram."
+        ],
+        "counterplay": [
+          "One cadence at a time; silence fields suppress support pulse."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Concentric sound rings, fork vibration, roof-light beat markers."
+        ],
+        "animation": [
+          "Roof forks tilt into cadence shapes; side plates pulse mechanically with rhythm."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Resonance Choir war contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "War Bus or Armored Battle Bus foundation"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-019",
+      "name": "Gravewake Hearse",
+      "family": "vehicle",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "necromantic retrieval vehicle",
+      "identity": {
+        "fantasy": "A fast armored hearse that collects spectral echoes from cleared necromantic objectives for safe delivery to sanctuaries.",
+        "silhouette": "Long black hearse with pale glass reliquary cabin and floating rear lanterns.",
+        "lore_hook": "Gravewake Hearse is tied to this acquisition path: Legendary Sepulchral Concord logistics chain."
+      },
+      "mechanics": {
+        "core": [
+          "echo cargo",
+          "sanctuary delivery",
+          "fear resistance"
+        ],
+        "signature": [
+          "Reliquary Drive stores one objective-bound spectral cargo state protected from nearby hostile necromancer theft.",
+          "Capability expression: echo cargo.",
+          "Capability expression: sanctuary delivery.",
+          "Capability expression: fear resistance."
+        ],
+        "counterplay": [
+          "Cargo is lost if vehicle destroyed; cannot store arbitrary enemy souls."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Pale lantern wake, enclosed spectral silhouette, sanctuary arrival bloom."
+        ],
+        "animation": [
+          "Rear reliquary shutters close around cargo; suspension lowers under spectral load."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Sepulchral Concord logistics chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "Sedan/Sports Car foundation"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-020",
+      "name": "Solar Roc VTOL",
+      "family": "vehicle",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "solar assault helicopter",
+      "identity": {
+        "fantasy": "A mythic helicopter variant whose solar wing arrays charge one defensive flare and one dive-assist burst.",
+        "silhouette": "White-gold rotorcraft with feather-shaped solar fins and beaklike sensor nose.",
+        "lore_hook": "Solar Roc VTOL is tied to this acquisition path: Mythic Helios air temple reward."
+      },
+      "mechanics": {
+        "core": [
+          "solar flare",
+          "dive assist",
+          "air transport"
+        ],
+        "signature": [
+          "Roc Descent converts stored sunlight into a controlled high-speed descent with automatic pullout assistance in approved airspace.",
+          "Capability expression: solar flare.",
+          "Capability expression: dive assist.",
+          "Capability expression: air transport."
+        ],
+        "counterplay": [
+          "Needs open-sky charge; flare and descent share resource meter."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Gold wing corona, controlled dive contrail, defensive sun flash."
+        ],
+        "animation": [
+          "Solar fins spread under charge and fold tightly during descent."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Helios air temple reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "Helicopter Spawner"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-021",
+      "name": "Cinder Quad",
+      "family": "vehicle",
+      "tier": "epic",
+      "status": "specified",
+      "role": "volcanic stunt vehicle",
+      "identity": {
+        "fantasy": "A classic-feeling high-bounce quad platform tuned for lava-shelf jumps and ash-storm racing.",
+        "silhouette": "Compact black-red quad with furnace front grille and wide heat-shield fenders.",
+        "lore_hook": "Cinder Quad is tied to this acquisition path: Epic Ember Throne stunt circuit."
+      },
+      "mechanics": {
+        "core": [
+          "jump boost",
+          "ash handling",
+          "heat burst"
+        ],
+        "signature": [
+          "Kiln Jump stores landing heat and converts it into one amplified next jump on approved stunt routes.",
+          "Capability expression: jump boost.",
+          "Capability expression: ash handling.",
+          "Capability expression: heat burst."
+        ],
+        "counterplay": [
+          "Hard crashes lose charge; no immunity to lava or major fire hazards."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Orange jump arc, ember tire spray, compact landing ring."
+        ],
+        "animation": [
+          "Suspension visibly overcompresses before empowered jump; rider braces low on landing."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Ember Throne stunt circuit."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "Quadcrasher-style foundation"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-022",
+      "name": "Meridian Dune Crawler",
+      "family": "vehicle",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "desert expedition SUV",
+      "identity": {
+        "fantasy": "A rugged exploration SUV carrying anomaly scanners and deployable shade panels for long Chronarch Scar expeditions.",
+        "silhouette": "Sand-gold six-seat SUV with roof chronometer mast and folding side awnings.",
+        "lore_hook": "Meridian Dune Crawler is tied to this acquisition path: Legendary Chronarch expedition license."
+      },
+      "mechanics": {
+        "core": [
+          "anomaly scan",
+          "shade camp",
+          "desert stability"
+        ],
+        "signature": [
+          "Scar Survey performs one slow local sweep for eligible temporal-route markers while parked.",
+          "Capability expression: anomaly scan.",
+          "Capability expression: shade camp.",
+          "Capability expression: desert stability."
+        ],
+        "counterplay": [
+          "Cannot scan while moving; scan broadcasts a visible pulse."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Gold sweep ring, dust reduction field under awnings, clock-mast pulse."
+        ],
+        "animation": [
+          "Awnings unfold mechanically; roof mast rotates one full revolution during scan."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Chronarch expedition license."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "SUV foundation"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-023",
+      "name": "Elsewhere Saucer",
+      "family": "vehicle",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "anomaly aerial craft",
+      "identity": {
+        "fantasy": "An exotic UFO-style craft that can switch between scouting hover and short relocation burst at authored anomaly gates.",
+        "silhouette": "Thin black saucer with iridescent underside aperture and three floating navigation beads.",
+        "lore_hook": "Elsewhere Saucer is tied to this acquisition path: Exotic Cartographers anomaly permit."
+      },
+      "mechanics": {
+        "core": [
+          "hover scout",
+          "anomaly gate burst",
+          "tractor utility"
+        ],
+        "signature": [
+          "Parallax Skip transfers the craft between paired anomaly air gates without granting unrestricted map teleportation.",
+          "Capability expression: hover scout.",
+          "Capability expression: anomaly gate burst.",
+          "Capability expression: tractor utility."
+        ],
+        "counterplay": [
+          "Gate-only; charge-up visible; vulnerable during hover."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Iridescent underside fold, bead alignment, compact space-cut arrival ring."
+        ],
+        "animation": [
+          "Navigation beads snap into a line before skip; craft flattens visually during transit."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic Cartographers anomaly permit."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "UFO Spawner"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-024",
+      "name": "Iron Oracle Siege Cannon",
+      "family": "vehicle",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "mobile artillery emplacement",
+      "identity": {
+        "fantasy": "A relocatable siege cannon used to predict and punish boss attack windows rather than spam explosives.",
+        "silhouette": "Gunmetal artillery chassis with rotating amber prediction lenses and collapsible stabilizers.",
+        "lore_hook": "Iron Oracle Siege Cannon is tied to this acquisition path: Legendary Iron Oracle war asset."
+      },
+      "mechanics": {
+        "core": [
+          "boss-window prediction",
+          "heavy shot",
+          "relocation"
+        ],
+        "signature": [
+          "Oracle Shot can only arm after a recognized authored boss telegraph, rewarding timing with a stronger stagger contribution.",
+          "Capability expression: boss-window prediction.",
+          "Capability expression: heavy shot.",
+          "Capability expression: relocation."
+        ],
+        "counterplay": [
+          "Cannot fire empowered shot without telegraph lock; stationary while deployed."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Amber forecast arc, heavy muzzle ring, stabilizer dust."
+        ],
+        "animation": [
+          "Lenses align, stabilizers slam down, barrel tracks forecast point before firing."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Iron Oracle war asset."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "Siege Cannon device"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    },
+    {
+      "id": "VEH-025",
+      "name": "Axiom Chariot",
+      "family": "vehicle",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "endgame multi-mode traversal platform",
+      "identity": {
+        "fantasy": "An Absolute vehicle system that changes between ground, hover, and siege handling packages only at authored transition shrines.",
+        "silhouette": "Black-white chariot body with four detached ring-wheels orbiting a bright central axiom core.",
+        "lore_hook": "Axiom Chariot is tied to this acquisition path: Absolute Axiom Forge vehicle chain."
+      },
+      "mechanics": {
+        "core": [
+          "ground mode",
+          "hover mode",
+          "siege mode",
+          "shrine reconfiguration"
+        ],
+        "signature": [
+          "Threefold Chassis reconfigures the same vehicle state at approved shrines so one endgame machine serves traversal, hover puzzles, and stationary raid support.",
+          "Capability expression: ground mode.",
+          "Capability expression: hover mode.",
+          "Capability expression: siege mode.",
+          "Capability expression: shrine reconfiguration."
+        ],
+        "counterplay": [
+          "Mode changes only at shrines; each mode has hard weaknesses and cannot be swapped in combat freely."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Zero-white ring wheels, black geometric transformation lattice, mode-specific trail language."
+        ],
+        "animation": [
+          "Full mechanical ring rotation and chassis rebuild animation at shrine; siege mode anchors into the ground."
+        ],
+        "audio": [
+          "Distinct engine/hover/boost/impact/critical-damage cues with interior/exterior mix rules and platform-safe fallback layers."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute Axiom Forge vehicle chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "Vehicle-device composition + authored reconfiguration system"
+      ],
+      "notes": [
+        "Vehicle identity is implemented on an available Fortnite/UEFN vehicle foundation plus Verse/device systems; custom shell/handling depth is subject to the selected base device."
+      ]
+    }
+  ]
+}
