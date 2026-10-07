@@ -103,6 +103,20 @@ aeonfall_npc_spawn_group_adapter_device := class(creative_device):
             return
 
         if:
+            Event.EventType = "invasion.spawn_group_released"
+            Event.TargetId = SpawnGroupId
+        then:
+            RemovedWave := RemoveRequester(Event.SourceId)
+            if:
+                RemovedWave?
+                ActiveInvasionIds.Length = 0
+            then:
+                DisableAll()
+                if (DespawnOnRelease?):
+                    DespawnAll()
+            return
+
+        if:
             Event.EventType = "invasion.completed"
             RemovedCompleted := RemoveRequester(Event.SourceId)
             RemovedCompleted?
