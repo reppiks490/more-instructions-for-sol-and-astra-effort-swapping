@@ -104,12 +104,6 @@ aeonfall_npc_spawn_group_adapter_device := class(creative_device):
 
         if:
             Event.EventType = "invasion.completed"
-            Event.EventType = "invasion.failed"
-        then:
-            return
-
-        if:
-            Event.EventType = "invasion.completed"
             RemovedCompleted := RemoveRequester(Event.SourceId)
             RemovedCompleted?
             ActiveInvasionIds.Length = 0
