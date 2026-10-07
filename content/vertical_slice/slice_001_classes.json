@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "slice_id": "SLICE-001",
+  "classes": [
+    {
+      "class_id": "CLS-006",
+      "name": "Sepulchral Sovereign",
+      "ability_ids": [
+        "ABL-001",
+        "ABL-002"
+      ],
+      "passive_status_ids": [],
+      "resource_id": "corpse_charge",
+      "max_resource": 100,
+      "base_max_companions": 2,
+      "required_unlock_ids": [],
+      "resource_rules": [
+        "Eligible corpse denial, cleansing, or controlled harvesting can generate corpse charge through authored adapters.",
+        "All Grave Architecture structures share the same class resource and encounter spawn cap.",
+        "Boss and event corpses may use authored values rather than ordinary corpse-charge values."
+      ]
+    },
+    {
+      "class_id": "CLS-007",
+      "name": "Beast-Crown",
+      "ability_ids": [
+        "ABL-003"
+      ],
+      "passive_status_ids": [],
+      "resource_id": "crown_bond",
+      "max_resource": 3,
+      "base_max_companions": 3,
+      "required_unlock_ids": [],
+      "resource_rules": [
+        "Crown Bond represents active command bandwidth, not a damage meter.",
+        "Elite taming challenges temporarily reserve one Crown Bond slot while unresolved.",
+        "Protected bosses and explicitly excluded mythic creatures cannot consume or bypass Crown Bond rules."
+      ]
+    }
+  ]
+}
