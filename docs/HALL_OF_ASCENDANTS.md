@@ -26,7 +26,7 @@ The first runtime implementation is a **session Hall**. For each connected playe
 - Transcendent history
 - Authority Depth
 
-Authority Depth follows the current canonical gates:
+Authority Depth follows the current canonical gates. History is earned only when an Authority reaches its full natural duration; cancel/teardown does not advance it:
 - Choosing complete + history 0 → first 3 Authorities
 - history 1+ → 5 Authorities
 - history 3+ → 6
