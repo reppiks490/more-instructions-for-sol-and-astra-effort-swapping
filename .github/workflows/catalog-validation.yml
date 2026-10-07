@@ -49,6 +49,7 @@ on:
       - "tools/validate_transcendent_authorities.py"
       - "tools/build_ascended_form_registry.py"
       - "tools/validate_ascended_forms.py"
+      - "tools/validate_ascended_form_adapter_bindings.py"
       - "tools/validate_transcendent_adapter_bindings.py"
       - "tools/validate_launch_test_plan.py"
       - "STATUS.md"
@@ -173,6 +174,9 @@ jobs:
 
       - name: Validate God and Absolute forms
         run: python tools/validate_ascended_forms.py
+
+      - name: Validate God and Absolute adapter bindings
+        run: python tools/validate_ascended_form_adapter_bindings.py
 
       - name: Build God and Absolute Verse registry
         run: python tools/build_ascended_form_registry.py
