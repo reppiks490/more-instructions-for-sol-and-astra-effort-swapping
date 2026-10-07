@@ -1,0 +1,253 @@
+{
+  "version": 1,
+  "region_id": "REG-001",
+  "initial_faction_influence": [
+    {
+      "faction_id": "FAC-002",
+      "influence": 35
+    },
+    {
+      "faction_id": "FAC-004",
+      "influence": 25
+    },
+    {
+      "faction_id": "FAC-007",
+      "influence": 15
+    }
+  ],
+  "corruption_thresholds": [
+    {
+      "min": 0,
+      "max": 19,
+      "label": "quiet_graves",
+      "mutation_id": ""
+    },
+    {
+      "min": 20,
+      "max": 39,
+      "label": "restless_soil",
+      "mutation_id": "MUT-CORRUPTION-I"
+    },
+    {
+      "min": 40,
+      "max": 59,
+      "label": "grave_bloom",
+      "mutation_id": "MUT-CORRUPTION-II"
+    },
+    {
+      "min": 60,
+      "max": 79,
+      "label": "necropolis_pressure",
+      "mutation_id": "MUT-CORRUPTION-III"
+    },
+    {
+      "min": 80,
+      "max": 94,
+      "label": "devouring_front",
+      "mutation_id": "MUT-CORRUPTION-IV"
+    },
+    {
+      "min": 95,
+      "max": 100,
+      "label": "cataclysmic_hunger",
+      "mutation_id": "MUT-CORRUPTION-V"
+    }
+  ],
+  "spawn_groups": [
+    {
+      "id": "SG-R001-GRAVE-SCAVENGERS",
+      "max_active": 8,
+      "entity_ids": [
+        "MON-043",
+        "MON-133",
+        "MON-001"
+      ]
+    },
+    {
+      "id": "SG-R001-NECRO-SUPPORT",
+      "max_active": 6,
+      "entity_ids": [
+        "MON-048",
+        "MON-050",
+        "MON-002"
+      ]
+    },
+    {
+      "id": "SG-R001-BROOD-PRESSURE",
+      "max_active": 10,
+      "entity_ids": [
+        "MON-007",
+        "MON-044",
+        "MON-053"
+      ]
+    },
+    {
+      "id": "SG-R001-NULL-ESCORT",
+      "max_active": 6,
+      "entity_ids": [
+        "MON-049",
+        "MON-058"
+      ]
+    },
+    {
+      "id": "SG-R001-OSSUARY-SIEGE",
+      "max_active": 12,
+      "entity_ids": [
+        "MON-008",
+        "MON-048",
+        "MON-050",
+        "MON-044"
+      ]
+    },
+    {
+      "id": "SG-R001-DEVOURING-PRECURSOR",
+      "max_active": 16,
+      "entity_ids": [
+        "MON-043",
+        "MON-044",
+        "MON-133",
+        "MON-053"
+      ]
+    }
+  ],
+  "invasions": [
+    {
+      "id": "INV-R001-001",
+      "name": "Grave Scavenger Surge",
+      "aggressor_id": "ECOL-NECROTIC",
+      "min_hostility_tier": 1,
+      "duration_seconds": 180,
+      "max_concurrent_ai": 10,
+      "timeout_is_failure": true,
+      "waves": [
+        [
+          "SG-R001-GRAVE-SCAVENGERS"
+        ],
+        [
+          "SG-R001-GRAVE-SCAVENGERS",
+          "SG-R001-NECRO-SUPPORT"
+        ]
+      ],
+      "objective_ids": [
+        "OBJ-INV001-DENY-CORPSES",
+        "OBJ-INV001-CLEAR-NEST"
+      ],
+      "hazard_ids": [
+        "HZ-INV001-CORPSE-LOTS"
+      ]
+    },
+    {
+      "id": "INV-R001-002",
+      "name": "Null Cartel Extraction",
+      "aggressor_id": "FAC-002",
+      "min_hostility_tier": 2,
+      "duration_seconds": 240,
+      "max_concurrent_ai": 12,
+      "timeout_is_failure": true,
+      "waves": [
+        [
+          "SG-R001-NULL-ESCORT"
+        ],
+        [
+          "SG-R001-NULL-ESCORT",
+          "SG-R001-GRAVE-SCAVENGERS"
+        ],
+        [
+          "SG-R001-NECRO-SUPPORT"
+        ]
+      ],
+      "objective_ids": [
+        "OBJ-INV002-INTERCEPT-RELIC",
+        "OBJ-INV002-SEAL-RIFT"
+      ],
+      "hazard_ids": [
+        "HZ-INV002-SMUGGLER-GATES"
+      ]
+    },
+    {
+      "id": "INV-R001-003",
+      "name": "Iron Mercy Purge",
+      "aggressor_id": "FAC-004",
+      "min_hostility_tier": 2,
+      "duration_seconds": 240,
+      "max_concurrent_ai": 14,
+      "timeout_is_failure": false,
+      "waves": [
+        [
+          "SG-R001-GRAVE-SCAVENGERS"
+        ],
+        [
+          "SG-R001-NECRO-SUPPORT",
+          "SG-R001-BROOD-PRESSURE"
+        ]
+      ],
+      "objective_ids": [
+        "OBJ-INV003-DEFEND-SANCTIFIERS",
+        "OBJ-INV003-BURN-CORPSE-LOTS"
+      ],
+      "hazard_ids": [
+        "HZ-INV003-SANCTIFIED-FIRE"
+      ]
+    },
+    {
+      "id": "INV-R001-004",
+      "name": "Synod Grave Experiment",
+      "aggressor_id": "FAC-007",
+      "min_hostility_tier": 3,
+      "duration_seconds": 300,
+      "max_concurrent_ai": 16,
+      "timeout_is_failure": true,
+      "waves": [
+        [
+          "SG-R001-BROOD-PRESSURE"
+        ],
+        [
+          "SG-R001-NULL-ESCORT",
+          "SG-R001-NECRO-SUPPORT"
+        ],
+        [
+          "SG-R001-OSSUARY-SIEGE"
+        ]
+      ],
+      "objective_ids": [
+        "OBJ-INV004-BREAK-RESEARCH-NODES",
+        "OBJ-INV004-KILL-ANCHOR"
+      ],
+      "hazard_ids": [
+        "HZ-INV004-VOID-GRAVE-FIELD",
+        "HZ-INV004-EXPERIMENTAL-RIFT"
+      ]
+    },
+    {
+      "id": "INV-R001-005",
+      "name": "Devouring Moon Precursor",
+      "aggressor_id": "ECOL-GRAVEFEEDING",
+      "min_hostility_tier": 4,
+      "duration_seconds": 360,
+      "max_concurrent_ai": 20,
+      "timeout_is_failure": true,
+      "waves": [
+        [
+          "SG-R001-DEVOURING-PRECURSOR"
+        ],
+        [
+          "SG-R001-DEVOURING-PRECURSOR",
+          "SG-R001-NECRO-SUPPORT"
+        ],
+        [
+          "SG-R001-OSSUARY-SIEGE",
+          "SG-R001-BROOD-PRESSURE"
+        ]
+      ],
+      "objective_ids": [
+        "OBJ-INV005-STOP-FEEDING",
+        "OBJ-INV005-DESTROY-EVOLUTION-NODES",
+        "OBJ-INV005-SEAL-MOON-RIFT"
+      ],
+      "hazard_ids": [
+        "HZ-INV005-RED-ASH",
+        "HZ-INV005-HUNGER-ZONES"
+      ]
+    }
+  ]
+}
