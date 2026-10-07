@@ -95,3 +95,6 @@ aeonfall_recipe_service := class():
                 return true
 
         false
+
+
+AEONFALLRecipeService:aeonfall_recipe_service = aeonfall_recipe_service{}
