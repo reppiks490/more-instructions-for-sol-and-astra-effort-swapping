@@ -24,6 +24,60 @@ aeonfall_invasion_runtime := class():
                     }
                 )
 
+    ReleaseSpawnGroup(
+        InvasionId:string,
+        RegionId:string,
+        SpawnGroupId:string,
+        WaveIndex:int
+    )<transacts>:void=
+        AEONFALLRuntimeBus.Emit(
+            aeonfall_runtime_event{
+                EventType := "invasion.spawn_group_released",
+                SourceId := InvasionId,
+                TargetId := SpawnGroupId,
+                ContextId := RegionId,
+                Amount := WaveIndex
+            }
+        )
+
+    TransitionWave(
+        Definition:aeonfall_invasion_definition,
+        OldWaveIndex:int,
+        NewWaveIndex:int
+    )<transacts>:void=
+        if:
+            OldWave := Definition.WaveSpawnGroupIds[OldWaveIndex]
+            NewWave := Definition.WaveSpawnGroupIds[NewWaveIndex]
+        then:
+            for (OldGroupId : OldWave):
+                if:
+                    NewWave.Find[OldGroupId]
+                then:
+                    OldGroupId = OldGroupId
+                else:
+                    ReleaseSpawnGroup(
+                        Definition.InvasionId,
+                        Definition.RegionId,
+                        OldGroupId,
+                        OldWaveIndex
+                    )
+
+            for (NewGroupId : NewWave):
+                if:
+                    OldWave.Find[NewGroupId]
+                then:
+                    NewGroupId = NewGroupId
+                else:
+                    AEONFALLRuntimeBus.Emit(
+                        aeonfall_runtime_event{
+                            EventType := "invasion.spawn_group_requested",
+                            SourceId := Definition.InvasionId,
+                            TargetId := NewGroupId,
+                            ContextId := Definition.RegionId,
+                            Amount := NewWaveIndex
+                        }
+                    )
+
     Start(InvasionId:string)<transacts>:logic=
         if:
             Definition := AEONFALLInvasionRegistry.Get[InvasionId]
@@ -140,7 +194,11 @@ aeonfall_invasion_runtime := class():
             if:
                 set States[InvasionId] = Updated
             then:
-                RequestWave(Definition, NextIndex)
+                TransitionWave(
+                    Definition,
+                    Old.CurrentWaveIndex,
+                    NextIndex
+                )
 
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{
