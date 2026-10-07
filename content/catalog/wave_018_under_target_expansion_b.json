@@ -1,0 +1,3031 @@
+{
+  "wave": "018",
+  "purpose": "Second focused under-target expansion emphasizing behavioral uniqueness in weapons and monster ecology while advancing armor and bosses.",
+  "entity_count": 48,
+  "entities": [
+    {
+      "id": "WPN-121",
+      "name": "Coffin Sun",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "delayed-flare carbine",
+      "identity": {
+        "fantasy": "A carbine whose bullets plant tiny lightless flares that ignite only when the target crosses from shadow into light.",
+        "silhouette": "Short black-gold carbine with sealed sun disks along the stock.",
+        "lore_hook": "Grave hunters used it to punish things that only emerged at dawn."
+      },
+      "mechanics": {
+        "core": [
+          "light transition",
+          "delayed flare",
+          "precision"
+        ],
+        "signature": [
+          "Hits plant Eclipse Seeds.",
+          "Crossing into brighter authored light detonates seeds as stagger flashes."
+        ],
+        "counterplay": [
+          "Stay in consistent lighting or cleanse seeds."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Black disks become gold at detonation."
+        ],
+        "animation": [
+          "Stock disks open one by one as seeds are planted."
+        ],
+        "audio": [
+          "Coffin Sun has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic eclipse-hunter contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "WPN-122",
+      "name": "Morrow Chain",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "link-shot rifle",
+      "identity": {
+        "fantasy": "A rifle that links the last two struck lesser enemies so displacement to one tugs the other.",
+        "silhouette": "Dark chain-wrapped receiver with twin sights.",
+        "lore_hook": "Jailers built it after deciding prisoners should carry each other's mistakes."
+      },
+      "mechanics": {
+        "core": [
+          "target linking",
+          "shared displacement",
+          "control"
+        ],
+        "signature": [
+          "Two targets become Chainmates.",
+          "Knockback on one transfers a reduced tug to the other."
+        ],
+        "counterplay": [
+          "Breaking distance snaps the chain harmlessly."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Spectral chain arc links paired targets."
+        ],
+        "animation": [
+          "Twin sights rotate toward both targets."
+        ],
+        "audio": [
+          "Morrow Chain has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic prison-fortress reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "WPN-123",
+      "name": "Rainmaker's Debt",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "weather-charge pistol",
+      "identity": {
+        "fantasy": "A heavy pistol that stores charge from standing in rain or storm cells and spends it on a single high-stagger shot.",
+        "silhouette": "Copper pistol with water gutters feeding a capacitor grip.",
+        "lore_hook": "Its maker charged ammunition by leaving the weapon outside."
+      },
+      "mechanics": {
+        "core": [
+          "weather charge",
+          "single-shot resource",
+          "stagger"
+        ],
+        "signature": [
+          "Rain slowly fills Storm Debt.",
+          "Charged shot spends all Debt for extra stagger."
+        ],
+        "counterplay": [
+          "Dry interiors prevent passive charging."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Water droplets crawl upward into the grip."
+        ],
+        "animation": [
+          "Grip capacitor visibly swells before discharge."
+        ],
+        "audio": [
+          "Rainmaker's Debt has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic storm-route reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "WPN-124",
+      "name": "Grave Cartographer",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "corpse-route marksman",
+      "identity": {
+        "fantasy": "A marksman weapon that draws temporary traversal lines between defeated enemies, enabling brief movement bonuses across battle aftermath.",
+        "silhouette": "Bone-white rifle with map-needle optic.",
+        "lore_hook": "The dead became landmarks because they stopped moving."
+      },
+      "mechanics": {
+        "core": [
+          "corpse anchors",
+          "route planning",
+          "mobility"
+        ],
+        "signature": [
+          "Two eligible defeated enemies create a Grave Route.",
+          "Crossing the route grants brief sprint stabilization."
+        ],
+        "counterplay": [
+          "Routes require recent corpses and expire rapidly."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Thin ivory map line connects corpse anchors."
+        ],
+        "animation": [
+          "Optic needle swings between anchors."
+        ],
+        "audio": [
+          "Grave Cartographer has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic grave survey chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "WPN-125",
+      "name": "Thorn Arithmetic",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "counting bow-rifle",
+      "identity": {
+        "fantasy": "A hybrid precision weapon whose fourth accurate hit creates a thorn wall perpendicular to the shot lane.",
+        "silhouette": "Green-black segmented weapon with four seed chambers.",
+        "lore_hook": "Garden engineers found four was the smallest number that reliably annoyed armies."
+      },
+      "mechanics": {
+        "core": [
+          "accuracy count",
+          "thorn wall",
+          "lane control"
+        ],
+        "signature": [
+          "Accurate hits fill four seed chambers.",
+          "Fourth hit sprouts a brief destructible thorn wall."
+        ],
+        "counterplay": [
+          "Miss breaks the count; wall position is predictable."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Seed chambers glow sequentially.",
+          "Wall erupts as green wireframe then solid thorns."
+        ],
+        "animation": [
+          "Fourth chamber kicks open during wall growth."
+        ],
+        "audio": [
+          "Thorn Arithmetic has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic black-garden trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "WPN-126",
+      "name": "Saint's Bankruptcy",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "support-drain shotgun",
+      "identity": {
+        "fantasy": "A shotgun that steals a tiny capped portion of temporary shielding from shielded lesser enemies and redistributes it as team overshield packets.",
+        "silhouette": "Ivory weapon with cracked charity seals.",
+        "lore_hook": "A saint discovered generosity could be enforced."
+      },
+      "mechanics": {
+        "core": [
+          "shield theft",
+          "team packets",
+          "close range"
+        ],
+        "signature": [
+          "Close hits against eligible shielded enemies generate Charity.",
+          "Reload at threshold ejects small overshield packets for allies."
+        ],
+        "counterplay": [
+          "Unshielded targets generate nothing and packet output is capped."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Gold shield fragments siphon into side seals."
+        ],
+        "animation": [
+          "Reload ejects floating charity motes."
+        ],
+        "audio": [
+          "Saint's Bankruptcy has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic saintless reliquary."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "WPN-127",
+      "name": "Black Tidemark",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "waterline sniper",
+      "identity": {
+        "fantasy": "A sniper that marks a horizontal tide height; enemies crossing that height trigger a delayed pressure shot from the mark.",
+        "silhouette": "Long blue-black rifle with liquid level tube.",
+        "lore_hook": "Abyssal hunters learned elevation matters more than distance underwater."
+      },
+      "mechanics": {
+        "core": [
+          "height mark",
+          "pressure trigger",
+          "sniper"
+        ],
+        "signature": [
+          "Critical hit establishes Tidemark height.",
+          "Marked enemy crossing above or below the plane arms a pressure echo.",
+          "Echo produces stagger, not full duplicate damage."
+        ],
+        "counterplay": [
+          "Remain near same height or break the mark."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Transparent plane flashes through target height.",
+          "Pressure echo appears as a water-ring compression."
+        ],
+        "animation": [
+          "Level tube tilts to match marked plane.",
+          "Echo shot animates a hydraulic stock pulse."
+        ],
+        "audio": [
+          "Black Tidemark has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary abyssal marksman trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "WPN-128",
+      "name": "Funeral Arithmetic",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "kill-sequence revolver",
+      "identity": {
+        "fantasy": "A revolver that rewards defeating distinct enemy archetypes in a deliberate sequence.",
+        "silhouette": "Six-chamber black revolver engraved with creature sigils.",
+        "lore_hook": "Its owner insisted death was more elegant alphabetized."
+      },
+      "mechanics": {
+        "core": [
+          "archetype sequence",
+          "chamber state",
+          "finisher"
+        ],
+        "signature": [
+          "Defeating two different archetypes loads Funeral Sequence.",
+          "Third distinct archetype enables a high-stagger ceremonial round.",
+          "Repeating an archetype clears the oldest sigil."
+        ],
+        "counterplay": [
+          "Mixed encounters are required; farming one mob type does not charge it."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Creature sigils illuminate around cylinder.",
+          "Ceremonial round leaves three overlapping silhouettes."
+        ],
+        "animation": [
+          "Cylinder rotates to lit sigils after kills.",
+          "Finisher uses a deliberate two-handed aim."
+        ],
+        "audio": [
+          "Funeral Arithmetic has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary hunter ledger mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "WPN-129",
+      "name": "Red Horizon Relay",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "squad relay rifle",
+      "identity": {
+        "fantasy": "A rifle whose marked hit can be handed off between squad members, each handoff changing the next effect.",
+        "silhouette": "Red-white rifle with relay baton beneath barrel.",
+        "lore_hook": "Signal corps weaponized the idea that no message should end with the sender."
+      },
+      "mechanics": {
+        "core": [
+          "squad handoff",
+          "mark relay",
+          "team combo"
+        ],
+        "signature": [
+          "Primary hit creates Relay Mark.",
+          "Ally damage passes mark to a second target.",
+          "Second handoff changes mark into a short vulnerability reveal.",
+          "Third valid handoff detonates a stagger pulse and resets."
+        ],
+        "counterplay": [
+          "Requires coordination; repeated same-player hits do not advance relay."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Red line jumps between players and targets.",
+          "Third relay creates a white network flash."
+        ],
+        "animation": [
+          "Baton slides along barrel per handoff.",
+          "Final relay locks stock into shoulder."
+        ],
+        "audio": [
+          "Red Horizon Relay has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary signal-corps reputation capstone."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "WPN-130",
+      "name": "Halo Tax",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "buff-punisher SMG",
+      "identity": {
+        "fantasy": "An SMG that gains tactical effects when shooting enemies currently benefiting from temporary buffs.",
+        "silhouette": "Compact gold-black weapon with rotating halo counter.",
+        "lore_hook": "The weapon assumes every blessing has administrative overhead."
+      },
+      "mechanics": {
+        "core": [
+          "buff detection",
+          "tax stacks",
+          "SMG pressure"
+        ],
+        "signature": [
+          "Hits on eligible buffed enemies add Tax.",
+          "Spend Tax to briefly reveal nearby buff sources.",
+          "Full Tax allows one shot to shorten an eligible lesser buff."
+        ],
+        "counterplay": [
+          "Unbuffed enemies give normal value; boss buffs obey explicit exceptions."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Tiny halo receipts peel off targets.",
+          "Buff source reveal draws golden lines."
+        ],
+        "animation": [
+          "Halo counter spins faster with Tax.",
+          "Full-Tax shot clamps counter shut."
+        ],
+        "audio": [
+          "Halo Tax has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary infernal audit cache."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "WPN-131",
+      "name": "Winter Funeral",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "freeze-zone launcher",
+      "identity": {
+        "fantasy": "A launcher that converts recently extinguished fire zones into temporary frost platforms and slowing patches.",
+        "silhouette": "Pale steel tube with charred ice fins.",
+        "lore_hook": "Firefighters made it after realizing extinguished fires still occupied useful space."
+      },
+      "mechanics": {
+        "core": [
+          "fire conversion",
+          "frost terrain",
+          "utility"
+        ],
+        "signature": [
+          "Target eligible spent fire zone to create Frost Wake.",
+          "Wake can form one temporary traversal platform.",
+          "Alternate detonation creates a localized slow patch."
+        ],
+        "counterplay": [
+          "Requires existing spent heat/fire interactions and surfaces are short-lived."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Steam flashes into crystalline floor.",
+          "Platform edges glow pale blue."
+        ],
+        "animation": [
+          "Ice fins close around barrel on conversion.",
+          "Platform shot uses upward recoil."
+        ],
+        "audio": [
+          "Winter Funeral has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary climate-engine challenge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "WPN-132",
+      "name": "Mimic's Confession",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "enemy-copy sidearm",
+      "identity": {
+        "fantasy": "A sidearm that samples one simple attack property from eligible lesser enemies and temporarily expresses a normalized version.",
+        "silhouette": "Mirror-black pistol with blank shifting icon plate.",
+        "lore_hook": "The mimic finally admitted imitation was easier with paperwork."
+      },
+      "mechanics": {
+        "core": [
+          "attack sampling",
+          "normalized copy",
+          "adaptive"
+        ],
+        "signature": [
+          "Scan struck lesser enemy for eligible property such as burn, slow, or knock.",
+          "Next magazine gains normalized sampled property.",
+          "Confess reload discards sample for faster reload."
+        ],
+        "counterplay": [
+          "Boss abilities and complex mechanics cannot be copied."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Icon plate morphs to sampled property.",
+          "Reload confession turns icon white then blank."
+        ],
+        "animation": [
+          "Pistol grip subtly changes per sample.",
+          "Confess reload flips weapon outward."
+        ],
+        "audio": [
+          "Mimic's Confession has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary mimic enclave reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "WPN-133",
+      "name": "Thirteen Black Feathers",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "orbiting projectile rifle",
+      "identity": {
+        "fantasy": "A rifle that generates spectral feathers from precision hits and spends them as configurable interceptors or attackers.",
+        "silhouette": "Long midnight rifle with thirteen feather sockets.",
+        "lore_hook": "Its order counted ammunition by omens rather than rounds."
+      },
+      "mechanics": {
+        "core": [
+          "precision resource",
+          "interception",
+          "orbiting attack"
+        ],
+        "signature": [
+          "Precision hits generate Black Feathers up to thirteen.",
+          "Guard mode spends feathers to intercept eligible projectiles.",
+          "Hunt mode launches feathers at a marked target.",
+          "Murder mode spends thirteen on a surrounding multi-angle strike."
+        ],
+        "counterplay": [
+          "Feathers are finite, visible, and shared across offense/defense."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Feathers orbit in uneven flock geometry.",
+          "Guard interceptions burst into black snow.",
+          "Murder mode forms a giant wing circle."
+        ],
+        "animation": [
+          "Sockets open progressively.",
+          "Mode swap rearranges feathers around shoulders."
+        ],
+        "audio": [
+          "Thirteen Black Feathers has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic raven covenant mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "WPN-134",
+      "name": "Pale King Engine",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "terrain-command cannon",
+      "identity": {
+        "fantasy": "A cannon that declares a small patch of ground as King's Ground and changes interactions inside it.",
+        "silhouette": "Ivory cannon with crown-shaped ground projector.",
+        "lore_hook": "The king's territory eventually became wherever his artillery could see."
+      },
+      "mechanics": {
+        "core": [
+          "ground domain",
+          "terrain command",
+          "heavy weapon"
+        ],
+        "signature": [
+          "King's Ground marks a bounded zone.",
+          "Allied knockback resistance improves slightly inside.",
+          "Enemy summons entering are briefly revealed.",
+          "Heavy impact inside the zone creates a short crown-shaped cover ridge.",
+          "Relocating the zone destroys the old ridge."
+        ],
+        "counterplay": [
+          "Only one small zone exists; it is obvious and contestable."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Ivory boundary with crown corners.",
+          "Cover ridge grows as white stone geometry.",
+          "Summons flash red on entry."
+        ],
+        "animation": [
+          "Projector unfolds into four crown feet.",
+          "Relocation slams feet shut before moving."
+        ],
+        "audio": [
+          "Pale King Engine has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic crown-engine raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "WPN-135",
+      "name": "Epoch Fang",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "temporal melee-rifle hybrid",
+      "identity": {
+        "fantasy": "A rifle with a bayonet that records a short window between a shot and a melee hit, then rewards repeating the rhythm.",
+        "silhouette": "Black chrome rifle with clock-tooth bayonet.",
+        "lore_hook": "Chronarch duelists trained weapons to remember cadence instead of victims."
+      },
+      "mechanics": {
+        "core": [
+          "shot-melee rhythm",
+          "temporal cadence",
+          "hybrid"
+        ],
+        "signature": [
+          "Shot starts Epoch Window.",
+          "Melee within window stores cadence.",
+          "Repeating the cadence grants a brief movement acceleration.",
+          "Perfect third repetition creates a small time-shear stagger cone."
+        ],
+        "counterplay": [
+          "Breaking rhythm resets chain; range transitions create risk."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Clock ticks appear along bayonet.",
+          "Third cadence draws a narrow blue time tear.",
+          "Epoch Fang exposes another distinct combat-readable visual state with distance-scaled presentation."
+        ],
+        "animation": [
+          "Bayonet extends after shot.",
+          "Perfect melee returns weapon to aim in one fluid rewind motion."
+        ],
+        "audio": [
+          "Epoch Fang has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Chronarch dueling rite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "WPN-136",
+      "name": "Seraph's Unpaid War",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "ally-debt support cannon",
+      "identity": {
+        "fantasy": "A cannon that grants powerful temporary squad buffs which must be repaid by completing combat objectives before timers expire.",
+        "silhouette": "White artillery frame with chained halo cells.",
+        "lore_hook": "The seraphs called it aid; their accountants called it leverage."
+      },
+      "mechanics": {
+        "core": [
+          "temporary buff",
+          "objective debt",
+          "support cannon"
+        ],
+        "signature": [
+          "Grant one ally a short mobility boon and create Movement Debt objective.",
+          "Grant shield boon and create Protection Debt objective.",
+          "Grant damage boon and create Assault Debt objective.",
+          "Completing objective clears debt; failure creates a mild temporary exhaustion state."
+        ],
+        "counterplay": [
+          "Buffs are capped and every boon has visible repayment rules."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Halo chains attach to buffed ally.",
+          "Debt objective appears as floating sigil.",
+          "Cleared debt breaks chain into feathers."
+        ],
+        "animation": [
+          "Cannon opens a different halo cell per boon.",
+          "Failure pulls chain back into weapon."
+        ],
+        "audio": [
+          "Seraph's Unpaid War has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic celestial war-debt raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "WPN-137",
+      "name": "The Door Between Bullets",
+      "family": "weapon",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "projectile-gateway weapon",
+      "identity": {
+        "fantasy": "An exotic weapon that places two tiny portals allowing a limited number of eligible shots to change origin.",
+        "silhouette": "Slim pistol-rifle with two rectangular portal emitters.",
+        "lore_hook": "Smugglers stopped moving contraband once they learned to move trajectories."
+      },
+      "mechanics": {
+        "core": [
+          "shot portal",
+          "origin shift",
+          "geometry"
+        ],
+        "signature": [
+          "Place Entry and Exit doors on valid nearby surfaces.",
+          "A capped number of eligible user shots entering one leave the other.",
+          "Door orientation influences exit vector.",
+          "Collapse Doors emits a harmless reveal pulse before cleanup."
+        ],
+        "counterplay": [
+          "Doors are visible, destructible, range-bound, and accept only whitelisted projectiles."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Small rectangular portals show distorted destination.",
+          "Passing projectile briefly stretches into a line.",
+          "Collapse folds both doors flat."
+        ],
+        "animation": [
+          "Emitters detach and hover during placement.",
+          "Weapon points at entry while exit swivels independently.",
+          "The Door Between Bullets uses an additional bespoke transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "The Door Between Bullets has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic dimensional smuggler quest."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "WPN-138",
+      "name": "Grief Constellation",
+      "family": "weapon",
+      "tier": "god",
+      "status": "specified",
+      "role": "team-deathless constellation weapon",
+      "identity": {
+        "fantasy": "A God-tier weapon that builds a constellation from squad survival achievements and spends it on large coordinated effects without requiring deaths.",
+        "silhouette": "Long celestial rifle with empty star sockets across a floating frame.",
+        "lore_hook": "It was named Grief because its creators wanted a weapon powerful enough to make grief unnecessary."
+      },
+      "mechanics": {
+        "core": [
+          "squad survival",
+          "constellation resource",
+          "god support"
+        ],
+        "signature": [
+          "Revive, rescue, objective save, and boss-interrupt actions light distinct Stars.",
+          "Three unique Stars enable Constellation Shield.",
+          "Five unique Stars enable Constellation Volley.",
+          "Seven unique Stars enable Guiding Heaven, revealing safe routes through one authored boss phase.",
+          "Perfect Constellation can be spent to shorten one world-event recovery interval.",
+          "Stars persist only for the encounter."
+        ],
+        "counterplay": [
+          "Requires diverse team contribution; repeated farming of one action cannot complete the constellation."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Stars physically populate the weapon frame.",
+          "Completed patterns project into the sky.",
+          "Guiding Heaven draws safe-route constellations over arena.",
+          "Perfect Constellation emits a vast but brief star map."
+        ],
+        "animation": [
+          "Frame expands as stars fill.",
+          "Shield casts by rotating rifle vertically.",
+          "Volley uses seven offset spectral barrels.",
+          "Guiding Heaven raises weapon overhead like an astrolabe."
+        ],
+        "audio": [
+          "Grief Constellation has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier squad mastery pilgrimage."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "ARM-101",
+      "name": "Mapbreaker Boots",
+      "family": "armor",
+      "tier": "epic",
+      "status": "specified",
+      "role": "terrain-response boots",
+      "identity": {
+        "fantasy": "Boots that store one recent mantle or slide direction and improve the next opposite-direction traversal move.",
+        "silhouette": "Black boots with compass heel plates.",
+        "lore_hook": "Explorers learned maps were easier to break from the feet upward."
+      },
+      "mechanics": {
+        "core": [
+          "movement memory",
+          "direction reversal",
+          "traversal"
+        ],
+        "signature": [
+          "Mantle or slide records direction.",
+          "Opposite-direction traversal gains a brief acceleration."
+        ],
+        "counterplay": [
+          "Repeating same direction yields no bonus."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Heel compass flips toward stored vector."
+        ],
+        "animation": [
+          "Boots spark on successful reversal."
+        ],
+        "audio": [
+          "Mapbreaker Boots has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic cartographer traversal trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "ARM-102",
+      "name": "Ember Census Plate",
+      "family": "armor",
+      "tier": "epic",
+      "status": "specified",
+      "role": "crowd-heat defense",
+      "identity": {
+        "fantasy": "Armor that vents more efficiently when surrounded by many lesser enemies, trading heat for survivability.",
+        "silhouette": "Bronze plate with numbered heat vents.",
+        "lore_hook": "Siege armor built for soldiers who measured danger by body count."
+      },
+      "mechanics": {
+        "core": [
+          "crowd sensing",
+          "heat vent",
+          "defense"
+        ],
+        "signature": [
+          "Nearby lesser hostile count fills vent indicator.",
+          "Manual vent grants brief heat resistance and minor stagger stability."
+        ],
+        "counterplay": [
+          "No benefit against lone bosses; crowd count capped."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Vents light sequentially.",
+          "Vent releases numbered ember plumes."
+        ],
+        "animation": [
+          "Back vents flare open under pressure."
+        ],
+        "audio": [
+          "Ember Census Plate has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic siege quartermaster reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "ARM-103",
+      "name": "Quiet Crown Rig",
+      "family": "armor",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "threat-management armor",
+      "identity": {
+        "fantasy": "Armor that can deliberately suppress or amplify the wearer's AI threat profile for short tactical windows.",
+        "silhouette": "Dark regal harness with dimmable crown nodes.",
+        "lore_hook": "Kings learned invisibility was less useful than choosing who noticed them."
+      },
+      "mechanics": {
+        "core": [
+          "threat modulation",
+          "tank-stealth choice",
+          "aggro"
+        ],
+        "signature": [
+          "Quiet stance reduces eligible lesser AI threat after no attacks.",
+          "Crown stance increases threat to peel enemies from allies.",
+          "Switching stances has a lockout."
+        ],
+        "counterplay": [
+          "Boss targeting obeys authored rules; attacking breaks Quiet."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Crown nodes dim or flare red-gold.",
+          "Threat lines briefly show affected mobs."
+        ],
+        "animation": [
+          "Posture changes between compact and broad stance.",
+          "Crown nodes physically rise in tank mode."
+        ],
+        "audio": [
+          "Quiet Crown Rig has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary command-order mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "ARM-104",
+      "name": "Tideglass Choir",
+      "family": "armor",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "water-support armor",
+      "identity": {
+        "fantasy": "Armor that creates harmonic benefits when multiple allies cross the same water or pressure wake in sequence.",
+        "silhouette": "Blue translucent layered armor with shell chimes.",
+        "lore_hook": "A drowned choir discovered footsteps could become music."
+      },
+      "mechanics": {
+        "core": [
+          "shared traversal",
+          "sequence support",
+          "water"
+        ],
+        "signature": [
+          "First crossing primes Tide Note.",
+          "Second allied crossing adds Harmony.",
+          "Third triggers brief team movement stabilization.",
+          "Sequence expires quickly."
+        ],
+        "counterplay": [
+          "Requires coordinated pathing and offers little solo value."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Water-note rings appear at crossings.",
+          "Third harmony creates a glass-wave crest."
+        ],
+        "animation": [
+          "Shell chimes rotate toward each crossing ally.",
+          "Harmony pulses through armor ribs."
+        ],
+        "audio": [
+          "Tideglass Choir has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary drowned choir quest."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "ARM-105",
+      "name": "Grave Clock Harness",
+      "family": "armor",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "downed-time support armor",
+      "identity": {
+        "fantasy": "Mythic armor that changes support behavior based on how long an ally has been downed, rewarding timely rescue without making late rescue impossible.",
+        "silhouette": "Black harness with visible grave clock dial.",
+        "lore_hook": "Its inventors believed rescue should have urgency but never hopelessness."
+      },
+      "mechanics": {
+        "core": [
+          "revive timing",
+          "support phases",
+          "clock"
+        ],
+        "signature": [
+          "Early rescue grants a small post-revive speed bonus.",
+          "Mid-window rescue grants stronger temporary shielding.",
+          "Late rescue grants no bonus but briefly reveals nearby danger sources.",
+          "Perfect Timing after three varied rescues grants a support cooldown refund."
+        ],
+        "counterplay": [
+          "Bonuses are modest and cannot bypass normal revive rules."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Clock dial changes color by window.",
+          "Perfect Timing forms a brief halo-clock.",
+          "Danger reveal sends black clock rays outward."
+        ],
+        "animation": [
+          "Dial hand visibly advances.",
+          "Different rescue windows use distinct kneeling postures."
+        ],
+        "audio": [
+          "Grave Clock Harness has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic grave-medic mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "ARM-106",
+      "name": "Eclipse Shepherd Mantle",
+      "family": "armor",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "companion light-state armor",
+      "identity": {
+        "fantasy": "Mythic mantle that changes hired/tamed companion behavior between light and shadow modes.",
+        "silhouette": "Half-white half-black mantle with orbiting shepherd crook.",
+        "lore_hook": "It teaches beasts to follow the shadow rather than the hand."
+      },
+      "mechanics": {
+        "core": [
+          "companion modes",
+          "light-shadow",
+          "command"
+        ],
+        "signature": [
+          "Light mode favors guard/support behavior.",
+          "Shadow mode favors flank/pursuit behavior.",
+          "Eclipse command briefly synchronizes eligible companions on one marked objective.",
+          "Mode swap has shared cooldown."
+        ],
+        "counterplay": [
+          "Companion navigation and boss-immunity rules remain authoritative."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Companions gain subtle white or black rim.",
+          "Eclipse command draws a ring through all companions.",
+          "Mantle splits into two tones during swap."
+        ],
+        "animation": [
+          "Crook rotates over shoulder on mode change.",
+          "Eclipse command plants spectral crook into ground."
+        ],
+        "audio": [
+          "Eclipse Shepherd Mantle has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic beastmaster eclipse trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "ARM-107",
+      "name": "Lawkeeper's Hollow",
+      "family": "armor",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "rule-warning armor",
+      "identity": {
+        "fantasy": "Exotic armor that gives enhanced telegraphing for authored rule-changing encounters and lets the wearer share one warning with squadmates.",
+        "silhouette": "Empty-looking black armor with bright moving punctuation.",
+        "lore_hook": "It cannot stop laws from changing, but it insists they announce themselves."
+      },
+      "mechanics": {
+        "core": [
+          "rule warning",
+          "squad ping",
+          "anomaly defense"
+        ],
+        "signature": [
+          "Detect selected Axiom/Absolute rule transition pre-signals.",
+          "Share one warning marker with squad.",
+          "Correctly reacting to a warning stores a small Resolve charge.",
+          "Resolve can cleanse one minor movement debuff."
+        ],
+        "counterplay": [
+          "Only authored supported events trigger detection; no hidden-information cheat."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Punctuation symbols appear before rule wave.",
+          "Shared warning forms a clean squad-visible beacon.",
+          "Resolve glows as white comma at chest."
+        ],
+        "animation": [
+          "Armor punctuation rearranges before warning.",
+          "Cleanse flicks symbol off chest.",
+          "Lawkeeper's Hollow uses an additional bespoke transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Lawkeeper's Hollow has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic anomaly sentinel capstone."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "ARM-108",
+      "name": "Worldroot Cathedral",
+      "family": "armor",
+      "tier": "god",
+      "status": "specified",
+      "role": "living-fortress armor",
+      "identity": {
+        "fantasy": "God-tier armor that grows a temporary rooted sanctuary with branches that react to team roles.",
+        "silhouette": "Massive living wood-metal armor with cathedral-window bark plates.",
+        "lore_hook": "The oldest worldroot stopped growing upward and began growing around people."
+      },
+      "mechanics": {
+        "core": [
+          "root sanctuary",
+          "role-reactive support",
+          "god armor"
+        ],
+        "signature": [
+          "Root Domain anchors wearer and grows sanctuary.",
+          "Nearby defender actions thicken cover roots.",
+          "Support actions grow healing fruit nodes.",
+          "Damage actions grow thorn turrets with strict caps.",
+          "Traversal actions grow branch ramps.",
+          "Uproot collapses sanctuary into a team movement burst."
+        ],
+        "counterplay": [
+          "Rooting sacrifices mobility; all structures are temporary and destructible; contribution caps prevent spam."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Cathedral roots rise from ground.",
+          "Stained-bark windows glow by team role.",
+          "Fruit nodes pulse green-gold.",
+          "Thorn turrets bloom dark red.",
+          "Uproot sends leaves and luminous roots outward."
+        ],
+        "animation": [
+          "Armor feet merge into roots.",
+          "Role branches physically grow toward contributors.",
+          "Uproot tears entire root network free in a large animation."
+        ],
+        "audio": [
+          "Worldroot Cathedral has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier worldroot pilgrimage."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "MON-115",
+      "name": "Copper Saint Beetle",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "armored support insect",
+      "identity": {
+        "fantasy": "A giant beetle that projects a narrow shield arc onto another monster and must reposition physically to maintain it.",
+        "silhouette": "Ox-sized copper beetle with halo-like horn.",
+        "lore_hook": "Cultists mistook its defensive instinct for holiness."
+      },
+      "mechanics": {
+        "core": [
+          "ally shield",
+          "positioning",
+          "insect"
+        ],
+        "signature": [
+          "Halo Guard shields one nearby monster in a forward arc.",
+          "Breaking horn cancels guard."
+        ],
+        "counterplay": [
+          "Flank the arc or break horn."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Copper arc connects beetle to protected ally."
+        ],
+        "animation": [
+          "Beetle shuffles sideways to track target."
+        ],
+        "audio": [
+          "Copper Saint Beetle has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic ruined-temple fauna."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "MON-116",
+      "name": "Mire Lantern Widow",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "swamp lure predator",
+      "identity": {
+        "fantasy": "A spider that hangs false loot-lanterns over mud pits and attacks when players approach.",
+        "silhouette": "Large low spider with glowing lure abdomen.",
+        "lore_hook": "It learned adventurers approach light faster than prey approaches webs."
+      },
+      "mechanics": {
+        "core": [
+          "lure",
+          "ambush",
+          "terrain trap"
+        ],
+        "signature": [
+          "Lantern decoys mimic low-tier loot glow.",
+          "Approach triggers mud snare and pounce."
+        ],
+        "counterplay": [
+          "Decoy glow flickers differently and can be shot from range."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Lantern lure pulses green-gold.",
+          "Mud web lines become visible on trigger."
+        ],
+        "animation": [
+          "Spider unfolds from beneath mud."
+        ],
+        "audio": [
+          "Mire Lantern Widow has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic mire predator encounter."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "MON-117",
+      "name": "Red Ledger Crow",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "debuff messenger flock",
+      "identity": {
+        "fantasy": "A large crow that carries one temporary debuff between nearby lesser monsters, redistributing pressure.",
+        "silhouette": "Red-black crow with paper tags tied to wings.",
+        "lore_hook": "Infernal accountants discovered crows delivered curses faster than mail."
+      },
+      "mechanics": {
+        "core": [
+          "debuff transfer",
+          "air support",
+          "flock"
+        ],
+        "signature": [
+          "Tax Flight moves one eligible buff/debuff between monsters.",
+          "Killing crow drops the effect harmlessly."
+        ],
+        "counterplay": [
+          "Prioritize crow before it redistributes support."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Paper tag glows with carried effect color."
+        ],
+        "animation": [
+          "Wing tags flutter violently during transfer."
+        ],
+        "audio": [
+          "Red Ledger Crow has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic infernal patrol support."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "MON-118",
+      "name": "Bone Compass Crab",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "directional tank beast",
+      "identity": {
+        "fantasy": "A heavy crab that rotates its thickest shell toward the highest recent damage direction.",
+        "silhouette": "White bone crab with compass rose shell.",
+        "lore_hook": "It never learned strategy; it simply grew armor where hunters stood."
+      },
+      "mechanics": {
+        "core": [
+          "directional shell",
+          "threat rotation",
+          "tank"
+        ],
+        "signature": [
+          "Shell tracks strongest attack direction.",
+          "Rear joints become exposed during rotation."
+        ],
+        "counterplay": [
+          "Force rotation then switch sides."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Compass rose turns toward threat."
+        ],
+        "animation": [
+          "Whole body pivots with grinding shell."
+        ],
+        "audio": [
+          "Bone Compass Crab has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic coastal grave fauna."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "MON-119",
+      "name": "Rain-Eater Mantis",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "weather-denial predator",
+      "identity": {
+        "fantasy": "A mantis that consumes active rain/storm particles in a small area to charge cutting attacks.",
+        "silhouette": "Tall glass-wing mantis with funnel mouth.",
+        "lore_hook": "It follows storms because dry weather tastes empty."
+      },
+      "mechanics": {
+        "core": [
+          "weather drain",
+          "charged slash",
+          "predator"
+        ],
+        "signature": [
+          "Storm feeding creates Clear Pocket.",
+          "Charge converts to Crescent Slash.",
+          "Dry zones weaken it."
+        ],
+        "counterplay": [
+          "Drag it away from weather cells and interrupt feeding."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Rain bends into its mouth.",
+          "Clear Pocket forms circular dry zone."
+        ],
+        "animation": [
+          "Forelimbs glow brighter with stored storm.",
+          "Rain-Eater Mantis uses an additional bespoke transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Rain-Eater Mantis has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary storm-jungle hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "MON-120",
+      "name": "Archive Centipede",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "ability-memory scavenger",
+      "identity": {
+        "fantasy": "A huge centipede that collects discarded ability effects from the ground and reuses simplified versions.",
+        "silhouette": "Books and metal plates form each body segment.",
+        "lore_hook": "Libraries attract it because forgotten ideas are easy food."
+      },
+      "mechanics": {
+        "core": [
+          "effect scavenging",
+          "ability reuse",
+          "crawler"
+        ],
+        "signature": [
+          "Scavenge eligible expired zones.",
+          "Stores one effect archetype per segment.",
+          "Break segment to remove stored effect."
+        ],
+        "counterplay": [
+          "Destroy charged segments before reuse."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Segments glow with collected effect colors.",
+          "Reused effect emerges from corresponding segment."
+        ],
+        "animation": [
+          "Centipede curls charged segment overhead.",
+          "Archive Centipede uses an additional bespoke transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Archive Centipede has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary archive infestation."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "MON-121",
+      "name": "Pale Ferry Knight",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "teleport guardian",
+      "identity": {
+        "fantasy": "An armored knight that patrols two fixed gateways and can only rapidly move by crossing them.",
+        "silhouette": "Tall white-black knight carrying an oar-spear.",
+        "lore_hook": "It guards a ferry whose river disappeared centuries ago."
+      },
+      "mechanics": {
+        "core": [
+          "paired gates",
+          "guardian",
+          "teleport"
+        ],
+        "signature": [
+          "Crosses Gate A to emerge Gate B.",
+          "Oar Sweep pushes players toward a gate.",
+          "Destroyed gate strands knight and slows it."
+        ],
+        "counterplay": [
+          "Pressure gateways and punish stranded phase."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Two black-white ferry arches glow.",
+          "Teleport leaves water-like wake despite dry ground."
+        ],
+        "animation": [
+          "Knight steps calmly through portals rather than blinking.",
+          "Pale Ferry Knight uses an additional bespoke transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Pale Ferry Knight has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary lost-ferry encounter."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "MON-122",
+      "name": "Cinder Scripture Ape",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "telegraphed combo brute",
+      "identity": {
+        "fantasy": "A massive ape whose burning tattoos spell out its next combo in readable pictograms.",
+        "silhouette": "Charcoal ape with orange scripture across arms.",
+        "lore_hook": "Its tribe never developed language because its skin already announced everything important."
+      },
+      "mechanics": {
+        "core": [
+          "combo telegraph",
+          "brute",
+          "script"
+        ],
+        "signature": [
+          "Arm glyphs show slam, grab, leap sequence.",
+          "Interrupting correct transition causes long stumble."
+        ],
+        "counterplay": [
+          "Read glyph order and punish transitions."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Orange pictograms animate along limbs.",
+          "Interrupted glyphs crack into ash."
+        ],
+        "animation": [
+          "Attack windups trace glyph shapes.",
+          "Cinder Scripture Ape uses an additional bespoke transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Cinder Scripture Ape has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary volcanic jungle elite."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "MON-123",
+      "name": "Mirror-Fed Hydra",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "reflection-growing beast",
+      "identity": {
+        "fantasy": "A hydra whose heads multiply temporarily when attacks are repeatedly reflected or blocked near it.",
+        "silhouette": "Six-headed silver-black reptile with mirror neck scales.",
+        "lore_hook": "It learned cowardice from watching warriors hide behind shields."
+      },
+      "mechanics": {
+        "core": [
+          "head growth",
+          "defense response",
+          "hydra"
+        ],
+        "signature": [
+          "Repeated blocked/deflected attacks feed Mirror Growth.",
+          "New temporary heads add distinct breath angles.",
+          "Breaking mirror scales removes temporary heads.",
+          "Unblocked precision hits suppress growth."
+        ],
+        "counterplay": [
+          "Avoid overusing reflection defenses; target mirror scales."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "New heads emerge as mirrored duplicates then solidify.",
+          "Scales flash when fed.",
+          "Mirror-Fed Hydra exposes another distinct combat-readable visual state with distance-scaled presentation."
+        ],
+        "animation": [
+          "Temporary necks unfold from reflections.",
+          "Head loss collapses into glass fragments."
+        ],
+        "audio": [
+          "Mirror-Fed Hydra has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic mirror marsh hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "MON-124",
+      "name": "Grave Weather Prophet",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "necromantic climate caster",
+      "identity": {
+        "fantasy": "A necromancer that predicts battlefield casualties and creates weather at projected death locations.",
+        "silhouette": "Tall robed corpse carrying a storm vane made of finger bones.",
+        "lore_hook": "It calls weather where it expects graves to be."
+      },
+      "mechanics": {
+        "core": [
+          "death prediction",
+          "weather zones",
+          "necromancy"
+        ],
+        "signature": [
+          "Marks likely down zones based on low-health entities.",
+          "Grave Rain weakens healing at marked ground.",
+          "Bone Hail targets corpse clusters.",
+          "False Forecast can be baited onto empty terrain."
+        ],
+        "counterplay": [
+          "Heal/reposition marked allies and bait forecast."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Storm vane points to predicted ground.",
+          "Dark rain falls only inside grave circles.",
+          "Bone hail leaves temporary white shards."
+        ],
+        "animation": [
+          "Vane spins rapidly before forecasts.",
+          "Caster raises both arms like weather mast."
+        ],
+        "audio": [
+          "Grave Weather Prophet has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic necromancer weather event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "MON-125",
+      "name": "The Fourth Wallcrawler",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "dimension-edge predator",
+      "identity": {
+        "fantasy": "An eldritch creature that crawls along arena boundaries and attacks inward from the edge rather than conventional navigation.",
+        "silhouette": "Flat many-limbed silhouette clinging to invisible perimeter.",
+        "lore_hook": "It lives where spaces end and considers interiors exposed organs."
+      },
+      "mechanics": {
+        "core": [
+          "boundary movement",
+          "edge attacks",
+          "eldritch"
+        ],
+        "signature": [
+          "Only travels along authored arena perimeter.",
+          "Edge Reach attacks inward in long lanes.",
+          "Corner Fold jumps instantly between adjacent boundary corners.",
+          "Boundary Peel briefly creates a safe gap by exposing itself."
+        ],
+        "counterplay": [
+          "Fight near center and punish Boundary Peel."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Perimeter distorts where it crawls.",
+          "Reach lanes look like stretched wall textures.",
+          "Peel exposes bright internal seam."
+        ],
+        "animation": [
+          "Body moves like a sticker sliding on glass.",
+          "Corner Fold bends around 90-degree angle."
+        ],
+        "audio": [
+          "The Fourth Wallcrawler has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic boundary anomaly."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "MON-126",
+      "name": "Infernal Orchard Bull",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "demon terrain cultivator",
+      "identity": {
+        "fantasy": "A horned demon bull that plants burning fruit with charges, then detonates or consumes them for different phase behavior.",
+        "silhouette": "Enormous red bull with branch antlers bearing ember fruit.",
+        "lore_hook": "Demon farmers bred it to fertilize battlefields with panic."
+      },
+      "mechanics": {
+        "core": [
+          "fruit planting",
+          "charge lanes",
+          "self-buff"
+        ],
+        "signature": [
+          "Charges plant Ember Fruit.",
+          "Bull can detonate fruit for fire zones.",
+          "Bull can eat fruit for temporary armor instead.",
+          "Horn Break reduces planting count."
+        ],
+        "counterplay": [
+          "Destroy fruit or bait bull into bad consumption choices."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Fruit grows instantly from hoof impacts.",
+          "Detonation creates ring-shaped flame orchards.",
+          "Consumed fruit lights horn veins."
+        ],
+        "animation": [
+          "Charge shakes fruit loose.",
+          "Eating animation exposes neck."
+        ],
+        "audio": [
+          "Infernal Orchard Bull has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic infernal orchard hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "MON-127",
+      "name": "Cathedral Manta",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "flying fortress beast",
+      "identity": {
+        "fantasy": "A huge manta-like creature with a ruined chapel growing on its back; cultists inside operate attack organs.",
+        "silhouette": "Airship-sized black manta carrying a stone nave.",
+        "lore_hook": "Pilgrims built a chapel on a sleeping creature and never noticed when it woke."
+      },
+      "mechanics": {
+        "core": [
+          "mobile structure",
+          "crew modules",
+          "aerial beast"
+        ],
+        "signature": [
+          "Bell Tower module fires sonic pulses.",
+          "Rose Window marks targets.",
+          "Choir Deck spawns lesser cultists.",
+          "Landing phase lets players board and disable modules."
+        ],
+        "counterplay": [
+          "Target exposed modules and board during landings."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Stained-glass light shines through manta wings.",
+          "Modules glow separately.",
+          "Boarding phase projects rope-like light paths."
+        ],
+        "animation": [
+          "Manta banks slowly like an island.",
+          "Chapel stones flex with wing movement."
+        ],
+        "audio": [
+          "Cathedral Manta has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic sky pilgrimage event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "MON-128",
+      "name": "Chronophage Doe",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "time-feeding prey-predator",
+      "identity": {
+        "fantasy": "A seemingly gentle deer that consumes active cooldown time from nearby abilities and turns it into speed.",
+        "silhouette": "Pale deer with hourglass antlers.",
+        "lore_hook": "Hunters learned the calmest animal in the forest was eating their future."
+      },
+      "mechanics": {
+        "core": [
+          "cooldown siphon",
+          "speed gain",
+          "deceptive wildlife"
+        ],
+        "signature": [
+          "Siphon extends selected minor cooldowns slightly within a capped radius.",
+          "Stolen time increases doe speed.",
+          "Antler Break releases stored time as cooldown relief pickups."
+        ],
+        "counterplay": [
+          "Keep distance and target antlers."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Sand streams upward inside antlers.",
+          "Stored-time trail appears behind sprint.",
+          "Chronophage Doe exposes another distinct combat-readable visual state with distance-scaled presentation."
+        ],
+        "animation": [
+          "Feeding posture is unnaturally still.",
+          "Broken antler bursts into floating clock motes."
+        ],
+        "audio": [
+          "Chronophage Doe has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic chronowood encounter."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "MON-129",
+      "name": "Null Choir Infant",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "silence-field crawler",
+      "identity": {
+        "fantasy": "A small but dangerous eldritch creature that emits moving silence pockets and changes them based on nearby sound events.",
+        "silhouette": "Child-sized faceless crawler with bell-shaped ribcage.",
+        "lore_hook": "It is called an infant because no one has survived seeing an adult."
+      },
+      "mechanics": {
+        "core": [
+          "moving silence",
+          "sound response",
+          "eldritch"
+        ],
+        "signature": [
+          "Loud combat expands its silence field.",
+          "Remaining quiet shrinks the field.",
+          "Field suppresses selected minor ability audio and cues but never accessibility-critical warnings.",
+          "Bell Rib attack releases stored sound as knock pulse."
+        ],
+        "counterplay": [
+          "Control noise and attack from outside field."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Audio-space boundary visible as transparent sphere.",
+          "Stored sound appears as ripples inside ribs.",
+          "Pulse sends concentric rings."
+        ],
+        "animation": [
+          "Crawler flinches at loud attacks.",
+          "Ribs expand before pulse.",
+          "Null Choir Infant uses an additional bespoke transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Null Choir Infant has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic silence anomaly."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "MON-130",
+      "name": "Door-Eater Crocodile",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "portal predator",
+      "identity": {
+        "fantasy": "A colossal crocodilian that hunts portal usage and can bite shut temporary gateways.",
+        "silhouette": "Train-sized black reptile with doorway-shaped teeth.",
+        "lore_hook": "It learned doors lead to food and eventually stopped distinguishing architecture from prey."
+      },
+      "mechanics": {
+        "core": [
+          "portal tracking",
+          "gateway suppression",
+          "ambush"
+        ],
+        "signature": [
+          "Detects nearby temporary portals.",
+          "Door Bite closes one eligible small gateway early.",
+          "Threshold Ambush emerges near frequently used portal exits.",
+          "Digest Gate briefly slows its own movement after consuming a portal."
+        ],
+        "counterplay": [
+          "Use portals sparingly and punish Digest Gate."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Teeth reflect portal interiors.",
+          "Consumed portal folds into its jaw.",
+          "Ambush leaves rectangular water ripple."
+        ],
+        "animation": [
+          "Jaw opens into doorway geometry.",
+          "Digest makes body visibly heavy.",
+          "Door-Eater Crocodile uses an additional bespoke transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Door-Eater Crocodile has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic dimensional swamp hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "MON-131",
+      "name": "Sovereign Thunderworm",
+      "family": "monster",
+      "tier": "god",
+      "status": "specified",
+      "role": "regional subterranean colossus",
+      "identity": {
+        "fantasy": "A God-tier worm that tunnels beneath multiple regions and erupts along lightning-marked fault lines.",
+        "silhouette": "Kilometer-long armored worm glimpsed through glowing cracks.",
+        "lore_hook": "People thought thunder followed storms until this creature began arriving on clear days."
+      },
+      "mechanics": {
+        "core": [
+          "regional tunneling",
+          "fault-line attacks",
+          "god colossus"
+        ],
+        "signature": [
+          "Fault Mark paints long regional crack.",
+          "Burrow Surge moves boss between encounter zones.",
+          "Thunder Eruption combines physical breach with lightning columns.",
+          "Armor Rings must be destroyed in separate regions.",
+          "Storm Heart becomes accessible after synchronized ring breaks."
+        ],
+        "counterplay": [
+          "Split teams across fault-line objectives and avoid marked eruption corridors."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Huge glowing cracks precede movement.",
+          "Distant dorsal rings breach terrain.",
+          "Lightning follows body route underground.",
+          "Storm Heart lights entire canyon blue."
+        ],
+        "animation": [
+          "Terrain shell lifts in waves above burrow path.",
+          "Eruptions are multi-stage skyline events.",
+          "Ring breaks visibly change distant silhouette."
+        ],
+        "audio": [
+          "Sovereign Thunderworm has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier deep-world event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "MON-132",
+      "name": "The Color Outside Dawn",
+      "family": "monster",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "perception-domain entity",
+      "identity": {
+        "fantasy": "An Absolute entity represented by a moving impossible color-state that rewrites visibility, faction recognition, and hazard readability in bounded regions.",
+        "silhouette": "No stable body; appears as a silhouette only where normal colors fail to meet.",
+        "lore_hook": "It arrived before sunrise and left people arguing whether morning had happened."
+      },
+      "mechanics": {
+        "core": [
+          "perception domain",
+          "identity distortion",
+          "absolute anomaly"
+        ],
+        "signature": [
+          "Chromatic Law remaps authored faction outline colors.",
+          "False Dawn makes safe and dangerous environmental colors temporarily swap with explicit symbol backups.",
+          "Identity Bleed creates hostile-looking echoes of allies that cannot deal damage.",
+          "Color Hunger erases one noncritical environmental color channel.",
+          "Reality Anchor restores normal palette inside protected zones."
+        ],
+        "counterplay": [
+          "Symbols and shapes always preserve accessibility; Reality Anchors provide stable safe zones; entity is attacked through projection nodes."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Sky gains impossible gradient with symbol overlays.",
+          "Faction outlines split into double colors.",
+          "Ally echoes are translucent and symbol-marked.",
+          "Anchor zones preserve true palette.",
+          "Projection nodes appear as black holes in color field."
+        ],
+        "animation": [
+          "World materials transition through authored palette sets.",
+          "Ally echoes peel from player silhouettes.",
+          "Projection nodes pulse rather than locomote.",
+          "Final retreat restores colors in a sweeping sunrise wave."
+        ],
+        "audio": [
+          "The Color Outside Dawn has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute perception anomaly chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "BOS-069",
+      "name": "Lord of the Unopened Mail",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "curse-delivery raid boss",
+      "identity": {
+        "fantasy": "A mythic demon postmaster who sends sealed curses around the arena; unopened letters become hazards, opened letters become objectives.",
+        "silhouette": "Tall infernal courier with winglike satchels and wax-seal face.",
+        "lore_hook": "Every war produces messages someone wishes had never arrived."
+      },
+      "mechanics": {
+        "core": [
+          "curse parcels",
+          "objective choice",
+          "arena routing"
+        ],
+        "signature": [
+          "Delivers sealed letters to marked zones.",
+          "Opening a letter reveals a combat task and removes its hazard.",
+          "Ignoring it causes the seal to mature into a hostile zone.",
+          "Return to Sender lets players redirect one completed letter into boss stagger."
+        ],
+        "counterplay": [
+          "Assign players to deliveries and complete tasks before seals mature."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Wax letters fly with red trails.",
+          "Mature seals spread parchment hazard fields.",
+          "Returned letter stamps boss chest."
+        ],
+        "animation": [
+          "Satchels open like wings.",
+          "Boss throws letters in sweeping postal arcs."
+        ],
+        "audio": [
+          "Lord of the Unopened Mail has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic infernal post raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "BOS-070",
+      "name": "The Orchard Beneath the Skin",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "body-horror ecology boss",
+      "identity": {
+        "fantasy": "A colossal rooted creature whose visible fruit correspond to hidden internal organs; teams must infer which fruit to destroy from external symptoms.",
+        "silhouette": "Building-sized bark-and-flesh mass with glowing fruit under translucent skin.",
+        "lore_hook": "The orchard did not grow on the beast. The beast grew around an orchard."
+      },
+      "mechanics": {
+        "core": [
+          "diagnostic weak points",
+          "organ puzzle",
+          "ecology"
+        ],
+        "signature": [
+          "External symptom patterns reveal one vulnerable fruit organ.",
+          "Wrong fruit bursts into adds rather than damage.",
+          "Correct fruit opens a short internal-root damage lane.",
+          "Late phase presents two simultaneous symptoms requiring split diagnosis."
+        ],
+        "counterplay": [
+          "Observe symptoms and coordinate fruit selection instead of indiscriminate fire."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Veins change color by symptom.",
+          "Fruit glows through translucent bark.",
+          "Correct lane lights deep internal roots."
+        ],
+        "animation": [
+          "Body convulses differently for each symptom.",
+          "Fruit rupture animates roots recoiling inward."
+        ],
+        "audio": [
+          "The Orchard Beneath the Skin has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic corrupted orchard raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "BOS-071",
+      "name": "The Cartographer's Enemy",
+      "family": "boss",
+      "tier": "god",
+      "status": "specified",
+      "role": "map-rewriting world boss",
+      "identity": {
+        "fantasy": "A God-tier entity that periodically redraws traversal connections between large arena sectors without altering their physical visuals.",
+        "silhouette": "Horizon-tall cloaked figure holding a map whose roads move independently.",
+        "lore_hook": "Cartographers named it after losing three cities that remained physically where they had always been."
+      },
+      "mechanics": {
+        "core": [
+          "route rewrite",
+          "sector connectivity",
+          "world boss"
+        ],
+        "signature": [
+          "Map Rewrite changes which portals/bridges connect sector pairs.",
+          "Compass Lie temporarily inverts waypoint guidance while preserving icon symbols.",
+          "True North objectives lock one connection in place.",
+          "Atlas Tear opens a dangerous shortcut through a boss weak region.",
+          "Final Survey asks squads to occupy several mapped sectors simultaneously."
+        ],
+        "counterplay": [
+          "Secure True North anchors and communicate routes rather than relying on habitual paths."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Huge sky-map appears during rewrites.",
+          "Connections glow as colored lines with unique symbols.",
+          "Atlas Tear looks like ripped parchment across terrain.",
+          "Locked routes gain white compass pylons."
+        ],
+        "animation": [
+          "Boss redraws map with enormous stylus.",
+          "Sector connections animate as folding paper corridors.",
+          "Final Survey raises map overhead, projecting whole arena graph."
+        ],
+        "audio": [
+          "The Cartographer's Enemy has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier cartographic apocalypse event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    },
+    {
+      "id": "BOS-072",
+      "name": "Axiom Predator Vesper-Null",
+      "family": "boss",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "rule-hunting boss",
+      "identity": {
+        "fantasy": "An Absolute predator that identifies the strongest active player-created rule/domain effect and evolves a temporary counter-organ specifically against it.",
+        "silhouette": "Tall six-limbed black predator with empty sockets where organs materialize.",
+        "lore_hook": "It survived the old gods by eating the exceptions in their laws."
+      },
+      "mechanics": {
+        "core": [
+          "counter-organ evolution",
+          "domain hunting",
+          "absolute adaptation"
+        ],
+        "signature": [
+          "Sense Law identifies one eligible high-authority player domain or construct pattern.",
+          "Grow Counter Organ creates a visible bespoke response such as anti-gravity fins, portal jaws, ward-breaking antlers, or summon-hunting eyes.",
+          "Destroying the organ creates a Adaptation Scar that prevents immediate regrowth of the same counter.",
+          "Second Law forces the predator to choose between two competing player systems.",
+          "Starvation Phase occurs if players intentionally stop feeding high-authority effects, making the boss more aggressive but simpler.",
+          "Final Hunt combines only surviving counter organs, never all possible ones."
+        ],
+        "counterplay": [
+          "Players can rotate systems, destroy organs, or starve adaptation; every counter has a physical weak point and visible tell."
+        ],
+        "evolution": [
+          "Evolution alters mechanic relationships and encounter decisions rather than relying on flat stat inflation."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Counter organs visibly grow from empty sockets.",
+          "Each organ has unique silhouette and color-neutral symbol.",
+          "Adaptation Scars remain glowing white wounds.",
+          "Starvation strips the boss to a lean black silhouette.",
+          "Final Hunt links surviving organs with geometric lines."
+        ],
+        "animation": [
+          "Organ growth changes locomotion silhouette.",
+          "Destroying an organ makes the matching limb stumble.",
+          "Starvation drops from six limbs to a fast four-limb gait.",
+          "Final Hunt pauses to display every surviving organ before attack.",
+          "Death collapses organs first, body last."
+        ],
+        "audio": [
+          "Axiom Predator Vesper-Null has unique activation, impact, danger, resource, and cooldown audio motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute anti-domain endgame raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 018 authored design; implementation requires deterministic cleanup and readable counterplay."
+      ]
+    }
+  ]
+}
