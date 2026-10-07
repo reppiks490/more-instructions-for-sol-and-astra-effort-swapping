@@ -1,10 +1,11 @@
 using { /Verse.org/Simulation }
 
 # Transcendent Zero qualification gate.
-# This is intentionally strict: qualification only grants candidacy, never the tier itself.
+# Qualification only grants candidacy; it never grants the final tier directly.
 aeonfall_zero_candidate_manager := class():
 
     ProfileService:aeonfall_profile_service = aeonfall_profile_service{}
+    LevelService:aeonfall_level_service = aeonfall_level_service{}
 
     RequiredLevel:int = 100
     RequiredMasteredClasses:int = 8
@@ -15,8 +16,9 @@ aeonfall_zero_candidate_manager := class():
 
     MeetsRequirements(Agent:agent)<decides><transacts>:void=
         Profile := ProfileService.GetProfile[Agent]
+        CurrentLevel := LevelService.GetCurrentLevel[Agent]
 
-        Profile.Level >= RequiredLevel
+        CurrentLevel >= RequiredLevel
         Profile.MasteredClassIds.Length >= RequiredMasteredClasses
         Profile.CompletedBossIds.Length >= RequiredBossClears
         Profile.CompletedWorldEventIds.Length >= RequiredWorldEvents
