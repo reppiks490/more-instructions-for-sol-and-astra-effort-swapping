@@ -9,6 +9,8 @@ on:
       - "tools/validate_catalog.py"
       - "tools/validate_crafting.py"
       - "tools/build_status.py"
+      - "tools/build_content_index.py"
+      - "tools/quality_audit.py"
       - "STATUS.md"
       - ".github/workflows/catalog-validation.yml"
   pull_request:
@@ -41,6 +43,12 @@ jobs:
 
       - name: Validate Axiom Heart crafting graph
         run: python tools/validate_crafting.py
+
+      - name: Audit content diversity
+        run: python tools/quality_audit.py
+
+      - name: Build runtime content index
+        run: python tools/build_content_index.py
 
       - name: Report generated status drift
         run: |
