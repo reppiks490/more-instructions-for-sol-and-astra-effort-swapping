@@ -23,6 +23,10 @@ aeonfall_actor_registry_bootstrap_device := class(creative_device):
                 }
             )
 
+            Refreshed := AEONFALLHallOfAscendants.RefreshIfReady(Player)
+            if (Refreshed?):
+                Refreshed = true
+
     UnregisterPlayer(Player:player)<transacts>:void=
         if:
             RuntimeKey := AEONFALLActorRegistry.GetRuntimeKey[Player]
