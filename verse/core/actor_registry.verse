@@ -82,6 +82,7 @@ aeonfall_actor_registry := class():
             AEONFALLClassRuntime.ClearOwner(RuntimeKey)
             AEONFALLEncounterParticipation.RemoveRuntimeKey(RuntimeKey)
             AEONFALLAscensionTrialRuntime.ClearOwner(RuntimeKey)
+            AEONFALLChoosingRuntime.ClearOwner(RuntimeKey)
 
             var UpdatedAgents:[string]agent = map{}
             var UpdatedKeys:[agent]string = map{}
