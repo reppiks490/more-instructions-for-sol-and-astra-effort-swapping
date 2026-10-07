@@ -14,7 +14,7 @@ aeonfall_level_service := class():
             # Quadratic-style growth without relying on hidden per-entity constants.
             500 * Level * Level
 
-    GetLevelForXP(XP:int):int=
+    GetLevelForXP(XP:int)<transacts>:int=
         var Level:int = 1
         var Continue:logic = true
 
@@ -31,7 +31,7 @@ aeonfall_level_service := class():
 
         Level
 
-    GrantXP(Agent:agent, Amount:int):void=
+    GrantXP(Agent:agent, Amount:int)<transacts>:void=
         ProfileService.GrantXP(Agent, Amount)
 
     GetCurrentLevel(Agent:agent)<decides><transacts>:int=
