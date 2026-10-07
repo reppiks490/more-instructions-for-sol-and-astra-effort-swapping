@@ -32,6 +32,8 @@ on:
       - "tools/build_slice_hireable_registry.py"
       - "tools/validate_slice_classes.py"
       - "tools/build_slice_registry.py"
+      - "tools/build_slice_recipe_registry.py"
+      - "tools/build_slice_shop_registry.py"
       - "tools/validate_verse_static.py"
       - "tools/validate_runtime_invariants.py"
       - "STATUS.md"
@@ -89,11 +91,23 @@ jobs:
       - name: Validate vertical slice recipes
         run: python tools/validate_slice_recipes.py
 
+      - name: Build first-slice recipe Verse registry
+        run: python tools/build_slice_recipe_registry.py
+
+      - name: Check generated first-slice recipe bootstrap
+        run: git diff --exit-code -- verse/generated/slice_001_recipe_bootstrap.verse
+
       - name: Validate vertical slice encounters
         run: python tools/validate_slice_encounters.py
 
       - name: Validate first-slice shop economy
         run: python tools/validate_slice_shop.py
+
+      - name: Build first-slice shop Verse registry
+        run: python tools/build_slice_shop_registry.py
+
+      - name: Check generated first-slice shop bootstrap
+        run: git diff --exit-code -- verse/generated/slice_001_shop_bootstrap.verse
 
       - name: Validate first-slice combat runtime data
         run: python tools/validate_slice_combat.py
