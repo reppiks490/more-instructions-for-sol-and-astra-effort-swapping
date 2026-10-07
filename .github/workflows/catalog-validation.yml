@@ -4,21 +4,28 @@ on:
   push:
     paths:
       - "content/catalog/**"
-      - "content/schema/**"
+      - "schemas/**"
       - "tools/validate_catalog.py"
       - ".github/workflows/catalog-validation.yml"
   pull_request:
     paths:
       - "content/catalog/**"
-      - "content/schema/**"
+      - "schemas/**"
       - "tools/validate_catalog.py"
+      - ".github/workflows/catalog-validation.yml"
+
+permissions:
+  contents: read
 
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Validate AEONFALL catalog
