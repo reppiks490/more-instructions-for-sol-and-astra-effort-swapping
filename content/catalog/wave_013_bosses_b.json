@@ -1,0 +1,1644 @@
+{
+  "wave": "013",
+  "purpose": "Twenty-six bosses expanding miniboss through Absolute-class raid content with distributed, objective-driven mechanics.",
+  "entity_count": 26,
+  "entities": [
+    {
+      "id": "BOS-025",
+      "name": "Bellmother Casket",
+      "family": "boss",
+      "tier": "epic",
+      "status": "specified",
+      "role": "miniboss — coffin-spawning necromancer",
+      "identity": {
+        "fantasy": "A walking iron casket whose internal bell summons one corpse-soldier at a time from whichever side of the coffin is currently open.",
+        "silhouette": "Eight-foot black coffin on six skeletal legs, one brass bell visible through the ribs of the lid.",
+        "lore_hook": "No one knows who is buried inside because every attempt to open the Casket produces someone else's dead."
+      },
+      "mechanics": {
+        "core": [
+          "coffin facing",
+          "single-spawn pressure",
+          "bell interrupt"
+        ],
+        "signature": [
+          "Open Side rotates one coffin face toward the squad and prepares a role-specific undead spawn."
+        ],
+        "counterplay": [
+          "Shoot the bell during its exposed toll window to cancel the next spawn and force a stagger."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Each coffin side glows with a different funerary symbol before opening."
+        ],
+        "animation": [
+          "The entire coffin pivots on bone legs and the bell swings visibly before summoning."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Necropolis miniboss contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-026",
+      "name": "Razor Saint Ilyr",
+      "family": "boss",
+      "tier": "epic",
+      "status": "specified",
+      "role": "miniboss — blade pilgrimage duelist",
+      "identity": {
+        "fantasy": "A saintlike swordsman covered in suspended razor halos who becomes more dangerous when players attack from the same angle repeatedly.",
+        "silhouette": "Tall silver pilgrim with four thin blade halos orbiting vertically around the body.",
+        "lore_hook": "Ilyr preached that every predictable attack is a confession."
+      },
+      "mechanics": {
+        "core": [
+          "angle memory",
+          "halo blades",
+          "duel pressure"
+        ],
+        "signature": [
+          "Pilgrim's Lesson marks the most-used attack direction and moves one halo to punish that approach."
+        ],
+        "counterplay": [
+          "Rotate firing angles and force the halos to redistribute instead of stacking one side."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Marked approach directions appear as thin red sectors on the ground."
+        ],
+        "animation": [
+          "Halos slide around the body to physically guard the learned angle."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Pilgrim road duel event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-027",
+      "name": "Quarry Devil Threx",
+      "family": "boss",
+      "tier": "epic",
+      "status": "specified",
+      "role": "miniboss — terrain smashing demon",
+      "identity": {
+        "fantasy": "A broad mining demon that weaponizes destructible quarry chunks as cover, projectiles, and self-made stepping stones.",
+        "silhouette": "Red-black horned brute with granite forearms and chain-wrapped quarry hooks.",
+        "lore_hook": "Threx was hired to excavate a hellgate and eventually decided the world was the ore body."
+      },
+      "mechanics": {
+        "core": [
+          "chunk creation",
+          "cover conversion",
+          "hook throw"
+        ],
+        "signature": [
+          "Break Ground tears up one authored stone chunk and chooses to throw, stack, or stand on it."
+        ],
+        "counterplay": [
+          "Destroy weakened chunks before Threx converts them into high ground or cover."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Fresh quarry fractures glow orange before chunks separate."
+        ],
+        "animation": [
+          "Threx physically levers chunks from the ground with both hooks."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Infernal quarry stronghold."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-028",
+      "name": "Madam Nullglass",
+      "family": "boss",
+      "tier": "epic",
+      "status": "specified",
+      "role": "miniboss — mirror decoy assassin",
+      "identity": {
+        "fantasy": "An elegant assassin whose mirror doubles copy her last movement but not her next attack, forcing players to read the real body's preparation.",
+        "silhouette": "Black glass gown-armor, faceless silver mask, and three floating mirror panels.",
+        "lore_hook": "Madam Nullglass never lies; she simply allows reflections to make assumptions."
+      },
+      "mechanics": {
+        "core": [
+          "movement doubles",
+          "mirror relocation",
+          "attack tell"
+        ],
+        "signature": [
+          "Courtesy Step leaves movement-copy doubles while the real body prepares a distinct attack pose."
+        ],
+        "counterplay": [
+          "Track the body with the unique pre-attack posture rather than following movement echoes."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Doubles reflect the arena accurately but lack the weapon's red preparation glow."
+        ],
+        "animation": [
+          "She performs formal dance steps while doubles replay one beat behind."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Velvet Court assassination event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-029",
+      "name": "Bone Orchard Duke",
+      "family": "boss",
+      "tier": "epic",
+      "status": "specified",
+      "role": "miniboss — corpse-garden controller",
+      "identity": {
+        "fantasy": "A decayed noble who plants bone saplings in defeated minions and harvests them as shields or spear volleys.",
+        "silhouette": "Rotting aristocrat with antler-like bone branches and a long pruning sword.",
+        "lore_hook": "The Duke inherited land, titles, and eventually the dead themselves."
+      },
+      "mechanics": {
+        "core": [
+          "bone planting",
+          "harvest choice",
+          "garden zoning"
+        ],
+        "signature": [
+          "Plant Heir turns one eligible corpse into a growing bone sapling that later becomes either cover or a spear burst."
+        ],
+        "counterplay": [
+          "Destroy saplings before harvest or bait the Duke into harvesting the less useful form."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Saplings glow differently for shield versus spear maturity."
+        ],
+        "animation": [
+          "The Duke kneels to plant a finger-bone seed, then prunes mature growth with one sweeping cut."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Red Orchard ossuary estate."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-030",
+      "name": "Thundertongue Ox",
+      "family": "boss",
+      "tier": "epic",
+      "status": "specified",
+      "role": "miniboss — shockwave megafauna",
+      "identity": {
+        "fantasy": "A giant armored ox that stores thunder in its tongue and releases directional shockwaves through bellows rather than horns.",
+        "silhouette": "Rhino-sized black ox with copper throat plates, broken horn tips, and a luminous blue tongue.",
+        "lore_hook": "Storm herders feared its voice more than its charge."
+      },
+      "mechanics": {
+        "core": [
+          "throat charge",
+          "directional bellow",
+          "charge feint"
+        ],
+        "signature": [
+          "Blue Bellow projects a long cone after visible throat charging; a horn scrape beforehand may be a feint into a sideways charge."
+        ],
+        "counterplay": [
+          "Watch throat plates instead of horns to distinguish real bellow from charge feint."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Copper throat plates light sequentially toward the mouth."
+        ],
+        "animation": [
+          "The tongue curls around an internal lightning ball before the bellow."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Storm pasture apex hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-031",
+      "name": "Hunger Clerk",
+      "family": "boss",
+      "tier": "epic",
+      "status": "specified",
+      "role": "miniboss — resource-denial demon",
+      "identity": {
+        "fantasy": "A thin bureaucratic demon that stamps temporary 'ration claims' on dropped encounter resources and forces players to break the claim before pickup.",
+        "silhouette": "Skeletal clerk in red ledger coat with a giant wax-seal hammer and scroll satchel.",
+        "lore_hook": "The Clerk's entire infernal career is built on proving that nothing is ever truly free."
+      },
+      "mechanics": {
+        "core": [
+          "pickup claims",
+          "seal weakpoints",
+          "resource pressure"
+        ],
+        "signature": [
+          "Claimed Goods places a destructible wax seal over one eligible dropped event-resource cluster."
+        ],
+        "counterplay": [
+          "Break the seal or ignore the resource until the claim expires; core inventory is never removed."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Claimed drops are covered by bright red contract ribbons."
+        ],
+        "animation": [
+          "The Clerk slams a seal hammer into the air and the claim appears at distance."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Infernal market disruption event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-032",
+      "name": "Sable Huntsman",
+      "family": "boss",
+      "tier": "epic",
+      "status": "specified",
+      "role": "miniboss — anti-trail stalker",
+      "identity": {
+        "fantasy": "A towering hunter that follows recent sprint, slide, and vehicle-exit traces but loses the trail when players deliberately move unpredictably.",
+        "silhouette": "Long black coat over antlered armor, lamp-like eyes, and a spear made from road signs.",
+        "lore_hook": "The Huntsman has never seen prey. He only sees where prey has been."
+      },
+      "mechanics": {
+        "core": [
+          "movement trail hunt",
+          "prediction spear",
+          "trail reset"
+        ],
+        "signature": [
+          "Black Trail visualizes recent high-speed routes and the Huntsman throws ahead of the most consistent path."
+        ],
+        "counterplay": [
+          "Break patterns with vertical movement, pauses, or route changes to force prediction errors."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Recent movement trails appear as smoky black ribbons only near the Huntsman."
+        ],
+        "animation": [
+          "He pauses to sniff the trail with the spear tip before predictive throws."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Night-road hunt event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-033",
+      "name": "Queen Virelia, Marrow Regent",
+      "family": "boss",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "boss — necromancer queen",
+      "identity": {
+        "fantasy": "A regal necromancer who builds a court from specific bones harvested during the fight, with each courtier changing the queen's tactical behavior.",
+        "silhouette": "Tall bone-white queen in a ribbed gown with four empty throne niches floating behind her.",
+        "lore_hook": "Virelia refuses to rule the dead anonymously; every bone in her court retains a title."
+      },
+      "mechanics": {
+        "core": [
+          "court construction",
+          "bone roles",
+          "regent phases"
+        ],
+        "signature": [
+          "Appoint Courtier consumes one eligible bone cache to fill a throne niche with a support role.",
+          "Royal Vacancy exposes Virelia when players destroy a courtier and before she can appoint another."
+        ],
+        "counterplay": [
+          "Choose which court role to remove first and burst during the vacancy window."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Each throne niche has a unique heraldic bone glow.",
+          "Vacancy turns one throne completely black and cracks the queen's crown."
+        ],
+        "animation": [
+          "Court appointments use a slow coronation gesture.",
+          "Destroyed courtiers cause the corresponding throne to collapse."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Marrow Court raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-034",
+      "name": "Malkor the Ledger",
+      "family": "boss",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "boss — infernal contract lord",
+      "identity": {
+        "fantasy": "A demon lord who writes temporary combat contracts offering dangerous advantages that always carry a visible price.",
+        "silhouette": "Massive crimson barrister with scroll wings, chain spectacles, and a flaming signature quill.",
+        "lore_hook": "Malkor's greatest trick is not forcing contracts. It is making the terms genuinely tempting."
+      },
+      "mechanics": {
+        "core": [
+          "optional contracts",
+          "risk reward",
+          "contract break"
+        ],
+        "signature": [
+          "Offer Terms presents one optional encounter boon with an explicit drawback.",
+          "Breach Penalty empowers Malkor briefly only if a player accepts terms and violates the stated condition."
+        ],
+        "counterplay": [
+          "Decline bad contracts or follow accepted conditions; contracts never hide their penalties."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Accepted contracts appear as visible red-gold wrist sigils.",
+          "Breach turns the sigil into a broken chain above the offender."
+        ],
+        "animation": [
+          "Malkor writes each offer in the air with a burning quill.",
+          "Breach causes him to tear the floating contract in half."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary infernal courthouse raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-035",
+      "name": "Urom, Glass Leviathan",
+      "family": "boss",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "boss — refractive desert leviathan",
+      "identity": {
+        "fantasy": "A vast glass leviathan that swims beneath sand and rises as several refractive body arcs, each altering projectile visibility and sightlines.",
+        "silhouette": "Transparent whale-serpent body visible as rainbow arcs beneath dunes, with a faceted skull like a cathedral window.",
+        "lore_hook": "Urom swallowed a desert mirage and grew a body around it."
+      },
+      "mechanics": {
+        "core": [
+          "sand swimming",
+          "refractive body arcs",
+          "facet breaks"
+        ],
+        "signature": [
+          "Mirage Breach raises multiple glass segments that bend sightlines while exposing specific matte facets.",
+          "Sandwake predicts the next emergence path with a huge visible dune ripple."
+        ],
+        "counterplay": [
+          "Attack matte facets and use Sandwake to reposition before emergence."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Body arcs cast moving rainbow bands across the arena.",
+          "Broken facets turn cloudy and stop refracting."
+        ],
+        "animation": [
+          "Segments surface independently but share one synchronized leviathan roll.",
+          "Skull breach is a slow vertical glass explosion."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary prism desert raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-036",
+      "name": "Chronophage Knight",
+      "family": "boss",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "boss — cooldown-eating duelist",
+      "identity": {
+        "fantasy": "An armored knight that feeds on repeated ability timing, gaining haste when players use major skills on identical rhythms.",
+        "silhouette": "Black knight whose cape is a clock face with missing wedges and a mouthlike visor of rotating hour marks.",
+        "lore_hook": "It does not eat time. It eats habits that time makes obvious."
+      },
+      "mechanics": {
+        "core": [
+          "cadence predation",
+          "haste theft",
+          "duel timing"
+        ],
+        "signature": [
+          "Feast on Rhythm detects repeated high-impact ability cadence and fills one missing clock wedge.",
+          "Borrowed Hour spends completed wedges for a short boss haste phase."
+        ],
+        "counterplay": [
+          "Stagger major ability timing across the squad and break clock wedges during their exposed charging state."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Clock wedges fill with stolen color from the repeated ability.",
+          "Haste phase creates multiple delayed knight afterimages."
+        ],
+        "animation": [
+          "The cape-clock rotates independently while the knight fights.",
+          "Borrowed Hour snaps every wedge into place behind the head."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Chronarch arena."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-037",
+      "name": "Mother Architect of Carrion",
+      "family": "boss",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "boss — horde mutation designer",
+      "identity": {
+        "fantasy": "A grotesque brood-mother that does not spawn random adds; she assembles bespoke Gravefeeding variants from visible organ racks around the arena.",
+        "silhouette": "Huge centipede-bodied matriarch with a humanlike torso and six external organ racks carried on bone pylons.",
+        "lore_hook": "She is the point at which cannibal evolution stops being accidental and becomes engineering."
+      },
+      "mechanics": {
+        "core": [
+          "organ assembly",
+          "bespoke add recipes",
+          "rack objectives"
+        ],
+        "signature": [
+          "Design Offspring selects two active organ racks and visibly previews the resulting add archetype.",
+          "Maternal Recall dismantles surviving offspring to reclaim one organ if players leave them alive too long."
+        ],
+        "counterplay": [
+          "Destroy or disable key organ racks to limit available recipes; finish dangerous adds before Recall."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Organ racks glow with icon-coded traits.",
+          "Preview embryos appear as transparent silhouettes before assembly."
+        ],
+        "animation": [
+          "The Mother physically threads organs together with tendon arms.",
+          "Recall reels living tissue backward into the racks."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Gravefeeding breeding pit."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-038",
+      "name": "Moon-Siege Colossus",
+      "family": "boss",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "boss — lunar fortress giant",
+      "identity": {
+        "fantasy": "A stone giant carrying a miniature fortress across its shoulders; squads must fight defenders on the moving structure while disabling the giant's locomotion.",
+        "silhouette": "Hundred-foot pale stone titan with crenellated shoulder-city, drawbridges, and a moonlit face carved into its chest.",
+        "lore_hook": "The fortress was built to withstand sieges until someone realized moving the fortress was easier."
+      },
+      "mechanics": {
+        "core": [
+          "moving fortress",
+          "limb sabotage",
+          "on-body objectives"
+        ],
+        "signature": [
+          "March of Walls moves the shoulder fortress through the arena while artillery and defenders remain active.",
+          "Knee Bastion exposes sabotage points that slow the colossus without directly damaging its core."
+        ],
+        "counterplay": [
+          "Board the fortress, disable artillery, and coordinate limb sabotage rather than shooting the stone body endlessly."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Fortress windows and moon banners remain readable at distance.",
+          "Damaged knees shed pale rock and moonlight."
+        ],
+        "animation": [
+          "Colossus locomotion is slow and objective-driven.",
+          "Drawbridges physically deploy to create boarding windows."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary lunar siege event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-039",
+      "name": "Seraq, Witch-Engine",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "super boss — occult machine intelligence",
+      "identity": {
+        "fantasy": "A cathedral-sized spell engine containing a captive witch consciousness that rewrites which machine subsystems are 'magical' each phase.",
+        "silhouette": "Walking brass hexapod cathedral with a woman's translucent face projected across its central boiler.",
+        "lore_hook": "Seraq was executed for witchcraft and rebuilt by engineers who wanted to know whether the accusation was technically correct."
+      },
+      "mechanics": {
+        "core": [
+          "subsystem enchantment",
+          "machine phase rotation",
+          "captive consciousness"
+        ],
+        "signature": [
+          "Hex Circuit enchants one subsystem—legs, weapons, shields, or forge—with a unique occult behavior.",
+          "Sabotage Window exposes mundane maintenance nodes on non-enchanted subsystems.",
+          "Witch's Choice occasionally overrides the machine's safest phase order, creating high-risk opportunity."
+        ],
+        "counterplay": [
+          "Attack mundane subsystems while tracking which one is currently enchanted; exploit unsafe overrides instead of resisting them."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Enchanted machinery gains impossible rune geometry.",
+          "The projected face distorts toward the active subsystem.",
+          "Sabotage nodes flash industrial white instead of magic colors."
+        ],
+        "animation": [
+          "Machine legs and cathedral modules animate independently.",
+          "Phase changes send the projected face racing through pipes.",
+          "Unsafe override makes the whole engine shudder out of sequence."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic witch-foundry raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-040",
+      "name": "Admiral of the Grave Tide",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "super boss — necromantic fleet commander",
+      "identity": {
+        "fantasy": "A drowned admiral commanding spectral ship sections that phase into the battlefield as moving cover, artillery platforms, and boarding hazards.",
+        "silhouette": "Barnacled corpse officer standing on a floating ship wheel while ghostly hull fragments orbit like a broken fleet.",
+        "lore_hook": "The Admiral sank with nine ships and returned commanding all ten—the tenth being the sea itself."
+      },
+      "mechanics": {
+        "core": [
+          "spectral fleet sections",
+          "moving cover",
+          "boarding phase"
+        ],
+        "signature": [
+          "Fleet Bearing summons a spectral hull section along a visible route through the arena.",
+          "Broadside Memory replays artillery from the last surviving hull section.",
+          "Boarding Order creates a short objective on one passing deck where destroying the command bell weakens the next fleet phase."
+        ],
+        "counterplay": [
+          "Use hulls as temporary cover, board selectively, and destroy command bells rather than chasing the Admiral constantly."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Ghost hulls phase from seawater-like fog.",
+          "Broadside lanes glow before cannon memories fire.",
+          "Boarding bells burn green through deck walls."
+        ],
+        "animation": [
+          "The Admiral steers with the floating wheel and ship sections respond at distance.",
+          "Boarding phase makes him salute before decks materialize."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic drowned fleet raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-041",
+      "name": "World-Wound Choir",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "super boss — multi-body eldritch chorus",
+      "identity": {
+        "fantasy": "A raid boss composed of seven separate mouths embedded in the landscape; their combined song changes local physics presentation and attack timing.",
+        "silhouette": "No central body—seven enormous vertical mouths open in cliffs, floors, and suspended rock with matching teeth geometry.",
+        "lore_hook": "The Choir is what the world sounds like when a wound learns harmony."
+      },
+      "mechanics": {
+        "core": [
+          "distributed mouths",
+          "chord composition",
+          "landscape encounter"
+        ],
+        "signature": [
+          "Seven Notes gives each mouth one unique attack timing and role.",
+          "Chord State changes based on which mouths remain active, altering safe lanes and stagger opportunities.",
+          "Mute Window lets squads temporarily silence a mouth through a local objective instead of only damaging it."
+        ],
+        "counterplay": [
+          "Split the team across mouths, coordinate silence windows, and avoid accidentally creating the most dangerous chord combination."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Sound appears as visible geometry connecting active mouths.",
+          "Muted mouths seal with stone-like tissue.",
+          "Chord changes recolor the connecting waveforms."
+        ],
+        "animation": [
+          "Each mouth is independently animated and synchronized by a central encounter controller.",
+          "Chord transition ripples across the terrain in sequence."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic world-wound raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-042",
+      "name": "Prince of Lost Seconds",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "super boss — temporal theft monarch",
+      "identity": {
+        "fantasy": "A temporal prince who steals small fragments of encounter time and stores them as visible floating 'seconds' that players can break to recover lost opportunities.",
+        "silhouette": "Young armored monarch with a cloak made of frozen clock shards and dozens of glowing second-hands orbiting the crown.",
+        "lore_hook": "He inherited a kingdom that lasted one minute and has spent eternity collecting the missing fifty-nine seconds."
+      },
+      "mechanics": {
+        "core": [
+          "time-fragment theft",
+          "recoverable seconds",
+          "phase scheduling"
+        ],
+        "signature": [
+          "Lost Second delays one eligible non-critical player cooldown tick and creates a breakable time shard in the arena.",
+          "Royal Minute accumulates unbroken shards to unlock an extra boss action at phase end.",
+          "Reclaim Time lets players destroy shards to recover a small normalized cooldown benefit."
+        ],
+        "counterplay": [
+          "Prioritize shards before Royal Minute fills; no hard time stop or control loss is applied."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Stolen seconds appear as bright numbered clock fragments.",
+          "Royal Minute forms an incomplete clock behind the Prince.",
+          "Broken shards flow back toward nearby players as blue ticks."
+        ],
+        "animation": [
+          "The Prince plucks seconds from the air with two fingers.",
+          "Royal Minute has him arrange shards into a clock face."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic temporal palace raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-043",
+      "name": "Leviathan of Eleven Graves",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "super boss — multi-life abyssal titan",
+      "identity": {
+        "fantasy": "An abyssal leviathan whose eleven armored grave plates each represent one distinct phase resource, forcing the raid to choose an order of destruction.",
+        "silhouette": "Island-sized-looking black sea beast with eleven tombstone-like plates along its back and lantern eyes beneath the waterline.",
+        "lore_hook": "Eleven civilizations claimed to kill it. The graves on its back belong to the civilizations."
+      },
+      "mechanics": {
+        "core": [
+          "eleven grave plates",
+          "phase-order choice",
+          "abyssal arena"
+        ],
+        "signature": [
+          "Grave Plate Break permanently removes one attack family but empowers a linked neighboring plate.",
+          "Undertow Passage exposes traversal routes across the leviathan's back between plate phases.",
+          "Eleventh Wake begins when only one plate remains, transforming its final attack set based on the chosen destruction order."
+        ],
+        "counterplay": [
+          "Plan plate order, use traversal windows, and accept tradeoffs instead of expecting one optimal sequence."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Each grave plate has a distinct funerary color.",
+          "Neighbor empowerment appears as visible energy transfer.",
+          "Final Wake combines surviving plate motifs into one storm."
+        ],
+        "animation": [
+          "Back segments rise from water as local streamed encounter spaces.",
+          "Plate destruction changes swimming posture and route."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic abyssal raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-044",
+      "name": "Orias, Celestial Parasite",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "super boss — star-devouring symbiote",
+      "identity": {
+        "fantasy": "A radiant parasite wrapped around a fallen celestial body, using stolen starlight to alternate between beautiful protective halos and predatory feeding tendrils.",
+        "silhouette": "Enormous translucent serpent coiled around a floating cracked star-heart, with angelic wings that are actually feeding membranes.",
+        "lore_hook": "Pilgrims worshipped Orias for centuries before discovering the halo was a mouth."
+      },
+      "mechanics": {
+        "core": [
+          "star-heart host",
+          "halo defense",
+          "feeding tendrils"
+        ],
+        "signature": [
+          "Borrowed Halo shields one star-heart quadrant while exposing feeding membranes elsewhere.",
+          "Tendril Feast drains charge from arena star pylons unless intercepted.",
+          "Host Rejection periodically makes the celestial heart attack the parasite from within, creating a shared damage window."
+        ],
+        "counterplay": [
+          "Defend pylons, attack exposed membranes, and exploit Host Rejection rather than tunneling the halo."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "The halo flips inside-out to reveal teethlike membrane structures.",
+          "Star pylon energy streams visibly into tendrils.",
+          "Host Rejection cracks the star-heart with white internal light."
+        ],
+        "animation": [
+          "Parasite coils reposition around the host by phase.",
+          "Halo inversion is a large readable transformation."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic fallen-star raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-045",
+      "name": "The Ninth Sun",
+      "family": "boss",
+      "tier": "god",
+      "status": "specified",
+      "role": "god-class stellar raid boss",
+      "identity": {
+        "fantasy": "A sentient artificial sun that descends in eight controlled avatars before revealing the ninth core as a raid objective rather than an untargetable sky object.",
+        "silhouette": "A white-gold star surrounded by eight humanoid solar avatars orbiting like planets, all projected over a massive observatory arena.",
+        "lore_hook": "There were eight suns in the old empire's scriptures. The ninth was omitted because it could read."
+      },
+      "mechanics": {
+        "core": [
+          "solar avatars",
+          "orbital phase logic",
+          "core revelation"
+        ],
+        "signature": [
+          "Eightfold Orbit assigns each avatar a unique attack domain and rotational lane.",
+          "Solar Conjunction causes selected avatars to combine attacks when their orbits align.",
+          "Eclipse Engines around the arena let squads safely interrupt one conjunction at a time.",
+          "Ninth Face reveals the central stellar core only after enough avatars are dispersed."
+        ],
+        "counterplay": [
+          "Track orbit alignment, use Eclipse Engines strategically, and avoid wasting them on low-threat conjunctions."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Eight avatars orbit on giant perspective-safe rings.",
+          "Conjunction draws solar bridges between avatars.",
+          "Eclipse Engines cast black disks over parts of the star.",
+          "Core reveal turns the entire skybox white for one controlled beat."
+        ],
+        "animation": [
+          "Avatars move independently but follow synchronized orbital choreography.",
+          "Ninth Face contracts the star into a detailed targetable core.",
+          "The Ninth Sun uses a bespoke transition animation for core revelation so phase changes are readable before damage begins."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier stellar observatory world raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-046",
+      "name": "The Ocean That Learned to Walk",
+      "family": "boss",
+      "tier": "god",
+      "status": "specified",
+      "role": "god-class mobile sea continent",
+      "identity": {
+        "fantasy": "A mobile ocean mass standing on colossal water legs, carrying storms, islands, and sea monsters across the land as a multi-zone event.",
+        "silhouette": "Horizon-wide wall of ocean elevated on four transparent tidal columns with islands floating across its upper surface.",
+        "lore_hook": "The sea spent ages touching every coast until it decided coasts should come to it."
+      },
+      "mechanics": {
+        "core": [
+          "mobile ocean arena",
+          "island objectives",
+          "tidal legs"
+        ],
+        "signature": [
+          "Walking Tide advances the ocean front across authored regional anchors.",
+          "Island Heart objectives on the upper surface control one tidal leg each.",
+          "Deep Step creates enormous but telegraphed flood corridors when a leg lands.",
+          "Low Tide exposes the abyssal core beneath the walking mass after enough legs are disabled."
+        ],
+        "counterplay": [
+          "Split teams between island objectives and ground evacuation lanes; disable legs to force Low Tide."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Tidal legs are transparent columns containing fish and debris.",
+          "Flood corridors project far ahead of each step.",
+          "Upper islands cast distorted shadows through the water body.",
+          "Core reveal drains the walking ocean upward like a lifted curtain."
+        ],
+        "animation": [
+          "Legs deform fluidly but follow constrained anchor paths.",
+          "Island surface remains a separate streamed combat layer.",
+          "Low Tide changes the entire silhouette from wall to suspended basin."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier global tide event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-047",
+      "name": "The Bell After Death",
+      "family": "boss",
+      "tier": "god",
+      "status": "specified",
+      "role": "god-class necromantic sound entity",
+      "identity": {
+        "fantasy": "A city-sized bell suspended in empty air that has no visible ringer; each toll resurrects a different historical battle as a temporary encounter layer.",
+        "silhouette": "Black cracked bell larger than a skyscraper, hanging from nothing, with armies visible as reflections inside its metal.",
+        "lore_hook": "The first toll was heard after everyone nearby was already dead."
+      },
+      "mechanics": {
+        "core": [
+          "historical battle layers",
+          "toll scheduling",
+          "reflection armies"
+        ],
+        "signature": [
+          "First Toll manifests one authored historical battlefield formation over the current arena.",
+          "Second Toll changes objectives rather than simply adding enemies, such as holding a gate or escorting a phantom standard.",
+          "Crack the Bell requires squads to complete battle-layer objectives that expose enormous fracture lines.",
+          "Final Silence opens the interior clapper-core after enough fractures are widened."
+        ],
+        "counterplay": [
+          "Complete layer objectives instead of farming reflected armies; each toll telegraphs the historical scenario before manifestation."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Armies appear first as reflections across the bell surface.",
+          "Toll waves visually reshape local fog and light.",
+          "Fractures shine with white cemetery light.",
+          "Final Silence removes all ambient sound for a brief core reveal."
+        ],
+        "animation": [
+          "The bell itself barely moves; environmental layers animate in response to each toll.",
+          "Fractures widen physically between phases.",
+          "Core clapper descends as a targetable encounter object."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier death-history world event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-048",
+      "name": "Throne That Ate Its King",
+      "family": "boss",
+      "tier": "god",
+      "status": "specified",
+      "role": "god-class sovereign mimic",
+      "identity": {
+        "fantasy": "A colossal living throne that absorbed generations of rulers and can manifest fragments of their command styles as phase mechanics.",
+        "silhouette": "Mountain-sized black throne with dozens of human crowns embedded in its arms and a vertical mouth where the seat back should be.",
+        "lore_hook": "The kingdom blamed bad kings until the throne itself finally stood up."
+      },
+      "mechanics": {
+        "core": [
+          "ruler memory phases",
+          "command mimicry",
+          "crown weakpoints"
+        ],
+        "signature": [
+          "King Memory selects one of several authored dead-ruler combat doctrines.",
+          "Crown Array exposes the specific embedded crowns powering that doctrine.",
+          "Usurpation lets players temporarily seize a destroyed crown and use its command against the throne's lesser units.",
+          "Empty Seat becomes vulnerable only after enough ruler memories are defeated."
+        ],
+        "counterplay": [
+          "Identify the active ruler doctrine, break matching crowns, and use stolen commands instead of ignoring the add layer."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Active crowns glow in distinct heraldic colors.",
+          "Dead rulers appear as enormous translucent silhouettes seated on the throne.",
+          "Usurped crowns create temporary squad banners.",
+          "Empty Seat opens as a dark vertical cavity."
+        ],
+        "animation": [
+          "The throne walks on rootlike chair legs.",
+          "Ruler silhouettes change posture with each doctrine.",
+          "Destroyed crowns visibly fall from the arms into the arena."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier fallen-kingdom world raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-049",
+      "name": "The First Lie",
+      "family": "boss",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "absolute-class perception law encounter",
+      "identity": {
+        "fantasy": "An Absolute entity that cannot alter facts, controls, or ownership, but can temporarily present multiple contradictory visual interpretations of the same authored objective until players prove which one is real.",
+        "silhouette": "Featureless white giant whose body is covered by several offset translucent versions of the arena itself.",
+        "lore_hook": "The First Lie was not a false statement. It was the discovery that reality could be described more than one way."
+      },
+      "mechanics": {
+        "core": [
+          "contradictory objective views",
+          "truth verification",
+          "perception layers"
+        ],
+        "signature": [
+          "Contradiction Layer presents several visually distinct candidate objectives while preserving one canonical underlying game state.",
+          "Witness Marks placed by players on verified environmental clues persist across layers.",
+          "Proof Chain requires combining clues from multiple players or locations to identify the canonical objective.",
+          "False Collapse safely dissolves disproven visual layers without punishing players for exploration.",
+          "True Statement exposes one bounded weak point only after sufficient proof."
+        ],
+        "counterplay": [
+          "Communicate observations, use persistent Witness Marks, and verify through authored clues rather than guessing at random."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Multiple translucent arena interpretations overlap at different depth offsets.",
+          "Witness Marks remain stark black-white across every layer.",
+          "Disproven layers shatter into sheets of glasslike light.",
+          "Proof Chain draws lines between confirmed clues.",
+          "True Statement collapses all visuals into one extremely sharp reality layer."
+        ],
+        "animation": [
+          "The entity moves by swapping between offset versions rather than walking normally.",
+          "Layer changes slide entire body interpretations through one another.",
+          "True Statement locks every offset silhouette into perfect alignment.",
+          "Defeat causes the giant to become a simple line of textlike light and erase itself."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute hidden truth-chain raid after multiple world-lore completions."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    },
+    {
+      "id": "BOS-050",
+      "name": "Outside Context",
+      "family": "boss",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "absolute-class systemic anomaly encounter",
+      "identity": {
+        "fantasy": "An Absolute anomaly represented as a foreign-looking set of encounter rules entering AEONFALL one module at a time, forcing players to learn a new temporary combat grammar without breaking core Fortnite controls.",
+        "silhouette": "A massive impossible object assembled from shapes, materials, and motion styles not used anywhere else in the world; no stable front, face, or anatomy.",
+        "lore_hook": "Every civilization has a word for invasion. None had a word for something that arrived without sharing the idea of inside."
+      },
+      "mechanics": {
+        "core": [
+          "foreign combat grammar",
+          "module revelation",
+          "rule learning"
+        ],
+        "signature": [
+          "First Contact introduces one unfamiliar but fully telegraphed mechanic with its own visual language.",
+          "Context Module adds a second mechanic that interacts with the first instead of merely increasing damage.",
+          "Translation Nodes let players deliberately test safe interactions and record discovered rules in encounter UI.",
+          "Misunderstanding creates recoverable setbacks when players combine rules incorrectly rather than arbitrary instant kills.",
+          "Shared Context unlocks the final core phase only after the squad has demonstrated mastery of the introduced grammar."
+        ],
+        "counterplay": [
+          "Use Translation Nodes, experiment in safe windows, and treat each phase as a learnable system rather than a DPS race."
+        ],
+        "evolution": [
+          "Each phase changes mechanics, objectives, or arena state rather than only multiplying health and damage."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "The anomaly uses a unique geometric/material language absent from other regions.",
+          "Each introduced module adds one new color-space and motion motif.",
+          "Translation Nodes project simplified diagrams of observed cause/effect.",
+          "Misunderstanding creates visible broken syntax shapes around failed interactions.",
+          "Shared Context causes the anomaly's foreign visuals to become gradually legible and align with the arena."
+        ],
+        "animation": [
+          "Movement uses non-organic interpolation patterns rather than conventional locomotion.",
+          "Each module attaches with a distinct assembly logic.",
+          "Translation success changes the anomaly's motion from erratic to increasingly rhythmic.",
+          "Final phase reconfigures all modules into one coherent but still alien structure."
+        ],
+        "audio": [
+          "Layered boss audio provides long-range phase calls, local attack telegraphs, weak-point cues, and post-attack punish cues."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute endgame anomaly requiring broad system mastery across raids, factions, classes, and world events."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Boss rewards must unlock progression, recipes, materials, faction/world-state changes, or traversal—not only loot.",
+        "Colossal presentation uses distributed encounter controllers rather than unsafe single-mesh scaling."
+      ]
+    }
+  ]
+}
