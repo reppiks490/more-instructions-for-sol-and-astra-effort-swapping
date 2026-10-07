@@ -1,0 +1,1384 @@
+{
+  "wave": "007",
+  "purpose": "Relic and artifact wave 1 of 2.",
+  "entity_count": 23,
+  "entities": [
+    {
+      "id": "REL-001",
+      "name": "Mirror Saint Lens",
+      "family": "relic",
+      "tier": "epic",
+      "status": "specified",
+      "role": "reflection utility relic",
+      "identity": {
+        "fantasy": "A devotional lens that reveals one hidden reflective route or disguised mirror hazard when deliberately aimed.",
+        "silhouette": "Palm-sized silver monocle with cracked saint icon etched into smoky glass.",
+        "lore_hook": "Mirror Saint Lens is tied to this acquisition path: Recover from a Vesperglass chapel hidden behind a false mirror."
+      },
+      "mechanics": {
+        "core": [
+          "hidden route reveal",
+          "mirror hazard scan"
+        ],
+        "signature": [
+          "Sanctified Reflection highlights one eligible reflective secret in a narrow cone for a short duration.",
+          "Capability expression: hidden route reveal.",
+          "Capability expression: mirror hazard scan."
+        ],
+        "counterplay": [
+          "Requires deliberate aim and line of sight; cannot reveal arbitrary hidden enemies."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Thin silver scan cone and one halo outline around valid reflective geometry."
+        ],
+        "animation": [
+          "Player raises lens to eye; crack lines briefly align into a complete halo."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Recover from a Vesperglass chapel hidden behind a false mirror."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-002",
+      "name": "Bell of the Last Breath",
+      "family": "relic",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "downed-state rescue relic",
+      "identity": {
+        "fantasy": "A tiny funeral bell that stores one charge when the squad survives a near-wipe and can accelerate a future rescue interaction.",
+        "silhouette": "Black bronze hand bell wrapped in red thread with no visible clapper.",
+        "lore_hook": "Bell of the Last Breath is tied to this acquisition path: Legendary Ossuary memorial trial."
+      },
+      "mechanics": {
+        "core": [
+          "rescue charge",
+          "near-wipe memory",
+          "fear cleanse"
+        ],
+        "signature": [
+          "Last Breath rings once after a qualifying squad recovery, storing a charge that shortens one later authored rescue channel.",
+          "Capability expression: rescue charge.",
+          "Capability expression: near-wipe memory.",
+          "Capability expression: fear cleanse."
+        ],
+        "counterplay": [
+          "Charge is rare, consumed on use, and cannot bypass elimination rules."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Black ring expands into a red thread circle, then fades into a single stored rune."
+        ],
+        "animation": [
+          "Bell swings without visible clapper; player hand freezes briefly at the silent impact point."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Ossuary memorial trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-003",
+      "name": "Heliostat Heart",
+      "family": "relic",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "solar class catalyst",
+      "identity": {
+        "fantasy": "A miniature mechanical sun-heart that stores daylight and unlocks enhanced behavior in selected solar weapons and armor.",
+        "silhouette": "Gold sphere surrounded by three independently rotating mirror rings.",
+        "lore_hook": "Heliostat Heart is tied to this acquisition path: Mythic Helios observatory vault completion."
+      },
+      "mechanics": {
+        "core": [
+          "solar charge storage",
+          "weapon synergy",
+          "armor synergy"
+        ],
+        "signature": [
+          "Helios Reservoir transfers stored sunlight into one compatible solar system, temporarily enabling its mythic interaction layer.",
+          "Capability expression: solar charge storage.",
+          "Capability expression: weapon synergy.",
+          "Capability expression: armor synergy."
+        ],
+        "counterplay": [
+          "Charge only outdoors; one compatible system at a time; drains completely on transfer."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Gold corona within three mirror rings, heat shimmer kept tightly localized."
+        ],
+        "animation": [
+          "Rings accelerate in opposite directions before collapsing into a single transfer beam."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Helios observatory vault completion."
+        ],
+        "crafting_links": [
+          "WPN-002"
+        ],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-004",
+      "name": "Blacktide Compass",
+      "family": "relic",
+      "tier": "epic",
+      "status": "specified",
+      "role": "abyss navigation relic",
+      "identity": {
+        "fantasy": "A waterlogged compass that points toward safe pressure routes rather than north inside Blacktide events.",
+        "silhouette": "Dark brass compass with liquid-filled face and a needle shaped like a tiny leviathan.",
+        "lore_hook": "Blacktide Compass is tied to this acquisition path: Epic Blacktide salvage chain."
+      },
+      "mechanics": {
+        "core": [
+          "pressure route",
+          "storm warning",
+          "tide direction"
+        ],
+        "signature": [
+          "Abyss Bearing rotates toward one authored low-pressure route during eligible flood or storm events.",
+          "Capability expression: pressure route.",
+          "Capability expression: storm warning.",
+          "Capability expression: tide direction."
+        ],
+        "counterplay": [
+          "Does not reveal loot or enemies; incorrect if event state changes after reading."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Blue liquid glow, subtle pressure rings, tiny tide glyph around rim."
+        ],
+        "animation": [
+          "Compass needle swims like a creature before locking; player must hold still to read it."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Blacktide salvage chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-005",
+      "name": "Sepulchral Abacus",
+      "family": "relic",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "corpse-economy relic",
+      "identity": {
+        "fantasy": "A vertebral counting tool that tracks corpse-resource pressure and prevents overcommitting necromantic charges.",
+        "silhouette": "Finger-length spine segment threaded with black bone beads.",
+        "lore_hook": "Sepulchral Abacus is tied to this acquisition path: Legendary Sepulchral Concord mastery reward."
+      },
+      "mechanics": {
+        "core": [
+          "corpse charge tracking",
+          "construct efficiency",
+          "ritual warning"
+        ],
+        "signature": [
+          "Grave Accounting refunds a small portion of one failed eligible necromantic construction if it is interrupted early.",
+          "Capability expression: corpse charge tracking.",
+          "Capability expression: construct efficiency.",
+          "Capability expression: ritual warning."
+        ],
+        "counterplay": [
+          "Refund capped; no benefit to successful casts or high-tier ultimate summons."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Bone beads glow one by one, then reverse a few positions on valid refund."
+        ],
+        "animation": [
+          "Beads click rapidly during cast and snap backward if the construction fails early."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Sepulchral Concord mastery reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-006",
+      "name": "Folded Star Map",
+      "family": "relic",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "spatial route relic",
+      "identity": {
+        "fantasy": "An impossible map that unfolds into a local three-dimensional route model for Cartographer anomaly paths.",
+        "silhouette": "Black square of paper-thin metal that opens into a floating star-shaped map volume.",
+        "lore_hook": "Folded Star Map is tied to this acquisition path: Exotic Cartographers grand route completion."
+      },
+      "mechanics": {
+        "core": [
+          "anomaly route map",
+          "portal anchor hint",
+          "route comparison"
+        ],
+        "signature": [
+          "Elsewhere Overlay displays two eligible nearby route branches and their known risks without choosing for the player.",
+          "Capability expression: anomaly route map.",
+          "Capability expression: portal anchor hint.",
+          "Capability expression: route comparison."
+        ],
+        "counterplay": [
+          "Only discovered anchors appear; model expires quickly; no combat vision."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Prismatic wireframe map, tiny route stars, folding-space edge shimmer."
+        ],
+        "animation": [
+          "Map unfolds through more dimensions than its size suggests, then refolds into a flat square."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic Cartographers grand route completion."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-007",
+      "name": "Shard of the Ember Crown",
+      "family": "relic",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "infernal resistance catalyst",
+      "identity": {
+        "fantasy": "A broken crown tooth from an ancient infernal ruler that can invert one selected minor fire curse into temporary heat power.",
+        "silhouette": "Jagged black-red crown fragment with gold script burned into one edge.",
+        "lore_hook": "Shard of the Ember Crown is tied to this acquisition path: Mythic Ember Throne demon tribunal reward."
+      },
+      "mechanics": {
+        "core": [
+          "curse inversion",
+          "heat charge",
+          "demon lore key"
+        ],
+        "signature": [
+          "Crown Inversion consumes one eligible minor fire curse and converts it into a capped heat resource for compatible gear.",
+          "Capability expression: curse inversion.",
+          "Capability expression: heat charge.",
+          "Capability expression: demon lore key."
+        ],
+        "counterplay": [
+          "Cannot invert boss ultimates or major ritual curses; overheated gear still has limits."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Red curse lines turn white-gold and spiral into the shard, leaving ember script behind."
+        ],
+        "animation": [
+          "Relic rises above the palm and rotates as curse symbols reverse direction."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Ember Throne demon tribunal reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-008",
+      "name": "Rime Cantor Bell",
+      "family": "relic",
+      "tier": "epic",
+      "status": "specified",
+      "role": "sonic ice relic",
+      "identity": {
+        "fantasy": "A crystal handbell that can identify one resonance frequency in Pale Resonance puzzles or hazards.",
+        "silhouette": "Clear blue bell with no handle, floating above a silver ring grip.",
+        "lore_hook": "Rime Cantor Bell is tied to this acquisition path: Epic Pale Resonance choir shrine."
+      },
+      "mechanics": {
+        "core": [
+          "frequency identify",
+          "ice puzzle aid",
+          "sonic warning"
+        ],
+        "signature": [
+          "True Note emits the correct reference pitch for one authored resonance mechanism after the player samples it.",
+          "Capability expression: frequency identify.",
+          "Capability expression: ice puzzle aid.",
+          "Capability expression: sonic warning."
+        ],
+        "counterplay": [
+          "Provides pitch, not timing/order; combat noise can require re-sampling."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Blue standing-wave ring and brief crystal highlight on matching objects."
+        ],
+        "animation": [
+          "Bell levitates, rotates, and rings itself while the grip stays still."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Pale Resonance choir shrine."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-009",
+      "name": "Worldroot Seedcore",
+      "family": "relic",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "living construction catalyst",
+      "identity": {
+        "fantasy": "A hardened primordial seed that stores one portable growth template for compatible Worldroot abilities.",
+        "silhouette": "Walnut-sized glowing seed wrapped in tiny root filaments and armored bark petals.",
+        "lore_hook": "Worldroot Seedcore is tied to this acquisition path: Legendary Worldroot Cathedra pilgrimage."
+      },
+      "mechanics": {
+        "core": [
+          "growth template",
+          "temporary structure bonus",
+          "grove attunement"
+        ],
+        "signature": [
+          "Seed Memory stores one approved structure pattern and reduces setup time the next time that pattern is grown.",
+          "Capability expression: growth template.",
+          "Capability expression: temporary structure bonus.",
+          "Capability expression: grove attunement."
+        ],
+        "counterplay": [
+          "One stored pattern; destroyed structures still consume normal cooldown."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Green-gold root hologram, tiny leaf orbit, soft sap pulse."
+        ],
+        "animation": [
+          "Seed petals open to display the remembered miniature structure before snapping closed."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Worldroot Cathedra pilgrimage."
+        ],
+        "crafting_links": [
+          "SKL-003"
+        ],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-010",
+      "name": "Broken Hour of Aster",
+      "family": "relic",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "temporal record relic",
+      "identity": {
+        "fantasy": "A shattered watch containing one intact second that can be spent to extend a recorded-state window in approved Chronarch systems.",
+        "silhouette": "Cracked silver pocket watch with one floating hand frozen between ticks.",
+        "lore_hook": "Broken Hour of Aster is tied to this acquisition path: Mythic Chronarch Scar vault."
+      },
+      "mechanics": {
+        "core": [
+          "record extension",
+          "temporal puzzle key",
+          "echo stabilization"
+        ],
+        "signature": [
+          "Borrowed Second adds a short extension to one active approved record window before shattering its charge.",
+          "Capability expression: record extension.",
+          "Capability expression: temporal puzzle key.",
+          "Capability expression: echo stabilization."
+        ],
+        "counterplay": [
+          "Single use per recharge cycle; cannot extend Transcendent authority durations."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Silver second-hand trail, brief local clock halo, tiny glass reverse-fall effect."
+        ],
+        "animation": [
+          "Watch opens, broken pieces orbit, one hand completes a single impossible tick."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Chronarch Scar vault."
+        ],
+        "crafting_links": [
+          "SKL-002"
+        ],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-011",
+      "name": "Tablet of the Third Law",
+      "family": "relic",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "doctrine relic",
+      "identity": {
+        "fantasy": "An Absolute law tablet that attunes the bearer to one Null Basilica doctrine and reveals its hidden exception condition.",
+        "silhouette": "Thin black-white stone slab with a single moving line of text that cannot be viewed from two angles at once.",
+        "lore_hook": "Tablet of the Third Law is tied to this acquisition path: Absolute Null Basilica doctrine completion."
+      },
+      "mechanics": {
+        "core": [
+          "doctrine attunement",
+          "exception reveal",
+          "Absolute trial key"
+        ],
+        "signature": [
+          "Law Exception reveals one authored method of interacting with the current doctrine without nullifying the doctrine globally.",
+          "Capability expression: doctrine attunement.",
+          "Capability expression: exception reveal.",
+          "Capability expression: Absolute trial key."
+        ],
+        "counterplay": [
+          "Only one selected law; information is contextual and expires on district change."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Monochrome rule glyph, shifting text plane, thin white fracture through nearby air."
+        ],
+        "animation": [
+          "Tablet rotates to face away from the player before the exception symbol becomes readable in reflection."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute Null Basilica doctrine completion."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-012",
+      "name": "Tooth of the Crownless",
+      "family": "relic",
+      "tier": "god",
+      "status": "specified",
+      "role": "colossus raid catalyst",
+      "identity": {
+        "fantasy": "A mountain-sized creature's shed tooth fragment refined into a raid relic that improves damage contribution against distributed armor nodes.",
+        "silhouette": "Forearm-length black ivory shard with tiny ruined architecture fused to one side.",
+        "lore_hook": "Tooth of the Crownless is tied to this acquisition path: God-tier Crownless Continent raid trophy."
+      },
+      "mechanics": {
+        "core": [
+          "colossus node attunement",
+          "raid stagger",
+          "boss crafting key"
+        ],
+        "signature": [
+          "Sovereign Bite marks one eligible distributed armor node after repeated team damage and improves stagger contribution for a brief window.",
+          "Capability expression: colossus node attunement.",
+          "Capability expression: raid stagger.",
+          "Capability expression: boss crafting key."
+        ],
+        "counterplay": [
+          "Only active during authored colossus raids; one node at a time; no raw global damage multiplier."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Gold-black node lines, distant crown glyph, localized heavy pulse on stagger contribution."
+        ],
+        "animation": [
+          "Relic braces against forearm like a shield and points itself toward eligible node."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier Crownless Continent raid trophy."
+        ],
+        "crafting_links": [
+          "BOS-004"
+        ],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-013",
+      "name": "Moon-Drowned Scale",
+      "family": "relic",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "leviathan traversal relic",
+      "identity": {
+        "fantasy": "A translucent scale from the Drowned Moon leviathan that reacts to flood phase transitions and underwater gates.",
+        "silhouette": "Large crescent scale containing moving moonlight under dark water.",
+        "lore_hook": "Moon-Drowned Scale is tied to this acquisition path: Mythic Drowned Moon encounter reward."
+      },
+      "mechanics": {
+        "core": [
+          "flood phase sensing",
+          "deep gate key",
+          "water resistance"
+        ],
+        "signature": [
+          "Lunar Buoyancy grants a short controlled rise or fall modifier in eligible water traversal volumes.",
+          "Capability expression: flood phase sensing.",
+          "Capability expression: deep gate key.",
+          "Capability expression: water resistance."
+        ],
+        "counterplay": [
+          "Only within authored water zones; no free flight; long recovery."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Moonlit bubble trail, crescent water ring, scale glow brightens with depth."
+        ],
+        "animation": [
+          "Scale floats beside player and tilts upward/downward before movement modifier activates."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Drowned Moon encounter reward."
+        ],
+        "crafting_links": [
+          "BOS-003"
+        ],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-014",
+      "name": "Gravewake Lantern",
+      "family": "relic",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "spectral echo storage relic",
+      "identity": {
+        "fantasy": "A sealed lantern capable of holding one approved temporary combat echo for later summoning by compatible necromantic systems.",
+        "silhouette": "Black iron lantern containing a shifting silhouette instead of flame.",
+        "lore_hook": "Gravewake Lantern is tied to this acquisition path: Legendary Sepulchral mastery chain."
+      },
+      "mechanics": {
+        "core": [
+          "echo storage",
+          "necromantic synergy",
+          "spirit identification"
+        ],
+        "signature": [
+          "Lantern Archive stores one eligible non-boss echo archetype and displays its role before later recall.",
+          "Capability expression: echo storage.",
+          "Capability expression: necromantic synergy.",
+          "Capability expression: spirit identification."
+        ],
+        "counterplay": [
+          "One echo; copied elites lose protected signatures; storage replaced when recaptured."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Cold silhouette inside glass, blue-black stitching lines, small role glyph."
+        ],
+        "animation": [
+          "Lantern door opens inward into impossible depth as the echo folds inside."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Sepulchral mastery chain."
+        ],
+        "crafting_links": [
+          "NPC-003"
+        ],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-015",
+      "name": "Jawseal of Saint Vanta",
+      "family": "relic",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "status-devouring weapon catalyst",
+      "identity": {
+        "fantasy": "A silver script seal once used to bind the living jaw of a forbidden weapon and now used to refine its stolen-effect control.",
+        "silhouette": "Curved silver plate engraved with teeth-shaped scripture and one violet lock stone.",
+        "lore_hook": "Jawseal of Saint Vanta is tied to this acquisition path: Mythic undercrypt reliquary."
+      },
+      "mechanics": {
+        "core": [
+          "status filter",
+          "weapon attunement",
+          "stolen effect control"
+        ],
+        "signature": [
+          "Selective Devour lets a compatible devourer weapon reject one eligible stolen effect category so the next valid effect is preferred.",
+          "Capability expression: status filter.",
+          "Capability expression: weapon attunement.",
+          "Capability expression: stolen effect control."
+        ],
+        "counterplay": [
+          "Does not choose exact boss effects; filter has cooldown and limited categories."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Silver scripture crawls across weapon, violet lock flash, brief closed-jaw icon."
+        ],
+        "animation": [
+          "Seal snaps onto weapon housing and teeth-script rotates into alignment."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic undercrypt reliquary."
+        ],
+        "crafting_links": [
+          "WPN-003"
+        ],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-016",
+      "name": "Storm Throne Fragment",
+      "family": "relic",
+      "tier": "god",
+      "status": "specified",
+      "role": "storm-domain catalyst",
+      "identity": {
+        "fantasy": "A broken crown shard from the first Storm Throne that stores one sovereign lightning pattern for high-tier storm abilities.",
+        "silhouette": "Dark silver crown spike containing branching lightning frozen inside crystal.",
+        "lore_hook": "Storm Throne Fragment is tied to this acquisition path: God-tier Storm Throne sovereign trial."
+      },
+      "mechanics": {
+        "core": [
+          "storm pattern",
+          "chain target cap boost",
+          "domain attunement"
+        ],
+        "signature": [
+          "Royal Circuit allows one compatible storm domain to preselect an authored lightning chain pattern for tactical positioning.",
+          "Capability expression: storm pattern.",
+          "Capability expression: chain target cap boost.",
+          "Capability expression: domain attunement."
+        ],
+        "counterplay": [
+          "No extra unlimited targets; pattern visible to enemies before discharge."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Frozen lightning animates, crown glyph appears above valid targets, storm halo tightens."
+        ],
+        "animation": [
+          "Shard rises into the active crown formation then slams back into the user's gauntlet after discharge."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier Storm Throne sovereign trial."
+        ],
+        "crafting_links": [
+          "SKL-009"
+        ],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-017",
+      "name": "Parallax Monocle",
+      "family": "relic",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "angle-analysis relic",
+      "identity": {
+        "fantasy": "A Cartographer optic that visualizes one possible reflected firing angle or route bend at a time.",
+        "silhouette": "Iridescent half-monocle with floating secondary lens offset several centimeters from frame.",
+        "lore_hook": "Parallax Monocle is tied to this acquisition path: Exotic Vesperglass-Cartographer crossover quest."
+      },
+      "mechanics": {
+        "core": [
+          "angle preview",
+          "refraction planning",
+          "route bend"
+        ],
+        "signature": [
+          "Second Sight previews one approved single-bounce trajectory or portal exit angle before committing the action.",
+          "Capability expression: angle preview.",
+          "Capability expression: refraction planning.",
+          "Capability expression: route bend."
+        ],
+        "counterplay": [
+          "One preview at a time; moving quickly breaks solution; no auto-aim."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Prismatic line preview, ghost lens offset, tiny angle numbers replaced by symbolic ticks."
+        ],
+        "animation": [
+          "Secondary lens circles the primary optic and locks with a sharp click on valid geometry."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic Vesperglass-Cartographer crossover quest."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-018",
+      "name": "Hunter's Red Thread",
+      "family": "relic",
+      "tier": "epic",
+      "status": "specified",
+      "role": "tracking contract relic",
+      "identity": {
+        "fantasy": "A ritual cord that binds to one hunted monster family and records clues from tracks, roars, and remains.",
+        "silhouette": "Thin crimson cord wrapped around a black bone spool with three knot markers.",
+        "lore_hook": "Hunter's Red Thread is tied to this acquisition path: Epic hunter lodge contract reward."
+      },
+      "mechanics": {
+        "core": [
+          "hunt progress",
+          "clue memory",
+          "prey family attunement"
+        ],
+        "signature": [
+          "Three Knots records three different clue types and then reveals an approximate regional search area for the bound family.",
+          "Capability expression: hunt progress.",
+          "Capability expression: clue memory.",
+          "Capability expression: prey family attunement."
+        ],
+        "counterplay": [
+          "Requires varied clues; not a live tracker; thread unbinds after contract completion."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Red knots glow one at a time, faint regional circle pulse, minimal trail effect."
+        ],
+        "animation": [
+          "Player ties a new knot after each clue and unspools the thread across a map gesture when complete."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic hunter lodge contract reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "low",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-019",
+      "name": "Ossuary Architect's Compass",
+      "family": "relic",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "bone-structure planning relic",
+      "identity": {
+        "fantasy": "A necromantic drafting instrument that previews stable locations for selected bone structures before corpse charges are spent.",
+        "silhouette": "Four-armed ivory compass with tiny vertebra joints and black ink reservoir.",
+        "lore_hook": "Ossuary Architect's Compass is tied to this acquisition path: Legendary Ossuary Engineer workshop."
+      },
+      "mechanics": {
+        "core": [
+          "structure preview",
+          "stability check",
+          "corpse efficiency"
+        ],
+        "signature": [
+          "Grave Draft displays valid footprint and warns when a selected bone structure would collide with protected geometry.",
+          "Capability expression: structure preview.",
+          "Capability expression: stability check.",
+          "Capability expression: corpse efficiency."
+        ],
+        "counterplay": [
+          "Does not reduce material cost; only supported structure families appear."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "White blueprint outline, black ink anchor points, tiny bone measurement marks."
+        ],
+        "animation": [
+          "Compass unfolds four arms in midair and sketches a footprint before folding itself shut."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Ossuary Engineer workshop."
+        ],
+        "crafting_links": [
+          "SKL-006"
+        ],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-020",
+      "name": "Eclipsed Halo",
+      "family": "relic",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "domain-phase relic",
+      "identity": {
+        "fantasy": "A broken halo that tracks Eclipse Sovereign phase order and can delay one transition by a short authored interval.",
+        "silhouette": "Black crescent ring with a moving gold bite of light.",
+        "lore_hook": "Eclipsed Halo is tied to this acquisition path: Mythic Eclipse temple hidden challenge."
+      },
+      "mechanics": {
+        "core": [
+          "phase delay",
+          "domain forecast",
+          "mark synergy"
+        ],
+        "signature": [
+          "Held Eclipse spends a full relic charge to extend the current authored eclipse phase briefly without changing its effects.",
+          "Capability expression: phase delay.",
+          "Capability expression: domain forecast.",
+          "Capability expression: mark synergy."
+        ],
+        "counterplay": [
+          "Cannot extend Absolute/Transcendent states; once per domain; enemies see extension tell."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Gold bite stops moving, black halo thickens, phase glyph freezes then cracks."
+        ],
+        "animation": [
+          "Halo lifts from inventory and aligns behind the player's head until the extension ends."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Eclipse temple hidden challenge."
+        ],
+        "crafting_links": [
+          "SKL-004"
+        ],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-021",
+      "name": "Fang of the Beast-Crown",
+      "family": "relic",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "taming mastery relic",
+      "identity": {
+        "fantasy": "A ceremonial fang that stores the behavioral imprint of one bonded species and improves command clarity with that species.",
+        "silhouette": "Long pale fang carved with tiny animal silhouettes that move when viewed from the corner of the eye.",
+        "lore_hook": "Fang of the Beast-Crown is tied to this acquisition path: Legendary Wild Court mastery trial."
+      },
+      "mechanics": {
+        "core": [
+          "species imprint",
+          "command clarity",
+          "taming lore"
+        ],
+        "signature": [
+          "Crown Imprint reduces command delay for one selected bonded species family and unlocks an additional non-damage utility command.",
+          "Capability expression: species imprint.",
+          "Capability expression: command clarity.",
+          "Capability expression: taming lore."
+        ],
+        "counterplay": [
+          "One species attuned; no effect on untamed or protected creatures."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Gold-green species glyph, faint spirit silhouette, fang edge glow."
+        ],
+        "animation": [
+          "Fang rotates to display selected species mark before each advanced command."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Wild Court mastery trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-022",
+      "name": "Iron Oracle Lens",
+      "family": "relic",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "telegraph-analysis relic",
+      "identity": {
+        "fantasy": "A machine-seer optic that improves recognition of specific authored heavy-attack tells after repeated observation.",
+        "silhouette": "Amber mechanical lens with concentric shutters and a thin prediction needle.",
+        "lore_hook": "Iron Oracle Lens is tied to this acquisition path: Legendary Iron Oracle challenge."
+      },
+      "mechanics": {
+        "core": [
+          "telegraph learning",
+          "forecast cue",
+          "defensive timing"
+        ],
+        "signature": [
+          "Pattern Lock records one selected elite attack telegraph and adds a clearer pre-impact cue after the player has survived it multiple times.",
+          "Capability expression: telegraph learning.",
+          "Capability expression: forecast cue.",
+          "Capability expression: defensive timing."
+        ],
+        "counterplay": [
+          "No prediction for unseen attacks; only selected authored telegraphs; resets on encounter family change."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Amber forecast arc, shutter pulse, tiny pre-impact line."
+        ],
+        "animation": [
+          "Lens shutters close progressively with each observation, then snap fully open on learned tell."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary Iron Oracle challenge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    },
+    {
+      "id": "REL-023",
+      "name": "Choir Fork of Three Voices",
+      "family": "relic",
+      "tier": "epic",
+      "status": "specified",
+      "role": "rhythm-system relic",
+      "identity": {
+        "fantasy": "A three-pronged tuning fork that helps synchronize cadence-based weapons and support abilities without automating inputs.",
+        "silhouette": "Black-silver tuning fork with three unequal prongs wrapped in pale thread.",
+        "lore_hook": "Choir Fork of Three Voices is tied to this acquisition path: Epic Resonance Choir initiation reward."
+      },
+      "mechanics": {
+        "core": [
+          "cadence reference",
+          "rhythm training",
+          "resonance key"
+        ],
+        "signature": [
+          "Reference Chord plays the three target intervals of one equipped cadence system before combat practice.",
+          "Capability expression: cadence reference.",
+          "Capability expression: rhythm training.",
+          "Capability expression: resonance key."
+        ],
+        "counterplay": [
+          "Does not trigger the skill automatically and becomes silent during active enemy pressure."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Three concentric wave rings, prong-specific glints, no persistent particles."
+        ],
+        "animation": [
+          "Fork vibrates each prong separately, then all three together in a clean final chord."
+        ],
+        "audio": [
+          "Relic-specific activation, charge, warning, failure, and attunement cues kept short enough not to obscure combat telemetry."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Resonance Choir initiation reward."
+        ],
+        "crafting_links": [
+          "WPN-010"
+        ],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "low",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Relic power is bounded by charge, condition, encounter rule, or explicit cooldown so artifacts remain tactically meaningful rather than permanent passive inflation."
+      ]
+    }
+  ]
+}
