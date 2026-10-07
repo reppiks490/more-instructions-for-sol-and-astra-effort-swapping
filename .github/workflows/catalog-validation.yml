@@ -20,6 +20,8 @@ on:
       - "tools/validate_uefn_bindings.py"
       - "tools/validate_world_topology.py"
       - "tools/validate_region_001_living_world.py"
+      - "tools/validate_region_001_faction_conflicts.py"
+      - "tools/build_region_001_faction_conflict_registry.py"
       - "tools/build_region_001_living_world_registry.py"
       - "tools/validate_slice_recipes.py"
       - "tools/validate_slice_encounters.py"
@@ -95,6 +97,15 @@ jobs:
 
       - name: Validate Ossuary March living world
         run: python tools/validate_region_001_living_world.py
+
+      - name: Validate Ossuary March faction conflicts
+        run: python tools/validate_region_001_faction_conflicts.py
+
+      - name: Build Ossuary March faction-conflict Verse registry
+        run: python tools/build_region_001_faction_conflict_registry.py
+
+      - name: Check generated Ossuary March faction-conflict bootstrap
+        run: git diff --exit-code -- verse/generated/region_001_faction_conflict_bootstrap.verse
 
       - name: Build Ossuary March living-world Verse registry
         run: python tools/build_region_001_living_world_registry.py
