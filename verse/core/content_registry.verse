@@ -7,7 +7,7 @@ aeonfall_content_registry := class():
     var Definitions:[string]aeonfall_content_definition = map{}
     var Bindings:[string]aeonfall_runtime_binding = map{}
 
-    RegisterDefinition(Definition:aeonfall_content_definition):logic=
+    RegisterDefinition(Definition:aeonfall_content_definition)<transacts>:logic=
         if:
             Definition.CanonicalId <> ""
             set Definitions[Definition.CanonicalId] = Definition
@@ -22,7 +22,7 @@ aeonfall_content_registry := class():
             return true
         false
 
-    RegisterBinding(Binding:aeonfall_runtime_binding):logic=
+    RegisterBinding(Binding:aeonfall_runtime_binding)<transacts>:logic=
         if:
             Binding.CanonicalId <> ""
             set Bindings[Binding.CanonicalId] = Binding
