@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+from __future__ import annotations
+
 import json
 import re
 import sys
@@ -7,104 +9,185 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG = ROOT / "content" / "catalog"
 
-PREFIX_TO_FAMILY = {
+ID_RE = re.compile(r"^(WPN|ARM|REL|MON|WLD|NPC|FAC|BOS|VEH|SKL|CLS|MAT|EVT|POI)-\d{3}$")
+TIERS = {
+    "common","uncommon","rare","epic","legendary","mythic","exotic",
+    "god","absolute","transcendent_zero"
+}
+STATUSES = {
+    "concept","specified","prototype","implemented",
+    "vfx_ready","animation_ready","tested","production"
+}
+FAMILIES = {
+    "weapon","armor","relic","monster","wildlife","npc","faction","boss",
+    "vehicle","skill","class","material","event","poi"
+}
+CONCURRENCY = {"tiny","low","medium","high","event_only"}
+VFX = {"low","medium","high","cinematic"}
+REPLICATION = {"low","medium","high","critical"}
+LOCALITY = {"local","regional","global_event"}
+
+PREFIX_FAMILY = {
     "WPN":"weapon","ARM":"armor","REL":"relic","MON":"monster","WLD":"wildlife",
     "NPC":"npc","FAC":"faction","BOS":"boss","VEH":"vehicle","SKL":"skill",
-    "CLS":"class","MAT":"material","EVT":"event","POI":"poi"
+    "CLS":"class","MAT":"material","EVT":"event","POI":"poi",
 }
-TIERS = ["Common","Uncommon","Rare","Epic","Legendary","Mythic","Exotic","God","Absolute","Transcendent Zero"]
-STATUS = ["concept","specified","prototype","implemented","vfx_ready","animation_ready","tested","production"]
-HIGH_TIERS = {"Legendary","Mythic","Exotic","God","Absolute","Transcendent Zero"}
+
 REQUIRED = {
-    "id","family","name","tier","role","concept","signature_mechanic",
-    "visual_identity","animation_profile","vfx_profile","acquisition","performance","status"
+    "id","name","family","tier","status","role","identity",
+    "mechanics","presentation","acquisition","performance","dependencies"
 }
-ID_RE = re.compile(r"^(WPN|ARM|REL|MON|WLD|NPC|FAC|BOS|VEH|SKL|CLS|MAT|EVT|POI)-\d{3}$")
 
-def fail(errors, source, entity_id, message):
-    errors.append(f"{source}: {entity_id}: {message}")
+def fail(errors, path, message):
+    errors.append(f"{path.relative_to(ROOT)}: {message}")
 
-def validate_entity(e, source, seen, errors):
-    entity_id = e.get("id","<missing-id>")
-    missing = REQUIRED - set(e)
+def nonempty_string_list(value):
+    return isinstance(value, list) and len(value) > 0 and all(isinstance(v, str) and v.strip() for v in value)
+
+def validate_entity(path: Path, data: dict, seen_ids: dict[str, Path], seen_names: dict[str, Path], errors: list[str]):
+    missing = REQUIRED - data.keys()
     if missing:
-        fail(errors, source, entity_id, f"missing required fields: {sorted(missing)}")
-        return
+        fail(errors, path, f"missing required fields: {sorted(missing)}")
 
-    m = ID_RE.match(entity_id)
-    if not m:
-        fail(errors, source, entity_id, "invalid canonical ID")
+    entity_id = data.get("id")
+    if not isinstance(entity_id, str) or not ID_RE.match(entity_id):
+        fail(errors, path, f"invalid id: {entity_id!r}")
     else:
-        expected = PREFIX_TO_FAMILY[m.group(1)]
-        if e["family"] != expected:
-            fail(errors, source, entity_id, f"family must be {expected!r}")
+        if entity_id in seen_ids:
+            fail(errors, path, f"duplicate id {entity_id}; first seen in {seen_ids[entity_id].relative_to(ROOT)}")
+        else:
+            seen_ids[entity_id] = path
+        prefix = entity_id.split("-", 1)[0]
+        expected_family = PREFIX_FAMILY.get(prefix)
+        if expected_family and data.get("family") != expected_family:
+            fail(errors, path, f"id prefix {prefix} requires family={expected_family!r}")
 
-    if entity_id in seen:
-        fail(errors, source, entity_id, f"duplicate ID also found in {seen[entity_id]}")
+    name = data.get("name")
+    if not isinstance(name, str) or len(name.strip()) < 3:
+        fail(errors, path, "name must be at least 3 characters")
+    elif name.casefold() in seen_names:
+        fail(errors, path, f"duplicate name {name!r}; first seen in {seen_names[name.casefold()].relative_to(ROOT)}")
     else:
-        seen[entity_id] = source
+        seen_names[name.casefold()] = path
 
-    if e["tier"] not in TIERS:
-        fail(errors, source, entity_id, f"unknown tier {e['tier']!r}")
-    if e["status"] not in STATUS:
-        fail(errors, source, entity_id, f"unknown status {e['status']!r}")
+    if data.get("family") not in FAMILIES:
+        fail(errors, path, f"invalid family: {data.get('family')!r}")
+    if data.get("tier") not in TIERS:
+        fail(errors, path, f"invalid tier: {data.get('tier')!r}")
+    if data.get("status") not in STATUSES:
+        fail(errors, path, f"invalid status: {data.get('status')!r}")
 
-    perf = e.get("performance")
+    identity = data.get("identity")
+    if not isinstance(identity, dict):
+        fail(errors, path, "identity must be an object")
+    else:
+        for field in ("fantasy","silhouette","lore_hook"):
+            value = identity.get(field)
+            if not isinstance(value, str) or len(value.strip()) < 12:
+                fail(errors, path, f"identity.{field} must be descriptive")
+
+    mechanics = data.get("mechanics")
+    if not isinstance(mechanics, dict):
+        fail(errors, path, "mechanics must be an object")
+        mechanics = {}
+    else:
+        for field in ("core","signature","counterplay"):
+            if not nonempty_string_list(mechanics.get(field)):
+                fail(errors, path, f"mechanics.{field} must be a non-empty string list")
+
+    presentation = data.get("presentation")
+    if not isinstance(presentation, dict):
+        fail(errors, path, "presentation must be an object")
+        presentation = {}
+    else:
+        for field in ("vfx","animation","audio"):
+            if not isinstance(presentation.get(field), list):
+                fail(errors, path, f"presentation.{field} must be a list")
+
+    acquisition = data.get("acquisition")
+    if not isinstance(acquisition, dict) or not nonempty_string_list(acquisition.get("method")):
+        fail(errors, path, "acquisition.method must be a non-empty string list")
+
+    perf = data.get("performance")
     if not isinstance(perf, dict):
-        fail(errors, source, entity_id, "performance must be an object")
+        fail(errors, path, "performance must be an object")
     else:
-        for key in ("concurrency","vfx_band","replication_band"):
-            if key not in perf:
-                fail(errors, source, entity_id, f"performance missing {key}")
-        if isinstance(perf.get("concurrency"), int) and perf["concurrency"] < 1:
-            fail(errors, source, entity_id, "concurrency must be >= 1")
+        checks = (
+            ("concurrency_class", CONCURRENCY),
+            ("vfx_class", VFX),
+            ("replication_class", REPLICATION),
+            ("streaming_locality", LOCALITY),
+        )
+        for field, allowed in checks:
+            if perf.get(field) not in allowed:
+                fail(errors, path, f"performance.{field} invalid: {perf.get(field)!r}")
 
-    caps = e.get("capabilities", [])
-    if not isinstance(caps, list) or not caps:
-        fail(errors, source, entity_id, "capabilities must contain at least one item")
+    deps = data.get("dependencies")
+    if not isinstance(deps, list) or not all(isinstance(x, str) for x in deps):
+        fail(errors, path, "dependencies must be a string list")
 
-    if e["tier"] in HIGH_TIERS:
-        if len(e.get("counterplay", [])) < 1:
-            fail(errors, source, entity_id, "high-tier entity requires explicit counterplay")
-        if len(e.get("signature_mechanic","")) < 24:
-            fail(errors, source, entity_id, "high-tier signature mechanic is under-specified")
-        if len(e.get("animation_profile","")) < 24:
-            fail(errors, source, entity_id, "high-tier animation profile is under-specified")
-        if len(e.get("vfx_profile","")) < 24:
-            fail(errors, source, entity_id, "high-tier VFX profile is under-specified")
+    tier = data.get("tier")
+    signature_count = len(mechanics.get("signature", []))
+    vfx_count = len(presentation.get("vfx", []))
+    animation_count = len(presentation.get("animation", []))
 
-def main():
-    files = sorted(CATALOG.glob("*.json"))
-    if not files:
-        print("No catalog files found", file=sys.stderr)
-        return 2
+    minimums = {
+        "epic": (1,1,1),
+        "legendary": (2,2,2),
+        "mythic": (3,3,2),
+        "exotic": (3,3,3),
+        "god": (4,4,3),
+        "absolute": (5,5,4),
+        "transcendent_zero": (6,6,5),
+    }
+    if tier in minimums:
+        min_sig, min_vfx, min_anim = minimums[tier]
+        if signature_count < min_sig:
+            fail(errors, path, f"{tier} tier requires at least {min_sig} signature mechanics")
+        if vfx_count < min_vfx:
+            fail(errors, path, f"{tier} tier requires at least {min_vfx} VFX beats")
+        if animation_count < min_anim:
+            fail(errors, path, f"{tier} tier requires at least {min_anim} animation beats")
 
-    errors = []
-    seen = {}
-    count = 0
+def iter_entities(payload):
+    if isinstance(payload, dict) and "entities" in payload:
+        entries = payload["entities"]
+        if not isinstance(entries, list):
+            raise ValueError("entities must be a list")
+        return entries
+    if isinstance(payload, list):
+        return payload
+    if isinstance(payload, dict):
+        return [payload]
+    raise ValueError("top-level JSON must be an entity object, list, or object containing entities[]")
+
+def main() -> int:
+    errors: list[str] = []
+    seen_ids: dict[str, Path] = {}
+    seen_names: dict[str, Path] = {}
+    files = sorted(CATALOG.rglob("*.json"))
+
     for path in files:
         try:
             payload = json.loads(path.read_text(encoding="utf-8"))
+            entities = iter_entities(payload)
         except Exception as exc:
-            errors.append(f"{path}: invalid JSON: {exc}")
+            fail(errors, path, f"invalid catalog JSON: {exc}")
             continue
-        entities = payload.get("entities") if isinstance(payload, dict) else None
-        if not isinstance(entities, list):
-            errors.append(f"{path}: top-level object must contain entities[]")
-            continue
-        for entity in entities:
-            count += 1
+
+        for index, entity in enumerate(entities):
             if not isinstance(entity, dict):
-                errors.append(f"{path}: entity #{count} is not an object")
+                fail(errors, path, f"entry {index} is not an object")
                 continue
-            validate_entity(entity, path.relative_to(ROOT), seen, errors)
+            validate_entity(path, entity, seen_ids, seen_names, errors)
 
     if errors:
-        print("\n".join(errors), file=sys.stderr)
-        print(f"FAILED: {len(errors)} validation error(s)", file=sys.stderr)
+        print("AEONFALL catalog validation FAILED")
+        for error in errors:
+            print(f"- {error}")
         return 1
 
-    print(f"OK: validated {count} major entities across {len(files)} catalog file(s)")
+    print(f"AEONFALL catalog validation PASSED: {len(seen_ids)} entities across {len(files)} file(s)")
     return 0
 
 if __name__ == "__main__":
