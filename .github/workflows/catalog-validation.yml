@@ -17,6 +17,7 @@ on:
       - "tools/validate_vertical_slice.py"
       - "tools/validate_uefn_bindings.py"
       - "tools/validate_world_topology.py"
+      - "tools/validate_slice_recipes.py"
       - "STATUS.md"
       - ".github/workflows/catalog-validation.yml"
   pull_request:
@@ -64,6 +65,9 @@ jobs:
 
       - name: Validate streamed world topology
         run: python tools/validate_world_topology.py
+
+      - name: Validate vertical slice recipes
+        run: python tools/validate_slice_recipes.py
 
       - name: Build runtime content index
         run: python tools/build_content_index.py
