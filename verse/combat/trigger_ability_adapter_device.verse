@@ -17,6 +17,9 @@ aeonfall_trigger_ability_adapter_device := class(creative_device):
     @editable
     RequireRegisteredTarget:logic = false
 
+    @editable
+    UseTargetAgent:logic = false
+
     OnBegin<override>()<suspends>:void=
         AEONFALLRuntimeBus.AbilityEffectRequested.Subscribe(OnRequest)
 
@@ -47,7 +50,16 @@ aeonfall_trigger_ability_adapter_device := class(creative_device):
                     set ResultCode = "target_not_registered"
 
             if (Succeeded?):
-                TriggerOutput.Trigger(OwnerAgent)
+                if (UseTargetAgent?):
+                    if:
+                        TargetAgent := AEONFALLActorRegistry.GetAgent[Request.TargetKey]
+                    then:
+                        TriggerOutput.Trigger(TargetAgent)
+                    else:
+                        set Succeeded = false
+                        set ResultCode = "target_agent_not_registered"
+                else:
+                    TriggerOutput.Trigger(OwnerAgent)
         else:
             set Succeeded = false
             set ResultCode = "owner_not_registered"
