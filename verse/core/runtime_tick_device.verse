@@ -31,6 +31,7 @@ aeonfall_runtime_tick_device := class(creative_device):
             AEONFALLChoosingRuntime.TickAll(Interval)
             AEONFALLAscendedFormRuntime.TickAll(Interval)
             AEONFALLTranscendentRuntime.TickAll(Interval)
+            AEONFALLHallOfAscendants.TickAll(Interval)
 
             AEONFALLRuntimeBus.Emit(
                 aeonfall_runtime_event{
