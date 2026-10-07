@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AEONFALL Major Entity",
+  "type": "object",
+  "required": [
+    "id",
+    "family",
+    "name",
+    "tier",
+    "role",
+    "concept",
+    "signature_mechanic",
+    "visual_identity",
+    "animation_profile",
+    "vfx_profile",
+    "acquisition",
+    "performance",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^(WPN|ARM|REL|MON|WLD|NPC|FAC|BOS|VEH|SKL|CLS|MAT|EVT|POI)-[0-9]{3}$"
+    },
+    "family": {
+      "type": "string",
+      "enum": [
+        "weapon",
+        "armor",
+        "relic",
+        "monster",
+        "wildlife",
+        "npc",
+        "faction",
+        "boss",
+        "vehicle",
+        "skill",
+        "class",
+        "material",
+        "event",
+        "poi"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "minLength": 3
+    },
+    "tier": {
+      "type": "string",
+      "enum": [
+        "Common",
+        "Uncommon",
+        "Rare",
+        "Epic",
+        "Legendary",
+        "Mythic",
+        "Exotic",
+        "God",
+        "Absolute",
+        "Transcendent Zero"
+      ]
+    },
+    "role": {
+      "type": "string",
+      "minLength": 3
+    },
+    "concept": {
+      "type": "string",
+      "minLength": 20
+    },
+    "signature_mechanic": {
+      "type": "string",
+      "minLength": 10
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "counterplay": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "visual_identity": {
+      "type": "string",
+      "minLength": 10
+    },
+    "animation_profile": {
+      "type": "string",
+      "minLength": 10
+    },
+    "vfx_profile": {
+      "type": "string",
+      "minLength": 10
+    },
+    "audio_profile": {
+      "type": "string"
+    },
+    "acquisition": {
+      "type": "string",
+      "minLength": 3
+    },
+    "evolution": {
+      "type": "string"
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "performance": {
+      "type": "object",
+      "required": [
+        "concurrency",
+        "vfx_band",
+        "replication_band"
+      ],
+      "properties": {
+        "concurrency": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "vfx_band": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "extreme"
+          ]
+        },
+        "replication_band": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "extreme"
+          ]
+        },
+        "streaming_local": {
+          "type": "boolean"
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "concept",
+        "specified",
+        "prototype",
+        "implemented",
+        "vfx_ready",
+        "animation_ready",
+        "tested",
+        "production"
+      ]
+    }
+  }
+}
