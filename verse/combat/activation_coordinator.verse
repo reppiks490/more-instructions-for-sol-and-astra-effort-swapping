@@ -323,4 +323,30 @@ aeonfall_activation_coordinator := class():
                     }
                 )
 
+    ClearOwnerPending(OwnerKey:string)<transacts>:void=
+        var PendingIds:[]string = array{}
+
+        for (RequestId -> Pending : PendingActivations):
+            if (Pending.OwnerKey = OwnerKey):
+                set PendingIds = PendingIds + array{RequestId}
+
+        for (RequestId : PendingIds):
+            if:
+                Pending := PendingActivations[RequestId]
+            then:
+                Cancelled := CancelPending(
+                    Pending.OwnerKey,
+                    Pending.AbilityId,
+                    Pending.RequestId
+                )
+                if (Cancelled?):
+                    Cancelled = true
+
+        AEONFALLRuntimeBus.Emit(
+            aeonfall_runtime_event{
+                EventType := "ability.pending_owner_cleared",
+                SourceId := OwnerKey
+            }
+        )
+
 AEONFALLActivationCoordinator:aeonfall_activation_coordinator = aeonfall_activation_coordinator{}
