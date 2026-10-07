@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "slice_id": "SLICE-001",
+  "delivery_bindings": [
+    {
+      "entity_id": "WPN-001",
+      "strategy": "item_granter",
+      "runtime_device": "aeonfall_unlock_item_granter_adapter_device",
+      "binding_id": "GRANT_WPN_001"
+    },
+    {
+      "entity_id": "WPN-007",
+      "strategy": "item_granter",
+      "runtime_device": "aeonfall_unlock_item_granter_adapter_device",
+      "binding_id": "GRANT_WPN_007"
+    },
+    {
+      "entity_id": "WPN-122",
+      "strategy": "item_granter",
+      "runtime_device": "aeonfall_unlock_item_granter_adapter_device",
+      "binding_id": "GRANT_WPN_122"
+    },
+    {
+      "entity_id": "WPN-124",
+      "strategy": "item_granter",
+      "runtime_device": "aeonfall_unlock_item_granter_adapter_device",
+      "binding_id": "GRANT_WPN_124"
+    },
+    {
+      "entity_id": "ARM-002",
+      "strategy": "trigger_device_graph",
+      "runtime_device": "aeonfall_unlock_delivery_adapter_device",
+      "binding_id": "DELIVER_ARM_002"
+    },
+    {
+      "entity_id": "VEH-010",
+      "strategy": "trigger_device_graph",
+      "runtime_device": "aeonfall_unlock_delivery_adapter_device",
+      "binding_id": "DELIVER_VEH_010"
+    }
+  ],
+  "rules": [
+    "Persistent unlock is committed before physical delivery starts.",
+    "A failed or timed-out physical delivery never spends the durable purchase/craft cost twice.",
+    "Item Granter bindings must be configured to grant the canonical item's UEFN representation.",
+    "Armor and vehicle delivery remain editor-linked trigger graphs until their project assets and equip/spawn adapters are bound.",
+    "On join/equip reconstruction may redeliver session equipment from durable profile state without replaying the purchase transaction."
+  ]
+}
