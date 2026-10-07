@@ -1,0 +1,3798 @@
+{
+  "wave": "017",
+  "purpose": "Focused under-target expansion across weapons, armor, monsters, and bosses with increasing mechanical divergence and high-tier spectacle.",
+  "entity_count": 60,
+  "entities": [
+    {
+      "id": "WPN-097",
+      "name": "Pilgrim of Static",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "chain-mark rifle",
+      "identity": {
+        "fantasy": "A rifle that paints conductive pilgrim marks across multiple targets and rewards deliberate target rotation.",
+        "silhouette": "Long charcoal receiver with prayer-wire wrapped around a glass capacitor.",
+        "lore_hook": "Storm pilgrims carried one charge across entire continents without grounding it."
+      },
+      "mechanics": {
+        "core": [
+          "conductive marks",
+          "target rotation",
+          "chain setup"
+        ],
+        "signature": [
+          "Three differently marked enemies create a short chain-lightning route when one is critically hit.",
+          "Reloading with all three marks active converts the oldest mark into a brief movement buff."
+        ],
+        "counterplay": [
+          "Marks expire quickly and clustering makes the chain predictable."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Thin white-blue wires appear between fully prepared targets."
+        ],
+        "animation": [
+          "Capacitor spins faster with each unique mark."
+        ],
+        "audio": [
+          "Distinct Pilgrim of Static activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic storm pilgrimage contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-098",
+      "name": "Bloodless Bell",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "resonance handcannon",
+      "identity": {
+        "fantasy": "A handcannon whose shots leave silent resonance rings that detonate only when crossed by a moving enemy.",
+        "silhouette": "Black iron pistol with a hollow bell cylinder instead of a magazine.",
+        "lore_hook": "It was designed for duels where the first shot was considered impolite."
+      },
+      "mechanics": {
+        "core": [
+          "resonance ring",
+          "movement trap",
+          "precision"
+        ],
+        "signature": [
+          "Impacts place a short-lived invisible-to-AI ring that becomes visible to players.",
+          "Crossing a ring triggers a stagger pulse instead of bonus raw damage."
+        ],
+        "counterplay": [
+          "Standing still or routing around rings defeats the trap."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Ring reveals as a red-black circular ripple on approach."
+        ],
+        "animation": [
+          "Cylinder swings like a bell after each shot."
+        ],
+        "audio": [
+          "Distinct Bloodless Bell activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic bell-order challenge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-099",
+      "name": "Meridian Locust",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "swarm burst SMG",
+      "identity": {
+        "fantasy": "An SMG whose final round in each burst releases a tiny tracking drone that pressures the last struck target.",
+        "silhouette": "Compact olive-black weapon with insect-wing heat fins.",
+        "lore_hook": "Cartographers used its drones to trace enemies through dust storms."
+      },
+      "mechanics": {
+        "core": [
+          "burst fire",
+          "micro-drone",
+          "target pressure"
+        ],
+        "signature": [
+          "Every completed burst seeds one short-lived Locust drone.",
+          "Multiple drones cannot stack on one target; they instead spread to nearby hostiles."
+        ],
+        "counterplay": [
+          "Breaking line of sight and destroying drones reduces pressure."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Amber wing trails spiral off the final bullet."
+        ],
+        "animation": [
+          "Heat fins buzz open after each complete burst."
+        ],
+        "audio": [
+          "Distinct Meridian Locust activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic frontier survey reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-100",
+      "name": "Furnace Halo",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "heat-orbit shotgun",
+      "identity": {
+        "fantasy": "A shotgun that stores heat as rotating embers around the barrel and spends them to widen or tighten the next blast.",
+        "silhouette": "Heavy furnace-black frame with a visible ember ring.",
+        "lore_hook": "Smiths discovered the weapon became accurate only when dangerously hot."
+      },
+      "mechanics": {
+        "core": [
+          "heat orbit",
+          "spread control",
+          "risk"
+        ],
+        "signature": [
+          "Heat builds from consecutive shots and appears as orbiting embers.",
+          "Alternate fire consumes embers to tighten the next pellet cone."
+        ],
+        "counterplay": [
+          "Cooling resets stored heat; overheating causes a forced vent."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Orbiting orange embers visibly show charge."
+        ],
+        "animation": [
+          "Barrel ring expands for wide fire and contracts for focused fire."
+        ],
+        "audio": [
+          "Distinct Furnace Halo activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic forge gauntlet."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-101",
+      "name": "Pale Jury",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "verdict sidearm",
+      "identity": {
+        "fantasy": "A sidearm that records the last three damage categories dealt to a target and issues a bonus status only when all three differ.",
+        "silhouette": "Ivory-black pistol with three sliding verdict tabs.",
+        "lore_hook": "The Jury was invented by judges who distrusted repetition."
+      },
+      "mechanics": {
+        "core": [
+          "damage diversity",
+          "verdict",
+          "sidearm"
+        ],
+        "signature": [
+          "Three distinct eligible damage categories trigger a brief Verdict debuff.",
+          "Repeated categories slide the oldest tab out rather than stacking."
+        ],
+        "counterplay": [
+          "Single-damage builds gain little value and the tabs are visible."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Three verdict tabs light in different colors."
+        ],
+        "animation": [
+          "Tabs physically slam into alignment before Verdict."
+        ],
+        "audio": [
+          "Distinct Pale Jury activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic tribunal armory reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-102",
+      "name": "Ashen Census",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "crowd-count launcher",
+      "identity": {
+        "fantasy": "A launcher that scales its utility based on how many lesser enemies are inside its projected impact census.",
+        "silhouette": "Short tube launcher with a rotating tally wheel.",
+        "lore_hook": "Its creators believed crowds were a logistics problem before they were a combat problem."
+      },
+      "mechanics": {
+        "core": [
+          "crowd count",
+          "utility payload",
+          "anti-horde"
+        ],
+        "signature": [
+          "Aim projects a census circle that counts eligible lesser hostiles.",
+          "Payload changes from knockback to slow to disarm-like suppression at authored thresholds."
+        ],
+        "counterplay": [
+          "Elites and bosses do not inflate the count; spreading mobs weakens the effect."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Numerals rise around the target circle."
+        ],
+        "animation": [
+          "Tally wheel clicks to the detected crowd tier."
+        ],
+        "audio": [
+          "Distinct Ashen Census activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic anti-horde quartermaster chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-103",
+      "name": "Oracle Debt",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "prediction marksman rifle",
+      "identity": {
+        "fantasy": "A marksman rifle that predicts a target's broad next movement lane and rewards firing into the prediction rather than directly at the body.",
+        "silhouette": "Long silver rifle with a branching probability optic.",
+        "lore_hook": "The first oracle to use it stopped predicting wars and started predicting dodges."
+      },
+      "mechanics": {
+        "core": [
+          "movement prediction",
+          "lane shot",
+          "precision"
+        ],
+        "signature": [
+          "Optic paints one of several probable exit lanes after sustained aim.",
+          "Hitting the predicted lane before the target enters it arms a delayed impact.",
+          "Correct prediction refunds part of the charge cycle."
+        ],
+        "counterplay": [
+          "Prediction is coarse, visible, and invalidated by sudden stops."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Probability branches split from the reticle.",
+          "Correct lane flashes gold before delayed impact."
+        ],
+        "animation": [
+          "Optic branches fold into one line on firing.",
+          "Correct predictions trigger a controlled shoulder reset."
+        ],
+        "audio": [
+          "Distinct Oracle Debt activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary oracle trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-104",
+      "name": "Grief Engine",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "momentum cannon",
+      "identity": {
+        "fantasy": "A heavy cannon that stores recoil momentum from missed shots and converts it into controlled traversal rather than extra damage.",
+        "silhouette": "Industrial black cannon with piston stock and floor skids.",
+        "lore_hook": "Siege crews learned to use failure as transportation."
+      },
+      "mechanics": {
+        "core": [
+          "recoil storage",
+          "traversal",
+          "heavy shot"
+        ],
+        "signature": [
+          "Missed heavy shots add Recoil Debt.",
+          "Secondary fire vents Debt into a backward or upward movement burst.",
+          "Landing a hit clears some Debt without movement."
+        ],
+        "counterplay": [
+          "Debt caps low and movement direction is predictable."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Piston gauge glows red with stored recoil.",
+          "Vent creates a compressed air tunnel."
+        ],
+        "animation": [
+          "Stock pistons extend on misses.",
+          "Vent folds skids and throws the user."
+        ],
+        "audio": [
+          "Distinct Grief Engine activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary siege-engine salvage."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-105",
+      "name": "Winter Argument",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "thermal inversion rifle",
+      "identity": {
+        "fantasy": "A rifle that alternates hot and cold shot states; crossing states on the same target creates brittle steam shock.",
+        "silhouette": "White-red split rifle with two fluid reservoirs.",
+        "lore_hook": "Two rival engineers refused to compromise and accidentally made the weapon better."
+      },
+      "mechanics": {
+        "core": [
+          "heat-cold alternation",
+          "brittle shock",
+          "tempo"
+        ],
+        "signature": [
+          "Heat shots raise thermal state.",
+          "Cold shots lower it.",
+          "Crossing from one extreme to the other triggers a steam stagger burst."
+        ],
+        "counterplay": [
+          "Repeated same-state fire is weaker and state is visible."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Target gains red or blue thermal halo.",
+          "Cross-state burst erupts as white steam crystals."
+        ],
+        "animation": [
+          "Reservoir selector flips each alternate shot.",
+          "Brittle trigger recoils both reservoirs at once."
+        ],
+        "audio": [
+          "Distinct Winter Argument activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary climate vault reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-106",
+      "name": "Saintless Compass",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "navigation disruption rifle",
+      "identity": {
+        "fantasy": "A rifle that temporarily rotates lesser enemies' navigation preference around placed compass beacons.",
+        "silhouette": "Brass rifle with spinning cardinal sight.",
+        "lore_hook": "It was banned by armies because soldiers kept arriving at the correct battlefield from the wrong direction."
+      },
+      "mechanics": {
+        "core": [
+          "beacon placement",
+          "AI routing pressure",
+          "area control"
+        ],
+        "signature": [
+          "Compass Beacon encourages eligible lesser AI to route around one side of an area.",
+          "Second beacon creates a corridor between them.",
+          "Destroying either beacon collapses the route effect."
+        ],
+        "counterplay": [
+          "Players and bosses ignore forced routing; beacons are destructible."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Cardinal arrows sweep the ground around beacons.",
+          "Corridor glows as a faint map line."
+        ],
+        "animation": [
+          "Sight rotates to beacon orientation.",
+          "Placement uses a sharp downward wrist snap."
+        ],
+        "audio": [
+          "Distinct Saintless Compass activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary cartographer war-table reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-107",
+      "name": "Choir of Rust",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "armor-decay burst rifle",
+      "identity": {
+        "fantasy": "A burst rifle that applies temporary armor corrosion through rhythmically spaced hits instead of raw DPS.",
+        "silhouette": "Rust-red rifle with six tuning chambers.",
+        "lore_hook": "Its bullets were composed to make armor forget it was metal."
+      },
+      "mechanics": {
+        "core": [
+          "rhythm fire",
+          "armor corrosion",
+          "burst timing"
+        ],
+        "signature": [
+          "Hits on the authored rhythm add Rust Notes.",
+          "Three Notes briefly reduce eligible armor mitigation.",
+          "Off-rhythm hits consume a Note without effect."
+        ],
+        "counterplay": [
+          "Irregular movement and cover break the rhythm window."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Rust notes appear as floating orange score marks.",
+          "Corrosion flakes armor-light particles."
+        ],
+        "animation": [
+          "Tuning chambers open in sequence.",
+          "Perfect rhythm causes a short conducting flourish."
+        ],
+        "audio": [
+          "Distinct Choir of Rust activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary rust choir mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-108",
+      "name": "Night Ferry",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "teleport-anchor SMG",
+      "identity": {
+        "fantasy": "An SMG that can tag one safe surface and later consume its magazine to perform a short validated return dash.",
+        "silhouette": "Black compact weapon with a tiny lantern at the rear sight.",
+        "lore_hook": "Smugglers named it after the boat that always brought them back before dawn."
+      },
+      "mechanics": {
+        "core": [
+          "surface anchor",
+          "return dash",
+          "magazine resource"
+        ],
+        "signature": [
+          "Lantern Mark records one nearby valid surface.",
+          "Hold reload at low ammo to consume remaining rounds and dash back toward the mark.",
+          "Dash arrival grants brief accuracy stabilization."
+        ],
+        "counterplay": [
+          "Anchor range is short, visible, and invalidated by blocked geometry."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Small lantern remains at anchor.",
+          "Return leaves a dark wake line."
+        ],
+        "animation": [
+          "Rear lantern swings toward the stored anchor.",
+          "Return pulls weapon first, then body."
+        ],
+        "audio": [
+          "Distinct Night Ferry activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary smuggler faction capstone."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-109",
+      "name": "The Arithmetic Gun",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "count-sequence rifle",
+      "identity": {
+        "fantasy": "A mythic rifle whose fire mode changes after exact shot-count sequences, turning counting into combat mastery.",
+        "silhouette": "Minimal white rifle with numbered floating chamber plates.",
+        "lore_hook": "It was built for a mathematician who insisted recoil should be provable."
+      },
+      "mechanics": {
+        "core": [
+          "shot counting",
+          "mode sequence",
+          "precision mastery"
+        ],
+        "signature": [
+          "Third shot becomes a piercing line.",
+          "Fifth shot creates a short slow field.",
+          "Seventh shot refunds part of magazine if it hits a marked target.",
+          "Thirteenth shot becomes a high-stagger finisher and resets the sequence."
+        ],
+        "counterplay": [
+          "Reloading early resets the sequence; misses still advance the count."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Floating numerals orbit the chamber.",
+          "Special counts draw geometric muzzle glyphs.",
+          "Thirteenth shot erases all numerals in a white flash."
+        ],
+        "animation": [
+          "Chamber plates rearrange to current count.",
+          "Special shots use increasingly ceremonial recoil poses."
+        ],
+        "audio": [
+          "Distinct The Arithmetic Gun activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic theorem vault completion."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-110",
+      "name": "Widow of Tides",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "fluid-control shotgun",
+      "identity": {
+        "fantasy": "A mythic shotgun that leaves directional liquid-pressure wakes players and mobs can surf or be pushed by.",
+        "silhouette": "Pearlescent dark shotgun with translucent water chambers.",
+        "lore_hook": "The Widow was made for boarding ships that did not exist on oceans."
+      },
+      "mechanics": {
+        "core": [
+          "pressure wake",
+          "mobility lane",
+          "shotgun"
+        ],
+        "signature": [
+          "Blast creates a short pressure wake behind the pellets.",
+          "Allies moving with the wake gain speed.",
+          "Lesser enemies moving against it are slowed.",
+          "Alternate fire folds two wakes together into a brief lateral wave."
+        ],
+        "counterplay": [
+          "Wakes are short-lived and visually obvious; bosses resist push."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Water ribbons persist behind shots.",
+          "Folded wave rises as a sideways glass wall.",
+          "Chambers glow brighter near water."
+        ],
+        "animation": [
+          "Weapon rocks like a boat on fire.",
+          "Alternate fire twists both chambers inward."
+        ],
+        "audio": [
+          "Distinct Widow of Tides activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic abyssal fleet raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-111",
+      "name": "Crown of Nails",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "pinning rifle",
+      "identity": {
+        "fantasy": "A mythic rifle that pins temporary spectral nails into surfaces around a target, forming a cage if positioned intelligently.",
+        "silhouette": "Long iron rifle with a crown-shaped muzzle cluster.",
+        "lore_hook": "Executioners abandoned it because prisoners learned to respect geometry too quickly."
+      },
+      "mechanics": {
+        "core": [
+          "surface nails",
+          "cage geometry",
+          "position control"
+        ],
+        "signature": [
+          "Shots can plant spectral nails in nearby surfaces.",
+          "Three nails around one eligible lesser target create a temporary movement cage.",
+          "Four nails around a boss weak point instead grant team targeting clarity.",
+          "Cage collapse converts remaining nails into stagger pressure."
+        ],
+        "counterplay": [
+          "Nails are destructible and require surrounding geometry."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Red-black nails float slightly off surfaces.",
+          "Completed cage forms thin crown lines.",
+          "Boss weak-point version uses gold targeting filaments."
+        ],
+        "animation": [
+          "Muzzle crown opens per planted nail.",
+          "Collapse animation snaps the crown shut."
+        ],
+        "audio": [
+          "Distinct Crown of Nails activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic execution cathedral challenge."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-112",
+      "name": "Tomorrow's Scar",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "delayed-impact sniper",
+      "identity": {
+        "fantasy": "A sniper whose hit location is recorded and can be struck again by a delayed ghost shot if the target remains within a limited spatial envelope.",
+        "silhouette": "Long transparent rifle with a second spectral barrel offset in time.",
+        "lore_hook": "Every wound it creates remembers where it expected to be tomorrow."
+      },
+      "mechanics": {
+        "core": [
+          "delayed echo",
+          "spatial envelope",
+          "sniper"
+        ],
+        "signature": [
+          "Primary critical hit records a Scar.",
+          "After a fixed delay, ghost barrel fires at the recorded world position.",
+          "If target stays within the envelope, ghost hit applies stagger.",
+          "Manual cancel can trade the ghost shot for a reload-speed buff."
+        ],
+        "counterplay": [
+          "Moving decisively out of the envelope avoids the echo."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Recorded Scar appears as a thin clock-ring in world space.",
+          "Ghost barrel materializes beside the rifle.",
+          "Echo shot is monochrome."
+        ],
+        "animation": [
+          "Second barrel phases in slowly.",
+          "Cancel animation wipes the Scar away with the off hand."
+        ],
+        "audio": [
+          "Distinct Tomorrow's Scar activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic chronarch assassination trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-113",
+      "name": "Garden of Knives",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "blade-seed launcher",
+      "identity": {
+        "fantasy": "A launcher that plants metallic seed pods which grow different blade formations based on nearby enemy movement.",
+        "silhouette": "Black-green launcher with folded petal magazines.",
+        "lore_hook": "It was designed by gardeners who believed pruning should be preemptive."
+      },
+      "mechanics": {
+        "core": [
+          "adaptive trap",
+          "movement reading",
+          "area denial"
+        ],
+        "signature": [
+          "Slow-moving targets grow vertical blade flowers.",
+          "Fast targets trigger horizontal sweep vines.",
+          "Airborne targets trigger upward spear blooms.",
+          "Manual Harvest detonates mature pods into recoverable crafting fragments."
+        ],
+        "counterplay": [
+          "Pods are visible and destroyable; each formation has a long readable growth tell."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Seed pods glow by predicted formation.",
+          "Blade flowers unfold with metallic petals.",
+          "Harvest sprays green-black sparks."
+        ],
+        "animation": [
+          "Launcher unfolds petals to chamber seeds.",
+          "Harvest twists the barrel like pruning shears."
+        ],
+        "audio": [
+          "Distinct Garden of Knives activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic black garden mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-114",
+      "name": "Sevenfold Mercy",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "support burst weapon",
+      "identity": {
+        "fantasy": "A mythic support weapon with seven charges that can be spent on damage, shielding, cleansing, or rescue, but never replenished mid-encounter except through objectives.",
+        "silhouette": "White-gold rifle with seven luminous reliquary cells.",
+        "lore_hook": "Its order believed mercy only mattered when finite."
+      },
+      "mechanics": {
+        "core": [
+          "seven-charge resource",
+          "support choice",
+          "encounter planning"
+        ],
+        "signature": [
+          "Charge can fire an empowered damage burst.",
+          "Charge can shield one ally.",
+          "Charge can cleanse one eligible status.",
+          "Two charges can enable a fast rescue pulse on a downed ally.",
+          "Completing authored encounter objectives may restore one charge."
+        ],
+        "counterplay": [
+          "Resource is deliberately scarce and all effects are capped."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Seven cells extinguish one by one.",
+          "Each use has distinct gold-white geometry.",
+          "Last charge creates a visible warning halo."
+        ],
+        "animation": [
+          "Cells physically eject after use.",
+          "Two-charge rescue opens both side reliquaries."
+        ],
+        "audio": [
+          "Distinct Sevenfold Mercy activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic healer order pilgrimage."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-115",
+      "name": "Elsewhere Crown",
+      "family": "weapon",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "multi-origin rifle",
+      "identity": {
+        "fantasy": "An exotic rifle that can fire from one of three placed spectral firing origins instead of always from the player's barrel.",
+        "silhouette": "Floating crown frame around a compact rifle core.",
+        "lore_hook": "The Crown was designed for a king who refused to stand where his bullets came from."
+      },
+      "mechanics": {
+        "core": [
+          "remote origin",
+          "angle control",
+          "position trick"
+        ],
+        "signature": [
+          "Place up to three Crown Points on valid nearby surfaces.",
+          "Shots can originate from selected Crown Point.",
+          "Origin switching has a shared cooldown.",
+          "Destroying a Crown Point briefly reveals the user."
+        ],
+        "counterplay": [
+          "Points are visible, destructible, and range-limited."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Crown Points appear as floating half-halos.",
+          "Shot traces begin at remote origin with a spatial snap.",
+          "Destroyed point sends a reveal beam back to user."
+        ],
+        "animation": [
+          "Rifle barrel rotates toward selected point.",
+          "Origin switch spins crown frame around the player's head.",
+          "Elsewhere Crown uses a bespoke 3th state-transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Distinct Elsewhere Crown activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic royal paradox trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-116",
+      "name": "Funeral Weather",
+      "family": "weapon",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "localized climate weapon",
+      "identity": {
+        "fantasy": "An exotic weapon that cycles tiny weather cells—fog, rain, ash, static—around impact zones for tactical effects.",
+        "silhouette": "Umbrella-like black weapon with four weather chambers.",
+        "lore_hook": "Morticians once scheduled funerals around weather; this weapon schedules weather around funerals."
+      },
+      "mechanics": {
+        "core": [
+          "weather cells",
+          "impact zones",
+          "mode cycling"
+        ],
+        "signature": [
+          "Fog cell obscures lesser AI sight.",
+          "Rain cell improves conductivity interactions.",
+          "Ash cell weakens healing slightly in its small area.",
+          "Static cell interferes with selected summoned entities."
+        ],
+        "counterplay": [
+          "Cells are small, short, and strongly telegraphed."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Four weather icons rotate near barrel.",
+          "Each impact forms a distinct miniature cloud system.",
+          "Mode change alters ambient particles around weapon."
+        ],
+        "animation": [
+          "Chambers rotate like a weather vane.",
+          "Firing opens the umbrella muzzle briefly.",
+          "Funeral Weather uses a bespoke 3th state-transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Distinct Funeral Weather activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic weather-eater hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-117",
+      "name": "The Kindest Lie",
+      "family": "weapon",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "decoy projectile weapon",
+      "identity": {
+        "fantasy": "An exotic pistol that creates a believable fake impact a fraction before the real projectile arrives from a slightly different angle.",
+        "silhouette": "Elegant white pistol with split muzzle.",
+        "lore_hook": "A diplomat commissioned it after learning people react faster to fear than truth."
+      },
+      "mechanics": {
+        "core": [
+          "decoy impact",
+          "timing deception",
+          "duelist"
+        ],
+        "signature": [
+          "Primary fire projects a false muzzle trace and impact cue.",
+          "Real projectile arrives from a small authored offset after a short delay.",
+          "Perfect dodge of the fake cue grants target immunity to the real offset for that shot."
+        ],
+        "counterplay": [
+          "Experienced players can learn the timing; bosses ignore deception logic."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "False tracer is bright but hollow.",
+          "Real tracer is thin and delayed.",
+          "Successful read cancels impact VFX cleanly."
+        ],
+        "animation": [
+          "Split muzzle fires one empty flash then one real shot.",
+          "Weapon tilts between fake and real vector.",
+          "The Kindest Lie uses a bespoke 3th state-transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Distinct The Kindest Lie activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic diplomat assassin chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-118",
+      "name": "Atlas Needle",
+      "family": "weapon",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "terrain-piercing locator rifle",
+      "identity": {
+        "fantasy": "An exotic locator rifle that temporarily outlines traversable depth through large structures rather than simply shooting through everything.",
+        "silhouette": "Needle rifle with layered topographic optic.",
+        "lore_hook": "Surveyors used it to find the inside of mountains."
+      },
+      "mechanics": {
+        "core": [
+          "terrain scan",
+          "traversal reveal",
+          "precision"
+        ],
+        "signature": [
+          "Charged scan paints authored thin-structure paths and weak panels.",
+          "Marked panels can receive enhanced structural damage from the squad.",
+          "Secondary shot creates a temporary navigation pin visible through nearby geometry."
+        ],
+        "counterplay": [
+          "Only authored structures respond; no universal wall penetration."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Topographic contour lines crawl over scanned surfaces.",
+          "Weak panels pulse in amber layers.",
+          "Navigation pin appears as a depth-aware diamond."
+        ],
+        "animation": [
+          "Optic stacks layers during charge.",
+          "Scan releases with almost no recoil.",
+          "Atlas Needle uses a bespoke 3th state-transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Distinct Atlas Needle activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic deep-world cartographer mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-119",
+      "name": "Godhand of the Empty Forge",
+      "family": "weapon",
+      "tier": "god",
+      "status": "specified",
+      "role": "construct-forging cannon",
+      "identity": {
+        "fantasy": "A God-tier cannon that forges temporary battlefield constructs from accumulated combat heat.",
+        "silhouette": "Massive floating forge-hammer barrel with molten runic rails.",
+        "lore_hook": "The Empty Forge contains no fire until someone starts a war nearby."
+      },
+      "mechanics": {
+        "core": [
+          "combat heat",
+          "construct forging",
+          "domain utility"
+        ],
+        "signature": [
+          "Combat activity fills Forge Heat.",
+          "Forge Wall creates a temporary fortified barrier.",
+          "Forge Bridge creates a short traversal span.",
+          "Forge Turret creates a limited-duration autonomous support node.",
+          "Forge Hammer spends most heat on a large stagger strike.",
+          "Masterwork state improves one chosen construct after sustained heat discipline."
+        ],
+        "counterplay": [
+          "Construct count is capped; each is destructible; Masterwork requires deliberate resource saving."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Molten rails brighten with heat.",
+          "Forged constructs assemble from red-gold wireframes.",
+          "Masterwork adds white-hot engraved runes.",
+          "Forge Hammer draws a huge spectral anvil at impact."
+        ],
+        "animation": [
+          "Barrel reshapes into tool silhouette per construct.",
+          "Masterwork forging uses a two-handed hammering sequence.",
+          "Heat purge vents sparks from floating rails."
+        ],
+        "audio": [
+          "Distinct Godhand of the Empty Forge activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier Empty Forge pilgrimage."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "WPN-120",
+      "name": "Throne of Echoes",
+      "family": "weapon",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "memory-domain weapon",
+      "identity": {
+        "fantasy": "An Absolute weapon that records several authored battlefield events and lets the wielder replay one as a weaker controlled echo.",
+        "silhouette": "Floating black throne fragments orbiting a hand-held core.",
+        "lore_hook": "The throne remembers every order ever given from it, including those no ruler survived to repeat."
+      },
+      "mechanics": {
+        "core": [
+          "event memory",
+          "controlled replay",
+          "absolute domain"
+        ],
+        "signature": [
+          "Record one eligible movement event.",
+          "Record one eligible projectile pattern.",
+          "Record one eligible support pulse.",
+          "Record one eligible environmental hazard cue.",
+          "Replay exactly one stored category at reduced authored strength.",
+          "Erase Memory cancels all stored echoes to shorten the weapon's lockout."
+        ],
+        "counterplay": [
+          "Only whitelisted events can be recorded; boss ultimates and unrestricted world effects are never copied."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Recorded memories appear as tiny scenes inside throne fragments.",
+          "Replay uses monochrome ghost geometry.",
+          "Hazard echoes carry obvious Absolute warning sigils.",
+          "Erase Memory turns fragments blank white before reboot.",
+          "Throne of Echoes adds a unique readable VFX layer for its 5th state, with distance-scaled fallback."
+        ],
+        "animation": [
+          "Fragments adopt poses matching stored event types.",
+          "Replay makes the wielder conduct fragments rather than fire normally.",
+          "Erase Memory closes fragments around the core then explodes them outward.",
+          "Throne of Echoes uses a bespoke 4th state-transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Distinct Throne of Echoes activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute memory throne trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-089",
+      "name": "Ash Covenant Frame",
+      "family": "armor",
+      "tier": "epic",
+      "status": "specified",
+      "role": "heat-sharing squad armor",
+      "identity": {
+        "fantasy": "Armor that can vent a portion of accumulated heat into a nearby ally as a temporary reload boost.",
+        "silhouette": "Charred brass frame with paired shoulder vents.",
+        "lore_hook": "Two soldiers survived the Ash War by treating overheating as something that could be shared."
+      },
+      "mechanics": {
+        "core": [
+          "heat storage",
+          "ally transfer",
+          "support"
+        ],
+        "signature": [
+          "Combat heat accumulates while firing.",
+          "Vent Partner spends heat to buff one nearby ally's reload timing."
+        ],
+        "counterplay": [
+          "Requires proximity and gives up personal stored heat."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Orange vapor connects wearer to ally."
+        ],
+        "animation": [
+          "Shoulder vents rotate toward transfer target."
+        ],
+        "audio": [
+          "Distinct Ash Covenant Frame activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic ash covenant reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-090",
+      "name": "Glassstep Rig",
+      "family": "armor",
+      "tier": "epic",
+      "status": "specified",
+      "role": "precision movement armor",
+      "identity": {
+        "fantasy": "Armor that rewards landing from jumps exactly inside small projected safe circles.",
+        "silhouette": "Transparent shin plates and floating ankle rings.",
+        "lore_hook": "Couriers used it to train themselves to land where the future needed them."
+      },
+      "mechanics": {
+        "core": [
+          "landing precision",
+          "mobility reward",
+          "traversal"
+        ],
+        "signature": [
+          "After sprinting, a small landing circle appears ahead.",
+          "Landing inside grants a short movement and accuracy buff."
+        ],
+        "counterplay": [
+          "Missed circles grant nothing and can pull attention from combat."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Landing circles shimmer like thin glass.",
+          "Perfect land emits a crisp ring."
+        ],
+        "animation": [
+          "Ankle rings snap level on perfect landing."
+        ],
+        "audio": [
+          "Distinct Glassstep Rig activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic courier mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-091",
+      "name": "Mournsteel Harness",
+      "family": "armor",
+      "tier": "epic",
+      "status": "specified",
+      "role": "stagger-conversion armor",
+      "identity": {
+        "fantasy": "Armor that converts a portion of received stagger into a brief outgoing melee knock bonus.",
+        "silhouette": "Dark steel with flexible black spine plates.",
+        "lore_hook": "Mournsteel bends before it breaks and remembers who pushed it."
+      },
+      "mechanics": {
+        "core": [
+          "stagger storage",
+          "melee response",
+          "frontline"
+        ],
+        "signature": [
+          "Receiving eligible stagger fills Retort.",
+          "Next melee hit spends Retort as extra knock pressure."
+        ],
+        "counterplay": [
+          "Storage decays quickly and does not prevent original stagger."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Spine plates flash violet when charged."
+        ],
+        "animation": [
+          "Back plates compress under stagger then spring open on Retort."
+        ],
+        "audio": [
+          "Distinct Mournsteel Harness activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic duelist foundry."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-092",
+      "name": "Choirless Veil",
+      "family": "armor",
+      "tier": "epic",
+      "status": "specified",
+      "role": "audio-stealth armor",
+      "identity": {
+        "fantasy": "Armor that reduces selected self-generated noise after remaining out of combat, supporting ambush play without true invisibility.",
+        "silhouette": "Black cloth-metal veil with sound-dampening fins.",
+        "lore_hook": "Assassins cut the bells from their own order and wore the silence instead."
+      },
+      "mechanics": {
+        "core": [
+          "noise reduction",
+          "ambush setup",
+          "stealth"
+        ],
+        "signature": [
+          "Out-of-combat stillness builds Silence.",
+          "First sprint or weapon swap spends Silence to suppress some local audio cues."
+        ],
+        "counterplay": [
+          "Attacking immediately breaks the effect; visuals remain normal."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Fins fold flat when Silence is ready."
+        ],
+        "animation": [
+          "Movement starts with an unnaturally quiet first step."
+        ],
+        "audio": [
+          "Distinct Choirless Veil activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic silent-order contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-093",
+      "name": "Red Parliament Plate",
+      "family": "armor",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "companion-command armor",
+      "identity": {
+        "fantasy": "Armor that generates command points when hired NPCs perform distinct combat roles.",
+        "silhouette": "Crimson command coat with four floating insignia plates.",
+        "lore_hook": "The Parliament survived because its soldiers disagreed productively."
+      },
+      "mechanics": {
+        "core": [
+          "companion roles",
+          "command points",
+          "squad tactics"
+        ],
+        "signature": [
+          "Tank, support, scout, and damage companion actions each generate distinct command marks.",
+          "Collecting three different marks unlocks Rally Order.",
+          "Rally briefly improves companion repositioning and target focus."
+        ],
+        "counterplay": [
+          "Repeated same-role actions do not farm marks."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Role insignias orbit the wearer.",
+          "Rally draws lines to companions."
+        ],
+        "animation": [
+          "Wearer gives a broad battlefield hand signal.",
+          "Insignias slot into a temporary crest."
+        ],
+        "audio": [
+          "Distinct Red Parliament Plate activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary faction commander reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-094",
+      "name": "Chronicle Skin",
+      "family": "armor",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "damage-history armor",
+      "identity": {
+        "fantasy": "Armor that tracks the last two damage categories received and briefly resists repeating the same pattern.",
+        "silhouette": "Ink-black bodysuit with scrolling text along limbs.",
+        "lore_hook": "The armor writes what hurt it and hates rereading the same sentence."
+      },
+      "mechanics": {
+        "core": [
+          "damage history",
+          "repeat resistance",
+          "adaptive defense"
+        ],
+        "signature": [
+          "First category is written to left side.",
+          "Second category is written to right side.",
+          "A third hit matching either category gains modest mitigation and erases that entry."
+        ],
+        "counterplay": [
+          "Alternating damage types bypasses most value."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Text glows where category is stored.",
+          "Consumed entry burns off like paper."
+        ],
+        "animation": [
+          "Stored text crawls toward impact point.",
+          "Erase animation flakes symbols away."
+        ],
+        "audio": [
+          "Distinct Chronicle Skin activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary archive sentinel reward."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-095",
+      "name": "Leviathan Lung",
+      "family": "armor",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "breath-cycle armor",
+      "identity": {
+        "fantasy": "Armor with a visible inhale/exhale cycle that alternates movement and defense benefits.",
+        "silhouette": "Blue-black chestplate with expanding rib vents.",
+        "lore_hook": "Divers copied the breathing rhythm of creatures too large to drown."
+      },
+      "mechanics": {
+        "core": [
+          "breath cycle",
+          "movement-defense alternation",
+          "timing"
+        ],
+        "signature": [
+          "Inhale phase favors sprint and swim acceleration.",
+          "Exhale phase favors knockback resistance.",
+          "Holding still synchronizes the next cycle faster."
+        ],
+        "counterplay": [
+          "Benefits alternate predictably and cannot overlap fully."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Chest ribs glow blue on inhale and silver on exhale.",
+          "Leviathan Lung adds a unique readable VFX layer for its 2th state, with distance-scaled fallback."
+        ],
+        "animation": [
+          "Torso visibly expands and contracts in slow rhythm.",
+          "Leviathan Lung uses a bespoke 2th state-transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Distinct Leviathan Lung activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary abyssal diver trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-096",
+      "name": "Bellgrave Mantle",
+      "family": "armor",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "death-zone support armor",
+      "identity": {
+        "fantasy": "Armor that leaves a brief support bell at the site of a defeated elite, creating a temporary rally point.",
+        "silhouette": "Dark mantle with small bronze grave bells.",
+        "lore_hook": "Its order taught soldiers to stand where something dangerous had just died."
+      },
+      "mechanics": {
+        "core": [
+          "elite defeat",
+          "rally point",
+          "team sustain"
+        ],
+        "signature": [
+          "Eligible elite defeat spawns a Bellgrave.",
+          "Nearby allies receive modest recovery support.",
+          "Bell can be rung once to reveal nearby lesser enemies."
+        ],
+        "counterplay": [
+          "Bell duration is short and cannot chain from trivial mobs."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Bronze bell rises from fading elite silhouette.",
+          "Reveal sends a circular soundwave."
+        ],
+        "animation": [
+          "Wearer touches chest bell to activate reveal.",
+          "Bellgrave Mantle uses a bespoke 2th state-transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Distinct Bellgrave Mantle activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary gravewarden path."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-097",
+      "name": "Probability Carapace",
+      "family": "armor",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "branching-defense armor",
+      "identity": {
+        "fantasy": "Mythic armor that presents two predicted incoming threat lanes and lets the wearer commit defense to one.",
+        "silhouette": "Faceted silver shell with forked shoulder projections.",
+        "lore_hook": "Its builders stopped trying to know the future and settled for narrowing it."
+      },
+      "mechanics": {
+        "core": [
+          "threat prediction",
+          "commit defense",
+          "choice"
+        ],
+        "signature": [
+          "Threat Fork paints two likely heavy-attack lanes.",
+          "Choose one fork to gain strong directional mitigation.",
+          "Correct choice stores Probability Charge.",
+          "Three Charges unlock a short evasive phase-step."
+        ],
+        "counterplay": [
+          "Wrong commitment leaves opposite lane normal; telegraph requires attention."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Two translucent future silhouettes appear.",
+          "Chosen branch turns gold.",
+          "Phase-step leaves multiple fading branches."
+        ],
+        "animation": [
+          "Shoulder forks physically align to chosen lane.",
+          "Phase-step splits body afterimage into three."
+        ],
+        "audio": [
+          "Distinct Probability Carapace activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic probability engine trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-098",
+      "name": "Crown of Salt",
+      "family": "armor",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "anti-eldritch ward armor",
+      "identity": {
+        "fantasy": "Mythic armor that creates salt-like ward geometry against selected eldritch summons and portals.",
+        "silhouette": "White crystalline crownmail with dark salt seams.",
+        "lore_hook": "Old superstition survived because occasionally it was engineering."
+      },
+      "mechanics": {
+        "core": [
+          "ward geometry",
+          "portal interference",
+          "eldritch defense"
+        ],
+        "signature": [
+          "Salt Line can draw one short anti-summon boundary.",
+          "Crossing eligible eldritch minions are slowed.",
+          "Portal Bloom briefly destabilizes one eligible small portal.",
+          "Breaking the line releases a ward pulse."
+        ],
+        "counterplay": [
+          "Boundaries are short, visible, and ineffective against major boss bodies."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "White crystalline line sparkles against dark entities.",
+          "Destabilized portals flicker with square noise.",
+          "Crown seams glow during pulse."
+        ],
+        "animation": [
+          "Wearer drags gauntlet through air to draw line.",
+          "Pulse snaps crown spikes upright."
+        ],
+        "audio": [
+          "Distinct Crown of Salt activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic eldritch ward pilgrimage."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-099",
+      "name": "Furnace Saint Regalia",
+      "family": "armor",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "sacrifice-tank armor",
+      "identity": {
+        "fantasy": "Mythic armor that can deliberately lock movement to become a temporary heat-resistant anchor for the team.",
+        "silhouette": "White-red plated vestments with furnace door chest.",
+        "lore_hook": "The saint survived because everyone else could hide behind someone willing to stop moving."
+      },
+      "mechanics": {
+        "core": [
+          "anchor stance",
+          "team cover",
+          "heat resistance"
+        ],
+        "signature": [
+          "Sanctuary Lock roots wearer in place.",
+          "While locked, wearer gains major resistance to selected environmental heat and knock.",
+          "Allies behind the wearer gain a narrow cover benefit.",
+          "Release converts stored pressure into a forward stagger wave."
+        ],
+        "counterplay": [
+          "Rooting is dangerous against flanks and does not block all damage types."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Furnace door glows white during lock.",
+          "Narrow golden cover wedge projects behind wearer.",
+          "Release vents a cone of sparks."
+        ],
+        "animation": [
+          "Feet clamp into ground.",
+          "Chest door opens on release."
+        ],
+        "audio": [
+          "Distinct Furnace Saint Regalia activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic furnace saint trial."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "ARM-100",
+      "name": "Zero-Adjacent Shroud",
+      "family": "armor",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "ascension-preparation armor",
+      "identity": {
+        "fantasy": "Absolute armor used by Zero Candidates to survive trial environments without granting Transcendent powers.",
+        "silhouette": "Black-white shroud with incomplete impossible symbols that never close.",
+        "lore_hook": "Candidates wear it to learn that proximity to Zero is not ownership of Zero."
+      },
+      "mechanics": {
+        "core": [
+          "trial adaptation",
+          "resource telemetry",
+          "absolute defense"
+        ],
+        "signature": [
+          "Trial Sense highlights authored lethal-environment telegraphs.",
+          "Axiom Buffer stores a capped amount of rule-anomaly pressure.",
+          "Candidate Seal prevents one selected trial hazard from chaining twice in rapid succession.",
+          "Sacrifice Socket allows a chosen relic bonus to be disabled in exchange for trial currency.",
+          "Failure Memory records the last trial cause-of-failure category for UI coaching."
+        ],
+        "counterplay": [
+          "No direct power equal to Transcendent abilities; all benefits are trial-bounded and heavily capped."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Incomplete symbols brighten near hazards.",
+          "Buffer appears as black-white lattice.",
+          "Sacrifice Socket visibly darkens one equipment emblem.",
+          "Failure Memory writes one stark glyph over the chest.",
+          "Seal activation creates a single clean boundary ring."
+        ],
+        "animation": [
+          "Shroud folds away from incoming rule waves.",
+          "Sacrifice animation removes a spectral relic from the body.",
+          "Failure Memory draws glyph with the off hand.",
+          "Seal activation briefly locks the character in a braced stance."
+        ],
+        "audio": [
+          "Distinct Zero-Adjacent Shroud activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute Zero Candidate preparation quest."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-097",
+      "name": "Rust Choir Hound",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "mechanical pack hunter",
+      "identity": {
+        "fantasy": "A rusted canine automaton that harmonizes with packmates to sharpen their pursuit paths.",
+        "silhouette": "Lean iron hound with tuning-fork ribs.",
+        "lore_hook": "The pack hears paths before it sees prey."
+      },
+      "mechanics": {
+        "core": [
+          "pack harmony",
+          "pursuit",
+          "mechanical"
+        ],
+        "signature": [
+          "Two hounds in range create a pursuit resonance line.",
+          "Breaking one hound's ribs disrupts the line."
+        ],
+        "counterplay": [
+          "Split the pack and target tuning ribs."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Orange resonance line links packmates."
+        ],
+        "animation": [
+          "Rib forks flex while sprinting."
+        ],
+        "audio": [
+          "Distinct Rust Choir Hound activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic machine-waste encounter."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-098",
+      "name": "Coffin Kite",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "necromantic aerial ambusher",
+      "identity": {
+        "fantasy": "A flying coffin-creature that drops shadow tethers onto isolated players.",
+        "silhouette": "Black sarcophagus with ragged cloth wings.",
+        "lore_hook": "Some coffins learned burial was only a suggestion."
+      },
+      "mechanics": {
+        "core": [
+          "air ambush",
+          "shadow tether",
+          "isolation"
+        ],
+        "signature": [
+          "Shadow Line slows an isolated target briefly.",
+          "Breaking line with terrain snaps the tether."
+        ],
+        "counterplay": [
+          "Stay near cover and allies."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Black tether line descends from coffin."
+        ],
+        "animation": [
+          "Coffin lid flaps like a wing during attack."
+        ],
+        "audio": [
+          "Distinct Coffin Kite activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic necropolis air patrol."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-099",
+      "name": "Mire Crown Stag",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "corrupted territorial beast",
+      "identity": {
+        "fantasy": "A swamp stag whose antlers grow temporary toxic stepping zones where it charges.",
+        "silhouette": "Huge dark stag with algae crown antlers.",
+        "lore_hook": "The swamp follows its king one hoofprint at a time."
+      },
+      "mechanics": {
+        "core": [
+          "charge path",
+          "toxic terrain",
+          "beast"
+        ],
+        "signature": [
+          "Charge leaves short-lived mire pools.",
+          "Antler Slam splashes pools outward."
+        ],
+        "counterplay": [
+          "Bait charges onto dry ground."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Green-black pools shimmer after charge."
+        ],
+        "animation": [
+          "Antlers flex and shed moss during slam."
+        ],
+        "audio": [
+          "Distinct Mire Crown Stag activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic mire hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-100",
+      "name": "Inkjaw Monk",
+      "family": "monster",
+      "tier": "epic",
+      "status": "specified",
+      "role": "eldritch counterfighter",
+      "identity": {
+        "fantasy": "A robed creature that paints one recent player attack into the air and returns a simplified version.",
+        "silhouette": "Headless monk with an ink-filled jaw on its chest.",
+        "lore_hook": "It copies violence the way scribes copy scripture."
+      },
+      "mechanics": {
+        "core": [
+          "attack copy",
+          "counter",
+          "ink"
+        ],
+        "signature": [
+          "Ink Record stores one eligible simple attack archetype.",
+          "Return Stroke replays a weaker telegraphed copy."
+        ],
+        "counterplay": [
+          "Vary attacks and punish the recording stance."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Black ink sketch appears before replay."
+        ],
+        "animation": [
+          "Chest jaw writes attack shape with tongue-like brush."
+        ],
+        "audio": [
+          "Distinct Inkjaw Monk activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic archive anomaly."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-101",
+      "name": "Halo Leech",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "support-draining parasite",
+      "identity": {
+        "fantasy": "A floating parasite that attaches to protective zones and converts some of their output into shields for nearby monsters.",
+        "silhouette": "Pale disk-creature with hooked luminous tendrils.",
+        "lore_hook": "It evolved in temples by feeding on miracles."
+      },
+      "mechanics": {
+        "core": [
+          "support drain",
+          "parasite",
+          "shield transfer"
+        ],
+        "signature": [
+          "Attaches to eligible support fields.",
+          "Converts a capped fraction into monster shielding.",
+          "Detaching forces a vulnerable fall."
+        ],
+        "counterplay": [
+          "Move or cancel support zones and focus the attached leech."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Tendrils siphon gold light into dark shields.",
+          "Detached body flickers weakly."
+        ],
+        "animation": [
+          "Body flattens against support fields.",
+          "Fall animation spins uncontrollably."
+        ],
+        "audio": [
+          "Distinct Halo Leech activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary corrupted sanctuary event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-102",
+      "name": "Clockspine Lynx",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "temporal ambush beast",
+      "identity": {
+        "fantasy": "A feline predator whose spine ticks down before a burst of impossible speed.",
+        "silhouette": "Chrome-black lynx with exposed clock vertebrae.",
+        "lore_hook": "Hunters learned to fear the third tick, not the roar."
+      },
+      "mechanics": {
+        "core": [
+          "countdown dash",
+          "ambush",
+          "temporal"
+        ],
+        "signature": [
+          "Three visible spine ticks precede Time Pounce.",
+          "Missing the pounce leaves the lynx slowed briefly.",
+          "Repeated hits can desynchronize the countdown."
+        ],
+        "counterplay": [
+          "Watch the spine and dodge late."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Clock vertebrae glow one-two-three.",
+          "Pounce leaves segmented afterimages."
+        ],
+        "animation": [
+          "Spine clicks physically down toward tail.",
+          "Missed pounce ends in skidding collapse."
+        ],
+        "audio": [
+          "Distinct Clockspine Lynx activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary chrono wilderness hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-103",
+      "name": "Grave Orchard Wasp",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "corpse-seeding swarm unit",
+      "identity": {
+        "fantasy": "A giant wasp that plants necrotic larvae into eligible corpses, turning them into delayed swarm nests.",
+        "silhouette": "Human-sized black wasp with seed-pod abdomen.",
+        "lore_hook": "The orchard learned pollination from graveyards."
+      },
+      "mechanics": {
+        "core": [
+          "corpse seeding",
+          "delayed swarm",
+          "aerial"
+        ],
+        "signature": [
+          "Stings eligible corpses to create Brood Seeds.",
+          "Seeds hatch if not destroyed.",
+          "Queenless swarms disperse after timer."
+        ],
+        "counterplay": [
+          "Destroy seeded corpses and prioritize wasps."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Seeded corpses glow with dark pollen.",
+          "Hatch creates a brief black cloud."
+        ],
+        "animation": [
+          "Abdomen opens like flower petals during seeding.",
+          "Wings fold during dive."
+        ],
+        "audio": [
+          "Distinct Grave Orchard Wasp activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary grave orchard region."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-104",
+      "name": "Mirror Ape",
+      "family": "monster",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "imitation bruiser",
+      "identity": {
+        "fantasy": "A huge ape that mirrors the broad movement style of the nearest player—aggressive, defensive, or evasive.",
+        "silhouette": "Silver-furred ape with mirror plates on forearms.",
+        "lore_hook": "It does not copy technique, only intention."
+      },
+      "mechanics": {
+        "core": [
+          "behavior mirror",
+          "bruiser",
+          "adaptation"
+        ],
+        "signature": [
+          "Aggressive players cause it to rush.",
+          "Defensive players make it guard.",
+          "Evasive players make it leap and flank."
+        ],
+        "counterplay": [
+          "Team members can deliberately feed conflicting behaviors."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Forearm plates reflect target silhouette.",
+          "Mode change flashes corresponding posture icon."
+        ],
+        "animation": [
+          "Whole stance changes to match observed intent.",
+          "Mode switch includes mirror-swipe gesture."
+        ],
+        "audio": [
+          "Distinct Mirror Ape activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary mirror jungle hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-105",
+      "name": "Saint-Eater Moth",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "holy-effect predator",
+      "identity": {
+        "fantasy": "A giant moth attracted to healing and protective effects, feeding on them to grow luminous attack scales.",
+        "silhouette": "Cathedral-sized pale moth with black halo spots.",
+        "lore_hook": "It migrated along pilgrimage routes because faith was easier to smell than flowers."
+      },
+      "mechanics": {
+        "core": [
+          "support predation",
+          "scale growth",
+          "aerial bosslet"
+        ],
+        "signature": [
+          "Healing events attract the moth.",
+          "Feeding generates luminous scales.",
+          "Scale Burst scatters stored energy as hostile projectiles.",
+          "Blinding Dust temporarily obscures support-zone boundaries."
+        ],
+        "counterplay": [
+          "Use burst healing carefully and destroy wing scale clusters."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Halo spots brighten after feeding.",
+          "Scale Burst fills air with gold-black shards.",
+          "Dust makes boundaries flicker, not disappear."
+        ],
+        "animation": [
+          "Proboscis feeding animation is long and punishable.",
+          "Wingbeat telegraphs Burst."
+        ],
+        "audio": [
+          "Distinct Saint-Eater Moth activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic cathedral migration."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-106",
+      "name": "Ninefold Chimera",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "adaptive multi-head beast",
+      "identity": {
+        "fantasy": "A chimera with nine small heads, each tied to a different status or movement response.",
+        "silhouette": "Massive lion-serpent body with crown of nine distinct heads.",
+        "lore_hook": "No hunter agrees which head is the original because none of them behave like a leader."
+      },
+      "mechanics": {
+        "core": [
+          "multi-head adaptation",
+          "status response",
+          "phase shedding"
+        ],
+        "signature": [
+          "Only three heads are active at once.",
+          "Breaking one head forces a new one to activate.",
+          "Head set determines breath, leap, guard, or summon response.",
+          "After six breaks the beast enters unstable mixed phase."
+        ],
+        "counterplay": [
+          "Read active heads and target the one enabling the most dangerous mechanic."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Each head has unique color sigil.",
+          "Head swap sends a ring through the crown.",
+          "Mixed phase creates layered aura."
+        ],
+        "animation": [
+          "Heads argue and bite each other during swaps.",
+          "Broken head retracts into crown."
+        ],
+        "audio": [
+          "Distinct Ninefold Chimera activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic chimera hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-107",
+      "name": "Funeral Telescope",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "eldritch observer",
+      "identity": {
+        "fantasy": "A tall walking observatory that marks players it can see through its giant lens and calls distant hazards onto predicted routes.",
+        "silhouette": "Tripod creature with a moon-sized eye lens.",
+        "lore_hook": "It was built to look at stars; eventually something looked back through it."
+      },
+      "mechanics": {
+        "core": [
+          "observation mark",
+          "route prediction",
+          "artillery"
+        ],
+        "signature": [
+          "Lens Lock marks one visible player.",
+          "Predictive Arc paints likely travel corridor.",
+          "Distant Strike lands along corridor after delay.",
+          "Closing the lens by damage cancels the strike."
+        ],
+        "counterplay": [
+          "Break sight lines and focus lens shutters."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Huge lens beam scans terrain.",
+          "Predicted corridor draws constellation dots.",
+          "Strike descends as cold star line."
+        ],
+        "animation": [
+          "Tripod legs reposition with telescope precision.",
+          "Lens iris physically closes under pressure."
+        ],
+        "audio": [
+          "Distinct Funeral Telescope activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic observatory anomaly."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-108",
+      "name": "Infernal Choir Ox",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "siege demon",
+      "identity": {
+        "fantasy": "A giant armored ox demon whose bellow creates synchronized charge lanes for lesser demons.",
+        "silhouette": "Building-sized red-black ox with organ-pipe horns.",
+        "lore_hook": "Demon armies use it as both siege engine and conductor."
+      },
+      "mechanics": {
+        "core": [
+          "charge lanes",
+          "siege",
+          "demon commander"
+        ],
+        "signature": [
+          "Bellow paints three charge corridors.",
+          "Lesser demons align to those lanes.",
+          "Horn Break removes one corridor.",
+          "Final Stampede collapses remaining lanes into one heavy push."
+        ],
+        "counterplay": [
+          "Break horns and move perpendicular to corridors."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Red lane lines burn across floor.",
+          "Organ horns glow per active lane.",
+          "Final lane widens visibly."
+        ],
+        "animation": [
+          "Bellow inflates throat furnace.",
+          "Broken horn causes off-balance head shake."
+        ],
+        "audio": [
+          "Distinct Infernal Choir Ox activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic infernal siege event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-109",
+      "name": "Moonwell Serpent",
+      "family": "monster",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "gravity-swimming wyrm",
+      "identity": {
+        "fantasy": "A serpent that swims through local gravity wells as though they were water.",
+        "silhouette": "Long luminous serpent with crescent fins and star-speckled belly.",
+        "lore_hook": "It cannot tell sky from sea and sees no reason to learn."
+      },
+      "mechanics": {
+        "core": [
+          "gravity swim",
+          "air mobility",
+          "well creation"
+        ],
+        "signature": [
+          "Creates small gravity wells to turn in midair.",
+          "Dive converts a well into downward pressure.",
+          "Shed Scale leaves a temporary player-usable lift current.",
+          "Wells collapse if key scales are broken."
+        ],
+        "counterplay": [
+          "Destroy scale nodes and use shed currents to evade."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Gravity wells appear as blue lens spheres.",
+          "Serpent leaves star trails through air.",
+          "Scale current glows silver."
+        ],
+        "animation": [
+          "Body undulates as if underwater even in air.",
+          "Dive coils tightly then snaps downward."
+        ],
+        "audio": [
+          "Distinct Moonwell Serpent activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic moonwell migration."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-110",
+      "name": "The Empty Shepherd",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "possession controller",
+      "identity": {
+        "fantasy": "An exotic eldritch shepherd that temporarily drives abandoned summoned creatures and neutral constructs like puppets.",
+        "silhouette": "Tall hollow robe holding strings that disappear into space.",
+        "lore_hook": "The Shepherd owns nothing living, only things someone stopped paying attention to."
+      },
+      "mechanics": {
+        "core": [
+          "possession",
+          "construct control",
+          "battlefield theft"
+        ],
+        "signature": [
+          "Can possess eligible abandoned summons.",
+          "Can redirect neutral constructs.",
+          "String Cut releases all control and briefly stuns the Shepherd.",
+          "Possessed units show visible thread anchors."
+        ],
+        "counterplay": [
+          "Destroy thread anchors or keep summons active and protected."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "White strings connect to possessed entities.",
+          "Hollow hood contains moving stars.",
+          "String Cut showers thread fragments."
+        ],
+        "animation": [
+          "Hands conduct puppets with marionette motions.",
+          "Stun collapses robe inward.",
+          "The Empty Shepherd uses a bespoke 3th state-transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Distinct The Empty Shepherd activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic eldritch shepherd event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-111",
+      "name": "Crownless Djinn",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "wish-distortion caster",
+      "identity": {
+        "fantasy": "An exotic spirit that offers battlefield boons that always alter a second rule in exchange.",
+        "silhouette": "Smoke humanoid with broken crown fragments orbiting head.",
+        "lore_hook": "It grants exactly what is asked and something adjacent no one remembered to specify."
+      },
+      "mechanics": {
+        "core": [
+          "conditional boon",
+          "tradeoff",
+          "spirit caster"
+        ],
+        "signature": [
+          "Offers speed with reduced stopping control.",
+          "Offers shields with slower recharge afterward.",
+          "Offers damage with louder threat generation.",
+          "Refusing all offers enrages but simplifies its attacks."
+        ],
+        "counterplay": [
+          "Choose tradeoffs deliberately or refuse for predictable combat."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Offer icons appear as floating crown shards.",
+          "Accepted boon wraps player in two-color aura.",
+          "Refusal turns smoke dark red."
+        ],
+        "animation": [
+          "Djinn bows during offers.",
+          "Crown shards slot into chosen symbol.",
+          "Crownless Djinn uses a bespoke 3th state-transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Distinct Crownless Djinn activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic desert anomaly."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-112",
+      "name": "The House That Runs",
+      "family": "monster",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "mobile mimic structure",
+      "identity": {
+        "fantasy": "An entire abandoned house that unfolds legs and hunts players who loot the wrong room.",
+        "silhouette": "Victorian ruin on many insectile foundation legs.",
+        "lore_hook": "The house was never haunted. It was hungry and learned architecture."
+      },
+      "mechanics": {
+        "core": [
+          "structure mimic",
+          "interior fight",
+          "mobile terrain"
+        ],
+        "signature": [
+          "Rooms act as attack modules.",
+          "Windows spit hostile projectiles.",
+          "Staircase can detach as a sweeping limb.",
+          "Destroying interior Heart Room ends locomotion."
+        ],
+        "counterplay": [
+          "Enter during kneel phases and attack internal modules."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Windows glow like eyes.",
+          "Foundation legs leave dust trenches.",
+          "Heart Room pulses through walls."
+        ],
+        "animation": [
+          "House rises on legs in sections.",
+          "Staircase unfolds through a wall.",
+          "The House That Runs uses a bespoke 3th state-transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Distinct The House That Runs activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic haunted-district encounter."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-113",
+      "name": "Solar Wyrm Regent",
+      "family": "monster",
+      "tier": "god",
+      "status": "specified",
+      "role": "regional sky dragon",
+      "identity": {
+        "fantasy": "A God-tier dragon that drags a moving solar storm behind it and changes daytime lighting across its region.",
+        "silhouette": "Mountain-length gold-black dragon with sun-disc scales.",
+        "lore_hook": "Ancient calendars were simply records of where the Regent slept."
+      },
+      "mechanics": {
+        "core": [
+          "solar weather",
+          "regional flight",
+          "scale objectives"
+        ],
+        "signature": [
+          "Sunwake creates moving heat front.",
+          "Eclipse Turn swings the dragon between players and sun, changing visibility.",
+          "Scale Constellations are distributed weak points.",
+          "Solar Molt drops temporary burning armor plates into the world.",
+          "Crown Roar summons smaller heliophage creatures."
+        ],
+        "counterplay": [
+          "Teams must split across weak-point routes and exploit eclipse cooling windows."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Sky turns gold-white under Sunwake.",
+          "Dragon shadow causes instant regional eclipse.",
+          "Weak scales form visible star pattern.",
+          "Molted plates fall like suns."
+        ],
+        "animation": [
+          "Wingbeats move cloud layers.",
+          "Eclipse Turn is a slow horizon-filling roll.",
+          "Molt shakes entire body before plates fall."
+        ],
+        "audio": [
+          "Distinct Solar Wyrm Regent activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier solar world hunt."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "MON-114",
+      "name": "The Unfinished Ocean",
+      "family": "monster",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "reality-biome entity",
+      "identity": {
+        "fantasy": "An Absolute creature experienced as a moving body of water that temporarily replaces terrain rules across a region.",
+        "silhouette": "A vertical ocean wall with silhouettes of impossible marine life swimming inside.",
+        "lore_hook": "It is not water invading land; it is an ocean still deciding where its shore should be."
+      },
+      "mechanics": {
+        "core": [
+          "biome replacement",
+          "water-domain",
+          "absolute entity"
+        ],
+        "signature": [
+          "Flood Rewrite makes selected low areas behave as water zones.",
+          "Vertical Tide creates climbable flowing walls.",
+          "Drowned Gravity alters jump arcs inside the domain.",
+          "Memory Reef forms temporary terrain from submerged prior geometry.",
+          "Retreating Shore leaves behind temporary abyssal monsters."
+        ],
+        "counterplay": [
+          "Reality Anchors stabilize pockets of normal terrain; players fight projection organs rather than the ocean itself."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Huge transparent ocean wall moves across landscape.",
+          "Fish silhouettes swim through buildings.",
+          "Vertical Tide glows at safe traversal edges.",
+          "Memory Reef recreates ghost architecture underwater.",
+          "Anchor zones retain normal color."
+        ],
+        "animation": [
+          "Ocean boundary advances in slow world-scale animation.",
+          "Reef structures assemble from translucent fragments.",
+          "Projection organs breach like islands.",
+          "The Unfinished Ocean uses a bespoke 4th state-transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Distinct The Unfinished Ocean activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute ocean anomaly chain."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "BOS-063",
+      "name": "Archivist of Lost Damage",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "combat-history boss",
+      "identity": {
+        "fantasy": "A raid boss that records which damage patterns the squad repeats and temporarily adapts against overused patterns.",
+        "silhouette": "Tall librarian construct with shelves of glowing weapon memories.",
+        "lore_hook": "It catalogs not weapons, but habits."
+      },
+      "mechanics": {
+        "core": [
+          "adaptation",
+          "squad variety",
+          "memory"
+        ],
+        "signature": [
+          "Repeated damage category fills a Memory Shelf.",
+          "Full shelf grants temporary mitigation to that category.",
+          "Breaking shelf resets that adaptation.",
+          "Catalog Burn forces players to use underrepresented mechanics for a bonus window."
+        ],
+        "counterplay": [
+          "Vary squad loadouts and target shelves."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Shelves glow by damage category.",
+          "Full shelf closes behind armor shutters.",
+          "Burn highlights underused categories."
+        ],
+        "animation": [
+          "Boss pulls glowing books from attacks.",
+          "Shelf break showers memory pages."
+        ],
+        "audio": [
+          "Distinct Archivist of Lost Damage activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic archive raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "BOS-064",
+      "name": "Queen of the Crooked Moon",
+      "family": "boss",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "lunar beast sovereign",
+      "identity": {
+        "fantasy": "A giant horned queen who tilts the local gravity direction in authored wedges as the moon behind her rotates.",
+        "silhouette": "Towering antlered humanoid with crescent crown.",
+        "lore_hook": "Her court walks on walls because floors are considered provincial."
+      },
+      "mechanics": {
+        "core": [
+          "gravity wedges",
+          "lunar rotation",
+          "arena control"
+        ],
+        "signature": [
+          "Moon rotates through four gravity wedges.",
+          "Antler Strike changes one wedge early.",
+          "Crescent Gate lets players transfer between wedges.",
+          "Full Moon phase synchronizes all wedges briefly."
+        ],
+        "counterplay": [
+          "Use gates and watch moon orientation."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Giant moon dial hangs over arena.",
+          "Wedges show starfall direction.",
+          "Full Moon makes all particles orbit."
+        ],
+        "animation": [
+          "Queen leans with gravity instead of resisting it.",
+          "Antlers physically rotate the moon dial."
+        ],
+        "audio": [
+          "Distinct Queen of the Crooked Moon activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic lunar court raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "BOS-065",
+      "name": "The Debt Colossus",
+      "family": "boss",
+      "tier": "god",
+      "status": "specified",
+      "role": "resource-accounting titan",
+      "identity": {
+        "fantasy": "A God-tier titan that tracks how much healing, ammo, and summoned support the squad consumes, then creates counter-objectives around the most used resource.",
+        "silhouette": "Skyscraper brass giant with three enormous ledger drums.",
+        "lore_hook": "It believes victory is simply unpaid expense."
+      },
+      "mechanics": {
+        "core": [
+          "resource tracking",
+          "counter objectives",
+          "titan"
+        ],
+        "signature": [
+          "Healing use fills Mercy Ledger.",
+          "Ammo expenditure fills Arsenal Ledger.",
+          "Summons fill Command Ledger.",
+          "Highest ledger spawns a corresponding tax objective.",
+          "Paying tax through encounter mechanics opens a weak point.",
+          "Bankruptcy phase activates if squads let all ledgers cap simultaneously."
+        ],
+        "counterplay": [
+          "Balance resource use and clear tax objectives before cap."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Three giant ledger drums visibly fill.",
+          "Tax objective beams match ledger colors.",
+          "Weak point opens as a coin-like iris.",
+          "The Debt Colossus adds a unique readable VFX layer for its 4th state, with distance-scaled fallback."
+        ],
+        "animation": [
+          "Drums rotate on titan torso.",
+          "Tax declaration stamps terrain with huge seal.",
+          "The Debt Colossus uses a bespoke 3th state-transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Distinct The Debt Colossus activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier economic siege event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "BOS-066",
+      "name": "Mother of Roads",
+      "family": "boss",
+      "tier": "god",
+      "status": "specified",
+      "role": "world-traversal boss",
+      "identity": {
+        "fantasy": "A God-tier entity whose body is an impossible road network; defeating it requires traveling along moving routes while fighting projections at intersections.",
+        "silhouette": "Horizon-scale knot of roads rising into the sky like limbs.",
+        "lore_hook": "Every road is said to lead somewhere; hers lead back into herself."
+      },
+      "mechanics": {
+        "core": [
+          "moving routes",
+          "intersection fights",
+          "travel boss"
+        ],
+        "signature": [
+          "Road Arms create moving traversal paths.",
+          "Wrong Turn teleports players only between authored intersection pairs.",
+          "Toll Guardians control shortcuts.",
+          "Central Roundabout becomes final arena after enough routes are severed."
+        ],
+        "counterplay": [
+          "Map routes, capture shortcuts, and avoid fighting on collapsing lanes."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Roads glow as elevated ribbons.",
+          "Intersections pulse before relocation.",
+          "Central roundabout rises like a crown.",
+          "Mother of Roads adds a unique readable VFX layer for its 4th state, with distance-scaled fallback."
+        ],
+        "animation": [
+          "Entire road segments bend in slow arcs.",
+          "Roundabout spins during final phase.",
+          "Mother of Roads uses a bespoke 3th state-transition animation with protected anticipation frames."
+        ],
+        "audio": [
+          "Distinct Mother of Roads activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "God-tier world-route event."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "high",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "BOS-067",
+      "name": "Emperor of Second Suns",
+      "family": "boss",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "dual-star domain boss",
+      "identity": {
+        "fantasy": "An Absolute emperor who creates a second local sun and forces players to manage two moving shadow systems.",
+        "silhouette": "Colossal white-black ruler with two suns orbiting the arena.",
+        "lore_hook": "One sun reveals truth; the other reveals what truth costs."
+      },
+      "mechanics": {
+        "core": [
+          "dual light",
+          "shadow mechanics",
+          "absolute domain"
+        ],
+        "signature": [
+          "First Sun exposes real weak points.",
+          "Second Sun exposes false-but-dangerous shadow entities.",
+          "Solar Alignment creates a brief safe eclipse lane.",
+          "Twin Noon removes all shadows and forces movement between heat shelters.",
+          "Sun Theft lets a player temporarily carry one sun fragment to reposition light."
+        ],
+        "counterplay": [
+          "Coordinate light carriers and attack only under correct sun state."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Two distinct suns cast crossed shadows.",
+          "Alignment draws a perfect black-gold line.",
+          "Carried sun fragment lights player like a comet.",
+          "Twin Noon bleaches local color.",
+          "Weak points change under each sun."
+        ],
+        "animation": [
+          "Emperor gestures and suns physically orbit.",
+          "Sun Theft tears a fragment from sky.",
+          "Alignment pose locks both arms opposite each other.",
+          "Final eclipse kneel lowers both suns."
+        ],
+        "audio": [
+          "Distinct Emperor of Second Suns activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Absolute imperial raid."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    },
+    {
+      "id": "BOS-068",
+      "name": "The Name Before Zero",
+      "family": "boss",
+      "tier": "transcendent_zero",
+      "status": "specified",
+      "role": "pre-Choosing existential trial",
+      "identity": {
+        "fantasy": "A Transcendent trial manifestation that strips titles, rarity labels, and borrowed power presentation until only mastery-driven mechanics remain.",
+        "silhouette": "Human-scale black silhouette surrounded by erased UI fragments.",
+        "lore_hook": "Every candidate arrives with a name. The trial asks whether anything remains when the name is removed."
+      },
+      "mechanics": {
+        "core": [
+          "mastery stripping",
+          "loadout neutralization",
+          "trial scoring"
+        ],
+        "signature": [
+          "Erases cosmetic rarity presentation.",
+          "Suppresses selected borrowed encounter buffs.",
+          "Cycles through movement, support, precision, survival, and command tests.",
+          "Scores mechanic accuracy rather than raw damage.",
+          "Failure state returns player without consuming permanent progression.",
+          "Final Nameless Phase gives one simple attack pattern and demands perfect execution."
+        ],
+        "counterplay": [
+          "Deterministic trial with explicit telegraphs and no pay-to-skip path."
+        ],
+        "evolution": [
+          "Upgrades alter behavior, timing, or spatial control rather than relying on flat stat multipliers."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "UI labels fade into black strips.",
+          "Borrowed buffs appear as sealed icons.",
+          "Each mastery test uses one stark geometric color.",
+          "Final phase removes all background VFX.",
+          "Success writes the player's chosen title back into the scene.",
+          "Failure reseals the arena without spectacle."
+        ],
+        "animation": [
+          "Boss shifts stance to match each mastery test.",
+          "Buff suppression uses a clean seal gesture.",
+          "Final phase holds an almost motionless duelist stance.",
+          "Success bows once before dissolving.",
+          "Failure simply turns away."
+        ],
+        "audio": [
+          "Distinct The Name Before Zero activation, impact, danger, and cooldown motifs with positional falloff."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Only after all Zero Candidate prerequisites and before the Choosing."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "AEONFALL wave 017 authored design. UEFN implementation must preserve telegraphs, cleanup, streaming locality, and platform-safe fallbacks."
+      ]
+    }
+  ]
+}
