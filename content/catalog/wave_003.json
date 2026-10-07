@@ -1,889 +1,1666 @@
 {
   "wave": "003",
-  "purpose": "full requested hireable roster expansion",
+  "purpose": "Requested hireable roster expansion migrated to canonical AEONFALL schema.",
   "entity_count": 28,
   "entities": [
     {
       "id": "NPC-009",
-      "family": "npc",
       "name": "Rook Ashbreaker",
-      "tier": "Epic",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
       "role": "breach demolitions hire",
-      "concept": "A disciplined siege specialist built around opening fortified routes and punishing clustered enemies.",
-      "signature_mechanic": "Breach Charge places one directional demolition node that damages structures more than characters and opens alternate assault lanes.",
-      "capabilities": [
-        "structure breach",
-        "cluster pressure",
-        "cover denial"
-      ],
-      "counterplay": [
-        "Charges are visible, delayed, and limited."
-      ],
-      "visual_identity": "Ash-grey exosuit with orange demolition braces and a folding ram pack.",
-      "animation_profile": "Heavy planted throws and shoulder-braced breach detonations.",
-      "vfx_profile": "Compact directional blast cones, debris-limited structure cracks, orange warning grid.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Epic Ashbreakers reputation hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "medium",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A disciplined siege specialist built around opening fortified routes and punishing clustered enemies.",
+        "silhouette": "Ash-grey exosuit with orange demolition braces and a folding ram pack.",
+        "lore_hook": "Rook Ashbreaker is tied to this acquisition path: Epic Ashbreakers reputation hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "structure breach",
+          "cluster pressure",
+          "cover denial"
+        ],
+        "signature": [
+          "Breach Charge places one directional demolition node that damages structures more than characters and opens alternate assault lanes.",
+          "Capability expression: structure breach.",
+          "Capability expression: cluster pressure.",
+          "Capability expression: cover denial."
+        ],
+        "counterplay": [
+          "Charges are visible, delayed, and limited."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Compact directional blast cones, debris-limited structure cracks, orange warning grid."
+        ],
+        "animation": [
+          "Heavy planted throws and shoulder-braced breach detonations."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Ashbreakers reputation hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-010",
-      "family": "npc",
       "name": "Sera Nine-Lives",
-      "tier": "Epic",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
       "role": "combat medic hire",
-      "concept": "A reckless field medic who converts near-death rescues into short windows of mobility and overshield support.",
-      "signature_mechanic": "Last Thread grants a rescued ally a brief escape-speed burst and temporary directional overshield.",
-      "capabilities": [
-        "revive support",
-        "escape burst",
-        "overshield"
-      ],
-      "counterplay": [
-        "Long rescue cooldown; cannot chain repeatedly on one ally."
-      ],
-      "visual_identity": "White-black trauma armor with red ribbon monitors and compact drone satchel.",
-      "animation_profile": "Fast slide-to-kneel rescue sequence with one-handed sidearm cover.",
-      "vfx_profile": "Red pulse ribbons, compact shield fan, low-noise medical drone lights.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Epic field-hospital contract.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "medium",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A reckless field medic who converts near-death rescues into short windows of mobility and overshield support.",
+        "silhouette": "White-black trauma armor with red ribbon monitors and compact drone satchel.",
+        "lore_hook": "Sera Nine-Lives is tied to this acquisition path: Epic field-hospital contract."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "revive support",
+          "escape burst",
+          "overshield"
+        ],
+        "signature": [
+          "Last Thread grants a rescued ally a brief escape-speed burst and temporary directional overshield.",
+          "Capability expression: revive support.",
+          "Capability expression: escape burst.",
+          "Capability expression: overshield."
+        ],
+        "counterplay": [
+          "Long rescue cooldown; cannot chain repeatedly on one ally."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Red pulse ribbons, compact shield fan, low-noise medical drone lights."
+        ],
+        "animation": [
+          "Fast slide-to-kneel rescue sequence with one-handed sidearm cover."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic field-hospital contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-011",
-      "family": "npc",
       "name": "Bront Vale, Chainrunner",
-      "tier": "Epic",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
       "role": "melee interceptor hire",
-      "concept": "A high-mobility bruiser using chained hooks to interrupt lesser monsters and pull himself toward large targets.",
-      "signature_mechanic": "Chain Vault hooks eligible terrain or enemies and converts the pull into a guarded leap attack.",
-      "capabilities": [
-        "hook traversal",
-        "interrupt",
-        "melee peel"
-      ],
-      "counterplay": [
-        "Hook line is visible and can miss; bosses resist pull."
-      ],
-      "visual_identity": "Bronze chain harness, asymmetric shoulder plate, twin retracting hooks.",
-      "animation_profile": "Wide pendulum swings and low landing braces.",
-      "vfx_profile": "Bronze arc trails, hook sparks, concise impact rings.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Epic arena faction hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "medium",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A high-mobility bruiser using chained hooks to interrupt lesser monsters and pull himself toward large targets.",
+        "silhouette": "Bronze chain harness, asymmetric shoulder plate, twin retracting hooks.",
+        "lore_hook": "Bront Vale, Chainrunner is tied to this acquisition path: Epic arena faction hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "hook traversal",
+          "interrupt",
+          "melee peel"
+        ],
+        "signature": [
+          "Chain Vault hooks eligible terrain or enemies and converts the pull into a guarded leap attack.",
+          "Capability expression: hook traversal.",
+          "Capability expression: interrupt.",
+          "Capability expression: melee peel."
+        ],
+        "counterplay": [
+          "Hook line is visible and can miss; bosses resist pull."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Bronze arc trails, hook sparks, concise impact rings."
+        ],
+        "animation": [
+          "Wide pendulum swings and low landing braces."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic arena faction hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-012",
-      "family": "npc",
       "name": "Ilyra Mosswake",
-      "tier": "Epic",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
       "role": "terrain scout hire",
-      "concept": "A wilderness tracker who reveals ambush routes and seeds temporary restorative patches after clearing monster dens.",
-      "signature_mechanic": "Mossmark highlights nearby eligible hidden threats and turns cleared lairs into short-lived rest nodes.",
-      "capabilities": [
-        "threat reveal",
-        "rest node",
-        "tracking"
-      ],
-      "counterplay": [
-        "Reveal radius is local; rest nodes expire and cannot be stacked."
-      ],
-      "visual_identity": "Green-black scout leathers with living moss mantle and antler sensor rig.",
-      "animation_profile": "Low stalking locomotion and hand-to-ground tracking gestures.",
-      "vfx_profile": "Soft spore trails, green outline pings, moss growth on cleared ground.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Epic Wild Court hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "medium",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A wilderness tracker who reveals ambush routes and seeds temporary restorative patches after clearing monster dens.",
+        "silhouette": "Green-black scout leathers with living moss mantle and antler sensor rig.",
+        "lore_hook": "Ilyra Mosswake is tied to this acquisition path: Epic Wild Court hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "threat reveal",
+          "rest node",
+          "tracking"
+        ],
+        "signature": [
+          "Mossmark highlights nearby eligible hidden threats and turns cleared lairs into short-lived rest nodes.",
+          "Capability expression: threat reveal.",
+          "Capability expression: rest node.",
+          "Capability expression: tracking."
+        ],
+        "counterplay": [
+          "Reveal radius is local; rest nodes expire and cannot be stacked."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Soft spore trails, green outline pings, moss growth on cleared ground."
+        ],
+        "animation": [
+          "Low stalking locomotion and hand-to-ground tracking gestures."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic Wild Court hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-013",
-      "family": "npc",
       "name": "Kestrel Vox",
-      "tier": "Epic",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
       "role": "anti-air marksman hire",
-      "concept": "A precision gunner specializing in hostile flyers and leap-heavy monsters.",
-      "signature_mechanic": "Skylock accumulates aim on airborne targets and triggers a brief slow/stagger on a clean burst.",
-      "capabilities": [
-        "anti-air",
-        "tracking burst",
-        "stagger"
-      ],
-      "counterplay": [
-        "Grounded targets gain no special effect; lock breaks on cover."
-      ],
-      "visual_identity": "Slim cobalt armor with winglike optic fins and long anti-air rifle.",
-      "animation_profile": "Measured kneeling aim posture and upward snap tracking.",
-      "vfx_profile": "Blue tracking brackets and clean contrail-cut impacts.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Epic airwatch reputation hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "medium",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A precision gunner specializing in hostile flyers and leap-heavy monsters.",
+        "silhouette": "Slim cobalt armor with winglike optic fins and long anti-air rifle.",
+        "lore_hook": "Kestrel Vox is tied to this acquisition path: Epic airwatch reputation hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "anti-air",
+          "tracking burst",
+          "stagger"
+        ],
+        "signature": [
+          "Skylock accumulates aim on airborne targets and triggers a brief slow/stagger on a clean burst.",
+          "Capability expression: anti-air.",
+          "Capability expression: tracking burst.",
+          "Capability expression: stagger."
+        ],
+        "counterplay": [
+          "Grounded targets gain no special effect; lock breaks on cover."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Blue tracking brackets and clean contrail-cut impacts."
+        ],
+        "animation": [
+          "Measured kneeling aim posture and upward snap tracking."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic airwatch reputation hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-014",
-      "family": "npc",
       "name": "Dax Cinderjaw",
-      "tier": "Epic",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
       "role": "flame tank hire",
-      "concept": "A frontliner who stores limited heat from enemy fire and vents it as controlled frontal denial.",
-      "signature_mechanic": "Furnace Guard absorbs selected fire-type pressure into a capped heat meter and vents a cone burst.",
-      "capabilities": [
-        "fire resistance",
-        "heat storage",
-        "frontline denial"
-      ],
-      "counterplay": [
-        "Non-fire damage bypasses storage; overheat forces cooldown."
-      ],
-      "visual_identity": "Black furnace plate with glowing jaw grille and piston shoulders.",
-      "animation_profile": "Slow shielded advance, chest vents opening during release.",
-      "vfx_profile": "Orange heat bands, cone shimmer, capped ember spray.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Epic foundry clan hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "medium",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A frontliner who stores limited heat from enemy fire and vents it as controlled frontal denial.",
+        "silhouette": "Black furnace plate with glowing jaw grille and piston shoulders.",
+        "lore_hook": "Dax Cinderjaw is tied to this acquisition path: Epic foundry clan hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "fire resistance",
+          "heat storage",
+          "frontline denial"
+        ],
+        "signature": [
+          "Furnace Guard absorbs selected fire-type pressure into a capped heat meter and vents a cone burst.",
+          "Capability expression: fire resistance.",
+          "Capability expression: heat storage.",
+          "Capability expression: frontline denial."
+        ],
+        "counterplay": [
+          "Non-fire damage bypasses storage; overheat forces cooldown."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Orange heat bands, cone shimmer, capped ember spray."
+        ],
+        "animation": [
+          "Slow shielded advance, chest vents opening during release."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic foundry clan hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-015",
-      "family": "npc",
       "name": "Tala Hush",
-      "tier": "Epic",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
       "role": "stealth recon hire",
-      "concept": "A silent infiltrator who marks enemy patrol routes and briefly suppresses her own detection footprint.",
-      "signature_mechanic": "Dead Route predicts short patrol paths for eligible AI and highlights low-risk crossing windows.",
-      "capabilities": [
-        "patrol prediction",
-        "stealth window",
-        "scouting"
-      ],
-      "counterplay": [
-        "Does not hide the squad from alert enemies; effect is local and temporary."
-      ],
-      "visual_identity": "Matte indigo cloak with folding map-light panels and masked face.",
-      "animation_profile": "Low-profile crouch movement, finger-sign commands, cloak cinch before stealth.",
-      "vfx_profile": "Faint indigo route lines and minimal shimmer to avoid visual noise.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Epic shadow guild hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "medium",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A silent infiltrator who marks enemy patrol routes and briefly suppresses her own detection footprint.",
+        "silhouette": "Matte indigo cloak with folding map-light panels and masked face.",
+        "lore_hook": "Tala Hush is tied to this acquisition path: Epic shadow guild hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "patrol prediction",
+          "stealth window",
+          "scouting"
+        ],
+        "signature": [
+          "Dead Route predicts short patrol paths for eligible AI and highlights low-risk crossing windows.",
+          "Capability expression: patrol prediction.",
+          "Capability expression: stealth window.",
+          "Capability expression: scouting."
+        ],
+        "counterplay": [
+          "Does not hide the squad from alert enemies; effect is local and temporary."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Faint indigo route lines and minimal shimmer to avoid visual noise."
+        ],
+        "animation": [
+          "Low-profile crouch movement, finger-sign commands, cloak cinch before stealth."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic shadow guild hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-016",
-      "family": "npc",
       "name": "Orren Pike",
-      "tier": "Epic",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
       "role": "monster hunter hire",
-      "concept": "A pragmatic hunter that applies species-specific debuffs after observing a creature long enough.",
-      "signature_mechanic": "Hunter's Read identifies one eligible monster family weakness and applies a modest squad damage utility mark.",
-      "capabilities": [
-        "monster analysis",
-        "weakness mark",
-        "trap placement"
-      ],
-      "counterplay": [
-        "Requires observation time; mark is family-specific and limited."
-      ],
-      "visual_identity": "Weathered hunter armor with trophy tags and collapsible spear-rifle.",
-      "animation_profile": "Observational idle, notebook gesture, quick spear transitions.",
-      "vfx_profile": "Amber weak-point sigils and trap wire glints.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Epic hunter lodge hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "medium",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A pragmatic hunter that applies species-specific debuffs after observing a creature long enough.",
+        "silhouette": "Weathered hunter armor with trophy tags and collapsible spear-rifle.",
+        "lore_hook": "Orren Pike is tied to this acquisition path: Epic hunter lodge hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "monster analysis",
+          "weakness mark",
+          "trap placement"
+        ],
+        "signature": [
+          "Hunter's Read identifies one eligible monster family weakness and applies a modest squad damage utility mark.",
+          "Capability expression: monster analysis.",
+          "Capability expression: weakness mark.",
+          "Capability expression: trap placement."
+        ],
+        "counterplay": [
+          "Requires observation time; mark is family-specific and limited."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Amber weak-point sigils and trap wire glints."
+        ],
+        "animation": [
+          "Observational idle, notebook gesture, quick spear transitions."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic hunter lodge hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-017",
-      "family": "npc",
       "name": "Mara Coil",
-      "tier": "Epic",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
       "role": "shock engineer hire",
-      "concept": "An engineer who deploys one reusable arc pylon to control chokepoints and power nearby devices.",
-      "signature_mechanic": "Arc Nest chains low damage between nearby lesser enemies and boosts selected allied deployables.",
-      "capabilities": [
-        "arc pylon",
-        "chokepoint control",
-        "device boost"
-      ],
-      "counterplay": [
-        "Pylon is destructible and has limited range."
-      ],
-      "visual_identity": "Industrial yellow-black rig with coil backpack and insulated gloves.",
-      "animation_profile": "Two-step pylon unfold and cable-snap activation.",
-      "vfx_profile": "Blue-white short arcs, visible radius ring, low-cost sparks.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Epic engineer union hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "medium",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "An engineer who deploys one reusable arc pylon to control chokepoints and power nearby devices.",
+        "silhouette": "Industrial yellow-black rig with coil backpack and insulated gloves.",
+        "lore_hook": "Mara Coil is tied to this acquisition path: Epic engineer union hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "arc pylon",
+          "chokepoint control",
+          "device boost"
+        ],
+        "signature": [
+          "Arc Nest chains low damage between nearby lesser enemies and boosts selected allied deployables.",
+          "Capability expression: arc pylon.",
+          "Capability expression: chokepoint control.",
+          "Capability expression: device boost."
+        ],
+        "counterplay": [
+          "Pylon is destructible and has limited range."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Blue-white short arcs, visible radius ring, low-cost sparks."
+        ],
+        "animation": [
+          "Two-step pylon unfold and cable-snap activation."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic engineer union hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-018",
-      "family": "npc",
       "name": "Fen Glassknife",
-      "tier": "Epic",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
       "role": "duelist hire",
-      "concept": "A mobile sword-pistol specialist who gains advantage after perfectly avoiding a telegraphed heavy attack.",
-      "signature_mechanic": "Shatterstep grants one empowered riposte after a qualified near-miss dodge.",
-      "capabilities": [
-        "duel riposte",
-        "mobility",
-        "elite pressure"
-      ],
-      "counterplay": [
-        "Requires timing; no benefit from ordinary movement spam."
-      ],
-      "visual_identity": "Mirror-edged coat armor, glass sabre, compact pistol.",
-      "animation_profile": "Elegant lateral dodges into one precise reverse-grip strike.",
-      "vfx_profile": "Silver fracture afterimage and narrow riposte flash.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Epic duelist circuit hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "medium",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A mobile sword-pistol specialist who gains advantage after perfectly avoiding a telegraphed heavy attack.",
+        "silhouette": "Mirror-edged coat armor, glass sabre, compact pistol.",
+        "lore_hook": "Fen Glassknife is tied to this acquisition path: Epic duelist circuit hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "duel riposte",
+          "mobility",
+          "elite pressure"
+        ],
+        "signature": [
+          "Shatterstep grants one empowered riposte after a qualified near-miss dodge.",
+          "Capability expression: duel riposte.",
+          "Capability expression: mobility.",
+          "Capability expression: elite pressure."
+        ],
+        "counterplay": [
+          "Requires timing; no benefit from ordinary movement spam."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Silver fracture afterimage and narrow riposte flash."
+        ],
+        "animation": [
+          "Elegant lateral dodges into one precise reverse-grip strike."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic duelist circuit hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-019",
-      "family": "npc",
       "name": "Vela Runehook",
-      "tier": "Epic",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
       "role": "support saboteur hire",
-      "concept": "A rune technician who weakens enemy deployables and ritual objects rather than focusing on raw DPS.",
-      "signature_mechanic": "Counterseal marks one eligible hostile construct, increasing team damage and slowing its pulse rate.",
-      "capabilities": [
-        "construct debuff",
-        "ritual sabotage",
-        "utility fire"
-      ],
-      "counterplay": [
-        "Cannot affect protected world objectives; one active mark."
-      ],
-      "visual_identity": "Dark teal utility armor with hanging rune keys and hook staff.",
-      "animation_profile": "Quick hook-and-stamp motion on marked constructs.",
-      "vfx_profile": "Teal counter-runes, pulse slowdown visualization.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Epic archivist reputation hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "medium",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A rune technician who weakens enemy deployables and ritual objects rather than focusing on raw DPS.",
+        "silhouette": "Dark teal utility armor with hanging rune keys and hook staff.",
+        "lore_hook": "Vela Runehook is tied to this acquisition path: Epic archivist reputation hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "construct debuff",
+          "ritual sabotage",
+          "utility fire"
+        ],
+        "signature": [
+          "Counterseal marks one eligible hostile construct, increasing team damage and slowing its pulse rate.",
+          "Capability expression: construct debuff.",
+          "Capability expression: ritual sabotage.",
+          "Capability expression: utility fire."
+        ],
+        "counterplay": [
+          "Cannot affect protected world objectives; one active mark."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Teal counter-runes, pulse slowdown visualization."
+        ],
+        "animation": [
+          "Quick hook-and-stamp motion on marked constructs."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic archivist reputation hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-020",
-      "family": "npc",
       "name": "Garrick Floodstep",
-      "tier": "Epic",
+      "family": "npc",
+      "tier": "epic",
+      "status": "specified",
       "role": "amphibious skirmisher hire",
-      "concept": "A shoreline fighter who becomes faster and more accurate while moving through water or rain-soaked zones.",
-      "signature_mechanic": "Floodstep stores wet-movement momentum and spends it on a short rushing burst that knocks lesser enemies aside.",
-      "capabilities": [
-        "wet-zone mobility",
-        "rush",
-        "shoreline control"
-      ],
-      "counterplay": [
-        "Dry interiors remove the passive advantage."
-      ],
-      "visual_identity": "Blue-grey amphibious plate with finned boots and water-shedding cloak.",
-      "animation_profile": "Low hydroplane sprint and shoulder-first rush.",
-      "vfx_profile": "Water-slice trails, compact spray fan, blue momentum gauge.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Epic coastguard covenant hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "medium",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A shoreline fighter who becomes faster and more accurate while moving through water or rain-soaked zones.",
+        "silhouette": "Blue-grey amphibious plate with finned boots and water-shedding cloak.",
+        "lore_hook": "Garrick Floodstep is tied to this acquisition path: Epic coastguard covenant hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "wet-zone mobility",
+          "rush",
+          "shoreline control"
+        ],
+        "signature": [
+          "Floodstep stores wet-movement momentum and spends it on a short rushing burst that knocks lesser enemies aside.",
+          "Capability expression: wet-zone mobility.",
+          "Capability expression: rush.",
+          "Capability expression: shoreline control."
+        ],
+        "counterplay": [
+          "Dry interiors remove the passive advantage."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Water-slice trails, compact spray fan, blue momentum gauge."
+        ],
+        "animation": [
+          "Low hydroplane sprint and shoulder-first rush."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Epic coastguard covenant hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-021",
-      "family": "npc",
       "name": "Cassian Rime, White Reaver",
-      "tier": "Legendary",
+      "family": "npc",
+      "tier": "legendary",
+      "status": "specified",
       "role": "icefield commander hire",
-      "concept": "A legendary commander who turns frozen terrain into tactical lanes and cover rather than merely slowing enemies.",
-      "signature_mechanic": "Rimefront raises a moving line of temporary ice bulwarks that advances with the squad.",
-      "capabilities": [
-        "moving cover",
-        "freeze lanes",
-        "team advance"
-      ],
-      "counterplay": [
-        "Bulwarks are destructible and fire effects counter them."
-      ],
-      "visual_identity": "White steel armor with blue fur mantle and hovering frost shards.",
-      "animation_profile": "Slow commanding walk with sweeping blade gestures that lift cover in sequence.",
-      "vfx_profile": "Tall ice sheets, drifting frost ribbons, fracture shards with distance culling.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Legendary frost legion hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "high",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A legendary commander who turns frozen terrain into tactical lanes and cover rather than merely slowing enemies.",
+        "silhouette": "White steel armor with blue fur mantle and hovering frost shards.",
+        "lore_hook": "Cassian Rime, White Reaver is tied to this acquisition path: Legendary frost legion hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "moving cover",
+          "freeze lanes",
+          "team advance"
+        ],
+        "signature": [
+          "Rimefront raises a moving line of temporary ice bulwarks that advances with the squad.",
+          "Capability expression: moving cover.",
+          "Capability expression: freeze lanes.",
+          "Capability expression: team advance."
+        ],
+        "counterplay": [
+          "Bulwarks are destructible and fire effects counter them."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Tall ice sheets, drifting frost ribbons, fracture shards with distance culling."
+        ],
+        "animation": [
+          "Slow commanding walk with sweeping blade gestures that lift cover in sequence."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary frost legion hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-022",
-      "family": "npc",
       "name": "Amani Red Comet",
-      "tier": "Legendary",
+      "family": "npc",
+      "tier": "legendary",
+      "status": "specified",
       "role": "aerial striker hire",
-      "concept": "A jet-assisted spear fighter who repeatedly attacks from changing vertical angles.",
-      "signature_mechanic": "Comet Circuit stores three authored dive vectors and cycles between them to avoid predictable attack lines.",
-      "capabilities": [
-        "jet dive",
-        "spear burst",
-        "vertical reposition"
-      ],
-      "counterplay": [
-        "Dive routes telegraph with red lines; cramped interiors reduce options."
-      ],
-      "visual_identity": "Crimson flight armor with comet-tail cape and segmented spear.",
-      "animation_profile": "Explosive takeoffs, spiral dives, three distinct spear landing recoveries.",
-      "vfx_profile": "Red ion trails, comet sparks, circular landing shock.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Legendary sky arena hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "high",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A jet-assisted spear fighter who repeatedly attacks from changing vertical angles.",
+        "silhouette": "Crimson flight armor with comet-tail cape and segmented spear.",
+        "lore_hook": "Amani Red Comet is tied to this acquisition path: Legendary sky arena hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "jet dive",
+          "spear burst",
+          "vertical reposition"
+        ],
+        "signature": [
+          "Comet Circuit stores three authored dive vectors and cycles between them to avoid predictable attack lines.",
+          "Capability expression: jet dive.",
+          "Capability expression: spear burst.",
+          "Capability expression: vertical reposition."
+        ],
+        "counterplay": [
+          "Dive routes telegraph with red lines; cramped interiors reduce options."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Red ion trails, comet sparks, circular landing shock."
+        ],
+        "animation": [
+          "Explosive takeoffs, spiral dives, three distinct spear landing recoveries."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary sky arena hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-023",
-      "family": "npc",
       "name": "Lucent Marrow",
-      "tier": "Legendary",
+      "family": "npc",
+      "tier": "legendary",
+      "status": "specified",
       "role": "holy anti-undead hire",
-      "concept": "A radiant exorcist specializing in corpse denial, necromancer disruption, and cleansing fields.",
-      "signature_mechanic": "Final Rites sanctifies a bounded corpse cluster, preventing reuse and damaging active necromantic constructs nearby.",
-      "capabilities": [
-        "corpse denial",
-        "cleanse",
-        "necromancer disruption"
-      ],
-      "counterplay": [
-        "Limited sanctification charges; living demons are only lightly affected."
-      ],
-      "visual_identity": "Ivory-gold battle vestments with floating censer blades.",
-      "animation_profile": "Measured censer arcs and grounded seal-stamping motions.",
-      "vfx_profile": "Gold-white sanctification rings, ash-to-light dissolve, subtle incense trails.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Legendary sanctuary reputation hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "high",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A radiant exorcist specializing in corpse denial, necromancer disruption, and cleansing fields.",
+        "silhouette": "Ivory-gold battle vestments with floating censer blades.",
+        "lore_hook": "Lucent Marrow is tied to this acquisition path: Legendary sanctuary reputation hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "corpse denial",
+          "cleanse",
+          "necromancer disruption"
+        ],
+        "signature": [
+          "Final Rites sanctifies a bounded corpse cluster, preventing reuse and damaging active necromantic constructs nearby.",
+          "Capability expression: corpse denial.",
+          "Capability expression: cleanse.",
+          "Capability expression: necromancer disruption."
+        ],
+        "counterplay": [
+          "Limited sanctification charges; living demons are only lightly affected."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Gold-white sanctification rings, ash-to-light dissolve, subtle incense trails."
+        ],
+        "animation": [
+          "Measured censer arcs and grounded seal-stamping motions."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary sanctuary reputation hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-024",
-      "family": "npc",
       "name": "Dread Captain Sol Korr",
-      "tier": "Legendary",
+      "family": "npc",
+      "tier": "legendary",
+      "status": "specified",
       "role": "vehicle warlord hire",
-      "concept": "A combat driver who boosts squad vehicle handling and can perform one emergency field repair per encounter.",
-      "signature_mechanic": "War Rig Command grants nearby allied vehicles improved recovery and activates a capped repair burst.",
-      "capabilities": [
-        "vehicle buff",
-        "field repair",
-        "mounted fire"
-      ],
-      "counterplay": [
-        "Strongest only near vehicles; repair has encounter cooldown."
-      ],
-      "visual_identity": "Black-red convoy armor with holographic steering gauntlet and shoulder radio mast.",
-      "animation_profile": "Aggressive lean-in driver posture and rapid mechanical repair sequence.",
-      "vfx_profile": "Red route arrows, welding sparks, vehicle aura bands.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Legendary road-clan hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "medium",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A combat driver who boosts squad vehicle handling and can perform one emergency field repair per encounter.",
+        "silhouette": "Black-red convoy armor with holographic steering gauntlet and shoulder radio mast.",
+        "lore_hook": "Dread Captain Sol Korr is tied to this acquisition path: Legendary road-clan hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "vehicle buff",
+          "field repair",
+          "mounted fire"
+        ],
+        "signature": [
+          "War Rig Command grants nearby allied vehicles improved recovery and activates a capped repair burst.",
+          "Capability expression: vehicle buff.",
+          "Capability expression: field repair.",
+          "Capability expression: mounted fire."
+        ],
+        "counterplay": [
+          "Strongest only near vehicles; repair has encounter cooldown."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Red route arrows, welding sparks, vehicle aura bands."
+        ],
+        "animation": [
+          "Aggressive lean-in driver posture and rapid mechanical repair sequence."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary road-clan hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-025",
-      "family": "npc",
       "name": "Eris Pale Choir",
-      "tier": "Legendary",
+      "family": "npc",
+      "tier": "legendary",
+      "status": "specified",
       "role": "sonic support hire",
-      "concept": "A singer-warrior whose three-note combat phrases grant small tactical effects when allies remain within rhythm range.",
-      "signature_mechanic": "Battle Canticle rotates guard, haste, and focus phrases rather than stacking them simultaneously.",
-      "capabilities": [
-        "guard song",
-        "haste song",
-        "focus song"
-      ],
-      "counterplay": [
-        "Only one phrase active; silence effects interrupt the cycle."
-      ],
-      "visual_identity": "Pale silver armor with resonant throat collar and ribbon-like speaker fins.",
-      "animation_profile": "Combat gestures resemble conducting, with visible three-beat phrasing.",
-      "vfx_profile": "Concentric pale wave rings, note geometry, low particle density.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Legendary resonance order hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "high",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A singer-warrior whose three-note combat phrases grant small tactical effects when allies remain within rhythm range.",
+        "silhouette": "Pale silver armor with resonant throat collar and ribbon-like speaker fins.",
+        "lore_hook": "Eris Pale Choir is tied to this acquisition path: Legendary resonance order hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "guard song",
+          "haste song",
+          "focus song"
+        ],
+        "signature": [
+          "Battle Canticle rotates guard, haste, and focus phrases rather than stacking them simultaneously.",
+          "Capability expression: guard song.",
+          "Capability expression: haste song.",
+          "Capability expression: focus song."
+        ],
+        "counterplay": [
+          "Only one phrase active; silence effects interrupt the cycle."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Concentric pale wave rings, note geometry, low particle density."
+        ],
+        "animation": [
+          "Combat gestures resemble conducting, with visible three-beat phrasing."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary resonance order hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-026",
-      "family": "npc",
       "name": "Torvex, Iron Oracle",
-      "tier": "Legendary",
+      "family": "npc",
+      "tier": "legendary",
+      "status": "specified",
       "role": "predictive tank hire",
-      "concept": "A heavy guardian who projects short telegraphs of likely incoming elite attacks and braces against one predicted direction.",
-      "signature_mechanic": "Oracle Brace marks an incoming authored heavy attack and creates a directional mitigation wall if prediction completes.",
-      "capabilities": [
-        "attack preview",
-        "directional mitigation",
-        "tank peel"
-      ],
-      "counterplay": [
-        "Only selected telegraphed attacks qualify; wrong-facing brace wastes the effect."
-      ],
-      "visual_identity": "Massive gunmetal armor with rotating prediction lenses around the head.",
-      "animation_profile": "Slow lens alignment followed by an immovable shield-plant posture.",
-      "vfx_profile": "Amber forecast arcs and one directional metallic barrier.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Legendary machine-seer contract.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "high",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A heavy guardian who projects short telegraphs of likely incoming elite attacks and braces against one predicted direction.",
+        "silhouette": "Massive gunmetal armor with rotating prediction lenses around the head.",
+        "lore_hook": "Torvex, Iron Oracle is tied to this acquisition path: Legendary machine-seer contract."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "attack preview",
+          "directional mitigation",
+          "tank peel"
+        ],
+        "signature": [
+          "Oracle Brace marks an incoming authored heavy attack and creates a directional mitigation wall if prediction completes.",
+          "Capability expression: attack preview.",
+          "Capability expression: directional mitigation.",
+          "Capability expression: tank peel."
+        ],
+        "counterplay": [
+          "Only selected telegraphed attacks qualify; wrong-facing brace wastes the effect."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Amber forecast arcs and one directional metallic barrier."
+        ],
+        "animation": [
+          "Slow lens alignment followed by an immovable shield-plant posture."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Legendary machine-seer contract."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-027",
-      "family": "npc",
       "name": "Kharon Vell, Ferryman of Wounds",
-      "tier": "Mythic",
+      "family": "npc",
+      "tier": "mythic",
+      "status": "specified",
       "role": "rescue teleport support hire",
-      "concept": "A mythic ferryman who can extract a critically threatened ally through a short authored shadow crossing.",
-      "signature_mechanic": "Black Passage relocates one eligible ally to a nearby safe anchor and leaves a decoy wake that draws lesser enemies.",
-      "capabilities": [
-        "ally extraction",
-        "decoy wake",
-        "shadow crossing"
-      ],
-      "counterplay": [
-        "Anchor range is limited; bosses ignore decoy taunt; long cooldown."
-      ],
-      "visual_identity": "Tall black ferryman coat, chain oar, face hidden by dim lantern hood.",
-      "animation_profile": "Sweeping oar gesture cuts a doorway through shadow; ally exits in a kneeling recovery pose.",
-      "vfx_profile": "Black-water doorway, dim lantern wake, dissolving decoy silhouette.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Mythic river-of-dead questline hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "high",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A mythic ferryman who can extract a critically threatened ally through a short authored shadow crossing.",
+        "silhouette": "Tall black ferryman coat, chain oar, face hidden by dim lantern hood.",
+        "lore_hook": "Kharon Vell, Ferryman of Wounds is tied to this acquisition path: Mythic river-of-dead questline hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "ally extraction",
+          "decoy wake",
+          "shadow crossing"
+        ],
+        "signature": [
+          "Black Passage relocates one eligible ally to a nearby safe anchor and leaves a decoy wake that draws lesser enemies.",
+          "Capability expression: ally extraction.",
+          "Capability expression: decoy wake.",
+          "Capability expression: shadow crossing."
+        ],
+        "counterplay": [
+          "Anchor range is limited; bosses ignore decoy taunt; long cooldown."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Black-water doorway, dim lantern wake, dissolving decoy silhouette."
+        ],
+        "animation": [
+          "Sweeping oar gesture cuts a doorway through shadow; ally exits in a kneeling recovery pose."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic river-of-dead questline hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-028",
-      "family": "npc",
       "name": "Ysolde Star-Eater",
-      "tier": "Mythic",
+      "family": "npc",
+      "tier": "mythic",
+      "status": "specified",
       "role": "anti-projectile mystic hire",
-      "concept": "A mythic mystic who captures a limited number of hostile projectiles into orbit and converts them into one controlled counterburst.",
-      "signature_mechanic": "Star Maw stores eligible projectile energy up to a strict cap and fires a single compressed retaliation sphere.",
-      "capabilities": [
-        "projectile capture",
-        "counterburst",
-        "shield utility"
-      ],
-      "counterplay": [
-        "Capture cap is low; beam/continuous attacks bypass it; telegraphed overload window."
-      ],
-      "visual_identity": "Midnight robe-armor with a tiny dark star hovering above one palm.",
-      "animation_profile": "Captured shots visibly orbit her before collapsing into the palm and releasing forward.",
-      "vfx_profile": "Small orbiting projectiles, dark-star lensing, focused release ring.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Mythic astral monastery hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "extreme",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A mythic mystic who captures a limited number of hostile projectiles into orbit and converts them into one controlled counterburst.",
+        "silhouette": "Midnight robe-armor with a tiny dark star hovering above one palm.",
+        "lore_hook": "Ysolde Star-Eater is tied to this acquisition path: Mythic astral monastery hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "projectile capture",
+          "counterburst",
+          "shield utility"
+        ],
+        "signature": [
+          "Star Maw stores eligible projectile energy up to a strict cap and fires a single compressed retaliation sphere.",
+          "Capability expression: projectile capture.",
+          "Capability expression: counterburst.",
+          "Capability expression: shield utility."
+        ],
+        "counterplay": [
+          "Capture cap is low; beam/continuous attacks bypass it; telegraphed overload window."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Small orbiting projectiles, dark-star lensing, focused release ring."
+        ],
+        "animation": [
+          "Captured shots visibly orbit her before collapsing into the palm and releasing forward."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic astral monastery hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-029",
-      "family": "npc",
       "name": "Malach Rift-Tongue",
-      "tier": "Mythic",
+      "family": "npc",
+      "tier": "mythic",
+      "status": "specified",
       "role": "enemy ability disruptor hire",
-      "concept": "A mythic anti-caster who can temporarily lock one eligible elite ability family after witnessing it.",
-      "signature_mechanic": "Tongue of Denial records an eligible enemy signature and imposes a short lockout after the enemy uses it again.",
-      "capabilities": [
-        "ability observation",
-        "temporary lockout",
-        "caster pressure"
-      ],
-      "counterplay": [
-        "Boss ultimates and protected mechanics immune; requires witnessing the ability first."
-      ],
-      "visual_identity": "Tall split-mask warlock with ribbon-like glyph tongue and hooked staff.",
-      "animation_profile": "Head tilts unnaturally toward observed casts; denial snaps the glyph tongue into a seal.",
-      "vfx_profile": "Black-red seal ribbons, muted cast-cancel ring, signature glyph capture.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Mythic null cult defection hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "high",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A mythic anti-caster who can temporarily lock one eligible elite ability family after witnessing it.",
+        "silhouette": "Tall split-mask warlock with ribbon-like glyph tongue and hooked staff.",
+        "lore_hook": "Malach Rift-Tongue is tied to this acquisition path: Mythic null cult defection hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "ability observation",
+          "temporary lockout",
+          "caster pressure"
+        ],
+        "signature": [
+          "Tongue of Denial records an eligible enemy signature and imposes a short lockout after the enemy uses it again.",
+          "Capability expression: ability observation.",
+          "Capability expression: temporary lockout.",
+          "Capability expression: caster pressure."
+        ],
+        "counterplay": [
+          "Boss ultimates and protected mechanics immune; requires witnessing the ability first."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Black-red seal ribbons, muted cast-cancel ring, signature glyph capture."
+        ],
+        "animation": [
+          "Head tilts unnaturally toward observed casts; denial snaps the glyph tongue into a seal."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic null cult defection hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-030",
-      "family": "npc",
       "name": "Thessa Worldscar",
-      "tier": "Mythic",
+      "family": "npc",
+      "tier": "mythic",
+      "status": "specified",
       "role": "terrain-breaker hire",
-      "concept": "A mythic warrior who opens short-lived traversal cracks across authored obstacles and creates stagger lanes through monster formations.",
-      "signature_mechanic": "Worldscar cleaves a temporary breach line through eligible environmental blockers and staggers lesser enemies touching the line.",
-      "capabilities": [
-        "terrain breach",
-        "stagger lane",
-        "heavy melee"
-      ],
-      "counterplay": [
-        "Only authored breachable surfaces qualify; line is narrow and brief."
-      ],
-      "visual_identity": "Stone-black greatsword armor with glowing tectonic seams.",
-      "animation_profile": "Slow overhead draw followed by a full-body earth-splitting release.",
-      "vfx_profile": "Orange-white fault line, lifted debris ribbons, restrained ground fracture.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Mythic mountain tribunal hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "high",
-        "replication_band": "medium",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A mythic warrior who opens short-lived traversal cracks across authored obstacles and creates stagger lanes through monster formations.",
+        "silhouette": "Stone-black greatsword armor with glowing tectonic seams.",
+        "lore_hook": "Thessa Worldscar is tied to this acquisition path: Mythic mountain tribunal hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "terrain breach",
+          "stagger lane",
+          "heavy melee"
+        ],
+        "signature": [
+          "Worldscar cleaves a temporary breach line through eligible environmental blockers and staggers lesser enemies touching the line.",
+          "Capability expression: terrain breach.",
+          "Capability expression: stagger lane.",
+          "Capability expression: heavy melee."
+        ],
+        "counterplay": [
+          "Only authored breachable surfaces qualify; line is narrow and brief."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Orange-white fault line, lifted debris ribbons, restrained ground fracture."
+        ],
+        "animation": [
+          "Slow overhead draw followed by a full-body earth-splitting release."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic mountain tribunal hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-031",
-      "family": "npc",
       "name": "Nemea, Queen of Strays",
-      "tier": "Mythic",
+      "family": "npc",
+      "tier": "mythic",
+      "status": "specified",
       "role": "multi-beast commander hire",
-      "concept": "A mythic hunt queen who maintains a small temporary pack assembled from eligible local wildlife rather than summoning arbitrary creatures.",
-      "signature_mechanic": "Stray Crown recruits up to a capped set of nearby eligible beasts and assigns attack, guard, or scout roles.",
-      "capabilities": [
-        "temporary pack",
-        "role commands",
-        "wildlife rescue"
-      ],
-      "counterplay": [
-        "Pack size capped; bosses cannot be recruited; losing beasts reduces power until new eligibles are found."
-      ],
-      "visual_identity": "Royal hunt armor with living fur mantle and crown of mismatched beast sigils.",
-      "animation_profile": "Command gestures differ by role and active species; queen moves with deliberate predator calm.",
-      "vfx_profile": "Gold-green crown marks, species role icons, subtle spirit tracks.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Mythic Wild Court sovereign hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "high",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "A mythic hunt queen who maintains a small temporary pack assembled from eligible local wildlife rather than summoning arbitrary creatures.",
+        "silhouette": "Royal hunt armor with living fur mantle and crown of mismatched beast sigils.",
+        "lore_hook": "Nemea, Queen of Strays is tied to this acquisition path: Mythic Wild Court sovereign hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "temporary pack",
+          "role commands",
+          "wildlife rescue"
+        ],
+        "signature": [
+          "Stray Crown recruits up to a capped set of nearby eligible beasts and assigns attack, guard, or scout roles.",
+          "Capability expression: temporary pack.",
+          "Capability expression: role commands.",
+          "Capability expression: wildlife rescue."
+        ],
+        "counterplay": [
+          "Pack size capped; bosses cannot be recruited; losing beasts reduces power until new eligibles are found."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Gold-green crown marks, species role icons, subtle spirit tracks."
+        ],
+        "animation": [
+          "Command gestures differ by role and active species; queen moves with deliberate predator calm."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Mythic Wild Court sovereign hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-032",
-      "family": "npc",
       "name": "Quillon Elsewhere",
-      "tier": "Exotic",
+      "family": "npc",
+      "tier": "exotic",
+      "status": "specified",
       "role": "spatial trickster hire",
-      "concept": "An exotic mercenary who creates temporary mirrored firing positions rather than direct clones.",
-      "signature_mechanic": "Elsewhere Window opens two linked sight apertures that allow a limited number of shots to exit from the paired angle.",
-      "capabilities": [
-        "linked firing aperture",
-        "angle manipulation",
-        "reposition utility"
-      ],
-      "counterplay": [
-        "Apertures are visible and destructible; limited shot count."
-      ],
-      "visual_identity": "Iridescent geometric coat with floating monocle portals.",
-      "animation_profile": "Flicks apertures into space like coins, then fires through them without turning.",
-      "vfx_profile": "Prismatic apertures, thin refraction beams, clean collapse shards.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Exotic impossible-market hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "high",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "An exotic mercenary who creates temporary mirrored firing positions rather than direct clones.",
+        "silhouette": "Iridescent geometric coat with floating monocle portals.",
+        "lore_hook": "Quillon Elsewhere is tied to this acquisition path: Exotic impossible-market hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "linked firing aperture",
+          "angle manipulation",
+          "reposition utility"
+        ],
+        "signature": [
+          "Elsewhere Window opens two linked sight apertures that allow a limited number of shots to exit from the paired angle.",
+          "Capability expression: linked firing aperture.",
+          "Capability expression: angle manipulation.",
+          "Capability expression: reposition utility."
+        ],
+        "counterplay": [
+          "Apertures are visible and destructible; limited shot count."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Prismatic apertures, thin refraction beams, clean collapse shards."
+        ],
+        "animation": [
+          "Flicks apertures into space like coins, then fires through them without turning."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic impossible-market hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-033",
-      "family": "npc",
       "name": "Lady Hexadecimal",
-      "tier": "Exotic",
+      "family": "npc",
+      "tier": "exotic",
+      "status": "specified",
       "role": "combat systems hacker hire",
-      "concept": "An exotic techno-mystic who temporarily reprograms eligible hostile devices and simple machine enemies into neutral or allied states.",
-      "signature_mechanic": "Sixteen-Key Override solves a short rotating key pattern to convert one eligible device cluster for a limited duration.",
-      "capabilities": [
-        "device conversion",
-        "machine disruption",
-        "puzzle cast"
-      ],
-      "counterplay": [
-        "Organic enemies immune; protected objectives cannot convert; failed pattern triggers lockout."
-      ],
-      "visual_identity": "Black-violet cyber regalia with sixteen floating key tiles and a faceted visor.",
-      "animation_profile": "Hands type in midair while tiles orbit and snap into a final command grid.",
-      "vfx_profile": "Violet key glyphs, wireframe conversion wave, clean device color-state swap.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Exotic machine-court hire.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "high",
-        "replication_band": "high",
-        "streaming_local": true
+      "identity": {
+        "fantasy": "An exotic techno-mystic who temporarily reprograms eligible hostile devices and simple machine enemies into neutral or allied states.",
+        "silhouette": "Black-violet cyber regalia with sixteen floating key tiles and a faceted visor.",
+        "lore_hook": "Lady Hexadecimal is tied to this acquisition path: Exotic machine-court hire."
       },
-      "status": "specified"
+      "mechanics": {
+        "core": [
+          "device conversion",
+          "machine disruption",
+          "puzzle cast"
+        ],
+        "signature": [
+          "Sixteen-Key Override solves a short rotating key pattern to convert one eligible device cluster for a limited duration.",
+          "Capability expression: device conversion.",
+          "Capability expression: machine disruption.",
+          "Capability expression: puzzle cast."
+        ],
+        "counterplay": [
+          "Organic enemies immune; protected objectives cannot convert; failed pattern triggers lockout."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Violet key glyphs, wireframe conversion wave, clean device color-state swap."
+        ],
+        "animation": [
+          "Hands type in midair while tiles orbit and snap into a final command grid."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Exotic machine-court hire."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent."
+      ]
     },
     {
       "id": "NPC-034",
-      "family": "npc",
       "name": "Calypso Vant, Sunless Siren",
-      "tier": "Exotic",
-      "role": "premium-candidate crowd-control hire",
-      "concept": "An exotic siren duelist who bends enemy movement through rhythm pulses while granting nearby allies waterlike evasive motion.",
-      "signature_mechanic": "Abyssal Refrain alternates push, pull, and slipstream pulses on a strict three-beat cycle.",
-      "capabilities": [
-        "push pulse",
-        "pull pulse",
-        "ally slipstream"
-      ],
-      "counterplay": [
-        "Predictable three-beat order; silence and range break the cycle."
-      ],
-      "visual_identity": "Luxurious obsidian-and-pearl combat attire with translucent fin cape and luminous tide jewelry.",
-      "animation_profile": "Fluid dance-like footwork synced to three combat beats, never interrupting weapon handling.",
-      "vfx_profile": "Dark-water rings, pearl flashes, finlike refractive trails.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Eligible premium entitlement or equivalent authorized unlock path, subject to Epic policy.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "high",
-        "replication_band": "high",
-        "streaming_local": true
-      },
+      "family": "npc",
+      "tier": "exotic",
       "status": "specified",
-      "monetization": {
-        "mode": "premium_candidate",
-        "creator_dev_test_override": "development_only"
-      }
+      "role": "premium-candidate crowd-control hire",
+      "identity": {
+        "fantasy": "An exotic siren duelist who bends enemy movement through rhythm pulses while granting nearby allies waterlike evasive motion.",
+        "silhouette": "Luxurious obsidian-and-pearl combat attire with translucent fin cape and luminous tide jewelry.",
+        "lore_hook": "Calypso Vant, Sunless Siren is tied to this acquisition path: Eligible premium entitlement or equivalent authorized unlock path, subject to Epic policy."
+      },
+      "mechanics": {
+        "core": [
+          "push pulse",
+          "pull pulse",
+          "ally slipstream"
+        ],
+        "signature": [
+          "Abyssal Refrain alternates push, pull, and slipstream pulses on a strict three-beat cycle.",
+          "Capability expression: push pulse.",
+          "Capability expression: pull pulse.",
+          "Capability expression: ally slipstream."
+        ],
+        "counterplay": [
+          "Predictable three-beat order; silence and range break the cycle."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Dark-water rings, pearl flashes, finlike refractive trails."
+        ],
+        "animation": [
+          "Fluid dance-like footwork synced to three combat beats, never interrupting weapon handling."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Eligible premium entitlement or equivalent authorized unlock path, subject to Epic policy."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent.",
+        "Monetization candidate: premium_candidate; creator/dev override restricted to development_only."
+      ]
     },
     {
       "id": "NPC-035",
-      "family": "npc",
       "name": "Valeria Sol Invicta",
-      "tier": "God",
-      "role": "premium-candidate solar war goddess hire",
-      "concept": "A God-tier adult solar champion who fights as a mobile daylight fortress, protecting allies while annihilating clustered monsters with controlled coronas.",
-      "signature_mechanic": "Unconquered Sun creates a bounded moving solar court that burns hostile swarms, strengthens ally shields, and charges one devastating spearfall.",
-      "capabilities": [
-        "solar court",
-        "ally shield boost",
-        "spearfall",
-        "flight"
-      ],
-      "counterplay": [
-        "Court weakens underground; spearfall has a long visible charge and post-cast vulnerability."
-      ],
-      "visual_identity": "Regal sun-warrior design with luminous gold armor, radiant mantle, crown halo, and elegant athletic silhouette.",
-      "animation_profile": "Confident hover stride, broad spear arcs, halo assembly into a throne-sun before ultimate.",
-      "vfx_profile": "Gold-white corona, solar spears, heat haze, shield filaments, kilometer-readable but LOD-managed sun marker.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Eligible premium entitlement or equivalent authorized unlock path, subject to Epic policy.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "extreme",
-        "replication_band": "high",
-        "streaming_local": true
-      },
+      "family": "npc",
+      "tier": "god",
       "status": "specified",
-      "monetization": {
-        "mode": "premium_candidate",
-        "creator_dev_test_override": "development_only"
-      }
+      "role": "premium-candidate solar war goddess hire",
+      "identity": {
+        "fantasy": "A God-tier adult solar champion who fights as a mobile daylight fortress, protecting allies while annihilating clustered monsters with controlled coronas.",
+        "silhouette": "Regal sun-warrior design with luminous gold armor, radiant mantle, crown halo, and elegant athletic silhouette.",
+        "lore_hook": "Valeria Sol Invicta is tied to this acquisition path: Eligible premium entitlement or equivalent authorized unlock path, subject to Epic policy."
+      },
+      "mechanics": {
+        "core": [
+          "solar court",
+          "ally shield boost",
+          "spearfall",
+          "flight"
+        ],
+        "signature": [
+          "Unconquered Sun creates a bounded moving solar court that burns hostile swarms, strengthens ally shields, and charges one devastating spearfall.",
+          "Capability expression: solar court.",
+          "Capability expression: ally shield boost.",
+          "Capability expression: spearfall.",
+          "Capability expression: flight."
+        ],
+        "counterplay": [
+          "Court weakens underground; spearfall has a long visible charge and post-cast vulnerability."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Gold-white corona, solar spears, heat haze, shield filaments, kilometer-readable but LOD-managed sun marker."
+        ],
+        "animation": [
+          "Confident hover stride, broad spear arcs, halo assembly into a throne-sun before ultimate."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Eligible premium entitlement or equivalent authorized unlock path, subject to Epic policy."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent.",
+        "Monetization candidate: premium_candidate; creator/dev override restricted to development_only."
+      ]
     },
     {
       "id": "NPC-036",
-      "family": "npc",
       "name": "Mordecai Zenith, King of the Last Storm",
-      "tier": "God",
-      "role": "premium-candidate catastrophe commander hire",
-      "concept": "A God-tier storm king who coordinates allied movement through catastrophic weather lanes and converts major enemy attacks into team reposition opportunities.",
-      "signature_mechanic": "Last Storm Throne creates rotating safe and danger sectors inside a bounded storm, forcing movement while granting allies timed lightning-step routes.",
-      "capabilities": [
-        "storm sectors",
-        "lightning-step routes",
-        "boss pressure",
-        "team movement"
-      ],
-      "counterplay": [
-        "Sector rotation is telegraphed; indoors and shielded arenas weaken the storm; protected boss mechanics persist."
-      ],
-      "visual_identity": "Towering black-silver king armor with broken lightning crown and cloak made from layered storm fronts.",
-      "animation_profile": "Slow royal levitation, sword used as lightning conductor, throne-crown formation during domain cast.",
-      "vfx_profile": "Extreme but bounded storm wall, rotating sector beacons, target-capped lightning, distant thunder landmark.",
-      "audio_profile": "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio.",
-      "acquisition": "Eligible premium entitlement or equivalent authorized unlock path, subject to Epic policy.",
-      "evolution": "",
-      "dependencies": [],
-      "performance": {
-        "concurrency": 1,
-        "vfx_band": "extreme",
-        "replication_band": "high",
-        "streaming_local": true
-      },
+      "family": "npc",
+      "tier": "god",
       "status": "specified",
-      "monetization": {
-        "mode": "premium_candidate",
-        "creator_dev_test_override": "development_only"
-      }
+      "role": "premium-candidate catastrophe commander hire",
+      "identity": {
+        "fantasy": "A God-tier storm king who coordinates allied movement through catastrophic weather lanes and converts major enemy attacks into team reposition opportunities.",
+        "silhouette": "Towering black-silver king armor with broken lightning crown and cloak made from layered storm fronts.",
+        "lore_hook": "Mordecai Zenith, King of the Last Storm is tied to this acquisition path: Eligible premium entitlement or equivalent authorized unlock path, subject to Epic policy."
+      },
+      "mechanics": {
+        "core": [
+          "storm sectors",
+          "lightning-step routes",
+          "boss pressure",
+          "team movement"
+        ],
+        "signature": [
+          "Last Storm Throne creates rotating safe and danger sectors inside a bounded storm, forcing movement while granting allies timed lightning-step routes.",
+          "Capability expression: storm sectors.",
+          "Capability expression: lightning-step routes.",
+          "Capability expression: boss pressure.",
+          "Capability expression: team movement."
+        ],
+        "counterplay": [
+          "Sector rotation is telegraphed; indoors and shielded arenas weaken the storm; protected boss mechanics persist."
+        ],
+        "evolution": []
+      },
+      "presentation": {
+        "vfx": [
+          "Extreme but bounded storm wall, rotating sector beacons, target-capped lightning, distant thunder landmark."
+        ],
+        "animation": [
+          "Slow royal levitation, sword used as lightning conductor, throne-crown formation during domain cast."
+        ],
+        "audio": [
+          "Unique hire, danger, command, ultimate, downed, and retreat cues with spatially readable combat audio."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Eligible premium entitlement or equivalent authorized unlock path, subject to Epic policy."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "tiny",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [],
+      "notes": [
+        "Migrated from AEONFALL authored wave 003 legacy schema without discarding original design intent.",
+        "Monetization candidate: premium_candidate; creator/dev override restricted to development_only."
+      ]
     }
   ]
 }
