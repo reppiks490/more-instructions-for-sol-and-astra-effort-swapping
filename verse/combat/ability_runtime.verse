@@ -14,7 +14,7 @@ aeonfall_ability_runtime := class():
     Initialize(
         OwnerKey:string,
         Definition:aeonfall_ability_definition
-    ):logic=
+    )<transacts>:logic=
         if:
             OwnerKey <> ""
             Definition.AbilityId <> ""
@@ -112,7 +112,7 @@ aeonfall_ability_runtime := class():
         OwnerKey:string,
         Definition:aeonfall_ability_definition,
         Context:aeonfall_ability_context_flags
-    ):logic=
+    )<transacts>:logic=
         if:
             CanActivate(OwnerKey, Definition, Context)?
             Old := GetState[OwnerKey, Definition.AbilityId]
@@ -161,7 +161,7 @@ aeonfall_ability_runtime := class():
 
         false
 
-    EndActivation(OwnerKey:string, AbilityId:string):logic=
+    EndActivation(OwnerKey:string, AbilityId:string)<transacts>:logic=
         if:
             Old := GetState[OwnerKey, AbilityId]
         then:
@@ -193,7 +193,7 @@ aeonfall_ability_runtime := class():
         OwnerKey:string,
         Definition:aeonfall_ability_definition,
         Amount:int
-    ):logic=
+    )<transacts>:logic=
         if:
             Amount > 0
             Old := GetState[OwnerKey, Definition.AbilityId]
@@ -233,7 +233,7 @@ aeonfall_ability_runtime := class():
         OwnerKey:string,
         AbilityId:string,
         Locked:logic
-    ):logic=
+    )<transacts>:logic=
         if:
             Old := GetState[OwnerKey, AbilityId]
         then:
@@ -258,7 +258,7 @@ aeonfall_ability_runtime := class():
         OwnerKey:string,
         Definition:aeonfall_ability_definition,
         DeltaSeconds:float
-    ):void=
+    )<transacts>:void=
         if (DeltaSeconds <= 0.0):
             return
 
