@@ -57,6 +57,26 @@ aeonfall_regional_escalation_service := class():
                     Tier + Band
             CorruptionBand := Band
 
+    ReconcileMutation(
+        RegionId:string,
+        MutationId:string,
+        ShouldBeActive:logic
+    )<transacts>:void=
+        if (ShouldBeActive?):
+            Added := AEONFALLRegionRuntime.AddMutation(
+                RegionId,
+                MutationId
+            )
+            if (Added?):
+                Added = true
+        else:
+            Removed := AEONFALLRegionRuntime.RemoveMutation(
+                RegionId,
+                MutationId
+            )
+            if (Removed?):
+                Removed = true
+
     ReconcileRegion(RegionId:string)<transacts>:logic=
         if:
             State := AEONFALLRegionRuntime.GetState[RegionId]
@@ -69,45 +89,33 @@ aeonfall_regional_escalation_service := class():
 
             Band:int = CorruptionBand(State.Corruption)
 
-            if (Band >= 1):
-                Added1 := AEONFALLRegionRuntime.AddMutation(
-                    RegionId,
-                    "MUT-CORRUPTION-I"
-                )
-                if (Added1?):
-                    Added1 = true
-
-            if (Band >= 2):
-                Added2 := AEONFALLRegionRuntime.AddMutation(
-                    RegionId,
-                    "MUT-CORRUPTION-II"
-                )
-                if (Added2?):
-                    Added2 = true
-
-            if (Band >= 3):
-                Added3 := AEONFALLRegionRuntime.AddMutation(
-                    RegionId,
-                    "MUT-CORRUPTION-III"
-                )
-                if (Added3?):
-                    Added3 = true
-
-            if (Band >= 4):
-                Added4 := AEONFALLRegionRuntime.AddMutation(
-                    RegionId,
-                    "MUT-CORRUPTION-IV"
-                )
-                if (Added4?):
-                    Added4 = true
-
-            if (Band >= 5):
-                Added5 := AEONFALLRegionRuntime.AddMutation(
-                    RegionId,
-                    "MUT-CORRUPTION-V"
-                )
-                if (Added5?):
-                    Added5 = true
+            # Mutation flags are exact state, not an append-only history.
+            # Cleansing corruption must remove tiers no longer justified.
+            ReconcileMutation(
+                RegionId,
+                "MUT-CORRUPTION-I",
+                Band >= 1
+            )
+            ReconcileMutation(
+                RegionId,
+                "MUT-CORRUPTION-II",
+                Band >= 2
+            )
+            ReconcileMutation(
+                RegionId,
+                "MUT-CORRUPTION-III",
+                Band >= 3
+            )
+            ReconcileMutation(
+                RegionId,
+                "MUT-CORRUPTION-IV",
+                Band >= 4
+            )
+            ReconcileMutation(
+                RegionId,
+                "MUT-CORRUPTION-V",
+                Band >= 5
+            )
 
             AEONFALLRuntimeBus.Emit(
                 aeonfall_runtime_event{
