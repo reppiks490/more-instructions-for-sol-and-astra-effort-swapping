@@ -93,6 +93,21 @@ aeonfall_recipe_service := class():
                         TargetId := Recipe.OutputEntityId
                     }
                 )
+
+                DeliveryStarted := AEONFALLUnlockDeliveryService.Request(
+                    Agent,
+                    Recipe.OutputEntityId,
+                    Recipe.RecipeId
+                )
+                if (not DeliveryStarted?):
+                    AEONFALLRuntimeBus.Emit(
+                        aeonfall_runtime_event{
+                            EventType := "crafting.delivery_deferred",
+                            SourceId := Recipe.RecipeId,
+                            TargetId := Recipe.OutputEntityId
+                        }
+                    )
+
                 return true
 
         false
