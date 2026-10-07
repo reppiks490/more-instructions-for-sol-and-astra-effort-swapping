@@ -82,6 +82,21 @@ aeonfall_faction_conflict_service := class():
 
         false
 
+    StartRegistered(ConflictId:string)<transacts>:logic=
+        if:
+            Definition := AEONFALLFactionConflictRegistry.Get[ConflictId]
+            RegionState := AEONFALLRegionRuntime.GetState[Definition.RegionId]
+            RegionState.HostilityTier >= Definition.MinHostilityTier
+        then:
+            StartConflict(
+                Definition.ConflictId,
+                Definition.RegionId,
+                Definition.FactionAId,
+                Definition.FactionBId
+            )
+        else:
+            false
+
     GetState(ConflictId:string)<decides><transacts>:aeonfall_faction_conflict_state=
         Conflicts[ConflictId]
 
@@ -130,6 +145,19 @@ aeonfall_faction_conflict_service := class():
                         ContextId := "tier::{NewTier}"
                     }
                 )
+
+                if:
+                    Definition := AEONFALLFactionConflictRegistry.Get[ConflictId]
+                    (
+                        ScoreA >= Definition.VictoryScore
+                        or ScoreB >= Definition.VictoryScore
+                    )
+                    ScoreA <> ScoreB
+                then:
+                    Completed := CompleteConflict(ConflictId)
+                    if (Completed?):
+                        Completed = true
+
                 return true
 
         false
