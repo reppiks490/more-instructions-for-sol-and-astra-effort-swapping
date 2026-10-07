@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "slice_id": "SLICE-001",
+  "hireables": [
+    {
+      "npc_id": "NPC-003",
+      "name": "Orion Gravewake",
+      "faction_id": "",
+      "required_reputation": 0,
+      "required_unlock_ids": [],
+      "required_boss_ids": [
+        "BOS-011"
+      ],
+      "required_world_event_ids": [
+        "EVT-011"
+      ],
+      "allowed_orders": [
+        "Follow",
+        "Guard",
+        "FocusTarget",
+        "HoldPosition",
+        "Retreat"
+      ],
+      "max_simultaneous_per_player": 1,
+      "can_enter_boss_arenas": true,
+      "can_be_revived": true
+    },
+    {
+      "npc_id": "NPC-008",
+      "name": "Mira Sable, Beast-Crown",
+      "faction_id": "FAC-003",
+      "required_reputation": 300,
+      "required_unlock_ids": [],
+      "required_boss_ids": [],
+      "required_world_event_ids": [],
+      "allowed_orders": [
+        "Follow",
+        "Guard",
+        "FocusTarget",
+        "Flank",
+        "Retreat"
+      ],
+      "max_simultaneous_per_player": 1,
+      "can_enter_boss_arenas": true,
+      "can_be_revived": true
+    },
+    {
+      "npc_id": "NPC-009",
+      "name": "Rook Ashbreaker",
+      "faction_id": "FAC-001",
+      "required_reputation": 75,
+      "required_unlock_ids": [],
+      "required_boss_ids": [],
+      "required_world_event_ids": [],
+      "allowed_orders": [
+        "Follow",
+        "Guard",
+        "FocusTarget",
+        "HoldPosition"
+      ],
+      "max_simultaneous_per_player": 1,
+      "can_enter_boss_arenas": true,
+      "can_be_revived": true
+    },
+    {
+      "npc_id": "NPC-010",
+      "name": "Sera Nine-Lives",
+      "faction_id": "FAC-004",
+      "required_reputation": 75,
+      "required_unlock_ids": [],
+      "required_boss_ids": [],
+      "required_world_event_ids": [],
+      "allowed_orders": [
+        "Follow",
+        "Guard",
+        "HoldPosition",
+        "Retreat"
+      ],
+      "max_simultaneous_per_player": 1,
+      "can_enter_boss_arenas": true,
+      "can_be_revived": true
+    },
+    {
+      "npc_id": "NPC-012",
+      "name": "Ilyra Mosswake",
+      "faction_id": "FAC-003",
+      "required_reputation": 100,
+      "required_unlock_ids": [],
+      "required_boss_ids": [],
+      "required_world_event_ids": [],
+      "allowed_orders": [
+        "Follow",
+        "FocusTarget",
+        "HoldPosition",
+        "Flank",
+        "Retreat"
+      ],
+      "max_simultaneous_per_player": 1,
+      "can_enter_boss_arenas": true,
+      "can_be_revived": true
+    },
+    {
+      "npc_id": "NPC-016",
+      "name": "Orren Pike",
+      "faction_id": "FAC-001",
+      "required_reputation": 125,
+      "required_unlock_ids": [],
+      "required_boss_ids": [],
+      "required_world_event_ids": [],
+      "allowed_orders": [
+        "Follow",
+        "Guard",
+        "FocusTarget",
+        "HoldPosition",
+        "Flank"
+      ],
+      "max_simultaneous_per_player": 1,
+      "can_enter_boss_arenas": true,
+      "can_be_revived": true
+    },
+    {
+      "npc_id": "NPC-023",
+      "name": "Lucent Marrow",
+      "faction_id": "FAC-004",
+      "required_reputation": 250,
+      "required_unlock_ids": [],
+      "required_boss_ids": [
+        "BOS-011"
+      ],
+      "required_world_event_ids": [],
+      "allowed_orders": [
+        "Follow",
+        "Guard",
+        "FocusTarget",
+        "HoldPosition",
+        "Retreat"
+      ],
+      "max_simultaneous_per_player": 1,
+      "can_enter_boss_arenas": true,
+      "can_be_revived": true
+    },
+    {
+      "npc_id": "NPC-051",
+      "name": "Orryx Bone-Crown",
+      "faction_id": "FAC-007",
+      "required_reputation": 200,
+      "required_unlock_ids": [],
+      "required_boss_ids": [
+        "BOS-011"
+      ],
+      "required_world_event_ids": [
+        "EVT-011"
+      ],
+      "allowed_orders": [
+        "Follow",
+        "Guard",
+        "FocusTarget",
+        "HoldPosition",
+        "Flank",
+        "Retreat"
+      ],
+      "max_simultaneous_per_player": 1,
+      "can_enter_boss_arenas": true,
+      "can_be_revived": true
+    }
+  ]
+}
