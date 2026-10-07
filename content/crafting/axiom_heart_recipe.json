@@ -361,5 +361,6 @@
         "The Choosing not yet attempted"
       ]
     }
-  ]
+  ],
+  "minimum_raw_acquisitions": 50000
 }
