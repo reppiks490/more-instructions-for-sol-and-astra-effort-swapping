@@ -320,6 +320,50 @@ aeonfall_class_runtime := class():
 
         false
 
+    TransferReservation(
+        OldRequestId:string,
+        NewRequestId:string
+    )<transacts>:logic=
+        if:
+            OldRequestId <> ""
+            NewRequestId <> ""
+            OldRequestId <> NewRequestId
+            Reservation := Reservations[OldRequestId]
+        then:
+            if:
+                Existing := Reservations[NewRequestId]
+            then:
+                return false
+            else:
+                Updated := aeonfall_class_resource_reservation:
+                    RequestId := NewRequestId
+                    OwnerKey := Reservation.OwnerKey
+                    ClassId := Reservation.ClassId
+                    Amount := Reservation.Amount
+                    HoldWhileActive := true
+
+                if:
+                    set Reservations[NewRequestId] = Updated
+                then:
+                    Removed := RemoveReservation(OldRequestId)
+                    if (Removed?):
+                        AEONFALLRuntimeBus.Emit(
+                            aeonfall_runtime_event{
+                                EventType := "class.resource_transferred",
+                                SourceId := Reservation.OwnerKey,
+                                TargetId := Reservation.ClassId,
+                                ContextId := NewRequestId,
+                                Amount := GetAvailableResource(Reservation.OwnerKey)
+                            }
+                        )
+                        return true
+                    else:
+                        Rollback := RemoveReservation(NewRequestId)
+                        if (Rollback?):
+                            Rollback = true
+
+        false
+
     ReleaseReservation(RequestId:string)<transacts>:logic=
         if:
             Reservation := Reservations[RequestId]
