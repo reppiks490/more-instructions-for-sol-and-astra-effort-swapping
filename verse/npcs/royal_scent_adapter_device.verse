@@ -46,6 +46,13 @@ aeonfall_royal_scent_adapter_device := class(creative_device):
                 )
 
                 if (Started?):
+                    spawn{
+                        AEONFALLTamingRuntime.WatchTimeout(
+                            Request.TargetKey,
+                            Request.RequestId,
+                            Definition.MaxChallengeSeconds
+                        )
+                    }
                     set Succeeded = true
                     set ResultCode = "taming_challenge_started"
                 else:
