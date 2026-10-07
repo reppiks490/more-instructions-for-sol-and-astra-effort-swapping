@@ -129,6 +129,18 @@ aeonfall_world_event_service := class():
                         SourceId := EventId
                     }
                 )
+
+                Awarded:int = AEONFALLEncounterRewardService.AwardRegistered(
+                    EventId
+                )
+
+                AEONFALLRuntimeBus.Emit(
+                    aeonfall_runtime_event{
+                        EventType := "world_event.rewards_resolved",
+                        SourceId := EventId,
+                        Amount := Awarded
+                    }
+                )
                 return true
 
         false
@@ -155,6 +167,10 @@ aeonfall_world_event_service := class():
                         EventType := "world_event.failed",
                         SourceId := EventId
                     }
+                )
+
+                AEONFALLEncounterParticipation.ClearEncounter(
+                    EventId
                 )
                 return true
 
