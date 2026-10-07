@@ -90,7 +90,7 @@ REQUIRED_TOKENS = {
         "Resolve",
         "ClearOwner",
         "TickAll",
-        "UnlockDeliveryRequested",
+        "RequestUnlockDelivery",
     ],
     "verse/combat/ability_activation_service.verse": [
         "AEONFALLActorContextRuntime.GetFlags",
