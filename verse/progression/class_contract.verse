@@ -16,3 +16,11 @@ aeonfall_class_runtime_state := class:
     MaxResource:int = 0
     AbilityIds:[]string = array{}
     Active:logic = false
+
+
+aeonfall_class_resource_reservation := class:
+    RequestId:string = ""
+    OwnerKey:string = ""
+    ClassId:string = ""
+    Amount:int = 0
+    HoldWhileActive:logic = false
