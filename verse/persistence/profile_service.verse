@@ -3,6 +3,8 @@ using { /Verse.org/Verse }
 
 # Central persistent profile update service.
 # Variable-sized updates are checked with FitsInPlayerMap before replacement.
+# Canonical completion arrays are de-duplicated with array.Find[] so progression
+# counts represent unique accomplishments rather than repeated writes.
 aeonfall_profile_service := class():
 
     GetProfile(Agent:agent)<decides><transacts>:aeonfall_player_profile=
@@ -13,6 +15,12 @@ aeonfall_profile_service := class():
             set Result = MakeAEONFALLPlayerProfile(Saved)
         Result
 
+    SaveProfile(Player:player, Candidate:aeonfall_player_profile):void=
+        if:
+            FitsInPlayerMap(Candidate)
+        then:
+            set AEONFALLPlayerProfiles[Player] = Candidate
+
     GrantXP(Agent:agent, Amount:int):void=
         if:
             Amount > 0
@@ -22,11 +30,7 @@ aeonfall_profile_service := class():
             Candidate := aeonfall_player_profile:
                 MakeAEONFALLPlayerProfile<constructor>(Old)
                 XP := Old.XP + Amount
-
-            if:
-                FitsInPlayerMap(Candidate)
-            then:
-                set AEONFALLPlayerProfiles[Player] = Candidate
+            SaveProfile(Player, Candidate)
 
     GrantMasteryPoints(Agent:agent, Amount:int):void=
         if:
@@ -37,11 +41,127 @@ aeonfall_profile_service := class():
             Candidate := aeonfall_player_profile:
                 MakeAEONFALLPlayerProfile<constructor>(Old)
                 MasteryPoints := Old.MasteryPoints + Amount
+            SaveProfile(Player, Candidate)
 
+    UnlockEntity(Agent:agent, EntityId:string):void=
+        if:
+            Player := player[Agent]
+            Old := AEONFALLPlayerProfiles[Player]
+        then:
             if:
-                FitsInPlayerMap(Candidate)
+                Old.UnlockedEntityIds.Find[EntityId]
             then:
-                set AEONFALLPlayerProfiles[Player] = Candidate
+                return
+            else:
+                Candidate := aeonfall_player_profile:
+                    MakeAEONFALLPlayerProfile<constructor>(Old)
+                    UnlockedEntityIds := Old.UnlockedEntityIds + array{EntityId}
+                SaveProfile(Player, Candidate)
+
+    MasterClass(Agent:agent, ClassId:string):void=
+        if:
+            Player := player[Agent]
+            Old := AEONFALLPlayerProfiles[Player]
+        then:
+            if:
+                Old.MasteredClassIds.Find[ClassId]
+            then:
+                return
+            else:
+                Candidate := aeonfall_player_profile:
+                    MakeAEONFALLPlayerProfile<constructor>(Old)
+                    MasteredClassIds := Old.MasteredClassIds + array{ClassId}
+                SaveProfile(Player, Candidate)
+
+    CompleteBoss(Agent:agent, BossId:string):void=
+        if:
+            Player := player[Agent]
+            Old := AEONFALLPlayerProfiles[Player]
+        then:
+            if:
+                Old.CompletedBossIds.Find[BossId]
+            then:
+                return
+            else:
+                Candidate := aeonfall_player_profile:
+                    MakeAEONFALLPlayerProfile<constructor>(Old)
+                    CompletedBossIds := Old.CompletedBossIds + array{BossId}
+                SaveProfile(Player, Candidate)
+
+    CompleteWorldEvent(Agent:agent, EventId:string):void=
+        if:
+            Player := player[Agent]
+            Old := AEONFALLPlayerProfiles[Player]
+        then:
+            if:
+                Old.CompletedWorldEventIds.Find[EventId]
+            then:
+                return
+            else:
+                Candidate := aeonfall_player_profile:
+                    MakeAEONFALLPlayerProfile<constructor>(Old)
+                    CompletedWorldEventIds := Old.CompletedWorldEventIds + array{EventId}
+                SaveProfile(Player, Candidate)
+
+    CompleteTrial(Agent:agent, TrialId:string):void=
+        if:
+            Player := player[Agent]
+            Old := AEONFALLPlayerProfiles[Player]
+        then:
+            if:
+                Old.CompletedTrialIds.Find[TrialId]
+            then:
+                return
+            else:
+                Candidate := aeonfall_player_profile:
+                    MakeAEONFALLPlayerProfile<constructor>(Old)
+                    CompletedTrialIds := Old.CompletedTrialIds + array{TrialId}
+                SaveProfile(Player, Candidate)
+
+    DiscoverPoi(Agent:agent, PoiId:string):void=
+        if:
+            Player := player[Agent]
+            Old := AEONFALLPlayerProfiles[Player]
+        then:
+            if:
+                Old.DiscoveredPoiIds.Find[PoiId]
+            then:
+                return
+            else:
+                Candidate := aeonfall_player_profile:
+                    MakeAEONFALLPlayerProfile<constructor>(Old)
+                    DiscoveredPoiIds := Old.DiscoveredPoiIds + array{PoiId}
+                SaveProfile(Player, Candidate)
+
+    UnlockHireable(Agent:agent, NpcId:string):void=
+        if:
+            Player := player[Agent]
+            Old := AEONFALLPlayerProfiles[Player]
+        then:
+            if:
+                Old.HireableUnlockIds.Find[NpcId]
+            then:
+                return
+            else:
+                Candidate := aeonfall_player_profile:
+                    MakeAEONFALLPlayerProfile<constructor>(Old)
+                    HireableUnlockIds := Old.HireableUnlockIds + array{NpcId}
+                SaveProfile(Player, Candidate)
+
+    RecordTamedSpecies(Agent:agent, SpeciesId:string):void=
+        if:
+            Player := player[Agent]
+            Old := AEONFALLPlayerProfiles[Player]
+        then:
+            if:
+                Old.TamedSpeciesIds.Find[SpeciesId]
+            then:
+                return
+            else:
+                Candidate := aeonfall_player_profile:
+                    MakeAEONFALLPlayerProfile<constructor>(Old)
+                    TamedSpeciesIds := Old.TamedSpeciesIds + array{SpeciesId}
+                SaveProfile(Player, Candidate)
 
     SetMaterialCount(Agent:agent, MaterialId:string, NewCount:int):void=
         if:
@@ -50,18 +170,28 @@ aeonfall_profile_service := class():
             Old := AEONFALLPlayerProfiles[Player]
         then:
             var UpdatedLedger:[string]int = Old.MaterialLedger
-
             if:
                 set UpdatedLedger[MaterialId] = NewCount
             then:
                 Candidate := aeonfall_player_profile:
                     MakeAEONFALLPlayerProfile<constructor>(Old)
                     MaterialLedger := UpdatedLedger
+                SaveProfile(Player, Candidate)
 
-                if:
-                    FitsInPlayerMap(Candidate)
-                then:
-                    set AEONFALLPlayerProfiles[Player] = Candidate
+    SetFactionReputation(Agent:agent, FactionId:string, Reputation:int):void=
+        if:
+            Reputation >= 0
+            Player := player[Agent]
+            Old := AEONFALLPlayerProfiles[Player]
+        then:
+            var UpdatedReputation:[string]int = Old.FactionReputation
+            if:
+                set UpdatedReputation[FactionId] = Reputation
+            then:
+                Candidate := aeonfall_player_profile:
+                    MakeAEONFALLPlayerProfile<constructor>(Old)
+                    FactionReputation := UpdatedReputation
+                SaveProfile(Player, Candidate)
 
     SetEquipment(
         Agent:agent,
@@ -78,26 +208,35 @@ aeonfall_profile_service := class():
                 EquippedArmorIds := ArmorIds
                 EquippedWeaponIds := WeaponIds
                 EquippedRelicIds := RelicIds
+            SaveProfile(Player, Candidate)
 
-            if:
-                FitsInPlayerMap(Candidate)
-            then:
-                set AEONFALLPlayerProfiles[Player] = Candidate
+    SetAscensionRank(Agent:agent, NewRank:int):void=
+        if:
+            NewRank >= 0
+            Player := player[Agent]
+            Old := AEONFALLPlayerProfiles[Player]
+        then:
+            Candidate := aeonfall_player_profile:
+                MakeAEONFALLPlayerProfile<constructor>(Old)
+                AscensionRank := NewRank
+            SaveProfile(Player, Candidate)
 
     SetAxiomHeartCrafted(Agent:agent, IsCrafted:logic):void=
         if:
             Player := player[Agent]
             Old := AEONFALLPlayerProfiles[Player]
         then:
-            set AEONFALLPlayerProfiles[Player] = aeonfall_player_profile:
+            Candidate := aeonfall_player_profile:
                 MakeAEONFALLPlayerProfile<constructor>(Old)
                 AxiomHeartCrafted := IsCrafted
+            SaveProfile(Player, Candidate)
 
     SetZeroCandidate(Agent:agent, IsCandidate:logic):void=
         if:
             Player := player[Agent]
             Old := AEONFALLPlayerProfiles[Player]
         then:
-            set AEONFALLPlayerProfiles[Player] = aeonfall_player_profile:
+            Candidate := aeonfall_player_profile:
                 MakeAEONFALLPlayerProfile<constructor>(Old)
                 IsZeroCandidate := IsCandidate
+            SaveProfile(Player, Candidate)
