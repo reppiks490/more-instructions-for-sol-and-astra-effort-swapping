@@ -116,6 +116,18 @@ REQUIRED_TOKENS = {
         "AEONFALLActorContextRuntime.GetFlags",
         "AEONFALLTargetingRuntime.GetSelection",
     ],
+    "verse/world/region_runtime.verse": [
+        "AddMutation",
+        "RemoveMutation",
+        "region.mutation_added",
+        "region.mutation_removed",
+    ],
+    "verse/world/regional_escalation_runtime.verse": [
+        "ReconcileMutation",
+        "AEONFALLRegionRuntime.AddMutation",
+        "AEONFALLRegionRuntime.RemoveMutation",
+        "Band >= 5",
+    ],
     "verse/transcendent/choosing_runtime.verse": [
         "CommitChoosingSuccess",
         "TickAll",
@@ -193,6 +205,24 @@ def main() -> int:
             errors.append(
                 f"{path.relative_to(ROOT)}: adapter does not report two-phase result"
             )
+
+    # Regional mutation reconciliation policy: corruption flags must be
+    # removable when corruption falls, not append-only historical state.
+    region_text = (ROOT / "verse/world/region_runtime.verse").read_text(
+        encoding="utf-8"
+    )
+    escalation_text = (
+        ROOT / "verse/world/regional_escalation_runtime.verse"
+    ).read_text(encoding="utf-8")
+
+    if "RemoveMutation" not in region_text:
+        errors.append("regional mutation reconciliation policy missing RemoveMutation")
+    if "region.mutation_removed" not in region_text:
+        errors.append("regional mutation removal observability event missing")
+    if "AEONFALLRegionRuntime.RemoveMutation" not in escalation_text:
+        errors.append("regional escalation never removes stale corruption mutations")
+    if "ReconcileMutation" not in escalation_text:
+        errors.append("regional escalation lacks exact mutation reconciliation helper")
 
     # Transcendent history policy: never award on activation start.
     # Award must occur inside EndActive, after the Active -> Exhausted map write,
