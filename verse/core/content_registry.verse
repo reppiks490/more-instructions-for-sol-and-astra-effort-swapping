@@ -10,8 +10,21 @@ aeonfall_content_registry := class():
     RegisterDefinition(Definition:aeonfall_content_definition)<transacts>:logic=
         if:
             Definition.CanonicalId <> ""
-            set Definitions[Definition.CanonicalId] = Definition
         then:
+            if:
+                Existing := Definitions[Definition.CanonicalId]
+            then:
+                AEONFALLRuntimeBus.Emit(
+                    aeonfall_runtime_event{
+                        EventType := "content.definition_duplicate_rejected",
+                        SourceId := Definition.CanonicalId
+                    }
+                )
+                return false
+
+            if:
+                set Definitions[Definition.CanonicalId] = Definition
+            then:
             AEONFALLRuntimeBus.Emit(
                 aeonfall_runtime_event{
                     EventType := "content.definition_registered",
@@ -19,14 +32,27 @@ aeonfall_content_registry := class():
                     ContextId := Definition.RuntimeBindingId
                 }
             )
-            return true
+                return true
         false
 
     RegisterBinding(Binding:aeonfall_runtime_binding)<transacts>:logic=
         if:
             Binding.CanonicalId <> ""
-            set Bindings[Binding.CanonicalId] = Binding
         then:
+            if:
+                Existing := Bindings[Binding.CanonicalId]
+            then:
+                AEONFALLRuntimeBus.Emit(
+                    aeonfall_runtime_event{
+                        EventType := "content.binding_duplicate_rejected",
+                        SourceId := Binding.CanonicalId
+                    }
+                )
+                return false
+
+            if:
+                set Bindings[Binding.CanonicalId] = Binding
+            then:
             AEONFALLRuntimeBus.Emit(
                 aeonfall_runtime_event{
                     EventType := "content.binding_registered",
@@ -34,7 +60,7 @@ aeonfall_content_registry := class():
                     ContextId := Binding.RuntimeBindingId
                 }
             )
-            return true
+                return true
         false
 
     GetDefinition(CanonicalId:string)<decides><transacts>:aeonfall_content_definition=
