@@ -301,5 +301,6 @@ aeonfall_ability_runtime := class():
             if:
                 set States[Key] = Updated
             then:
+                return
 
 AEONFALLAbilityRuntime:aeonfall_ability_runtime = aeonfall_ability_runtime{}
