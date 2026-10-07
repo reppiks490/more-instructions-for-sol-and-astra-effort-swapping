@@ -1,0 +1,130 @@
+{
+  "id": "AXIOM-HEART-V1",
+  "name": "Axiom Heart",
+  "purpose": "Mandatory endgame craft required before a player may become a Zero Candidate.",
+  "design_rule": "The recipe represents tens of thousands of acquired inputs through nested refinement. The final craft is never directly purchasable and does not grant Transcendent Zero by itself.",
+  "raw_equivalent_target": 68420,
+  "components": [
+    {
+      "id": "MAT-VOID-SHARD",
+      "name": "Void Shard",
+      "raw_equivalent": 13000,
+      "source": "eldritch anomalies, void hunts, dimensional events"
+    },
+    {
+      "id": "MAT-CELESTIAL-FRAGMENT",
+      "name": "Celestial Fragment",
+      "raw_equivalent": 10000,
+      "source": "solar raids, Starforge Descent, celestial bosses"
+    },
+    {
+      "id": "MAT-TITAN-BONE",
+      "name": "Titan Bone",
+      "raw_equivalent": 8000,
+      "source": "colossal beasts and distributed titan encounters"
+    },
+    {
+      "id": "MAT-INFERNAL-EMBER",
+      "name": "Infernal Ember",
+      "raw_equivalent": 7000,
+      "source": "demon incursions, Bellstorm, infernal raids"
+    },
+    {
+      "id": "MAT-CHRONO-CRYSTAL",
+      "name": "Chrono Crystal",
+      "raw_equivalent": 6000,
+      "source": "Chronarch content and temporal bosses"
+    },
+    {
+      "id": "MAT-LEVIATHAN-SCALE",
+      "name": "Leviathan Scale",
+      "raw_equivalent": 5000,
+      "source": "oceanic and abyssal encounters"
+    },
+    {
+      "id": "MAT-MACHINE-CORE",
+      "name": "Ancient Machine Core",
+      "raw_equivalent": 4000,
+      "source": "constructs, Brass Court, siege automata"
+    },
+    {
+      "id": "MAT-NECROTIC-ESSENCE",
+      "name": "Necrotic Essence",
+      "raw_equivalent": 3500,
+      "source": "necromancer strongholds and grave events"
+    },
+    {
+      "id": "MAT-MYTHIC-HEART",
+      "name": "Mythic Beast Heart",
+      "raw_equivalent": 3000,
+      "source": "high-tier mythical wildlife and hunts"
+    },
+    {
+      "id": "MAT-DIMENSIONAL-CATALYST",
+      "name": "Dimensional Catalyst",
+      "raw_equivalent": 2500,
+      "source": "rift and mirror events"
+    },
+    {
+      "id": "MAT-BOSS-SOUL",
+      "name": "Boss Soul",
+      "raw_equivalent": 2000,
+      "source": "eligible major and super bosses"
+    },
+    {
+      "id": "MAT-WORLD-CORE",
+      "name": "World Event Core",
+      "raw_equivalent": 1500,
+      "source": "eligible world-event completions"
+    },
+    {
+      "id": "MAT-SOVEREIGN-SIGIL",
+      "name": "Sovereign Sigil",
+      "raw_equivalent": 1000,
+      "source": "faction capstones and sovereign bosses"
+    },
+    {
+      "id": "MAT-ABSOLUTE-RELIC",
+      "name": "Absolute Relic",
+      "raw_equivalent": 600,
+      "source": "Absolute trials and hidden endgame chains"
+    },
+    {
+      "id": "MAT-PRIMORDIAL-KEY",
+      "name": "Primordial Key",
+      "raw_equivalent": 500,
+      "source": "multi-region secret quest lines"
+    },
+    {
+      "id": "MAT-REALITY-ANCHOR",
+      "name": "Reality Anchor",
+      "raw_equivalent": 300,
+      "source": "Absolute world anomalies"
+    },
+    {
+      "id": "REL-045",
+      "name": "Seed of Zero",
+      "raw_equivalent": 20,
+      "source": "non-purchasable hidden mastery chain"
+    },
+    {
+      "id": "MAT-WITNESS-SEAL",
+      "name": "Witness Seal",
+      "raw_equivalent": 500,
+      "source": "ten Ascension Trial completion records"
+    }
+  ],
+  "refinement_layers": [
+    "raw -> refined bundle",
+    "refined bundle -> sovereign component",
+    "sovereign component -> axiom component",
+    "axiom components + Seed of Zero -> Axiom Heart"
+  ],
+  "anti_grind_rules": [
+    "No single activity can supply more than a bounded fraction of total progress.",
+    "Several ingredients require unique clears or account-level mastery rather than repeated farming.",
+    "No final-tier prerequisite may be purchased directly.",
+    "Event-exclusive materials return on predictable rotations so the path is difficult rather than permanently missable.",
+    "All raw-equivalent counts are balance targets and must be tuned from telemetry."
+  ]
+}
