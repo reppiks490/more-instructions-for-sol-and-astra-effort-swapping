@@ -24,9 +24,23 @@ aeonfall_ability_definition := class:
     OwnerEntityId:string = ""
     ResourcePolicy:aeonfall_resource_policy = aeonfall_resource_policy.Cooldown
     TargetPolicy:aeonfall_target_policy = aeonfall_target_policy.Enemy
+
+    # Cooldown policy.
     CooldownSeconds:float = 0.0
+
+    # Charge policy.
     MaxCharges:int = 0
+    RechargeSeconds:float = 0.0
+
+    # Meter policy.
     MaxMeter:int = 0
+    ActivationCost:int = 0
+
+    # Context gates.
+    RequiresEncounterContext:logic = false
+    RequiresTransformationContext:logic = false
+    AllowWhileActive:logic = false
+
     StatusIds:[]string = array{}
     SpawnIds:[]string = array{}
     EventIds:[]string = array{}
@@ -39,5 +53,10 @@ aeonfall_ability_runtime_state := class:
     CurrentCharges:int = 0
     CurrentMeter:int = 0
     CooldownRemainingSeconds:float = 0.0
+    ChargeRechargeRemainingSeconds:float = 0.0
     Active:logic = false
     Locked:logic = false
+
+aeonfall_ability_context_flags := class:
+    EncounterActive:logic = false
+    TransformationActive:logic = false
