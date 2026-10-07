@@ -1,0 +1,1986 @@
+{
+  "wave": "010",
+  "purpose": "Original custom ranged weapon expansion using supported UEFN weapon-template foundations plus authored Verse/Scene Graph mechanics.",
+  "entity_count": 30,
+  "entities": [
+    {
+      "id": "WPN-013",
+      "name": "Ashcoil Repeater",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "assault rifle — heat rhythm weapon",
+      "identity": {
+        "fantasy": "Builds a controlled heat rhythm through sustained accuracy; missing too often vents the stored pattern instead of simply overheating.",
+        "silhouette": "Gunmetal rifle wrapped in a glowing copper coil, short ceramic barrel, ember counter running along the receiver.",
+        "lore_hook": "Forged for Cinder March marksmen who were taught that heat is a metronome rather than a penalty."
+      },
+      "mechanics": {
+        "core": [
+          "heat rhythm",
+          "precision sustain",
+          "vent punish"
+        ],
+        "signature": [
+          "Ember Cadence adds one heat beat after consecutive hits.",
+          "Fourth Coil empowers the next accurate burst after three clean beats.",
+          "Cold Miss dumps one beat on a miss, making accuracy more valuable than spray.",
+          "Manual Vent safely clears heat but sacrifices the current empowered window."
+        ],
+        "counterplay": [
+          "Break line of sight or force missed shots; the weapon is ordinary until its rhythm is maintained."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Copper coils brighten one section at a time, accurate bursts leave thin ember rings, and a failed rhythm vents sparks sideways instead of exploding."
+        ],
+        "animation": [
+          "Receiver coil visibly expands with heat, reload includes a palm roll over a cooling sleeve, and empowered bursts brace the weapon tighter against the shoulder."
+        ],
+        "audio": [
+          "Dry mechanical rifle report layered with coil hum, three rising beat clicks, and a compact pressure hiss on manual vent."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "assault_rifle_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: assault_rifle_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-014",
+      "name": "Graveglass Pistol",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "pistol — corpse-resource utility sidearm",
+      "identity": {
+        "fantasy": "Marks defeated lesser undead with brittle graveglass nodes that can be shattered to deny necromancer corpse economy or harvested for crafting dust.",
+        "silhouette": "Black glass pistol with transparent chamber, silver funeral wire wrapped around the grip, muzzle shaped like a small broken window.",
+        "lore_hook": "Designed by mortuary engineers who wanted every bullet to settle an argument about who owns a corpse."
+      },
+      "mechanics": {
+        "core": [
+          "corpse denial",
+          "graveglass mark",
+          "resource utility"
+        ],
+        "signature": [
+          "Quietus Mark attaches a brittle node to eligible necrotic enemies on finishing hit.",
+          "Shatter Claim destroys the node from range to deny corpse-resource interactions.",
+          "Harvest Claim lets the player interact with an intact node for a small crafting resource instead.",
+          "Funeral Window briefly highlights eligible marked remains through nearby clutter."
+        ],
+        "counterplay": [
+          "Marks only apply to eligible lesser enemies and the player must choose denial or harvest, never both."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Black-silver glass splinters, tiny funeral halos on marked remains, and a clean window-outline pulse during Funeral Window."
+        ],
+        "animation": [
+          "Precise one-hand pistol posture, chamber turns like a glass cylinder during reload, and mark shots end with a restrained wrist snap."
+        ],
+        "audio": [
+          "Sharp glassy report, soft burial chime on mark, brittle crack on denial, and faint sand-pour sound during harvest."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "pistol_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: pistol_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-015",
+      "name": "Riftneedle SMG",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "SMG — close-range positional tracer",
+      "identity": {
+        "fantasy": "Rapid hits stitch short-lived rift points across one target; completing the pattern lets the shooter perform a bounded lateral blink rather than increasing raw damage.",
+        "silhouette": "Compact violet SMG with needle-thin barrel cluster, three floating ring sights, and a split magazine.",
+        "lore_hook": "Meridian smugglers use it to make their own escape routes one target at a time."
+      },
+      "mechanics": {
+        "core": [
+          "hit stitching",
+          "lateral blink",
+          "close pressure"
+        ],
+        "signature": [
+          "Needle Stitch places up to three visible rift marks on one target.",
+          "Sidecut consumes a completed stitch pattern for a short authored lateral reposition.",
+          "Loose Thread decays marks quickly when the shooter changes targets.",
+          "Ring Lock prevents blink activation into invalid or protected locations."
+        ],
+        "counterplay": [
+          "Force target swaps or disengage until marks decay; the blink direction is previewed before activation."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Violet stitch points connect with thread-thin lines, ring sights align when the pattern completes, and Sidecut leaves a narrow parallax slice in the air."
+        ],
+        "animation": [
+          "Fast low-recoil tracking stance, weapon tilts inward as rings align, and blink ends in a low sideways landing while retaining aim."
+        ],
+        "audio": [
+          "Needle-like suppressed reports, three escalating stitch tones, and a short paper-tear spatial sound on Sidecut."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "sub_machine_gun_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: sub_machine_gun_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-016",
+      "name": "Mourning Bell Shotgun",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "shotgun — stagger cadence weapon",
+      "identity": {
+        "fantasy": "Each close hit rings a different virtual bell; completing the cadence creates a short stagger pulse against lesser mobs without multiplying pellet damage.",
+        "silhouette": "Heavy black shotgun with bell-metal receiver, bronze trigger guard, and a small suspended clapper under the fore-end.",
+        "lore_hook": "Cathedral wardens once fired these only during funerals. The funerals became increasingly proactive."
+      },
+      "mechanics": {
+        "core": [
+          "bell cadence",
+          "close stagger",
+          "mob control"
+        ],
+        "signature": [
+          "First Toll begins a three-hit cadence on valid close-range hits.",
+          "Second Toll widens the next pellet pattern slightly to reward commitment.",
+          "Third Toll emits a bounded stagger ring against lesser enemies.",
+          "Broken Cadence resets if the shooter waits too long or misses entirely."
+        ],
+        "counterplay": [
+          "Back away to deny cadence; elites and bosses receive only limited stagger contribution."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Bronze sound rings expand from close impacts, the receiver engravings light by toll number, and the third shot forms a brief cathedral-window shock pattern."
+        ],
+        "animation": [
+          "Each pump becomes more forceful across the cadence, the clapper swings visibly, and the third recoil drives a full shoulder reset."
+        ],
+        "audio": [
+          "Three distinct bell-weighted reports, bronze resonance tails, and a deep but short church toll on the third hit."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "shotgun_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: shotgun_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-017",
+      "name": "Sunspoke Carbine",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "assault rifle — open-sky charge carbine",
+      "identity": {
+        "fantasy": "Charges a small solar spoke wheel in open sky, spending charge to pierce one additional lesser target in a line.",
+        "silhouette": "White-gold carbine with a small rotating solar wheel around the barrel and matte ceramic furniture.",
+        "lore_hook": "Built as the practical infantry cousin of much more dangerous Heliophage technology."
+      },
+      "mechanics": {
+        "core": [
+          "solar charge",
+          "line penetration",
+          "open-sky dependency"
+        ],
+        "signature": [
+          "Sunspoke Wheel gains charge slowly in valid open-sky conditions.",
+          "Bright Line spends charge to permit one additional eligible penetration.",
+          "Shade Lock prevents charge gain under protected interiors.",
+          "Cooling Eclipse reduces muzzle bloom briefly after spending full charge."
+        ],
+        "counterplay": [
+          "Fight indoors or break line geometry; penetration is limited and telegraphed by the lit spoke wheel."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Gold spokes brighten individually, charged rounds leave a thin straight sun-line, and full spend briefly darkens the wheel into an eclipse."
+        ],
+        "animation": [
+          "Wheel spins faster during aim, reload rotates it backward to cool, and charged bursts use a firmer straight-shoulder stance."
+        ],
+        "audio": [
+          "Clean carbine crack, subtle solar whir, bright chime on full wheel, and a soft eclipse hush after spending."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "assault_rifle_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: assault_rifle_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-018",
+      "name": "Thornwake Scattergun",
+      "family": "weapon",
+      "tier": "epic",
+      "status": "specified",
+      "role": "shotgun — living snare shotgun",
+      "identity": {
+        "fantasy": "Pellet hits seed temporary vine points on terrain and lesser creatures; reloading after a close hit can trigger a small authored snare patch.",
+        "silhouette": "Dark green organic shotgun with bark plates, seed chambers instead of shell brass, thorned stock growing around the user's shoulder.",
+        "lore_hook": "Verdant Teeth hunters consider it a gardening tool that happens to dislike demons."
+      },
+      "mechanics": {
+        "core": [
+          "seed pellets",
+          "reload snare",
+          "living weapon"
+        ],
+        "signature": [
+          "Seedshot leaves temporary viable seed points on eligible impacts.",
+          "Wake Reload converts nearby viable points into a small thorn snare patch.",
+          "Dry Soil causes seeds to fail on invalid protected surfaces.",
+          "Green Return refunds one seed charge after a successful tame nearby."
+        ],
+        "counterplay": [
+          "Keep distance and move off seeded terrain before the reload trigger."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Bright green seed sparks stick to surfaces, vines grow only after Wake Reload, and living stock thorns retract when the weapon is empty."
+        ],
+        "animation": [
+          "Organic pump flexes like a branch, reload presses glowing seeds into the chamber, and Wake Reload finishes with a downward wrist twist as vines erupt."
+        ],
+        "audio": [
+          "Wooden snap reports, seed-pod rattles, fast vine growth, and a soft animal-like exhale from the stock."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "medium",
+        "vfx_class": "medium",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "shotgun_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: shotgun_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-019",
+      "name": "Null Choir Rifle",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "assault rifle — silence-window precision weapon",
+      "identity": {
+        "fantasy": "Builds a temporary acoustic dead zone around a successfully marked elite, suppressing noncritical enemy audio clutter while preserving important telegraphs.",
+        "silhouette": "Long matte-black rifle with a hollow choir-tube barrel, silver waveform marks along the stock, no visible muzzle opening.",
+        "lore_hook": "Hollow Court deserters built it after discovering silence is useful only if you can still hear what matters."
+      },
+      "mechanics": {
+        "core": [
+          "elite mark",
+          "audio declutter",
+          "precision window",
+          "silence field"
+        ],
+        "signature": [
+          "Mute Mark attaches to one elite after a precision threshold is met.",
+          "Choir Null lowers authored noncritical local enemy audio density around the marked target.",
+          "Quiet Shot gains a modest accuracy benefit while inside the null zone.",
+          "Critical Exception guarantees boss-critical and accessibility telemetry remains audible."
+        ],
+        "counterplay": [
+          "Mark setup requires precision and the field grants no invulnerability or hard silence."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Muzzle flash collapses inward, a thin black waveform ring surrounds marked elites, and nearby cosmetic sound VFX fade while critical indicators stay bright."
+        ],
+        "animation": [
+          "Minimal recoil posture, deliberate breath-like aim settle, and mark completion pulls the rifle tight into a completely still firing stance."
+        ],
+        "audio": [
+          "Deep suppressed cracks, descending waveform tones, local ambience ducking only on cosmetic layers, and a clear untouched critical-alert channel."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "assault_rifle_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: assault_rifle_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-020",
+      "name": "Red Ledger Handcannon",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "pistol — risk accounting sidearm",
+      "identity": {
+        "fantasy": "Tracks damage 'debt' on one elite; cashing the ledger early produces control utility, while waiting longer risks losing the stored value if the target escapes.",
+        "silhouette": "Massive black-red revolver with floating tally marks along the cylinder and a tiny chain-bound ledger under the grip.",
+        "lore_hook": "Marrow Taxers hate seeing their own accounting philosophy weaponized against them."
+      },
+      "mechanics": {
+        "core": [
+          "damage debt",
+          "cash-out choice",
+          "elite pressure",
+          "risk retention"
+        ],
+        "signature": [
+          "Open Account marks one eligible elite after the first precision hit.",
+          "Accrued Debt stores a capped fraction of subsequent weapon damage as tally value.",
+          "Foreclose spends stored value on stagger contribution instead of duplicating raw damage.",
+          "Bad Debt erases stored value if the marked target escapes the allowed combat window."
+        ],
+        "counterplay": [
+          "Disengage or force target swaps to destroy stored debt; stagger payout is capped on bosses."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Red tally marks accumulate around the cylinder, the target carries a visible ledger seal, and Foreclose stamps a large but clean red sigil on impact."
+        ],
+        "animation": [
+          "Heavy one-hand recoil, cylinder rotates one tally per shot, and Foreclose uses a two-hand hammer-cock animation before the decisive round."
+        ],
+        "audio": [
+          "Thunderous handcannon report, coin-like tally ticks, paper stamp on mark, and chain snap on Bad Debt."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "pistol_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: pistol_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-021",
+      "name": "Polar Crown SMG",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "SMG — frost mobility weapon",
+      "identity": {
+        "fantasy": "Sustained close hits build a temporary frost track behind the shooter, enabling faster retreat or lateral reposition without hard-freezing enemies.",
+        "silhouette": "Ice-white SMG with crown-shaped heat sink, translucent grip, vapor streaming backward from side vents.",
+        "lore_hook": "Aurora hunters use it to leave roads where roads should not survive."
+      },
+      "mechanics": {
+        "core": [
+          "frost track",
+          "mobility",
+          "sustained close fire",
+          "retreat utility"
+        ],
+        "signature": [
+          "Crown Frost builds track charge through consecutive close hits.",
+          "White Road leaves a short self/allied movement strip behind the shooter at full charge.",
+          "No Prison prevents the weapon from hard-freezing players or protected elites.",
+          "Shatter Step ends the road in a small visual ice burst when the shooter dashes away."
+        ],
+        "counterplay": [
+          "Force range or stop the hit chain; frost roads are visible and temporary."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Thin crystalline road grows behind movement, crown sink fills with blue light, muzzle vapor thickens at full charge, and Shatter Step bursts into snowglass fragments."
+        ],
+        "animation": [
+          "Forward-leaning SMG posture, crown vents open as charge rises, and movement becomes a skating low-step while on White Road."
+        ],
+        "audio": [
+          "Fast cold metallic reports, crystalline charge ticks, sliding ice texture on the road, and a short crack on Shatter Step."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "sub_machine_gun_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: sub_machine_gun_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-022",
+      "name": "Ossuary Breacher",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "shotgun — construct demolition weapon",
+      "identity": {
+        "fantasy": "Specialized anti-construct shotgun that builds fracture on necrotic walls, nests, sentries, and selected deployables without becoming a universal structure delete button.",
+        "silhouette": "Short brutal shotgun with ivory breaching teeth around muzzle, black sling, rotating fracture gauge on top rail.",
+        "lore_hook": "Designed after one siege where soldiers spent more ammunition on walls made of corpses than on the corpses themselves."
+      },
+      "mechanics": {
+        "core": [
+          "construct fracture",
+          "breach charge",
+          "anti-necrotic utility",
+          "close demolition"
+        ],
+        "signature": [
+          "Bone Fracture adds breach stacks only to eligible necrotic constructs.",
+          "Breach Threshold causes the next close blast to deal bonus structural pressure once enough stacks are present.",
+          "No Masonry Abuse excludes ordinary protected player/world geometry from the bonus system.",
+          "Dust Return grants a brief reload-speed window after successfully breaking an eligible construct."
+        ],
+        "counterplay": [
+          "The bonus is useless against unsupported targets; staying away from constructs denies its niche."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Ivory crack lines crawl across eligible constructs, muzzle teeth glow on threshold, and broken targets burst into pale dust rather than excessive gore."
+        ],
+        "animation": [
+          "Short aggressive pump, muzzle pressed toward constructs in breach pose, and successful breaks snap the weapon downward for a fast shell load."
+        ],
+        "audio": [
+          "Hard short blast, bone saw rasp on stack application, rising fracture clicks, and a dry collapse crack on breach."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "shotgun_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: shotgun_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-023",
+      "name": "Vesperline Pistol",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "pistol — echo reposition sidearm",
+      "identity": {
+        "fantasy": "Precision hits generate a delayed phantom firing position; reactivating the weapon briefly moves the player's aim reference to that echo for one shot without teleporting the body.",
+        "silhouette": "Elegant indigo pistol with mirror slide, glass rear sight, ribbon-like projection emitter along the barrel.",
+        "lore_hook": "Vesper duelists describe it as shooting from where you almost were."
+      },
+      "mechanics": {
+        "core": [
+          "aim echo",
+          "delayed angle",
+          "precision setup",
+          "duel utility"
+        ],
+        "signature": [
+          "Mirror Point records one recent valid firing location after a precision hit.",
+          "Echo Sight previews the line from that location without moving the player.",
+          "Vesper Shot fires one special trace from the recorded authored point under range/visibility rules.",
+          "Broken Mirror clears the echo if geometry changes or the player moves too far."
+        ],
+        "counterplay": [
+          "Echo point is visible to enemies and short-lived; changing cover invalidates unsafe lines."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Indigo silhouette remains at the recorded point, a thin mirror line previews the special shot, and the echo shatters immediately after firing."
+        ],
+        "animation": [
+          "Precision shot ends with a slight backward lean that leaves the echo, activation raises the pistol sideways as if aligning with a reflection."
+        ],
+        "audio": [
+          "Elegant pistol crack, delayed reflected tail from echo point, glass alignment tone, and mirror shatter after the special shot."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "pistol_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: pistol_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-024",
+      "name": "Leviathan Needle",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "assault rifle — anti-colossus weak-point tool",
+      "identity": {
+        "fantasy": "Marks massive boss weak points and builds a capped team-visible puncture meter that rewards sustained coordinated fire at the same sector.",
+        "silhouette": "Long dark-blue rifle with harpoon-like barrel shroud, pressure gauge stock, braided silver line wrapped around receiver.",
+        "lore_hook": "Blacktide engineers learned that a giant monster is easier to kill once everyone agrees exactly where to shoot it."
+      },
+      "mechanics": {
+        "core": [
+          "boss weak-point mark",
+          "team puncture",
+          "sector focus",
+          "anti-colossus"
+        ],
+        "signature": [
+          "Needle Mark attaches only to eligible boss weak-point actors.",
+          "Pressure Ledger builds from allied hits on the marked sector up to an encounter-defined cap.",
+          "Deep Puncture triggers a limited stagger/armor contribution when the ledger fills.",
+          "Line Break removes the mark if the weak point changes phase or closes."
+        ],
+        "counterplay": [
+          "Boss mechanics can close or move weak points; the weapon provides coordination, not free boss damage."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Thin blue harpoon line anchors to the weak point, pressure gauge fills visibly, allied impacts flash through the line, and full ledger produces a compact water-pressure burst."
+        ],
+        "animation": [
+          "Heavy rifle bracing, gauge hand trembles under pressure, reload releases a brief valve puff, and full puncture recoils like a tether snapping."
+        ],
+        "audio": [
+          "Pressure rifle crack, cable twang, gauge ticks, team-visible rising sonar tone, and deep underwater pop on puncture."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "assault_rifle_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: assault_rifle_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-025",
+      "name": "Scripture Engine",
+      "family": "weapon",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "assault rifle — corruption conversion rifle",
+      "identity": {
+        "fantasy": "Converts a portion of supported corruption exposure into temporary weapon stability and shield-restoration utility rather than raw damage.",
+        "silhouette": "Cathedral iron rifle, glowing scripture strips wrapped around barrel, reliquary magazine with red-white liquid window.",
+        "lore_hook": "Cathedral wardens call it a sermon because it makes corruption listen to instructions."
+      },
+      "mechanics": {
+        "core": [
+          "corruption conversion",
+          "stability",
+          "support return",
+          "reliquary charge"
+        ],
+        "signature": [
+          "Scripture Intake stores a capped amount of supported corruption received while equipped.",
+          "Absolution Burst spends charge to stabilize recoil and apply a small shield-restoration pulse to nearby allies after hits.",
+          "Relic Magazine displays stored charge physically rather than as hidden UI only.",
+          "Exorcist Lock prevents farming charge from self-created or trivial corruption sources."
+        ],
+        "counterplay": [
+          "Outside corrupted regions it behaves as a conventional rifle; stored charge is capped and decays between encounters."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Molten script brightens as charge rises, red corruption turns white inside the magazine window, and Absolution sends narrow cathedral-window pulses through nearby allies."
+        ],
+        "animation": [
+          "Two-hand rifle stance with occasional thumb trace across scripture, reload seats the reliquary like a ritual object, and spending charge snaps all glyphs white."
+        ],
+        "audio": [
+          "Heavy rifle report with restrained choir tail, scripture hiss, reliquary glass tone, and warm shield pulse chord."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "assault_rifle_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: assault_rifle_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-026",
+      "name": "Chronicle-7",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "assault rifle — recorded burst weapon",
+      "identity": {
+        "fantasy": "Records one short sequence of accurate shots and can replay their timing pattern as a reduced-damage echo burst from the weapon itself.",
+        "silhouette": "Silver rifle with transparent timeline rail above barrel, seven floating tick markers, split clockwork stock.",
+        "lore_hook": "Chronarch smiths insist it does not fire twice. It remembers firing once very convincingly."
+      },
+      "mechanics": {
+        "core": [
+          "shot recording",
+          "echo replay",
+          "timing control",
+          "precision mastery"
+        ],
+        "signature": [
+          "Chronicle Window records up to seven eligible accurate shots during a brief armed state.",
+          "Echo Sequence replays their cadence as reduced-power traces while the player can reposition.",
+          "No Duplicate Crit caps echo precision contribution so recording cannot double peak damage.",
+          "Broken Timeline cancels replay if the weapon is swapped, stunned, or enters protected phase rules."
+        ],
+        "counterplay": [
+          "Pressure the user during recording; echo timing is visible on the timeline rail before replay."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Seven silver ticks fill along the rail, recorded muzzle flashes remain as tiny frozen afterimages, and replay shots appear as pale clock-hand streaks."
+        ],
+        "animation": [
+          "Recording stance becomes increasingly still, replay lets the rifle cycle itself with minimal hand motion, and timeline cancel scatters tick markers like broken glass."
+        ],
+        "audio": [
+          "Clean rifle crack, ticking rail, ghosted copies of prior shot audio at lower volume, and a clock-spring unwind at replay end."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "assault_rifle_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: assault_rifle_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-027",
+      "name": "Void Orchard",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "shotgun — singularity seed shotgun",
+      "identity": {
+        "fantasy": "Fires void seeds that bloom into tiny short-lived pull wells only when enough pellets land inside the same bounded area.",
+        "silhouette": "Black botanical shotgun with flower-like muzzle petals, starfield chamber, root-shaped stock wrapping around the forearm.",
+        "lore_hook": "Someone in the Hollow Astral Synod decided gravity should be cultivated."
+      },
+      "mechanics": {
+        "core": [
+          "void seeds",
+          "micro pull well",
+          "area setup",
+          "crowd shaping"
+        ],
+        "signature": [
+          "Seed Scatter leaves small inert void seeds on eligible impacts.",
+          "Black Bloom activates a tiny pull well when enough seeds cluster inside one radius.",
+          "Root Limit caps wells to a small simultaneous count and prevents boss displacement.",
+          "Orchard Collapse ends all active wells early for a small visual burst and faster reset."
+        ],
+        "counterplay": [
+          "Spread out and leave seeded areas; wells are heavily telegraphed and cannot hard-control protected elites."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Pellets become tiny black flowers with star rims, clustered seeds bend nearby particles inward, and active wells sprout dark root-lines across the floor."
+        ],
+        "animation": [
+          "Muzzle petals open during aim, pump action resembles closing a flower, and collapse uses a sharp twist that folds every active bloom inward."
+        ],
+        "audio": [
+          "Deep soft shotgun report, seed clicks on impact, low gravitational hum during bloom, and a vacuum pop on collapse."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "shotgun_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: shotgun_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-028",
+      "name": "Kingfisher Arc",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "pistol — chain-selection precision weapon",
+      "identity": {
+        "fantasy": "A precision pistol that can route one reduced secondary arc to a deliberately selected marked lesser target, rewarding target planning rather than random chain lightning.",
+        "silhouette": "Blue-gold long pistol with forked barrel crown, bright selector bead, featherlike conductor fins.",
+        "lore_hook": "Named after a bird that never misses twice because it chooses the second target before the first."
+      },
+      "mechanics": {
+        "core": [
+          "target selection",
+          "secondary arc",
+          "precision planning",
+          "conductive mark"
+        ],
+        "signature": [
+          "Fisher Mark tags one eligible secondary lesser target with the selector bead.",
+          "Primary Strike triggers a reduced arc to the marked target only after a precision hit on a different enemy.",
+          "Dry Water prevents chaining through arbitrary crowds or protected boss actors.",
+          "Perfect Cast briefly speeds mark acquisition after a successful two-target sequence."
+        ],
+        "counterplay": [
+          "Kill or move the marked secondary target out of range; chain destination is always visible."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "A thin blue-gold line previews the chosen secondary, primary precision hits create a single clean lightning bridge, and conductor fins flare like feathers."
+        ],
+        "animation": [
+          "Mark acquisition uses a quick wrist angle, precision firing is rigid and deliberate, and successful sequence ends with a feather-fin snap closed."
+        ],
+        "audio": [
+          "Sharp elegant pistol report, water-drop selector tone, single electrical crack, and bright cast chime on perfect sequence."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "pistol_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: pistol_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-029",
+      "name": "Dreadstar Pulse Rifle",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "assault rifle — boss pressure pulse weapon",
+      "identity": {
+        "fantasy": "Builds a star-pressure core while attacking boss armor sectors, then spends it on a large visual pulse that contributes stagger without bypassing phase rules.",
+        "silhouette": "Long black-violet rifle with captive star orb behind magazine, segmented gravitational barrel cage, wide shoulder brace.",
+        "lore_hook": "The Dreadstar line was built for enemies whose armor is measured in neighborhoods."
+      },
+      "mechanics": {
+        "core": [
+          "boss armor pressure",
+          "star core",
+          "stagger pulse",
+          "phase-safe"
+        ],
+        "signature": [
+          "Armor Orbit gains charge only from eligible boss armor or colossus sector hits.",
+          "Dreadstar Core visibly compresses as the meter fills.",
+          "Black Pulse spends full charge on a capped stagger contribution against the same eligible sector.",
+          "Orbit Loss drains charge when switching to unrelated targets or inactive sectors."
+        ],
+        "counterplay": [
+          "Phase changes and weak-point closures drain or invalidate charge; no benefit against ordinary targets."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Captive star compresses from purple sphere to near-black point, barrel cage bends inward, boss impacts leave orbit rings, and Black Pulse expands as a huge but thin gravitational disk."
+        ],
+        "animation": [
+          "Heavy shouldered firing, cage segments tighten with charge, full pulse requires a clear two-step brace, and star re-expands slowly afterward."
+        ],
+        "audio": [
+          "Deep pulse shots, gravitational bass swell, orbiting metallic resonance, and enormous low-frequency snap on Black Pulse."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "assault_rifle_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: assault_rifle_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-030",
+      "name": "Saint Vanta's Second Mouth",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "shotgun — status transmutation weapon",
+      "identity": {
+        "fantasy": "An evolved relic-shotgun that samples one eligible enemy status and converts it into one of several pre-authored shell behaviors rather than copying effects literally.",
+        "silhouette": "Obsidian jaw shotgun with two nested rows of silver teeth, red scripture tongue inside chamber, living hinge stock.",
+        "lore_hook": "After the first Maw learned to devour curses, the second learned to digest them."
+      },
+      "mechanics": {
+        "core": [
+          "status sampling",
+          "shell transmutation",
+          "adaptive close combat",
+          "living weapon"
+        ],
+        "signature": [
+          "Taste Sigil reads one eligible target status family after a close hit.",
+          "Digestive Chamber converts that family into a safe authored shell type such as armor-break, slow field, cleanse burst, or knockback.",
+          "Second Bite can store two different shell families but only one is active at a time.",
+          "Indigestion forces a cooldown after rapid family switching."
+        ],
+        "counterplay": [
+          "Boss statuses expose only safe families; pressure the user during Indigestion and stay outside close sampling range."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Nested jaw teeth change glow by stored family, chamber tongue inscribes new sigils during digestion, shell impacts inherit restrained family-specific effects, and Indigestion vents black-red smoke."
+        ],
+        "animation": [
+          "Weapon bites backward on recoil, teeth flex independently, family switch uses a grotesque chamber swallow, and reload feeds shells past the inner jaw."
+        ],
+        "audio": [
+          "Bone-metal blast, wet mechanical jaw clack, swallowed effect tone during transmutation, and harsh cough-like vent on Indigestion."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "shotgun_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: shotgun_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-031",
+      "name": "Aureate Mercy",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "pistol — support finisher sidearm",
+      "identity": {
+        "fantasy": "A mythic sidearm that stores support merit from revives, cleanses, and objective defense, then spends it to empower one protective precision shot.",
+        "silhouette": "White-gold pistol shaped like a narrow reliquary, halo sight, translucent grip holding a tiny sunrise.",
+        "lore_hook": "Aureon forbids calling it a weapon unless someone nearby still needs saving."
+      },
+      "mechanics": {
+        "core": [
+          "support merit",
+          "protective shot",
+          "objective synergy",
+          "sunrise charge"
+        ],
+        "signature": [
+          "Mercy Ledger gains charge from authored support actions rather than kills.",
+          "Golden Intercession marks one hostile precision target and grants a small temporary shield to the ally it is threatening.",
+          "Sunrise Round spends full merit to strengthen that shield and add limited stagger to the hostile.",
+          "No Martyr Farming rejects trivial repeated support actions for charge gain."
+        ],
+        "counterplay": [
+          "The pistol's strongest state requires genuine support play and can be baited by changing threat targets."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Halo sight fills with sunrise light, support actions send tiny gold motes into the grip, and Sunrise Round draws a straight gold line between ally, enemy, and shooter."
+        ],
+        "animation": [
+          "Elegant one-hand support stance, halo sight rotates during Intercession, and the full-merit shot uses a calm two-handed prayer-like brace."
+        ],
+        "audio": [
+          "Bright but soft pistol crack, tiny sunrise chord on support gain, halo bell on mark, and warm shield resonance on Intercession."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "pistol_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: pistol_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-032",
+      "name": "Prism Fang Array",
+      "family": "weapon",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "SMG — stance-spectrum weapon",
+      "identity": {
+        "fantasy": "Cycles through a small set of authored spectrum stances that alter recoil, movement, and utility behavior while keeping base lethality controlled.",
+        "silhouette": "Faceted iridescent SMG with transparent receiver, folding crystal fins, white central barrel splitting light into color bands.",
+        "lore_hook": "Zyrella's engineers rejected the phrase 'rainbow gun' under threat of exile."
+      },
+      "mechanics": {
+        "core": [
+          "spectrum stances",
+          "movement variation",
+          "utility adaptation",
+          "stance mastery"
+        ],
+        "signature": [
+          "Cobalt Stance favors stable sustained fire and short defensive movement.",
+          "Crimson Stance favors aggressive close tracking and stronger recoil.",
+          "Viridian Stance trades fire pressure for a small team utility pulse after reload.",
+          "White Prism can reset to neutral and clear stance penalties after a long cooldown."
+        ],
+        "counterplay": [
+          "Stance is visible through weapon color and silhouette; counter by forcing the wrong engagement range for the active stance."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Crystal fins reconfigure by stance, bullet traces use restrained stance colors, neutral reset briefly refracts the entire model into white spectral fragments."
+        ],
+        "animation": [
+          "Grip, shoulder position, and reload choreography differ by stance; fins snap into new geometry during switch with a readable half-second transition."
+        ],
+        "audio": [
+          "Each stance carries a distinct firing timbre, switch uses crystalline chord intervals, and White Prism resolves all tones into one clean note."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "sub_machine_gun_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: sub_machine_gun_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-033",
+      "name": "Elsewhere Service Pistol",
+      "family": "weapon",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "pistol — impossible-angle utility weapon",
+      "identity": {
+        "fantasy": "Stores one valid authored firing point near the user and later permits a single shot from that point if geometry and range remain legal.",
+        "silhouette": "Minimal white pistol with black rectangular void where the slide should be, small floating coordinate cube above grip.",
+        "lore_hook": "The manufacturer address is listed as 'adjacent.'"
+      },
+      "mechanics": {
+        "core": [
+          "stored firing point",
+          "angle utility",
+          "geometry validation",
+          "single remote shot"
+        ],
+        "signature": [
+          "Elsewhere Pin stores one recent valid nearby firing position.",
+          "Adjacent Fire executes one reduced special trace from the stored point after preview.",
+          "Reality Check cancels the point if geometry, encounter rules, or range become invalid.",
+          "Return Address refunds part of cooldown if cancellation happens before firing."
+        ],
+        "counterplay": [
+          "The stored point is shown as a visible coordinate cube and can be invalidated by movement or cover change."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "White coordinate cube remains at the stored point, preview line draws in black-white segments, and fired traces appear to begin from empty air with a compact rectangular tear."
+        ],
+        "animation": [
+          "Weapon briefly points away from the target during remote fire as if aiming at another coordinate, then snaps back into normal alignment."
+        ],
+        "audio": [
+          "Dry precise pistol crack, distant synchronized report from the stored point, coordinate confirmation beep, and soft spatial rejection tone on cancel."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "pistol_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: pistol_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-034",
+      "name": "Hexdrive Jury-Rig",
+      "family": "weapon",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "assault rifle — modular field-engineer weapon",
+      "identity": {
+        "fantasy": "A deliberately unstable modular rifle whose three engineering modes alter utility behavior during events, requiring manual reconfiguration rather than instant swapping.",
+        "silhouette": "Cobalt industrial rifle covered in replaceable hex modules, exposed cables, tool clamps, and a rotating mode block near the stock.",
+        "lore_hook": "Bront insists every part is factory-approved. No factory has admitted this."
+      },
+      "mechanics": {
+        "core": [
+          "three engineering modes",
+          "manual reconfigure",
+          "deployable synergy",
+          "event utility"
+        ],
+        "signature": [
+          "Suppressor Module improves control against lesser mobs but offers no special boss bonus.",
+          "Breaker Module builds fracture against eligible deployables and armor nodes.",
+          "Repair Beacon Module sacrifices fire pressure to emit a small supported repair pulse after a full reload cycle.",
+          "Hot Swap requires a visible manual reconfiguration animation and temporarily prevents firing."
+        ],
+        "counterplay": [
+          "Attack during Hot Swap; each module has a clear engagement weakness and cannot stack."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Hex modules glow distinct industrial colors, exposed cables reroute physically during swap, repair mode emits polygonal maintenance lines, and breaker hits flash blueprint cracks."
+        ],
+        "animation": [
+          "User physically removes and rotates the mode block, locks clamps by hand, and performs different reload actions based on selected module."
+        ],
+        "audio": [
+          "Industrial rifle report, tool ratchets during reconfigure, module confirmation tones, and rough electrical buzz when swaps are interrupted."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "assault_rifle_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: assault_rifle_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-035",
+      "name": "Velvet Guillotine",
+      "family": "weapon",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "shotgun — contract duel weapon",
+      "identity": {
+        "fantasy": "Offers the wielder one self-imposed combat clause; obeying the clause charges a dramatic close-range execution shot, while violating it clears the charge.",
+        "silhouette": "Luxurious red-black shotgun with velvet-wrapped stock, gold legal script, narrow blade-like barrel shroud.",
+        "lore_hook": "The weapon is not cursed. It is simply extremely disappointed when you break your word."
+      },
+      "mechanics": {
+        "core": [
+          "self-clause",
+          "earned execution shot",
+          "duel constraint",
+          "contract charge"
+        ],
+        "signature": [
+          "Choose Clause selects one authored restriction such as remain close, avoid reload cancel, or maintain one target.",
+          "Good Standing builds charge only while the clause remains satisfied.",
+          "Guillotine Round spends full standing on a high-stagger close shot with capped damage rules.",
+          "Breach of Contract clears all standing immediately and visually burns the active clause."
+        ],
+        "counterplay": [
+          "Read the active clause and force the user into situations where maintaining it is strategically costly."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Gold contract script writes itself along the barrel, standing fills as red velvet light, the full round projects a thin guillotine silhouette behind the muzzle, and broken clauses burn to black ash."
+        ],
+        "animation": [
+          "Clause selection uses a ceremonial thumb seal, charged stance becomes rigid and formal, and the Guillotine Round recoils into a dramatic barrel-down finish."
+        ],
+        "audio": [
+          "Velvet-muted shotgun boom, pen-scratch charge ticks, wax-seal confirmation, and a giant paper-cut snap on the execution shot."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "shotgun_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: shotgun_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-036",
+      "name": "Nullskin Whisper",
+      "family": "weapon",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "SMG — anti-pattern stealth pressure weapon",
+      "identity": {
+        "fantasy": "Tracks the user's own repeated firing/movement pattern and rewards deliberate variation with reduced detection footprint and stronger utility marks.",
+        "silhouette": "Almost featureless matte-black SMG with one moving seam, no visible magazine, surface remaining flat from every viewing angle.",
+        "lore_hook": "Nullskin hunters taught the weapon that predictability is louder than gunfire."
+      },
+      "mechanics": {
+        "core": [
+          "self-pattern analysis",
+          "variation reward",
+          "detection footprint",
+          "mark utility"
+        ],
+        "signature": [
+          "Pattern Memory watches a small authored set of repeated user actions.",
+          "Whisper State activates after sufficient variation and reduces selected noncritical detection cues rather than granting invisibility.",
+          "Quiet Mark becomes available during Whisper State to tag one target for squad awareness.",
+          "Repetition Collapse immediately ends Whisper State when the same pattern is spammed."
+        ],
+        "counterplay": [
+          "Force predictable movement or sustained spray; Whisper State never removes direct visibility."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Almost no muzzle flash in Whisper State, one white seam moves around the receiver when repetition rises, and Quiet Mark is a subtle hollow diamond rather than a glow."
+        ],
+        "animation": [
+          "Movement and firing animations remain deliberately restrained; seam shifts are the main visual tell, with a brief full-model flattening effect when Whisper begins."
+        ],
+        "audio": [
+          "Dry low-volume SMG report, seam ticks, spatial hush on state entry, and a harsh cloth-tear sound on repetition collapse."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "sub_machine_gun_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: sub_machine_gun_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-037",
+      "name": "Sun-Eater Array",
+      "family": "weapon",
+      "tier": "exotic",
+      "status": "specified",
+      "role": "assault rifle — light conversion weapon",
+      "identity": {
+        "fantasy": "Stores charge from bright authored environmental zones and spends it to create controlled darkness pulses that expose luminous weak points.",
+        "silhouette": "Black-gold rifle with solar intake petals around stock, dark glass barrel, miniature eclipse disk floating over rear sight.",
+        "lore_hook": "A Hollow Court theft redesigned by people who actually wanted to survive using it."
+      },
+      "mechanics": {
+        "core": [
+          "light intake",
+          "darkness pulse",
+          "weak-point reveal",
+          "eclipse economy"
+        ],
+        "signature": [
+          "Radiance Intake charges only in supported bright zones or solar events.",
+          "Local Eclipse spends charge to dim a bounded combat pocket without changing global lighting.",
+          "Black Contrast highlights authored luminous weak points inside the pocket.",
+          "Dawn Return restores ordinary local presentation immediately when charge ends or protected mechanics demand it."
+        ],
+        "counterplay": [
+          "Move the fight out of bright charge zones; weak-point reveal is limited to authored eligible targets."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Gold light streams into rear petals, eclipse disk grows as charge fills, Local Eclipse forms a crisp bounded shadow dome, and weak points glow with strong white-gold contrast."
+        ],
+        "animation": [
+          "Rear petals unfold toward light, firing stance lowers inside Eclipse, and charge spend ends with petals snapping closed around the stock."
+        ],
+        "audio": [
+          "Solar intake hum, dark-glass rifle cracks, sudden ambience dampening in Eclipse, and bright return chord when the pocket collapses."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "high",
+        "streaming_locality": "local"
+      },
+      "dependencies": [
+        "assault_rifle_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: assault_rifle_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Earnable equipment concept."
+      ]
+    },
+    {
+      "id": "WPN-038",
+      "name": "Thirteen-Tide Carbine",
+      "family": "weapon",
+      "tier": "god",
+      "status": "specified",
+      "role": "assault rifle — tidal doctrine weapon",
+      "identity": {
+        "fantasy": "A God-tier carbine with thirteen authored tide modes unlocked through mastery, but only three can be equipped into a run at once.",
+        "silhouette": "Ocean-black rifle with thirteen coral inlays along a crescent receiver, water flowing upward through transparent channels.",
+        "lore_hook": "Crafted from a branch shed by the Sovereign of Thirteen Tides and an amount of engineering no sane armorer approved."
+      },
+      "mechanics": {
+        "core": [
+          "thirteen tide library",
+          "three-mode loadout",
+          "water traversal synergy",
+          "god-tier mastery"
+        ],
+        "signature": [
+          "Tide Loadout selects three unlocked doctrine modes before combat, preventing universal on-demand access.",
+          "Rising Tide mode builds pressure through sustained accurate fire and releases a controlled push pulse.",
+          "Undertow mode marks one lesser enemy and drags only dropped resources/loose encounter objects toward its defeat point, not players.",
+          "Still Sea mode rewards not firing for a short interval with extreme first-burst stability.",
+          "Crown Tide consumes a full tide cycle to trigger one cinematic crescent water strike whose boss damage remains capped."
+        ],
+        "counterplay": [
+          "Mode loadout is locked during combat, and each mode has a distinct visible coral color and tactical weakness."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Water runs upward through thirteen channels, only selected coral branches illuminate, mode changes reorganize flowing water patterns, and Crown Tide projects an enormous translucent crescent wave behind the shot."
+        ],
+        "animation": [
+          "Three different firing postures correspond to equipped modes, water channels pulse with recoil, and Crown Tide requires a full spear-like forward brace before release."
+        ],
+        "audio": [
+          "Layered ocean resonance, distinct three-mode tonal identities, coral clicks on cycle changes, and a massive but brief surf impact on Crown Tide."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [
+        "assault_rifle_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: assault_rifle_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Premium-designated concept flag follows the current economy design; publication implementation must use Epic-supported entitlements and rules."
+      ]
+    },
+    {
+      "id": "WPN-039",
+      "name": "Last Gate Ordinance",
+      "family": "weapon",
+      "tier": "god",
+      "status": "specified",
+      "role": "shotgun — defensive god weapon",
+      "identity": {
+        "fantasy": "A colossal defensive shotgun that stores successful protection actions as Gate Charges and spends them on formation-saving barrier blasts.",
+        "silhouette": "Gunmetal-ivory shotgun shaped like a fortress gate, rectangular barrel, shield plates folding along stock, names engraved into side panels.",
+        "lore_hook": "The Last Gate Imperium considers it a rescue tool whose ammunition happens to be hostile."
+      },
+      "mechanics": {
+        "core": [
+          "protection charge",
+          "barrier blast",
+          "rescue synergy",
+          "formation control"
+        ],
+        "signature": [
+          "Gate Charges are earned through supported ally rescues, objective blocks, and interception actions rather than kills.",
+          "Open Gate fires a wide close blast while projecting a brief directional cover plane behind the shooter for allies.",
+          "Closed Gate spends charges to reinforce one existing cover plane and increase stagger against attackers in front.",
+          "Names Remembered stores a limited record of successful rescues that cosmetically illuminates the weapon.",
+          "Final Gate spends all charges on one huge forward counterwave after the squad survives a critical defense window."
+        ],
+        "counterplay": [
+          "Charges require real defensive play, cover planes are directional and brief, and Final Gate cannot negate scripted wipes."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Fortress plates unfold into translucent wall geometry, engraved names light one by one, muzzle blast resembles a gate slamming open, and Final Gate projects a city-scale doorway silhouette for a moment."
+        ],
+        "animation": [
+          "Extremely heavy pump, shield plates physically shift around the forearm, Open Gate uses a planted stance, and Final Gate forces a two-step recoil backward after release."
+        ],
+        "audio": [
+          "Stone-gate shotgun boom, shield impacts stored as rhythmic pulses, whispered names, and monumental gate slam on the final counterwave."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [
+        "shotgun_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: shotgun_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Premium-designated concept flag follows the current economy design; publication implementation must use Epic-supported entitlements and rules."
+      ]
+    },
+    {
+      "id": "WPN-040",
+      "name": "Aureon's Horizon",
+      "family": "weapon",
+      "tier": "god",
+      "status": "specified",
+      "role": "pistol — god-tier support command sidearm",
+      "identity": {
+        "fantasy": "A radiant command pistol that converts squad mastery actions into short-lived horizon charges used for support, resurrection preparation, or boss coordination.",
+        "silhouette": "White-gold long pistol with six rotating halo blades around the barrel and a sunrise horizon suspended inside the grip.",
+        "lore_hook": "Forged from a fragment of the Last Dawn, it grows brighter when its owner helps someone else succeed."
+      },
+      "mechanics": {
+        "core": [
+          "squad mastery charge",
+          "support command",
+          "resurrection preparation",
+          "boss coordination"
+        ],
+        "signature": [
+          "Horizon Charges accrue from authored mastery actions such as weak-point breaks, cleanses, rescues, and synchronized objectives.",
+          "First Dawn marks a boss weak point and grants nearby allies a brief accuracy/stability support window against it.",
+          "Second Dawn converts charges into a directional shield-and-heal pulse with strict caps.",
+          "Third Dawn stores one limited resurrection-preparation token usable only where encounter rules allow.",
+          "Last Horizon spends all remaining charges to empower the squad's next completed objective rather than raw weapon damage."
+        ],
+        "counterplay": [
+          "The weapon is mediocre if the squad ignores mechanics; resurrection preparation is heavily restricted and never bypasses wipe rules."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Six halo blades rotate into different formations per Dawn, sunrise fills the grip from a thin line to full disk, boss marks resemble tiny horizons, and Last Horizon sends a luminous line across the objective space."
+        ],
+        "animation": [
+          "Elegant command-pointing shots, halo blades lock into geometric shapes, resurrection preparation uses a two-hand upward raise, and Last Horizon ends with the pistol held vertically like a beacon."
+        ],
+        "audio": [
+          "Bright precise pistol cracks, six-layer halo chimes, sunrise swell, clean support pulses, and a major orchestral horizon chord without vocals."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "high",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [
+        "pistol_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: pistol_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Premium-designated concept flag follows the current economy design; publication implementation must use Epic-supported entitlements and rules."
+      ]
+    },
+    {
+      "id": "WPN-041",
+      "name": "Axiom Breaker Mk.I",
+      "family": "weapon",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "assault rifle — absolute local-doctrine weapon",
+      "identity": {
+        "fantasy": "An Absolute-tier rifle that can temporarily select one pre-authored local weapon doctrine—projectile pacing, recoil geometry, mark behavior, or structure interaction—inside strict encounter bounds.",
+        "silhouette": "White-black rifle assembled from floating geometric sections with no visible physical connections, barrel surrounded by rotating axiom symbols.",
+        "lore_hook": "Not built to break reality. Built to prove reality already has configuration files."
+      },
+      "mechanics": {
+        "core": [
+          "doctrine selection",
+          "bounded rule mode",
+          "axiom charge",
+          "local encounter rewrite"
+        ],
+        "signature": [
+          "Doctrine Wheel offers a curated set of weapon-specific modes rather than freeform rule editing.",
+          "Weightless Burst changes only the user's recoil/movement interaction for a short mode, not global gravity.",
+          "Frozen Cadence creates delayed shot release timing with visible queued rounds rather than stopping projectiles in the world.",
+          "Mercy Axiom converts selected damage contribution into capped stagger/support against protected encounters.",
+          "Structure Axiom alters interaction with eligible authored constructs while explicitly excluding protected world geometry."
+        ],
+        "counterplay": [
+          "Only one doctrine at a time, modes are clearly visible, duration is short, and protected encounter rules override the weapon."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Floating sections reconfigure into different impossible alignments, selected axiom symbol expands behind the rifle, queued rounds appear as stationary geometric beads attached to the gun rather than frozen world bullets, and mode collapse fractures symbols into white shards."
+        ],
+        "animation": [
+          "Weapon pieces rotate without touching during mode switch, firing posture changes radically per doctrine, and Axiom selection uses a slow deliberate hand-through-symbol gesture before sections lock."
+        ],
+        "audio": [
+          "Each doctrine has a distinct clean synthetic chord, firing sound changes structurally rather than just by pitch, queued cadence uses metronomic clicks, and mode collapse resolves into a hard silence-pop."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [
+        "assault_rifle_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: assault_rifle_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Premium-designated concept flag follows the current economy design; publication implementation must use Epic-supported entitlements and rules."
+      ]
+    },
+    {
+      "id": "WPN-042",
+      "name": "Black Star Testament",
+      "family": "weapon",
+      "tier": "absolute",
+      "status": "specified",
+      "role": "shotgun — absolute anti-colossus relic weapon",
+      "identity": {
+        "fantasy": "An Absolute shotgun designed for distributed colossus encounters: it records successful sector mechanics and converts that mastery into one phase-safe Black Star strike.",
+        "silhouette": "Cathedral-sized aesthetic compressed into a hand weapon: black star chamber, white scripture rings, folding gravitational ribs around a wide muzzle.",
+        "lore_hook": "Every part was built from something that survived a world boss. None of the parts agree that survival was a good idea."
+      },
+      "mechanics": {
+        "core": [
+          "sector mastery",
+          "black star charge",
+          "colossus interaction",
+          "phase-safe finisher"
+        ],
+        "signature": [
+          "Testament Pages fill only when the wielder participates in distinct authored boss mechanics, preventing mindless damage farming.",
+          "Gravitic Rib opens a short close-range cone that contributes extra armor fracture to eligible colossus nodes.",
+          "Black Star Chamber compresses earned mastery into one visible singularity-like charge.",
+          "Witness Clause shares a small part of charge gain with squad members completing linked sector objectives.",
+          "Final Testament spends all pages on one cinematic phase-safe strike that massively contributes stagger/armor objectives but obeys encounter damage caps."
+        ],
+        "counterplay": [
+          "Charge cannot be farmed outside real boss mechanics, requires multiple distinct actions, and resets partially on failed phases."
+        ],
+        "evolution": [
+          "Higher mastery unlocks authored cosmetic/mechanical evolution states without invalidating encounter caps."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "White scripture pages orbit the black chamber, gravitational ribs widen with completed mechanics, the chamber shrinks into a near-black point at full charge, and Final Testament draws a huge inverted star glyph across the active boss sector."
+        ],
+        "animation": [
+          "Every completed mechanic adds one physical scripture ring, reload folds rings through each other impossibly, full-charge firing uses a full-body anchored stance, and recoil briefly separates weapon parts into a constellation before reassembly."
+        ],
+        "audio": [
+          "Deep cathedral shotgun concussion, scripture-page tones, gravitational bass that intensifies with mastery, and an enormous inverted choir impact during Final Testament."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Earned through faction, boss, raid, crafting, mastery, or endgame progression appropriate to tier."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": true
+      },
+      "performance": {
+        "concurrency_class": "event_only",
+        "vfx_class": "cinematic",
+        "replication_class": "critical",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [
+        "shotgun_template"
+      ],
+      "notes": [
+        "Base custom ranged implementation target: shotgun_template.",
+        "Custom effects must be implemented through supported Scene Graph/Verse/device behavior and validated in UEFN.",
+        "Premium-designated concept flag follows the current economy design; publication implementation must use Epic-supported entitlements and rules."
+      ]
+    }
+  ]
+}
