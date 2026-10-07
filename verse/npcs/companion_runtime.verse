@@ -10,6 +10,20 @@ aeonfall_companion_runtime := class():
     var Bindings:[string]aeonfall_companion_binding = map{}
     var States:[string]aeonfall_companion_runtime_state = map{}
 
+    OrderId(Order:aeonfall_companion_order):string=
+        if (Order = aeonfall_companion_order.Follow):
+            "Follow"
+        else if (Order = aeonfall_companion_order.Guard):
+            "Guard"
+        else if (Order = aeonfall_companion_order.FocusTarget):
+            "FocusTarget"
+        else if (Order = aeonfall_companion_order.HoldPosition):
+            "HoldPosition"
+        else if (Order = aeonfall_companion_order.Flank):
+            "Flank"
+        else:
+            "Retreat"
+
     GetBinding(CompanionKey:string)<decides><transacts>:aeonfall_companion_binding=
         Bindings[CompanionKey]
 
@@ -21,6 +35,20 @@ aeonfall_companion_runtime := class():
         for (CompanionKey -> Binding : Bindings):
             if:
                 Binding.OwnerKey = OwnerKey
+                Binding.Active?
+            then:
+                set Count += 1
+        Count
+
+    CountActiveEntity(
+        OwnerKey:string,
+        CanonicalId:string
+    )<transacts>:int=
+        var Count:int = 0
+        for (CompanionKey -> Binding : Bindings):
+            if:
+                Binding.OwnerKey = OwnerKey
+                Binding.CanonicalId = CanonicalId
                 Binding.Active?
             then:
                 set Count += 1
@@ -139,6 +167,8 @@ aeonfall_companion_runtime := class():
             CanBind(OwnerKey, CompanionKey)?
             CanonicalId := AEONFALLActorRegistry.GetCanonicalId[CompanionKey]
             CanonicalId = NpcId
+            Definition := AEONFALLHireableRegistry.Get[NpcId]
+            CountActiveEntity(OwnerKey, NpcId) < Definition.MaxSimultaneousPerPlayer
         then:
             Binding := aeonfall_companion_binding:
                 OwnerKey := OwnerKey
@@ -197,6 +227,20 @@ aeonfall_companion_runtime := class():
             Old := States[CompanionKey]
             Old.IsActive?
         then:
+            var OrderAllowed:logic = true
+
+            if (Binding.Kind = aeonfall_companion_kind.Hireable):
+                if:
+                    Definition := AEONFALLHireableRegistry.Get[Binding.CanonicalId]
+                    Definition.AllowedOrderIds.Find[OrderId(NewOrder)]
+                then:
+                    set OrderAllowed = true
+                else:
+                    set OrderAllowed = false
+
+            if (not OrderAllowed?):
+                return false
+
             Updated := aeonfall_companion_runtime_state:
                 EntityId := Old.EntityId
                 CurrentOrder := NewOrder
