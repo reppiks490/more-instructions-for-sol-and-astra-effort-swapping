@@ -20,6 +20,8 @@ on:
       - "tools/validate_slice_recipes.py"
       - "tools/validate_slice_encounters.py"
       - "tools/validate_slice_shop.py"
+      - "tools/validate_slice_combat.py"
+      - "tools/build_slice_combat_registry.py"
       - "tools/build_slice_registry.py"
       - "STATUS.md"
       - ".github/workflows/catalog-validation.yml"
@@ -77,6 +79,12 @@ jobs:
 
       - name: Validate first-slice shop economy
         run: python tools/validate_slice_shop.py
+
+      - name: Validate first-slice combat runtime data
+        run: python tools/validate_slice_combat.py
+
+      - name: Build first-slice combat Verse registry
+        run: python tools/build_slice_combat_registry.py
 
       - name: Build runtime content index
         run: python tools/build_content_index.py
