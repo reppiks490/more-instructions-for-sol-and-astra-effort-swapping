@@ -185,4 +185,46 @@ aeonfall_status_runtime := class():
                 }
             )
 
+    TickAll(DeltaSeconds:float)<transacts>:void=
+        if (DeltaSeconds <= 0.0):
+            return
+
+        var UpdatedMap:[string][]aeonfall_status_instance = map{}
+
+        for (TargetKey -> Existing : StatusesByTarget):
+            var Updated:[]aeonfall_status_instance = array{}
+
+            for (Instance : Existing):
+                if (Instance.RemainingSeconds <= 0.0):
+                    # Zero duration is the canonical persistent/session status.
+                    set Updated = Updated + array{Instance}
+                else:
+                    Remaining:float = Instance.RemainingSeconds - DeltaSeconds
+                    if (Remaining > 0.0):
+                        set Updated = Updated + array{
+                            aeonfall_status_instance{
+                                StatusId := Instance.StatusId,
+                                SourceId := Instance.SourceId,
+                                StackCount := Instance.StackCount,
+                                Magnitude := Instance.Magnitude,
+                                RemainingSeconds := Remaining
+                            }
+                        }
+                    else:
+                        AEONFALLRuntimeBus.Emit(
+                            aeonfall_runtime_event{
+                                EventType := "status.expired",
+                                SourceId := Instance.SourceId,
+                                TargetId := TargetKey,
+                                ContextId := Instance.StatusId
+                            }
+                        )
+
+            if:
+                set UpdatedMap[TargetKey] = Updated
+            then:
+                set UpdatedMap = UpdatedMap
+
+        set StatusesByTarget = UpdatedMap
+
 AEONFALLStatusRuntime:aeonfall_status_runtime = aeonfall_status_runtime{}
