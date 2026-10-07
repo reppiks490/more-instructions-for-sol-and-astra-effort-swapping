@@ -1,0 +1,500 @@
+{
+  "wave": "004",
+  "purpose": "Foundational hireable factions and regional world-state identities.",
+  "entity_count": 8,
+  "entities": [
+    {
+      "id": "FAC-001",
+      "name": "The Cinder March Covenant",
+      "family": "faction",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "frontier war-covenant",
+      "identity": {
+        "fantasy": "A mobile nation of furnace cities, ash rangers, oathbound siege captains, and monster hunters who treat every frontier as a temporary battlefield.",
+        "silhouette": "Black iron, ember-orange cloth, portable banners, furnace vents, hooked rifles, and scorched heraldry built around a broken sun.",
+        "lore_hook": "The Covenant advances only into lands that have already been declared uninhabitable, arguing that civilization is strongest where survival was supposed to be impossible."
+      },
+      "mechanics": {
+        "core": [
+          "frontier contracts",
+          "siege caravans",
+          "predator hunts",
+          "heat-forged gear"
+        ],
+        "signature": [
+          "Marching Citadels periodically relocate faction services between authored frontier hubs.",
+          "Ash Oaths unlock contract branches based on whether players rescue, hunt, fortify, or conquer.",
+          "Cinder Reprisal increases local faction patrol strength after repeated attacks against Covenant holdings."
+        ],
+        "counterplay": [
+          "Their caravans create visible logistics routes that enemies can disrupt; territorial gains require sustained supply."
+        ],
+        "evolution": [
+          "Faction standing unlocks deeper services, contracts, visual recognition, and region-specific world-state influence."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Ember banners shed ash without burning, furnace convoys leave glowing wheel-runes, and major Covenant events tint smoke columns deep orange across the local skyline."
+        ],
+        "animation": [
+          "Faction NPCs use drilled shield-and-rifle formations, ritual weapon salutes, and synchronized caravan deployment animations that emphasize military discipline."
+        ],
+        "audio": [
+          "Heavy marching drums, forge hammers used as rhythmic signals, low horn calls for caravan movement, and sharp whistle codes during hunts."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Faction reputation is earned through authored contracts, rescues, world events, and faction-specific mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Major faction definition; faction entities are system-level content and may exceed the 800-major-entity minimum target."
+      ]
+    },
+    {
+      "id": "FAC-002",
+      "name": "The Meridian Null Cartel",
+      "family": "faction",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "reality-smuggler intelligence network",
+      "identity": {
+        "fantasy": "Spies, cartographers, smugglers, and portal thieves who traffic in forbidden routes, erased maps, and places that officially do not exist.",
+        "silhouette": "Midnight coats, mirrored masks, animated coordinate lines, compact portal hardware, and map-scroll fabrics that redraw themselves.",
+        "lore_hook": "The Cartel became wealthy by selling shortcuts through wars, then became powerful enough that governments began paying them to forget certain roads existed."
+      },
+      "mechanics": {
+        "core": [
+          "hidden routes",
+          "intel economy",
+          "smuggling contracts",
+          "sensor denial"
+        ],
+        "signature": [
+          "Black Atlas routes temporarily expose authored traversal shortcuts when sufficient Cartel reputation is held.",
+          "Null Auctions exchange intelligence tokens for rare location data rather than direct combat power.",
+          "Erased Territory events make selected POI entrances shift between multiple authored access states."
+        ],
+        "counterplay": [
+          "Cartel routes can be compromised, and using hostile shortcuts can trigger ambush contracts or reputation loss."
+        ],
+        "evolution": [
+          "Faction standing unlocks deeper services, contracts, visual recognition, and region-specific world-state influence."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Thin black compass roses bloom on surfaces, route seams glow like erased pencil lines, and portal hardware emits flat mirror-like distortions instead of colorful rifts."
+        ],
+        "animation": [
+          "Agents constantly scan corners, fold maps into impossible shapes, and use compact hand signs to coordinate before portal breaches."
+        ],
+        "audio": [
+          "Pen scratches, reversed compass clicks, soft sonar inversions, and whispered coordinate strings layered beneath ambient sound."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Faction reputation is earned through authored contracts, rescues, world events, and faction-specific mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Major faction definition; faction entities are system-level content and may exceed the 800-major-entity minimum target."
+      ]
+    },
+    {
+      "id": "FAC-003",
+      "name": "The Verdant Teeth",
+      "family": "faction",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "predatory druidic megafauna pact",
+      "identity": {
+        "fantasy": "A militant ecological order that bonds with monsters, breeds living weapons, and views cities as temporary infestations inside a much older food chain.",
+        "silhouette": "Living thorn armor, luminous seed organs, bone-and-vine weapons, beast masks, and enormous tameable predators used as mobile shrines.",
+        "lore_hook": "The Verdant Teeth believe every creature has a place in the ecosystem—including civilization, provided civilization remembers it can still be eaten."
+      },
+      "mechanics": {
+        "core": [
+          "taming rites",
+          "living weapons",
+          "biome control",
+          "predator bonds"
+        ],
+        "signature": [
+          "Predator Accord changes eligible wildlife disposition based on regional faction reputation.",
+          "Bloom War causes authored plant structures to grow into cover, traps, or traversal during faction events.",
+          "Apex Pilgrimage sends players across multiple biomes to bond with progressively more dangerous creatures.",
+          "Living Arsenal crafting converts monster-derived materials into faction-specific biological equipment."
+        ],
+        "counterplay": [
+          "Fire, corruption, and overhunting can destabilize their regional ecology and close certain services until restored."
+        ],
+        "evolution": [
+          "Faction standing unlocks deeper services, contracts, visual recognition, and region-specific world-state influence."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Bioluminescent spores trace faction paths, thorn structures visibly grow from seed points, bonded beasts display changing crest patterns, and faction hubs pulse like living organs."
+        ],
+        "animation": [
+          "Members use animal-like crouches, vine-assisted vaults, seed-planting gestures, and calm open-palmed taming rituals even around enormous predators."
+        ],
+        "audio": [
+          "Wet vine snaps, layered insect harmonics, distant animal calls used as signals, and deep wooden resonance when major bonds complete."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Faction reputation is earned through authored contracts, rescues, world events, and faction-specific mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "medium",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Major faction definition; faction entities are system-level content and may exceed the 800-major-entity minimum target."
+      ]
+    },
+    {
+      "id": "FAC-004",
+      "name": "The Cathedral of Iron Mercy",
+      "family": "faction",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "anti-corruption militant sanctuary",
+      "identity": {
+        "fantasy": "Knight-engineers, plague wardens, relic smiths, and battlefield medics who convert corruption into armor, power, and containment structures.",
+        "silhouette": "Cathedral plate, reliquary shields, molten scripture, iron bells, red-white cloth, and mobile chapels mounted on armored vehicles.",
+        "lore_hook": "The Cathedral teaches that corruption cannot always be destroyed, but it can be forced to pay rent in the form of useful energy."
+      },
+      "mechanics": {
+        "core": [
+          "corruption cleansing",
+          "sanctuary defense",
+          "relic forging",
+          "plague containment"
+        ],
+        "signature": [
+          "Mercy Furnaces consume authored corruption resources to power regional defenses.",
+          "Sanctuary Lines create temporary safe corridors during invasion events when faction objectives remain intact.",
+          "Reliquary Forging unlocks anti-corruption armor branches from purified boss materials.",
+          "Bell Judgment events repel or enrage necrotic populations depending on player choices."
+        ],
+        "counterplay": [
+          "Their defenses are resource hungry; destroying or starving Mercy Furnaces sharply reduces regional protection."
+        ],
+        "evolution": [
+          "Faction standing unlocks deeper services, contracts, visual recognition, and region-specific world-state influence."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Molten scripture crawls across architecture, corruption burns into silver sparks at sanctuary borders, and giant translucent cathedral-window patterns appear during successful cleanses."
+        ],
+        "animation": [
+          "Wardens advance behind shields in measured formations, medics use heavy reliquary tools, and smith-priests hammer glowing symbols directly into armor plates."
+        ],
+        "audio": [
+          "Deep iron bells, restrained choir textures, furnace hiss, heavy shield impacts, and clear warning tolls before containment failures."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Faction reputation is earned through authored contracts, rescues, world events, and faction-specific mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "medium",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Major faction definition; faction entities are system-level content and may exceed the 800-major-entity minimum target."
+      ]
+    },
+    {
+      "id": "FAC-005",
+      "name": "The Blacktide Dominion",
+      "family": "faction",
+      "tier": "legendary",
+      "status": "specified",
+      "role": "drowned amphibious empire",
+      "identity": {
+        "fantasy": "An oceanic military civilization operating through drowned transit systems, abyssal fortresses, pressure weapons, and amphibious assault companies.",
+        "silhouette": "Black-blue scale armor, pressure tanks, manta fins, harpoon rifles, wet reflective capes, and vehicles shaped like predatory marine life.",
+        "lore_hook": "The Dominion's capital sank generations ago; instead of rebuilding above water, they declared the sea itself to be their road network and expanded."
+      },
+      "mechanics": {
+        "core": [
+          "amphibious warfare",
+          "underwater routes",
+          "pressure technology",
+          "salvage dominion"
+        ],
+        "signature": [
+          "Drowned Transit unlocks fast travel through submerged authored tunnels as reputation rises.",
+          "Pressure Front assaults can flood or drain selected encounter sub-areas in staged scripted transitions.",
+          "Abyssal Salvage contracts recover rare vehicle and weapon components from dangerous wreck zones."
+        ],
+        "counterplay": [
+          "Dominion technology loses efficiency in dry inland strongholds, and transit routes can be sealed by rival factions."
+        ],
+        "evolution": [
+          "Faction standing unlocks deeper services, contracts, visual recognition, and region-specific world-state influence."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Black current ribbons mark movement lanes, pressure doors bloom with blue-white condensation, and faction assaults send wall-like water shadows racing across nearby surfaces."
+        ],
+        "animation": [
+          "Troops use low hydrodynamic movement, cable-braced firing stances, coordinated dive entries, and shoulder-first breach animations through pressure doors."
+        ],
+        "audio": [
+          "Muffled sub-bass booms, sonar knocks, cable whine, pressure pops, and distant foghorn calls used as military signals."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Faction reputation is earned through authored contracts, rescues, world events, and faction-specific mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "high",
+        "replication_class": "medium",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Major faction definition; faction entities are system-level content and may exceed the 800-major-entity minimum target."
+      ]
+    },
+    {
+      "id": "FAC-006",
+      "name": "The Court of Broken Hours",
+      "family": "faction",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "temporal aristocracy and state-archive order",
+      "identity": {
+        "fantasy": "Chronarchs, ruined nobles, state archivists, and time duelists who manipulate recorded authored states, delayed actions, and ritualized timing windows.",
+        "silhouette": "Fractured clock armor, transparent gear plates, floating hour hands, silver-black regalia, and trailing afterimages that lag behind physical movement.",
+        "lore_hook": "The Court survived the destruction of its kingdom by refusing to agree on which moment the destruction actually occurred."
+      },
+      "mechanics": {
+        "core": [
+          "state recording",
+          "timing trials",
+          "temporal contracts",
+          "chronicle archives"
+        ],
+        "signature": [
+          "Chronicle Vaults preserve encounter records used to unlock replay challenges and mastery rewards.",
+          "Ruined Hour events alter timing windows and enemy sequencing without unrestricted global time control.",
+          "Court Duels reward precision timing, parries, and synchronized team execution instead of raw DPS.",
+          "Archive Verdicts change faction reputation based on whether players preserve or intentionally destroy recorded histories."
+        ],
+        "counterplay": [
+          "Protected world states cannot be rewound; Court mechanics are telegraphed and vulnerable to disruption at anchors."
+        ],
+        "evolution": [
+          "Faction standing unlocks deeper services, contracts, visual recognition, and region-specific world-state influence."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Transparent clock rails cross the environment, afterimages stack at key positions, numeral fragments orbit important anchors, and successful state restores snap through layered ghost poses."
+        ],
+        "animation": [
+          "Court members move with deliberate pauses followed by sudden synchronized motion, rotate wrist-mounted time rings before casts, and use formal dueling bows before high-stakes challenges."
+        ],
+        "audio": [
+          "Multiple asynchronous ticking layers, reversed bells, metronome-like combat cues, and a single enormous clock strike during major state transitions."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Faction reputation is earned through authored contracts, rescues, world events, and faction-specific mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "medium",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Major faction definition; faction entities are system-level content and may exceed the 800-major-entity minimum target."
+      ]
+    },
+    {
+      "id": "FAC-007",
+      "name": "The Hollow Astral Synod",
+      "family": "faction",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "void and celestial research cult",
+      "identity": {
+        "fantasy": "Astronomers, void navigators, star-render artillery priests, and dimensional scholars who map places between stars and weaponize controlled absence.",
+        "silhouette": "White-black astral robes over hard armor, floating astrolabes, starfield masks, negative-space ornaments, and thin luminous coordinate grids.",
+        "lore_hook": "The Synod does not worship the stars; it considers stars to be instruments for measuring the shape of everything missing between them."
+      },
+      "mechanics": {
+        "core": [
+          "void anchors",
+          "stellar artillery",
+          "dimensional research",
+          "astral navigation"
+        ],
+        "signature": [
+          "Astral Batteries charge regional observatories used for high-tier event support.",
+          "Void Survey missions reveal unstable dimensional pockets with rotating hazards and rare materials.",
+          "Synod Alignment events let players choose which observatory network receives power, changing available support abilities.",
+          "Star-Render Protocols unlock carefully telegraphed orbital encounter mechanics in open-sky regions."
+        ],
+        "counterplay": [
+          "Observatories are fixed strategic assets, and many Synod systems become unavailable underground or when alignment infrastructure is destroyed."
+        ],
+        "evolution": [
+          "Faction standing unlocks deeper services, contracts, visual recognition, and region-specific world-state influence."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Star maps crawl across terrain, floating astrolabes cast thin geometric shadows, void anchors appear as perfect black disks, and artillery alignments paint enormous constellation lanes across the sky."
+        ],
+        "animation": [
+          "Researchers manipulate floating instruments with precise finger motions, artillery priests perform slow alignment gestures, and void navigators move with tiny spatial skips near active anchors."
+        ],
+        "audio": [
+          "Deep celestial ticks, glass harmonics, low gravitational hum, distant radio-like star noise, and descending tones before artillery impacts."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Faction reputation is earned through authored contracts, rescues, world events, and faction-specific mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "medium",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Major faction definition; faction entities are system-level content and may exceed the 800-major-entity minimum target."
+      ]
+    },
+    {
+      "id": "FAC-008",
+      "name": "The Last Gate Imperium",
+      "family": "faction",
+      "tier": "mythic",
+      "status": "specified",
+      "role": "fortress civilization and oathbound rescue order",
+      "identity": {
+        "fantasy": "A civilization built around defensive mastery, rescue doctrine, siege endurance, and the belief that abandoning an ally is a metaphysical crime.",
+        "silhouette": "Fortress-shaped helms, rectangular blade-shields, ivory gunmetal armor, city-name inscriptions, and mobile gate structures deployed as battlefield cover.",
+        "lore_hook": "The Imperium formed after an ancient evacuation failed; every law it writes is ultimately a variation on one promise: nobody is left beyond the gate."
+      },
+      "mechanics": {
+        "core": [
+          "rescue doctrine",
+          "formation defense",
+          "siege endurance",
+          "oath contracts"
+        ],
+        "signature": [
+          "Gate Oaths track successful rescues, defended objectives, and squad survival to unlock deeper faction standing.",
+          "Moving Bastions deploy temporary cover routes during world events and retreat as objectives fall.",
+          "Imperial Burden contracts reward players for absorbing risk on behalf of weaker squads or NPC populations.",
+          "Last Gate sieges become multi-stage regional events where failure changes local faction control."
+        ],
+        "counterplay": [
+          "Their formations are powerful but predictable; separating defenders from their bastions reduces their advantage."
+        ],
+        "evolution": [
+          "Faction standing unlocks deeper services, contracts, visual recognition, and region-specific world-state influence."
+        ]
+      },
+      "presentation": {
+        "vfx": [
+          "Towering translucent gate outlines rise during defensive events, temporary ally names illuminate on shields after rescues, and moving bastions project clean ivory geometry onto the ground."
+        ],
+        "animation": [
+          "Imperial units plant shields in synchronized walls, physically carry injured NPCs, form rotating cover teams, and kneel in massive oath ceremonies after successful sieges."
+        ],
+        "audio": [
+          "Stone gate groans, command horns, layered shield impacts, whispered names of defended settlements, and monumental closing-gate booms."
+        ]
+      },
+      "acquisition": {
+        "method": [
+          "Faction reputation is earned through authored contracts, rescues, world events, and faction-specific mastery."
+        ],
+        "crafting_links": [],
+        "boss_links": [],
+        "paid": false
+      },
+      "performance": {
+        "concurrency_class": "low",
+        "vfx_class": "cinematic",
+        "replication_class": "medium",
+        "streaming_locality": "regional"
+      },
+      "dependencies": [],
+      "notes": [
+        "Major faction definition; faction entities are system-level content and may exceed the 800-major-entity minimum target."
+      ]
+    }
+  ]
+}
