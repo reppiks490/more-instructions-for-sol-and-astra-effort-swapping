@@ -13,7 +13,7 @@ aeonfall_ability_result_router_device := class(creative_device):
         if:
             Definition := AEONFALLAbilityRegistry.Get[Result.AbilityId]
         then:
-            Resolved := AEONFALLAbilityRuntime.ResolveActivation(
+            Resolved := AEONFALLActivationCoordinator.ResolveAdapterResult(
                 Definition,
                 Result
             )
