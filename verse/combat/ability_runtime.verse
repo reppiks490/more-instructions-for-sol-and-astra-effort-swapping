@@ -497,4 +497,56 @@ aeonfall_ability_runtime := class():
             then:
                 return
 
+    TickAll(DeltaSeconds:float)<transacts>:void=
+        if (DeltaSeconds <= 0.0):
+            return
+
+        var UpdatedStates:[string]aeonfall_ability_runtime_state = map{}
+
+        for (Key -> Old : States):
+            var Cooldown:float = Old.CooldownRemainingSeconds
+            var Charges:int = Old.CurrentCharges
+            var Recharge:float = Old.ChargeRechargeRemainingSeconds
+
+            if:
+                Definition := AEONFALLAbilityRegistry.Get[Old.AbilityId]
+            then:
+                if (Cooldown > 0.0):
+                    set Cooldown = Cooldown - DeltaSeconds
+                    if (Cooldown < 0.0):
+                        set Cooldown = 0.0
+
+                if:
+                    Definition.ResourcePolicy = aeonfall_resource_policy.Charges
+                    Charges < Definition.MaxCharges
+                then:
+                    if (Recharge > 0.0):
+                        set Recharge = Recharge - DeltaSeconds
+
+                    if (Recharge <= 0.0):
+                        set Charges = Charges + 1
+                        if (Charges < Definition.MaxCharges):
+                            set Recharge = Definition.RechargeSeconds
+                        else:
+                            set Recharge = 0.0
+
+            Updated := aeonfall_ability_runtime_state:
+                AbilityId := Old.AbilityId
+                CurrentCharges := Charges
+                CurrentMeter := Old.CurrentMeter
+                CooldownRemainingSeconds := Cooldown
+                ChargeRechargeRemainingSeconds := Recharge
+                Active := Old.Active
+                ActiveRequestId := Old.ActiveRequestId
+                Pending := Old.Pending
+                PendingRequestId := Old.PendingRequestId
+                Locked := Old.Locked
+
+            if:
+                set UpdatedStates[Key] = Updated
+            then:
+                set UpdatedStates = UpdatedStates
+
+        set States = UpdatedStates
+
 AEONFALLAbilityRuntime:aeonfall_ability_runtime = aeonfall_ability_runtime{}
