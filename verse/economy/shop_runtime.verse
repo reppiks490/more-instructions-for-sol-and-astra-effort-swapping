@@ -114,6 +114,21 @@ aeonfall_shop_service := class():
                         TargetId := Offer.OutputEntityId
                     }
                 )
+
+                DeliveryStarted := AEONFALLUnlockDeliveryService.Request(
+                    Agent,
+                    Offer.OutputEntityId,
+                    Offer.OfferId
+                )
+                if (not DeliveryStarted?):
+                    AEONFALLRuntimeBus.Emit(
+                        aeonfall_runtime_event{
+                            EventType := "shop.delivery_deferred",
+                            SourceId := Offer.OfferId,
+                            TargetId := Offer.OutputEntityId
+                        }
+                    )
+
                 return true
 
         false
