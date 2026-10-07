@@ -28,11 +28,26 @@ aeonfall_adapter_result := class:
     Succeeded:logic = false
     ResultCode:string = ""
 
+aeonfall_unlock_delivery_request := class:
+    RequestId:string = ""
+    OwnerKey:string = ""
+    EntityId:string = ""
+    SourceId:string = ""
+
+aeonfall_unlock_delivery_result := class:
+    RequestId:string = ""
+    OwnerKey:string = ""
+    EntityId:string = ""
+    Succeeded:logic = false
+    ResultCode:string = ""
+
 aeonfall_event_bus := class():
 
     RuntimeEvent:event(aeonfall_runtime_event) = event(aeonfall_runtime_event){}
     AbilityEffectRequested:event(aeonfall_ability_effect_request) = event(aeonfall_ability_effect_request){}
     AdapterResult:event(aeonfall_adapter_result) = event(aeonfall_adapter_result){}
+    UnlockDeliveryRequested:event(aeonfall_unlock_delivery_request) = event(aeonfall_unlock_delivery_request){}
+    UnlockDeliveryResult:event(aeonfall_unlock_delivery_result) = event(aeonfall_unlock_delivery_result){}
 
     Emit(Event:aeonfall_runtime_event):void=
         RuntimeEvent.Signal(Event)
@@ -42,6 +57,12 @@ aeonfall_event_bus := class():
 
     ReportAdapterResult(Result:aeonfall_adapter_result):void=
         AdapterResult.Signal(Result)
+
+    RequestUnlockDelivery(Request:aeonfall_unlock_delivery_request):void=
+        UnlockDeliveryRequested.Signal(Request)
+
+    ReportUnlockDelivery(Result:aeonfall_unlock_delivery_result):void=
+        UnlockDeliveryResult.Signal(Result)
 
 # One shared session bus. Persistent state is NOT stored here; this only routes
 # transient runtime signals between systems such as encounters, companions,
