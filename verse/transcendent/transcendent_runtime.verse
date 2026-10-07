@@ -174,6 +174,20 @@ aeonfall_transcendent_runtime := class():
 
         false
 
+    EndForAgent(
+        Agent:agent,
+        Reason:string
+    )<transacts>:logic=
+        if:
+            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
+        then:
+            EndActive(
+                OwnerKey,
+                Reason
+            )
+        else:
+            false
+
     ClearOwner(OwnerKey:string)<transacts>:void=
         if:
             Existing := StatesByOwner[OwnerKey]
