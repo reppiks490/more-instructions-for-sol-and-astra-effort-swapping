@@ -2333,7 +2333,7 @@
       ]
     },
     {
-      "id": "EVT-031",
+      "id": "EVT-051",
       "name": "The Devouring Moon",
       "family": "event",
       "tier": "mythic",
@@ -2399,7 +2399,7 @@
       ]
     },
     {
-      "id": "EVT-032",
+      "id": "EVT-052",
       "name": "Night of a Thousand Doors",
       "family": "event",
       "tier": "legendary",
@@ -2463,7 +2463,7 @@
       ]
     },
     {
-      "id": "EVT-033",
+      "id": "EVT-053",
       "name": "Sky-Cathedral Descent",
       "family": "event",
       "tier": "mythic",
@@ -2527,7 +2527,7 @@
       ]
     },
     {
-      "id": "EVT-034",
+      "id": "EVT-054",
       "name": "Axiom Storm",
       "family": "event",
       "tier": "absolute",
@@ -2596,7 +2596,7 @@
       ]
     },
     {
-      "id": "EVT-035",
+      "id": "EVT-055",
       "name": "The Continent Wakes",
       "family": "event",
       "tier": "absolute",
@@ -2665,7 +2665,7 @@
       ]
     },
     {
-      "id": "EVT-036",
+      "id": "EVT-056",
       "name": "Black Sun Procession",
       "family": "event",
       "tier": "god",
@@ -2732,7 +2732,7 @@
       ]
     },
     {
-      "id": "EVT-037",
+      "id": "EVT-057",
       "name": "Necropolis Bloom",
       "family": "event",
       "tier": "mythic",
@@ -2797,7 +2797,7 @@
       ]
     },
     {
-      "id": "EVT-038",
+      "id": "EVT-058",
       "name": "Zero Resonance",
       "family": "event",
       "tier": "transcendent_zero",
