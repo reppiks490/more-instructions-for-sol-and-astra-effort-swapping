@@ -12,6 +12,7 @@ REQUIRED_TOKENS = {
         "AEONFALLStatusRuntime.TickAll",
         "AEONFALLTargetingRuntime.TickAll",
         "AEONFALLPositionTargetingRuntime.TickAll",
+        "AEONFALLSpawnRuntime.TickAll",
     ],
     "verse/core/actor_registry.verse": [
         "AEONFALLActivationCoordinator.ClearOwnerPending",
@@ -20,6 +21,7 @@ REQUIRED_TOKENS = {
         "AEONFALLTargetingRuntime.Clear",
         "AEONFALLActorContextRuntime.Clear",
         "AEONFALLPositionTargetingRuntime.ClearOwner",
+        "AEONFALLSpawnRuntime.ClearOwner",
         "AEONFALLStatusRuntime.ClearTarget",
         "AEONFALLAbilityRuntime.ClearOwner",
         "AEONFALLClassRuntime.ClearOwner",
@@ -29,6 +31,7 @@ REQUIRED_TOKENS = {
         "TickPendingActivations",
         "CancelPending",
         "ReleaseReservation",
+        "ClearOwnerPending",
         "ability.adapter_timeout",
     ],
     "verse/combat/ability_runtime.verse": [
@@ -73,13 +76,23 @@ REQUIRED_TOKENS = {
         "status.expired",
         "ClearTarget",
     ],
+    "verse/core/spawn_runtime.verse": [
+        "Reserve",
+        "Release",
+        "ClearOwner",
+        "TickAll",
+        "MaxPerOwner",
+    ],
+    "verse/combat/ability_activation_service.verse": [
+        "AEONFALLActorContextRuntime.GetFlags",
+    ],
+    "verse/combat/targeted_ability_input_device.verse": [
+        "AEONFALLActorContextRuntime.GetFlags",
+        "AEONFALLTargetingRuntime.GetSelection",
+    ],
 }
 
 FORBIDDEN_TOKENS = {
-    "verse/combat/ability_activation_service.verse": [
-        "false,
-                false",
-    ],
     "verse/combat/targeted_ability_input_device.verse": [
         "EncounterActive:logic = false",
         "TransformationActive:logic = false",
@@ -131,6 +144,8 @@ def main() -> int:
         errors.append("validation workflow does not watch verse/**")
     if "python tools/validate_verse_static.py" not in workflow:
         errors.append("validation workflow does not run static Verse validation")
+    if "python tools/validate_runtime_invariants.py" not in workflow:
+        errors.append("validation workflow does not run runtime invariant validation")
 
     if errors:
         print("AEONFALL runtime invariant validation FAILED")
