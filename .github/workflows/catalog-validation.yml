@@ -55,6 +55,10 @@ on:
       - "tools/validate_transformation_launch_tests.py"
       - "tools/validate_transcendent_adapter_bindings.py"
       - "tools/validate_launch_test_plan.py"
+      - "tools/**"
+      - "tests/**"
+      - "assets/source/ossuary_starter/**"
+      - "bootstrap/**"
       - "STATUS.md"
       - ".github/workflows/catalog-validation.yml"
   pull_request:
@@ -70,6 +74,10 @@ on:
       - "schemas/**"
       - "tools/validate_*.py"
       - "tools/build_*.py"
+      - "tools/**"
+      - "tests/**"
+      - "assets/source/ossuary_starter/**"
+      - "bootstrap/**"
       - "STATUS.md"
       - ".github/workflows/catalog-validation.yml"
 
@@ -177,6 +185,30 @@ jobs:
         run: python tools/validate_runtime_invariants.py
       - name: Validate horde runtime integration
         run: python tools/validate_horde_runtime.py
+
+      - name: Validate typed event queues and activation transactions
+        run: |
+          python tools/validate_runtime_event_bus.py
+          python tools/test_runtime_event_bus_validation.py
+          python tools/validate_activation_transactions.py
+          python tools/test_activation_transaction_validation.py
+
+      - name: Validate canonical encounter directors
+        run: |
+          python tools/validate_encounter_directors.py
+          python tools/test_encounter_director_policy.py
+          python tools/build_slice_encounter_directors.py
+          git diff --exit-code -- verse/bosses/slice_001_encounter_directors.verse
+
+      - name: Validate actual Ossuary starter geometry
+        run: |
+          python tools/validate_ossuary_starter_assets.py
+          python tools/test_ossuary_starter_assets.py
+          python tools/build_ossuary_starter_assets.py
+          git diff --exit-code -- assets/source/ossuary_starter
+
+      - name: Test UEFN source installer and editor call contracts
+        run: python -m unittest discover -s tests -v
 
       - name: Validate implementation evidence
         run: python tools/validate_implementation_evidence.py

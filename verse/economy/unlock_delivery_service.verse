@@ -129,6 +129,8 @@ aeonfall_unlock_delivery_service := class():
             return
 
         var Updated:[string]aeonfall_unlock_delivery_state = map{}
+        var Retries:[]aeonfall_unlock_delivery_state = array{}
+        var Expired:[]aeonfall_unlock_delivery_state = array{}
 
         for (RequestId -> State : Pending):
             Remaining:float = State.RemainingSeconds - DeltaSeconds
@@ -159,35 +161,29 @@ aeonfall_unlock_delivery_service := class():
                     if:
                         set Updated[RequestId] = Retry
                     then:
-                        AEONFALLRuntimeBus.RequestUnlockDelivery(
-                            aeonfall_unlock_delivery_request{
-                                RequestId := Retry.RequestId,
-                                OwnerKey := Retry.OwnerKey,
-                                EntityId := Retry.EntityId,
-                                SourceId := Retry.SourceId
-                            }
-                        )
+                        set Retries += array{Retry}
 
-                        AEONFALLRuntimeBus.Emit(
-                            aeonfall_runtime_event{
-                                EventType := "unlock.delivery_retried",
-                                SourceId := Retry.OwnerKey,
-                                TargetId := Retry.EntityId,
-                                ContextId := Retry.RequestId,
-                                Amount := Retry.AttemptsRemaining
-                            }
-                        )
                 else:
-                    AEONFALLRuntimeBus.Emit(
-                        aeonfall_runtime_event{
-                            EventType := "unlock.delivery_timed_out",
-                            SourceId := State.OwnerKey,
-                            TargetId := State.EntityId,
-                            ContextId := State.RequestId
-                        }
-                    )
+                    set Expired += array{State}
 
+        # Commit retry state before callbacks can resolve it. Never overwrite
+        # callback removals with a pre-dispatch snapshot of Pending.
         set Pending = Updated
+        for (Retry : Retries):
+            AEONFALLRuntimeBus.RequestUnlockDelivery(aeonfall_unlock_delivery_request{
+                RequestId := Retry.RequestId, OwnerKey := Retry.OwnerKey,
+                EntityId := Retry.EntityId, SourceId := Retry.SourceId
+            })
+            AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                EventType := "unlock.delivery_retried", SourceId := Retry.OwnerKey,
+                TargetId := Retry.EntityId, ContextId := Retry.RequestId,
+                Amount := Retry.AttemptsRemaining
+            })
+        for (State : Expired):
+            AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                EventType := "unlock.delivery_timed_out", SourceId := State.OwnerKey,
+                TargetId := State.EntityId, ContextId := State.RequestId
+            })
 
 AEONFALLUnlockDeliveryService:aeonfall_unlock_delivery_service =
     aeonfall_unlock_delivery_service{}

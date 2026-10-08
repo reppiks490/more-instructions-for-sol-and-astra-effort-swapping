@@ -30,6 +30,10 @@ aeonfall_horde_runtime_test_device := class(creative_device):
         if (not Enabled?):
             return
         Runtime := aeonfall_horde_runtime{}
+        Check("region before population", Runtime.RegisterRegion("event_first"))
+        Check("event before spawn", Runtime.SetApexEvent("event_first", true))
+        Check("corpse before population", logic{Runtime.AddCorpse("event_first", 20, aeonfall_horde_trait.None) > 0})
+        Runtime.ClearRegion("event_first")
         Check("register", Runtime.RegisterBrood("a", "test"))
         Check("duplicate registration", logic{not Runtime.RegisterBrood("a", "test")?})
         Check("empty actor", logic{not Runtime.RegisterBrood("", "test")?})

@@ -175,6 +175,7 @@ Slice001AbilityDefinitions:[]aeonfall_ability_definition = array{
         PresentationId := "",
         AudioId := "",
         AdapterId := "grave_architecture_redoubt_adapter",
+        ActivationLifetime := aeonfall_activation_lifetime.Instant,
         BossSafe := true
     },
     aeonfall_ability_definition{
@@ -200,6 +201,7 @@ Slice001AbilityDefinitions:[]aeonfall_ability_definition = array{
         PresentationId := "",
         AudioId := "",
         AdapterId := "grave_architecture_stair_adapter",
+        ActivationLifetime := aeonfall_activation_lifetime.Instant,
         BossSafe := true
     },
     aeonfall_ability_definition{
@@ -225,6 +227,7 @@ Slice001AbilityDefinitions:[]aeonfall_ability_definition = array{
         PresentationId := "",
         AudioId := "",
         AdapterId := "royal_scent_adapter",
+        ActivationLifetime := aeonfall_activation_lifetime.Managed,
         BossSafe := true
     },
     aeonfall_ability_definition{
@@ -250,6 +253,7 @@ Slice001AbilityDefinitions:[]aeonfall_ability_definition = array{
         PresentationId := "",
         AudioId := "",
         AdapterId := "guardian_breach_adapter",
+        ActivationLifetime := aeonfall_activation_lifetime.Instant,
         BossSafe := true
     },
     aeonfall_ability_definition{
@@ -275,6 +279,7 @@ Slice001AbilityDefinitions:[]aeonfall_ability_definition = array{
         PresentationId := "",
         AudioId := "",
         AdapterId := "grief_gaze_adapter",
+        ActivationLifetime := aeonfall_activation_lifetime.Instant,
         BossSafe := true
     },
     aeonfall_ability_definition{
@@ -300,6 +305,7 @@ Slice001AbilityDefinitions:[]aeonfall_ability_definition = array{
         PresentationId := "",
         AudioId := "",
         AdapterId := "heat_motion_component",
+        ActivationLifetime := aeonfall_activation_lifetime.Instant,
         BossSafe := true
     },
     aeonfall_ability_definition{
@@ -325,6 +331,7 @@ Slice001AbilityDefinitions:[]aeonfall_ability_definition = array{
         PresentationId := "",
         AudioId := "",
         AdapterId := "temporal_duelist_component",
+        ActivationLifetime := aeonfall_activation_lifetime.Instant,
         BossSafe := true
     },
     aeonfall_ability_definition{
@@ -350,6 +357,7 @@ Slice001AbilityDefinitions:[]aeonfall_ability_definition = array{
         PresentationId := "",
         AudioId := "",
         AdapterId := "support_sniper_component",
+        ActivationLifetime := aeonfall_activation_lifetime.Instant,
         BossSafe := true
     },
     aeonfall_ability_definition{
@@ -375,6 +383,7 @@ Slice001AbilityDefinitions:[]aeonfall_ability_definition = array{
         PresentationId := "",
         AudioId := "",
         AdapterId := "status_devour_component",
+        ActivationLifetime := aeonfall_activation_lifetime.Instant,
         BossSafe := false
     },
     aeonfall_ability_definition{
@@ -400,6 +409,7 @@ Slice001AbilityDefinitions:[]aeonfall_ability_definition = array{
         PresentationId := "",
         AudioId := "",
         AdapterId := "corpse_route_component",
+        ActivationLifetime := aeonfall_activation_lifetime.Instant,
         BossSafe := true
     },
 }

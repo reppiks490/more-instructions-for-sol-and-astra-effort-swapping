@@ -1,5 +1,6 @@
 using { /Fortnite.com/Devices }
 using { /Verse.org/Simulation }
+using { /Verse.org/Verse }
 
 # Royal Scent does not instantly tame anything. It validates an eligible
 # aggressive creature, applies the tracking mark, starts its authored species
@@ -7,11 +8,37 @@ using { /Verse.org/Simulation }
 # can commit.
 aeonfall_royal_scent_adapter_device := class(creative_device):
 
-    OnBegin<override>()<suspends>:void=
-        AEONFALLRuntimeBus.AbilityEffectRequested.Subscribe(OnRequest)
+    var EffectSubscription:?cancelable = false
 
-    OnRequest(Request:aeonfall_ability_effect_request)<transacts>:void=
+    OnBegin<override>()<suspends>:void=
+        Subscription := AEONFALLRuntimeBus.AbilityEffectRequested.Subscribe(OnRequest)
+        set EffectSubscription = option{Subscription}
+
+    OnEnd<override>():void=
+        if (Subscription := EffectSubscription?):
+            Subscription.Cancel()
+        set EffectSubscription = false
+
+    # Rejecting a competing challenge restores the previous owner's mark and
+    # queued presentation. Removing a refreshed mark is not a valid rollback.
+    StartMarkedChallenge(
+        Request:aeonfall_ability_effect_request, SpeciesId:string
+    )<decides><transacts>:void=
+        MarkDefinition := AEONFALLStatusRegistry.Get["STS-005"]
+        Marked := AEONFALLStatusRuntime.ApplyStatus(
+            Request.TargetKey, MarkDefinition, Request.OwnerKey, Request.Magnitude
+        )
+        Marked?
+        Started := AEONFALLTamingRuntime.StartChallenge(
+            Request.RequestId, Request.OwnerKey, Request.TargetKey, SpeciesId
+        )
+        Started?
+
+    OnRequest(Request:aeonfall_ability_effect_request):void=
         if (Request.AdapterId <> "royal_scent_adapter"):
+            return
+        Claimed := AEONFALLAbilityRuntime.ClaimEffectRequest(Request)
+        if (not Claimed?):
             return
 
         var Succeeded:logic = false
@@ -28,45 +55,17 @@ aeonfall_royal_scent_adapter_device := class(creative_device):
                 Request.OwnerKey,
                 Request.TargetKey
             )?
-            MarkDefinition := AEONFALLStatusRegistry.Get["STS-005"]
+            StartMarkedChallenge[Request, SpeciesId]
         then:
-            Marked := AEONFALLStatusRuntime.ApplyStatus(
-                Request.TargetKey,
-                MarkDefinition,
-                Request.OwnerKey,
-                Request.Magnitude
-            )
-
-            if (Marked?):
-                Started := AEONFALLTamingRuntime.StartChallenge(
-                    Request.RequestId,
-                    Request.OwnerKey,
-                    Request.TargetKey,
-                    SpeciesId
+            spawn{
+                AEONFALLTamingRuntime.WatchTimeout(
+                    Request.TargetKey, Request.RequestId, Definition.MaxChallengeSeconds
                 )
+            }
+            set Succeeded = true
+            set ResultCode = "taming_challenge_started"
 
-                if (Started?):
-                    spawn{
-                        AEONFALLTamingRuntime.WatchTimeout(
-                            Request.TargetKey,
-                            Request.RequestId,
-                            Definition.MaxChallengeSeconds
-                        )
-                    }
-                    set Succeeded = true
-                    set ResultCode = "taming_challenge_started"
-                else:
-                    Removed := AEONFALLStatusRuntime.RemoveStatus(
-                        Request.TargetKey,
-                        "STS-005"
-                    )
-                    if (Removed?):
-                        Removed = true
-                    set ResultCode = "challenge_start_failed"
-            else:
-                set ResultCode = "tracking_mark_failed"
-
-        AEONFALLRuntimeBus.ReportAdapterResult(
+        AEONFALLAdapterResultDelivery.Report(
             aeonfall_adapter_result{
                 RequestId := Request.RequestId,
                 OwnerKey := Request.OwnerKey,

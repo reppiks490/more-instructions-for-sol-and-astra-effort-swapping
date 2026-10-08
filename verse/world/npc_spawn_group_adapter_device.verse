@@ -1,5 +1,6 @@
 using { /Fortnite.com/Devices }
 using { /Verse.org/Simulation }
+using { /Verse.org/Verse }
 
 # Project-bound adapter from canonical invasion spawn-group requests to one or
 # more configured NPC Spawner devices.
@@ -23,11 +24,19 @@ aeonfall_npc_spawn_group_adapter_device := class(creative_device):
 
     var ActiveInvasionIds:[]string = array{}
 
+    var BusSubscription:?cancelable = false
+
     OnBegin<override>()<suspends>:void=
         if (StartDisabled?):
             DisableAll()
 
-        AEONFALLRuntimeBus.RuntimeEvent.Subscribe(OnRuntimeEvent)
+        Subscription := AEONFALLRuntimeBus.RuntimeEvent.Subscribe(OnRuntimeEvent)
+        set BusSubscription = option{Subscription}
+
+    OnEnd<override>():void=
+        if (Subscription := BusSubscription?):
+            Subscription.Cancel()
+        set BusSubscription = false
 
     AddRequester(InvasionId:string)<transacts>:logic=
         if (InvasionId = ""):

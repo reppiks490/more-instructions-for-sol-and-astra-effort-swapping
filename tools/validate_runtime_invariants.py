@@ -201,7 +201,7 @@ def main() -> int:
             errors.append(f"missing adapter implementation: {path.relative_to(ROOT)}")
             continue
         text = path.read_text(encoding="utf-8")
-        if "AEONFALLRuntimeBus.ReportAdapterResult" not in text:
+        if not any(token in text for token in ("AEONFALLRuntimeBus.ReportAdapterResult", "AEONFALLAdapterResultDelivery.Report")):
             errors.append(
                 f"{path.relative_to(ROOT)}: adapter does not report two-phase result"
             )

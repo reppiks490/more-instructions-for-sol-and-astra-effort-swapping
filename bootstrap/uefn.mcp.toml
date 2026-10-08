@@ -1,0 +1,4 @@
+# Merge this stanza into the local Codex CLI config after enabling UEFN MCP.
+# The editor and CLI must run on the SAME Windows computer.
+[mcp_servers.uefn]
+url = "http://127.0.0.1:8000/mcp"

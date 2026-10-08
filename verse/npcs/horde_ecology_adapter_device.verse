@@ -1,5 +1,6 @@
 using { /Fortnite.com/Devices }
 using { /Fortnite.com/Characters }
+using { /Fortnite.com/Game }
 using { /Verse.org/Simulation }
 using { /Verse.org/Verse }
 using { /UnrealEngine.com/Temporary/SpatialMath }
@@ -51,10 +52,13 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
     var Running:logic = false
     var Subscriptions:[]cancelable = array{}
     var DeathSubscriptions:[string]cancelable = map{}
+    var OwnedActorKeys:[string]logic = map{}
     var CorpsePositions:[int]vector3 = map{}
 
     OnBegin<override>()<suspends>:void=
         if (RegionId = "" or CanonicalId = "" or FeedingRadiusCm <= 0.0):
+            return
+        if (not AEONFALLHordeRuntime.RegisterRegion(RegionId)?):
             return
         set Running = true
         set Subscriptions = array{
@@ -112,6 +116,7 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
 
     OnSpawned(Agent:agent):void=
         PruneListeners()
+        ExistingIdentity:logic = logic{AEONFALLActorRegistry.GetRuntimeKey[Agent]}
         if:
             Running?
             Key := AEONFALLActorRegistry.Register[CanonicalId, Agent]
@@ -120,12 +125,20 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
             not DeathSubscriptions[Key]
             AEONFALLHordeRuntime.RegisterBrood(Key, RegionId)?
         then:
+            if (not ExistingIdentity?):
+                if (set OwnedActorKeys[Key] = true):
+                    set OwnedActorKeys = OwnedActorKeys
+                else:
+                    AEONFALLHordeRuntime.RemoveBrood(Key)
+                    Removed := AEONFALLActorRegistry.Unregister(Key)
+                    return
             Listener := aeonfall_horde_death_listener{Adapter := Self, ActorKey := Key}
             Subscription := Character.EliminatedEvent().Subscribe(Listener.OnEliminated)
             if (set DeathSubscriptions[Key] = Subscription):
                 return
             Subscription.Cancel()
             AEONFALLHordeRuntime.RemoveBrood(Key)
+            ReleaseOwnedActor(Key)
 
     RecordDeath(ActorKey:string, Position:vector3):void=
         if (Running?):
@@ -138,6 +151,7 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
                     AEONFALLHordeRuntime.RemoveCorpse(Id)
         AEONFALLHordeRuntime.RemoveBrood(ActorKey)
         RemoveListener(ActorKey)
+        ReleaseOwnedActor(ActorKey)
 
     FindNearest(Position:vector3)<transacts>:?int=
         var Nearest:?int = false
@@ -195,13 +209,31 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
                     set Kept = Kept
         set DeathSubscriptions = Kept
 
+    ReleaseOwnedActor(ActorKey:string):void=
+        if (OwnedActorKeys[ActorKey]):
+            Removed := AEONFALLActorRegistry.Unregister(ActorKey)
+        var Kept:[string]logic = map{}
+        for (Key -> Owned : OwnedActorKeys):
+            if (Key <> ActorKey):
+                if (set Kept[Key] = Owned):
+                    set Kept = Kept
+        set OwnedActorKeys = Kept
+
     PruneListeners():void=
         var Stale:[]string = array{}
         for (Key -> Subscription : DeathSubscriptions):
-            if (not AEONFALLActorRegistry.IsRegistered[Key]):
+            if:
+                Agent := AEONFALLActorRegistry.GetAgent[Key]
+                Character := Agent.GetFortCharacter[]
+                Character.IsActive[]
+            then:
+                set Stale = Stale
+            else:
                 set Stale += array{Key}
         for (Key : Stale):
+            AEONFALLHordeRuntime.RemoveBrood(Key)
             RemoveListener(Key)
+            ReleaseOwnedActor(Key)
 
     OnEnd<override>():void=
         if (not Running?):
@@ -213,6 +245,9 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
             Subscription.Cancel()
         for (Key -> Subscription : DeathSubscriptions):
             Subscription.Cancel()
+        for (Key -> Owned : OwnedActorKeys):
+            Removed := AEONFALLActorRegistry.Unregister(Key)
+        set OwnedActorKeys = map{}
         set Subscriptions = array{}
         set DeathSubscriptions = map{}
         set CorpsePositions = map{}

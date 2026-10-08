@@ -31,13 +31,15 @@ aeonfall_horde_runtime := class():
             RegionId <> ""
             not Brood[ActorKey]
             Brood.Length < Policy.MaxBrood
-            EnsureRegion(RegionId)?
+            RegisterRegion(RegionId)?
             set Brood[ActorKey] = aeonfall_horde_brood{ActorKey := ActorKey, RegionId := RegionId}
         then:
             return true
         false
 
-    EnsureRegion(RegionId:string)<transacts>:logic=
+    RegisterRegion(RegionId:string)<transacts>:logic=
+        if (RegionId = "" or not ValidPolicy()? ):
+            return false
         if (RegionalBiomass[RegionId]):
             return true
         if:
@@ -58,7 +60,7 @@ aeonfall_horde_runtime := class():
         if:
             ValidPolicy()?
             RegionId <> ""
-            HasRegion(RegionId)?
+            RegionalBiomass[RegionId]
             Biomass > 0
             Biomass <= Policy.CrownedBiomass
             Corpses.Length < Policy.MaxCorpses
@@ -90,7 +92,7 @@ aeonfall_horde_runtime := class():
         if:
             RegionId <> ""
             # Only registered regions may allocate session state.
-            HasRegion(RegionId)?
+            RegionalBiomass[RegionId]
             set ApexEventOpen[RegionId] = Open
         then:
             return true

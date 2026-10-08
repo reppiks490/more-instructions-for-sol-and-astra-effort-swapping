@@ -13,7 +13,7 @@ def main() -> int:
         "verse/npcs/horde_runtime.verse": [
             "Corpse.RegionId = Old.RegionId", "Corpse.RemainingSeconds > 0.0",
             "Corpses.Length < Policy.MaxCorpses", "Brood.Length < Policy.MaxBrood",
-            "RegionalBiomass.Length < Policy.MaxBrood", "HasRegion(RegionId)?",
+            "RegionalBiomass.Length < Policy.MaxBrood", "RegisterRegion(RegionId)?",
             "Id := NextCorpseId + 1", "not HasApex(Old.RegionId)?",
             "RegionTotal >= Policy.RegionalApexBiomass", "Open?",
             "Secondary = aeonfall_horde_trait.None", "ClearRegion", "RemoveBrood",
@@ -35,6 +35,11 @@ def main() -> int:
         for token in tokens:
             if token not in source:
                 errors.append(f"{path}: missing integration guard {token}")
+    adapter = (ROOT / "verse/npcs/horde_ecology_adapter_device.verse").read_text()
+    prune = adapter.split("    PruneListeners():void=", 1)[-1].split("    OnEnd", 1)[0]
+    for token in ["Character.IsActive[]", "AEONFALLHordeRuntime.RemoveBrood(Key)", "ReleaseOwnedActor(Key)"]:
+        if token not in prune:
+            errors.append("horde despawn cleanup is missing: " + token)
     harness = (ROOT / "verse/testing/horde_runtime_test_device.verse").read_text()
     labels = set(re.findall(r'Check\("([^"]+)"', harness))
     coverage = {

@@ -19,6 +19,10 @@ aeonfall_runtime_tick_device := class(creative_device):
 
             Sleep(Interval)
 
+            # Deliver queued effects/results before timeout cleanup. A second
+            # pump resolves callback-generated results without waiting a turn.
+            AEONFALLRuntimeBus.Pump()
+            AEONFALLRuntimeBus.Pump()
             AEONFALLActivationCoordinator.TickPendingActivations(Interval)
             AEONFALLAbilityRuntime.TickAll(Interval)
             AEONFALLStatusRuntime.TickAll(Interval)
@@ -33,6 +37,9 @@ aeonfall_runtime_tick_device := class(creative_device):
             AEONFALLAscendedFormRuntime.TickAll(Interval)
             AEONFALLTranscendentRuntime.TickAll(Interval)
             AEONFALLHallOfAscendants.TickAll(Interval)
+            # Dispatch callbacks after canonical state commits; events emitted
+            # by callbacks remain queued for the next scheduler turn.
+            AEONFALLRuntimeBus.Pump()
 
             AEONFALLRuntimeBus.Emit(
                 aeonfall_runtime_event{

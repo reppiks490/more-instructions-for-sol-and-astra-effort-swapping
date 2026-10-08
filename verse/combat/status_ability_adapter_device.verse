@@ -1,5 +1,6 @@
 using { /Fortnite.com/Devices }
 using { /Verse.org/Simulation }
+using { /Verse.org/Verse }
 
 # Generic adapter for abilities whose canonical effect is one or more AEONFALL
 # statuses. Physical gameplay/presentation for each status is handled by
@@ -10,8 +11,16 @@ aeonfall_status_ability_adapter_device := class(creative_device):
     @editable
     SupportedAdapterIds:[]string = array{}
 
+    var EffectSubscription:?cancelable = false
+
     OnBegin<override>()<suspends>:void=
-        AEONFALLRuntimeBus.AbilityEffectRequested.Subscribe(OnAbilityEffectRequested)
+        Subscription := AEONFALLRuntimeBus.AbilityEffectRequested.Subscribe(OnAbilityEffectRequested)
+        set EffectSubscription = option{Subscription}
+
+    OnEnd<override>():void=
+        if (Subscription := EffectSubscription?):
+            Subscription.Cancel()
+        set EffectSubscription = false
 
     Supports(AdapterId:string)<transacts>:logic=
         if:
@@ -23,8 +32,11 @@ aeonfall_status_ability_adapter_device := class(creative_device):
 
     OnAbilityEffectRequested(
         Request:aeonfall_ability_effect_request
-    )<transacts>:void=
+    ):void=
         if (not Supports(Request.AdapterId)?):
+            return
+        Claimed := AEONFALLAbilityRuntime.ClaimEffectRequest(Request)
+        if (not Claimed?):
             return
 
         var Succeeded:logic = true
@@ -46,28 +58,18 @@ aeonfall_status_ability_adapter_device := class(creative_device):
                     set Succeeded = false
                     set ResultCode = "ability_has_no_statuses"
 
-                for (StatusId : Definition.StatusIds):
-                    if:
-                        StatusDefinition := AEONFALLStatusRegistry.Get[StatusId]
-                    then:
-                        Applied := AEONFALLStatusRuntime.ApplyStatus(
-                            Request.TargetKey,
-                            StatusDefinition,
-                            Request.OwnerKey,
-                            Request.Magnitude
-                        )
-
-                        if (not Applied?):
-                            set Succeeded = false
-                            set ResultCode = "status_apply_failed"
+                if (Succeeded?):
+                    if (AEONFALLStatusRuntime.ApplyBatch[Request.TargetKey, Definition.StatusIds, Request.OwnerKey, Request.Magnitude]):
+                        set Succeeded = true
                     else:
                         set Succeeded = false
-                        set ResultCode = "status_definition_missing"
+                        set ResultCode = "status_batch_rejected"
+
             else:
                 set Succeeded = false
                 set ResultCode = "ability_definition_missing"
 
-        AEONFALLRuntimeBus.ReportAdapterResult(
+        AEONFALLAdapterResultDelivery.Report(
             aeonfall_adapter_result{
                 RequestId := Request.RequestId,
                 OwnerKey := Request.OwnerKey,

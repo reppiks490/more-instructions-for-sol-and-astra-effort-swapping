@@ -10,6 +10,7 @@ aeonfall_ability_runtime := class():
 
     var States:[string]aeonfall_ability_runtime_state = map{}
     var OwnerByStateKey:[string]string = map{}
+    var EffectClaims:[string]string = map{}
 
     MakeStateKey(OwnerKey:string, AbilityId:string):string=
         OwnerKey + "::" + AbilityId
@@ -112,19 +113,19 @@ aeonfall_ability_runtime := class():
                 return false
 
             if (Definition.ResourcePolicy = aeonfall_resource_policy.Cooldown):
-                return State.CooldownRemainingSeconds <= 0.0
+                return logic{State.CooldownRemainingSeconds <= 0.0}
 
             if (Definition.ResourcePolicy = aeonfall_resource_policy.Charges):
-                return State.CurrentCharges > 0
+                return logic{State.CurrentCharges > 0}
 
             if (Definition.ResourcePolicy = aeonfall_resource_policy.Meter):
-                return State.CurrentMeter >= Definition.ActivationCost
+                return logic{State.CurrentMeter >= Definition.ActivationCost}
 
             if (Definition.ResourcePolicy = aeonfall_resource_policy.EncounterOnly):
-                return Context.EncounterActive?
+                return Context.EncounterActive
 
             if (Definition.ResourcePolicy = aeonfall_resource_policy.TransformationOnly):
-                return Context.TransformationActive?
+                return Context.TransformationActive
 
             if (Definition.ResourcePolicy = aeonfall_resource_policy.ExternalClassResource):
                 return true
@@ -171,7 +172,7 @@ aeonfall_ability_runtime := class():
                     }
                 )
 
-                AEONFALLRuntimeBus.RequestAbilityEffect(
+                Accepted := AEONFALLRuntimeBus.TryRequestAbilityEffect(
                     aeonfall_ability_effect_request{
                         RequestId := RequestId,
                         OwnerKey := OwnerKey,
@@ -182,9 +183,44 @@ aeonfall_ability_runtime := class():
                         Magnitude := Magnitude
                     }
                 )
+                if (not Accepted?):
+                    Cancelled := CancelPending(OwnerKey, Definition.AbilityId, RequestId)
+                    return false
                 return true
 
         false
+
+    IsCurrentEffectRequest(Request:aeonfall_ability_effect_request)<transacts>:logic=
+        if:
+            Definition := AEONFALLAbilityRegistry.Get[Request.AbilityId]
+            Definition.AdapterId = Request.AdapterId
+            State := GetState[Request.OwnerKey, Request.AbilityId]
+            State.Pending?
+            State.PendingRequestId = Request.RequestId
+            Request.RequestId <> ""
+        then:
+            return true
+        false
+
+    # Capture this return outside a negated failure context so the claim commits.
+    # Duplicate editor bindings cannot execute the same physical effect twice
+    # while the first adapter's result is waiting in the delivery queue.
+    ClaimEffectRequest(Request:aeonfall_ability_effect_request)<transacts>:logic=
+        if:
+            IsCurrentEffectRequest(Request)?
+            not EffectClaims[Request.RequestId]
+            set EffectClaims[Request.RequestId] = Request.OwnerKey
+        then:
+            return true
+        false
+
+    RemoveEffectClaim(RequestId:string)<transacts>:void=
+        var Kept:[string]string = map{}
+        for (Id -> Owner : EffectClaims):
+            if (Id <> RequestId):
+                if (set Kept[Id] = Owner):
+                    set Kept = Kept
+        set EffectClaims = Kept
 
     ResolveActivation(
         Definition:aeonfall_ability_definition,
@@ -215,6 +251,7 @@ aeonfall_ability_runtime := class():
                 if:
                     set States[Key] = Cancelled
                 then:
+                    RemoveEffectClaim(Result.RequestId)
                     AEONFALLRuntimeBus.Emit(
                         aeonfall_runtime_event{
                             EventType := "ability.effect_rejected",
@@ -244,14 +281,20 @@ aeonfall_ability_runtime := class():
             if (Definition.ResourcePolicy = aeonfall_resource_policy.Meter):
                 set Meter = Old.CurrentMeter - Definition.ActivationCost
 
+            Managed:logic = logic{
+                Definition.ActivationLifetime = aeonfall_activation_lifetime.Managed
+                or Definition.ClassResourceMode = aeonfall_class_resource_mode.ReserveWhileActive
+                or Definition.RequiresTransformationContext?
+                or Definition.ResourcePolicy = aeonfall_resource_policy.TransformationOnly
+            }
             Committed := aeonfall_ability_runtime_state:
                 AbilityId := Old.AbilityId
                 CurrentCharges := Charges
                 CurrentMeter := Meter
                 CooldownRemainingSeconds := Cooldown
                 ChargeRechargeRemainingSeconds := Recharge
-                Active := true
-                ActiveRequestId := Result.RequestId
+                Active := Managed
+                ActiveRequestId := if (Managed?) then Result.RequestId else ""
                 Pending := false
                 PendingRequestId := ""
                 Locked := Old.Locked
@@ -260,6 +303,7 @@ aeonfall_ability_runtime := class():
             if:
                 set States[Key] = Committed
             then:
+                RemoveEffectClaim(Result.RequestId)
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{
                         EventType := "ability.activation_committed",
@@ -299,6 +343,7 @@ aeonfall_ability_runtime := class():
             if:
                 set States[Key] = Updated
             then:
+                RemoveEffectClaim(RequestId)
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{
                         EventType := "ability.pending_cancelled",
@@ -562,6 +607,12 @@ aeonfall_ability_runtime := class():
         set States = UpdatedStates
 
     ClearOwner(OwnerKey:string)<transacts>:void=
+        var KeptClaims:[string]string = map{}
+        for (Id -> Owner : EffectClaims):
+            if (Owner <> OwnerKey):
+                if (set KeptClaims[Id] = Owner):
+                    set KeptClaims = KeptClaims
+        set EffectClaims = KeptClaims
         var UpdatedStates:[string]aeonfall_ability_runtime_state = map{}
         var UpdatedOwners:[string]string = map{}
 

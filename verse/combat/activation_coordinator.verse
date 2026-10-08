@@ -46,71 +46,69 @@ aeonfall_activation_coordinator := class():
         RuntimeContextId:string,
         Magnitude:int
     )<transacts>:logic=
-        var ClassReserved:logic = false
-
-        if (Definition.ClassResourceMode <> aeonfall_class_resource_mode.None):
-            HoldWhileActive:logic =
-                Definition.ClassResourceMode = aeonfall_class_resource_mode.ReserveWhileActive
-
-            Reserved := AEONFALLClassRuntime.ReserveResource(
-                RequestId,
-                OwnerKey,
-                Definition.RequiredClassId,
-                Definition.ClassResourceCost,
-                HoldWhileActive
-            )
-
-            if (not Reserved?):
-                return false
-
-            set ClassReserved = true
-
-        Requested := AEONFALLAbilityRuntime.RequestActivation(
-            RequestId,
-            OwnerKey,
-            Definition,
-            Context,
-            TargetKey,
-            RuntimeContextId,
-            Magnitude
-        )
-
-        if (not Requested?):
-            if (ClassReserved?):
-                Released := AEONFALLClassRuntime.ReleaseReservation(RequestId)
-                if (Released?):
-                    set ClassReserved = false
+        # Register timeout ownership BEFORE dispatch: an adapter may report
+        # its result synchronously while RequestActivation is still executing.
+        if (RequestId = "" or OwnerKey = ""):
+            return false
+        if (PendingActivations[RequestId]):
+            return false
+        if (not AEONFALLAbilityRuntime.CanActivate(OwnerKey, Definition, Context)?):
             return false
 
-        Pending := aeonfall_pending_activation:
-            RequestId := RequestId
-            OwnerKey := OwnerKey
-            AbilityId := Definition.AbilityId
-            TimeoutRemainingSeconds := 5.0
+        var ClassReserved:logic = false
+        if (Definition.ClassResourceMode <> aeonfall_class_resource_mode.None):
+            HoldWhileActive:logic = logic{Definition.ClassResourceMode = aeonfall_class_resource_mode.ReserveWhileActive}
+            Reserved := AEONFALLClassRuntime.ReserveResource(
+                RequestId, OwnerKey, Definition.RequiredClassId,
+                Definition.ClassResourceCost, HoldWhileActive
+            )
+            if (not Reserved?):
+                return false
+            set ClassReserved = true
 
+        Pending := aeonfall_pending_activation{
+            RequestId := RequestId, OwnerKey := OwnerKey,
+            AbilityId := Definition.AbilityId, TimeoutRemainingSeconds := 5.0
+        }
+        if (set PendingActivations[RequestId] = Pending):
+            Requested := AEONFALLAbilityRuntime.RequestActivation(
+                RequestId, OwnerKey, Definition, Context,
+                TargetKey, RuntimeContextId, Magnitude
+            )
+            if (Requested?):
+                return true
+            Removed := RemovePendingRecord(RequestId)
+
+        if (ClassReserved?):
+            Released := AEONFALLClassRuntime.ReleaseReservation(RequestId)
+        false
+
+    IsMatchingPending(
+        Definition:aeonfall_ability_definition,
+        Result:aeonfall_adapter_result
+    )<transacts>:logic=
         if:
-            set PendingActivations[RequestId] = Pending
+            Result.RequestId <> ""
+            Result.AbilityId = Definition.AbilityId
+            Result.AdapterId = Definition.AdapterId
+            Pending := PendingActivations[Result.RequestId]
+            Pending.OwnerKey = Result.OwnerKey
+            Pending.AbilityId = Result.AbilityId
+            State := AEONFALLAbilityRuntime.GetState[Result.OwnerKey, Result.AbilityId]
+            State.Pending?
+            State.PendingRequestId = Result.RequestId
         then:
             return true
-
-        # Roll back both reservations if timeout tracking itself cannot be stored.
-        Cancelled := AEONFALLAbilityRuntime.CancelPending(
-            OwnerKey,
-            Definition.AbilityId,
-            RequestId
-        )
-        if (Cancelled?):
-            if (ClassReserved?):
-                Released := AEONFALLClassRuntime.ReleaseReservation(RequestId)
-                if (Released?):
-                    set ClassReserved = false
-
         false
 
     ResolveAdapterResult(
         Definition:aeonfall_ability_definition,
         Result:aeonfall_adapter_result
     )<transacts>:logic=
+        # Ignore stale/duplicate/mismatched callbacks before releasing either
+        # timeout ownership or class resources belonging to another request.
+        if (not IsMatchingPending(Definition, Result)?):
+            return false
         RemovedPending := RemovePendingRecord(Result.RequestId)
         if (RemovedPending?):
             RemovedPending = true
@@ -250,25 +248,22 @@ aeonfall_activation_coordinator := class():
         AbilityId:string,
         RequestId:string
     )<transacts>:logic=
-        RemovedPending := RemovePendingRecord(RequestId)
-        if (RemovedPending?):
-            RemovedPending = true
-
         if:
+            Pending := PendingActivations[RequestId]
+            Pending.OwnerKey = OwnerKey
+            Pending.AbilityId = AbilityId
             Definition := AEONFALLAbilityRegistry.Get[AbilityId]
+            State := AEONFALLAbilityRuntime.GetState[OwnerKey, AbilityId]
+            State.Pending?
+            State.PendingRequestId = RequestId
         then:
-            if (Definition.ClassResourceMode <> aeonfall_class_resource_mode.None):
-                Released := AEONFALLClassRuntime.ReleaseReservation(RequestId)
-                if (Released?):
-                    Released = true
-
-            AEONFALLAbilityRuntime.CancelPending(
-                OwnerKey,
-                AbilityId,
-                RequestId
-            )
-        else:
-            false
+            Cancelled := AEONFALLAbilityRuntime.CancelPending(OwnerKey, AbilityId, RequestId)
+            if (Cancelled?):
+                Removed := RemovePendingRecord(RequestId)
+                if (Definition.ClassResourceMode <> aeonfall_class_resource_mode.None):
+                    Released := AEONFALLClassRuntime.ReleaseReservation(RequestId)
+                return true
+        false
 
     TickPendingActivations(DeltaSeconds:float)<transacts>:void=
         if (DeltaSeconds <= 0.0):

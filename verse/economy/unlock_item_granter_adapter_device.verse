@@ -1,5 +1,6 @@
 using { /Fortnite.com/Devices }
 using { /Verse.org/Simulation }
+using { /Verse.org/Verse }
 
 # Direct physical-delivery adapter for item-backed unlocks.
 # Configure ItemGranter in UEFN with the item represented by EntityId.
@@ -11,12 +12,20 @@ aeonfall_unlock_item_granter_adapter_device := class(creative_device):
     @editable
     ItemGranter:item_granter_device = item_granter_device{}
 
+    var BusSubscription:?cancelable = false
+
     OnBegin<override>()<suspends>:void=
-        AEONFALLRuntimeBus.UnlockDeliveryRequested.Subscribe(OnDeliveryRequested)
+        Subscription := AEONFALLRuntimeBus.UnlockDeliveryRequested.Subscribe(OnDeliveryRequested)
+        set BusSubscription = option{Subscription}
+
+    OnEnd<override>():void=
+        if (Subscription := BusSubscription?):
+            Subscription.Cancel()
+        set BusSubscription = false
 
     OnDeliveryRequested(
         Request:aeonfall_unlock_delivery_request
-    )<transacts>:void=
+    ):void=
         if (Request.EntityId <> EntityId):
             return
 
@@ -30,12 +39,22 @@ aeonfall_unlock_item_granter_adapter_device := class(creative_device):
             set Succeeded = true
             set ResultCode = "item_grant_dispatched"
 
-        AEONFALLRuntimeBus.ReportUnlockDelivery(
-            aeonfall_unlock_delivery_result{
-                RequestId := Request.RequestId,
-                OwnerKey := Request.OwnerKey,
-                EntityId := Request.EntityId,
-                Succeeded := Succeeded,
-                ResultCode := ResultCode
-            }
-        )
+        Result := aeonfall_unlock_delivery_result{
+            RequestId := Request.RequestId,
+            OwnerKey := Request.OwnerKey,
+            EntityId := Request.EntityId,
+            Succeeded := Succeeded,
+            ResultCode := ResultCode
+        }
+        Admitted := AEONFALLRuntimeBus.TryReportUnlockDelivery(Result)
+        if (not Admitted?):
+            # The physical grant already happened; preserve its canonical
+            # completion even if the asynchronous result queue is saturated.
+            Resolved := AEONFALLUnlockDeliveryService.Resolve(Result)
+            if (not Resolved?):
+                AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                    EventType := "unlock.delivery_result_fallback_unresolved",
+                    SourceId := Result.OwnerKey,
+                    TargetId := Result.EntityId,
+                    ContextId := Result.RequestId
+                })

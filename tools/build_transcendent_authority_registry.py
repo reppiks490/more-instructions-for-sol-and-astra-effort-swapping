@@ -68,6 +68,7 @@ def main() -> int:
                 "        ActivationCost := 0,",
                 "        RequiresEncounterContext := false,",
                 "        RequiresTransformationContext := true,",
+                "        ActivationLifetime := aeonfall_activation_lifetime.Managed,",
                 f"        RequiredTransformationId := {q('TRANSCENDENT_ZERO::' + authority['id'])},",
                 "        AllowWhileActive := false,",
                 '        RequiredClassId := "",',

@@ -1,11 +1,12 @@
 using { /Fortnite.com/Devices }
 using { /Verse.org/Simulation }
+using { /Verse.org/Verse }
 
 # Composite adapter for abilities that combine canonical status state with one
 # project-bound UEFN device graph (for example Corpse Route: status + route spawn).
 #
-# Canonical status application happens first. If the linked graph cannot be
-# addressed, applied statuses are rolled back before reporting failure.
+# Recipient validation precedes transactional all-or-none status application.
+# Failed batches restore previous stacks and roll back queued status events.
 aeonfall_composite_ability_adapter_device := class(creative_device):
 
     @editable
@@ -28,87 +29,50 @@ aeonfall_composite_ability_adapter_device := class(creative_device):
         else:
             false
 
-    OnBegin<override>()<suspends>:void=
-        AEONFALLRuntimeBus.AbilityEffectRequested.Subscribe(OnRequest)
+    var EffectSubscription:?cancelable = false
 
-    OnRequest(Request:aeonfall_ability_effect_request)<transacts>:void=
+    OnBegin<override>()<suspends>:void=
+        Subscription := AEONFALLRuntimeBus.AbilityEffectRequested.Subscribe(OnRequest)
+        set EffectSubscription = option{Subscription}
+
+    OnEnd<override>():void=
+        if (Subscription := EffectSubscription?):
+            Subscription.Cancel()
+        set EffectSubscription = false
+
+    OnRequest(Request:aeonfall_ability_effect_request):void=
         if (not Supports(Request.AdapterId)?):
             return
-
-        var Succeeded:logic = true
-        var ResultCode:string = "ok"
-        var AppliedStatusIds:[]string = array{}
-
+        Claimed := AEONFALLAbilityRuntime.ClaimEffectRequest(Request)
+        if (not Claimed?):
+            return
+        var Succeeded:logic = false
+        var ResultCode:string = "effect_preflight_failed"
+        # Resolve graph recipient before the batch. A missing recipient cannot
+        # erase a previously active status or leave a partial new status set.
         if:
             Definition := AEONFALLAbilityRegistry.Get[Request.AbilityId]
+            OwnerAgent := AEONFALLActorRegistry.GetAgent[Request.OwnerKey]
         then:
+            var Recipient:?agent = option{OwnerAgent}
             if (RequireRegisteredTarget?):
-                if:
-                    AEONFALLActorRegistry.IsRegistered[Request.TargetKey]
-                then:
-                    set Succeeded = Succeeded
+                if (not AEONFALLActorRegistry.IsRegistered[Request.TargetKey]):
+                    set Recipient = false
+            if (TriggerOnTargetAgent?):
+                if (TargetAgent := AEONFALLActorRegistry.GetAgent[Request.TargetKey]):
+                    if (Recipient?):
+                        set Recipient = option{TargetAgent}
                 else:
-                    set Succeeded = false
-                    set ResultCode = "target_not_registered"
-
-            if (Succeeded?):
-                for (StatusId : Definition.StatusIds):
-                    if:
-                        StatusDefinition := AEONFALLStatusRegistry.Get[StatusId]
-                    then:
-                        Applied := AEONFALLStatusRuntime.ApplyStatus(
-                            Request.TargetKey,
-                            StatusDefinition,
-                            Request.OwnerKey,
-                            Request.Magnitude
-                        )
-
-                        if (Applied?):
-                            set AppliedStatusIds = AppliedStatusIds + array{StatusId}
-                        else:
-                            set Succeeded = false
-                            set ResultCode = "status_apply_failed"
-                    else:
-                        set Succeeded = false
-                        set ResultCode = "status_definition_missing"
-
-            if (Succeeded?):
-                if:
-                    OwnerAgent := AEONFALLActorRegistry.GetAgent[Request.OwnerKey]
-                then:
-                    if (TriggerOnTargetAgent?):
-                        if:
-                            TargetAgent := AEONFALLActorRegistry.GetAgent[Request.TargetKey]
-                        then:
-                            TriggerOutput.Trigger(TargetAgent)
-                        else:
-                            set Succeeded = false
-                            set ResultCode = "target_agent_not_registered"
-                    else:
-                        TriggerOutput.Trigger(OwnerAgent)
-                else:
-                    set Succeeded = false
-                    set ResultCode = "owner_not_registered"
-        else:
-            set Succeeded = false
-            set ResultCode = "ability_definition_missing"
-
-        if (not Succeeded?):
-            for (StatusId : AppliedStatusIds):
-                RolledBack := AEONFALLStatusRuntime.RemoveStatus(
-                    Request.TargetKey,
-                    StatusId
-                )
-                if (RolledBack?):
-                    set Succeeded = Succeeded
-
-        AEONFALLRuntimeBus.ReportAdapterResult(
-            aeonfall_adapter_result{
-                RequestId := Request.RequestId,
-                OwnerKey := Request.OwnerKey,
-                AbilityId := Request.AbilityId,
-                AdapterId := Request.AdapterId,
-                Succeeded := Succeeded,
-                ResultCode := ResultCode
-            }
-        )
+                    set Recipient = false
+            if:
+                DispatchAgent := Recipient?
+                AEONFALLStatusRuntime.ApplyBatch[Request.TargetKey, Definition.StatusIds, Request.OwnerKey, Request.Magnitude]
+            then:
+                TriggerOutput.Trigger(DispatchAgent)
+                set Succeeded = true
+                set ResultCode = "ok"
+        AEONFALLAdapterResultDelivery.Report(aeonfall_adapter_result{
+            RequestId := Request.RequestId, OwnerKey := Request.OwnerKey,
+            AbilityId := Request.AbilityId, AdapterId := Request.AdapterId,
+            Succeeded := Succeeded, ResultCode := ResultCode
+        })
