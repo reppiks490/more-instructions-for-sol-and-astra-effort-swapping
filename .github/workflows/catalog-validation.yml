@@ -175,6 +175,8 @@ jobs:
 
       - name: Validate AEONFALL runtime invariants
         run: python tools/validate_runtime_invariants.py
+      - name: Validate horde runtime integration
+        run: python tools/validate_horde_runtime.py
 
       - name: Validate implementation evidence
         run: python tools/validate_implementation_evidence.py

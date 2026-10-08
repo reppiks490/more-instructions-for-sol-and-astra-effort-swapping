@@ -99,6 +99,9 @@ Targets:
 - [x] invasion + spawn-group runtime scaffolds
 - [ ] UEFN NPC spawner/device binding and soak test
 - [x] five-tier cannibal horde evolution specified
+- [x] bounded corpse-economy and five-tier evolution session runtime + range-checked spawner adapter
+- [x] horde runtime in-editor assertion harness and CI integration guard
+- [ ] horde Verse compilation, Launch Session assertions, and physical tier-effect bindings
 - [x] necromancer ecosystem baseline specified
 - [x] roaming mythic threat baseline specified
 - [x] first-region faction conflict runtime scaffold

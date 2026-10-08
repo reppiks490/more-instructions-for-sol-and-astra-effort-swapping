@@ -22,6 +22,7 @@ aeonfall_runtime_tick_device := class(creative_device):
             AEONFALLActivationCoordinator.TickPendingActivations(Interval)
             AEONFALLAbilityRuntime.TickAll(Interval)
             AEONFALLStatusRuntime.TickAll(Interval)
+            AEONFALLHordeRuntime.TickAll(Interval)
             AEONFALLTargetingRuntime.TickAll(Interval)
             AEONFALLPositionTargetingRuntime.TickAll(Interval)
             AEONFALLSpawnRuntime.TickAll(Interval)
