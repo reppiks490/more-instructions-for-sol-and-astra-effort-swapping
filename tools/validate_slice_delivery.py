@@ -7,6 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SHOP = ROOT / "content" / "vertical_slice" / "slice_001_shop.json"
 RECIPES = ROOT / "content" / "vertical_slice" / "slice_001_recipes.json"
+REWARDS = ROOT / "content" / "vertical_slice" / "slice_001_rewards.json"
 COVERAGE = ROOT / "content" / "vertical_slice" / "slice_001_delivery_coverage.json"
 
 ALLOWED = {
@@ -19,6 +20,7 @@ def main() -> int:
     shop = json.loads(SHOP.read_text(encoding="utf-8"))
     recipes = json.loads(RECIPES.read_text(encoding="utf-8"))
     coverage = json.loads(COVERAGE.read_text(encoding="utf-8"))
+    rewards = json.loads(REWARDS.read_text(encoding="utf-8"))
 
     required = {
         offer["output_entity_id"]
@@ -28,6 +30,11 @@ def main() -> int:
         for recipe in recipes.get("recipes", [])
     }
 
+    required |= {
+        entity_id
+        for reward in rewards.get("rewards", [])
+        for entity_id in reward.get("unlock_entity_ids", [])
+    }
     rows = coverage.get("delivery_bindings", [])
     ids = [row.get("entity_id") for row in rows]
 

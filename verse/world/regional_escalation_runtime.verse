@@ -41,7 +41,7 @@ aeonfall_regional_escalation_service := class():
             Tier
 
     GetPressure(RegionId:string)<decides><transacts>:aeonfall_region_pressure=
-        State := AEONFALLRegionRuntime.GetState[RegionId]
+        State := GetAEONFALLRegionRuntime().GetState[RegionId]
         Tier:int = ComputeHostility(State)
         Band:int = CorruptionBand(State.Corruption)
 
@@ -63,26 +63,22 @@ aeonfall_regional_escalation_service := class():
         ShouldBeActive:logic
     )<transacts>:void=
         if (ShouldBeActive?):
-            Added := AEONFALLRegionRuntime.AddMutation(
+            Added := GetAEONFALLRegionRuntime().AddMutation(
                 RegionId,
                 MutationId
             )
-            if (Added?):
-                Added = true
         else:
-            Removed := AEONFALLRegionRuntime.RemoveMutation(
+            Removed := GetAEONFALLRegionRuntime().RemoveMutation(
                 RegionId,
                 MutationId
             )
-            if (Removed?):
-                Removed = true
 
     ReconcileRegion(RegionId:string)<transacts>:logic=
         if:
-            State := AEONFALLRegionRuntime.GetState[RegionId]
+            State := GetAEONFALLRegionRuntime().GetState[RegionId]
         then:
             NewTier:int = ComputeHostility(State)
-            Changed := AEONFALLRegionRuntime.SetHostilityTier(
+            Changed := GetAEONFALLRegionRuntime().SetHostilityTier(
                 RegionId,
                 NewTier
             )

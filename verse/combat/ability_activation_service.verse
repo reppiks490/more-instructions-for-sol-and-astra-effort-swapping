@@ -1,3 +1,4 @@
+using { /Verse.org/Verse }
 using { /Verse.org/Simulation }
 
 # Public player/NPC-facing activation facade.
@@ -21,10 +22,21 @@ aeonfall_ability_activation_service := class():
         TransformationActive:logic
     )<transacts>:logic=
         if:
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
-            Definition := AEONFALLAbilityRegistry.Get[AbilityId]
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
+            Definition := GetAEONFALLAbilityRegistry().Get[AbilityId]
         then:
-            Initialized := AEONFALLAbilityRuntime.Initialize(
+            if (Player := player[Agent]):
+                Entitled := AEONFALLPlayerLoadoutService.CanActivateForPlayer(
+                    Player, OwnerKey, Definition
+                )
+                if (not Entitled?):
+                    AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                        EventType := "ability.entitlement_rejected",
+                        SourceId := OwnerKey,
+                        TargetId := AbilityId
+                    })
+                    return false
+            Initialized := GetAEONFALLAbilityRuntime().Initialize(
                 OwnerKey,
                 Definition
             )
@@ -35,14 +47,14 @@ aeonfall_ability_activation_service := class():
             # Resolve authoritative context from the registered owner instead
             # of trusting caller-provided booleans. The legacy parameters remain
             # for source compatibility with current input devices.
-            Context := AEONFALLActorContextRuntime.GetFlags(OwnerKey)
+            Context := GetAEONFALLActorContextRuntime().GetFlags(OwnerKey)
 
             RequestId:string = MakeRequestId(
                 OwnerKey,
                 AbilityId
             )
 
-            Requested := AEONFALLActivationCoordinator.RequestActivation(
+            Requested := GetAEONFALLActivationCoordinator().RequestActivation(
                 RequestId,
                 OwnerKey,
                 Definition,
@@ -72,9 +84,9 @@ aeonfall_ability_activation_service := class():
         Magnitude:int
     )<transacts>:logic=
         if:
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
         then:
-            Flags := AEONFALLActorContextRuntime.GetFlags(OwnerKey)
+            Flags := GetAEONFALLActorContextRuntime().GetFlags(OwnerKey)
 
             TryActivate(
                 Agent,
@@ -88,5 +100,15 @@ aeonfall_ability_activation_service := class():
         else:
             false
 
-AEONFALLAbilityActivationService:aeonfall_ability_activation_service =
-    aeonfall_ability_activation_service{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLAbilityActivationServiceSessions:weak_map(session, aeonfall_ability_activation_service) = map{}
+
+GetAEONFALLAbilityActivationService()<transacts>:aeonfall_ability_activation_service=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLAbilityActivationServiceSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_ability_activation_service{}
+    if (set AEONFALLAbilityActivationServiceSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLAbilityActivationService in its session")

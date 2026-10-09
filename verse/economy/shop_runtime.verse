@@ -101,11 +101,13 @@ aeonfall_shop_service := class():
                         set Eligible = false
 
             if (Eligible?):
-                ProfileService.CommitMaterialAndUnlock(
+                Committed := ProfileService.CommitMaterialAndUnlock(
                     Agent,
                     UpdatedLedger,
                     Offer.OutputEntityId
                 )
+                if (not Committed?):
+                    return false
 
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{
@@ -115,7 +117,7 @@ aeonfall_shop_service := class():
                     }
                 )
 
-                DeliveryStarted := AEONFALLUnlockDeliveryService.Request(
+                DeliveryStarted := GetAEONFALLUnlockDeliveryService().QueueAfterCommit(
                     Agent,
                     Offer.OutputEntityId,
                     Offer.OfferId

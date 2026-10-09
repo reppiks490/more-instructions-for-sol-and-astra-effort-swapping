@@ -23,23 +23,19 @@ aeonfall_encounter_participant_volume_device := class(creative_device):
     OnEntered(Agent:agent)<transacts>:void=
         if:
             Player := player[Agent]
-            RuntimeKey := AEONFALLActorRegistry.GetRuntimeKey[Player]
+            RuntimeKey := GetAEONFALLActorRegistry().GetRuntimeKey[Player]
         then:
-            Added := AEONFALLEncounterParticipation.Add(
+            Added := GetAEONFALLEncounterParticipation().Add(
                 EncounterId,
                 RuntimeKey
             )
-            if (Added?):
-                Added = true
 
     OnExited(Agent:agent)<transacts>:void=
         if:
             Player := player[Agent]
-            RuntimeKey := AEONFALLActorRegistry.GetRuntimeKey[Player]
+            RuntimeKey := GetAEONFALLActorRegistry().GetRuntimeKey[Player]
         then:
-            Removed := AEONFALLEncounterParticipation.Remove(
+            Removed := GetAEONFALLEncounterParticipation().Remove(
                 EncounterId,
                 RuntimeKey
             )
-            if (Removed?):
-                Removed = true

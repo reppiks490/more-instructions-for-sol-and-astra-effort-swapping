@@ -24,7 +24,7 @@ aeonfall_npc_lifecycle_behavior<public> := class(npc_behavior):
     OnBegin<override>()<suspends>:void=
         if:
             Agent := GetAgent[]
-            RegisteredKey := AEONFALLActorRegistry.Register[CanonicalId, Agent]
+            RegisteredKey := GetAEONFALLActorRegistry().Register[CanonicalId, Agent]
         then:
             set RuntimeKey = RegisteredKey
 
@@ -48,7 +48,7 @@ aeonfall_npc_lifecycle_behavior<public> := class(npc_behavior):
 
     OnEnd<override>():void=
         if (RuntimeKey <> ""):
-            Removed := AEONFALLActorRegistry.Unregister(RuntimeKey)
+            Removed := GetAEONFALLActorRegistry().Unregister(RuntimeKey)
             if (not Removed?):
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{

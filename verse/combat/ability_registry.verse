@@ -1,3 +1,5 @@
+using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 # Canonical ability-definition registry.
 # Project/bootstrap registration is generated from validated content data.
 
@@ -31,4 +33,15 @@ aeonfall_ability_registry := class():
         Definition.AbilityId <> ""
         Definition.AdapterId <> ""
 
-AEONFALLAbilityRegistry:aeonfall_ability_registry = aeonfall_ability_registry{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLAbilityRegistrySessions:weak_map(session, aeonfall_ability_registry) = map{}
+
+GetAEONFALLAbilityRegistry()<transacts>:aeonfall_ability_registry=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLAbilityRegistrySessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_ability_registry{}
+    if (set AEONFALLAbilityRegistrySessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLAbilityRegistry in its session")

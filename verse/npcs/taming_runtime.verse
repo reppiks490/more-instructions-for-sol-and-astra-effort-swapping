@@ -1,3 +1,4 @@
+using { /Verse.org/Verse }
 using { /Verse.org/Simulation }
 
 # Species-specific taming challenge runtime.
@@ -28,7 +29,18 @@ aeonfall_taming_registry := class():
     Get(SpeciesId:string)<decides><transacts>:aeonfall_taming_definition=
         Definitions[SpeciesId]
 
-AEONFALLTamingRegistry:aeonfall_taming_registry = aeonfall_taming_registry{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLTamingRegistrySessions:weak_map(session, aeonfall_taming_registry) = map{}
+
+GetAEONFALLTamingRegistry()<transacts>:aeonfall_taming_registry=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLTamingRegistrySessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_taming_registry{}
+    if (set AEONFALLTamingRegistrySessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLTamingRegistry in its session")
 
 aeonfall_taming_runtime := class():
 
@@ -47,10 +59,10 @@ aeonfall_taming_runtime := class():
             RequestId <> ""
             OwnerKey <> ""
             TargetKey <> ""
-            Definition := AEONFALLTamingRegistry.Get[SpeciesId]
-            CanonicalId := AEONFALLActorRegistry.GetCanonicalId[TargetKey]
+            Definition := GetAEONFALLTamingRegistry().Get[SpeciesId]
+            CanonicalId := GetAEONFALLActorRegistry().GetCanonicalId[TargetKey]
             CanonicalId = SpeciesId
-            AEONFALLCompanionRuntime.CanBind(OwnerKey, TargetKey)?
+            GetAEONFALLCompanionRuntime().CanBind(OwnerKey, TargetKey)?
         then:
             if:
                 Existing := Challenges[TargetKey]
@@ -104,8 +116,6 @@ aeonfall_taming_runtime := class():
                 TargetKey,
                 "challenge_timeout"
             )
-            if (TimedOut?):
-                TimedOut = true
 
     CompleteStep(
         OwnerKey:string,
@@ -116,7 +126,7 @@ aeonfall_taming_runtime := class():
             Old := Challenges[TargetKey]
             Old.Active?
             Old.OwnerKey = OwnerKey
-            Definition := AEONFALLTamingRegistry.Get[Old.SpeciesId]
+            Definition := GetAEONFALLTamingRegistry().Get[Old.SpeciesId]
             ExpectedStep := Definition.Steps[Old.CurrentStepIndex]
             ExpectedStep = Step
         then:
@@ -156,17 +166,17 @@ aeonfall_taming_runtime := class():
         if:
             Old := Challenges[TargetKey]
             Old.Active?
-            Definition := AEONFALLTamingRegistry.Get[Old.SpeciesId]
-            AEONFALLCompanionRuntime.CanBind(Old.OwnerKey, TargetKey)?
+            Definition := GetAEONFALLTamingRegistry().Get[Old.SpeciesId]
+            GetAEONFALLCompanionRuntime().CanBind(Old.OwnerKey, TargetKey)?
         then:
             BondReservationId:string = "BOND::" + TargetKey
-            Transferred := AEONFALLClassRuntime.TransferReservation(
+            Transferred := GetAEONFALLClassRuntime().TransferReservation(
                 Old.RequestId,
                 BondReservationId
             )
 
             if (Transferred?):
-                Bound := AEONFALLCompanionRuntime.BindTamed(
+                Bound := GetAEONFALLCompanionRuntime().BindTamed(
                     Old.OwnerKey,
                     TargetKey,
                     Old.SpeciesId,
@@ -177,12 +187,10 @@ aeonfall_taming_runtime := class():
                 if (Bound?):
                     # The challenge ability can close while its class-resource
                     # reservation survives under the companion bond ID.
-                    Ended := AEONFALLAbilityRuntime.EndActivation(
+                    Ended := GetAEONFALLAbilityRuntime().EndActivation(
                         Old.OwnerKey,
                         Old.AbilityId
                     )
-                    if (Ended?):
-                        Ended = true
 
                     Removed := RemoveChallenge(TargetKey)
                     if (Removed?):
@@ -196,12 +204,10 @@ aeonfall_taming_runtime := class():
                         )
                         return true
 
-                RolledBack := AEONFALLClassRuntime.TransferReservation(
+                RolledBack := GetAEONFALLClassRuntime().TransferReservation(
                     BondReservationId,
                     Old.RequestId
                 )
-                if (RolledBack?):
-                    RolledBack = true
 
             return FailChallenge(
                 TargetKey,
@@ -217,21 +223,17 @@ aeonfall_taming_runtime := class():
         if:
             Old := Challenges[TargetKey]
             Old.Active?
-            Definition := AEONFALLTamingRegistry.Get[Old.SpeciesId]
+            Definition := GetAEONFALLTamingRegistry().Get[Old.SpeciesId]
         then:
-            Ended := AEONFALLActivationCoordinator.EndActivation(
+            Ended := GetAEONFALLActivationCoordinator().EndActivation(
                 Old.OwnerKey,
                 Old.AbilityId
             )
-            if (Ended?):
-                Ended = true
 
-            RemovedMark := AEONFALLStatusRuntime.RemoveStatus(
+            RemovedMark := GetAEONFALLStatusRuntime().RemoveStatus(
                 TargetKey,
                 "STS-005"
             )
-            if (RemovedMark?):
-                RemovedMark = true
 
             Removed := RemoveChallenge(TargetKey)
             if (Removed?):
@@ -269,4 +271,15 @@ aeonfall_taming_runtime := class():
 
         false
 
-AEONFALLTamingRuntime:aeonfall_taming_runtime = aeonfall_taming_runtime{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLTamingRuntimeSessions:weak_map(session, aeonfall_taming_runtime) = map{}
+
+GetAEONFALLTamingRuntime()<transacts>:aeonfall_taming_runtime=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLTamingRuntimeSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_taming_runtime{}
+    if (set AEONFALLTamingRuntimeSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLTamingRuntime in its session")

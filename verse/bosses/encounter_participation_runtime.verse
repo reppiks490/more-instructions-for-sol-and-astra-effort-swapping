@@ -1,3 +1,5 @@
+using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 # Tracks human-player participation in boss/world-event encounter spaces.
 # Runtime keys are used instead of player objects so teardown stays centralized
 # in the actor registry.
@@ -116,5 +118,15 @@ aeonfall_encounter_participation_runtime := class():
 
         set ParticipantKeysByEncounter = UpdatedMap
 
-AEONFALLEncounterParticipation:aeonfall_encounter_participation_runtime =
-    aeonfall_encounter_participation_runtime{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLEncounterParticipationSessions:weak_map(session, aeonfall_encounter_participation_runtime) = map{}
+
+GetAEONFALLEncounterParticipation()<transacts>:aeonfall_encounter_participation_runtime=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLEncounterParticipationSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_encounter_participation_runtime{}
+    if (set AEONFALLEncounterParticipationSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLEncounterParticipation in its session")

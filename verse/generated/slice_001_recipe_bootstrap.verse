@@ -53,7 +53,7 @@ aeonfall_slice_001_recipe_bootstrap_device := class(creative_device):
 
     OnBegin<override>()<suspends>:void=
         for (Recipe : Slice001RecipeDefinitions):
-            Registered := AEONFALLRecipeRegistry.Register(Recipe)
+            Registered := GetAEONFALLRecipeRegistry().Register(Recipe)
             if (not Registered?):
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{

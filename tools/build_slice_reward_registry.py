@@ -57,7 +57,7 @@ def main() -> int:
         "",
         "    OnBegin<override>()<suspends>:void=",
         "        for (Definition : Slice001EncounterRewardDefinitions):",
-        "            Registered := AEONFALLEncounterRewardRegistry.Register(Definition)",
+        "            Registered := GetAEONFALLEncounterRewardRegistry().Register(Definition)",
         "            if (not Registered?):",
         "                AEONFALLRuntimeBus.Emit(",
         "                    aeonfall_runtime_event{",

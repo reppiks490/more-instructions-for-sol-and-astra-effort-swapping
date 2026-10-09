@@ -78,6 +78,7 @@ def main()->int:
             '        PresentationId := "",',
             '        AudioId := "",',
             f"        AdapterId := {q(a['adapter_id'])},",
+            f"        ActivationLifetime := aeonfall_activation_lifetime.{a.get('activation_lifetime', 'Managed' if a.get('class_resource_mode') == 'ReserveWhileActive' else 'Instant')},",
             f"        BossSafe := {logic(a['boss_safe'])}",
             "    },"
         ])
@@ -89,7 +90,7 @@ def main()->int:
         "",
         "    OnBegin<override>()<suspends>:void=",
         "        for (Definition : Slice001StatusDefinitions):",
-        "            Registered := AEONFALLStatusRegistry.Register(Definition)",
+        "            Registered := GetAEONFALLStatusRegistry().Register(Definition)",
         "            if (not Registered?):",
         "                AEONFALLRuntimeBus.Emit(",
         "                    aeonfall_runtime_event{",
@@ -99,7 +100,7 @@ def main()->int:
         "                )",
         "",
         "        for (Definition : Slice001AbilityDefinitions):",
-        "            Registered := AEONFALLAbilityRegistry.Register(Definition)",
+        "            Registered := GetAEONFALLAbilityRegistry().Register(Definition)",
         "            if (not Registered?):",
         "                AEONFALLRuntimeBus.Emit(",
         "                    aeonfall_runtime_event{",

@@ -1,5 +1,6 @@
 using { /Fortnite.com/Devices }
 using { /Verse.org/Simulation }
+using { /Verse.org/Verse }
 
 # Generic publish-safe bridge from canonical ability requests into an
 # editor-linked UEFN device graph. Configure one instance per AdapterId.
@@ -20,11 +21,22 @@ aeonfall_trigger_ability_adapter_device := class(creative_device):
     @editable
     UseTargetAgent:logic = false
 
-    OnBegin<override>()<suspends>:void=
-        AEONFALLRuntimeBus.AbilityEffectRequested.Subscribe(OnRequest)
+    var EffectSubscription:?cancelable = false
 
-    OnRequest(Request:aeonfall_ability_effect_request)<transacts>:void=
+    OnBegin<override>()<suspends>:void=
+        Subscription := AEONFALLRuntimeBus.AbilityEffectRequested.Subscribe(OnRequest)
+        set EffectSubscription = option{Subscription}
+
+    OnEnd<override>():void=
+        if (Subscription := EffectSubscription?):
+            Subscription.Cancel()
+        set EffectSubscription = false
+
+    OnRequest(Request:aeonfall_ability_effect_request):void=
         if (Request.AdapterId <> AdapterId):
+            return
+        Claimed := GetAEONFALLAbilityRuntime().ClaimEffectRequest(Request)
+        if (not Claimed?):
             return
 
         var Succeeded:logic = true
@@ -35,14 +47,14 @@ aeonfall_trigger_ability_adapter_device := class(creative_device):
             set ResultCode = "adapter_id_empty"
 
         if:
-            OwnerAgent := AEONFALLActorRegistry.GetAgent[Request.OwnerKey]
+            OwnerAgent := GetAEONFALLActorRegistry().GetAgent[Request.OwnerKey]
         then:
             if:
                 Succeeded?
                 RequireRegisteredTarget?
             then:
                 if:
-                    AEONFALLActorRegistry.IsRegistered[Request.TargetKey]
+                    GetAEONFALLActorRegistry().IsRegistered[Request.TargetKey]
                 then:
                     set Succeeded = Succeeded
                 else:
@@ -52,7 +64,7 @@ aeonfall_trigger_ability_adapter_device := class(creative_device):
             if (Succeeded?):
                 if (UseTargetAgent?):
                     if:
-                        TargetAgent := AEONFALLActorRegistry.GetAgent[Request.TargetKey]
+                        TargetAgent := GetAEONFALLActorRegistry().GetAgent[Request.TargetKey]
                     then:
                         TriggerOutput.Trigger(TargetAgent)
                     else:
@@ -64,7 +76,7 @@ aeonfall_trigger_ability_adapter_device := class(creative_device):
             set Succeeded = false
             set ResultCode = "owner_not_registered"
 
-        AEONFALLRuntimeBus.ReportAdapterResult(
+        AEONFALLAdapterResultDelivery.Report(
             aeonfall_adapter_result{
                 RequestId := Request.RequestId,
                 OwnerKey := Request.OwnerKey,

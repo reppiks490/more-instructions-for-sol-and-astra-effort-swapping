@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "services": [
+    {
+      "name": "AEONFALLAbilityActivationService",
+      "type": "aeonfall_ability_activation_service",
+      "path": "verse/combat/ability_activation_service.verse"
+    },
+    {
+      "name": "AEONFALLAbilityRegistry",
+      "type": "aeonfall_ability_registry",
+      "path": "verse/combat/ability_registry.verse"
+    },
+    {
+      "name": "AEONFALLAbilityRuntime",
+      "type": "aeonfall_ability_runtime",
+      "path": "verse/combat/ability_runtime.verse"
+    },
+    {
+      "name": "AEONFALLActivationCoordinator",
+      "type": "aeonfall_activation_coordinator",
+      "path": "verse/combat/activation_coordinator.verse"
+    },
+    {
+      "name": "AEONFALLActorContextRuntime",
+      "type": "aeonfall_actor_context_runtime",
+      "path": "verse/combat/actor_context_runtime.verse"
+    },
+    {
+      "name": "AEONFALLActorRegistry",
+      "type": "aeonfall_actor_registry",
+      "path": "verse/core/actor_registry.verse"
+    },
+    {
+      "name": "AEONFALLAscendedFormRegistry",
+      "type": "aeonfall_ascended_form_registry",
+      "path": "verse/transcendent/ascended_form_registry.verse"
+    },
+    {
+      "name": "AEONFALLAscendedFormRuntime",
+      "type": "aeonfall_ascended_form_runtime",
+      "path": "verse/transcendent/ascended_form_runtime.verse"
+    },
+    {
+      "name": "AEONFALLAscensionTrialRegistry",
+      "type": "aeonfall_ascension_trial_registry",
+      "path": "verse/transcendent/ascension_trial_registry.verse"
+    },
+    {
+      "name": "AEONFALLAscensionTrialRuntime",
+      "type": "aeonfall_ascension_trial_service",
+      "path": "verse/transcendent/ascension_trial_runtime.verse"
+    },
+    {
+      "name": "AEONFALLChoosingRuntime",
+      "type": "aeonfall_choosing_service",
+      "path": "verse/transcendent/choosing_runtime.verse"
+    },
+    {
+      "name": "AEONFALLClassRegistry",
+      "type": "aeonfall_class_registry",
+      "path": "verse/progression/class_runtime.verse"
+    },
+    {
+      "name": "AEONFALLClassRuntime",
+      "type": "aeonfall_class_runtime",
+      "path": "verse/progression/class_runtime.verse"
+    },
+    {
+      "name": "AEONFALLCompanionRuntime",
+      "type": "aeonfall_companion_runtime",
+      "path": "verse/npcs/companion_runtime.verse"
+    },
+    {
+      "name": "AEONFALLContentRegistry",
+      "type": "aeonfall_content_registry",
+      "path": "verse/core/content_registry.verse"
+    },
+    {
+      "name": "AEONFALLEncounterParticipation",
+      "type": "aeonfall_encounter_participation_runtime",
+      "path": "verse/bosses/encounter_participation_runtime.verse"
+    },
+    {
+      "name": "AEONFALLEncounterRewardRegistry",
+      "type": "aeonfall_encounter_reward_registry",
+      "path": "verse/progression/encounter_reward_registry.verse"
+    },
+    {
+      "name": "AEONFALLFactionConflictRegistry",
+      "type": "aeonfall_faction_conflict_registry",
+      "path": "verse/factions/conflict_registry.verse"
+    },
+    {
+      "name": "AEONFALLFactionConflictRuntime",
+      "type": "aeonfall_faction_conflict_service",
+      "path": "verse/factions/conflict_runtime.verse"
+    },
+    {
+      "name": "AEONFALLHallOfAscendants",
+      "type": "aeonfall_hall_of_ascendants_runtime",
+      "path": "verse/transcendent/hall_of_ascendants_runtime.verse"
+    },
+    {
+      "name": "AEONFALLHireableRegistry",
+      "type": "aeonfall_hireable_registry",
+      "path": "verse/npcs/hiring_runtime.verse"
+    },
+    {
+      "name": "AEONFALLHordeRuntime",
+      "type": "aeonfall_horde_runtime",
+      "path": "verse/npcs/horde_runtime.verse"
+    },
+    {
+      "name": "AEONFALLInvasionRegistry",
+      "type": "aeonfall_invasion_registry",
+      "path": "verse/world/invasion_registry.verse"
+    },
+    {
+      "name": "AEONFALLInvasionRuntime",
+      "type": "aeonfall_invasion_runtime",
+      "path": "verse/world/invasion_runtime.verse"
+    },
+    {
+      "name": "AEONFALLPositionTargetingRuntime",
+      "type": "aeonfall_position_targeting_runtime",
+      "path": "verse/combat/position_targeting_runtime.verse"
+    },
+    {
+      "name": "AEONFALLRecipeRegistry",
+      "type": "aeonfall_recipe_registry",
+      "path": "verse/crafting/recipe_registry.verse"
+    },
+    {
+      "name": "AEONFALLRegionRegistry",
+      "type": "aeonfall_region_registry",
+      "path": "verse/world/region_registry.verse"
+    },
+    {
+      "name": "AEONFALLRegionRuntime",
+      "type": "aeonfall_region_runtime",
+      "path": "verse/world/region_runtime.verse"
+    },
+    {
+      "name": "AEONFALLShopRegistry",
+      "type": "aeonfall_shop_registry",
+      "path": "verse/economy/shop_registry.verse"
+    },
+    {
+      "name": "AEONFALLSpawnRuntime",
+      "type": "aeonfall_spawn_runtime",
+      "path": "verse/core/spawn_runtime.verse"
+    },
+    {
+      "name": "AEONFALLStatusRegistry",
+      "type": "aeonfall_status_registry",
+      "path": "verse/combat/status_registry.verse"
+    },
+    {
+      "name": "AEONFALLStatusRuntime",
+      "type": "aeonfall_status_runtime",
+      "path": "verse/combat/status_runtime.verse"
+    },
+    {
+      "name": "AEONFALLTamingRegistry",
+      "type": "aeonfall_taming_registry",
+      "path": "verse/npcs/taming_runtime.verse"
+    },
+    {
+      "name": "AEONFALLTamingRuntime",
+      "type": "aeonfall_taming_runtime",
+      "path": "verse/npcs/taming_runtime.verse"
+    },
+    {
+      "name": "AEONFALLTargetingRuntime",
+      "type": "aeonfall_targeting_runtime",
+      "path": "verse/combat/targeting_runtime.verse"
+    },
+    {
+      "name": "AEONFALLTranscendentAuthorityRegistry",
+      "type": "aeonfall_transcendent_authority_registry",
+      "path": "verse/transcendent/transcendent_registry.verse"
+    },
+    {
+      "name": "AEONFALLTranscendentRuntime",
+      "type": "aeonfall_transcendent_runtime",
+      "path": "verse/transcendent/transcendent_runtime.verse"
+    },
+    {
+      "name": "AEONFALLUnlockDeliveryService",
+      "type": "aeonfall_unlock_delivery_service",
+      "path": "verse/economy/unlock_delivery_service.verse"
+    }
+  ]
+}

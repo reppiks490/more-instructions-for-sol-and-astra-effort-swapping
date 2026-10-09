@@ -1,3 +1,5 @@
+using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 aeonfall_encounter_reward_registry := class():
 
     var Definitions:[string]aeonfall_encounter_reward_definition = map{}
@@ -33,5 +35,15 @@ aeonfall_encounter_reward_registry := class():
     )<decides><transacts>:aeonfall_encounter_reward_definition=
         Definitions[EncounterId]
 
-AEONFALLEncounterRewardRegistry:aeonfall_encounter_reward_registry =
-    aeonfall_encounter_reward_registry{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLEncounterRewardRegistrySessions:weak_map(session, aeonfall_encounter_reward_registry) = map{}
+
+GetAEONFALLEncounterRewardRegistry()<transacts>:aeonfall_encounter_reward_registry=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLEncounterRewardRegistrySessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_encounter_reward_registry{}
+    if (set AEONFALLEncounterRewardRegistrySessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLEncounterRewardRegistry in its session")

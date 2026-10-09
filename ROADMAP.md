@@ -15,9 +15,11 @@
 - [x] canonical Verse content/entity registries and generated bootstrap data
 - [ ] actual UEFN asset/prefab/Character Definition binding
 - [x] typed runtime event bus scaffold
+- [x] session-scoped queued typed event channels, cancellation and saturation guards
 - [x] shared status-effect contract
 - [x] shared ability/resource contract
 - [x] two-phase ability activation/execution coordinator + publish-safe adapter bridges
+- [x] request identity/ordering guards, instant vs managed lifetimes, atomic status batches
 - [ ] project-bound physical effect graphs for every declared adapter
 - [x] boss encounter state machine scaffold
 - [x] world-event state machine scaffold
@@ -43,12 +45,14 @@ One production-quality region containing:
 - [x] 2-armor slice manifest + binding plan
 - [ ] 2 implemented/compiled armor sets
 - [x] first dungeon structure specified: The Ossuary Exchange
+- [x] original modular dungeon source geometry, 593-placement plan and editor assembly automation
 - [ ] dungeon built and Launch Session tested
 - [x] 2 minibosses selected + encounter bindings specified
 - [ ] 2 minibosses implemented/tested
 - [x] major boss selected + encounter binding specified
 - [ ] major boss implemented/tested
 - [x] world event selected + director binding specified
+- [x] canonical boss/event phase directors, physical-health gates and in-editor assertion harness
 - [ ] world event implemented/tested
 - [x] atomic crafting transaction scaffold + validated first-slice recipes
 - [x] crafting transaction + recipe-button runtime scaffold
@@ -99,6 +103,9 @@ Targets:
 - [x] invasion + spawn-group runtime scaffolds
 - [ ] UEFN NPC spawner/device binding and soak test
 - [x] five-tier cannibal horde evolution specified
+- [x] bounded corpse-economy and five-tier evolution session runtime + range-checked spawner adapter
+- [x] horde runtime in-editor assertion harness and CI integration guard
+- [ ] horde Verse compilation, Launch Session assertions, and physical tier-effect bindings
 - [x] necromancer ecosystem baseline specified
 - [x] roaming mythic threat baseline specified
 - [x] first-region faction conflict runtime scaffold
@@ -118,6 +125,7 @@ Targets:
 - [ ] bind 34 God/Absolute/Transcendent effect graphs in UEFN and pass the transformation acceptance matrix
 
 ## Gate 7 — Production
+- [x] existing-project Windows source installer and documented local UEFN MCP/Python handoff
 - [ ] UEFN project binding
 - [ ] Verse compile verification
 - [ ] memory calculations

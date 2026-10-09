@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AEONFALL · Ossuary Exchange asset preview</title>
+<style>
+  *{box-sizing:border-box} body{margin:0;background:#101820;color:#e8e3d9;font:14px system-ui,sans-serif}
+  header{padding:14px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-bottom:1px solid #36434b}
+  h1{margin:0;font-size:18px;font-weight:600} button,.file{color:inherit;background:#283941;border:1px solid #527164;border-radius:5px;padding:8px 12px;cursor:pointer}
+  input{display:none} canvas{display:block;width:100vw;height:calc(100vh - 138px);touch-action:none}
+  footer{padding:12px 20px;color:#a9b8b3;display:flex;gap:12px;flex-wrap:wrap} #status{color:#c4d7ca}
+  .note{margin-left:auto;font-size:12px;color:#a9b8b3} a{color:#b5dcc8}
+</style>
+<header>
+  <h1>AEONFALL · The Ossuary Exchange</h1>
+  <label class="file">Open GLB<input id="file" type="file" accept=".glb"></label>
+  <button id="layout">Dungeon layout</button><button id="gallery">Module gallery</button>
+  <button id="fit">Fit view</button><button id="top">Plan view</button>
+  <span class="note">Original geometric starter assets</span>
+</header>
+<canvas id="canvas" aria-label="Interactive 3D preview of the original Ossuary starter geometry"></canvas>
+<footer><span id="status">Loading dungeon layout…</span><span>Drag to orbit · scroll to zoom · drop a GLB to open</span><a href="layout_plan.svg">Labeled floor plan</a></footer>
+<script>
+"use strict";
+// A small self-contained glTF 2.0 mesh viewer. No CDN, account or uploads.
+const canvas=document.querySelector('#canvas'), status=document.querySelector('#status');
+const gl=canvas.getContext('webgl',{antialias:true});
+let drawables=[],dataBuffer=null,center=[0,0,0],radius=120,yaw=-.6,pitch=.7,fitRadius=120;
+const vecSub=(a,b)=>a.map((v,i)=>v-b[i]),dot=(a,b)=>a.reduce((n,v,i)=>n+v*b[i],0);
+const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const normalize=a=>{const n=Math.hypot(...a);return a.map(v=>v/n)};
+function multiply(a,b){let o=new Float32Array(16);for(let c=0;c<4;c++)for(let r=0;r<4;r++)for(let k=0;k<4;k++)o[c*4+r]+=a[k*4+r]*b[c*4+k];return o}
+function lookAt(eye,target){const z=normalize(vecSub(eye,target)),x=normalize(cross([0,1,0],z)),y=cross(z,x);return new Float32Array([x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-dot(x,eye),-dot(y,eye),-dot(z,eye),1])}
+function perspective(fov,aspect,near,far){const f=1/Math.tan(fov/2);return new Float32Array([f/aspect,0,0,0,0,f,0,0,0,0,(far+near)/(near-far),-1,0,0,2*far*near/(near-far),0])}
+function nodeMatrices(node){
+  const [x,y,z,w]=node.rotation||[0,0,0,1],s=node.scale||[1,1,1],t=node.translation||[0,0,0];
+  const r=[1-2*(y*y+z*z),2*(x*y+w*z),2*(x*z-w*y),2*(x*y-w*z),1-2*(x*x+z*z),2*(y*z+w*x),2*(x*z+w*y),2*(y*z-w*x),1-2*(x*x+y*y)];
+  return {model:new Float32Array([r[0]*s[0],r[1]*s[0],r[2]*s[0],0,r[3]*s[1],r[4]*s[1],r[5]*s[1],0,r[6]*s[2],r[7]*s[2],r[8]*s[2],0,...t,1]),
+    normalMatrix:new Float32Array(r.map((v,i)=>v/s[Math.floor(i/3)]))};
+}
+function shader(type,source){const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s}
+let program,loc;
+try{
+  if(!gl||!gl.getExtension('OES_element_index_uint'))throw Error('This preview needs WebGL with 32-bit triangle index support.');
+  program=gl.createProgram();
+  gl.attachShader(program,shader(gl.VERTEX_SHADER,'attribute vec3 aPosition;attribute vec3 aNormal;uniform mat4 uVP;uniform mat4 uModel;uniform mat3 uNormal;varying vec3 vNormal;void main(){vNormal=normalize(uNormal*aNormal);gl_Position=uVP*uModel*vec4(aPosition,1.0);}'));
+  gl.attachShader(program,shader(gl.FRAGMENT_SHADER,'precision mediump float;varying vec3 vNormal;uniform vec4 uColor;uniform vec3 uEmission;void main(){float light=.42+.58*max(0.0,dot(normalize(vNormal),normalize(vec3(-.5,1.0,.4))));vec3 color=uColor.rgb*light+uEmission*.45;gl_FragColor=vec4(pow(color,vec3(.75)),1.0);}'));
+  gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(program));
+  gl.useProgram(program);loc={};
+  for(const n of ['aPosition','aNormal'])loc[n]=gl.getAttribLocation(program,n);
+  for(const n of ['uVP','uModel','uNormal','uColor','uEmission'])loc[n]=gl.getUniformLocation(program,n);
+  gl.enable(gl.DEPTH_TEST);gl.enable(gl.CULL_FACE);gl.clearColor(.04,.065,.08,1);
+}catch(error){status.textContent=error.message}
+function load(array,name){
+  if(!program)throw Error('WebGL is unavailable. The labeled SVG floor plan remains available.');
+  const view=new DataView(array);
+  if(view.getUint32(0,true)!==0x46546c67||view.getUint32(4,true)!==2||view.getUint32(8,true)!==array.byteLength)throw Error('Invalid GLB 2.0 file.');
+  let cursor=12,doc,bin;
+  while(cursor<array.byteLength){const size=view.getUint32(cursor,true),kind=view.getUint32(cursor+4,true);if(cursor+8+size>array.byteLength)throw Error('Truncated GLB chunk.');if(kind===0x4e4f534a)doc=JSON.parse(new TextDecoder().decode(new Uint8Array(array,cursor+8,size)));if(kind===0x004e4942)bin=new Uint8Array(array,cursor+8,size);cursor+=8+size;}
+  if(!doc||!bin)throw Error('Expected JSON and embedded mesh data.');
+  if(dataBuffer)gl.deleteBuffer(dataBuffer);dataBuffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,dataBuffer);gl.bufferData(gl.ARRAY_BUFFER,bin,gl.STATIC_DRAW);
+  const attr=i=>{const a=doc.accessors[i],v=doc.bufferViews[a.bufferView];return {offset:(v.byteOffset||0)+(a.byteOffset||0),stride:v.byteStride||0,count:a.count,type:a.componentType,min:a.min,max:a.max};};
+  drawables=[];let low=[Infinity,Infinity,Infinity],high=[-Infinity,-Infinity,-Infinity],triangles=0;
+  const visit=(index,parent)=>{
+    const node=doc.nodes[index];if(node.matrix)throw Error('This preview supports translation/rotation/scale nodes, as generated by this pack.');
+    const matrices=nodeMatrices(node);if(parent)throw Error('This preview supports flat asset scenes, as generated by this pack.');
+    if(node.mesh!==undefined){
+      for(const primitive of doc.meshes[node.mesh].primitives){
+        if((primitive.mode??4)!==4)continue;
+        const position=attr(primitive.attributes.POSITION),normal=attr(primitive.attributes.NORMAL),indices=attr(primitive.indices),material=doc.materials?.[primitive.material]||{};
+        if(!position.min||!position.max)throw Error('POSITION bounds are required.');
+        for(let corner=0;corner<8;corner++){
+          const p=[0,1,2].map(i=>(corner&(1<<i))?position.max[i]:position.min[i]),m=matrices.model;
+          for(let i=0;i<3;i++){const v=m[i]*p[0]+m[4+i]*p[1]+m[8+i]*p[2]+m[12+i];low[i]=Math.min(low[i],v);high[i]=Math.max(high[i],v);}
+        }
+        drawables.push({position,normal,indices,...matrices,color:material.pbrMetallicRoughness?.baseColorFactor||[.6,.6,.6,1],emission:material.emissiveFactor||[0,0,0]});triangles+=indices.count/3;
+      }
+    }
+    for(const child of node.children||[])visit(child,node);
+  };
+  for(const index of doc.scenes[doc.scene||0].nodes)visit(index,null);
+  center=low.map((v,i)=>(v+high[i])/2);fitRadius=Math.max(...high.map((v,i)=>v-low[i]))*1.06;radius=fitRadius;yaw=-.6;pitch=.7;
+  status.textContent=`${name} · ${doc.nodes.length.toLocaleString()} objects · ${triangles.toLocaleString()} triangles`;
+}
+async function loadURL(name){try{const response=await fetch(name);if(!response.ok)throw Error('File unavailable.');load(await response.arrayBuffer(),name)}catch(error){status.textContent=location.protocol==='file:'?'Open GLB and select ossuary_exchange_preview.glb or ossuary_module_gallery.glb.':error.message}}
+document.querySelector('#file').onchange=async event=>{const file=event.target.files[0];if(file)try{load(await file.arrayBuffer(),file.name)}catch(error){status.textContent=error.message}};
+document.querySelector('#layout').onclick=()=>loadURL('ossuary_exchange_preview.glb');document.querySelector('#gallery').onclick=()=>loadURL('ossuary_module_gallery.glb');
+document.querySelector('#fit').onclick=()=>{radius=fitRadius;pitch=.7;yaw=-.6};document.querySelector('#top').onclick=()=>{pitch=1.56;yaw=0;radius=fitRadius};
+let dragging=false,last=[0,0];canvas.onpointerdown=e=>{dragging=true;last=[e.clientX,e.clientY];canvas.setPointerCapture(e.pointerId)};
+canvas.onpointerup=()=>dragging=false;canvas.onpointercancel=()=>dragging=false;
+canvas.onpointermove=e=>{if(dragging){yaw-=(e.clientX-last[0])*.006;pitch=Math.max(.08,Math.min(1.56,pitch+(e.clientY-last[1])*.005));last=[e.clientX,e.clientY]}};
+canvas.addEventListener('wheel',e=>{e.preventDefault();radius=Math.max(fitRadius*.08,Math.min(fitRadius*5,radius*Math.exp(e.deltaY*.001)))},{passive:false});
+document.ondragover=e=>e.preventDefault();document.ondrop=async e=>{e.preventDefault();const f=e.dataTransfer.files[0];if(f)try{load(await f.arrayBuffer(),f.name)}catch(error){status.textContent=error.message}};
+function render(){
+  if(program){
+    const ratio=Math.min(devicePixelRatio||1,2),width=Math.round(canvas.clientWidth*ratio),height=Math.round(canvas.clientHeight*ratio);
+    if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height}gl.viewport(0,0,width,height);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+    const eye=[center[0]+radius*Math.sin(yaw)*Math.cos(pitch),center[1]+radius*Math.sin(pitch),center[2]+radius*Math.cos(yaw)*Math.cos(pitch)];
+    gl.uniformMatrix4fv(loc.uVP,false,multiply(perspective(Math.PI*.31,width/height,.05,Math.max(2000,radius*10)),lookAt(eye,center)));
+    if(dataBuffer){gl.bindBuffer(gl.ARRAY_BUFFER,dataBuffer);gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,dataBuffer)}
+    for(const d of drawables){
+      for(const [attribute,a] of [[loc.aPosition,d.position],[loc.aNormal,d.normal]]){gl.enableVertexAttribArray(attribute);gl.vertexAttribPointer(attribute,3,a.type,false,a.stride,a.offset)}
+      gl.uniformMatrix4fv(loc.uModel,false,d.model);gl.uniformMatrix3fv(loc.uNormal,false,d.normalMatrix);gl.uniform4fv(loc.uColor,d.color);gl.uniform3fv(loc.uEmission,d.emission);
+      gl.drawElements(gl.TRIANGLES,d.indices.count,d.indices.type,d.indices.offset);
+    }
+  }
+  requestAnimationFrame(render);
+}
+if(program){loadURL('ossuary_exchange_preview.glb');render()}
+</script>
+</html>

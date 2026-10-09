@@ -5,18 +5,18 @@
     {
       "ability_id": "ABL-001",
       "adapter_id": "grave_architecture_redoubt_adapter",
-      "strategy": "trigger_device_graph",
-      "runtime_device": "aeonfall_trigger_ability_adapter_device",
-      "target_mode": "owner",
-      "notes": "Project graph validates placement and spawns bounded grave wall."
+      "strategy": "native_prop_spawn",
+      "runtime_device": "aeonfall_prop_spawn_adapter_device",
+      "target_mode": "validated_position_context",
+      "notes": "Native SpawnProp with exact owner/ability context, distance and lifetime checks, budget reservation, explicit failure disposal and canonical cleanup. Requires a bound editor-authored creative prop asset."
     },
     {
       "ability_id": "ABL-002",
       "adapter_id": "grave_architecture_stair_adapter",
-      "strategy": "trigger_device_graph",
-      "runtime_device": "aeonfall_trigger_ability_adapter_device",
-      "target_mode": "owner",
-      "notes": "Project graph validates placement and spawns bounded grave stair."
+      "strategy": "native_prop_spawn",
+      "runtime_device": "aeonfall_prop_spawn_adapter_device",
+      "target_mode": "validated_position_context",
+      "notes": "Native SpawnProp with exact owner/ability context, distance and lifetime checks, budget reservation, explicit failure disposal and canonical cleanup. Requires a bound editor-authored creative prop asset."
     },
     {
       "ability_id": "ABL-003",
@@ -77,10 +77,10 @@
     {
       "ability_id": "ABL-010",
       "adapter_id": "corpse_route_component",
-      "strategy": "composite_status_and_trigger",
-      "runtime_device": "aeonfall_composite_ability_adapter_device",
-      "target_mode": "registered_or_context_target",
-      "notes": "Applies STS-009 and triggers bounded route-spawn graph; status rolls back if adapter cannot dispatch."
+      "strategy": "canonical_status_and_prop_spawn",
+      "runtime_device": "aeonfall_prop_spawn_adapter_device",
+      "target_mode": "validated_position_context",
+      "notes": "Native SpawnProp with exact owner/ability context, distance and lifetime checks, budget reservation, explicit failure disposal and canonical cleanup. Requires a bound editor-authored creative prop asset."
     }
   ],
   "status_bridges": [

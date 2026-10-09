@@ -24,6 +24,10 @@ aeonfall_target_policy := enum:
     Area
     AuthoredObjective
 
+aeonfall_activation_lifetime := enum:
+    Instant
+    Managed
+
 aeonfall_ability_definition := class:
     AbilityId:string = ""
     DisplayName:string = ""
@@ -64,6 +68,9 @@ aeonfall_ability_definition := class:
     AudioId:string = ""
     AdapterId:string = ""
     BossSafe:logic = true
+    # Instant actions retain their cooldown/status/spawn state but do not keep
+    # the activation lock. Managed actions end through the coordinator.
+    ActivationLifetime:aeonfall_activation_lifetime = aeonfall_activation_lifetime.Instant
 
 aeonfall_ability_runtime_state := class:
     AbilityId:string = ""

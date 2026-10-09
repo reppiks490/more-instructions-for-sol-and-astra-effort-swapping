@@ -1,3 +1,5 @@
+using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 # Canonical Transcendent Zero Authority registry.
 
 aeonfall_transcendent_authority_registry := class():
@@ -35,5 +37,15 @@ aeonfall_transcendent_authority_registry := class():
         Definition := Definitions[AuthorityId]
         Definition.AuthorityId <> ""
 
-AEONFALLTranscendentAuthorityRegistry:aeonfall_transcendent_authority_registry =
-    aeonfall_transcendent_authority_registry{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLTranscendentAuthorityRegistrySessions:weak_map(session, aeonfall_transcendent_authority_registry) = map{}
+
+GetAEONFALLTranscendentAuthorityRegistry()<transacts>:aeonfall_transcendent_authority_registry=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLTranscendentAuthorityRegistrySessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_transcendent_authority_registry{}
+    if (set AEONFALLTranscendentAuthorityRegistrySessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLTranscendentAuthorityRegistry in its session")
