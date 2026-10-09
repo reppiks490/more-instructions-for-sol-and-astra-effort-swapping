@@ -1,3 +1,5 @@
+using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 # Session status state runtime.
 # Gameplay adapters translate these canonical states into actual movement,
 # damage, VFX, device, character, or Scene Graph effects.
@@ -5,8 +7,13 @@
 aeonfall_status_runtime := class():
 
     EventBus:aeonfall_event_bus = AEONFALLRuntimeBus
-    StatusRegistry:aeonfall_status_registry = AEONFALLStatusRegistry
+    StatusRegistryOverride:?aeonfall_status_registry = false
     var StatusesByTarget:[string][]aeonfall_status_instance = map{}
+
+    Registry()<transacts>:aeonfall_status_registry=
+        if (Override := StatusRegistryOverride?):
+            return Override
+        GetAEONFALLStatusRegistry()
 
     # Both the canonical map write and its physical command must commit. A full
     # queue fails this helper and rolls back the map write in the caller's
@@ -154,7 +161,7 @@ aeonfall_status_runtime := class():
         var Seen:[]string = array{}
         for (StatusId : StatusIds):
             not Seen.Find[StatusId]
-            Definition := StatusRegistry.Get[StatusId]
+            Definition := Registry().Get[StatusId]
             Applied := ApplyStatus(TargetKey, Definition, SourceId, Magnitude)
             Applied?
             set Seen += array{StatusId}
@@ -252,4 +259,15 @@ aeonfall_status_runtime := class():
         for (TargetKey : TargetKeys):
             Tick(TargetKey, DeltaSeconds)
 
-AEONFALLStatusRuntime:aeonfall_status_runtime = aeonfall_status_runtime{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLStatusRuntimeSessions:weak_map(session, aeonfall_status_runtime) = map{}
+
+GetAEONFALLStatusRuntime()<transacts>:aeonfall_status_runtime=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLStatusRuntimeSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_status_runtime{}
+    if (set AEONFALLStatusRuntimeSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLStatusRuntime in its session")

@@ -78,9 +78,9 @@ GetAEONFALLBusState()<transacts>:aeonfall_event_bus_state=
     State := aeonfall_event_bus_state{}
     if (set AEONFALLBusStates[GetSession()] = State):
         return State
-    # A failed map write cannot retain a queue. A temporary zero-capacity state
-    # reports admission failure instead of pretending to accept a message.
-    aeonfall_event_bus_state{QueueCapacity := 0}
+    # Losing queue ownership is a runtime initialization failure. Do not return
+    # a fresh temporary bus state that gives every channel a different queue.
+    Err("AEONFALL could not retain its event bus state in the session")
 
 # Cancel only mutates transactional state; native event.Signal has no_rollback.
 # The listener's race releases an idle subscription within 0.05 simulation

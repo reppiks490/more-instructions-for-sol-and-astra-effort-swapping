@@ -5,6 +5,8 @@ import re
 import sys
 from pathlib import Path
 
+from migrate_session_services import load_services, read_sources, validate_sources as validate_session_sources
+
 ROOT = Path(__file__).resolve().parents[1]
 VERSE = ROOT / "verse"
 
@@ -49,6 +51,9 @@ def main() -> int:
         errors.append("no Verse source files found")
 
     persistent_roots = 0
+
+    sources = read_sources(ROOT)
+    errors.extend(validate_session_sources(sources, load_services(ROOT, sources)))
 
     for path in files:
         text = path.read_text(encoding="utf-8")

@@ -20,9 +20,9 @@ aeonfall_ability_result_router_device := class(creative_device):
 
     OnAdapterResult(Result:aeonfall_adapter_result)<transacts>:void=
         if:
-            Definition := AEONFALLAbilityRegistry.Get[Result.AbilityId]
+            Definition := GetAEONFALLAbilityRegistry().Get[Result.AbilityId]
         then:
-            Resolved := AEONFALLActivationCoordinator.ResolveAdapterResult(
+            Resolved := GetAEONFALLActivationCoordinator().ResolveAdapterResult(
                 Definition,
                 Result
             )

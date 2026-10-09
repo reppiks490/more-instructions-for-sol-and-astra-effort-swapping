@@ -1,3 +1,5 @@
+using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 # One adapter request reserved by the coordinator until success, failure,
 # explicit cancellation, or timeout.
 aeonfall_pending_activation := class:
@@ -52,13 +54,13 @@ aeonfall_activation_coordinator := class():
             return false
         if (PendingActivations[RequestId]):
             return false
-        if (not AEONFALLAbilityRuntime.CanActivate(OwnerKey, Definition, Context)?):
+        if (not GetAEONFALLAbilityRuntime().CanActivate(OwnerKey, Definition, Context)?):
             return false
 
         var ClassReserved:logic = false
         if (Definition.ClassResourceMode <> aeonfall_class_resource_mode.None):
             HoldWhileActive:logic = logic{Definition.ClassResourceMode = aeonfall_class_resource_mode.ReserveWhileActive}
-            Reserved := AEONFALLClassRuntime.ReserveResource(
+            Reserved := GetAEONFALLClassRuntime().ReserveResource(
                 RequestId, OwnerKey, Definition.RequiredClassId,
                 Definition.ClassResourceCost, HoldWhileActive
             )
@@ -71,7 +73,7 @@ aeonfall_activation_coordinator := class():
             AbilityId := Definition.AbilityId, TimeoutRemainingSeconds := 5.0
         }
         if (set PendingActivations[RequestId] = Pending):
-            Requested := AEONFALLAbilityRuntime.RequestActivation(
+            Requested := GetAEONFALLAbilityRuntime().RequestActivation(
                 RequestId, OwnerKey, Definition, Context,
                 TargetKey, RuntimeContextId, Magnitude
             )
@@ -80,7 +82,7 @@ aeonfall_activation_coordinator := class():
             Removed := RemovePendingRecord(RequestId)
 
         if (ClassReserved?):
-            Released := AEONFALLClassRuntime.ReleaseReservation(RequestId)
+            Released := GetAEONFALLClassRuntime().ReleaseReservation(RequestId)
         false
 
     IsMatchingPending(
@@ -94,7 +96,7 @@ aeonfall_activation_coordinator := class():
             Pending := PendingActivations[Result.RequestId]
             Pending.OwnerKey = Result.OwnerKey
             Pending.AbilityId = Result.AbilityId
-            State := AEONFALLAbilityRuntime.GetState[Result.OwnerKey, Result.AbilityId]
+            State := GetAEONFALLAbilityRuntime().GetState[Result.OwnerKey, Result.AbilityId]
             State.Pending?
             State.PendingRequestId = Result.RequestId
         then:
@@ -110,22 +112,18 @@ aeonfall_activation_coordinator := class():
         if (not IsMatchingPending(Definition, Result)?):
             return false
         RemovedPending := RemovePendingRecord(Result.RequestId)
-        if (RemovedPending?):
-            RemovedPending = true
 
         if (not Result.Succeeded?):
             if (Definition.ClassResourceMode <> aeonfall_class_resource_mode.None):
-                Released := AEONFALLClassRuntime.ReleaseReservation(Result.RequestId)
-                if (Released?):
-                    Released = true
+                Released := GetAEONFALLClassRuntime().ReleaseReservation(Result.RequestId)
 
-            return AEONFALLAbilityRuntime.ResolveActivation(
+            return GetAEONFALLAbilityRuntime().ResolveActivation(
                 Definition,
                 Result
             )
 
         if (Definition.ClassResourceMode = aeonfall_class_resource_mode.SpendOnSuccess):
-            CommittedClass := AEONFALLClassRuntime.CommitReservation(
+            CommittedClass := GetAEONFALLClassRuntime().CommitReservation(
                 Result.RequestId
             )
 
@@ -138,18 +136,16 @@ aeonfall_activation_coordinator := class():
                     Succeeded := false
                     ResultCode := "class_resource_commit_failed"
 
-                Released := AEONFALLClassRuntime.ReleaseReservation(
+                Released := GetAEONFALLClassRuntime().ReleaseReservation(
                     Result.RequestId
                 )
-                if (Released?):
-                    Released = true
 
-                return AEONFALLAbilityRuntime.ResolveActivation(
+                return GetAEONFALLAbilityRuntime().ResolveActivation(
                     Definition,
                     FailedResult
                 )
 
-            Resolved := AEONFALLAbilityRuntime.ResolveActivation(
+            Resolved := GetAEONFALLAbilityRuntime().ResolveActivation(
                 Definition,
                 Result
             )
@@ -157,17 +153,15 @@ aeonfall_activation_coordinator := class():
             if (not Resolved?):
                 # Reservation guaranteed this spend. Restore it if the
                 # canonical ability state unexpectedly fails to commit.
-                Restored := AEONFALLClassRuntime.AddResource(
+                Restored := GetAEONFALLClassRuntime().AddResource(
                     Result.OwnerKey,
                     Definition.ClassResourceCost
                 )
-                if (Restored?):
-                    Restored = true
 
             return Resolved
 
         if (Definition.ClassResourceMode = aeonfall_class_resource_mode.ReserveWhileActive):
-            Held := AEONFALLClassRuntime.HoldReservation(Result.RequestId)
+            Held := GetAEONFALLClassRuntime().HoldReservation(Result.RequestId)
             if (not Held?):
                 FailedResult := aeonfall_adapter_result:
                     RequestId := Result.RequestId
@@ -177,32 +171,28 @@ aeonfall_activation_coordinator := class():
                     Succeeded := false
                     ResultCode := "class_resource_hold_failed"
 
-                Released := AEONFALLClassRuntime.ReleaseReservation(
+                Released := GetAEONFALLClassRuntime().ReleaseReservation(
                     Result.RequestId
                 )
-                if (Released?):
-                    Released = true
 
-                return AEONFALLAbilityRuntime.ResolveActivation(
+                return GetAEONFALLAbilityRuntime().ResolveActivation(
                     Definition,
                     FailedResult
                 )
 
-            Resolved := AEONFALLAbilityRuntime.ResolveActivation(
+            Resolved := GetAEONFALLAbilityRuntime().ResolveActivation(
                 Definition,
                 Result
             )
 
             if (not Resolved?):
-                Released := AEONFALLClassRuntime.ReleaseReservation(
+                Released := GetAEONFALLClassRuntime().ReleaseReservation(
                     Result.RequestId
                 )
-                if (Released?):
-                    Released = true
 
             return Resolved
 
-        AEONFALLAbilityRuntime.ResolveActivation(
+        GetAEONFALLAbilityRuntime().ResolveActivation(
             Definition,
             Result
         )
@@ -212,11 +202,11 @@ aeonfall_activation_coordinator := class():
         AbilityId:string
     )<transacts>:logic=
         if:
-            Definition := AEONFALLAbilityRegistry.Get[AbilityId]
-            State := AEONFALLAbilityRuntime.GetState[OwnerKey, AbilityId]
+            Definition := GetAEONFALLAbilityRegistry().Get[AbilityId]
+            State := GetAEONFALLAbilityRuntime().GetState[OwnerKey, AbilityId]
         then:
             ActiveRequestId:string = State.ActiveRequestId
-            Ended := AEONFALLAbilityRuntime.EndActivation(
+            Ended := GetAEONFALLAbilityRuntime().EndActivation(
                 OwnerKey,
                 AbilityId
             )
@@ -226,7 +216,7 @@ aeonfall_activation_coordinator := class():
                 Definition.ClassResourceMode = aeonfall_class_resource_mode.ReserveWhileActive
                 ActiveRequestId <> ""
             then:
-                Released := AEONFALLClassRuntime.ReleaseReservation(
+                Released := GetAEONFALLClassRuntime().ReleaseReservation(
                     ActiveRequestId
                 )
                 if (not Released?):
@@ -252,16 +242,16 @@ aeonfall_activation_coordinator := class():
             Pending := PendingActivations[RequestId]
             Pending.OwnerKey = OwnerKey
             Pending.AbilityId = AbilityId
-            Definition := AEONFALLAbilityRegistry.Get[AbilityId]
-            State := AEONFALLAbilityRuntime.GetState[OwnerKey, AbilityId]
+            Definition := GetAEONFALLAbilityRegistry().Get[AbilityId]
+            State := GetAEONFALLAbilityRuntime().GetState[OwnerKey, AbilityId]
             State.Pending?
             State.PendingRequestId = RequestId
         then:
-            Cancelled := AEONFALLAbilityRuntime.CancelPending(OwnerKey, AbilityId, RequestId)
+            Cancelled := GetAEONFALLAbilityRuntime().CancelPending(OwnerKey, AbilityId, RequestId)
             if (Cancelled?):
                 Removed := RemovePendingRecord(RequestId)
                 if (Definition.ClassResourceMode <> aeonfall_class_resource_mode.None):
-                    Released := AEONFALLClassRuntime.ReleaseReservation(RequestId)
+                    Released := GetAEONFALLClassRuntime().ReleaseReservation(RequestId)
                 return true
         false
 
@@ -293,16 +283,14 @@ aeonfall_activation_coordinator := class():
 
         for (Pending : Expired):
             if:
-                Definition := AEONFALLAbilityRegistry.Get[Pending.AbilityId]
+                Definition := GetAEONFALLAbilityRegistry().Get[Pending.AbilityId]
             then:
                 if (Definition.ClassResourceMode <> aeonfall_class_resource_mode.None):
-                    Released := AEONFALLClassRuntime.ReleaseReservation(
+                    Released := GetAEONFALLClassRuntime().ReleaseReservation(
                         Pending.RequestId
                     )
-                    if (Released?):
-                        Released = true
 
-            Cancelled := AEONFALLAbilityRuntime.CancelPending(
+            Cancelled := GetAEONFALLAbilityRuntime().CancelPending(
                 Pending.OwnerKey,
                 Pending.AbilityId,
                 Pending.RequestId
@@ -334,8 +322,6 @@ aeonfall_activation_coordinator := class():
                     Pending.AbilityId,
                     Pending.RequestId
                 )
-                if (Cancelled?):
-                    Cancelled = true
 
         AEONFALLRuntimeBus.Emit(
             aeonfall_runtime_event{
@@ -344,4 +330,15 @@ aeonfall_activation_coordinator := class():
             }
         )
 
-AEONFALLActivationCoordinator:aeonfall_activation_coordinator = aeonfall_activation_coordinator{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLActivationCoordinatorSessions:weak_map(session, aeonfall_activation_coordinator) = map{}
+
+GetAEONFALLActivationCoordinator()<transacts>:aeonfall_activation_coordinator=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLActivationCoordinatorSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_activation_coordinator{}
+    if (set AEONFALLActivationCoordinatorSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLActivationCoordinator in its session")

@@ -31,8 +31,10 @@ registered live players in its volume immediately before reward resolution.
    if no live `fort_character` arrives within `BossSpawnTimeoutSeconds` (default
    five seconds), or if a second distinct boss body arrives.
 4. Add three `Phases` entries in exactly the order below. Each `Inputs` entry
-   has a `Kind`, canonical ID, and its own Trigger device. Drive these inputs
-   from authored objectives/destructibles/trackers; no objective completes merely
+   has a `Kind`, canonical ID, and distinct physical source. Set `Source` to
+   `PropDestroyed` and bind `DestructionSource` for native destructible targets;
+   set `Source` to `TriggerGraph` and bind `Input` for authored mechanic graphs.
+   Drive these inputs from actual objectives/destructibles/trackers; no objective completes merely
    because its phase starts. Every listed objective and weak point must have
    one input binding, even when it is an optional mechanic.
 
@@ -80,6 +82,43 @@ source graph must emit once per distinct lot/decree. Trigger payloads do not
 contain an event nonce; the director cannot distinguish duplicated hardware
 delivery from a second legitimate success. Inactive phase inputs are disabled
 and also rejected by their captured phase index.
+
+### Native stair anchors and physical ownership
+
+The director now accepts actual `prop_manipulator_device.DestroyedEvent` inputs.
+For each of the three stair objectives, select `Source = PropDestroyed` and bind
+its own Prop Manipulator. Each region must cover exactly one destructible anchor;
+the event contains the destroying agent but does not identify which prop within
+a multi-prop region was destroyed. The native callback accepts a registered,
+living human player inside the arena, then applies the captured phase gate. It
+does not emit fake boss damage or elimination. Blockout weak-point props can use
+the same source; they represent separate destructible targets rather than native
+body hit-location detection.
+
+Phase entry enables, shows and restores the health of existing affected props;
+phase exit hides them and disables the manipulator. A destroyed prop must be
+recreated by the authored phase-entry graph for a repeated run. `RestoreHealth`
+is not evidence that a destroyed prop has been respawned. Verify reset behavior
+in UEFN before accepting repeatable encounter completion.
+
+Startup validates every referenced active physical object before any initial
+cleanup. All source, output, damage-volume and spawner roles must be distinct,
+including roles in different phases. Repeated canonical hazard/weak-point IDs
+therefore use separate physical instances. The boss spawner cannot also belong
+to a phase add group. A session lease rejects a second director for the same
+encounter and any director sharing an existing director's physical objects.
+Rejected directors perform no arena cleanup or participation reset on shutdown.
+
+`content/vertical_slice/first_playable_rig.json` records a complete BOS-005
+director binding graph with unique device references and bootstrap readiness
+dependencies. These dependencies do not impose engine `OnBegin` order. The file
+is authored placement intent; all placement, Verse compilation and Launch
+Session fields remain `not_run`. Validate it with
+`python tools/validate_first_playable_rig.py`; its mutation tests reject shared
+stair sources, boss/add reuse, feedback, unresolved references and dependency
+cycles. Native health at 70%, three destroyed anchors and final native
+elimination form the first-playable route. Optional corpse/whistle graph inputs
+still require their real authored producers.
 
 ## Other first-slice directors
 

@@ -76,12 +76,12 @@ class RuntimeEventBusValidationTests(unittest.TestCase):
 
     def test_ability_result_resolution_fallback_removal_is_rejected(self) -> None:
         path = "verse/combat/adapter_result_delivery.verse"
-        errors = self.mutated(path, "AEONFALLActivationCoordinator.ResolveAdapterResult(Definition, Result)", "IgnoreCanonicalResolution(Definition, Result)")
+        errors = self.mutated(path, "GetAEONFALLActivationCoordinator().ResolveAdapterResult(Definition, Result)", "IgnoreCanonicalResolution(Definition, Result)")
         self.assertTrue(any(path in error and "requires direct canonical resolution" in error for error in errors))
 
     def test_unlock_result_resolution_fallback_removal_is_rejected(self) -> None:
         path = "verse/economy/unlock_delivery_adapter_device.verse"
-        errors = self.mutated(path, "AEONFALLUnlockDeliveryService.Resolve(Result)", "IgnoreCanonicalResolution(Result)")
+        errors = self.mutated(path, "GetAEONFALLUnlockDeliveryService().Resolve(Result)", "IgnoreCanonicalResolution(Result)")
         self.assertTrue(any(path in error and "requires direct canonical resolution" in error for error in errors))
 
     def test_native_effect_handler_cannot_claim_transactional_effects(self) -> None:
@@ -118,6 +118,21 @@ class RuntimeEventBusValidationTests(unittest.TestCase):
         path = "verse/combat/status_device_bridge.verse"
         errors = self.mutated(path, "set AppliedAgents[TargetKey] = TargetAgent", "RecordNothing()")
         self.assertTrue(any(path in error and "track each application before applying physical effects" in error for error in errors))
+
+    def test_bridge_must_discover_pre_subscription_statuses(self) -> None:
+        path = "verse/combat/status_device_bridge.verse"
+        errors = self.mutated(path, "GetAEONFALLStatusRuntime().StatusesByTarget", "AppliedAgents")
+        self.assertTrue(any("discover canonical statuses" in error for error in errors))
+
+    def test_bridge_must_detect_replacement_character(self) -> None:
+        path = "verse/combat/status_device_bridge.verse"
+        errors = self.mutated(path, "CurrentCharacter = TrackedCharacter", "CurrentAgent = TrackedAgent")
+        self.assertTrue(any("character generation across respawn" in error for error in errors))
+
+    def test_bridge_character_tracking_commits_before_native_effects(self) -> None:
+        path = "verse/combat/status_device_bridge.verse"
+        errors = self.mutated(path, "set AppliedCharacters[TargetKey] = Character", "RecordNothing()")
+        self.assertTrue(any("track each application before applying physical effects" in error for error in errors))
 
 
 if __name__ == "__main__":

@@ -56,7 +56,7 @@ def main() -> int:
         "        var Ready:logic = false",
         "",
         "        for (Attempt := 1..20):",
-        f"            if (AEONFALLRegionRegistry.IsRegistered[{q(region_id)}]):",
+        f"            if (GetAEONFALLRegionRegistry().IsRegistered[{q(region_id)}]):",
         "                set Ready = true",
         "                break",
         "            Sleep(0.25)",
@@ -72,21 +72,26 @@ def main() -> int:
         "",
     ])
 
-    for seed in doc.get("initial_faction_influence", []):
+    for index, seed in enumerate(doc.get("initial_faction_influence", [])):
         lines.extend([
-            "        Seeded := AEONFALLRegionRuntime.SetFactionInfluence(",
+            f"        Seeded{index} := GetAEONFALLRegionRuntime().SetFactionInfluence(",
             f"            {q(region_id)},",
             f"            {q(seed['faction_id'])},",
             f"            {seed['influence']}",
             "        )",
-            "        if (Seeded?):",
-            "            Seeded = true",
+            f"        if (not Seeded{index}?):",
+            "            AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{",
+            '                EventType := "bootstrap.region_001_faction_seed_failed",',
+            f"                SourceId := {q(region_id)},",
+            f"                TargetId := {q(seed['faction_id'])}",
+            "            })",
+            "            return",
         ])
 
     lines.extend([
         "",
         "        for (Definition : Region001InvasionDefinitions):",
-        "            Registered := AEONFALLInvasionRegistry.Register(Definition)",
+        "            Registered := GetAEONFALLInvasionRegistry().Register(Definition)",
         "            if (not Registered?):",
         "                AEONFALLRuntimeBus.Emit(",
         "                    aeonfall_runtime_event{",

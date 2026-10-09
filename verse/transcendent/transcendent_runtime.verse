@@ -1,3 +1,4 @@
+using { /Verse.org/Verse }
 using { /Verse.org/Simulation }
 
 # Session-only Transcendent Zero transformation runtime.
@@ -25,11 +26,11 @@ aeonfall_transcendent_runtime := class():
         Agent:agent,
         AuthorityId:string
     )<decides><transacts>:void=
-        OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
-        Definition := AEONFALLTranscendentAuthorityRegistry.Get[AuthorityId]
+        OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
+        Definition := GetAEONFALLTranscendentAuthorityRegistry().Get[AuthorityId]
         Profile := ProfileService.GetProfile[Agent]
         State := GetState(OwnerKey)
-        Flags := AEONFALLActorContextRuntime.GetFlags(OwnerKey)
+        Flags := GetAEONFALLActorContextRuntime().GetFlags(OwnerKey)
 
         GateService.CanActivateTranscendentState[Agent]
         not Flags.TransformationActive?
@@ -43,13 +44,13 @@ aeonfall_transcendent_runtime := class():
         AuthorityId:string
     )<transacts>:logic=
         if:
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
-            Definition := AEONFALLTranscendentAuthorityRegistry.Get[AuthorityId]
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
+            Definition := GetAEONFALLTranscendentAuthorityRegistry().Get[AuthorityId]
             CanActivate[Agent, AuthorityId]
         then:
             Old := GetState(OwnerKey)
 
-            TransformationSet := AEONFALLActorContextRuntime.SetTransformation(
+            TransformationSet := GetAEONFALLActorContextRuntime().SetTransformation(
                 OwnerKey,
                 true,
                 "TRANSCENDENT_ZERO::" + AuthorityId
@@ -80,13 +81,11 @@ aeonfall_transcendent_runtime := class():
                 )
                 return true
 
-            RolledBack := AEONFALLActorContextRuntime.SetTransformation(
+            RolledBack := GetAEONFALLActorContextRuntime().SetTransformation(
                 OwnerKey,
                 false,
                 "TRANSCENDENT_ZERO::" + AuthorityId
             )
-            if (RolledBack?):
-                RolledBack = true
 
         false
 
@@ -96,27 +95,23 @@ aeonfall_transcendent_runtime := class():
     )<transacts>:void=
         for (AbilityId : Definition.AbilityIds):
             if:
-                State := AEONFALLAbilityRuntime.GetState[OwnerKey, AbilityId]
+                State := GetAEONFALLAbilityRuntime().GetState[OwnerKey, AbilityId]
             then:
                 if:
                     State.Pending?
                     State.PendingRequestId <> ""
                 then:
-                    Cancelled := AEONFALLActivationCoordinator.CancelPending(
+                    Cancelled := GetAEONFALLActivationCoordinator().CancelPending(
                         OwnerKey,
                         AbilityId,
                         State.PendingRequestId
                     )
-                    if (Cancelled?):
-                        Cancelled = true
 
                 if (State.Active?):
-                    Ended := AEONFALLActivationCoordinator.EndActivation(
+                    Ended := GetAEONFALLActivationCoordinator().EndActivation(
                         OwnerKey,
                         AbilityId
                     )
-                    if (Ended?):
-                        Ended = true
 
     EndActive(
         OwnerKey:string,
@@ -125,14 +120,14 @@ aeonfall_transcendent_runtime := class():
         if:
             Old := StatesByOwner[OwnerKey]
             Old.Phase = aeonfall_transcendent_phase.Active
-            Definition := AEONFALLTranscendentAuthorityRegistry.Get[Old.AuthorityId]
+            Definition := GetAEONFALLTranscendentAuthorityRegistry().Get[Old.AuthorityId]
         then:
             StopAuthorityAbilities(
                 OwnerKey,
                 Definition
             )
 
-            TransformationCleared := AEONFALLActorContextRuntime.SetTransformation(
+            TransformationCleared := GetAEONFALLActorContextRuntime().SetTransformation(
                 OwnerKey,
                 false,
                 "TRANSCENDENT_ZERO::" + Old.AuthorityId
@@ -156,7 +151,7 @@ aeonfall_transcendent_runtime := class():
                 # transition has committed. A retry can no longer re-award it.
                 if (Reason = "duration_expired"):
                     if:
-                        Agent := AEONFALLActorRegistry.GetAgent[OwnerKey]
+                        Agent := GetAEONFALLActorRegistry().GetAgent[OwnerKey]
                     then:
                         HistoryAwarded := ProfileService.IncrementTranscendentHistory(
                             Agent
@@ -196,7 +191,7 @@ aeonfall_transcendent_runtime := class():
         Reason:string
     )<transacts>:logic=
         if:
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
         then:
             EndActive(
                 OwnerKey,
@@ -211,20 +206,18 @@ aeonfall_transcendent_runtime := class():
         then:
             if:
                 Existing.Phase = aeonfall_transcendent_phase.Active
-                Definition := AEONFALLTranscendentAuthorityRegistry.Get[Existing.AuthorityId]
+                Definition := GetAEONFALLTranscendentAuthorityRegistry().Get[Existing.AuthorityId]
             then:
                 StopAuthorityAbilities(
                     OwnerKey,
                     Definition
                 )
 
-                Cleared := AEONFALLActorContextRuntime.SetTransformation(
+                Cleared := GetAEONFALLActorContextRuntime().SetTransformation(
                     OwnerKey,
                     false,
                     "TRANSCENDENT_ZERO::" + Existing.AuthorityId
                 )
-                if (Cleared?):
-                    Cleared = true
 
         var Updated:[string]aeonfall_transcendent_runtime_state = map{}
 
@@ -340,8 +333,16 @@ aeonfall_transcendent_runtime := class():
                 OwnerKey,
                 "duration_expired"
             )
-            if (Ended?):
-                Ended = true
 
-AEONFALLTranscendentRuntime:aeonfall_transcendent_runtime =
-    aeonfall_transcendent_runtime{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLTranscendentRuntimeSessions:weak_map(session, aeonfall_transcendent_runtime) = map{}
+
+GetAEONFALLTranscendentRuntime()<transacts>:aeonfall_transcendent_runtime=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLTranscendentRuntimeSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_transcendent_runtime{}
+    if (set AEONFALLTranscendentRuntimeSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLTranscendentRuntime in its session")

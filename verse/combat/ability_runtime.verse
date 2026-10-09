@@ -1,3 +1,5 @@
+using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 # Publish-safe AEONFALL ability resource runtime.
 #
 # This file deliberately does not import Epic's Experimental Ability API.
@@ -192,7 +194,7 @@ aeonfall_ability_runtime := class():
 
     IsCurrentEffectRequest(Request:aeonfall_ability_effect_request)<transacts>:logic=
         if:
-            Definition := AEONFALLAbilityRegistry.Get[Request.AbilityId]
+            Definition := GetAEONFALLAbilityRegistry().Get[Request.AbilityId]
             Definition.AdapterId = Request.AdapterId
             State := GetState[Request.OwnerKey, Request.AbilityId]
             State.Pending?
@@ -566,7 +568,7 @@ aeonfall_ability_runtime := class():
             var Recharge:float = Old.ChargeRechargeRemainingSeconds
 
             if:
-                Definition := AEONFALLAbilityRegistry.Get[Old.AbilityId]
+                Definition := GetAEONFALLAbilityRegistry().Get[Old.AbilityId]
             then:
                 if (Cooldown > 0.0):
                     set Cooldown = Cooldown - DeltaSeconds
@@ -645,4 +647,15 @@ aeonfall_ability_runtime := class():
             }
         )
 
-AEONFALLAbilityRuntime:aeonfall_ability_runtime = aeonfall_ability_runtime{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLAbilityRuntimeSessions:weak_map(session, aeonfall_ability_runtime) = map{}
+
+GetAEONFALLAbilityRuntime()<transacts>:aeonfall_ability_runtime=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLAbilityRuntimeSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_ability_runtime{}
+    if (set AEONFALLAbilityRuntimeSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLAbilityRuntime in its session")

@@ -29,11 +29,17 @@ aeonfall_unlock_delivery_adapter_device := class(creative_device):
         if (Request.EntityId <> EntityId):
             return
 
+        Claimed := GetAEONFALLUnlockDeliveryService().ClaimDelivery(Request)
+        if (not Claimed?):
+            # Keep an inactive owner's request retryable; ignore stale or
+            # already-dispatched copies without reporting a false completion.
+            return
+
         var Succeeded:logic = false
         var ResultCode:string = "owner_not_registered"
 
         if:
-            OwnerAgent := AEONFALLActorRegistry.GetAgent[Request.OwnerKey]
+            OwnerAgent := GetAEONFALLActorRegistry().GetAgent[Request.OwnerKey]
         then:
             TriggerOutput.Trigger(OwnerAgent)
             set Succeeded = true
@@ -50,7 +56,7 @@ aeonfall_unlock_delivery_adapter_device := class(creative_device):
         if (not Admitted?):
             # The physical grant already happened; preserve its canonical
             # completion even if the asynchronous result queue is saturated.
-            Resolved := AEONFALLUnlockDeliveryService.Resolve(Result)
+            Resolved := GetAEONFALLUnlockDeliveryService().Resolve(Result)
             if (not Resolved?):
                 AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
                     EventType := "unlock.delivery_result_fallback_unresolved",

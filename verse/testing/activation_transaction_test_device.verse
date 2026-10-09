@@ -43,8 +43,8 @@ aeonfall_activation_transaction_test_device := class(creative_device):
             StatusId := "DEV-STS-REJECT", StackRule := aeonfall_status_stack_rule.RejectDuplicate,
             BaseDurationSeconds := 5.0
         }
-        Check("stack fixture registers", AEONFALLStatusRegistry.Register(Stack))
-        Check("reject fixture registers", AEONFALLStatusRegistry.Register(Reject))
+        Check("stack fixture registers", GetAEONFALLStatusRegistry().Register(Stack))
+        Check("reject fixture registers", GetAEONFALLStatusRegistry().Register(Reject))
         Check("seed existing stack", Runtime.ApplyStatus("DEV-STATUS-TARGET", Stack, "ORIGINAL-OWNER", 7))
         Check("seed existing rejection", Runtime.ApplyStatus("DEV-STATUS-TARGET", Reject, "ORIGINAL-OWNER", 1))
         QueueBefore := GetAEONFALLBusState().PendingRuntimeEvents.Length
@@ -70,7 +70,7 @@ aeonfall_activation_transaction_test_device := class(creative_device):
     OnRequest(Requested:aeonfall_ability_effect_request):void=
         if (Requested.AdapterId <> "DEV-TRANSACTION-ADAPTER"):
             return
-        if (Definition := AEONFALLAbilityRegistry.Get[Requested.AbilityId]):
+        if (Definition := GetAEONFALLAbilityRegistry().Get[Requested.AbilityId]):
             Result := aeonfall_adapter_result{
                 RequestId := Requested.RequestId, OwnerKey := Requested.OwnerKey,
                 AbilityId := Requested.AbilityId, AdapterId := Requested.AdapterId,
@@ -93,15 +93,15 @@ aeonfall_activation_transaction_test_device := class(creative_device):
         Instant := Fixture("DEV-ABL-INSTANT", aeonfall_activation_lifetime.Instant)
         Managed := Fixture("DEV-ABL-MANAGED", aeonfall_activation_lifetime.Managed)
         for (Definition : array{Instant, Managed}):
-            Check("definition registers", AEONFALLAbilityRegistry.Register(Definition))
-            Check("state initializes", AEONFALLAbilityRuntime.Initialize("DEV-TRANSACTION-OWNER", Definition))
+            Check("definition registers", GetAEONFALLAbilityRegistry().Register(Definition))
+            Check("state initializes", GetAEONFALLAbilityRuntime().Initialize("DEV-TRANSACTION-OWNER", Definition))
         Check("instant requested", Request(Instant, "DEV-R1"))
         ClaimFixture := aeonfall_ability_effect_request{
             RequestId := "DEV-R1", OwnerKey := "DEV-TRANSACTION-OWNER",
             AbilityId := Instant.AbilityId, AdapterId := Instant.AdapterId
         }
-        FirstClaim := AEONFALLAbilityRuntime.ClaimEffectRequest(ClaimFixture)
-        SecondClaim := AEONFALLAbilityRuntime.ClaimEffectRequest(ClaimFixture)
+        FirstClaim := GetAEONFALLAbilityRuntime().ClaimEffectRequest(ClaimFixture)
+        SecondClaim := GetAEONFALLAbilityRuntime().ClaimEffectRequest(ClaimFixture)
         Check("first effect claim succeeds", FirstClaim)
         Check("duplicate effect claim rejected", logic{not SecondClaim?})
         WrongOwner := aeonfall_adapter_result{
@@ -114,19 +114,19 @@ aeonfall_activation_transaction_test_device := class(creative_device):
         Check("wrong cancel rejected", logic{not Coordinator.CancelPending("OTHER-OWNER", Instant.AbilityId, "DEV-R1")?})
         AEONFALLRuntimeBus.Pump()
         Sleep(0.05)
-        Check("instant does not latch active", logic{State := AEONFALLAbilityRuntime.GetState["DEV-TRANSACTION-OWNER", Instant.AbilityId], not State.Active?})
-        Check("charged once", logic{State := AEONFALLAbilityRuntime.GetState["DEV-TRANSACTION-OWNER", Instant.AbilityId], State.CurrentCharges = 1})
+        Check("instant does not latch active", logic{State := GetAEONFALLAbilityRuntime().GetState["DEV-TRANSACTION-OWNER", Instant.AbilityId], not State.Active?})
+        Check("charged once", logic{State := GetAEONFALLAbilityRuntime().GetState["DEV-TRANSACTION-OWNER", Instant.AbilityId], State.CurrentCharges = 1})
         Check("no phantom pending", logic{not Coordinator.PendingActivations["DEV-R1"]})
-        Check("resolved claim released", logic{not AEONFALLAbilityRuntime.EffectClaims["DEV-R1"]})
+        Check("resolved claim released", logic{not GetAEONFALLAbilityRuntime().EffectClaims["DEV-R1"]})
         Check("instant reusable", Request(Instant, "DEV-R2"))
         set RejectNext = true
         AEONFALLRuntimeBus.Pump()
         Sleep(0.05)
-        Check("rejection retains charges", logic{State := AEONFALLAbilityRuntime.GetState["DEV-TRANSACTION-OWNER", Instant.AbilityId], State.CurrentCharges = 1})
+        Check("rejection retains charges", logic{State := GetAEONFALLAbilityRuntime().GetState["DEV-TRANSACTION-OWNER", Instant.AbilityId], State.CurrentCharges = 1})
         Check("managed requested", Request(Managed, "DEV-M1"))
         AEONFALLRuntimeBus.Pump()
         Sleep(0.05)
-        Check("managed remains active", logic{State := AEONFALLAbilityRuntime.GetState["DEV-TRANSACTION-OWNER", Managed.AbilityId], State.Active?})
+        Check("managed remains active", logic{State := GetAEONFALLAbilityRuntime().GetState["DEV-TRANSACTION-OWNER", Managed.AbilityId], State.Active?})
         Check("managed blocks duplicate", logic{not Request(Managed, "DEV-M2")?})
         Check("managed ends explicitly", Coordinator.EndActivation("DEV-TRANSACTION-OWNER", Managed.AbilityId))
         Check("managed reusable after end", Request(Managed, "DEV-M3"))
@@ -141,12 +141,12 @@ aeonfall_activation_transaction_test_device := class(creative_device):
         Check("timeout request", Request(Instant, "DEV-T1"))
         Coordinator.TickPendingActivations(5.0)
         Check("timeout clears tracking", logic{not Coordinator.PendingActivations["DEV-T1"]})
-        Check("timeout clears ability pending", logic{State := AEONFALLAbilityRuntime.GetState["DEV-TRANSACTION-OWNER", Instant.AbilityId], not State.Pending?})
-        AEONFALLAbilityRuntime.ClearOwner("DEV-TRANSACTION-OWNER")
+        Check("timeout clears ability pending", logic{State := GetAEONFALLAbilityRuntime().GetState["DEV-TRANSACTION-OWNER", Instant.AbilityId], not State.Pending?})
+        GetAEONFALLAbilityRuntime().ClearOwner("DEV-TRANSACTION-OWNER")
         Print("ACTIVATION RESULT: {Checks} checks, {Failures} failures")
 
     OnEnd<override>():void=
         if (Subscription := Listener?):
             Subscription.Cancel()
         Coordinator.ClearOwnerPending("DEV-TRANSACTION-OWNER")
-        AEONFALLAbilityRuntime.ClearOwner("DEV-TRANSACTION-OWNER")
+        GetAEONFALLAbilityRuntime().ClearOwner("DEV-TRANSACTION-OWNER")

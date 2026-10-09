@@ -1,3 +1,5 @@
+using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 # Session logical spawn-budget runtime.
 # Physical props/entities/NPCs are created by project-bound adapters only after
 # this runtime accepts the request. This service owns caps, lifetimes, and cleanup.
@@ -168,4 +170,15 @@ aeonfall_spawn_runtime := class():
 
         set Records = Updated
 
-AEONFALLSpawnRuntime:aeonfall_spawn_runtime = aeonfall_spawn_runtime{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLSpawnRuntimeSessions:weak_map(session, aeonfall_spawn_runtime) = map{}
+
+GetAEONFALLSpawnRuntime()<transacts>:aeonfall_spawn_runtime=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLSpawnRuntimeSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_spawn_runtime{}
+    if (set AEONFALLSpawnRuntimeSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLSpawnRuntime in its session")

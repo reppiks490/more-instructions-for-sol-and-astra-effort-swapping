@@ -418,7 +418,7 @@ aeonfall_slice_001_combat_bootstrap_device := class(creative_device):
 
     OnBegin<override>()<suspends>:void=
         for (Definition : Slice001StatusDefinitions):
-            Registered := AEONFALLStatusRegistry.Register(Definition)
+            Registered := GetAEONFALLStatusRegistry().Register(Definition)
             if (not Registered?):
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{
@@ -428,7 +428,7 @@ aeonfall_slice_001_combat_bootstrap_device := class(creative_device):
                 )
 
         for (Definition : Slice001AbilityDefinitions):
-            Registered := AEONFALLAbilityRegistry.Register(Definition)
+            Registered := GetAEONFALLAbilityRegistry().Register(Definition)
             if (not Registered?):
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{

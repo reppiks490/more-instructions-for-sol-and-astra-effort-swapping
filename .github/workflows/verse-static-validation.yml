@@ -5,11 +5,17 @@ on:
     paths:
       - "verse/**"
       - "tools/validate_verse_static.py"
+      - "tools/migrate_session_services.py"
+      - "tools/test_session_services.py"
+      - "content/runtime/session_services.json"
       - ".github/workflows/verse-static-validation.yml"
   pull_request:
     paths:
       - "verse/**"
       - "tools/validate_verse_static.py"
+      - "tools/migrate_session_services.py"
+      - "tools/test_session_services.py"
+      - "content/runtime/session_services.json"
       - ".github/workflows/verse-static-validation.yml"
 
 permissions:
@@ -30,3 +36,9 @@ jobs:
 
       - name: Validate Verse source structure
         run: python tools/validate_verse_static.py
+
+      - name: Check session service migration is stable
+        run: python tools/migrate_session_services.py --check
+
+      - name: Test session allocation and source mutation guards
+        run: python tools/test_session_services.py

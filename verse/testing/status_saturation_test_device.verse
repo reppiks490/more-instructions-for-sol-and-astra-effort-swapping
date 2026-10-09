@@ -37,7 +37,7 @@ aeonfall_status_saturation_test_device := class(creative_device):
             UnlockDeliveryResult := aeonfall_unlock_result_channel{StateOverride := option{State}}
         }
         LocalRegistry := aeonfall_status_registry{}
-        Runtime := aeonfall_status_runtime{EventBus := LocalBus, StatusRegistry := LocalRegistry}
+        Runtime := aeonfall_status_runtime{EventBus := LocalBus, StatusRegistryOverride := option{LocalRegistry}}
         Timed := aeonfall_status_definition{
             StatusId := "DEV-SAT-TIMED", BaseDurationSeconds := 0.1,
             StackRule := aeonfall_status_stack_rule.RefreshDuration

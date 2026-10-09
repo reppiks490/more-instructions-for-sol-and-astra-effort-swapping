@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "status": "authored_source_awaiting_uefn_compile_and_session",
+  "default_class_id": "CLS-006",
+  "starter_weapon_id": "WPN-001",
+  "corpse_harvest": {
+    "region_id": "REG-001",
+    "maximum_range_cm": 250,
+    "source": "registered NPC physical elimination",
+    "exclusive_consumption": true,
+    "material_rewards": {
+      "MAT-008": 12,
+      "MAT-003": 4
+    },
+    "faction_reputation": {
+      "FAC-002": 5
+    },
+    "xp": 20,
+    "class_resource": {
+      "class_id": "CLS-006",
+      "resource_id": "corpse_charge",
+      "amount": 20
+    },
+    "weapon_meter": {
+      "weapon_id": "WPN-003",
+      "ability_id": "ABL-009",
+      "amount": 25,
+      "requires_unlocked_and_equipped": true
+    },
+    "persistent_save_failure": "rollback reward and corpse consumption"
+  },
+  "target_selection": {
+    "canonical_ids": [
+      "MON-043",
+      "BOS-005"
+    ],
+    "maximum_range_cm": 2500,
+    "minimum_forward_cosine": 0.94,
+    "lifetime_seconds": 8,
+    "line_of_sight_check": false
+  },
+  "heat_meter": {
+    "weapon_id": "WPN-007",
+    "ability_id": "ABL-006",
+    "npc_canonical_id": "MON-043",
+    "amount_per_positive_damage_event": 10,
+    "minimum_interval_seconds": 0.25,
+    "requires_unlocked_and_equipped": true,
+    "requires_actual_item_holding_gate": true,
+    "enabled_by_default": false
+  },
+  "physical_position_abilities": [
+    {
+      "ability_id": "ABL-001",
+      "adapter_id": "grave_architecture_redoubt_adapter",
+      "spawn_id": "SPAWN-GRAVE-WALL",
+      "max_per_owner": 2,
+      "lifetime_seconds": 30
+    },
+    {
+      "ability_id": "ABL-002",
+      "adapter_id": "grave_architecture_stair_adapter",
+      "spawn_id": "SPAWN-GRAVE-STAIR",
+      "max_per_owner": 2,
+      "lifetime_seconds": 30
+    },
+    {
+      "ability_id": "ABL-010",
+      "adapter_id": "corpse_route_component",
+      "spawn_id": "SPAWN-GRAVE-ROUTE",
+      "max_per_owner": 1,
+      "lifetime_seconds": 20
+    }
+  ]
+}

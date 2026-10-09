@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "id": "UNI-001",
+  "name": "Sovereign Unmaking",
+  "rarity": "Unique Sovereign",
+  "ordinary_unlockable": false,
+  "owner_limit": 1,
+  "owner_provisioning": "injected verified-player authority, fail closed by default",
+  "activation": {
+    "duration_seconds": 180,
+    "duplicate_policy": "reject while active",
+    "stages": [
+      {
+        "at_seconds": 0,
+        "action": "world herald and red-void sky sequence"
+      },
+      {
+        "at_seconds": 2,
+        "action": "regional maelstrom VFX"
+      },
+      {
+        "at_seconds": 4,
+        "action": "regional rifts and finite monstrosity burst"
+      }
+    ]
+  },
+  "quest": {
+    "title": "Tribute or Unmaking",
+    "owner_exempt": true,
+    "late_join_snapshot": true,
+    "tribute": {
+      "material_id": "MAT-008",
+      "amount": 40,
+      "recipient": "verified sovereign",
+      "checked_atomic_two_profile_save": true
+    },
+    "defiance": "defeat sovereign before deadline",
+    "failure": "Unmade, session quest outcome only by default",
+    "late_join_exposure_grace_seconds": 30,
+    "optional_elimination": "requires authored EnableUnmakingElimination AND player explicitly selected Defy",
+    "participant_capacity": 512
+  },
+  "army": {
+    "maximum_commanded": 64,
+    "maximum_allowed": 96,
+    "region_limit": 8,
+    "rift_burst_per_region": 4,
+    "rift_total_limit": 32,
+    "eligible": "registered MON- actors with native fort_character navigatable; protected BOS- encounter actors excluded",
+    "native_team_change": true,
+    "native_navigation": "shared custom behavior follows owner, finite awaits; restore team/navigation when ended",
+    "spawn_timer_required": false,
+    "spawn_at_game_start_required": false
+  },
+  "veil": {
+    "mode_of": "UNI-001",
+    "unlimited_at_will": true,
+    "cooldown_seconds": 0,
+    "resource_cost": 0,
+    "native": "fort_character.Hide / Show",
+    "independent_of_manifestation": true,
+    "authorization_each_toggle": true,
+    "cleanup_on_disconnect_revocation_end": true
+  },
+  "mandatory_editor_bindings": [
+    "verified authority",
+    "three distinct input triggers",
+    "three distinct HUD message devices",
+    "individual nonpersistent tracker",
+    "tribute and defiance buttons",
+    "nonpersistent global HUD timer",
+    "Everyone-audience restore-state red-void sky Level Sequence",
+    "owned per-region maelstrom and rift VFX spawners",
+    "owned NPC spawners with timer spawning disabled, spawn count <=4 and sovereign monster behavior",
+    "normal AI provider with actual patrol anchors"
+  ],
+  "engine_verification": {
+    "compile": "not_run",
+    "session": "not_run",
+    "assets": "author and bind in UEFN"
+  }
+}

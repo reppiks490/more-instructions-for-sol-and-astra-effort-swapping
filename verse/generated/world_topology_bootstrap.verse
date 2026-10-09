@@ -102,9 +102,9 @@ aeonfall_world_topology_bootstrap_device := class(creative_device):
 
     OnBegin<override>()<suspends>:void=
         for (Definition : AEONFALLWorldRegionDefinitions):
-            Registered := AEONFALLRegionRegistry.Register(Definition)
+            Registered := GetAEONFALLRegionRegistry().Register(Definition)
             if (Registered?):
-                Initialized := AEONFALLRegionRuntime.InitializeRegion(Definition.RegionId)
+                Initialized := GetAEONFALLRegionRuntime().InitializeRegion(Definition.RegionId)
                 if (not Initialized?):
                     AEONFALLRuntimeBus.Emit(
                         aeonfall_runtime_event{

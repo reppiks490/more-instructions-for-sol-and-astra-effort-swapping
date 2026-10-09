@@ -35,7 +35,7 @@ aeonfall_status_ability_adapter_device := class(creative_device):
     ):void=
         if (not Supports(Request.AdapterId)?):
             return
-        Claimed := AEONFALLAbilityRuntime.ClaimEffectRequest(Request)
+        Claimed := GetAEONFALLAbilityRuntime().ClaimEffectRequest(Request)
         if (not Claimed?):
             return
 
@@ -43,7 +43,7 @@ aeonfall_status_ability_adapter_device := class(creative_device):
         var ResultCode:string = "ok"
 
         if:
-            AEONFALLActorRegistry.IsRegistered[Request.TargetKey]
+            GetAEONFALLActorRegistry().IsRegistered[Request.TargetKey]
         then:
             set Succeeded = Succeeded
         else:
@@ -52,14 +52,14 @@ aeonfall_status_ability_adapter_device := class(creative_device):
 
         if (Succeeded?):
             if:
-                Definition := AEONFALLAbilityRegistry.Get[Request.AbilityId]
+                Definition := GetAEONFALLAbilityRegistry().Get[Request.AbilityId]
             then:
                 if (Definition.StatusIds.Length <= 0):
                     set Succeeded = false
                     set ResultCode = "ability_has_no_statuses"
 
                 if (Succeeded?):
-                    if (AEONFALLStatusRuntime.ApplyBatch[Request.TargetKey, Definition.StatusIds, Request.OwnerKey, Request.Magnitude]):
+                    if (GetAEONFALLStatusRuntime().ApplyBatch[Request.TargetKey, Definition.StatusIds, Request.OwnerKey, Request.Magnitude]):
                         set Succeeded = true
                     else:
                         set Succeeded = false

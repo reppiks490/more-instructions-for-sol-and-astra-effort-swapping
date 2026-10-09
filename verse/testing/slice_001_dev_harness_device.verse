@@ -49,7 +49,7 @@ aeonfall_slice_001_dev_harness_device := class(creative_device):
         SuccessMessage.Show(Agent)
 
         if:
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
         then:
             AEONFALLRuntimeBus.Emit(
                 aeonfall_runtime_event{
@@ -69,9 +69,9 @@ aeonfall_slice_001_dev_harness_device := class(creative_device):
         ClassId:string
     )<transacts>:void=
         if:
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
         then:
-            Activated := AEONFALLClassRuntime.ActivateClass(
+            Activated := GetAEONFALLClassRuntime().ActivateClass(
                 OwnerKey,
                 ClassId
             )

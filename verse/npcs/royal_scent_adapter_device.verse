@@ -24,12 +24,12 @@ aeonfall_royal_scent_adapter_device := class(creative_device):
     StartMarkedChallenge(
         Request:aeonfall_ability_effect_request, SpeciesId:string
     )<decides><transacts>:void=
-        MarkDefinition := AEONFALLStatusRegistry.Get["STS-005"]
-        Marked := AEONFALLStatusRuntime.ApplyStatus(
+        MarkDefinition := GetAEONFALLStatusRegistry().Get["STS-005"]
+        Marked := GetAEONFALLStatusRuntime().ApplyStatus(
             Request.TargetKey, MarkDefinition, Request.OwnerKey, Request.Magnitude
         )
         Marked?
-        Started := AEONFALLTamingRuntime.StartChallenge(
+        Started := GetAEONFALLTamingRuntime().StartChallenge(
             Request.RequestId, Request.OwnerKey, Request.TargetKey, SpeciesId
         )
         Started?
@@ -37,7 +37,7 @@ aeonfall_royal_scent_adapter_device := class(creative_device):
     OnRequest(Request:aeonfall_ability_effect_request):void=
         if (Request.AdapterId <> "royal_scent_adapter"):
             return
-        Claimed := AEONFALLAbilityRuntime.ClaimEffectRequest(Request)
+        Claimed := GetAEONFALLAbilityRuntime().ClaimEffectRequest(Request)
         if (not Claimed?):
             return
 
@@ -45,20 +45,20 @@ aeonfall_royal_scent_adapter_device := class(creative_device):
         var ResultCode:string = "invalid_target"
 
         if:
-            SpeciesId := AEONFALLActorRegistry.GetCanonicalId[Request.TargetKey]
-            Definition := AEONFALLTamingRegistry.Get[SpeciesId]
+            SpeciesId := GetAEONFALLActorRegistry().GetCanonicalId[Request.TargetKey]
+            Definition := GetAEONFALLTamingRegistry().Get[SpeciesId]
             Definition.AbilityId = Request.AbilityId
-            ClassState := AEONFALLClassRuntime.GetState[Request.OwnerKey]
+            ClassState := GetAEONFALLClassRuntime().GetState[Request.OwnerKey]
             ClassState.ClassId = Definition.RequiredClassId
             ClassState.Active?
-            AEONFALLCompanionRuntime.CanBind(
+            GetAEONFALLCompanionRuntime().CanBind(
                 Request.OwnerKey,
                 Request.TargetKey
             )?
             StartMarkedChallenge[Request, SpeciesId]
         then:
             spawn{
-                AEONFALLTamingRuntime.WatchTimeout(
+                GetAEONFALLTamingRuntime().WatchTimeout(
                     Request.TargetKey, Request.RequestId, Definition.MaxChallengeSeconds
                 )
             }

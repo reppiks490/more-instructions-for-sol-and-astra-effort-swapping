@@ -21,7 +21,7 @@ def validate_sources(sources: dict[str, str]) -> list[str]:
     errors = []
     request = method(sources.get(COORDINATOR, ""), "RequestActivation")
     reserve = request.find("set PendingActivations[RequestId] = Pending")
-    dispatch = request.find("AEONFALLAbilityRuntime.RequestActivation")
+    dispatch = request.find("GetAEONFALLAbilityRuntime().RequestActivation")
     if reserve < 0 or dispatch < 0 or reserve > dispatch:
         errors.append("pending tracking must commit before effect dispatch")
     if "PendingActivations[RequestId]" not in request or 'RequestId = ""' not in request:
@@ -66,7 +66,7 @@ def validate_sources(sources: dict[str, str]) -> list[str]:
     for path in ["verse/combat/status_ability_adapter_device.verse", "verse/combat/composite_ability_adapter_device.verse",
                  "verse/combat/trigger_ability_adapter_device.verse", "verse/npcs/royal_scent_adapter_device.verse"]:
         adapter = sources.get(path, "")
-        if "Claimed := AEONFALLAbilityRuntime.ClaimEffectRequest(Request)" not in adapter or "if (not Claimed?):" not in adapter:
+        if "Claimed := GetAEONFALLAbilityRuntime().ClaimEffectRequest(Request)" not in adapter or "if (not Claimed?):" not in adapter:
             errors.append(path + ": canceled/late requests may execute free effects")
         if "AEONFALLAdapterResultDelivery.Report" not in adapter:
             errors.append(path + ": missing reliable result delivery")

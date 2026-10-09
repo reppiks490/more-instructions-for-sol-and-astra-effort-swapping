@@ -750,7 +750,7 @@ aeonfall_transcendent_authority_bootstrap_device := class(creative_device):
 
     OnBegin<override>()<suspends>:void=
         for (Definition : AEONFALLTranscendentAuthorityDefinitions):
-            Registered := AEONFALLTranscendentAuthorityRegistry.Register(Definition)
+            Registered := GetAEONFALLTranscendentAuthorityRegistry().Register(Definition)
             if (not Registered?):
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{
@@ -760,7 +760,7 @@ aeonfall_transcendent_authority_bootstrap_device := class(creative_device):
                 )
 
         for (Definition : AEONFALLTranscendentAbilityDefinitions):
-            Registered := AEONFALLAbilityRegistry.Register(Definition)
+            Registered := GetAEONFALLAbilityRegistry().Register(Definition)
             if (not Registered?):
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{

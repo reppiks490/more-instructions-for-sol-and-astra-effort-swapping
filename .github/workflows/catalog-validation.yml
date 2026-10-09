@@ -9,6 +9,8 @@ on:
       - "content/world/**"
       - "content/transcendent/**"
       - "content/implementation/**"
+      - "content/sovereign/**"
+      - "content/runtime/**"
       - "verse/**"
       - "verse/generated/**"
       - "schemas/**"
@@ -69,6 +71,8 @@ on:
       - "content/world/**"
       - "content/transcendent/**"
       - "content/implementation/**"
+      - "content/sovereign/**"
+      - "content/runtime/**"
       - "verse/**"
       - "verse/generated/**"
       - "schemas/**"
@@ -91,6 +95,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -210,6 +216,25 @@ jobs:
       - name: Test UEFN source installer and editor call contracts
         run: python -m unittest discover -s tests -v
 
+
+      - name: Validate first playable loop source guards
+        run: python tools/validate_first_playable_loop.py
+
+      - name: Validate player loadout and unique sovereign integration
+        run: |
+          python tools/validate_player_loadout.py
+          python tools/validate_sovereign_unmaking.py
+          python tools/migrate_session_services.py --check
+          python tools/test_session_services.py
+
+      - name: Validate first playable rig and editor MCP contracts
+        run: |
+          python tools/build_first_playable_rig.py
+          git diff --exit-code -- content/vertical_slice/first_playable_rig.json
+          python tools/validate_first_playable_rig.py
+          python tools/test_first_playable_rig.py
+          python tools/test_uefn_mcp_bridge.py
+
       - name: Validate implementation evidence
         run: python tools/validate_implementation_evidence.py
 
@@ -289,3 +314,35 @@ jobs:
         run: |
           python tools/build_status.py
           git diff -- STATUS.md || true
+
+  source-package:
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact validated source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Package and verify committed source
+        run: |
+          python tools/build_source_bundle.py \
+            --output dist/aeonfall-source.zip \
+            --source-checks passed \
+            --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+      - name: Upload source package and checksum
+        uses: actions/upload-artifact@v4
+        with:
+          name: AEONFALL-source-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            dist/aeonfall-source.zip
+            dist/aeonfall-source.zip.sha256
+          if-no-files-found: error
+          retention-days: 30

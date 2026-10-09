@@ -1,3 +1,5 @@
+using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 # Authoritative corpse allocation and consumption. No suspension between check
 # and commit. Range/navigation and physical mutations belong to the adapter.
 aeonfall_horde_runtime := class():
@@ -252,4 +254,15 @@ aeonfall_horde_runtime := class():
                 })
         set Corpses = Kept
 
-AEONFALLHordeRuntime:aeonfall_horde_runtime = aeonfall_horde_runtime{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLHordeRuntimeSessions:weak_map(session, aeonfall_horde_runtime) = map{}
+
+GetAEONFALLHordeRuntime()<transacts>:aeonfall_horde_runtime=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLHordeRuntimeSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_horde_runtime{}
+    if (set AEONFALLHordeRuntimeSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLHordeRuntime in its session")

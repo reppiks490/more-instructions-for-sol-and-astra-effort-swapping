@@ -43,7 +43,7 @@ aeonfall_composite_ability_adapter_device := class(creative_device):
     OnRequest(Request:aeonfall_ability_effect_request):void=
         if (not Supports(Request.AdapterId)?):
             return
-        Claimed := AEONFALLAbilityRuntime.ClaimEffectRequest(Request)
+        Claimed := GetAEONFALLAbilityRuntime().ClaimEffectRequest(Request)
         if (not Claimed?):
             return
         var Succeeded:logic = false
@@ -51,22 +51,22 @@ aeonfall_composite_ability_adapter_device := class(creative_device):
         # Resolve graph recipient before the batch. A missing recipient cannot
         # erase a previously active status or leave a partial new status set.
         if:
-            Definition := AEONFALLAbilityRegistry.Get[Request.AbilityId]
-            OwnerAgent := AEONFALLActorRegistry.GetAgent[Request.OwnerKey]
+            Definition := GetAEONFALLAbilityRegistry().Get[Request.AbilityId]
+            OwnerAgent := GetAEONFALLActorRegistry().GetAgent[Request.OwnerKey]
         then:
             var Recipient:?agent = option{OwnerAgent}
             if (RequireRegisteredTarget?):
-                if (not AEONFALLActorRegistry.IsRegistered[Request.TargetKey]):
+                if (not GetAEONFALLActorRegistry().IsRegistered[Request.TargetKey]):
                     set Recipient = false
             if (TriggerOnTargetAgent?):
-                if (TargetAgent := AEONFALLActorRegistry.GetAgent[Request.TargetKey]):
+                if (TargetAgent := GetAEONFALLActorRegistry().GetAgent[Request.TargetKey]):
                     if (Recipient?):
                         set Recipient = option{TargetAgent}
                 else:
                     set Recipient = false
             if:
                 DispatchAgent := Recipient?
-                AEONFALLStatusRuntime.ApplyBatch[Request.TargetKey, Definition.StatusIds, Request.OwnerKey, Request.Magnitude]
+                GetAEONFALLStatusRuntime().ApplyBatch[Request.TargetKey, Definition.StatusIds, Request.OwnerKey, Request.Magnitude]
             then:
                 TriggerOutput.Trigger(DispatchAgent)
                 set Succeeded = true

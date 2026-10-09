@@ -81,11 +81,13 @@ aeonfall_recipe_service := class():
                         set RequirementsMet = false
 
             if (RequirementsMet?):
-                ProfileService.CommitMaterialAndUnlock(
+                Committed := ProfileService.CommitMaterialAndUnlock(
                     Agent,
                     UpdatedLedger,
                     Recipe.OutputEntityId
                 )
+                if (not Committed?):
+                    return false
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{
                         EventType := "crafting.unlock_committed",
@@ -94,7 +96,7 @@ aeonfall_recipe_service := class():
                     }
                 )
 
-                DeliveryStarted := AEONFALLUnlockDeliveryService.Request(
+                DeliveryStarted := GetAEONFALLUnlockDeliveryService().QueueAfterCommit(
                     Agent,
                     Recipe.OutputEntityId,
                     Recipe.RecipeId

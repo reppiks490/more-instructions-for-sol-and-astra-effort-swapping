@@ -87,11 +87,11 @@ def validate_sources(sources: dict[str, str]) -> list[str]:
             errors.append(f"{path}: physical ability results require the admission/fallback delivery helper")
     delivery_path = "verse/combat/adapter_result_delivery.verse"
     delivery = code_only(sources.get(delivery_path, ""))
-    if "AEONFALLRuntimeBus.TryReportAdapterResult(Result)" not in delivery or "AEONFALLActivationCoordinator.ResolveAdapterResult(Definition, Result)" not in delivery:
+    if "AEONFALLRuntimeBus.TryReportAdapterResult(Result)" not in delivery or "GetAEONFALLActivationCoordinator().ResolveAdapterResult(Definition, Result)" not in delivery:
         errors.append(f"{delivery_path}: rejected result admission requires direct canonical resolution")
     for path in UNLOCK_ADAPTERS:
         adapter = code_only(sources.get(path, ""))
-        if "AEONFALLRuntimeBus.TryReportUnlockDelivery(Result)" not in adapter or "AEONFALLUnlockDeliveryService.Resolve(Result)" not in adapter:
+        if "AEONFALLRuntimeBus.TryReportUnlockDelivery(Result)" not in adapter or "GetAEONFALLUnlockDeliveryService().Resolve(Result)" not in adapter:
             errors.append(f"{path}: rejected unlock result admission requires direct canonical resolution")
     for path, handlers in NATIVE_HANDLERS.items():
         adapter = code_only(sources.get(path, ""))
@@ -121,14 +121,24 @@ def validate_sources(sources: dict[str, str]) -> list[str]:
     if "var AppliedAgents:[string]agent" not in bridge or "Sleep(0.1)" not in method_body(bridge, "ReconcileLoop") or "CleanupIfStale(TargetKey)" not in method_body(bridge, "Reconcile"):
         errors.append(f"{bridge_path}: physical statuses require tracked-agent periodic reconciliation")
     stale = method_body(bridge, "CleanupIfStale")
-    for required in ("AEONFALLStatusRuntime.HasStatus(TargetKey, StatusId)?", "AEONFALLActorRegistry.GetAgent[TargetKey]", "CurrentAgent = TrackedAgent", "Cleanup(TrackedAgent)"):
+    for required in ("GetAEONFALLStatusRuntime().HasStatus(TargetKey, StatusId)?", "GetAEONFALLActorRegistry().GetAgent[TargetKey]", "CurrentAgent = TrackedAgent", "Cleanup(TrackedAgent)"):
         if required not in stale:
             errors.append(f"{bridge_path}: stale cleanup missing {required}")
     applied = method_body(bridge, "ApplyTracked")
-    tracking = applied.find("set AppliedAgents[TargetKey] = TargetAgent")
+    tracking = applied.find("CommitTracking[TargetKey, TargetAgent]")
     triggering = applied.find("ApplyTrigger.Trigger(TargetAgent)")
-    if tracking < 0 or triggering < tracking:
+    committed = method_body(bridge, "CommitTracking")
+    if (tracking < 0 or triggering < tracking or
+        "<decides><transacts>" not in bridge or
+        "set AppliedAgents[TargetKey] = TargetAgent" not in committed or
+        "set AppliedCharacters[TargetKey] = Character" not in committed):
         errors.append(f"{bridge_path}: track each application before applying physical effects")
+    reconcile = method_body(bridge, "Reconcile")
+    for required in ("GetAEONFALLStatusRuntime().StatusesByTarget", "not AppliedCharacters[TargetKey]", "ApplyTracked(TargetKey, TargetAgent)"):
+        if required not in reconcile:
+            errors.append(f"{bridge_path}: discover canonical statuses and replacement characters: {required}")
+    if "CurrentCharacter = TrackedCharacter" not in stale:
+        errors.append(f"{bridge_path}: track physical character generation across respawn")
     if "CleanupAll()" not in method_body(bridge, "OnEnd") or "ReconciliationStopped.Signal()" not in method_body(bridge, "OnEnd"):
         errors.append(f"{bridge_path}: OnEnd must stop reconciliation and clean all tracked effects")
 

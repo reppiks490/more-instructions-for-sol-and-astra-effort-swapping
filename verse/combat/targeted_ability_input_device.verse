@@ -2,7 +2,7 @@ using { /Fortnite.com/Devices }
 using { /Verse.org/Simulation }
 
 # Input bridge for abilities that consume the owner's current actor target.
-# Project-bound targeting logic must set AEONFALLTargetingRuntime first.
+# Project-bound targeting logic must set GetAEONFALLTargetingRuntime() first.
 aeonfall_targeted_ability_input_device := class(creative_device):
 
     @editable
@@ -19,12 +19,12 @@ aeonfall_targeted_ability_input_device := class(creative_device):
 
     OnPressed(Agent:agent)<transacts>:void=
         if:
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
-            Selection := AEONFALLTargetingRuntime.GetSelection[OwnerKey]
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
+            Selection := GetAEONFALLTargetingRuntime().GetSelection[OwnerKey]
         then:
-            Flags := AEONFALLActorContextRuntime.GetFlags(OwnerKey)
+            Flags := GetAEONFALLActorContextRuntime().GetFlags(OwnerKey)
 
-            Activated := AEONFALLAbilityActivationService.TryActivate(
+            Activated := GetAEONFALLAbilityActivationService().TryActivate(
                 Agent,
                 AbilityId,
                 Selection.TargetKey,
@@ -38,7 +38,7 @@ aeonfall_targeted_ability_input_device := class(creative_device):
                 return
 
         if:
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
         then:
             AEONFALLRuntimeBus.Emit(
                 aeonfall_runtime_event{

@@ -37,6 +37,12 @@
       "strategy": "trigger_device_graph",
       "runtime_device": "aeonfall_unlock_delivery_adapter_device",
       "binding_id": "DELIVER_VEH_010"
+    },
+    {
+      "entity_id": "WPN-126",
+      "strategy": "item_granter",
+      "runtime_device": "aeonfall_unlock_item_granter_adapter_device",
+      "binding_id": "GRANT_WPN_126"
     }
   ],
   "rules": [

@@ -1,3 +1,5 @@
+using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 # Canonical region registry generated from content/world/world_topology.json.
 
 aeonfall_region_registry := class():
@@ -40,4 +42,15 @@ aeonfall_region_registry := class():
         Definition := Definitions[RegionId]
         Definition.RegionId <> ""
 
-AEONFALLRegionRegistry:aeonfall_region_registry = aeonfall_region_registry{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLRegionRegistrySessions:weak_map(session, aeonfall_region_registry) = map{}
+
+GetAEONFALLRegionRegistry()<transacts>:aeonfall_region_registry=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLRegionRegistrySessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_region_registry{}
+    if (set AEONFALLRegionRegistrySessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLRegionRegistry in its session")

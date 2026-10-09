@@ -8,8 +8,8 @@ aeonfall_adapter_result_delivery_service := class:
         if (Admitted?):
             return
 
-        if (Definition := AEONFALLAbilityRegistry.Get[Result.AbilityId]):
-            Resolved := AEONFALLActivationCoordinator.ResolveAdapterResult(Definition, Result)
+        if (Definition := GetAEONFALLAbilityRegistry().Get[Result.AbilityId]):
+            Resolved := GetAEONFALLActivationCoordinator().ResolveAdapterResult(Definition, Result)
             if (Resolved?):
                 return
 

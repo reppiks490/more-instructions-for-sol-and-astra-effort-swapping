@@ -1,0 +1,548 @@
+{
+  "schema_version": 1,
+  "rig_id": "AEONFALL-FIRST-PLAYABLE-BOS005",
+  "state": "authored_unplaced",
+  "encounter_id": "BOS-005",
+  "startup_contract": "Dependencies describe readiness requirements, not guaranteed OnBegin ordering. Reward readiness is checked at start.",
+  "native_completion": {
+    "health_source": "owned_fort_character",
+    "defeat_source": "owned_fort_character.EliminatedEvent",
+    "stair_source": "three_distinct_prop_manipulator_device.DestroyedEvent"
+  },
+  "devices": [
+    {
+      "id": "runtime_tick",
+      "type": "aeonfall_runtime_tick_device",
+      "depends_on": [],
+      "source_path": "verse/core/runtime_tick_device.verse"
+    },
+    {
+      "id": "player_identity",
+      "type": "aeonfall_actor_registry_bootstrap_device",
+      "depends_on": [],
+      "source_path": "verse/core/actor_registry_bootstrap_device.verse"
+    },
+    {
+      "id": "player_profile",
+      "type": "aeonfall_profile_bootstrap_device",
+      "depends_on": [],
+      "source_path": "verse/persistence/profile_bootstrap_device.verse"
+    },
+    {
+      "id": "combat_definitions",
+      "type": "aeonfall_slice_001_combat_bootstrap_device",
+      "depends_on": [],
+      "source_path": "verse/generated/slice_001_combat_bootstrap.verse"
+    },
+    {
+      "id": "class_definitions",
+      "type": "aeonfall_slice_001_class_bootstrap_device",
+      "depends_on": [],
+      "source_path": "verse/generated/slice_001_class_bootstrap.verse"
+    },
+    {
+      "id": "encounter_rewards",
+      "type": "aeonfall_slice_001_reward_bootstrap_device",
+      "depends_on": [],
+      "source_path": "verse/generated/slice_001_reward_bootstrap.verse"
+    },
+    {
+      "id": "arena_volume",
+      "type": "volume_device",
+      "depends_on": []
+    },
+    {
+      "id": "encounter_start",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "encounter_fail",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "encounter_complete",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "encounter_failed",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "boss_spawner",
+      "type": "npc_spawner_device",
+      "depends_on": [],
+      "editor_requirements": [
+        "One boss NPC maximum; no game-start or timer spawn; initially disabled.",
+        "Bind a real Character Definition with supported NPC combat/navigation behavior."
+      ]
+    },
+    {
+      "id": "bos005_p1_enter",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "bos005_p1_cleanup",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "bos005_p1_objective_1",
+      "type": "trigger_device",
+      "depends_on": [],
+      "editor_requirements": [
+        "Unlimited activations, zero transmit delay, never driven by a phase-enter output.",
+        "Requires its authored mechanic producer; optional to the native-health victory path."
+      ]
+    },
+    {
+      "id": "bos005_p1_weakpoint_1",
+      "type": "prop_manipulator_device",
+      "depends_on": [],
+      "editor_requirements": [
+        "Affect exactly one authored destructible prop; manipulator regions must not overlap.",
+        "Recreate destroyed props from the phase EnterOutput graph before a repeated run.",
+        "No resource-node substitution; use the actual DestroyedEvent."
+      ],
+      "native_event": "DestroyedEvent",
+      "affected_prop_count": 1
+    },
+    {
+      "id": "bos005_p1_hazard_1_enable",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "bos005_p1_hazard_1_disable",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "bos005_p1_hazard_1_damage",
+      "type": "damage_volume_device",
+      "depends_on": [],
+      "editor_requirements": [
+        "Encounter-owned volume; initial state disabled; finite authored damage."
+      ]
+    },
+    {
+      "id": "bos005_p1_hazard_2_enable",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "bos005_p1_hazard_2_disable",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "bos005_p1_hazard_2_damage",
+      "type": "damage_volume_device",
+      "depends_on": [],
+      "editor_requirements": [
+        "Encounter-owned volume; initial state disabled; finite authored damage."
+      ]
+    },
+    {
+      "id": "bos005_p1_adds_1",
+      "type": "npc_spawner_device",
+      "depends_on": [],
+      "editor_requirements": [
+        "Separate from the boss and every ambient/invasion spawner.",
+        "Initially disabled; finite timer-driven spawn batch; phase cleanup despawns owned adds."
+      ]
+    },
+    {
+      "id": "bos005_p2_enter",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "bos005_p2_cleanup",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "bos005_p2_objective_1",
+      "type": "prop_manipulator_device",
+      "depends_on": [],
+      "editor_requirements": [
+        "Affect exactly one authored destructible prop; manipulator regions must not overlap.",
+        "Recreate destroyed props from the phase EnterOutput graph before a repeated run.",
+        "No resource-node substitution; use the actual DestroyedEvent."
+      ],
+      "native_event": "DestroyedEvent",
+      "affected_prop_count": 1
+    },
+    {
+      "id": "bos005_p2_objective_2",
+      "type": "prop_manipulator_device",
+      "depends_on": [],
+      "editor_requirements": [
+        "Affect exactly one authored destructible prop; manipulator regions must not overlap.",
+        "Recreate destroyed props from the phase EnterOutput graph before a repeated run.",
+        "No resource-node substitution; use the actual DestroyedEvent."
+      ],
+      "native_event": "DestroyedEvent",
+      "affected_prop_count": 1
+    },
+    {
+      "id": "bos005_p2_objective_3",
+      "type": "prop_manipulator_device",
+      "depends_on": [],
+      "editor_requirements": [
+        "Affect exactly one authored destructible prop; manipulator regions must not overlap.",
+        "Recreate destroyed props from the phase EnterOutput graph before a repeated run.",
+        "No resource-node substitution; use the actual DestroyedEvent."
+      ],
+      "native_event": "DestroyedEvent",
+      "affected_prop_count": 1
+    },
+    {
+      "id": "bos005_p2_weakpoint_1",
+      "type": "prop_manipulator_device",
+      "depends_on": [],
+      "editor_requirements": [
+        "Affect exactly one authored destructible prop; manipulator regions must not overlap.",
+        "Recreate destroyed props from the phase EnterOutput graph before a repeated run.",
+        "No resource-node substitution; use the actual DestroyedEvent."
+      ],
+      "native_event": "DestroyedEvent",
+      "affected_prop_count": 1
+    },
+    {
+      "id": "bos005_p2_hazard_1_enable",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "bos005_p2_hazard_1_disable",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "bos005_p2_hazard_1_damage",
+      "type": "damage_volume_device",
+      "depends_on": [],
+      "editor_requirements": [
+        "Encounter-owned volume; initial state disabled; finite authored damage."
+      ]
+    },
+    {
+      "id": "bos005_p2_hazard_2_enable",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "bos005_p2_hazard_2_disable",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "bos005_p2_hazard_2_damage",
+      "type": "damage_volume_device",
+      "depends_on": [],
+      "editor_requirements": [
+        "Encounter-owned volume; initial state disabled; finite authored damage."
+      ]
+    },
+    {
+      "id": "bos005_p2_adds_1",
+      "type": "npc_spawner_device",
+      "depends_on": [],
+      "editor_requirements": [
+        "Separate from the boss and every ambient/invasion spawner.",
+        "Initially disabled; finite timer-driven spawn batch; phase cleanup despawns owned adds."
+      ]
+    },
+    {
+      "id": "bos005_p3_enter",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "bos005_p3_cleanup",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "bos005_p3_objective_1",
+      "type": "trigger_device",
+      "depends_on": [],
+      "editor_requirements": [
+        "Unlimited activations, zero transmit delay, never driven by a phase-enter output.",
+        "Requires its authored mechanic producer; optional to the native-health victory path."
+      ]
+    },
+    {
+      "id": "bos005_p3_weakpoint_1",
+      "type": "prop_manipulator_device",
+      "depends_on": [],
+      "editor_requirements": [
+        "Affect exactly one authored destructible prop; manipulator regions must not overlap.",
+        "Recreate destroyed props from the phase EnterOutput graph before a repeated run.",
+        "No resource-node substitution; use the actual DestroyedEvent."
+      ],
+      "native_event": "DestroyedEvent",
+      "affected_prop_count": 1
+    },
+    {
+      "id": "bos005_p3_weakpoint_2",
+      "type": "prop_manipulator_device",
+      "depends_on": [],
+      "editor_requirements": [
+        "Affect exactly one authored destructible prop; manipulator regions must not overlap.",
+        "Recreate destroyed props from the phase EnterOutput graph before a repeated run.",
+        "No resource-node substitution; use the actual DestroyedEvent."
+      ],
+      "native_event": "DestroyedEvent",
+      "affected_prop_count": 1
+    },
+    {
+      "id": "bos005_p3_hazard_1_enable",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "bos005_p3_hazard_1_disable",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "bos005_p3_hazard_1_damage",
+      "type": "damage_volume_device",
+      "depends_on": [],
+      "editor_requirements": [
+        "Encounter-owned volume; initial state disabled; finite authored damage."
+      ]
+    },
+    {
+      "id": "bos005_p3_hazard_2_enable",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "bos005_p3_hazard_2_disable",
+      "type": "trigger_device",
+      "depends_on": []
+    },
+    {
+      "id": "bos005_p3_hazard_2_damage",
+      "type": "damage_volume_device",
+      "depends_on": [],
+      "editor_requirements": [
+        "Encounter-owned volume; initial state disabled; finite authored damage."
+      ]
+    },
+    {
+      "id": "bos005_p3_adds_1",
+      "type": "npc_spawner_device",
+      "depends_on": [],
+      "editor_requirements": [
+        "Separate from the boss and every ambient/invasion spawner.",
+        "Initially disabled; finite timer-driven spawn batch; phase cleanup despawns owned adds."
+      ]
+    },
+    {
+      "id": "bos005_director",
+      "type": "aeonfall_encounter_director_device",
+      "depends_on": [
+        "runtime_tick",
+        "player_identity",
+        "player_profile",
+        "combat_definitions",
+        "class_definitions",
+        "encounter_rewards"
+      ],
+      "editable_values": {
+        "EncounterId": "BOS-005",
+        "BossSpawnTimeoutSeconds": 5.0
+      },
+      "bindings": {
+        "StartInput": "encounter_start",
+        "FailInput": "encounter_fail",
+        "ParticipantVolume": "arena_volume",
+        "BossSpawners": [
+          "boss_spawner"
+        ],
+        "CompletedOutput": "encounter_complete",
+        "FailedOutput": "encounter_failed",
+        "Phases": [
+          {
+            "phase_id": "BOS005-P1-FRESH-MORTAR",
+            "inputs": [
+              {
+                "kind": "Objective",
+                "canonical_id": "OBJ-BOS005-DENY-CORPSES",
+                "source": "TriggerGraph",
+                "device_ref": "bos005_p1_objective_1"
+              },
+              {
+                "kind": "WeakPoint",
+                "canonical_id": "WP-BOS005-RED-HAND",
+                "source": "PropDestroyed",
+                "device_ref": "bos005_p1_weakpoint_1"
+              }
+            ],
+            "hazards": [
+              {
+                "canonical_id": "HZ-BOS005-RED-WALL",
+                "damage_volume_refs": [
+                  "bos005_p1_hazard_1_damage"
+                ],
+                "enable_ref": "bos005_p1_hazard_1_enable",
+                "disable_ref": "bos005_p1_hazard_1_disable"
+              },
+              {
+                "canonical_id": "HZ-BOS005-MORTAR-FIST",
+                "damage_volume_refs": [
+                  "bos005_p1_hazard_2_damage"
+                ],
+                "enable_ref": "bos005_p1_hazard_2_enable",
+                "disable_ref": "bos005_p1_hazard_2_disable"
+              }
+            ],
+            "spawn_groups": [
+              {
+                "canonical_id": "SG-BOS005-BUILDERS",
+                "spawner_refs": [
+                  "bos005_p1_adds_1"
+                ],
+                "maximum_live": 12
+              }
+            ],
+            "enter_ref": "bos005_p1_enter",
+            "cleanup_ref": "bos005_p1_cleanup"
+          },
+          {
+            "phase_id": "BOS005-P2-DEADMANS-STAIR",
+            "inputs": [
+              {
+                "kind": "Objective",
+                "canonical_id": "OBJ-BOS005-BREAK-STAIR-A",
+                "source": "PropDestroyed",
+                "device_ref": "bos005_p2_objective_1"
+              },
+              {
+                "kind": "Objective",
+                "canonical_id": "OBJ-BOS005-BREAK-STAIR-B",
+                "source": "PropDestroyed",
+                "device_ref": "bos005_p2_objective_2"
+              },
+              {
+                "kind": "Objective",
+                "canonical_id": "OBJ-BOS005-BREAK-STAIR-C",
+                "source": "PropDestroyed",
+                "device_ref": "bos005_p2_objective_3"
+              },
+              {
+                "kind": "WeakPoint",
+                "canonical_id": "WP-BOS005-TOOL-ARMS",
+                "source": "PropDestroyed",
+                "device_ref": "bos005_p2_weakpoint_1"
+              }
+            ],
+            "hazards": [
+              {
+                "canonical_id": "HZ-BOS005-STAIR-LANES",
+                "damage_volume_refs": [
+                  "bos005_p2_hazard_1_damage"
+                ],
+                "enable_ref": "bos005_p2_hazard_1_enable",
+                "disable_ref": "bos005_p2_hazard_1_disable"
+              },
+              {
+                "canonical_id": "HZ-BOS005-HARDENED-WALLS",
+                "damage_volume_refs": [
+                  "bos005_p2_hazard_2_damage"
+                ],
+                "enable_ref": "bos005_p2_hazard_2_enable",
+                "disable_ref": "bos005_p2_hazard_2_disable"
+              }
+            ],
+            "spawn_groups": [
+              {
+                "canonical_id": "SG-BOS005-REINFORCEMENTS",
+                "spawner_refs": [
+                  "bos005_p2_adds_1"
+                ],
+                "maximum_live": 12
+              }
+            ],
+            "enter_ref": "bos005_p2_enter",
+            "cleanup_ref": "bos005_p2_cleanup"
+          },
+          {
+            "phase_id": "BOS005-P3-LAST-WALL",
+            "inputs": [
+              {
+                "kind": "Objective",
+                "canonical_id": "OBJ-BOS005-PUNISH-WHISTLE",
+                "source": "TriggerGraph",
+                "device_ref": "bos005_p3_objective_1"
+              },
+              {
+                "kind": "WeakPoint",
+                "canonical_id": "WP-BOS005-RED-HAND",
+                "source": "PropDestroyed",
+                "device_ref": "bos005_p3_weakpoint_1"
+              },
+              {
+                "kind": "WeakPoint",
+                "canonical_id": "WP-BOS005-WHISTLE",
+                "source": "PropDestroyed",
+                "device_ref": "bos005_p3_weakpoint_2"
+              }
+            ],
+            "hazards": [
+              {
+                "canonical_id": "HZ-BOS005-LAST-WALL",
+                "damage_volume_refs": [
+                  "bos005_p3_hazard_1_damage"
+                ],
+                "enable_ref": "bos005_p3_hazard_1_enable",
+                "disable_ref": "bos005_p3_hazard_1_disable"
+              },
+              {
+                "canonical_id": "HZ-BOS005-MORTAR-FIST",
+                "damage_volume_refs": [
+                  "bos005_p3_hazard_2_damage"
+                ],
+                "enable_ref": "bos005_p3_hazard_2_enable",
+                "disable_ref": "bos005_p3_hazard_2_disable"
+              }
+            ],
+            "spawn_groups": [
+              {
+                "canonical_id": "SG-BOS005-FINAL-BUILDERS",
+                "spawner_refs": [
+                  "bos005_p3_adds_1"
+                ],
+                "maximum_live": 12
+              }
+            ],
+            "enter_ref": "bos005_p3_enter",
+            "cleanup_ref": "bos005_p3_cleanup"
+          }
+        ]
+      },
+      "source_path": "verse/bosses/encounter_director_device.verse"
+    }
+  ],
+  "pending_editor_requirements": [
+    "Create/open an actual Windows UEFN project.",
+    "Place these devices using their live editor schemas and bind real references.",
+    "Create Character Definitions, authored destructible props, HUD/telegraph graphs and finite arena failure rule.",
+    "Bound optional trigger mechanics require real producer graphs; no fake boss-health or defeat inputs.",
+    "Compile Verse, save the placed map, Launch Session and record native health/three-anchor/elimination acceptance."
+  ],
+  "execution_evidence": {
+    "uefn_compile": "not_run",
+    "device_placement": "not_run",
+    "launch_session": "not_run"
+  }
+}

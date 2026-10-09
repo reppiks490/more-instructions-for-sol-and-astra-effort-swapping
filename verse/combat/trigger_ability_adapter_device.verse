@@ -35,7 +35,7 @@ aeonfall_trigger_ability_adapter_device := class(creative_device):
     OnRequest(Request:aeonfall_ability_effect_request):void=
         if (Request.AdapterId <> AdapterId):
             return
-        Claimed := AEONFALLAbilityRuntime.ClaimEffectRequest(Request)
+        Claimed := GetAEONFALLAbilityRuntime().ClaimEffectRequest(Request)
         if (not Claimed?):
             return
 
@@ -47,14 +47,14 @@ aeonfall_trigger_ability_adapter_device := class(creative_device):
             set ResultCode = "adapter_id_empty"
 
         if:
-            OwnerAgent := AEONFALLActorRegistry.GetAgent[Request.OwnerKey]
+            OwnerAgent := GetAEONFALLActorRegistry().GetAgent[Request.OwnerKey]
         then:
             if:
                 Succeeded?
                 RequireRegisteredTarget?
             then:
                 if:
-                    AEONFALLActorRegistry.IsRegistered[Request.TargetKey]
+                    GetAEONFALLActorRegistry().IsRegistered[Request.TargetKey]
                 then:
                     set Succeeded = Succeeded
                 else:
@@ -64,7 +64,7 @@ aeonfall_trigger_ability_adapter_device := class(creative_device):
             if (Succeeded?):
                 if (UseTargetAgent?):
                     if:
-                        TargetAgent := AEONFALLActorRegistry.GetAgent[Request.TargetKey]
+                        TargetAgent := GetAEONFALLActorRegistry().GetAgent[Request.TargetKey]
                     then:
                         TriggerOutput.Trigger(TargetAgent)
                     else:

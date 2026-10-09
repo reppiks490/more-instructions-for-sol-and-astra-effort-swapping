@@ -8,8 +8,8 @@ ROOT = Path(__file__).resolve().parents[1]
 def main() -> int:
     errors = []
     required = {
-        "verse/core/runtime_tick_device.verse": ["AEONFALLHordeRuntime.TickAll(Interval)"],
-        "verse/core/actor_registry.verse": ["AEONFALLHordeRuntime.RemoveBrood(RuntimeKey)"],
+        "verse/core/runtime_tick_device.verse": ["GetAEONFALLHordeRuntime().TickAll(Interval)"],
+        "verse/core/actor_registry.verse": ["GetAEONFALLHordeRuntime().RemoveBrood(RuntimeKey)"],
         "verse/npcs/horde_runtime.verse": [
             "Corpse.RegionId = Old.RegionId", "Corpse.RemainingSeconds > 0.0",
             "Corpses.Length < Policy.MaxCorpses", "Brood.Length < Policy.MaxBrood",
@@ -25,7 +25,7 @@ def main() -> int:
             "Range <= BestDistance", "Character.IsActive[]", "player[Agent]",
             "Handled:logic = false", "set Handled = true", "Subscription.Cancel()",
             "StopEvent.Signal()", "StopEvent.Await()", "race:",
-            "AEONFALLHordeRuntime.ClearRegion(RegionId)", "FindNearest",
+            "GetAEONFALLHordeRuntime().ClearRegion(RegionId)", "FindNearest",
             "GorgedEffects.Trigger(Agent)", "RemadeEffects.Trigger(Agent)",
             "ApostateEffects.Trigger(Agent)", "CrownedEffects.Trigger(Agent)",
         ],
@@ -37,7 +37,7 @@ def main() -> int:
                 errors.append(f"{path}: missing integration guard {token}")
     adapter = (ROOT / "verse/npcs/horde_ecology_adapter_device.verse").read_text()
     prune = adapter.split("    PruneListeners():void=", 1)[-1].split("    OnEnd", 1)[0]
-    for token in ["Character.IsActive[]", "AEONFALLHordeRuntime.RemoveBrood(Key)", "ReleaseOwnedActor(Key)"]:
+    for token in ["Character.IsActive[]", "GetAEONFALLHordeRuntime().RemoveBrood(Key)", "ReleaseOwnedActor(Key)"]:
         if token not in prune:
             errors.append("horde despawn cleanup is missing: " + token)
     harness = (ROOT / "verse/testing/horde_runtime_test_device.verse").read_text()

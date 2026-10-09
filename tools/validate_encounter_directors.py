@@ -124,10 +124,21 @@ def main() -> int:
         "Subscription.Cancel()", "Player.IsActive[]", "ParticipantVolume.GetAgentsInVolume()",
         "Target.BossHealthPercent = 0, not Target.BossDefeat?", "encounter.director_reward_not_ready",
         "not PendingBossElimination?", "ExistingAgent = Agent",
+        "GetPhysicalDevices()<decides><transacts>", "Device.IsValid[]", "not Devices.Find[Device]",
+        "OtherDevices.Find[Device]", "AcquireDirectorLease()", "ReleaseDirectorLease()",
+        "AEONFALLEncounterDirectorLeases:weak_map(session", "encounter.director_duplicate_owner",
+        "Input.DestructionSource.DestroyedEvent.Subscribe", "ParticipantVolume.GetAgentsInVolume().Find[Instigator]",
+        "OnNativeDestruction", "if (not OwnsLease?):",
     )
     for token in required:
         if token not in source:
             errors.append(f"director is missing integration guard: {token}")
+    begin = source.split("\n    OnBegin<override>", 1)[1].split("\n    Report(", 1)[0]
+    if not (begin.index("ValidateBindings(Definition)") < begin.index("AcquireDirectorLease()") < begin.index("DisableAll(false)")):
+        errors.append("binding validation and physical ownership must precede all initial cleanup")
+    end = source.split("\n    OnEnd<override>", 1)[1]
+    if not (end.index("if (not OwnsLease?):") < end.index("RunStopped.Signal()") < end.index("ReleaseDirectorLease()")):
+        errors.append("rejected directors must not cancel, clear participants or manipulate another owner's devices")
     finish = source.split("\n    Finish(", 1)[1].split("\n    OnEnd", 1)[0]
     if not (finish.index("Runtime.Stop()") < finish.index("CancelBossSubscriptions()") < finish.index("BossService.CompleteEncounter") < finish.index("ExitPhase(CurrentIndex, true)")):
         errors.append("terminal ingress/cancellation/reward/cleanup order changed")

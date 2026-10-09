@@ -43,7 +43,7 @@ aeonfall_region_001_faction_conflict_bootstrap_device := class(creative_device):
         var Ready:logic = false
 
         for (Attempt := 1..20):
-            if (AEONFALLRegionRegistry.IsRegistered["REG-001"]):
+            if (GetAEONFALLRegionRegistry().IsRegistered["REG-001"]):
                 set Ready = true
                 break
             Sleep(0.25)
@@ -58,7 +58,7 @@ aeonfall_region_001_faction_conflict_bootstrap_device := class(creative_device):
             return
 
         for (Definition : Region001FactionConflictDefinitions):
-            Registered := AEONFALLFactionConflictRegistry.Register(Definition)
+            Registered := GetAEONFALLFactionConflictRegistry().Register(Definition)
             if (not Registered?):
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{

@@ -1,3 +1,5 @@
+using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 aeonfall_faction_conflict_registry := class():
 
     var Definitions:[string]aeonfall_faction_conflict_definition = map{}
@@ -12,7 +14,7 @@ aeonfall_faction_conflict_registry := class():
             Definition.VictoryScore > 0
             Definition.MinHostilityTier >= 0
             Definition.MinHostilityTier <= 5
-            AEONFALLRegionRegistry.IsRegistered[Definition.RegionId]
+            GetAEONFALLRegionRegistry().IsRegistered[Definition.RegionId]
         then:
             if:
                 Existing := Definitions[Definition.ConflictId]
@@ -37,5 +39,15 @@ aeonfall_faction_conflict_registry := class():
     Get(ConflictId:string)<decides><transacts>:aeonfall_faction_conflict_definition=
         Definitions[ConflictId]
 
-AEONFALLFactionConflictRegistry:aeonfall_faction_conflict_registry =
-    aeonfall_faction_conflict_registry{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLFactionConflictRegistrySessions:weak_map(session, aeonfall_faction_conflict_registry) = map{}
+
+GetAEONFALLFactionConflictRegistry()<transacts>:aeonfall_faction_conflict_registry=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLFactionConflictRegistrySessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_faction_conflict_registry{}
+    if (set AEONFALLFactionConflictRegistrySessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLFactionConflictRegistry in its session")

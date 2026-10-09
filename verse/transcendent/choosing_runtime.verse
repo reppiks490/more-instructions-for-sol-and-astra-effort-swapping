@@ -1,3 +1,4 @@
+using { /Verse.org/Verse }
 using { /Verse.org/Simulation }
 
 aeonfall_choosing_service := class():
@@ -21,7 +22,7 @@ aeonfall_choosing_service := class():
 
     Start(Agent:agent)<transacts>:logic=
         if:
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
             GateService.CanEnterChoosing[Agent]
         then:
             if:
@@ -57,7 +58,7 @@ aeonfall_choosing_service := class():
         ObjectiveId:string
     )<transacts>:logic=
         if:
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
             Old := StatesByOwner[OwnerKey]
             Old.Active?
             Definition.ObjectiveIds.Find[ObjectiveId]
@@ -94,8 +95,6 @@ aeonfall_choosing_service := class():
                     UpdatedObjectives.Length >= Definition.ObjectiveIds.Length
                 then:
                     Completed := Complete(Agent)
-                    if (Completed?):
-                        Completed = true
 
                 return true
 
@@ -103,7 +102,7 @@ aeonfall_choosing_service := class():
 
     Complete(Agent:agent)<transacts>:logic=
         if:
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
             Old := StatesByOwner[OwnerKey]
             Old.Active?
             Old.CompletedObjectiveIds.Length >= Definition.ObjectiveIds.Length
@@ -171,8 +170,6 @@ aeonfall_choosing_service := class():
             OwnerKey,
             "owner_unregistered"
         )
-        if (Failed?):
-            Failed = true
 
         var Updated:[string]aeonfall_choosing_runtime_state = map{}
         for (StoredOwner -> State : StatesByOwner):
@@ -232,8 +229,16 @@ aeonfall_choosing_service := class():
                 OwnerKey,
                 "time_limit"
             )
-            if (Failed?):
-                Failed = true
 
-AEONFALLChoosingRuntime:aeonfall_choosing_service =
-    aeonfall_choosing_service{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLChoosingRuntimeSessions:weak_map(session, aeonfall_choosing_service) = map{}
+
+GetAEONFALLChoosingRuntime()<transacts>:aeonfall_choosing_service=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLChoosingRuntimeSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_choosing_service{}
+    if (set AEONFALLChoosingRuntimeSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLChoosingRuntime in its session")

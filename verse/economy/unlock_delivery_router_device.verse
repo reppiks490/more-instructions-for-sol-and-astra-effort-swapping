@@ -18,7 +18,7 @@ aeonfall_unlock_delivery_router_device := class(creative_device):
         set BusSubscription = false
 
     OnResult(Result:aeonfall_unlock_delivery_result)<transacts>:void=
-        Resolved := AEONFALLUnlockDeliveryService.Resolve(Result)
+        Resolved := GetAEONFALLUnlockDeliveryService().Resolve(Result)
 
         if (not Resolved?):
             AEONFALLRuntimeBus.Emit(

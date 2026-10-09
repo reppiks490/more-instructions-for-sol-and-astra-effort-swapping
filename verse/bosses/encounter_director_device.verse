@@ -11,7 +11,11 @@ aeonfall_encounter_input_binding := class<concrete>:
     @editable
     CanonicalId:string = ""
     @editable
+    Source:aeonfall_encounter_input_source = aeonfall_encounter_input_source.TriggerGraph
+    @editable
     Input:trigger_device = trigger_device{}
+    @editable
+    DestructionSource:prop_manipulator_device = prop_manipulator_device{}
 
 aeonfall_encounter_hazard_binding := class<concrete>:
     @editable
@@ -52,6 +56,9 @@ aeonfall_encounter_input_listener := class:
     OnTriggered(Instigator:?agent):void=
         Director.OnPhaseInput(PhaseIndex, Kind, CanonicalId)
 
+    OnDestroyed(Instigator:agent):void=
+        Director.OnNativeDestruction(PhaseIndex, Kind, CanonicalId, Instigator)
+
 aeonfall_encounter_boss_listener := class:
     Director:aeonfall_encounter_director_device
     Generation:int
@@ -61,6 +68,10 @@ aeonfall_encounter_boss_listener := class:
 
     OnEliminated(Result:elimination_result):void=
         Director.OnBossEliminated(Generation)
+
+# Empty session maps allocate no mutable class instance during module loading.
+# A rejected duplicate must not touch any physical devices or participation.
+var AEONFALLEncounterDirectorLeases:weak_map(session, [string]aeonfall_encounter_director_device) = map{}
 
 # One placed director per canonical encounter ID. All referenced physical
 # devices must be encounter-owned, never shared with ambient/invasion spawners.
@@ -98,11 +109,10 @@ aeonfall_encounter_director_device := class(creative_device):
     var Generation:int = 0
     var PendingBossElimination:?int = false
     var PendingFailure:logic = false
+    var OwnsLease:logic = false
     RunStopped:event() = event(){}
 
     OnBegin<override>()<suspends>:void=
-        # Initial cleanup clears hazards without firing phase cleanup graphs.
-        DisableAll(false)
         if (Definition := GetSlice001EncounterDirector[EncounterId]):
             Valid := ValidateBindings(Definition)
             if (not Valid?):
@@ -112,6 +122,15 @@ aeonfall_encounter_director_device := class(creative_device):
         else:
             Report("encounter.director_unknown_id")
             return
+
+        # Validate and lease first: even initial cleanup can despawn a shared
+        # boss or disable another director's live arena.
+        Leased := AcquireDirectorLease()
+        if (not Leased?):
+            Report("encounter.director_duplicate_owner")
+            return
+        set OwnsLease = true
+        DisableAll(false)
 
         set Subscriptions = array{
             StartInput.TriggeredEvent.Subscribe(OnStart),
@@ -125,7 +144,10 @@ aeonfall_encounter_director_device := class(creative_device):
                     Director := Self, PhaseIndex := Index,
                     Kind := Input.Kind, CanonicalId := Input.CanonicalId
                 }
-                Subscription := Input.Input.TriggeredEvent.Subscribe(Listener.OnTriggered)
+                Subscription := if (Input.Source = aeonfall_encounter_input_source.PropDestroyed):
+                    Input.DestructionSource.DestroyedEvent.Subscribe(Listener.OnDestroyed)
+                else:
+                    Input.Input.TriggeredEvent.Subscribe(Listener.OnTriggered)
                 set Subscriptions += array{Subscription}
         for (Spawner : BossSpawners):
             set Subscriptions += array{Spawner.SpawnedEvent.Subscribe(OnBossSpawned)}
@@ -136,6 +158,8 @@ aeonfall_encounter_director_device := class(creative_device):
         AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{EventType := EventType, SourceId := EncounterId})
 
     ValidateBindings(Definition:aeonfall_encounter_director_contract)<transacts>:logic=
+        if (not GetPhysicalDevices[]):
+            return false
         if (Phases.Length <> Definition.ProgressionPhases.Length):
             return false
         if (Definition.Kind = aeonfall_encounter_kind.Boss, BossSpawners.Length <> 1):
@@ -187,6 +211,77 @@ aeonfall_encounter_director_device := class(creative_device):
                 return false
         true
 
+    # Every active role has one valid physical object. In particular, one stair
+    # trigger cannot credit all three anchors, input/output feedback is rejected,
+    # and phase add cleanup cannot despawn the boss through a shared spawner.
+    GetPhysicalDevices()<decides><transacts>:[]creative_object=
+        var Devices:[]creative_object = array{}
+        set Devices = AddPhysicalDevice[Devices, ParticipantVolume]
+        set Devices = AddPhysicalDevice[Devices, StartInput]
+        set Devices = AddPhysicalDevice[Devices, FailInput]
+        set Devices = AddPhysicalDevice[Devices, CompletedOutput]
+        set Devices = AddPhysicalDevice[Devices, FailedOutput]
+        for (Spawner : BossSpawners):
+            set Devices = AddPhysicalDevice[Devices, Spawner]
+        for (Binding : Phases):
+            set Devices = AddPhysicalDevice[Devices, Binding.EnterOutput]
+            set Devices = AddPhysicalDevice[Devices, Binding.CleanupOutput]
+            for (Input : Binding.Inputs):
+                if (Input.Source = aeonfall_encounter_input_source.PropDestroyed):
+                    set Devices = AddPhysicalDevice[Devices, Input.DestructionSource]
+                else:
+                    set Devices = AddPhysicalDevice[Devices, Input.Input]
+            for (Hazard : Binding.Hazards):
+                set Devices = AddPhysicalDevice[Devices, Hazard.EnableOutput]
+                set Devices = AddPhysicalDevice[Devices, Hazard.DisableOutput]
+                for (Volume : Hazard.DamageVolumes):
+                    set Devices = AddPhysicalDevice[Devices, Volume]
+            for (Group : Binding.SpawnGroups):
+                for (Spawner : Group.Spawners):
+                    set Devices = AddPhysicalDevice[Devices, Spawner]
+        Devices
+
+    AddPhysicalDevice(Devices:[]creative_object, Device:creative_object)<decides><transacts>:[]creative_object=
+        Device.IsValid[]
+        not Devices.Find[Device]
+        Devices + array{Device}
+
+    AcquireDirectorLease()<transacts>:logic=
+        if (Devices := GetPhysicalDevices[]):
+            var Owners:[string]aeonfall_encounter_director_device = map{}
+            if (Current := AEONFALLEncounterDirectorLeases[GetSession()]):
+                set Owners = Current
+            if (Owners[EncounterId] or Owners.Length >= 128):
+                return false
+            for (Id -> Other : Owners):
+                if (OtherDevices := Other.GetPhysicalDevices[]):
+                    for (Device : Devices):
+                        if (OtherDevices.Find[Device]):
+                            return false
+                else:
+                    # An owner with stale physical references must finish its
+                    # own cleanup before another director may borrow them.
+                    return false
+            if:
+                set Owners[EncounterId] = Self
+                set AEONFALLEncounterDirectorLeases[GetSession()] = Owners
+            then:
+                return true
+        false
+
+    ReleaseDirectorLease()<transacts>:logic=
+        if (Owners := AEONFALLEncounterDirectorLeases[GetSession()], Owners[EncounterId] = Self):
+            var Kept:[string]aeonfall_encounter_director_device = map{}
+            var ReadyToRelease:logic = true
+            for (Id -> Other : Owners, Id <> EncounterId):
+                if (set Kept[Id] = Other):
+                    set ReadyToRelease = ReadyToRelease
+                else:
+                    set ReadyToRelease = false
+            if (ReadyToRelease?, set AEONFALLEncounterDirectorLeases[GetSession()] = Kept):
+                return true
+        false
+
     SameIds(Actual:[]string, Expected:[]string)<transacts>:logic=
         if (Actual.Length <> Expected.Length):
             return false
@@ -196,7 +291,7 @@ aeonfall_encounter_director_device := class(creative_device):
         true
 
     RewardReady(Definition:aeonfall_encounter_director_contract)<transacts>:logic=
-        if (Reward := AEONFALLEncounterRewardRegistry.Get[EncounterId], Reward.FirstClearOnly?):
+        if (Reward := GetAEONFALLEncounterRewardRegistry().Get[EncounterId], Reward.FirstClearOnly?):
             if (Definition.Kind = aeonfall_encounter_kind.Boss, Reward.Kind = aeonfall_encounter_reward_kind.Boss):
                 return true
             if (Definition.Kind = aeonfall_encounter_kind.WorldEvent, Reward.Kind = aeonfall_encounter_reward_kind.WorldEvent):
@@ -281,6 +376,19 @@ aeonfall_encounter_director_device := class(creative_device):
             ReleaseBusy()
             EvaluateBossHealth()
 
+    OnNativeDestruction(Index:int, Kind:aeonfall_encounter_input_kind, Id:string, Instigator:agent):void=
+        if:
+            Ready?
+            OwnsLease?
+            Player := player[Instigator]
+            Player.IsActive[]
+            Character := Instigator.GetFortCharacter[]
+            Character.IsActive[]
+            GetAEONFALLActorRegistry().GetRuntimeKey[Player]
+            ParticipantVolume.GetAgentsInVolume().Find[Instigator]
+        then:
+            OnPhaseInput(Index, Kind, Id)
+
     ResolvePhase(Runtime:aeonfall_encounter_director_runtime):void=
         if (PendingFailure?):
             Finish(Runtime, false)
@@ -307,8 +415,13 @@ aeonfall_encounter_director_device := class(creative_device):
     EnterPhase(Runtime:aeonfall_encounter_director_runtime):void=
         if (Binding := Phases[Runtime.PhaseIndex]):
             for (Input : Binding.Inputs):
-                Input.Input.Reset()
-                Input.Input.Enable()
+                if (Input.Source = aeonfall_encounter_input_source.PropDestroyed):
+                    Input.DestructionSource.Enable()
+                    Input.DestructionSource.ShowProps()
+                    Input.DestructionSource.RestoreHealth()
+                else:
+                    Input.Input.Reset()
+                    Input.Input.Enable()
             if (Character := BossCharacter?, Phase := Runtime.Definition.BossContract.PhaseContracts[Runtime.PhaseIndex]):
                 Character.SetVulnerability(Phase.AllowsDirectBossDamage)
             for (Hazard : Binding.Hazards):
@@ -324,7 +437,11 @@ aeonfall_encounter_director_device := class(creative_device):
     ExitPhase(Index:int, FireCleanup:logic):void=
         if (Binding := Phases[Index]):
             for (Input : Binding.Inputs):
-                Input.Input.Disable()
+                if (Input.Source = aeonfall_encounter_input_source.PropDestroyed):
+                    Input.DestructionSource.HideProps()
+                    Input.DestructionSource.Disable()
+                else:
+                    Input.Input.Disable()
             for (Hazard : Binding.Hazards):
                 for (Volume : Hazard.DamageVolumes):
                     Volume.Disable()
@@ -484,16 +601,16 @@ aeonfall_encounter_director_device := class(creative_device):
             Player.IsActive[]
             Character := Agent.GetFortCharacter[]
             Character.IsActive[]
-            Key := AEONFALLActorRegistry.GetRuntimeKey[Player]
+            Key := GetAEONFALLActorRegistry().GetRuntimeKey[Player]
         then:
-            Added := AEONFALLEncounterParticipation.Add(EncounterId, Key)
+            Added := GetAEONFALLEncounterParticipation().Add(EncounterId, Key)
 
     OnParticipantExited(Agent:agent):void=
-        if (Player := player[Agent], Key := AEONFALLActorRegistry.GetRuntimeKey[Player]):
-            Removed := AEONFALLEncounterParticipation.Remove(EncounterId, Key)
+        if (Player := player[Agent], Key := GetAEONFALLActorRegistry().GetRuntimeKey[Player]):
+            Removed := GetAEONFALLEncounterParticipation().Remove(EncounterId, Key)
 
     RefreshParticipants():void=
-        AEONFALLEncounterParticipation.ClearEncounter(EncounterId)
+        GetAEONFALLEncounterParticipation().ClearEncounter(EncounterId)
         for (Agent : ParticipantVolume.GetAgentsInVolume()):
             AddParticipant(Agent)
 
@@ -517,7 +634,7 @@ aeonfall_encounter_director_device := class(creative_device):
             else:
                 Failed := EventService.FailEvent(EncounterId)
         # Reward resolution happens above, while participant keys are populated.
-        AEONFALLEncounterParticipation.ClearEncounter(EncounterId)
+        GetAEONFALLEncounterParticipation().ClearEncounter(EncounterId)
         ExitPhase(CurrentIndex, true)
         DisableAll(false)
         if (Success?):
@@ -526,6 +643,8 @@ aeonfall_encounter_director_device := class(creative_device):
             FailedOutput.Trigger()
 
     OnEnd<override>():void=
+        if (not OwnsLease?):
+            return
         set Ending = true
         set Ready = false
         set Busy = true
@@ -538,4 +657,6 @@ aeonfall_encounter_director_device := class(creative_device):
         else:
             CancelBossSubscriptions()
             DisableAll(false)
-            AEONFALLEncounterParticipation.ClearEncounter(EncounterId)
+            GetAEONFALLEncounterParticipation().ClearEncounter(EncounterId)
+        Released := ReleaseDirectorLease()
+        set OwnsLease = false

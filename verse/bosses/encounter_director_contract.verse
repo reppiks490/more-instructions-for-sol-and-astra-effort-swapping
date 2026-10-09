@@ -11,6 +11,13 @@ aeonfall_encounter_input_kind := enum:
     WeakPoint
     Progression
 
+# Native destruction reports a real destroyed prop and its destroying agent.
+# TriggerGraph remains available for authored mechanics that have their own
+# authenticated producers; it must never impersonate boss health or defeat.
+aeonfall_encounter_input_source := enum:
+    TriggerGraph
+    PropDestroyed
+
 aeonfall_encounter_counter_contract := class:
     Id:string = ""
     RequiredCount:int = 1

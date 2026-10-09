@@ -306,7 +306,7 @@ aeonfall_ascended_form_bootstrap_device := class(creative_device):
 
     OnBegin<override>()<suspends>:void=
         for (Definition : AEONFALLAscendedFormDefinitions):
-            Registered := AEONFALLAscendedFormRegistry.Register(Definition)
+            Registered := GetAEONFALLAscendedFormRegistry().Register(Definition)
             if (not Registered?):
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{
@@ -316,7 +316,7 @@ aeonfall_ascended_form_bootstrap_device := class(creative_device):
                 )
 
         for (Definition : AEONFALLAscendedFormAbilityDefinitions):
-            Registered := AEONFALLAbilityRegistry.Register(Definition)
+            Registered := GetAEONFALLAbilityRegistry().Register(Definition)
             if (not Registered?):
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{

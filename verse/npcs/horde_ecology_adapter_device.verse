@@ -5,6 +5,10 @@ using { /Verse.org/Simulation }
 using { /Verse.org/Verse }
 using { /UnrealEngine.com/Temporary/SpatialMath }
 
+# Session leases prevent two adapters from owning the same region or physical
+# NPC spawner. A rejected adapter never disables or clears another adapter.
+var AEONFALLHordeAdapterLeases:weak_map(session, [string]aeonfall_horde_ecology_adapter_device) = map{}
+
 # One adapter per region. NPC spawners supply authored appearance/navigation.
 # This adapter consumes logical remains only when a living brood NPC is nearby.
 aeonfall_horde_death_listener := class:
@@ -58,7 +62,13 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
     OnBegin<override>()<suspends>:void=
         if (RegionId = "" or CanonicalId = "" or FeedingRadiusCm <= 0.0):
             return
-        if (not AEONFALLHordeRuntime.RegisterRegion(RegionId)?):
+        Leased := AcquireAdapterLease()
+        if (not Leased?):
+            Print("AEONFALL horde adapter rejected duplicate region or NPC spawner.")
+            return
+        Registered := GetAEONFALLHordeRuntime().RegisterRegion(RegionId)
+        if (not Registered?):
+            ReleasedLease := ReleaseAdapterLease()
             return
         set Running = true
         set Subscriptions = array{
@@ -75,6 +85,43 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
             WatchEvolution()
             StopEvent.Await()
 
+    AcquireAdapterLease()<transacts>:logic=
+        var Owners:[string]aeonfall_horde_ecology_adapter_device = map{}
+        if (Current := AEONFALLHordeAdapterLeases[GetSession()]):
+            set Owners = Current
+        if (Existing := Owners[RegionId]):
+            if (Existing = Self):
+                return true
+            return false
+        if (Owners.Length >= 128):
+            return false
+        for (OtherRegion -> OtherAdapter : Owners):
+            if (OtherAdapter.Spawner = Spawner):
+                return false
+        if:
+            set Owners[RegionId] = Self
+            set AEONFALLHordeAdapterLeases[GetSession()] = Owners
+        then:
+            return true
+        false
+
+    ReleaseAdapterLease()<transacts>:logic=
+        if:
+            Owners := AEONFALLHordeAdapterLeases[GetSession()]
+            Owners[RegionId] = Self
+        then:
+            var Kept:[string]aeonfall_horde_ecology_adapter_device = map{}
+            var Ready:logic = true
+            for (OtherRegion -> OtherAdapter : Owners):
+                if (OtherRegion <> RegionId):
+                    if (set Kept[OtherRegion] = OtherAdapter):
+                        set Ready = Ready
+                    else:
+                        set Ready = false
+            if (Ready?, set AEONFALLHordeAdapterLeases[GetSession()] = Kept):
+                return true
+        false
+
     WatchEvolution()<suspends>:void=
         loop:
             Event := AEONFALLRuntimeBus.RuntimeEvent.Await()
@@ -83,7 +130,7 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
                 Event.EventType = "horde.evolved"
                 Event.TargetId = RegionId
                 DeathSubscriptions[Event.SourceId]
-                Agent := AEONFALLActorRegistry.GetAgent[Event.SourceId]
+                Agent := GetAEONFALLActorRegistry().GetAgent[Event.SourceId]
             then:
                 # Bind these triggers to project-authored tier presentation and
                 # physical effects; a logical promotion does not replace meshes.
@@ -104,52 +151,52 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
             PrunePositions()
             for (Key -> Subscription : DeathSubscriptions):
                 if:
-                    Agent := AEONFALLActorRegistry.GetAgent[Key]
+                    Agent := GetAEONFALLActorRegistry().GetAgent[Key]
                     Character := Agent.GetFortCharacter[]
                     Character.IsActive[]
                     CorpseId := FindNearest(Character.GetTransform().Translation)?
                 then:
-                    Fed := AEONFALLHordeRuntime.Feed(Key, CorpseId)
+                    Fed := GetAEONFALLHordeRuntime().Feed(Key, CorpseId)
                     if (Fed?):
                         PrunePositions()
             PruneListeners()
 
     OnSpawned(Agent:agent):void=
         PruneListeners()
-        ExistingIdentity:logic = logic{AEONFALLActorRegistry.GetRuntimeKey[Agent]}
+        ExistingIdentity:logic = logic{GetAEONFALLActorRegistry().GetRuntimeKey[Agent]}
         if:
             Running?
-            Key := AEONFALLActorRegistry.Register[CanonicalId, Agent]
+            Key := GetAEONFALLActorRegistry().Register[CanonicalId, Agent]
             Character := Agent.GetFortCharacter[]
             Character.IsActive[]
             not DeathSubscriptions[Key]
-            AEONFALLHordeRuntime.RegisterBrood(Key, RegionId)?
+            GetAEONFALLHordeRuntime().RegisterBrood(Key, RegionId)?
         then:
             if (not ExistingIdentity?):
                 if (set OwnedActorKeys[Key] = true):
                     set OwnedActorKeys = OwnedActorKeys
                 else:
-                    AEONFALLHordeRuntime.RemoveBrood(Key)
-                    Removed := AEONFALLActorRegistry.Unregister(Key)
+                    GetAEONFALLHordeRuntime().RemoveBrood(Key)
+                    Removed := GetAEONFALLActorRegistry().Unregister(Key)
                     return
             Listener := aeonfall_horde_death_listener{Adapter := Self, ActorKey := Key}
             Subscription := Character.EliminatedEvent().Subscribe(Listener.OnEliminated)
             if (set DeathSubscriptions[Key] = Subscription):
                 return
             Subscription.Cancel()
-            AEONFALLHordeRuntime.RemoveBrood(Key)
+            GetAEONFALLHordeRuntime().RemoveBrood(Key)
             ReleaseOwnedActor(Key)
 
     RecordDeath(ActorKey:string, Position:vector3):void=
         if (Running?):
             PrunePositions()
-            Id := AEONFALLHordeRuntime.AddCorpse(RegionId, CorpseBiomass, CorpseTrait)
+            Id := GetAEONFALLHordeRuntime().AddCorpse(RegionId, CorpseBiomass, CorpseTrait)
             if (Id > 0):
                 if (set CorpsePositions[Id] = Position):
                     set CorpsePositions = CorpsePositions
                 else:
-                    AEONFALLHordeRuntime.RemoveCorpse(Id)
-        AEONFALLHordeRuntime.RemoveBrood(ActorKey)
+                    GetAEONFALLHordeRuntime().RemoveCorpse(Id)
+        GetAEONFALLHordeRuntime().RemoveBrood(ActorKey)
         RemoveListener(ActorKey)
         ReleaseOwnedActor(ActorKey)
 
@@ -158,7 +205,7 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
         var BestDistance:float = FeedingRadiusCm
         for (Id -> CorpsePosition : CorpsePositions):
             if:
-                Corpse := AEONFALLHordeRuntime.GetCorpse[Id]
+                Corpse := GetAEONFALLHordeRuntime().GetCorpse[Id]
                 Corpse.RegionId = RegionId
                 Corpse.RemainingSeconds > 0.0
             then:
@@ -182,20 +229,20 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
             Character.IsActive[]
             Id := FindNearest(Character.GetTransform().Translation)?
         then:
-            Used := AEONFALLHordeRuntime.UseCorpse(RegionId, Id, Use)
+            Used := GetAEONFALLHordeRuntime().UseCorpse(RegionId, Id, Use)
             if (Used?):
                 PrunePositions()
 
     OpenApex(MaybeAgent:?agent):void=
-        Changed := AEONFALLHordeRuntime.SetApexEvent(RegionId, true)
+        Changed := GetAEONFALLHordeRuntime().SetApexEvent(RegionId, true)
 
     CloseApex(MaybeAgent:?agent):void=
-        Changed := AEONFALLHordeRuntime.SetApexEvent(RegionId, false)
+        Changed := GetAEONFALLHordeRuntime().SetApexEvent(RegionId, false)
 
     PrunePositions()<transacts>:void=
         var Kept:[int]vector3 = map{}
         for (Id -> Position : CorpsePositions):
-            if (AEONFALLHordeRuntime.GetCorpse[Id], set Kept[Id] = Position):
+            if (GetAEONFALLHordeRuntime().GetCorpse[Id], set Kept[Id] = Position):
                 set Kept = Kept
         set CorpsePositions = Kept
 
@@ -211,7 +258,7 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
 
     ReleaseOwnedActor(ActorKey:string):void=
         if (OwnedActorKeys[ActorKey]):
-            Removed := AEONFALLActorRegistry.Unregister(ActorKey)
+            Removed := GetAEONFALLActorRegistry().Unregister(ActorKey)
         var Kept:[string]logic = map{}
         for (Key -> Owned : OwnedActorKeys):
             if (Key <> ActorKey):
@@ -223,7 +270,7 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
         var Stale:[]string = array{}
         for (Key -> Subscription : DeathSubscriptions):
             if:
-                Agent := AEONFALLActorRegistry.GetAgent[Key]
+                Agent := GetAEONFALLActorRegistry().GetAgent[Key]
                 Character := Agent.GetFortCharacter[]
                 Character.IsActive[]
             then:
@@ -231,7 +278,7 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
             else:
                 set Stale += array{Key}
         for (Key : Stale):
-            AEONFALLHordeRuntime.RemoveBrood(Key)
+            GetAEONFALLHordeRuntime().RemoveBrood(Key)
             RemoveListener(Key)
             ReleaseOwnedActor(Key)
 
@@ -246,9 +293,10 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
         for (Key -> Subscription : DeathSubscriptions):
             Subscription.Cancel()
         for (Key -> Owned : OwnedActorKeys):
-            Removed := AEONFALLActorRegistry.Unregister(Key)
+            Removed := GetAEONFALLActorRegistry().Unregister(Key)
         set OwnedActorKeys = map{}
         set Subscriptions = array{}
         set DeathSubscriptions = map{}
         set CorpsePositions = map{}
-        AEONFALLHordeRuntime.ClearRegion(RegionId)
+        GetAEONFALLHordeRuntime().ClearRegion(RegionId)
+        ReleasedLease := ReleaseAdapterLease()

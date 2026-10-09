@@ -1,4 +1,5 @@
 using { /Fortnite.com/Devices }
+using { /Fortnite.com/Characters }
 using { /Verse.org/Simulation }
 using { /Verse.org/Verse }
 
@@ -34,11 +35,18 @@ aeonfall_status_device_bridge := class(creative_device):
 
     var BusSubscription:?cancelable = false
     var AppliedAgents:[string]agent = map{}
+    var AppliedCharacters:[string]fort_character = map{}
     ReconciliationStopped:event() = event(){}
 
     OnBegin<override>()<suspends>:void=
+        if (StatusId = ""):
+            Print("AEONFALL status bridge requires a canonical status ID.")
+            return
         Subscription := AEONFALLRuntimeBus.RuntimeEvent.Subscribe(OnRuntimeEvent)
         set BusSubscription = option{Subscription}
+        # Bootstrap order is not a native-device guarantee. Recover statuses
+        # committed before this bridge subscribed to the event channel.
+        Reconcile()
         race:
             ReconciliationStopped.Await()
             ReconcileLoop()
@@ -62,12 +70,27 @@ aeonfall_status_device_bridge := class(creative_device):
         for (TargetKey -> TrackedAgent : Tracked):
             CleanupIfStale(TargetKey)
 
+        # The player agent survives respawn, while its fort_character changes.
+        # Rebind only missing generations; polling must not refresh authored
+        # effects every tenth of a second while the same character is active.
+        for (TargetKey -> Instances : GetAEONFALLStatusRuntime().StatusesByTarget):
+            if:
+                GetAEONFALLStatusRuntime().HasStatus(TargetKey, StatusId)?
+                TargetAgent := GetAEONFALLActorRegistry().GetAgent[TargetKey]
+                Character := TargetAgent.GetFortCharacter[]
+                Character.IsActive[]
+                not AppliedCharacters[TargetKey]
+            then:
+                ApplyTracked(TargetKey, TargetAgent)
+
     OnRuntimeEvent(Event:aeonfall_runtime_event):void=
         if:
             Event.EventType = "status.applied"
             Event.ContextId = StatusId
-            AEONFALLStatusRuntime.HasStatus(Event.TargetId, StatusId)?
-            TargetAgent := AEONFALLActorRegistry.GetAgent[Event.TargetId]
+            GetAEONFALLStatusRuntime().HasStatus(Event.TargetId, StatusId)?
+            TargetAgent := GetAEONFALLActorRegistry().GetAgent[Event.TargetId]
+            Character := TargetAgent.GetFortCharacter[]
+            Character.IsActive[]
         then:
             ApplyTracked(Event.TargetId, TargetAgent)
             return
@@ -102,9 +125,9 @@ aeonfall_status_device_bridge := class(creative_device):
             else:
                 false
 
-        # Admission to tracking precedes every physical effect. A failed map
-        # write leaves no new effect that reconciliation would be unable to find.
-        if (set AppliedAgents[TargetKey] = TargetAgent):
+        # Both tracking maps commit atomically before any physical effect.
+        # Failed admission creates no untracked native effect.
+        if (CommitTracking[TargetKey, TargetAgent]):
             if (TrackedAgent := PreviousAgent?, TrackedAgent <> TargetAgent):
                 Cleanup(TrackedAgent)
 
@@ -115,12 +138,22 @@ aeonfall_status_device_bridge := class(creative_device):
             if (UseVfx?):
                 Effect.Begin(TargetAgent)
 
+    CommitTracking(TargetKey:string, TargetAgent:agent)<decides><transacts>:void=
+        Character := TargetAgent.GetFortCharacter[]
+        Character.IsActive[]
+        set AppliedAgents[TargetKey] = TargetAgent
+        set AppliedCharacters[TargetKey] = Character
+
     CleanupIfStale(TargetKey:string):void=
         if (TrackedAgent := AppliedAgents[TargetKey]):
             if:
-                AEONFALLStatusRuntime.HasStatus(TargetKey, StatusId)?
-                CurrentAgent := AEONFALLActorRegistry.GetAgent[TargetKey]
+                GetAEONFALLStatusRuntime().HasStatus(TargetKey, StatusId)?
+                CurrentAgent := GetAEONFALLActorRegistry().GetAgent[TargetKey]
                 CurrentAgent = TrackedAgent
+                TrackedCharacter := AppliedCharacters[TargetKey]
+                CurrentCharacter := CurrentAgent.GetFortCharacter[]
+                CurrentCharacter.IsActive[]
+                CurrentCharacter = TrackedCharacter
             then:
                 # A queued removal can refer to an older status lifetime. Keep
                 # the current physical effect while canonical status is active.
@@ -134,11 +167,17 @@ aeonfall_status_device_bridge := class(creative_device):
         for (StoredKey -> StoredAgent : AppliedAgents):
             if (StoredKey <> TargetKey):
                 set Remaining[StoredKey] = StoredAgent
+        var RemainingCharacters:[string]fort_character = map{}
+        for (StoredKey -> StoredCharacter : AppliedCharacters):
+            if (StoredKey <> TargetKey):
+                set RemainingCharacters[StoredKey] = StoredCharacter
         set AppliedAgents = Remaining
+        set AppliedCharacters = RemainingCharacters
 
     CleanupAll():void=
         Tracked := AppliedAgents
         set AppliedAgents = map{}
+        set AppliedCharacters = map{}
         for (TargetKey -> TrackedAgent : Tracked):
             Cleanup(TrackedAgent)
 

@@ -1,3 +1,4 @@
+using { /Verse.org/Verse }
 using { /Verse.org/Simulation }
 
 # Session-only God / Absolute transformation runtime.
@@ -22,11 +23,11 @@ aeonfall_ascended_form_runtime := class():
         Agent:agent,
         FormId:string
     )<decides><transacts>:void=
-        OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
-        Definition := AEONFALLAscendedFormRegistry.Get[FormId]
+        OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
+        Definition := GetAEONFALLAscendedFormRegistry().Get[FormId]
         Profile := ProfileService.GetProfile[Agent]
         State := GetState(OwnerKey)
-        Flags := AEONFALLActorContextRuntime.GetFlags(OwnerKey)
+        Flags := GetAEONFALLActorContextRuntime().GetFlags(OwnerKey)
 
         Profile.AscensionRank >= Definition.RequiredAscensionRank
         not Flags.TransformationActive?
@@ -39,13 +40,13 @@ aeonfall_ascended_form_runtime := class():
         FormId:string
     )<transacts>:logic=
         if:
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
-            Definition := AEONFALLAscendedFormRegistry.Get[FormId]
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
+            Definition := GetAEONFALLAscendedFormRegistry().Get[FormId]
             CanActivate[Agent, FormId]
         then:
             Old := GetState(OwnerKey)
 
-            ContextSet := AEONFALLActorContextRuntime.SetTransformation(
+            ContextSet := GetAEONFALLActorContextRuntime().SetTransformation(
                 OwnerKey,
                 true,
                 Definition.TransformationId
@@ -77,13 +78,11 @@ aeonfall_ascended_form_runtime := class():
                 )
                 return true
 
-            RolledBack := AEONFALLActorContextRuntime.SetTransformation(
+            RolledBack := GetAEONFALLActorContextRuntime().SetTransformation(
                 OwnerKey,
                 false,
                 Definition.TransformationId
             )
-            if (RolledBack?):
-                RolledBack = true
 
         false
 
@@ -93,27 +92,23 @@ aeonfall_ascended_form_runtime := class():
     )<transacts>:void=
         for (AbilityId : Definition.AbilityIds):
             if:
-                State := AEONFALLAbilityRuntime.GetState[OwnerKey, AbilityId]
+                State := GetAEONFALLAbilityRuntime().GetState[OwnerKey, AbilityId]
             then:
                 if:
                     State.Pending?
                     State.PendingRequestId <> ""
                 then:
-                    Cancelled := AEONFALLActivationCoordinator.CancelPending(
+                    Cancelled := GetAEONFALLActivationCoordinator().CancelPending(
                         OwnerKey,
                         AbilityId,
                         State.PendingRequestId
                     )
-                    if (Cancelled?):
-                        Cancelled = true
 
                 if (State.Active?):
-                    Ended := AEONFALLActivationCoordinator.EndActivation(
+                    Ended := GetAEONFALLActivationCoordinator().EndActivation(
                         OwnerKey,
                         AbilityId
                     )
-                    if (Ended?):
-                        Ended = true
 
     EndActive(
         OwnerKey:string,
@@ -122,14 +117,14 @@ aeonfall_ascended_form_runtime := class():
         if:
             Old := StatesByOwner[OwnerKey]
             Old.Phase = aeonfall_ascended_form_phase.Active
-            Definition := AEONFALLAscendedFormRegistry.Get[Old.FormId]
+            Definition := GetAEONFALLAscendedFormRegistry().Get[Old.FormId]
         then:
             StopFormAbilities(
                 OwnerKey,
                 Definition
             )
 
-            ContextCleared := AEONFALLActorContextRuntime.SetTransformation(
+            ContextCleared := GetAEONFALLActorContextRuntime().SetTransformation(
                 OwnerKey,
                 false,
                 Definition.TransformationId
@@ -167,7 +162,7 @@ aeonfall_ascended_form_runtime := class():
         Reason:string
     )<transacts>:logic=
         if:
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
         then:
             EndActive(
                 OwnerKey,
@@ -182,20 +177,18 @@ aeonfall_ascended_form_runtime := class():
         then:
             if:
                 Existing.Phase = aeonfall_ascended_form_phase.Active
-                Definition := AEONFALLAscendedFormRegistry.Get[Existing.FormId]
+                Definition := GetAEONFALLAscendedFormRegistry().Get[Existing.FormId]
             then:
                 StopFormAbilities(
                     OwnerKey,
                     Definition
                 )
 
-                Cleared := AEONFALLActorContextRuntime.SetTransformation(
+                Cleared := GetAEONFALLActorContextRuntime().SetTransformation(
                     OwnerKey,
                     false,
                     Existing.TransformationId
                 )
-                if (Cleared?):
-                    Cleared = true
 
         var Updated:[string]aeonfall_ascended_form_runtime_state = map{}
 
@@ -312,8 +305,16 @@ aeonfall_ascended_form_runtime := class():
                 OwnerKey,
                 "duration_expired"
             )
-            if (Ended?):
-                Ended = true
 
-AEONFALLAscendedFormRuntime:aeonfall_ascended_form_runtime =
-    aeonfall_ascended_form_runtime{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLAscendedFormRuntimeSessions:weak_map(session, aeonfall_ascended_form_runtime) = map{}
+
+GetAEONFALLAscendedFormRuntime()<transacts>:aeonfall_ascended_form_runtime=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLAscendedFormRuntimeSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_ascended_form_runtime{}
+    if (set AEONFALLAscendedFormRuntimeSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLAscendedFormRuntime in its session")
