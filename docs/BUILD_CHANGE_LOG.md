@@ -41,3 +41,20 @@ that did not reconcile a new character after respawn; the bridge now discovers
 canonical status state and tracks the physical character. Source and mutation
 checks are run locally and in CI; actual compiler and session verification
 remain separate acceptance requirements.
+
+## 2026-10-09 — replace the owner's outfit inside AEONFALL
+
+The creator asked to appear differently from their current Fortnite character.
+Current Epic documentation exposes a native `disguise_device` that replaces a
+human player's cosmetic outfit with an available disguise. The owner appearance
+adapter uses the existing single-owner authority, reapplies after respawn, and
+removes only its own disguise when access ends. It confirms native applied state
+instead of treating a void `ApplyDisguise` call as proof of success.
+
+The source and policy leave automatic all-player spawn application off and
+require a fixed disguise from the actual editor catalog. Arbitrary uploaded
+player skins are not documented by this device; custom NPC meshes and visual
+proxies are not claimed as supported native-player replacements. The original
+screenshot supplies owner identification only. It is not used to design the
+replacement appearance. Physical outfit choice and multiplayer/veil verification
+remain editor acceptance checks.

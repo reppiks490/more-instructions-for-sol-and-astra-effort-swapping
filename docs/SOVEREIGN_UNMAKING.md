@@ -18,6 +18,9 @@ The creator identified **User-f4d40f7823**, the player shown in their supplied
 Fortnite screenshot, as the intended sole owner of the god status. This is
 recorded in [`owner_identity.json`](../content/sovereign/owner_identity.json).
 The character's cosmetic appearance is not design material or an access key.
+The creator separately requested a replacement in-game appearance. The
+[owner appearance adapter](SOVEREIGN_APPEARANCE.md) shares this same authority;
+changing the disguise never changes who owns the god status.
 
 Both the controller and authority start disabled. The authority accepts one
 native `player` held by its configured Player Reference device, latches that

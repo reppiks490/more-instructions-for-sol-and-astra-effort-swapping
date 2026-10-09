@@ -24,6 +24,9 @@ claim a compiled or published island.
 world event: red-void sky control, maelstroms, rifts, a commanded monster army,
 tribute-or-resistance quests, and unlimited invisibility. Its owner authority
 starts locked until a trusted native-player reference is verified and bound.
+[Owner appearance](docs/SOVEREIGN_APPEARANCE.md) uses Fortnite's native Disguise
+device to replace that owner's outfit inside AEONFALL with a supported fixed
+disguise. Outfit selection and actual multiplayer verification require UEFN.
 See [player loadouts](docs/PLAYER_LOADOUT.md) and the
 [first playable rig](content/vertical_slice/first_playable_rig.json) for the
 ordinary gameplay and concrete editor bindings.

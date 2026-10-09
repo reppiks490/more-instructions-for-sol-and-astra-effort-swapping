@@ -1,0 +1,47 @@
+{
+  "id": "UNI-001-APPEARANCE",
+  "enabled_by_default": false,
+  "owner_limit": 1,
+  "authorization": "aeonfall_sovereign_authority_device.CanWield",
+  "independent_of_world_manifestation": true,
+  "native": {
+    "device": "disguise_device",
+    "palette": "fixed_combat_or_casual_catalog",
+    "selected_outfit": null,
+    "arbitrary_uploaded_player_skin": false,
+    "required_options": {
+      "apply_disguise_on_player_spawn": false,
+      "start_enabled": false,
+      "disguise_breaks_on_attack": "Off",
+      "disguise_breaks_on_damage": "Off",
+      "replace_existing_disguise": true,
+      "team_to_apply_to": "Any",
+      "class_to_apply_to": "Any"
+    }
+  },
+  "retry": {
+    "interval_seconds": 1,
+    "maximum_attempts_per_character": 16,
+    "reset_on": "actual_native_character_identity_change"
+  },
+  "cleanup": {
+    "remove_only_this_devices_disguise": true,
+    "authorization_revocation": true,
+    "disconnect": true,
+    "end": true,
+    "does_not_call_character_show_or_hide": true
+  },
+  "engine_verification": {
+    "compile": "not_run",
+    "session": "not_run",
+    "outfit_catalog_selection": "not_run",
+    "disguise_during_native_invisibility": "not_run"
+  },
+  "official_sources": [
+    "https://dev.epicgames.com/documentation/fortnite/using-disguise-devices-in-fortnite",
+    "https://dev.epicgames.com/documentation/fortnite/verse-api/fortnitedotcom/devices/disguise_device",
+    "https://dev.epicgames.com/documentation/fortnite/verse-api/fortnitedotcom/devices/disguise_device/applydisguise",
+    "https://dev.epicgames.com/documentation/fortnite/verse-api/fortnitedotcom/devices/disguise_device/isdisguiseapplied",
+    "https://dev.epicgames.com/documentation/fortnite/verse-api/fortnitedotcom/devices/disguise_device/removedisguise"
+  ]
+}

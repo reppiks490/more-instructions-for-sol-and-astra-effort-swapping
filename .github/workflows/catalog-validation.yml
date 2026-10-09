@@ -224,6 +224,7 @@ jobs:
         run: |
           python tools/validate_player_loadout.py
           python tools/validate_sovereign_unmaking.py
+          python tools/validate_sovereign_appearance.py
           python tools/migrate_session_services.py --check
           python tools/test_session_services.py
 
