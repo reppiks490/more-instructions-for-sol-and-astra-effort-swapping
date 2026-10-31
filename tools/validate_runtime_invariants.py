@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -168,8 +169,54 @@ FORBIDDEN_TOKENS = {
     ],
 }
 
+
+def check_runtime_clock(text: str) -> list[str]:
+    """Guard elapsed-simulation-time wiring; this is source validation, not Verse execution."""
+    errors: list[str] = []
+    code = "\n".join(line.split("#", 1)[0] for line in text.splitlines())
+    required = [
+        "var PreviousTime:float = GetSimulationElapsedTime()",
+        "CurrentTime:float = GetSimulationElapsedTime()",
+        "DeltaSeconds:float = CurrentTime - PreviousTime",
+        "set PreviousTime = CurrentTime",
+        "if (DeltaSeconds > 0.0):",
+        "OnEnd<override>():void=",
+        "set Running = false",
+        "AdvanceRuntime(DeltaSeconds)",
+        "AEONFALLRuntimeBus.Pump()",
+        "GetAEONFALLActivationCoordinator().TickPendingActivations(DeltaSeconds)",
+        "GetAEONFALLAbilityRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLStatusRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLHordeRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLTargetingRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLPositionTargetingRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLSpawnRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLUnlockDeliveryService().TickAll(DeltaSeconds)",
+        "GetAEONFALLInvasionRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLAscensionTrialRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLChoosingRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLAscendedFormRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLTranscendentRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLHallOfAscendants().TickAll(DeltaSeconds)",
+    ]
+    for token in required:
+        if token not in code:
+            errors.append(f"runtime clock missing {token!r}")
+    sleep = code.find("Sleep(Interval)")
+    guard = code.find("if (not Running?):", sleep)
+    advance = code.find("AdvanceRuntime(DeltaSeconds)", sleep)
+    if sleep < 0 or guard < sleep or advance < guard:
+        errors.append("runtime clock must check shutdown after Sleep and before advance")
+    if re.search(r"Tick(All|PendingActivations)\(Interval\)", code):
+        errors.append("runtime clock must not advance services by requested Sleep interval")
+    return errors
+
 def main() -> int:
     errors: list[str] = []
+    clock_path = ROOT / "verse/core/runtime_tick_device.verse"
+    if clock_path.exists():
+        errors.extend(check_runtime_clock(clock_path.read_text(encoding="utf-8")))
+
 
     for rel, tokens in REQUIRED_TOKENS.items():
         path = ROOT / rel

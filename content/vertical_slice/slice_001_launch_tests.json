@@ -332,6 +332,34 @@
         "Color is not the sole identifier for critical state.",
         "No HUD/status bridge removes accessibility-critical warnings."
       ]
+    },
+    {
+      "id": "LT-023",
+      "category": "performance",
+      "name": "Runtime clock under delayed frames",
+      "steps": [
+        "Set the runtime tick interval to 0.25 seconds and create finite status, cooldown, targeting, pending activation, spawn reservation, delivery, horde/invasion and ascension states.",
+        "Under a profiled dense encounter, record simulation timestamps across normal and delayed scheduler wakeups; repeat after changing the authored tick interval during the session."
+      ],
+      "pass": [
+        "Every finite runtime service advances by measured simulation-time delta rather than the configured sleep interval.",
+        "A delayed scheduler wake catches up once without a burst of duplicate runtime.tick events.",
+        "Expired finite states and adapter/delivery timeouts resolve once on the first tick past their deadlines; nonpositive deltas do not advance state."
+      ]
+    },
+    {
+      "id": "LT-024",
+      "category": "teardown",
+      "name": "Runtime clock ends with session",
+      "steps": [
+        "With finite runtime state active, end the session while the runtime tick device is suspended in Sleep.",
+        "Observe runtime events during teardown, then start a fresh session with the same authored scheduler device."
+      ],
+      "pass": [
+        "A sleeper that resumes after OnEnd does not advance runtime services or emit runtime.tick.",
+        "The fresh session samples a new simulation-time baseline and never subtracts the previous session clock.",
+        "Queued runtime callbacks from the ended session are not pumped after the Running guard closes."
+      ]
     }
   ]
 }

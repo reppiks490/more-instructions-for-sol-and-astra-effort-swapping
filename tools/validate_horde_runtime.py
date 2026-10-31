@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def main() -> int:
     errors = []
     required = {
-        "verse/core/runtime_tick_device.verse": ["GetAEONFALLHordeRuntime().TickAll(Interval)"],
+        "verse/core/runtime_tick_device.verse": ["GetAEONFALLHordeRuntime().TickAll(DeltaSeconds)"],
         "verse/core/actor_registry.verse": ["GetAEONFALLHordeRuntime().RemoveBrood(RuntimeKey)"],
         "verse/npcs/horde_runtime.verse": [
             "Corpse.RegionId = Old.RegionId", "Corpse.RemainingSeconds > 0.0",
