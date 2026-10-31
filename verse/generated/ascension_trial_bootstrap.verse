@@ -141,7 +141,7 @@ aeonfall_ascension_trial_bootstrap_device := class(creative_device):
 
     OnBegin<override>()<suspends>:void=
         for (Definition : AEONFALLAscensionTrialDefinitions):
-            Registered := AEONFALLAscensionTrialRegistry.Register(Definition)
+            Registered := GetAEONFALLAscensionTrialRegistry().Register(Definition)
             if (not Registered?):
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{

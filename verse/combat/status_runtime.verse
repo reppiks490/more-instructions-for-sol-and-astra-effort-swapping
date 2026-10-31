@@ -1,10 +1,29 @@
+using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 # Session status state runtime.
 # Gameplay adapters translate these canonical states into actual movement,
 # damage, VFX, device, character, or Scene Graph effects.
 
 aeonfall_status_runtime := class():
 
+    EventBus:aeonfall_event_bus = AEONFALLRuntimeBus
+    StatusRegistryOverride:?aeonfall_status_registry = false
     var StatusesByTarget:[string][]aeonfall_status_instance = map{}
+
+    Registry()<transacts>:aeonfall_status_registry=
+        if (Override := StatusRegistryOverride?):
+            return Override
+        GetAEONFALLStatusRegistry()
+
+    # Both the canonical map write and its physical command must commit. A full
+    # queue fails this helper and rolls back the map write in the caller's
+    # failure context, including earlier applications in ApplyBatch.
+    CommitStatusChange(
+        TargetKey:string, Updated:[]aeonfall_status_instance, Event:aeonfall_runtime_event
+    )<decides><transacts>:void=
+        set StatusesByTarget[TargetKey] = Updated
+        Admitted := EventBus.TryEmit(Event)
+        Admitted?
 
     GetStatuses(TargetKey:string)<transacts>:[]aeonfall_status_instance=
         if (Statuses := StatusesByTarget[TargetKey]):
@@ -111,20 +130,17 @@ aeonfall_status_runtime := class():
 
             if:
                 Changed?
-                set StatusesByTarget[TargetKey] = Updated
+                CommitStatusChange[TargetKey, Updated, aeonfall_runtime_event{
+                    EventType := "status.applied",
+                    SourceId := SourceId,
+                    TargetId := TargetKey,
+                    ContextId := Definition.StatusId,
+                    Amount := Magnitude
+                }]
             then:
-                AEONFALLRuntimeBus.Emit(
-                    aeonfall_runtime_event{
-                        EventType := "status.applied",
-                        SourceId := SourceId,
-                        TargetId := TargetKey,
-                        ContextId := Definition.StatusId,
-                        Amount := Magnitude
-                    }
-                )
                 return true
 
-            AEONFALLRuntimeBus.Emit(
+            EventBus.Emit(
                 aeonfall_runtime_event{
                     EventType := "status.application_rejected",
                     SourceId := SourceId,
@@ -135,6 +151,20 @@ aeonfall_status_runtime := class():
             )
 
         false
+
+    # Called in a failure context: all status changes AND queued presentation
+    # events roll back if any status is missing or rejects application. Existing
+    # stacks are restored, not removed as an approximate "undo" operation.
+    ApplyBatch(
+        TargetKey:string, StatusIds:[]string, SourceId:string, Magnitude:int
+    )<decides><transacts>:void=
+        var Seen:[]string = array{}
+        for (StatusId : StatusIds):
+            not Seen.Find[StatusId]
+            Definition := Registry().Get[StatusId]
+            Applied := ApplyStatus(TargetKey, Definition, SourceId, Magnitude)
+            Applied?
+            set Seen += array{StatusId}
 
     RemoveStatus(TargetKey:string, StatusId:string)<transacts>:logic=
         Existing := GetStatuses(TargetKey)
@@ -149,23 +179,17 @@ aeonfall_status_runtime := class():
 
         if:
             Removed?
-            set StatusesByTarget[TargetKey] = Updated
+            CommitStatusChange[TargetKey, Updated, aeonfall_runtime_event{
+                EventType := "status.removed",
+                TargetId := TargetKey,
+                ContextId := StatusId
+            }]
         then:
-            AEONFALLRuntimeBus.Emit(
-                aeonfall_runtime_event{
-                    EventType := "status.removed",
-                    TargetId := TargetKey,
-                    ContextId := StatusId
-                }
-            )
             return true
 
         false
 
-    Tick(TargetKey:string, DeltaSeconds:float)<transacts>:void=
-        if (DeltaSeconds <= 0.0):
-            return
-
+    CommitStatusTick(TargetKey:string, DeltaSeconds:float)<decides><transacts>:void=
         Existing := GetStatuses(TargetKey)
         var Updated:[]aeonfall_status_instance = array{}
 
@@ -185,7 +209,7 @@ aeonfall_status_runtime := class():
                         }
                     }
                 else:
-                    AEONFALLRuntimeBus.Emit(
+                    Admitted := EventBus.TryEmit(
                         aeonfall_runtime_event{
                             EventType := "status.expired",
                             SourceId := Instance.SourceId,
@@ -193,16 +217,30 @@ aeonfall_status_runtime := class():
                             ContextId := Instance.StatusId
                         }
                     )
+                    if (not Admitted?):
+                        # Retain its positive remaining duration. Writing zero
+                        # would turn a timed status into a persistent status;
+                        # keeping the instance retries expiry on the next tick.
+                        set Updated = Updated + array{Instance}
 
+        # Roll back expiry admissions if the corresponding map write fails.
+        set StatusesByTarget[TargetKey] = Updated
+
+    Tick(TargetKey:string, DeltaSeconds:float)<transacts>:void=
+        if (DeltaSeconds <= 0.0):
+            return
         if:
-            set StatusesByTarget[TargetKey] = Updated
+            CommitStatusTick[TargetKey, DeltaSeconds]
         then:
             return
+
     ClearTarget(TargetKey:string)<transacts>:void=
         if:
             set StatusesByTarget[TargetKey] = array{}
         then:
-            AEONFALLRuntimeBus.Emit(
+            # Forced canonical cleanup must not wait for presentation capacity.
+            # The bridge's tracked-agent reconciliation handles a lost command.
+            EventBus.Emit(
                 aeonfall_runtime_event{
                     EventType := "status.target_cleared",
                     TargetId := TargetKey
@@ -213,42 +251,23 @@ aeonfall_status_runtime := class():
         if (DeltaSeconds <= 0.0):
             return
 
-        var UpdatedMap:[string][]aeonfall_status_instance = map{}
-
+        # Snapshot keys so per-target atomic commits do not mutate an iterated
+        # collection, and share the same expiry/retry policy with Tick.
+        var TargetKeys:[]string = array{}
         for (TargetKey -> Existing : StatusesByTarget):
-            var Updated:[]aeonfall_status_instance = array{}
+            set TargetKeys += array{TargetKey}
+        for (TargetKey : TargetKeys):
+            Tick(TargetKey, DeltaSeconds)
 
-            for (Instance : Existing):
-                if (Instance.RemainingSeconds <= 0.0):
-                    # Zero duration is the canonical persistent/session status.
-                    set Updated = Updated + array{Instance}
-                else:
-                    Remaining:float = Instance.RemainingSeconds - DeltaSeconds
-                    if (Remaining > 0.0):
-                        set Updated = Updated + array{
-                            aeonfall_status_instance{
-                                StatusId := Instance.StatusId,
-                                SourceId := Instance.SourceId,
-                                StackCount := Instance.StackCount,
-                                Magnitude := Instance.Magnitude,
-                                RemainingSeconds := Remaining
-                            }
-                        }
-                    else:
-                        AEONFALLRuntimeBus.Emit(
-                            aeonfall_runtime_event{
-                                EventType := "status.expired",
-                                SourceId := Instance.SourceId,
-                                TargetId := TargetKey,
-                                ContextId := Instance.StatusId
-                            }
-                        )
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLStatusRuntimeSessions:weak_map(session, aeonfall_status_runtime) = map{}
 
-            if:
-                set UpdatedMap[TargetKey] = Updated
-            then:
-                set UpdatedMap = UpdatedMap
-
-        set StatusesByTarget = UpdatedMap
-
-AEONFALLStatusRuntime:aeonfall_status_runtime = aeonfall_status_runtime{}
+GetAEONFALLStatusRuntime()<transacts>:aeonfall_status_runtime=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLStatusRuntimeSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_status_runtime{}
+    if (set AEONFALLStatusRuntimeSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLStatusRuntime in its session")

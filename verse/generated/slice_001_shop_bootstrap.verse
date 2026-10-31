@@ -56,7 +56,7 @@ aeonfall_slice_001_shop_bootstrap_device := class(creative_device):
 
     OnBegin<override>()<suspends>:void=
         for (Offer : Slice001ShopOffers):
-            Registered := AEONFALLShopRegistry.Register(Offer)
+            Registered := GetAEONFALLShopRegistry().Register(Offer)
             if (not Registered?):
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{

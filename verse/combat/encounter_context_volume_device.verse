@@ -15,17 +15,13 @@ aeonfall_encounter_context_volume_device := class(creative_device):
         Volume.AgentExitsEvent.Subscribe(OnExit)
 
     OnEnter(Agent:agent)<transacts>:void=
-        Entered := AEONFALLActorContextRuntime.EnterEncounter(
+        Entered := GetAEONFALLActorContextRuntime().EnterEncounter(
             Agent,
             EncounterId
         )
-        if (Entered?):
-            Entered = true
 
     OnExit(Agent:agent)<transacts>:void=
-        Exited := AEONFALLActorContextRuntime.ExitEncounter(
+        Exited := GetAEONFALLActorContextRuntime().ExitEncounter(
             Agent,
             EncounterId
         )
-        if (Exited?):
-            Exited = true

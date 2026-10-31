@@ -169,7 +169,7 @@ aeonfall_world_event_service := class():
                     }
                 )
 
-                AEONFALLEncounterParticipation.ClearEncounter(
+                GetAEONFALLEncounterParticipation().ClearEncounter(
                     EventId
                 )
                 return true

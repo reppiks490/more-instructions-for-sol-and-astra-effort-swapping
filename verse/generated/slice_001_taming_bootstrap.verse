@@ -71,7 +71,7 @@ aeonfall_slice_001_taming_bootstrap_device := class(creative_device):
 
     OnBegin<override>()<suspends>:void=
         for (Definition : Slice001TamingDefinitions):
-            Registered := AEONFALLTamingRegistry.Register(Definition)
+            Registered := GetAEONFALLTamingRegistry().Register(Definition)
             if (not Registered?):
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{

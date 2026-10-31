@@ -1,3 +1,4 @@
+using { /Verse.org/Verse }
 using { /Verse.org/Simulation }
 
 # Session class runtime with persistent equipped-class selection for players.
@@ -25,7 +26,18 @@ aeonfall_class_registry := class():
     Get(ClassId:string)<decides><transacts>:aeonfall_class_definition=
         Definitions[ClassId]
 
-AEONFALLClassRegistry:aeonfall_class_registry = aeonfall_class_registry{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLClassRegistrySessions:weak_map(session, aeonfall_class_registry) = map{}
+
+GetAEONFALLClassRegistry()<transacts>:aeonfall_class_registry=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLClassRegistrySessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_class_registry{}
+    if (set AEONFALLClassRegistrySessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLClassRegistry in its session")
 
 aeonfall_class_runtime := class():
 
@@ -33,6 +45,7 @@ aeonfall_class_runtime := class():
 
     var States:[string]aeonfall_class_runtime_state = map{}
     var Reservations:[string]aeonfall_class_resource_reservation = map{}
+    var ResourceHistory:[string][string]int = map{}
 
     GetState(OwnerKey:string)<decides><transacts>:aeonfall_class_runtime_state=
         States[OwnerKey]
@@ -62,89 +75,80 @@ aeonfall_class_runtime := class():
                 return true
         false
 
-    ActivateClass(
-        OwnerKey:string,
-        ClassId:string
-    )<transacts>:logic=
-        if (HasActiveReservation(OwnerKey)?):
-            return false
-
-        if:
-            Agent := AEONFALLActorRegistry.GetAgent[OwnerKey]
-            Definition := AEONFALLClassRegistry.Get[ClassId]
-        then:
-            # Resolve every ability before mutating class state.
-            var Ready:logic = true
-            for (AbilityId : Definition.AbilityIds):
-                if:
-                    AbilityDefinition := AEONFALLAbilityRegistry.Get[AbilityId]
-                then:
-                    Initialized := AEONFALLAbilityRuntime.Initialize(
-                        OwnerKey,
-                        AbilityDefinition
-                    )
-                    if (not Initialized?):
-                        set Ready = false
-                else:
-                    set Ready = false
-
-            if (Ready?):
-                # Remove previous permanent/passive class statuses.
-                if:
-                    OldState := States[OwnerKey]
-                    OldDefinition := AEONFALLClassRegistry.Get[OldState.ClassId]
-                then:
-                    for (StatusId : OldDefinition.PassiveStatusIds):
-                        Removed := AEONFALLStatusRuntime.RemoveStatus(
-                            OwnerKey,
-                            StatusId
-                        )
-                        if (Removed?):
-                            set Ready = Ready
-
-                # Apply the new class passives only after all references resolve.
-                for (StatusId : Definition.PassiveStatusIds):
-                    if:
-                        StatusDefinition := AEONFALLStatusRegistry.Get[StatusId]
-                    then:
-                        Applied := AEONFALLStatusRuntime.ApplyStatus(
-                            OwnerKey,
-                            StatusDefinition,
-                            ClassId,
-                            0
-                        )
-                        if (not Applied?):
-                            set Ready = false
-                    else:
-                        set Ready = false
-
-            if (Ready?):
-                NewState := aeonfall_class_runtime_state:
-                    ClassId := ClassId
-                    CurrentResource := Definition.MaxResource
-                    MaxResource := Definition.MaxResource
-                    AbilityIds := Definition.AbilityIds
-                    Active := true
-
-                if:
-                    set States[OwnerKey] = NewState
-                then:
-                    if:
-                        Player := player[Agent]
-                    then:
-                        ProfileService.SetEquippedClass(Player, ClassId)
-
-                    AEONFALLRuntimeBus.Emit(
-                        aeonfall_runtime_event{
-                            EventType := "class.activated",
-                            SourceId := OwnerKey,
-                            TargetId := ClassId,
-                            Amount := Definition.MaxResource
-                        }
-                    )
-                    return true
-
+    # Re-selecting the active class is idempotent. Switching saves each class's
+    # current resource so selecting another class cannot manufacture a refill.
+    ActivateClass(OwnerKey:string, ClassId:string)<transacts>:logic=
+        if (Current := States[OwnerKey], Current.Active?, Current.ClassId = ClassId):
+            return true
+        if (CommitClassActivation[OwnerKey, ClassId]):
+            return true
         false
+
+    # All logical effects and the persistent selection share one failure scope.
+    # Missing abilities, a full status/event queue, or a refused save rolls back
+    # the old passives, resources, ability initialization and profile together.
+    CommitClassActivation(OwnerKey:string, ClassId:string)<decides><transacts>:void=
+        not HasActiveReservation(OwnerKey)?
+        Agent := GetAEONFALLActorRegistry().GetAgent[OwnerKey]
+        Definition := GetAEONFALLClassRegistry().Get[ClassId]
+
+        if (Player := player[Agent]):
+            Profile := ProfileService.GetProfile[Player]
+            for (UnlockId : Definition.RequiredUnlockIds):
+                Profile.UnlockedEntityIds.Find[UnlockId]
+
+        for (AbilityId : Definition.AbilityIds):
+            AbilityDefinition := GetAEONFALLAbilityRegistry().Get[AbilityId]
+            Initialized := GetAEONFALLAbilityRuntime().Initialize(OwnerKey, AbilityDefinition)
+            Initialized?
+
+        var History:[string]int = map{}
+        if (Saved := ResourceHistory[OwnerKey]):
+            set History = Saved
+        if (OldState := States[OwnerKey]):
+            set History[OldState.ClassId] = OldState.CurrentResource
+            OldDefinition := GetAEONFALLClassRegistry().Get[OldState.ClassId]
+            for (StatusId : OldDefinition.PassiveStatusIds):
+                if (GetAEONFALLStatusRuntime().HasStatus(OwnerKey, StatusId)?):
+                    Removed := GetAEONFALLStatusRuntime().RemoveStatus(OwnerKey, StatusId)
+                    Removed?
+
+        GetAEONFALLStatusRuntime().ApplyBatch[
+            OwnerKey, Definition.PassiveStatusIds, ClassId, 0
+        ]
+
+        var Resource:int = Definition.MaxResource
+        if (SavedResource := History[ClassId]):
+            set Resource = SavedResource
+        if (Resource < 0):
+            set Resource = 0
+        if (Resource > Definition.MaxResource):
+            set Resource = Definition.MaxResource
+
+        set ResourceHistory[OwnerKey] = History
+        set States[OwnerKey] = aeonfall_class_runtime_state{
+            ClassId := ClassId,
+            CurrentResource := Resource,
+            MaxResource := Definition.MaxResource,
+            AbilityIds := Definition.AbilityIds,
+            Active := true
+        }
+
+        if (Player := player[Agent]):
+            OldProfile := ProfileService.GetProfile[Player]
+            Candidate := aeonfall_player_profile:
+                MakeAEONFALLPlayerProfile<constructor>(OldProfile)
+                EquippedClassId := ClassId
+            Saved := ProfileService.TrySaveProfile(Player, Candidate)
+            Saved?
+
+        Admitted := AEONFALLRuntimeBus.TryEmit(aeonfall_runtime_event{
+            EventType := "class.activated",
+            SourceId := OwnerKey,
+            TargetId := ClassId,
+            Amount := Resource
+        })
+        Admitted?
 
     AddResource(
         OwnerKey:string,
@@ -359,8 +363,6 @@ aeonfall_class_runtime := class():
                         return true
                     else:
                         Rollback := RemoveReservation(NewRequestId)
-                        if (Rollback?):
-                            Rollback = true
 
         false
 
@@ -423,6 +425,12 @@ aeonfall_class_runtime := class():
                 then:
                     set UpdatedReservations = UpdatedReservations
 
+        var KeptHistory:[string][string]int = map{}
+        for (StoredOwnerKey -> History : ResourceHistory):
+            if (StoredOwnerKey <> OwnerKey):
+                if (set KeptHistory[StoredOwnerKey] = History):
+                    set KeptHistory = KeptHistory
+        set ResourceHistory = KeptHistory
         set States = UpdatedStates
         set Reservations = UpdatedReservations
 
@@ -433,4 +441,15 @@ aeonfall_class_runtime := class():
             }
         )
 
-AEONFALLClassRuntime:aeonfall_class_runtime = aeonfall_class_runtime{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLClassRuntimeSessions:weak_map(session, aeonfall_class_runtime) = map{}
+
+GetAEONFALLClassRuntime()<transacts>:aeonfall_class_runtime=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLClassRuntimeSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_class_runtime{}
+    if (set AEONFALLClassRuntimeSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLClassRuntime in its session")

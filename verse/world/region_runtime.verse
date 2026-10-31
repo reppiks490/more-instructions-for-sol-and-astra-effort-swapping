@@ -1,3 +1,5 @@
+using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 # Session living-world state.
 # Physical streaming, weather, NPC spawning, terrain presentation, and devices
 # are project-bound adapters; this runtime owns canonical region state only.
@@ -24,7 +26,7 @@ aeonfall_region_runtime := class():
 
     InitializeRegion(RegionId:string)<transacts>:logic=
         if:
-            AEONFALLRegionRegistry.IsRegistered[RegionId]
+            GetAEONFALLRegionRegistry().IsRegistered[RegionId]
         then:
             if:
                 Existing := States[RegionId]
@@ -357,4 +359,15 @@ aeonfall_region_runtime := class():
 
         false
 
-AEONFALLRegionRuntime:aeonfall_region_runtime = aeonfall_region_runtime{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLRegionRuntimeSessions:weak_map(session, aeonfall_region_runtime) = map{}
+
+GetAEONFALLRegionRuntime()<transacts>:aeonfall_region_runtime=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLRegionRuntimeSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_region_runtime{}
+    if (set AEONFALLRegionRuntimeSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLRegionRuntime in its session")

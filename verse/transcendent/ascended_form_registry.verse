@@ -1,3 +1,5 @@
+using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 # Canonical God/Absolute form registry.
 
 aeonfall_ascended_form_registry := class():
@@ -28,5 +30,15 @@ aeonfall_ascended_form_registry := class():
     Get(FormId:string)<decides><transacts>:aeonfall_ascended_form_definition=
         Definitions[FormId]
 
-AEONFALLAscendedFormRegistry:aeonfall_ascended_form_registry =
-    aeonfall_ascended_form_registry{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLAscendedFormRegistrySessions:weak_map(session, aeonfall_ascended_form_registry) = map{}
+
+GetAEONFALLAscendedFormRegistry()<transacts>:aeonfall_ascended_form_registry=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLAscendedFormRegistrySessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_ascended_form_registry{}
+    if (set AEONFALLAscendedFormRegistrySessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLAscendedFormRegistry in its session")

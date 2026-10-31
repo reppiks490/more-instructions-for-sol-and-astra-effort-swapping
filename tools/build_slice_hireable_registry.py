@@ -54,7 +54,7 @@ def main()->int:
         "",
         "    OnBegin<override>()<suspends>:void=",
         "        for (Definition : Slice001HireableDefinitions):",
-        "            Registered := AEONFALLHireableRegistry.Register(Definition)",
+        "            Registered := GetAEONFALLHireableRegistry().Register(Definition)",
         "            if (not Registered?):",
         "                AEONFALLRuntimeBus.Emit(",
         "                    aeonfall_runtime_event{",

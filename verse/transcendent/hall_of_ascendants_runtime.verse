@@ -1,3 +1,4 @@
+using { /Verse.org/Verse }
 using { /Verse.org/Simulation }
 
 # Session Hall of Ascendants.
@@ -48,7 +49,7 @@ aeonfall_hall_of_ascendants_runtime := class():
 
     RefreshIfReady(Agent:agent)<transacts>:logic=
         if:
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
             Profile := ProfileService.GetProfile[Agent]
         then:
             Entry := aeonfall_hall_entry:
@@ -119,11 +120,19 @@ aeonfall_hall_of_ascendants_runtime := class():
 
         for (OwnerKey : OwnerKeys):
             if:
-                Agent := AEONFALLActorRegistry.GetAgent[OwnerKey]
+                Agent := GetAEONFALLActorRegistry().GetAgent[OwnerKey]
             then:
                 Refreshed := RefreshIfReady(Agent)
-                if (Refreshed?):
-                    Refreshed = true
 
-AEONFALLHallOfAscendants:aeonfall_hall_of_ascendants_runtime =
-    aeonfall_hall_of_ascendants_runtime{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLHallOfAscendantsSessions:weak_map(session, aeonfall_hall_of_ascendants_runtime) = map{}
+
+GetAEONFALLHallOfAscendants()<transacts>:aeonfall_hall_of_ascendants_runtime=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLHallOfAscendantsSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_hall_of_ascendants_runtime{}
+    if (set AEONFALLHallOfAscendantsSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLHallOfAscendants in its session")

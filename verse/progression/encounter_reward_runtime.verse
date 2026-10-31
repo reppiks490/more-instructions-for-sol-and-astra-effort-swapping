@@ -10,9 +10,9 @@ aeonfall_encounter_reward_service := class():
 
     AwardRegistered(EncounterId:string)<transacts>:int=
         if:
-            Definition := AEONFALLEncounterRewardRegistry.Get[EncounterId]
+            Definition := GetAEONFALLEncounterRewardRegistry().Get[EncounterId]
         then:
-            ParticipantKeys := AEONFALLEncounterParticipation.GetParticipants(
+            ParticipantKeys := GetAEONFALLEncounterParticipation().GetParticipants(
                 EncounterId
             )
 
@@ -25,18 +25,20 @@ aeonfall_encounter_reward_service := class():
                         SourceId := EncounterId
                     }
                 )
-                AEONFALLEncounterParticipation.ClearEncounter(
+                GetAEONFALLEncounterParticipation().ClearEncounter(
                     EncounterId
                 )
                 return 0
 
             for (RuntimeKey : ParticipantKeys):
                 if:
-                    Agent := AEONFALLActorRegistry.GetAgent[RuntimeKey]
+                    Agent := GetAEONFALLActorRegistry().GetAgent[RuntimeKey]
                     Player := player[Agent]
+                    BeforeReward := ProfileService.GetProfile[Player]
                 then:
-                    IsBoss:logic =
+                    IsBoss:logic = logic{
                         Definition.Kind = aeonfall_encounter_reward_kind.Boss
+                    }
 
                     Committed := ProfileService.CommitEncounterFirstClearReward(
                         Player,
@@ -50,6 +52,20 @@ aeonfall_encounter_reward_service := class():
 
                     if (Committed?):
                         set Awarded += 1
+                        # Only the successful immutable first-clear commit can
+                        # request physical unlock delivery; repeated clears skip.
+                        for (EntityId : Definition.UnlockEntityIds):
+                            if (not BeforeReward.UnlockedEntityIds.Find[EntityId]):
+                                DeliveryStarted := GetAEONFALLUnlockDeliveryService().QueueAfterCommit(
+                                    Player, EntityId, EncounterId
+                                )
+                                if (not DeliveryStarted?):
+                                    AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                                        EventType := "encounter_reward.delivery_backlog_full",
+                                        SourceId := EncounterId,
+                                        TargetId := EntityId,
+                                        ContextId := RuntimeKey
+                                    })
 
                         AEONFALLRuntimeBus.Emit(
                             aeonfall_runtime_event{
@@ -68,7 +84,7 @@ aeonfall_encounter_reward_service := class():
                             }
                         )
 
-            AEONFALLEncounterParticipation.ClearEncounter(
+            GetAEONFALLEncounterParticipation().ClearEncounter(
                 EncounterId
             )
 

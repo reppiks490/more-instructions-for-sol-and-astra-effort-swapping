@@ -1,3 +1,4 @@
+using { /Verse.org/Verse }
 using { /Verse.org/Simulation }
 
 aeonfall_target_selection := class:
@@ -21,8 +22,8 @@ aeonfall_targeting_runtime := class():
     )<transacts>:logic=
         if:
             DurationSeconds > 0.0
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Owner]
-            TargetKey := AEONFALLActorRegistry.GetRuntimeKey[Target]
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Owner]
+            TargetKey := GetAEONFALLActorRegistry().GetRuntimeKey[Target]
             OwnerKey <> TargetKey
         then:
             Selection := aeonfall_target_selection:
@@ -55,8 +56,8 @@ aeonfall_targeting_runtime := class():
         if:
             DurationSeconds > 0.0
             OwnerKey <> TargetKey
-            AEONFALLActorRegistry.IsRegistered[OwnerKey]
-            AEONFALLActorRegistry.IsRegistered[TargetKey]
+            GetAEONFALLActorRegistry().IsRegistered[OwnerKey]
+            GetAEONFALLActorRegistry().IsRegistered[TargetKey]
         then:
             Selection := aeonfall_target_selection:
                 OwnerKey := OwnerKey
@@ -82,7 +83,7 @@ aeonfall_targeting_runtime := class():
     GetSelection(OwnerKey:string)<decides><transacts>:aeonfall_target_selection=
         Selection := Selections[OwnerKey]
         Selection.RemainingSeconds > 0.0
-        AEONFALLActorRegistry.IsRegistered[Selection.TargetKey]
+        GetAEONFALLActorRegistry().IsRegistered[Selection.TargetKey]
         Selection
 
     Clear(OwnerKey:string)<transacts>:logic=
@@ -126,7 +127,7 @@ aeonfall_targeting_runtime := class():
 
             if:
                 Remaining > 0.0
-                AEONFALLActorRegistry.IsRegistered[Selection.TargetKey]
+                GetAEONFALLActorRegistry().IsRegistered[Selection.TargetKey]
             then:
                 Next := aeonfall_target_selection:
                     OwnerKey := Selection.OwnerKey
@@ -150,4 +151,15 @@ aeonfall_targeting_runtime := class():
 
         set Selections = Updated
 
-AEONFALLTargetingRuntime:aeonfall_targeting_runtime = aeonfall_targeting_runtime{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLTargetingRuntimeSessions:weak_map(session, aeonfall_targeting_runtime) = map{}
+
+GetAEONFALLTargetingRuntime()<transacts>:aeonfall_targeting_runtime=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLTargetingRuntimeSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_targeting_runtime{}
+    if (set AEONFALLTargetingRuntimeSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLTargetingRuntime in its session")

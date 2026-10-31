@@ -1,3 +1,5 @@
+using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 # Session faction-war runtime.
 # Physical NPC armies, territory props, objectives, and presentation are
 # project-bound directors. This service owns conflict score/escalation/results.
@@ -49,7 +51,7 @@ aeonfall_faction_conflict_service := class():
             FactionAId <> ""
             FactionBId <> ""
             FactionAId <> FactionBId
-            AEONFALLRegionRegistry.IsRegistered[RegionId]
+            GetAEONFALLRegionRegistry().IsRegistered[RegionId]
         then:
             if:
                 Existing := Conflicts[ConflictId]
@@ -84,8 +86,8 @@ aeonfall_faction_conflict_service := class():
 
     StartRegistered(ConflictId:string)<transacts>:logic=
         if:
-            Definition := AEONFALLFactionConflictRegistry.Get[ConflictId]
-            RegionState := AEONFALLRegionRuntime.GetState[Definition.RegionId]
+            Definition := GetAEONFALLFactionConflictRegistry().Get[ConflictId]
+            RegionState := GetAEONFALLRegionRuntime().GetState[Definition.RegionId]
             RegionState.HostilityTier >= Definition.MinHostilityTier
         then:
             StartConflict(
@@ -147,7 +149,7 @@ aeonfall_faction_conflict_service := class():
                 )
 
                 if:
-                    Definition := AEONFALLFactionConflictRegistry.Get[ConflictId]
+                    Definition := GetAEONFALLFactionConflictRegistry().Get[ConflictId]
                     (
                         ScoreA >= Definition.VictoryScore
                         or ScoreB >= Definition.VictoryScore
@@ -155,8 +157,6 @@ aeonfall_faction_conflict_service := class():
                     ScoreA <> ScoreB
                 then:
                     Completed := CompleteConflict(ConflictId)
-                    if (Completed?):
-                        Completed = true
 
                 return true
 
@@ -190,13 +190,11 @@ aeonfall_faction_conflict_service := class():
                 set Conflicts[ConflictId] = Completed
             then:
                 if (Winner <> ""):
-                    InfluenceAdded := AEONFALLRegionRuntime.AddFactionInfluence(
+                    InfluenceAdded := GetAEONFALLRegionRuntime().AddFactionInfluence(
                         Old.RegionId,
                         Winner,
                         20
                     )
-                    if (InfluenceAdded?):
-                        InfluenceAdded = true
 
                     Loser:string =
                         if (Winner = Old.FactionAId):
@@ -204,13 +202,11 @@ aeonfall_faction_conflict_service := class():
                         else:
                             Old.FactionAId
 
-                    InfluenceRemoved := AEONFALLRegionRuntime.AddFactionInfluence(
+                    InfluenceRemoved := GetAEONFALLRegionRuntime().AddFactionInfluence(
                         Old.RegionId,
                         Loser,
                         -10
                     )
-                    if (InfluenceRemoved?):
-                        InfluenceRemoved = true
 
                 AEONFALLRegionalEscalation.ReconcileRegion(Old.RegionId)
 
@@ -227,5 +223,15 @@ aeonfall_faction_conflict_service := class():
 
         false
 
-AEONFALLFactionConflictRuntime:aeonfall_faction_conflict_service =
-    aeonfall_faction_conflict_service{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLFactionConflictRuntimeSessions:weak_map(session, aeonfall_faction_conflict_service) = map{}
+
+GetAEONFALLFactionConflictRuntime()<transacts>:aeonfall_faction_conflict_service=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLFactionConflictRuntimeSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_faction_conflict_service{}
+    if (set AEONFALLFactionConflictRuntimeSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLFactionConflictRuntime in its session")

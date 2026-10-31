@@ -1,3 +1,5 @@
+using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 # Canonical status-definition registry.
 # Definitions are generated from validated slice content and registered during
 # project bootstrap so adapters never hardcode status behavior by name.
@@ -43,4 +45,15 @@ aeonfall_status_registry := class():
         Definition := Definitions[StatusId]
         Definition.StatusId <> ""
 
-AEONFALLStatusRegistry:aeonfall_status_registry = aeonfall_status_registry{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLStatusRegistrySessions:weak_map(session, aeonfall_status_registry) = map{}
+
+GetAEONFALLStatusRegistry()<transacts>:aeonfall_status_registry=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLStatusRegistrySessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_status_registry{}
+    if (set AEONFALLStatusRegistrySessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLStatusRegistry in its session")

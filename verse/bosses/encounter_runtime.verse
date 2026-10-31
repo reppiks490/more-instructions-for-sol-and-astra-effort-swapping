@@ -198,7 +198,7 @@ aeonfall_boss_encounter_service := class():
                     }
                 )
 
-                AEONFALLEncounterParticipation.ClearEncounter(
+                GetAEONFALLEncounterParticipation().ClearEncounter(
                     BossId
                 )
                 return true

@@ -1,0 +1,330 @@
+{
+  "schema_version": 1,
+  "encounters": [
+    {
+      "id": "BOS-005",
+      "kind": "Boss",
+      "phases": [
+        {
+          "phase_id": "BOS005-P1-FRESH-MORTAR",
+          "objective_counts": {},
+          "signals": [
+            {
+              "id": "SIG-BOS005-HEALTH-70",
+              "count": 1,
+              "boss_health_percent": 70
+            }
+          ],
+          "transition_alternatives": [
+            {
+              "objectives": [
+                "OBJ-BOS005-DENY-CORPSES"
+              ],
+              "weak_points": [],
+              "signals": []
+            },
+            {
+              "objectives": [],
+              "weak_points": [],
+              "signals": [
+                "SIG-BOS005-HEALTH-70"
+              ]
+            }
+          ]
+        },
+        {
+          "phase_id": "BOS005-P2-DEADMANS-STAIR",
+          "objective_counts": {},
+          "signals": [],
+          "transition_alternatives": [
+            {
+              "objectives": [
+                "OBJ-BOS005-BREAK-STAIR-A",
+                "OBJ-BOS005-BREAK-STAIR-B",
+                "OBJ-BOS005-BREAK-STAIR-C"
+              ],
+              "weak_points": [],
+              "signals": []
+            }
+          ]
+        },
+        {
+          "phase_id": "BOS005-P3-LAST-WALL",
+          "objective_counts": {},
+          "signals": [
+            {
+              "id": "SIG-BOS005-DEFEATED",
+              "count": 1,
+              "boss_defeat": true
+            }
+          ],
+          "transition_alternatives": [
+            {
+              "objectives": [],
+              "weak_points": [],
+              "signals": [
+                "SIG-BOS005-DEFEATED"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BOS-006",
+      "kind": "Boss",
+      "phases": [
+        {
+          "phase_id": "BOS006-P1-BLESSING-SCENT",
+          "objective_counts": {},
+          "signals": [
+            {
+              "id": "SIG-BOS006-HEALTH-70",
+              "count": 1,
+              "boss_health_percent": 70
+            }
+          ],
+          "transition_alternatives": [
+            {
+              "objectives": [
+                "OBJ-BOS006-BAIT-POUNCE"
+              ],
+              "weak_points": [],
+              "signals": [
+                "SIG-BOS006-HEALTH-70"
+              ]
+            }
+          ]
+        },
+        {
+          "phase_id": "BOS006-P2-STOLEN-HALO",
+          "objective_counts": {},
+          "signals": [
+            {
+              "id": "SIG-BOS006-HEALTH-35",
+              "count": 1,
+              "boss_health_percent": 35
+            }
+          ],
+          "transition_alternatives": [
+            {
+              "objectives": [
+                "OBJ-BOS006-BREAK-STOLEN-HALO"
+              ],
+              "weak_points": [],
+              "signals": []
+            },
+            {
+              "objectives": [],
+              "weak_points": [],
+              "signals": [
+                "SIG-BOS006-HEALTH-35"
+              ]
+            }
+          ]
+        },
+        {
+          "phase_id": "BOS006-P3-STARVED-GRIN",
+          "objective_counts": {},
+          "signals": [
+            {
+              "id": "SIG-BOS006-DEFEATED",
+              "count": 1,
+              "boss_defeat": true
+            }
+          ],
+          "transition_alternatives": [
+            {
+              "objectives": [],
+              "weak_points": [],
+              "signals": [
+                "SIG-BOS006-DEFEATED"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BOS-011",
+      "kind": "Boss",
+      "phases": [
+        {
+          "phase_id": "BOS011-P1-ROYAL-TAX",
+          "objective_counts": {},
+          "signals": [
+            {
+              "id": "SIG-BOS011-TREASURY-THRESHOLD",
+              "count": 1
+            },
+            {
+              "id": "SIG-BOS011-HEALTH-75",
+              "count": 1,
+              "boss_health_percent": 75
+            }
+          ],
+          "transition_alternatives": [
+            {
+              "objectives": [],
+              "weak_points": [],
+              "signals": [
+                "SIG-BOS011-TREASURY-THRESHOLD"
+              ]
+            },
+            {
+              "objectives": [],
+              "weak_points": [],
+              "signals": [
+                "SIG-BOS011-HEALTH-75"
+              ]
+            }
+          ]
+        },
+        {
+          "phase_id": "BOS011-P2-DEAD-TREASURY",
+          "objective_counts": {},
+          "signals": [],
+          "transition_alternatives": [
+            {
+              "objectives": [
+                "OBJ-BOS011-BREAK-TREASURY-A",
+                "OBJ-BOS011-BREAK-TREASURY-B"
+              ],
+              "weak_points": [],
+              "signals": []
+            }
+          ]
+        },
+        {
+          "phase_id": "BOS011-P3-BLACK-DECREE",
+          "objective_counts": {
+            "OBJ-BOS011-SOLVE-DECREES": 3
+          },
+          "signals": [],
+          "transition_alternatives": [
+            {
+              "objectives": [
+                "OBJ-BOS011-SOLVE-DECREES"
+              ],
+              "weak_points": [],
+              "signals": []
+            }
+          ]
+        },
+        {
+          "phase_id": "BOS011-P4-BANKRUPTCY",
+          "objective_counts": {},
+          "signals": [
+            {
+              "id": "SIG-BOS011-DEFEATED",
+              "count": 1,
+              "boss_defeat": true
+            }
+          ],
+          "transition_alternatives": [
+            {
+              "objectives": [],
+              "weak_points": [],
+              "signals": [
+                "SIG-BOS011-DEFEATED"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "EVT-011",
+      "kind": "WorldEvent",
+      "phases": [
+        {
+          "phase_id": "EVT011-S1-CORPSE-LOTS",
+          "objective_counts": {},
+          "signals": [
+            {
+              "id": "SIG-EVT011-LOT-RESOLVED",
+              "count": 3
+            }
+          ],
+          "transition_alternatives": [
+            {
+              "objectives": [],
+              "weak_points": [],
+              "signals": [
+                "SIG-EVT011-LOT-RESOLVED"
+              ]
+            }
+          ]
+        },
+        {
+          "phase_id": "EVT011-S2-BLACK-AUCTION",
+          "objective_counts": {},
+          "signals": [
+            {
+              "id": "SIG-EVT011-INFLUENCE-RESOLVED",
+              "count": 1
+            }
+          ],
+          "transition_alternatives": [
+            {
+              "objectives": [],
+              "weak_points": [],
+              "signals": [
+                "SIG-EVT011-INFLUENCE-RESOLVED"
+              ]
+            }
+          ]
+        },
+        {
+          "phase_id": "EVT011-S3-CLEAN-LEDGER",
+          "objective_counts": {},
+          "signals": [
+            {
+              "id": "SIG-EVT011-DENIAL-THRESHOLD",
+              "count": 1
+            },
+            {
+              "id": "SIG-EVT011-AUCTION-RESOLVED",
+              "count": 1
+            }
+          ],
+          "transition_alternatives": [
+            {
+              "objectives": [],
+              "weak_points": [],
+              "signals": [
+                "SIG-EVT011-DENIAL-THRESHOLD"
+              ]
+            },
+            {
+              "objectives": [],
+              "weak_points": [],
+              "signals": [
+                "SIG-EVT011-AUCTION-RESOLVED"
+              ]
+            }
+          ]
+        },
+        {
+          "phase_id": "EVT011-S4-MARKET-CRASH",
+          "objective_counts": {},
+          "signals": [
+            {
+              "id": "SIG-EVT011-LEDGER-DESTROYED",
+              "count": 1
+            }
+          ],
+          "transition_alternatives": [
+            {
+              "objectives": [],
+              "weak_points": [],
+              "signals": [
+                "SIG-EVT011-LEDGER-DESTROYED"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

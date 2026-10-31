@@ -19,14 +19,14 @@ aeonfall_transcendent_authority_input_device := class(creative_device):
         CancelInput.PressedEvent.Subscribe(OnCancelPressed)
 
     OnActivatePressed(Agent:agent)<transacts>:void=
-        Activated := AEONFALLTranscendentRuntime.Activate(
+        Activated := GetAEONFALLTranscendentRuntime().Activate(
             Agent,
             AuthorityId
         )
 
         if (not Activated?):
             if:
-                OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
+                OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
             then:
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{
@@ -37,14 +37,14 @@ aeonfall_transcendent_authority_input_device := class(creative_device):
                 )
 
     OnCancelPressed(Agent:agent)<transacts>:void=
-        Ended := AEONFALLTranscendentRuntime.EndForAgent(
+        Ended := GetAEONFALLTranscendentRuntime().EndForAgent(
             Agent,
             "manual_cancel"
         )
 
         if (not Ended?):
             if:
-                OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
+                OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
             then:
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{

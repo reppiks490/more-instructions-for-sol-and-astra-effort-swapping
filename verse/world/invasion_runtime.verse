@@ -1,3 +1,5 @@
+using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 # Dynamic invasion state machine.
 # Physical spawning is requested through runtime events and remains the job of
 # project-bound spawn adapters / NPC Spawners.
@@ -50,11 +52,7 @@ aeonfall_invasion_runtime := class():
             NewWave := Definition.WaveSpawnGroupIds[NewWaveIndex]
         then:
             for (OldGroupId : OldWave):
-                if:
-                    NewWave.Find[OldGroupId]
-                then:
-                    OldGroupId = OldGroupId
-                else:
+                if (not NewWave.Find[OldGroupId]):
                     ReleaseSpawnGroup(
                         Definition.InvasionId,
                         Definition.RegionId,
@@ -63,11 +61,7 @@ aeonfall_invasion_runtime := class():
                     )
 
             for (NewGroupId : NewWave):
-                if:
-                    OldWave.Find[NewGroupId]
-                then:
-                    NewGroupId = NewGroupId
-                else:
+                if (not OldWave.Find[NewGroupId]):
                     AEONFALLRuntimeBus.Emit(
                         aeonfall_runtime_event{
                             EventType := "invasion.spawn_group_requested",
@@ -80,8 +74,8 @@ aeonfall_invasion_runtime := class():
 
     Start(InvasionId:string)<transacts>:logic=
         if:
-            Definition := AEONFALLInvasionRegistry.Get[InvasionId]
-            RegionState := AEONFALLRegionRuntime.GetState[Definition.RegionId]
+            Definition := GetAEONFALLInvasionRegistry().Get[InvasionId]
+            RegionState := GetAEONFALLRegionRuntime().GetState[Definition.RegionId]
             RegionState.HostilityTier >= Definition.MinHostilityTier
         then:
             if:
@@ -103,12 +97,10 @@ aeonfall_invasion_runtime := class():
             if:
                 set States[InvasionId] = Initial
             then:
-                Added := AEONFALLRegionRuntime.AddEvent(
+                Added := GetAEONFALLRegionRuntime().AddEvent(
                     Definition.RegionId,
                     InvasionId
                 )
-                if (Added?):
-                    Added = true
 
                 AEONFALLRegionalEscalation.ReconcileRegion(
                     Definition.RegionId
@@ -172,7 +164,7 @@ aeonfall_invasion_runtime := class():
 
     AdvanceWave(InvasionId:string)<transacts>:logic=
         if:
-            Definition := AEONFALLInvasionRegistry.Get[InvasionId]
+            Definition := GetAEONFALLInvasionRegistry().Get[InvasionId]
             Old := States[InvasionId]
             Old.Active?
         then:
@@ -214,7 +206,7 @@ aeonfall_invasion_runtime := class():
 
     Complete(InvasionId:string)<transacts>:logic=
         if:
-            Definition := AEONFALLInvasionRegistry.Get[InvasionId]
+            Definition := GetAEONFALLInvasionRegistry().Get[InvasionId]
             Old := States[InvasionId]
             Old.Active?
         then:
@@ -231,12 +223,10 @@ aeonfall_invasion_runtime := class():
             if:
                 set States[InvasionId] = Finished
             then:
-                Removed := AEONFALLRegionRuntime.RemoveEvent(
+                Removed := GetAEONFALLRegionRuntime().RemoveEvent(
                     Definition.RegionId,
                     InvasionId
                 )
-                if (Removed?):
-                    Removed = true
 
                 AEONFALLRegionalEscalation.ReconcileRegion(
                     Definition.RegionId
@@ -255,7 +245,7 @@ aeonfall_invasion_runtime := class():
 
     Fail(InvasionId:string)<transacts>:logic=
         if:
-            Definition := AEONFALLInvasionRegistry.Get[InvasionId]
+            Definition := GetAEONFALLInvasionRegistry().Get[InvasionId]
             Old := States[InvasionId]
             Old.Active?
         then:
@@ -272,22 +262,18 @@ aeonfall_invasion_runtime := class():
             if:
                 set States[InvasionId] = Finished
             then:
-                Removed := AEONFALLRegionRuntime.RemoveEvent(
+                Removed := GetAEONFALLRegionRuntime().RemoveEvent(
                     Definition.RegionId,
                     InvasionId
                 )
-                if (Removed?):
-                    Removed = true
 
                 if:
-                    RegionState := AEONFALLRegionRuntime.GetState[Definition.RegionId]
+                    RegionState := GetAEONFALLRegionRuntime().GetState[Definition.RegionId]
                 then:
-                    Corrupted := AEONFALLRegionRuntime.SetCorruption(
+                    Corrupted := GetAEONFALLRegionRuntime().SetCorruption(
                         Definition.RegionId,
                         RegionState.Corruption + Old.CurrentWaveIndex * 10 + 10
                     )
-                    if (Corrupted?):
-                        Corrupted = true
 
                 AEONFALLRegionalEscalation.ReconcileRegion(
                     Definition.RegionId
@@ -357,15 +343,22 @@ aeonfall_invasion_runtime := class():
 
         for (InvasionId : ExpiredIds):
             if:
-                Definition := AEONFALLInvasionRegistry.Get[InvasionId]
+                Definition := GetAEONFALLInvasionRegistry().Get[InvasionId]
             then:
                 if (Definition.TimeoutIsFailure?):
                     Failed := Fail(InvasionId)
-                    if (Failed?):
-                        Failed = true
                 else:
                     Completed := Complete(InvasionId)
-                    if (Completed?):
-                        Completed = true
 
-AEONFALLInvasionRuntime:aeonfall_invasion_runtime = aeonfall_invasion_runtime{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLInvasionRuntimeSessions:weak_map(session, aeonfall_invasion_runtime) = map{}
+
+GetAEONFALLInvasionRuntime()<transacts>:aeonfall_invasion_runtime=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLInvasionRuntimeSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_invasion_runtime{}
+    if (set AEONFALLInvasionRuntimeSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLInvasionRuntime in its session")

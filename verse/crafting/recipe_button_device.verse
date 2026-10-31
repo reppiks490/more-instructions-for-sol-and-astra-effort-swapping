@@ -23,7 +23,7 @@ aeonfall_recipe_button_device := class(creative_device):
 
     OnInteracted(Agent:agent)<transacts>:void=
         if:
-            Recipe := AEONFALLRecipeRegistry.Get[RecipeId]
+            Recipe := GetAEONFALLRecipeRegistry().Get[RecipeId]
         then:
             Crafted := AEONFALLRecipeService.TryCraftUnlock(
                 Agent,

@@ -1,6 +1,7 @@
+using { /Verse.org/Verse }
 using { /Fortnite.com/Characters }
 using { /Verse.org/Simulation }
-using { /Verse.org/SpatialMath }
+using { /UnrealEngine.com/Temporary/SpatialMath }
 
 aeonfall_position_target_context := class:
     ContextId:string = ""
@@ -23,10 +24,19 @@ aeonfall_position_targeting_runtime := class():
         DistanceWorldUnits:float,
         LifetimeSeconds:float
     )<decides><transacts>:string=
+        AbilityId <> ""
         DistanceWorldUnits > 0.0
+        DistanceWorldUnits <= 10000.0
         LifetimeSeconds > 0.0
-        OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
-        Character := Agent.GetFortCharacter()
+        LifetimeSeconds <= 30.0
+        Contexts.Length < 1024
+        OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
+        var OwnerContexts:int = 0
+        for (StoredContextId -> StoredContext : Contexts):
+            if (StoredContext.OwnerKey = OwnerKey):
+                set OwnerContexts += 1
+        OwnerContexts < 16
+        Character := Agent.GetFortCharacter[]
         Character.IsActive[]
 
         Origin := Character.GetViewLocation()
@@ -134,5 +144,15 @@ aeonfall_position_targeting_runtime := class():
 
         set Contexts = Updated
 
-AEONFALLPositionTargetingRuntime:aeonfall_position_targeting_runtime =
-    aeonfall_position_targeting_runtime{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLPositionTargetingRuntimeSessions:weak_map(session, aeonfall_position_targeting_runtime) = map{}
+
+GetAEONFALLPositionTargetingRuntime()<transacts>:aeonfall_position_targeting_runtime=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLPositionTargetingRuntimeSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_position_targeting_runtime{}
+    if (set AEONFALLPositionTargetingRuntimeSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLPositionTargetingRuntime in its session")

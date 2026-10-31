@@ -1,3 +1,4 @@
+using { /Verse.org/Verse }
 using { /Verse.org/Simulation }
 
 # Session actor identity registry.
@@ -54,38 +55,35 @@ aeonfall_actor_registry := class():
             Agent := AgentByKey[RuntimeKey]
         then:
             # Release dependent runtime state while the key is still resolvable.
-            AEONFALLActivationCoordinator.ClearOwnerPending(RuntimeKey)
-            AEONFALLCompanionRuntime.ReleaseAllForOwner(
+            GetAEONFALLActivationCoordinator().ClearOwnerPending(RuntimeKey)
+            GetAEONFALLCompanionRuntime().ReleaseAllForOwner(
                 RuntimeKey,
                 "owner_unregistered"
             )
-            ReleasedAsCompanion := AEONFALLCompanionRuntime.ReleaseByCompanionKey(
+            ReleasedAsCompanion := GetAEONFALLCompanionRuntime().ReleaseByCompanionKey(
                 RuntimeKey,
                 "companion_unregistered"
             )
-            if (ReleasedAsCompanion?):
-                ReleasedAsCompanion = true
 
-            ClearedTarget := AEONFALLTargetingRuntime.Clear(RuntimeKey)
-            if (ClearedTarget?):
-                ClearedTarget = true
+            ClearedTarget := GetAEONFALLTargetingRuntime().Clear(RuntimeKey)
 
-            AEONFALLActorContextRuntime.Clear(RuntimeKey)
-            AEONFALLPositionTargetingRuntime.ClearOwner(RuntimeKey)
-            AEONFALLSpawnRuntime.ClearOwner(
+            GetAEONFALLActorContextRuntime().Clear(RuntimeKey)
+            GetAEONFALLPositionTargetingRuntime().ClearOwner(RuntimeKey)
+            GetAEONFALLSpawnRuntime().ClearOwner(
                 RuntimeKey,
                 "owner_unregistered"
             )
-            AEONFALLUnlockDeliveryService.ClearOwner(RuntimeKey)
-            AEONFALLStatusRuntime.ClearTarget(RuntimeKey)
-            AEONFALLAbilityRuntime.ClearOwner(RuntimeKey)
-            AEONFALLClassRuntime.ClearOwner(RuntimeKey)
-            AEONFALLEncounterParticipation.RemoveRuntimeKey(RuntimeKey)
-            AEONFALLAscensionTrialRuntime.ClearOwner(RuntimeKey)
-            AEONFALLChoosingRuntime.ClearOwner(RuntimeKey)
-            AEONFALLAscendedFormRuntime.ClearOwner(RuntimeKey)
-            AEONFALLTranscendentRuntime.ClearOwner(RuntimeKey)
-            AEONFALLHallOfAscendants.RemoveOwner(RuntimeKey)
+            GetAEONFALLUnlockDeliveryService().ClearOwner(RuntimeKey)
+            GetAEONFALLHordeRuntime().RemoveBrood(RuntimeKey)
+            GetAEONFALLStatusRuntime().ClearTarget(RuntimeKey)
+            GetAEONFALLAbilityRuntime().ClearOwner(RuntimeKey)
+            GetAEONFALLClassRuntime().ClearOwner(RuntimeKey)
+            GetAEONFALLEncounterParticipation().RemoveRuntimeKey(RuntimeKey)
+            GetAEONFALLAscensionTrialRuntime().ClearOwner(RuntimeKey)
+            GetAEONFALLChoosingRuntime().ClearOwner(RuntimeKey)
+            GetAEONFALLAscendedFormRuntime().ClearOwner(RuntimeKey)
+            GetAEONFALLTranscendentRuntime().ClearOwner(RuntimeKey)
+            GetAEONFALLHallOfAscendants().RemoveOwner(RuntimeKey)
 
             var UpdatedAgents:[string]agent = map{}
             var UpdatedKeys:[agent]string = map{}
@@ -134,4 +132,15 @@ aeonfall_actor_registry := class():
 
         false
 
-AEONFALLActorRegistry:aeonfall_actor_registry = aeonfall_actor_registry{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLActorRegistrySessions:weak_map(session, aeonfall_actor_registry) = map{}
+
+GetAEONFALLActorRegistry()<transacts>:aeonfall_actor_registry=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLActorRegistrySessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_actor_registry{}
+    if (set AEONFALLActorRegistrySessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLActorRegistry in its session")

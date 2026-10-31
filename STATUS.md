@@ -32,7 +32,7 @@ This file is generated from the canonical catalog by `tools/build_status.py`.
 - production: 0
 
 ## Premium-Designated Concepts
-- 6 catalog entities currently carry `acquisition.paid=true`.
+- 75 catalog entities currently carry `acquisition.paid=true`.
 - Premium designation is a design flag only; implementation must use Epic-supported entitlement/transaction systems and publication rules.
 
 ## Integrity Gates

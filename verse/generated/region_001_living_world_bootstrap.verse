@@ -73,7 +73,7 @@ aeonfall_region_001_living_world_bootstrap_device := class(creative_device):
         var Ready:logic = false
 
         for (Attempt := 1..20):
-            if (AEONFALLRegionRegistry.IsRegistered["REG-001"]):
+            if (GetAEONFALLRegionRegistry().IsRegistered["REG-001"]):
                 set Ready = true
                 break
             Sleep(0.25)
@@ -87,30 +87,45 @@ aeonfall_region_001_living_world_bootstrap_device := class(creative_device):
             )
             return
 
-        Seeded := AEONFALLRegionRuntime.SetFactionInfluence(
+        Seeded0 := GetAEONFALLRegionRuntime().SetFactionInfluence(
             "REG-001",
             "FAC-002",
             35
         )
-        if (Seeded?):
-            Seeded = true
-        Seeded := AEONFALLRegionRuntime.SetFactionInfluence(
+        if (not Seeded0?):
+            AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                EventType := "bootstrap.region_001_faction_seed_failed",
+                SourceId := "REG-001",
+                TargetId := "FAC-002"
+            })
+            return
+        Seeded1 := GetAEONFALLRegionRuntime().SetFactionInfluence(
             "REG-001",
             "FAC-004",
             25
         )
-        if (Seeded?):
-            Seeded = true
-        Seeded := AEONFALLRegionRuntime.SetFactionInfluence(
+        if (not Seeded1?):
+            AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                EventType := "bootstrap.region_001_faction_seed_failed",
+                SourceId := "REG-001",
+                TargetId := "FAC-004"
+            })
+            return
+        Seeded2 := GetAEONFALLRegionRuntime().SetFactionInfluence(
             "REG-001",
             "FAC-007",
             15
         )
-        if (Seeded?):
-            Seeded = true
+        if (not Seeded2?):
+            AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                EventType := "bootstrap.region_001_faction_seed_failed",
+                SourceId := "REG-001",
+                TargetId := "FAC-007"
+            })
+            return
 
         for (Definition : Region001InvasionDefinitions):
-            Registered := AEONFALLInvasionRegistry.Register(Definition)
+            Registered := GetAEONFALLInvasionRegistry().Register(Definition)
             if (not Registered?):
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{

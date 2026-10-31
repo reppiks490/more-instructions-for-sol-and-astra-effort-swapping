@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "ability_id": "UNI-001",
+  "owner_limit": 1,
+  "display_name_reference": "User-f4d40f7823",
+  "epic_account_id": null,
+  "account_identity_verified": false,
+  "native_player_reference_provisioned": false,
+  "authority_enabled": false,
+  "authorization_note": "The creator identified User-f4d40f7823 as the intended sole god-status owner. This display name records the requested account; cosmetic appearance is not used. Verify and bind this account to the actual native player reference before enabling access.",
+  "owner_identification_source": "creator identified their own player in the supplied Fortnite screenshot"
+}

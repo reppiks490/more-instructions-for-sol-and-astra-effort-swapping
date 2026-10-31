@@ -1,3 +1,4 @@
+using { /Verse.org/Verse }
 using { /Verse.org/Simulation }
 
 # Sequential trial state machine.
@@ -34,8 +35,8 @@ aeonfall_ascension_trial_service := class():
         TrialId:string
     )<transacts>:logic=
         if:
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
-            Definition := AEONFALLAscensionTrialRegistry.Get[TrialId]
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
+            Definition := GetAEONFALLAscensionTrialRegistry().Get[TrialId]
             CanStart[Agent, Definition]
         then:
             if:
@@ -77,10 +78,10 @@ aeonfall_ascension_trial_service := class():
         ObjectiveId:string
     )<transacts>:logic=
         if:
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
             Old := StatesByOwner[OwnerKey]
             Old.Active?
-            Definition := AEONFALLAscensionTrialRegistry.Get[Old.TrialId]
+            Definition := GetAEONFALLAscensionTrialRegistry().Get[Old.TrialId]
         then:
             if:
                 not Definition.ObjectiveIds.Find[ObjectiveId]
@@ -120,8 +121,6 @@ aeonfall_ascension_trial_service := class():
                     UpdatedObjectives.Length >= Definition.ObjectiveIds.Length
                 then:
                     Completed := Complete(Agent)
-                    if (Completed?):
-                        Completed = true
 
                 return true
 
@@ -129,10 +128,10 @@ aeonfall_ascension_trial_service := class():
 
     Complete(Agent:agent)<transacts>:logic=
         if:
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
             Old := StatesByOwner[OwnerKey]
             Old.Active?
-            Definition := AEONFALLAscensionTrialRegistry.Get[Old.TrialId]
+            Definition := GetAEONFALLAscensionTrialRegistry().Get[Old.TrialId]
             Old.CompletedObjectiveIds.Length >= Definition.ObjectiveIds.Length
         then:
             ProfileService.CompleteTrial(
@@ -211,8 +210,6 @@ aeonfall_ascension_trial_service := class():
             OwnerKey,
             "owner_unregistered"
         )
-        if (Failed?):
-            Failed = true
 
         var Updated:[string]aeonfall_ascension_trial_runtime_state = map{}
 
@@ -277,8 +274,16 @@ aeonfall_ascension_trial_service := class():
                 OwnerKey,
                 "time_limit"
             )
-            if (Failed?):
-                Failed = true
 
-AEONFALLAscensionTrialRuntime:aeonfall_ascension_trial_service =
-    aeonfall_ascension_trial_service{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLAscensionTrialRuntimeSessions:weak_map(session, aeonfall_ascension_trial_service) = map{}
+
+GetAEONFALLAscensionTrialRuntime()<transacts>:aeonfall_ascension_trial_service=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLAscensionTrialRuntimeSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_ascension_trial_service{}
+    if (set AEONFALLAscensionTrialRuntimeSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLAscensionTrialRuntime in its session")

@@ -12,6 +12,7 @@ ALLOWED_RUNTIME_DEVICES = {
     "aeonfall_trigger_ability_adapter_device",
     "aeonfall_status_ability_adapter_device",
     "aeonfall_composite_ability_adapter_device",
+    "aeonfall_prop_spawn_adapter_device",
 }
 
 def main() -> int:
@@ -58,6 +59,23 @@ def main() -> int:
 
         strategy = row.get("strategy")
         statuses = source.get("status_ids", [])
+
+        if strategy not in {"canonical_status", "composite_status_and_trigger",
+                             "trigger_device_graph", "native_prop_spawn",
+                             "canonical_status_and_prop_spawn"}:
+            errors.append(f"{aid}: unsupported adapter strategy {strategy}")
+        if strategy in {"native_prop_spawn", "canonical_status_and_prop_spawn"}:
+            if row.get("runtime_device") != "aeonfall_prop_spawn_adapter_device":
+                errors.append(f"{aid}: native spawn strategy must use physical prop adapter")
+            if source.get("target_policy") != "Position" or len(source.get("spawn_ids", [])) != 1:
+                errors.append(f"{aid}: native prop adapter requires one spawn and a position target")
+            if strategy == "canonical_status_and_prop_spawn" and not statuses:
+                errors.append(f"{aid}: composite prop strategy requires canonical statuses")
+            if strategy == "native_prop_spawn" and statuses:
+                errors.append(f"{aid}: statuses require composite prop strategy")
+            physical_source = ROOT / "verse/core/prop_spawn_adapter_device.verse"
+            if not physical_source.is_file():
+                errors.append(f"{aid}: native prop adapter source is missing")
 
         if strategy == "canonical_status":
             if not statuses:

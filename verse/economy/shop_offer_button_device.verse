@@ -23,7 +23,7 @@ aeonfall_shop_offer_button_device := class(creative_device):
 
     OnInteracted(Agent:agent)<transacts>:void=
         if:
-            Offer := AEONFALLShopRegistry.Get[OfferId]
+            Offer := GetAEONFALLShopRegistry().Get[OfferId]
         then:
             Purchased := AEONFALLShopService.TryPurchaseUnlock(
                 Agent,

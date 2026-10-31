@@ -22,7 +22,7 @@ aeonfall_self_ability_input_device := class(creative_device):
         Input.PressedEvent.Subscribe(OnPressed)
 
     OnPressed(Agent:agent)<transacts>:void=
-        Activated := AEONFALLAbilityActivationService.TryActivateSelf(
+        Activated := GetAEONFALLAbilityActivationService().TryActivateSelf(
             Agent,
             AbilityId,
             RuntimeContextId,
@@ -31,7 +31,7 @@ aeonfall_self_ability_input_device := class(creative_device):
 
         if (not Activated?):
             if:
-                OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
+                OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
             then:
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{

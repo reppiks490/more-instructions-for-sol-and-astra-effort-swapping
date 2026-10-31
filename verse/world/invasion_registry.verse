@@ -1,3 +1,5 @@
+using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 aeonfall_invasion_registry := class():
 
     var Definitions:[string]aeonfall_invasion_definition = map{}
@@ -9,7 +11,7 @@ aeonfall_invasion_registry := class():
             Definition.WaveSpawnGroupIds.Length > 0
             Definition.DurationSeconds > 0.0
             Definition.MaxConcurrentAi > 0
-            AEONFALLRegionRegistry.IsRegistered[Definition.RegionId]
+            GetAEONFALLRegionRegistry().IsRegistered[Definition.RegionId]
         then:
             if:
                 Existing := Definitions[Definition.InvasionId]
@@ -34,4 +36,15 @@ aeonfall_invasion_registry := class():
     Get(InvasionId:string)<decides><transacts>:aeonfall_invasion_definition=
         Definitions[InvasionId]
 
-AEONFALLInvasionRegistry:aeonfall_invasion_registry = aeonfall_invasion_registry{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLInvasionRegistrySessions:weak_map(session, aeonfall_invasion_registry) = map{}
+
+GetAEONFALLInvasionRegistry()<transacts>:aeonfall_invasion_registry=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLInvasionRegistrySessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_invasion_registry{}
+    if (set AEONFALLInvasionRegistrySessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLInvasionRegistry in its session")

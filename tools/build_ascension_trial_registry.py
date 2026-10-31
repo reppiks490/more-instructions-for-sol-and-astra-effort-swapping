@@ -47,7 +47,7 @@ def main()->int:
         "",
         "    OnBegin<override>()<suspends>:void=",
         "        for (Definition : AEONFALLAscensionTrialDefinitions):",
-        "            Registered := AEONFALLAscensionTrialRegistry.Register(Definition)",
+        "            Registered := GetAEONFALLAscensionTrialRegistry().Register(Definition)",
         "            if (not Registered?):",
         "                AEONFALLRuntimeBus.Emit(",
         "                    aeonfall_runtime_event{",

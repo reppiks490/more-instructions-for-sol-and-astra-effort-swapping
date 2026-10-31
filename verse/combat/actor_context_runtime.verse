@@ -1,3 +1,4 @@
+using { /Verse.org/Verse }
 using { /Verse.org/Simulation }
 
 aeonfall_actor_context_state := class:
@@ -34,7 +35,7 @@ aeonfall_actor_context_runtime := class():
         EncounterId:string
     )<transacts>:logic=
         if:
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
         then:
             Old := GetState(OwnerKey)
             Updated := aeonfall_actor_context_state:
@@ -64,7 +65,7 @@ aeonfall_actor_context_runtime := class():
         EncounterId:string
     )<transacts>:logic=
         if:
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
         then:
             Old := GetState(OwnerKey)
             NextDepth:int =
@@ -105,7 +106,7 @@ aeonfall_actor_context_runtime := class():
         TransformationId:string
     )<transacts>:logic=
         if:
-            AEONFALLActorRegistry.IsRegistered[OwnerKey]
+            GetAEONFALLActorRegistry().IsRegistered[OwnerKey]
         then:
             Old := GetState(OwnerKey)
 
@@ -150,5 +151,15 @@ aeonfall_actor_context_runtime := class():
 
         set States = Updated
 
-AEONFALLActorContextRuntime:aeonfall_actor_context_runtime =
-    aeonfall_actor_context_runtime{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLActorContextRuntimeSessions:weak_map(session, aeonfall_actor_context_runtime) = map{}
+
+GetAEONFALLActorContextRuntime()<transacts>:aeonfall_actor_context_runtime=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLActorContextRuntimeSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_actor_context_runtime{}
+    if (set AEONFALLActorContextRuntimeSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLActorContextRuntime in its session")
