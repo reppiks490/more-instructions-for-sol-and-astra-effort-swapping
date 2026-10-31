@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG = ROOT / "content" / "catalog"
 STATUS = ROOT / "STATUS.md"
+TRANSCENDENT_ROOT = ROOT / "content" / "transcendent"
 
 TARGETS = [
     ("weapon", "Weapons", 180),
@@ -22,6 +23,11 @@ TARGETS = [
     ("class_skill", "Classes / major skills", 30),
     ("event", "World events / special effects", 30),
 ]
+
+def load_optional_json(path: Path) -> dict:
+    if not path.exists():
+        return {}
+    return json.loads(path.read_text(encoding="utf-8"))
 
 def load_entities() -> list[dict]:
     entities: list[dict] = []
@@ -93,6 +99,34 @@ def render(entities: list[dict]) -> str:
         lines.append(f"- {status}: {by_status[status]}")
 
     paid = [e for e in entities if isinstance(e.get("acquisition"), dict) and e["acquisition"].get("paid") is True]
+
+    trial_doc = load_optional_json(TRANSCENDENT_ROOT / "ascension_trials.json")
+    authority_doc = load_optional_json(TRANSCENDENT_ROOT / "authorities.json")
+    form_doc = load_optional_json(TRANSCENDENT_ROOT / "ascended_forms.json")
+    authority_binding_doc = load_optional_json(TRANSCENDENT_ROOT / "adapter_bindings.json")
+    form_binding_doc = load_optional_json(TRANSCENDENT_ROOT / "ascended_form_adapter_bindings.json")
+    transform_test_doc = load_optional_json(TRANSCENDENT_ROOT / "transformation_launch_tests.json")
+
+    trial_count = len(trial_doc.get("trials", []))
+    authorities = authority_doc.get("authorities", [])
+    authority_count = len(authorities)
+    authority_ability_count = sum(len(a.get("abilities", [])) for a in authorities)
+    forms = form_doc.get("forms", [])
+    form_count = len(forms)
+    form_ability_count = sum(len(f.get("abilities", [])) for f in forms)
+    authority_binding_count = len(authority_binding_doc.get("bindings", []))
+    form_binding_count = len(form_binding_doc.get("bindings", []))
+    transformation_test_count = len(transform_test_doc.get("cases", []))
+
+    runtime_files = [
+        ROOT / "verse/transcendent/ascension_trial_runtime.verse",
+        ROOT / "verse/transcendent/choosing_runtime.verse",
+        ROOT / "verse/transcendent/ascended_form_runtime.verse",
+        ROOT / "verse/transcendent/transcendent_runtime.verse",
+        ROOT / "verse/transcendent/hall_of_ascendants_runtime.verse",
+    ]
+    runtime_file_count = sum(1 for path in runtime_files if path.exists())
+
     lines.extend([
         "",
         "## Premium-Designated Concepts",
@@ -100,15 +134,29 @@ def render(entities: list[dict]) -> str:
         "- Premium designation is a design flag only; implementation must use Epic-supported entitlement/transaction systems and publication rules.",
         "",
         "## Integrity Gates",
-        "- canonical ID uniqueness: enforced by CI",
-        "- canonical dependency existence: enforced by CI",
-        "- declared per-wave entity counts: enforced by CI",
-        "- tier depth / presentation requirements: enforced by CI",
-        "- status dashboard freshness: enforced by CI",
+        "- canonical ID uniqueness / dependencies / per-wave counts: enforced by CI",
+        "- tier depth and presentation requirements: enforced by CI",
+        "- original family minimums: enforced by quota guard",
+        "- normalized-name / repeated-signature diversity checks: enforced by CI",
+        "- Verse static safety and runtime lifecycle invariants: enforced by CI",
+        "- generated registries are regenerated and drift-checked in CI",
+        "- Axiom Heart recursive crafting graph: validated in CI",
+        "- transformation data, adapter coverage, and Launch Session acceptance matrix: validated in CI",
+        "",
+        "## Endgame Runtime",
+        f"- Ascension Trials authored: **{trial_count}**",
+        f"- canonical God/Absolute forms: **{form_count}** with **{form_ability_count}** registered transformation abilities",
+        f"- Transcendent Zero Authorities: **{authority_count}** with **{authority_ability_count}** registered Authority abilities",
+        f"- declared project effect bindings: **{form_binding_count + authority_binding_count}** ({form_binding_count} God/Absolute + {authority_binding_count} Transcendent)",
+        f"- transformation Launch Session acceptance cases: **{transformation_test_count}**",
+        f"- endgame session runtime files present: **{runtime_file_count} / {len(runtime_files)}** (Trials, Choosing, God/Absolute, Transcendent, Hall)",
+        "- transformation identity is explicit, so God/Absolute/Authority abilities cannot satisfy one another's context gates.",
+        "- active transformation/exhaustion state is session-only; permanent eligibility/history stays in the persistent profile.",
+        "- Hall of Ascendants is currently an honest session registry derived from connected players' persistent progress, not a claimed global leaderboard.",
         "",
         "## Production Boundary",
-        "Catalog specification is not equivalent to UEFN implementation.",
-        "The next implementation gates require the UEFN project, asset binding, Verse compilation, Launch Session testing, memory profiling, VFX/animation production, and balance passes.",
+        "Repository runtime scaffolding and CI validation are not equivalent to a finished Fortnite island.",
+        "Project-bound effect graphs, prefabs, Character Definitions, VFX/animation/audio assets, Verse compilation inside the actual UEFN project, multiplayer Launch Session tests, memory/spatial profiling, platform validation, balance, and Epic publication/compliance review still remain.",
         "",
     ])
     return "\n".join(lines)

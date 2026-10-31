@@ -1,3 +1,5 @@
+using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 # Session runtime registry for canonical AEONFALL content.
 # Registration is project-bound: generated/bootstrap code supplies definitions
 # and bindings without changing persistent canonical IDs.
@@ -81,4 +83,15 @@ aeonfall_content_registry := class():
         Definition.Enabled?
         Binding.RuntimeBindingId <> ""
 
-AEONFALLContentRegistry:aeonfall_content_registry = aeonfall_content_registry{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLContentRegistrySessions:weak_map(session, aeonfall_content_registry) = map{}
+
+GetAEONFALLContentRegistry()<transacts>:aeonfall_content_registry=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLContentRegistrySessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_content_registry{}
+    if (set AEONFALLContentRegistrySessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLContentRegistry in its session")

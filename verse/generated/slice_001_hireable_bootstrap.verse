@@ -123,7 +123,7 @@ aeonfall_slice_001_hireable_bootstrap_device := class(creative_device):
 
     OnBegin<override>()<suspends>:void=
         for (Definition : Slice001HireableDefinitions):
-            Registered := AEONFALLHireableRegistry.Register(Definition)
+            Registered := GetAEONFALLHireableRegistry().Register(Definition)
             if (not Registered?):
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{

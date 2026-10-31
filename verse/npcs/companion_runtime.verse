@@ -1,3 +1,4 @@
+using { /Verse.org/Verse }
 using { /Verse.org/Simulation }
 
 # Shared ownership/order runtime for hireables, tameables, and authored summons.
@@ -56,9 +57,9 @@ aeonfall_companion_runtime := class():
 
     GetCompanionLimit(OwnerKey:string)<transacts>:int=
         if:
-            ClassState := AEONFALLClassRuntime.GetState[OwnerKey]
+            ClassState := GetAEONFALLClassRuntime().GetState[OwnerKey]
             ClassState.Active?
-            Definition := AEONFALLClassRegistry.Get[ClassState.ClassId]
+            Definition := GetAEONFALLClassRegistry().Get[ClassState.ClassId]
         then:
             if (Definition.BaseMaxCompanions > 0):
                 Definition.BaseMaxCompanions
@@ -72,8 +73,8 @@ aeonfall_companion_runtime := class():
         CompanionKey:string
     )<transacts>:logic=
         if:
-            AEONFALLActorRegistry.IsRegistered[OwnerKey]
-            AEONFALLActorRegistry.IsRegistered[CompanionKey]
+            GetAEONFALLActorRegistry().IsRegistered[OwnerKey]
+            GetAEONFALLActorRegistry().IsRegistered[CompanionKey]
             CountActive(OwnerKey) < GetCompanionLimit(OwnerKey)
         then:
             if:
@@ -97,7 +98,7 @@ aeonfall_companion_runtime := class():
             SpeciesId <> ""
             ReservationId <> ""
             CanBind(OwnerKey, CompanionKey)?
-            CanonicalId := AEONFALLActorRegistry.GetCanonicalId[CompanionKey]
+            CanonicalId := GetAEONFALLActorRegistry().GetCanonicalId[CompanionKey]
             CanonicalId = SpeciesId
         then:
             Binding := aeonfall_companion_binding:
@@ -122,19 +123,17 @@ aeonfall_companion_runtime := class():
                 set States[CompanionKey] = State
             then:
                 if:
-                    BondStatus := AEONFALLStatusRegistry.Get["STS-008"]
+                    BondStatus := GetAEONFALLStatusRegistry().Get["STS-008"]
                 then:
-                    Applied := AEONFALLStatusRuntime.ApplyStatus(
+                    Applied := GetAEONFALLStatusRuntime().ApplyStatus(
                         CompanionKey,
                         BondStatus,
                         OwnerKey,
                         1
                     )
-                    if (Applied?):
-                        Applied = true
 
                 if:
-                    OwnerAgent := AEONFALLActorRegistry.GetAgent[OwnerKey]
+                    OwnerAgent := GetAEONFALLActorRegistry().GetAgent[OwnerKey]
                 then:
                     if:
                         OwnerPlayer := player[OwnerAgent]
@@ -165,9 +164,9 @@ aeonfall_companion_runtime := class():
         if:
             NpcId <> ""
             CanBind(OwnerKey, CompanionKey)?
-            CanonicalId := AEONFALLActorRegistry.GetCanonicalId[CompanionKey]
+            CanonicalId := GetAEONFALLActorRegistry().GetCanonicalId[CompanionKey]
             CanonicalId = NpcId
-            Definition := AEONFALLHireableRegistry.Get[NpcId]
+            Definition := GetAEONFALLHireableRegistry().Get[NpcId]
             CountActiveEntity(OwnerKey, NpcId) < Definition.MaxSimultaneousPerPlayer
         then:
             Binding := aeonfall_companion_binding:
@@ -192,7 +191,7 @@ aeonfall_companion_runtime := class():
                 set States[CompanionKey] = State
             then:
                 if:
-                    OwnerAgent := AEONFALLActorRegistry.GetAgent[OwnerKey]
+                    OwnerAgent := GetAEONFALLActorRegistry().GetAgent[OwnerKey]
                 then:
                     if:
                         OwnerPlayer := player[OwnerAgent]
@@ -231,7 +230,7 @@ aeonfall_companion_runtime := class():
 
             if (Binding.Kind = aeonfall_companion_kind.Hireable):
                 if:
-                    Definition := AEONFALLHireableRegistry.Get[Binding.CanonicalId]
+                    Definition := GetAEONFALLHireableRegistry().Get[Binding.CanonicalId]
                     Definition.AllowedOrderIds.Find[OrderId(NewOrder)]
                 then:
                     set OrderAllowed = true
@@ -324,18 +323,14 @@ aeonfall_companion_runtime := class():
                 set States = UpdatedStates
 
                 if (Binding.ReservationId <> ""):
-                    Released := AEONFALLClassRuntime.ReleaseReservation(
+                    Released := GetAEONFALLClassRuntime().ReleaseReservation(
                         Binding.ReservationId
                     )
-                    if (Released?):
-                        Released = true
 
-                RemovedBond := AEONFALLStatusRuntime.RemoveStatus(
+                RemovedBond := GetAEONFALLStatusRuntime().RemoveStatus(
                     CompanionKey,
                     "STS-008"
                 )
-                if (RemovedBond?):
-                    RemovedBond = true
 
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{
@@ -384,7 +379,16 @@ aeonfall_companion_runtime := class():
                 CompanionKey,
                 Reason
             )
-            if (Released?):
-                Released = true
 
-AEONFALLCompanionRuntime:aeonfall_companion_runtime = aeonfall_companion_runtime{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLCompanionRuntimeSessions:weak_map(session, aeonfall_companion_runtime) = map{}
+
+GetAEONFALLCompanionRuntime()<transacts>:aeonfall_companion_runtime=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLCompanionRuntimeSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_companion_runtime{}
+    if (set AEONFALLCompanionRuntimeSessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLCompanionRuntime in its session")

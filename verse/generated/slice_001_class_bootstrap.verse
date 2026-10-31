@@ -31,7 +31,7 @@ aeonfall_slice_001_class_bootstrap_device := class(creative_device):
 
     OnBegin<override>()<suspends>:void=
         for (Definition : Slice001ClassDefinitions):
-            Registered := AEONFALLClassRegistry.Register(Definition)
+            Registered := GetAEONFALLClassRegistry().Register(Definition)
             if (not Registered?):
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{

@@ -1,0 +1,197 @@
+{
+  "version": 1,
+  "progression_order": "Level 1000 + broad mastery -> Trials I-IX -> Axiom Heart -> Trial X -> Zero Candidate -> Choosing -> Transcendent Zero",
+  "trials": [
+    {
+      "id": "ASC-TRIAL-001",
+      "index": 1,
+      "name": "Severance",
+      "previous": "",
+      "time_limit_seconds": 1200,
+      "requires_axiom_heart": false,
+      "unlocks_axiom_forge": false,
+      "allows_companions": false,
+      "allows_god_abilities": false,
+      "allows_absolute_abilities": false,
+      "objectives": [
+        "OBJ-ASC001-ENTER-ALONE",
+        "OBJ-ASC001-SURVIVE-THREE-ARCHETYPES",
+        "OBJ-ASC001-CLEAR-WITHOUT-COMPANION"
+      ],
+      "design": "Proves the candidate can operate without hireables, tameables, God skills, or Absolute rule effects."
+    },
+    {
+      "id": "ASC-TRIAL-002",
+      "index": 2,
+      "name": "Collection",
+      "previous": "ASC-TRIAL-001",
+      "time_limit_seconds": 1800,
+      "requires_axiom_heart": false,
+      "unlocks_axiom_forge": false,
+      "allows_companions": true,
+      "allows_god_abilities": true,
+      "allows_absolute_abilities": false,
+      "objectives": [
+        "OBJ-ASC002-DEPOSIT-ECOLOGY-TRIBUTE",
+        "OBJ-ASC002-DEPOSIT-FACTION-TRIBUTE",
+        "OBJ-ASC002-DEPOSIT-BOSS-TRIBUTE",
+        "OBJ-ASC002-DEPOSIT-WORLD-EVENT-TRIBUTE"
+      ],
+      "design": "Tests breadth of acquisition. Tributes must come from distinct ecosystems and activities; one farm route cannot satisfy the trial."
+    },
+    {
+      "id": "ASC-TRIAL-003",
+      "index": 3,
+      "name": "Hunter",
+      "previous": "ASC-TRIAL-002",
+      "time_limit_seconds": 2100,
+      "requires_axiom_heart": false,
+      "unlocks_axiom_forge": false,
+      "allows_companions": true,
+      "allows_god_abilities": true,
+      "allows_absolute_abilities": false,
+      "objectives": [
+        "OBJ-ASC003-HUNT-ELDRITCH",
+        "OBJ-ASC003-HUNT-INFERNAL",
+        "OBJ-ASC003-HUNT-COLOSSAL",
+        "OBJ-ASC003-HUNT-NECROMANTIC",
+        "OBJ-ASC003-HUNT-MYTHICAL"
+      ],
+      "design": "Requires mastery across five threat families with separate counterplay rather than raw damage racing."
+    },
+    {
+      "id": "ASC-TRIAL-004",
+      "index": 4,
+      "name": "Dominion",
+      "previous": "ASC-TRIAL-003",
+      "time_limit_seconds": 2400,
+      "requires_axiom_heart": false,
+      "unlocks_axiom_forge": false,
+      "allows_companions": true,
+      "allows_god_abilities": true,
+      "allows_absolute_abilities": false,
+      "objectives": [
+        "OBJ-ASC004-WIN-FACTION-CONFLICT",
+        "OBJ-ASC004-STABILIZE-CORRUPTED-REGION",
+        "OBJ-ASC004-HOLD-TWO-OBJECTIVES",
+        "OBJ-ASC004-PRESERVE-NEUTRAL-POPULATION"
+      ],
+      "design": "Tests whether power can control territory without simply destroying every faction or ecology present."
+    },
+    {
+      "id": "ASC-TRIAL-005",
+      "index": 5,
+      "name": "Memory",
+      "previous": "ASC-TRIAL-004",
+      "time_limit_seconds": 2400,
+      "requires_axiom_heart": false,
+      "unlocks_axiom_forge": false,
+      "allows_companions": false,
+      "allows_god_abilities": true,
+      "allows_absolute_abilities": false,
+      "objectives": [
+        "OBJ-ASC005-RECOGNIZE-THREE-REMIXED-BOSS-PATTERNS",
+        "OBJ-ASC005-SOLVE-SEQUENCE-WITHOUT-HUD-PROMPT",
+        "OBJ-ASC005-CLEAR-MEMORY-ECHO"
+      ],
+      "design": "Remixes previously learned encounter grammar and scores recognition rather than gear score."
+    },
+    {
+      "id": "ASC-TRIAL-006",
+      "index": 6,
+      "name": "Genesis",
+      "previous": "ASC-TRIAL-005",
+      "time_limit_seconds": 2700,
+      "requires_axiom_heart": false,
+      "unlocks_axiom_forge": false,
+      "allows_companions": true,
+      "allows_god_abilities": true,
+      "allows_absolute_abilities": false,
+      "objectives": [
+        "OBJ-ASC006-BUILD-DEFENSIVE-NETWORK",
+        "OBJ-ASC006-PROTECT-THREE-NODES",
+        "OBJ-ASC006-REPAIR-BROKEN-LINK",
+        "OBJ-ASC006-WIN-USING-CREATED-SPACE"
+      ],
+      "design": "Requires creation and defense: structures, companions, or summoned systems must be used to preserve objectives rather than merely eliminate threats."
+    },
+    {
+      "id": "ASC-TRIAL-007",
+      "index": 7,
+      "name": "Restraint",
+      "previous": "ASC-TRIAL-006",
+      "time_limit_seconds": 3000,
+      "requires_axiom_heart": false,
+      "unlocks_axiom_forge": false,
+      "allows_companions": true,
+      "allows_god_abilities": false,
+      "allows_absolute_abilities": false,
+      "objectives": [
+        "OBJ-ASC007-SPARE-OPTIONAL-TARGET",
+        "OBJ-ASC007-DISABLE-WITHOUT-ULTIMATE",
+        "OBJ-ASC007-SAVE-ALLY-OBJECTIVE",
+        "OBJ-ASC007-CLEAR-UNDER-POWER-CAP"
+      ],
+      "design": "Tests controlled power. The strongest available finishers are locked; success requires precision, protection, and deliberate non-destruction."
+    },
+    {
+      "id": "ASC-TRIAL-008",
+      "index": 8,
+      "name": "Sacrifice",
+      "previous": "ASC-TRIAL-007",
+      "time_limit_seconds": 3300,
+      "requires_axiom_heart": false,
+      "unlocks_axiom_forge": false,
+      "allows_companions": false,
+      "allows_god_abilities": false,
+      "allows_absolute_abilities": false,
+      "objectives": [
+        "OBJ-ASC008-SEAL-HIGHEST-TIER-LOADOUT",
+        "OBJ-ASC008-OFFER-SOVEREIGN-SIGILS",
+        "OBJ-ASC008-CLEAR-WITH-REDUCED-SLOTS",
+        "OBJ-ASC008-RECOVER-SEALED-RELICS"
+      ],
+      "design": "Temporarily seals apex loadout advantages and consumes designated rare trial tributes. Equipment is recovered after resolution; the challenge is loss of access, not destructive deletion."
+    },
+    {
+      "id": "ASC-TRIAL-009",
+      "index": 9,
+      "name": "Convergence",
+      "previous": "ASC-TRIAL-008",
+      "time_limit_seconds": 3600,
+      "requires_axiom_heart": false,
+      "unlocks_axiom_forge": true,
+      "allows_companions": true,
+      "allows_god_abilities": true,
+      "allows_absolute_abilities": true,
+      "objectives": [
+        "OBJ-ASC009-STABILIZE-REGION-A",
+        "OBJ-ASC009-STABILIZE-REGION-B",
+        "OBJ-ASC009-STABILIZE-REGION-C",
+        "OBJ-ASC009-DEFEAT-CONVERGENCE-WARDEN",
+        "OBJ-ASC009-OPEN-AXIOM-FORGE"
+      ],
+      "design": "Coordinates simultaneous pressure across multiple streamed regions, then opens the Axiom Forge path. This is the final trial before the 68,420-acquisition Heart craft."
+    },
+    {
+      "id": "ASC-TRIAL-010",
+      "index": 10,
+      "name": "The Final Witness",
+      "previous": "ASC-TRIAL-009",
+      "time_limit_seconds": 3600,
+      "requires_axiom_heart": true,
+      "unlocks_axiom_forge": false,
+      "allows_companions": false,
+      "allows_god_abilities": false,
+      "allows_absolute_abilities": false,
+      "objectives": [
+        "OBJ-ASC010-WITNESS-FORCE",
+        "OBJ-ASC010-WITNESS-SHELTER",
+        "OBJ-ASC010-WITNESS-CHOICE",
+        "OBJ-ASC010-WITNESS-COMPANY",
+        "OBJ-ASC010-FINAL-WITNESS"
+      ],
+      "design": "Requires the crafted Axiom Heart and tests restraint, protection, consequence, and mastery. Completing it triggers Zero Candidate evaluation; it does not itself grant Transcendent Zero."
+    }
+  ]
+}

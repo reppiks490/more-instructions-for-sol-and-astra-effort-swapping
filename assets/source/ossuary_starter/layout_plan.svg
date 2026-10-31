@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="660" height="1040" viewBox="0 0 660 1040" role="img" aria-label="Ossuary Exchange starter plan in meters">
+<rect width="660" height="1040" fill="#101820"/>
+<style>text{font-family:system-ui,sans-serif;fill:#e8e3d9;font-size:12px}.label{font-size:14px;font-weight:600}.small{font-size:10px}</style>
+<text x="24" y="30" font-size="24">AEONFALL · The Ossuary Exchange</text>
+<text x="24" y="53">Original importable greybox · plan in meters · north ↑</text>
+<polyline points="260.0,956.0 260.0,840.0 260.0,688.0 260.0,520.0 260.0,376.0 260.0,240.0" stroke="#244236" stroke-width="32" fill="none"/>
+<polyline points="260.0,464.0 124.0,464.0" stroke="#244236" stroke-width="32" fill="none"/>
+<rect x="196.0" y="784.0" width="128" height="112" fill="#27313b" stroke="#b2a58f" stroke-width="3"/>
+<text class="small" x="260" y="844" text-anchor="middle">32 × 28m</text>
+<text class="label" x="338.0" y="796.0">Outer Market · faction choice</text>
+<rect x="212.0" y="640.0" width="96" height="96" fill="#27313b" stroke="#b2a58f" stroke-width="3"/>
+<text class="small" x="260" y="692" text-anchor="middle">24 × 24m</text>
+<text class="label" x="322.0" y="652.0">Corpse-economy disruption</text>
+<rect x="220.0" y="448.0" width="80" height="144" fill="#27313b" stroke="#b2a58f" stroke-width="3"/>
+<text class="small" x="260" y="524" text-anchor="middle">20 × 36m</text>
+<text class="label" x="314.0" y="460.0">Necromancer construction gauntlet</text>
+<rect x="76.0" y="416.0" width="96" height="96" fill="#27313b" stroke="#b2a58f" stroke-width="3"/>
+<text class="small" x="124" y="468" text-anchor="middle">24 × 24m</text>
+<text class="label" x="186.0" y="428.0">Red Mason branch · BOS-005</text>
+<rect x="228.0" y="344.0" width="64" height="64" fill="#27313b" stroke="#b2a58f" stroke-width="3"/>
+<text class="small" x="260" y="380" text-anchor="middle">16 × 16m</text>
+<text class="label" x="306.0" y="356.0">King Without Pulse approach</text>
+<rect x="172.0" y="152.0" width="176" height="176" fill="#27313b" stroke="#b2a58f" stroke-width="3"/>
+<text class="small" x="260" y="244" text-anchor="middle">44 × 44m</text>
+<text class="label" x="362.0" y="164.0">Black Throne · BOS-011</text>
+<circle cx="220.0" cy="868.0" r="4" fill="#826950"/>
+<circle cx="220.0" cy="812.0" r="4" fill="#826950"/>
+<circle cx="300.0" cy="868.0" r="4" fill="#826950"/>
+<circle cx="300.0" cy="812.0" r="4" fill="#826950"/>
+<circle cx="232.0" cy="708.0" r="4" fill="#826950"/>
+<circle cx="232.0" cy="668.0" r="4" fill="#826950"/>
+<circle cx="288.0" cy="708.0" r="4" fill="#826950"/>
+<circle cx="288.0" cy="668.0" r="4" fill="#826950"/>
+<circle cx="232.0" cy="568.0" r="4" fill="#aaa08c"/>
+<circle cx="232.0" cy="520.0" r="4" fill="#aaa08c"/>
+<circle cx="232.0" cy="480.0" r="4" fill="#aaa08c"/>
+<circle cx="288.0" cy="568.0" r="4" fill="#aaa08c"/>
+<circle cx="288.0" cy="520.0" r="4" fill="#aaa08c"/>
+<circle cx="288.0" cy="480.0" r="4" fill="#aaa08c"/>
+<circle cx="100.0" cy="488.0" r="4" fill="#6dd3a0"/>
+<circle cx="148.0" cy="440.0" r="4" fill="#6dd3a0"/>
+<circle cx="200.0" cy="288.0" r="4" fill="#aaa08c"/>
+<circle cx="200.0" cy="240.0" r="4" fill="#aaa08c"/>
+<circle cx="200.0" cy="184.0" r="4" fill="#aaa08c"/>
+<circle cx="320.0" cy="288.0" r="4" fill="#aaa08c"/>
+<circle cx="320.0" cy="240.0" r="4" fill="#aaa08c"/>
+<circle cx="320.0" cy="184.0" r="4" fill="#aaa08c"/>
+<circle cx="212.0" cy="224.0" r="4" fill="#6dd3a0"/>
+<circle cx="308.0" cy="224.0" r="4" fill="#6dd3a0"/>
+<circle cx="260.0" cy="180.0" r="4" fill="#b98756"/>
+<polyline points="260.0,956.0 260.0,840.0 260.0,688.0 260.0,520.0 260.0,376.0 260.0,240.0" stroke="#87cbaa" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
+<polyline points="260.0,464.0 124.0,464.0" stroke="#87cbaa" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
+<text x="24" y="965">Portals: 5m clear width at floor · routes tested for 4.8m × 3m envelope</text>
+<text x="24" y="987">Green: treasury anchors · copper: throne · gray: cover · brown: market/crypt props</text>
+<path d="M24 1010h160m-160-4v8m160-8v8" stroke="#e8e3d9"/>
+<text x="190" y="1014">40m</text>
+</svg>

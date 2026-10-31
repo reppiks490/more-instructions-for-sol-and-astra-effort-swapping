@@ -2,7 +2,7 @@ using { /Fortnite.com/Devices }
 using { /Verse.org/Simulation }
 
 # Input bridge for position-targeted abilities. The adapter resolves the
-# position snapshot through AEONFALLPositionTargetingRuntime using ContextId.
+# position snapshot through GetAEONFALLPositionTargetingRuntime() using ContextId.
 aeonfall_position_ability_input_device := class(creative_device):
 
     @editable
@@ -25,17 +25,17 @@ aeonfall_position_ability_input_device := class(creative_device):
 
     OnPressed(Agent:agent)<transacts>:void=
         if:
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
-            ContextId := AEONFALLPositionTargetingRuntime.CreateFromView[
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
+            ContextId := GetAEONFALLPositionTargetingRuntime().CreateFromView[
                 Agent,
                 AbilityId,
                 DistanceWorldUnits,
                 ContextLifetimeSeconds
             ]
         then:
-            Flags := AEONFALLActorContextRuntime.GetFlags(OwnerKey)
+            Flags := GetAEONFALLActorContextRuntime().GetFlags(OwnerKey)
 
-            Activated := AEONFALLAbilityActivationService.TryActivate(
+            Activated := GetAEONFALLAbilityActivationService().TryActivate(
                 Agent,
                 AbilityId,
                 OwnerKey,
@@ -48,12 +48,10 @@ aeonfall_position_ability_input_device := class(creative_device):
             if (Activated?):
                 return
 
-            Removed := AEONFALLPositionTargetingRuntime.Remove(ContextId)
-            if (Removed?):
-                Removed = true
+            Removed := GetAEONFALLPositionTargetingRuntime().Remove(ContextId)
 
         if:
-            OwnerKey := AEONFALLActorRegistry.GetRuntimeKey[Agent]
+            OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
         then:
             AEONFALLRuntimeBus.Emit(
                 aeonfall_runtime_event{

@@ -1,3 +1,5 @@
+using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 # Canonical in-session registry for validated shop offers.
 aeonfall_shop_registry := class():
 
@@ -27,4 +29,15 @@ aeonfall_shop_registry := class():
         Offer := Offers[OfferId]
         Offer.OfferId <> ""
 
-AEONFALLShopRegistry:aeonfall_shop_registry = aeonfall_shop_registry{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLShopRegistrySessions:weak_map(session, aeonfall_shop_registry) = map{}
+
+GetAEONFALLShopRegistry()<transacts>:aeonfall_shop_registry=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLShopRegistrySessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_shop_registry{}
+    if (set AEONFALLShopRegistrySessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLShopRegistry in its session")

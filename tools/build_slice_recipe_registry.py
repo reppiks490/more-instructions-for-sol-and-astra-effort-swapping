@@ -58,7 +58,7 @@ def main() -> int:
         "",
         "    OnBegin<override>()<suspends>:void=",
         "        for (Recipe : Slice001RecipeDefinitions):",
-        "            Registered := AEONFALLRecipeRegistry.Register(Recipe)",
+        "            Registered := GetAEONFALLRecipeRegistry().Register(Recipe)",
         "            if (not Registered?):",
         "                AEONFALLRuntimeBus.Emit(",
         "                    aeonfall_runtime_event{",

@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "region_id": "REG-001",
+  "conflicts": [
+    {
+      "id": "CON-R001-001",
+      "name": "The Reliquary Toll War",
+      "faction_a_id": "FAC-002",
+      "faction_b_id": "FAC-004",
+      "victory_score": 100,
+      "min_hostility_tier": 1,
+      "objective_ids": [
+        "OBJ-CON001-HOLD-TOLLHOUSE",
+        "OBJ-CON001-SECURE-RELIQUARY",
+        "OBJ-CON001-ESCORT-LEDGER"
+      ],
+      "hazard_ids": [
+        "HZ-CON001-BLACK-MARKET-RIFTS"
+      ]
+    },
+    {
+      "id": "CON-R001-002",
+      "name": "The Sanctified Excavation",
+      "faction_a_id": "FAC-004",
+      "faction_b_id": "FAC-007",
+      "victory_score": 120,
+      "min_hostility_tier": 2,
+      "objective_ids": [
+        "OBJ-CON002-PURIFY-DIGSITE",
+        "OBJ-CON002-STEAL-RESEARCH",
+        "OBJ-CON002-HOLD-OSSUARY-WELL"
+      ],
+      "hazard_ids": [
+        "HZ-CON002-VOID-RESEARCH-FIELD",
+        "HZ-CON002-SANCTIFIED-FIRE"
+      ]
+    },
+    {
+      "id": "CON-R001-003",
+      "name": "The Graveglass Intelligence War",
+      "faction_a_id": "FAC-002",
+      "faction_b_id": "FAC-007",
+      "victory_score": 150,
+      "min_hostility_tier": 3,
+      "objective_ids": [
+        "OBJ-CON003-CAPTURE-COURIER",
+        "OBJ-CON003-DECODE-GRAVEGLASS",
+        "OBJ-CON003-SEAL-SMUGGLER-GATE"
+      ],
+      "hazard_ids": [
+        "HZ-CON003-MIRROR-RIFT",
+        "HZ-CON003-NULL-SURVEILLANCE"
+      ]
+    }
+  ]
+}

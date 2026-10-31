@@ -1,0 +1,302 @@
+{
+  "version": 1,
+  "transformation_id": "TRANSCENDENT_ZERO",
+  "rules": [
+    "Only players with the Choosing-completed persistent unlock may activate a Transcendent Authority.",
+    "Only one Authority can be active at a time.",
+    "Active and exhaustion states are session-only and never persist as profile state 2/3.",
+    "Every Authority ability uses the existing two-phase adapter runtime and TransformationOnly resource policy.",
+    "Project-bound adapters must reject unsupported targets, invalid destinations, immune boss mechanics, and missing physical bindings before resources are committed.",
+    "The Reality Engine is the final Authority and requires prior successful Transcendent activations."
+  ],
+  "authorities": [
+    {
+      "id": "AUTH-001",
+      "name": "Axiom Break",
+      "fantasy": "Temporarily challenge one authored local rule without bypassing encounter invariants.",
+      "active_seconds": 30,
+      "cooldown_seconds": 300,
+      "min_history_activations": 0,
+      "presentation_id": "FX_TZ_AXIOM_BREAK",
+      "audio_id": "SFX_TZ_AXIOM_BREAK",
+      "abilities": [
+        {
+          "id": "TZA-001",
+          "name": "Sever Law",
+          "target": "AuthoredObjective",
+          "adapter": "tz_axiom_sever_law",
+          "event": "transcendent.axiom.sever_law",
+          "boss_safe": true
+        },
+        {
+          "id": "TZA-002",
+          "name": "Contradiction Step",
+          "target": "Position",
+          "adapter": "tz_axiom_contradiction_step",
+          "event": "transcendent.axiom.contradiction_step",
+          "boss_safe": true
+        },
+        {
+          "id": "TZA-003",
+          "name": "Proof Collapse",
+          "target": "Area",
+          "adapter": "tz_axiom_proof_collapse",
+          "event": "transcendent.axiom.proof_collapse",
+          "boss_safe": true
+        }
+      ]
+    },
+    {
+      "id": "AUTH-002",
+      "name": "World Devourer",
+      "fantasy": "Consume temporary battlefield structures and hazards into bounded traversal or pressure resources.",
+      "active_seconds": 28,
+      "cooldown_seconds": 330,
+      "min_history_activations": 0,
+      "presentation_id": "FX_TZ_WORLD_DEVOURER",
+      "audio_id": "SFX_TZ_WORLD_DEVOURER",
+      "abilities": [
+        {
+          "id": "TZA-004",
+          "name": "Devour Construct",
+          "target": "AuthoredObjective",
+          "adapter": "tz_devourer_construct",
+          "event": "transcendent.devourer.construct",
+          "boss_safe": true
+        },
+        {
+          "id": "TZA-005",
+          "name": "Hunger Gate",
+          "target": "Position",
+          "adapter": "tz_devourer_hunger_gate",
+          "event": "transcendent.devourer.hunger_gate",
+          "boss_safe": true
+        },
+        {
+          "id": "TZA-006",
+          "name": "Maw of the Field",
+          "target": "Area",
+          "adapter": "tz_devourer_maw_field",
+          "event": "transcendent.devourer.maw_field",
+          "boss_safe": false
+        }
+      ]
+    },
+    {
+      "id": "AUTH-003",
+      "name": "Omnipresence",
+      "fantasy": "Project bounded presence through validated positions, shared sight, and short-lived echoes rather than unrestricted teleportation.",
+      "active_seconds": 24,
+      "cooldown_seconds": 330,
+      "min_history_activations": 0,
+      "presentation_id": "FX_TZ_OMNIPRESENCE",
+      "audio_id": "SFX_TZ_OMNIPRESENCE",
+      "abilities": [
+        {
+          "id": "TZA-007",
+          "name": "Everywhere Step",
+          "target": "Position",
+          "adapter": "tz_omni_everywhere_step",
+          "event": "transcendent.omni.everywhere_step",
+          "boss_safe": true
+        },
+        {
+          "id": "TZA-008",
+          "name": "Witness Echo",
+          "target": "Position",
+          "adapter": "tz_omni_witness_echo",
+          "event": "transcendent.omni.witness_echo",
+          "boss_safe": true
+        },
+        {
+          "id": "TZA-009",
+          "name": "Shared Horizon",
+          "target": "Area",
+          "adapter": "tz_omni_shared_horizon",
+          "event": "transcendent.omni.shared_horizon",
+          "boss_safe": true
+        }
+      ]
+    },
+    {
+      "id": "AUTH-004",
+      "name": "Causality Rejection",
+      "fantasy": "Reject selected authored consequences through bounded counter-events rather than rewinding complete world state.",
+      "active_seconds": 22,
+      "cooldown_seconds": 360,
+      "min_history_activations": 1,
+      "presentation_id": "FX_TZ_CAUSALITY",
+      "audio_id": "SFX_TZ_CAUSALITY",
+      "abilities": [
+        {
+          "id": "TZA-010",
+          "name": "Refuse Momentum",
+          "target": "Self",
+          "adapter": "tz_causality_refuse_momentum",
+          "event": "transcendent.causality.refuse_momentum",
+          "boss_safe": true
+        },
+        {
+          "id": "TZA-011",
+          "name": "Reject Consequence",
+          "target": "AuthoredObjective",
+          "adapter": "tz_causality_reject_consequence",
+          "event": "transcendent.causality.reject_consequence",
+          "boss_safe": true
+        },
+        {
+          "id": "TZA-012",
+          "name": "Return the Echo",
+          "target": "Area",
+          "adapter": "tz_causality_return_echo",
+          "event": "transcendent.causality.return_echo",
+          "boss_safe": false
+        }
+      ]
+    },
+    {
+      "id": "AUTH-005",
+      "name": "Genesis Engine",
+      "fantasy": "Create temporary validated cover, routes, sanctuaries, and support constructs under strict spawn budgets.",
+      "active_seconds": 30,
+      "cooldown_seconds": 330,
+      "min_history_activations": 1,
+      "presentation_id": "FX_TZ_GENESIS",
+      "audio_id": "SFX_TZ_GENESIS",
+      "abilities": [
+        {
+          "id": "TZA-013",
+          "name": "Genesis Rampart",
+          "target": "Position",
+          "adapter": "tz_genesis_rampart",
+          "event": "transcendent.genesis.rampart",
+          "boss_safe": true
+        },
+        {
+          "id": "TZA-014",
+          "name": "Genesis Bridge",
+          "target": "Position",
+          "adapter": "tz_genesis_bridge",
+          "event": "transcendent.genesis.bridge",
+          "boss_safe": true
+        },
+        {
+          "id": "TZA-015",
+          "name": "Genesis Sanctuary",
+          "target": "Area",
+          "adapter": "tz_genesis_sanctuary",
+          "event": "transcendent.genesis.sanctuary",
+          "boss_safe": true
+        }
+      ]
+    },
+    {
+      "id": "AUTH-006",
+      "name": "Pantheon",
+      "fantasy": "Invoke one mutually exclusive divine aspect at a time, emphasizing deliberate role choice instead of stacking every god-state.",
+      "active_seconds": 26,
+      "cooldown_seconds": 390,
+      "min_history_activations": 3,
+      "presentation_id": "FX_TZ_PANTHEON",
+      "audio_id": "SFX_TZ_PANTHEON",
+      "abilities": [
+        {
+          "id": "TZA-016",
+          "name": "Aspect of Shelter",
+          "target": "Area",
+          "adapter": "tz_pantheon_shelter",
+          "event": "transcendent.pantheon.shelter",
+          "boss_safe": true
+        },
+        {
+          "id": "TZA-017",
+          "name": "Aspect of Hunt",
+          "target": "Enemy",
+          "adapter": "tz_pantheon_hunt",
+          "event": "transcendent.pantheon.hunt",
+          "boss_safe": true
+        },
+        {
+          "id": "TZA-018",
+          "name": "Aspect of Passage",
+          "target": "Position",
+          "adapter": "tz_pantheon_passage",
+          "event": "transcendent.pantheon.passage",
+          "boss_safe": true
+        }
+      ]
+    },
+    {
+      "id": "AUTH-007",
+      "name": "The Last Word",
+      "fantasy": "Exercise rare encounter-ending authority only when an authored vulnerability or objective state explicitly permits it.",
+      "active_seconds": 16,
+      "cooldown_seconds": 480,
+      "min_history_activations": 5,
+      "presentation_id": "FX_TZ_LAST_WORD",
+      "audio_id": "SFX_TZ_LAST_WORD",
+      "abilities": [
+        {
+          "id": "TZA-019",
+          "name": "Silence Clause",
+          "target": "Area",
+          "adapter": "tz_last_word_silence_clause",
+          "event": "transcendent.last_word.silence_clause",
+          "boss_safe": true
+        },
+        {
+          "id": "TZA-020",
+          "name": "Final Sentence",
+          "target": "AuthoredObjective",
+          "adapter": "tz_last_word_final_sentence",
+          "event": "transcendent.last_word.final_sentence",
+          "boss_safe": true
+        },
+        {
+          "id": "TZA-021",
+          "name": "End of Argument",
+          "target": "Enemy",
+          "adapter": "tz_last_word_end_argument",
+          "event": "transcendent.last_word.end_argument",
+          "boss_safe": false
+        }
+      ]
+    },
+    {
+      "id": "AUTH-008",
+      "name": "Reality Engine",
+      "fantasy": "The final Authority orchestrates bounded spatial, defensive, traversal, and encounter-state adapters without granting arbitrary engine mutation.",
+      "active_seconds": 20,
+      "cooldown_seconds": 600,
+      "min_history_activations": 8,
+      "presentation_id": "FX_TZ_REALITY_ENGINE",
+      "audio_id": "SFX_TZ_REALITY_ENGINE",
+      "abilities": [
+        {
+          "id": "TZA-022",
+          "name": "Recompile Domain",
+          "target": "Area",
+          "adapter": "tz_reality_recompile_domain",
+          "event": "transcendent.reality.recompile_domain",
+          "boss_safe": true
+        },
+        {
+          "id": "TZA-023",
+          "name": "Rewrite Path",
+          "target": "Position",
+          "adapter": "tz_reality_rewrite_path",
+          "event": "transcendent.reality.rewrite_path",
+          "boss_safe": true
+        },
+        {
+          "id": "TZA-024",
+          "name": "Stabilize Reality",
+          "target": "Area",
+          "adapter": "tz_reality_stabilize",
+          "event": "transcendent.reality.stabilize",
+          "boss_safe": true
+        }
+      ]
+    }
+  ]
+}

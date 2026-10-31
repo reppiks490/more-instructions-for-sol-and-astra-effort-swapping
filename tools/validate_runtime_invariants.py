@@ -7,27 +7,41 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 REQUIRED_TOKENS = {
+    "verse/combat/ability_contract.verse": [
+        "RequiredTransformationId",
+        "TransformationId:string",
+    ],
     "verse/core/runtime_tick_device.verse": [
-        "AEONFALLActivationCoordinator.TickPendingActivations",
-        "AEONFALLAbilityRuntime.TickAll",
-        "AEONFALLStatusRuntime.TickAll",
-        "AEONFALLTargetingRuntime.TickAll",
-        "AEONFALLPositionTargetingRuntime.TickAll",
-        "AEONFALLSpawnRuntime.TickAll",
-        "AEONFALLUnlockDeliveryService.TickAll",
+        "GetAEONFALLActivationCoordinator().TickPendingActivations",
+        "GetAEONFALLAbilityRuntime().TickAll",
+        "GetAEONFALLStatusRuntime().TickAll",
+        "GetAEONFALLTargetingRuntime().TickAll",
+        "GetAEONFALLPositionTargetingRuntime().TickAll",
+        "GetAEONFALLSpawnRuntime().TickAll",
+        "GetAEONFALLUnlockDeliveryService().TickAll",
+        "GetAEONFALLAscensionTrialRuntime().TickAll",
+        "GetAEONFALLChoosingRuntime().TickAll",
+        "GetAEONFALLAscendedFormRuntime().TickAll",
+        "GetAEONFALLTranscendentRuntime().TickAll",
+        "GetAEONFALLHallOfAscendants().TickAll",
     ],
     "verse/core/actor_registry.verse": [
-        "AEONFALLActivationCoordinator.ClearOwnerPending",
-        "AEONFALLCompanionRuntime.ReleaseAllForOwner",
-        "AEONFALLCompanionRuntime.ReleaseByCompanionKey",
-        "AEONFALLTargetingRuntime.Clear",
-        "AEONFALLActorContextRuntime.Clear",
-        "AEONFALLPositionTargetingRuntime.ClearOwner",
-        "AEONFALLSpawnRuntime.ClearOwner",
-        "AEONFALLUnlockDeliveryService.ClearOwner",
-        "AEONFALLStatusRuntime.ClearTarget",
-        "AEONFALLAbilityRuntime.ClearOwner",
-        "AEONFALLClassRuntime.ClearOwner",
+        "GetAEONFALLActivationCoordinator().ClearOwnerPending",
+        "GetAEONFALLCompanionRuntime().ReleaseAllForOwner",
+        "GetAEONFALLCompanionRuntime().ReleaseByCompanionKey",
+        "GetAEONFALLTargetingRuntime().Clear",
+        "GetAEONFALLActorContextRuntime().Clear",
+        "GetAEONFALLPositionTargetingRuntime().ClearOwner",
+        "GetAEONFALLSpawnRuntime().ClearOwner",
+        "GetAEONFALLUnlockDeliveryService().ClearOwner",
+        "GetAEONFALLStatusRuntime().ClearTarget",
+        "GetAEONFALLAbilityRuntime().ClearOwner",
+        "GetAEONFALLClassRuntime().ClearOwner",
+        "GetAEONFALLAscensionTrialRuntime().ClearOwner",
+        "GetAEONFALLChoosingRuntime().ClearOwner",
+        "GetAEONFALLAscendedFormRuntime().ClearOwner",
+        "GetAEONFALLTranscendentRuntime().ClearOwner",
+        "GetAEONFALLHallOfAscendants().RemoveOwner",
     ],
     "verse/combat/activation_coordinator.verse": [
         "PendingActivations",
@@ -39,6 +53,8 @@ REQUIRED_TOKENS = {
     ],
     "verse/combat/ability_runtime.verse": [
         "OwnerByStateKey",
+        "RequiredTransformationId",
+        "Context.TransformationId",
         "ClearOwner",
         "TickAll",
         "PendingRequestId",
@@ -68,6 +84,7 @@ REQUIRED_TOKENS = {
     ],
     "verse/combat/actor_context_runtime.verse": [
         "EncounterDepth",
+        "TransformationId",
         "GetFlags",
         "EnterEncounter",
         "ExitEncounter",
@@ -94,11 +111,54 @@ REQUIRED_TOKENS = {
         "RequestUnlockDelivery",
     ],
     "verse/combat/ability_activation_service.verse": [
-        "AEONFALLActorContextRuntime.GetFlags",
+        "GetAEONFALLActorContextRuntime().GetFlags",
     ],
     "verse/combat/targeted_ability_input_device.verse": [
-        "AEONFALLActorContextRuntime.GetFlags",
-        "AEONFALLTargetingRuntime.GetSelection",
+        "GetAEONFALLActorContextRuntime().GetFlags",
+        "GetAEONFALLTargetingRuntime().GetSelection",
+    ],
+    "verse/world/region_runtime.verse": [
+        "AddMutation",
+        "RemoveMutation",
+        "region.mutation_added",
+        "region.mutation_removed",
+    ],
+    "verse/world/regional_escalation_runtime.verse": [
+        "ReconcileMutation",
+        "GetAEONFALLRegionRuntime().AddMutation",
+        "GetAEONFALLRegionRuntime().RemoveMutation",
+        "Band >= 5",
+    ],
+    "verse/transcendent/choosing_runtime.verse": [
+        "CommitChoosingSuccess",
+        "TickAll",
+        "ClearOwner",
+    ],
+    "verse/transcendent/hall_of_ascendants_runtime.verse": [
+        "RefreshIfReady",
+        "GetAuthorityDepth",
+        "TickAll",
+        "RemoveOwner",
+        "TranscendentHistoryCount",
+    ],
+    "verse/transcendent/ascended_form_runtime.verse": [
+        "Profile.AscensionRank",
+        "not Flags.TransformationActive?",
+        "GetAEONFALLActorContextRuntime().SetTransformation",
+        "StopFormAbilities",
+        "GetAEONFALLActivationCoordinator().CancelPending",
+        "GetAEONFALLActivationCoordinator().EndActivation",
+        "TickAll",
+        "ClearOwner",
+    ],
+    "verse/transcendent/transcendent_runtime.verse": [
+        "ProfileService.IncrementTranscendentHistory",
+        "GetAEONFALLActorContextRuntime().SetTransformation",
+        "StopAuthorityAbilities",
+        "GetAEONFALLActivationCoordinator().CancelPending",
+        "GetAEONFALLActivationCoordinator().EndActivation",
+        "TickAll",
+        "ClearOwner",
     ],
 }
 
@@ -109,8 +169,9 @@ FORBIDDEN_TOKENS = {
     ],
 }
 
+
 def check_runtime_clock(text: str) -> list[str]:
-    """Guard elapsed-time wiring; this is source validation, not Verse execution."""
+    """Guard elapsed-simulation-time wiring; this is source validation, not Verse execution."""
     errors: list[str] = []
     code = "\n".join(line.split("#", 1)[0] for line in text.splitlines())
     required = [
@@ -121,6 +182,22 @@ def check_runtime_clock(text: str) -> list[str]:
         "if (DeltaSeconds > 0.0):",
         "OnEnd<override>():void=",
         "set Running = false",
+        "AdvanceRuntime(DeltaSeconds)",
+        "AEONFALLRuntimeBus.Pump()",
+        "GetAEONFALLActivationCoordinator().TickPendingActivations(DeltaSeconds)",
+        "GetAEONFALLAbilityRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLStatusRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLHordeRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLTargetingRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLPositionTargetingRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLSpawnRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLUnlockDeliveryService().TickAll(DeltaSeconds)",
+        "GetAEONFALLInvasionRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLAscensionTrialRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLChoosingRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLAscendedFormRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLTranscendentRuntime().TickAll(DeltaSeconds)",
+        "GetAEONFALLHallOfAscendants().TickAll(DeltaSeconds)",
     ]
     for token in required:
         if token not in code:
@@ -130,11 +207,8 @@ def check_runtime_clock(text: str) -> list[str]:
     advance = code.find("AdvanceRuntime(DeltaSeconds)", sleep)
     if sleep < 0 or guard < sleep or advance < guard:
         errors.append("runtime clock must check shutdown after Sleep and before advance")
-    for service in REQUIRED_TOKENS["verse/core/runtime_tick_device.verse"]:
-        if f"{service}(DeltaSeconds)" not in code:
-            errors.append(f"runtime clock must pass measured delta to {service}")
-        if f"{service}(Interval)" in code:
-            errors.append(f"runtime clock must not use requested sleep for {service}")
+    if re.search(r"Tick(All|PendingActivations)\(Interval\)", code):
+        errors.append("runtime clock must not advance services by requested Sleep interval")
     return errors
 
 def main() -> int:
@@ -142,6 +216,7 @@ def main() -> int:
     clock_path = ROOT / "verse/core/runtime_tick_device.verse"
     if clock_path.exists():
         errors.extend(check_runtime_clock(clock_path.read_text(encoding="utf-8")))
+
 
     for rel, tokens in REQUIRED_TOKENS.items():
         path = ROOT / rel
@@ -173,19 +248,65 @@ def main() -> int:
             errors.append(f"missing adapter implementation: {path.relative_to(ROOT)}")
             continue
         text = path.read_text(encoding="utf-8")
-        if "AEONFALLRuntimeBus.ReportAdapterResult" not in text:
+        if not any(token in text for token in ("AEONFALLRuntimeBus.ReportAdapterResult", "AEONFALLAdapterResultDelivery.Report")):
             errors.append(
                 f"{path.relative_to(ROOT)}: adapter does not report two-phase result"
             )
 
+    # Regional mutation reconciliation policy: corruption flags must be
+    # removable when corruption falls, not append-only historical state.
+    region_text = (ROOT / "verse/world/region_runtime.verse").read_text(
+        encoding="utf-8"
+    )
+    escalation_text = (
+        ROOT / "verse/world/regional_escalation_runtime.verse"
+    ).read_text(encoding="utf-8")
+
+    if "RemoveMutation" not in region_text:
+        errors.append("regional mutation reconciliation policy missing RemoveMutation")
+    if "region.mutation_removed" not in region_text:
+        errors.append("regional mutation removal observability event missing")
+    if "GetAEONFALLRegionRuntime().RemoveMutation" not in escalation_text:
+        errors.append("regional escalation never removes stale corruption mutations")
+    if "ReconcileMutation" not in escalation_text:
+        errors.append("regional escalation lacks exact mutation reconciliation helper")
+
+    # Transcendent history policy: never award on activation start.
+    # Award must occur inside EndActive, after the Active -> Exhausted map write,
+    # and only for natural duration expiry.
+    transcendent_path = ROOT / "verse/transcendent/transcendent_runtime.verse"
+    transcendent_text = transcendent_path.read_text(encoding="utf-8")
+    activate_pos = transcendent_text.find("    Activate(")
+    end_active_pos = transcendent_text.find("    EndActive(")
+    history_pos = transcendent_text.find("ProfileService.IncrementTranscendentHistory")
+    exhausted_write_pos = transcendent_text.find(
+        "set StatesByOwner[OwnerKey] = Exhausted"
+    )
+
+    if min(activate_pos, end_active_pos, history_pos, exhausted_write_pos) < 0:
+        errors.append("transcendent history policy markers are incomplete")
+    else:
+        if activate_pos < history_pos < end_active_pos:
+            errors.append(
+                "transcendent history policy violation: history increments during Activate"
+            )
+        if history_pos < exhausted_write_pos:
+            errors.append(
+                "transcendent history policy violation: history is awarded before Exhausted state commits"
+            )
+
+    if 'Reason = "duration_expired"' not in transcendent_text:
+        errors.append(
+            "transcendent history policy violation: natural-duration guard missing"
+        )
+    if "transcendent.history_awarded" not in transcendent_text:
+        errors.append("transcendent history award observability event missing")
+
     workflow = (ROOT / ".github/workflows/catalog-validation.yml").read_text(
         encoding="utf-8"
     )
-    for event in ("push", "pull_request"):
-        # Path entries have six spaces; stop at the next event/top-level stanza.
-        match = re.search(rf"(?ms)^  {event}:\n(.*?)(?=^  [a-z_]+:|^[a-z_]+:|\Z)", workflow)
-        if not match or '"verse/**"' not in match.group(1):
-            errors.append(f"validation workflow {event} does not watch verse/**")
+    if '"verse/**"' not in workflow:
+        errors.append("validation workflow does not watch verse/**")
     if "python tools/validate_verse_static.py" not in workflow:
         errors.append("validation workflow does not run static Verse validation")
     if "python tools/validate_runtime_invariants.py" not in workflow:

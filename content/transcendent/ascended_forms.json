@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "rules": [
+    "God form requires AscensionRank >= 1.",
+    "Absolute form requires AscensionRank >= 2.",
+    "God, Absolute, and Transcendent Zero are mutually exclusive session transformations.",
+    "All form abilities use TransformationOnly resources with an exact RequiredTransformationId.",
+    "Physical world-bending effects are bounded project adapters; no ability may bypass authored boss immunity, destination validation, publication rules, or performance budgets."
+  ],
+  "forms": [
+    {
+      "id": "FORM-GOD",
+      "name": "God Form",
+      "transformation_id": "ASCENDED_GOD",
+      "required_ascension_rank": 1,
+      "active_seconds": 45,
+      "cooldown_seconds": 120,
+      "fantasy": "Temporary godhood emphasizes domain control, elemental authority, survival, and colossal presence without rewriting core encounter laws.",
+      "presentation_id": "FX_FORM_GOD",
+      "audio_id": "SFX_FORM_GOD",
+      "abilities": [
+        {
+          "id": "GOD-ABL-001",
+          "name": "Storm Genesis",
+          "target": "Area",
+          "adapter": "god_storm_genesis",
+          "event": "god.storm_genesis",
+          "boss_safe": true,
+          "guardrail": "Creates a bounded authored storm domain; never changes global island weather state without the event director."
+        },
+        {
+          "id": "GOD-ABL-002",
+          "name": "Gravity Throne",
+          "target": "Area",
+          "adapter": "god_gravity_throne",
+          "event": "god.gravity_throne",
+          "boss_safe": true,
+          "guardrail": "Applies authored movement/gravity-like pressure only to eligible actors and project-bound zones."
+        },
+        {
+          "id": "GOD-ABL-003",
+          "name": "Phoenix Ascension",
+          "target": "Self",
+          "adapter": "god_phoenix_ascension",
+          "event": "god.phoenix_ascension",
+          "boss_safe": true,
+          "guardrail": "Provides bounded recovery/rebirth behavior through supported health, teleport, or checkpoint logic; no unrestricted immortality."
+        },
+        {
+          "id": "GOD-ABL-004",
+          "name": "Celestial Mandate",
+          "target": "Ally",
+          "adapter": "god_celestial_mandate",
+          "event": "god.celestial_mandate",
+          "boss_safe": true,
+          "guardrail": "Grants temporary support authority to an eligible ally without duplicating permanent unlocks."
+        },
+        {
+          "id": "GOD-ABL-005",
+          "name": "Titanheart Edict",
+          "target": "Self",
+          "adapter": "god_titanheart_edict",
+          "event": "god.titanheart_edict",
+          "boss_safe": true,
+          "guardrail": "Creates temporary stagger/fortitude authority; does not make the player universally immune."
+        }
+      ]
+    },
+    {
+      "id": "FORM-ABSOLUTE",
+      "name": "Absolute Form",
+      "transformation_id": "ASCENDED_ABSOLUTE",
+      "required_ascension_rank": 2,
+      "active_seconds": 30,
+      "cooldown_seconds": 240,
+      "fantasy": "Absolute form temporarily bends local encounter rules and spatial relationships, categorically above God while remaining below Transcendent Zero.",
+      "presentation_id": "FX_FORM_ABSOLUTE",
+      "audio_id": "SFX_FORM_ABSOLUTE",
+      "abilities": [
+        {
+          "id": "ABS-ABL-001",
+          "name": "Chrono Rupture",
+          "target": "Area",
+          "adapter": "absolute_chrono_rupture",
+          "event": "absolute.chrono_rupture",
+          "boss_safe": false,
+          "guardrail": "Uses bounded slow, replay, or timing-window simulation; never rewinds authoritative world state."
+        },
+        {
+          "id": "ABS-ABL-002",
+          "name": "Void Dominion",
+          "target": "Area",
+          "adapter": "absolute_void_dominion",
+          "event": "absolute.void_dominion",
+          "boss_safe": true,
+          "guardrail": "Suppresses only explicitly eligible temporary constructs, summons, or hazards inside a bounded domain."
+        },
+        {
+          "id": "ABS-ABL-003",
+          "name": "Axiom Dominion",
+          "target": "AuthoredObjective",
+          "adapter": "absolute_axiom_dominion",
+          "event": "absolute.axiom_dominion",
+          "boss_safe": true,
+          "guardrail": "Changes one whitelisted encounter rule through the objective/controller that owns that rule."
+        },
+        {
+          "id": "ABS-ABL-004",
+          "name": "Boundary Rewrite",
+          "target": "Position",
+          "adapter": "absolute_boundary_rewrite",
+          "event": "absolute.boundary_rewrite",
+          "boss_safe": true,
+          "guardrail": "Creates validated temporary routes, phase gates, or boundary changes; never teleports into invalid geometry."
+        },
+        {
+          "id": "ABS-ABL-005",
+          "name": "Sovereign Paradox",
+          "target": "Area",
+          "adapter": "absolute_sovereign_paradox",
+          "event": "absolute.sovereign_paradox",
+          "boss_safe": false,
+          "guardrail": "Combines authored effects only when their encounter contracts explicitly permit the interaction."
+        }
+      ]
+    }
+  ]
+}

@@ -24,6 +24,10 @@ aeonfall_target_policy := enum:
     Area
     AuthoredObjective
 
+aeonfall_activation_lifetime := enum:
+    Instant
+    Managed
+
 aeonfall_ability_definition := class:
     AbilityId:string = ""
     DisplayName:string = ""
@@ -45,6 +49,9 @@ aeonfall_ability_definition := class:
     # Context gates.
     RequiresEncounterContext:logic = false
     RequiresTransformationContext:logic = false
+    # Optional exact transformation identity. Empty means any valid
+    # transformation context satisfies TransformationOnly.
+    RequiredTransformationId:string = ""
     AllowWhileActive:logic = false
 
     # Optional class-resource gate. ExternalClassResource means this is the
@@ -61,6 +68,9 @@ aeonfall_ability_definition := class:
     AudioId:string = ""
     AdapterId:string = ""
     BossSafe:logic = true
+    # Instant actions retain their cooldown/status/spawn state but do not keep
+    # the activation lock. Managed actions end through the coordinator.
+    ActivationLifetime:aeonfall_activation_lifetime = aeonfall_activation_lifetime.Instant
 
 aeonfall_ability_runtime_state := class:
     AbilityId:string = ""
@@ -77,3 +87,4 @@ aeonfall_ability_runtime_state := class:
 aeonfall_ability_context_flags := class:
     EncounterActive:logic = false
     TransformationActive:logic = false
+    TransformationId:string = ""

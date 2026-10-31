@@ -1,3 +1,4 @@
+using { /Verse.org/Verse }
 using { /Verse.org/Simulation }
 
 # Hireable contract registry and recruitment runtime.
@@ -29,7 +30,18 @@ aeonfall_hireable_registry := class():
     Get(NpcId:string)<decides><transacts>:aeonfall_companion_contract=
         Definitions[NpcId]
 
-AEONFALLHireableRegistry:aeonfall_hireable_registry = aeonfall_hireable_registry{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLHireableRegistrySessions:weak_map(session, aeonfall_hireable_registry) = map{}
+
+GetAEONFALLHireableRegistry()<transacts>:aeonfall_hireable_registry=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLHireableRegistrySessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_hireable_registry{}
+    if (set AEONFALLHireableRegistrySessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLHireableRegistry in its session")
 
 aeonfall_hiring_runtime := class():
 
@@ -41,7 +53,7 @@ aeonfall_hiring_runtime := class():
         Definition:aeonfall_companion_contract
     )<transacts>:logic=
         if:
-            OwnerAgent := AEONFALLActorRegistry.GetAgent[OwnerKey]
+            OwnerAgent := GetAEONFALLActorRegistry().GetAgent[OwnerKey]
             OwnerPlayer := player[OwnerAgent]
             Profile := ProfileService.GetProfile[OwnerPlayer]
         then:
@@ -100,15 +112,15 @@ aeonfall_hiring_runtime := class():
         NpcRuntimeKey:string
     )<transacts>:logic=
         if:
-            NpcId := AEONFALLActorRegistry.GetCanonicalId[NpcRuntimeKey]
-            Definition := AEONFALLHireableRegistry.Get[NpcId]
+            NpcId := GetAEONFALLActorRegistry().GetCanonicalId[NpcRuntimeKey]
+            Definition := GetAEONFALLHireableRegistry().Get[NpcId]
             MeetsFirstRecruitmentRequirements(OwnerKey, Definition)?
-            AEONFALLCompanionRuntime.CanBind(
+            GetAEONFALLCompanionRuntime().CanBind(
                 OwnerKey,
                 NpcRuntimeKey
             )?
         then:
-            Hired := AEONFALLCompanionRuntime.BindHireable(
+            Hired := GetAEONFALLCompanionRuntime().BindHireable(
                 OwnerKey,
                 NpcRuntimeKey,
                 NpcId

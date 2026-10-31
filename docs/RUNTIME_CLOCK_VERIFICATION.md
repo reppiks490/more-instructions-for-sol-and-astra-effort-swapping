@@ -1,10 +1,10 @@
 # Runtime clock continuation — 2026-10-07
 
-The canonical scheduler previously advanced all seven services by the requested sleep
+The canonical scheduler previously advanced runtime services by the requested sleep
 interval. A delayed frame therefore extended cooldowns, status lifetimes, targeting
 leases, spawn reservations, and pending activation/delivery deadlines. The scheduler
-now samples simulation elapsed time on each wake and sends one measured delta to every
-service. It does not drop elapsed simulation time or generate a catch-up event burst.
+now samples simulation elapsed time on each wake and sends one measured delta to every current finite-time runtime service, including
+horde, invasion, ascension, choosing and transformation systems. It does not drop elapsed simulation time or generate a catch-up event burst.
 OnEnd closes the running guard; the sleeper checks it before further work.
 
 Catalog validation now runs for ordinary Verse changes on pull requests, as well as

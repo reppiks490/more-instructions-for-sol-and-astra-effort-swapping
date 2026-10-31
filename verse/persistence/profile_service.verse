@@ -7,24 +7,32 @@ using { /Verse.org/Verse }
 # counts represent unique accomplishments rather than repeated writes.
 aeonfall_profile_service := class():
 
+    # Missing/inactive records fail instead of fabricating an empty profile.
     GetProfile(Agent:agent)<decides><transacts>:aeonfall_player_profile=
-        var Result:aeonfall_player_profile = aeonfall_player_profile{}
-        if:
-            Player := player[Agent]
-            Saved := AEONFALLPlayerProfiles[Player]
-            set Result = MakeAEONFALLPlayerProfile(Saved)
-        Result
+        Player := player[Agent]
+        Player.IsActive[]
+        Saved := AEONFALLPlayerProfiles[Player]
+        MakeAEONFALLPlayerProfile(Saved)
 
-    SaveProfile(Player:player, Candidate:aeonfall_player_profile)<transacts>:void=
+    # The acknowledgement is the only success gate before irreversible grants.
+    TrySaveProfile(Player:player, Candidate:aeonfall_player_profile)<transacts>:logic=
         if:
-            FitsInPlayerMap(Candidate)
-        then:
+            Player.IsActive[]
+            FitsInPlayerMap[Candidate]
             set AEONFALLPlayerProfiles[Player] = Candidate
+        then:
+            return true
+        false
+
+    # Compatibility wrapper for legacy non-delivery setters.
+    SaveProfile(Player:player, Candidate:aeonfall_player_profile)<transacts>:void=
+        Saved := TrySaveProfile(Player, Candidate)
 
     GrantXP(Agent:agent, Amount:int)<transacts>:void=
         if:
             Amount > 0
             Player := player[Agent]
+            Player.IsActive[]
             Old := AEONFALLPlayerProfiles[Player]
         then:
             NewXP:int = Old.XP + Amount
@@ -34,7 +42,9 @@ aeonfall_profile_service := class():
                 MakeAEONFALLPlayerProfile<constructor>(Old)
                 XP := NewXP
                 Level := NewLevel
-            SaveProfile(Player, Candidate)
+            Saved := TrySaveProfile(Player, Candidate)
+            if (not Saved?):
+                return
 
             AEONFALLRuntimeBus.Emit(
                 aeonfall_runtime_event{
@@ -49,6 +59,7 @@ aeonfall_profile_service := class():
         if:
             Amount > 0
             Player := player[Agent]
+            Player.IsActive[]
             Old := AEONFALLPlayerProfiles[Player]
         then:
             Candidate := aeonfall_player_profile:
@@ -59,6 +70,7 @@ aeonfall_profile_service := class():
     UnlockEntity(Agent:agent, EntityId:string)<transacts>:void=
         if:
             Player := player[Agent]
+            Player.IsActive[]
             Old := AEONFALLPlayerProfiles[Player]
         then:
             if:
@@ -74,6 +86,7 @@ aeonfall_profile_service := class():
     MasterClass(Agent:agent, ClassId:string)<transacts>:void=
         if:
             Player := player[Agent]
+            Player.IsActive[]
             Old := AEONFALLPlayerProfiles[Player]
         then:
             if:
@@ -89,6 +102,7 @@ aeonfall_profile_service := class():
     CompleteBoss(Agent:agent, BossId:string)<transacts>:void=
         if:
             Player := player[Agent]
+            Player.IsActive[]
             Old := AEONFALLPlayerProfiles[Player]
         then:
             if:
@@ -104,6 +118,7 @@ aeonfall_profile_service := class():
     CompleteWorldEvent(Agent:agent, EventId:string)<transacts>:void=
         if:
             Player := player[Agent]
+            Player.IsActive[]
             Old := AEONFALLPlayerProfiles[Player]
         then:
             if:
@@ -119,6 +134,7 @@ aeonfall_profile_service := class():
     CompleteTrial(Agent:agent, TrialId:string)<transacts>:void=
         if:
             Player := player[Agent]
+            Player.IsActive[]
             Old := AEONFALLPlayerProfiles[Player]
         then:
             if:
@@ -134,6 +150,7 @@ aeonfall_profile_service := class():
     DiscoverPoi(Agent:agent, PoiId:string)<transacts>:void=
         if:
             Player := player[Agent]
+            Player.IsActive[]
             Old := AEONFALLPlayerProfiles[Player]
         then:
             if:
@@ -149,6 +166,7 @@ aeonfall_profile_service := class():
     UnlockHireable(Agent:agent, NpcId:string)<transacts>:void=
         if:
             Player := player[Agent]
+            Player.IsActive[]
             Old := AEONFALLPlayerProfiles[Player]
         then:
             if:
@@ -164,6 +182,7 @@ aeonfall_profile_service := class():
     RecordTamedSpecies(Agent:agent, SpeciesId:string)<transacts>:void=
         if:
             Player := player[Agent]
+            Player.IsActive[]
             Old := AEONFALLPlayerProfiles[Player]
         then:
             if:
@@ -180,6 +199,7 @@ aeonfall_profile_service := class():
         if:
             NewCount >= 0
             Player := player[Agent]
+            Player.IsActive[]
             Old := AEONFALLPlayerProfiles[Player]
         then:
             var UpdatedLedger:[string]int = Old.MaterialLedger
@@ -195,6 +215,7 @@ aeonfall_profile_service := class():
         if:
             Reputation >= 0
             Player := player[Agent]
+            Player.IsActive[]
             Old := AEONFALLPlayerProfiles[Player]
         then:
             var UpdatedReputation:[string]int = Old.FactionReputation
@@ -214,6 +235,7 @@ aeonfall_profile_service := class():
     )<transacts>:void=
         if:
             Player := player[Agent]
+            Player.IsActive[]
             Old := AEONFALLPlayerProfiles[Player]
         then:
             Candidate := aeonfall_player_profile:
@@ -227,6 +249,7 @@ aeonfall_profile_service := class():
         if:
             NewRank >= 0
             Player := player[Agent]
+            Player.IsActive[]
             Old := AEONFALLPlayerProfiles[Player]
         then:
             Candidate := aeonfall_player_profile:
@@ -237,6 +260,7 @@ aeonfall_profile_service := class():
     SetAxiomHeartCrafted(Agent:agent, IsCrafted:logic)<transacts>:void=
         if:
             Player := player[Agent]
+            Player.IsActive[]
             Old := AEONFALLPlayerProfiles[Player]
         then:
             Candidate := aeonfall_player_profile:
@@ -247,6 +271,7 @@ aeonfall_profile_service := class():
     SetZeroCandidate(Agent:agent, IsCandidate:logic)<transacts>:void=
         if:
             Player := player[Agent]
+            Player.IsActive[]
             Old := AEONFALLPlayerProfiles[Player]
         then:
             Candidate := aeonfall_player_profile:
@@ -261,6 +286,7 @@ aeonfall_profile_service := class():
     SetMaterialLedger(Agent:agent, NewLedger:[string]int)<transacts>:void=
         if:
             Player := player[Agent]
+            Player.IsActive[]
             Old := AEONFALLPlayerProfiles[Player]
         then:
             Candidate := aeonfall_player_profile:
@@ -275,9 +301,11 @@ aeonfall_profile_service := class():
         Agent:agent,
         NewLedger:[string]int,
         UnlockEntityId:string
-    )<transacts>:void=
+    )<transacts>:logic=
         if:
+            UnlockEntityId <> ""
             Player := player[Agent]
+            Player.IsActive[]
             Old := AEONFALLPlayerProfiles[Player]
         then:
             var UpdatedUnlocks:[]string = Old.UnlockedEntityIds
@@ -292,15 +320,177 @@ aeonfall_profile_service := class():
                 MakeAEONFALLPlayerProfile<constructor>(Old)
                 MaterialLedger := NewLedger
                 UnlockedEntityIds := UpdatedUnlocks
-            SaveProfile(Player, Candidate)
+            return TrySaveProfile(Player, Candidate)
+        false
 
 
     SetEquippedClass(Agent:agent, ClassId:string)<transacts>:void=
         if:
             Player := player[Agent]
+            Player.IsActive[]
             Old := AEONFALLPlayerProfiles[Player]
         then:
             Candidate := aeonfall_player_profile:
                 MakeAEONFALLPlayerProfile<constructor>(Old)
                 EquippedClassId := ClassId
             SaveProfile(Player, Candidate)
+
+
+    # Atomically commits the durable portion of one first-clear encounter reward.
+    # This is deliberately self-idempotent: even if two completion signals race,
+    # a profile that already contains the boss/event completion is rejected before
+    # any XP, mastery, unlock, or material mutation is constructed.
+    CommitEncounterFirstClearReward(
+        Agent:agent,
+        EncounterId:string,
+        IsBoss:logic,
+        XPReward:int,
+        MasteryReward:int,
+        UnlockIds:[]string,
+        MaterialRewards:[]aeonfall_material_cost
+    )<transacts>:logic=
+        if:
+            EncounterId <> ""
+            XPReward >= 0
+            MasteryReward >= 0
+            Player := player[Agent]
+            Player.IsActive[]
+            Old := AEONFALLPlayerProfiles[Player]
+        then:
+            if (IsBoss?):
+                if:
+                    Old.CompletedBossIds.Find[EncounterId]
+                then:
+                    return false
+            else:
+                if:
+                    Old.CompletedWorldEventIds.Find[EncounterId]
+                then:
+                    return false
+
+            var UpdatedBossIds:[]string = Old.CompletedBossIds
+            var UpdatedEventIds:[]string = Old.CompletedWorldEventIds
+
+            if (IsBoss?):
+                set UpdatedBossIds = Old.CompletedBossIds + array{EncounterId}
+            else:
+                set UpdatedEventIds = Old.CompletedWorldEventIds + array{EncounterId}
+
+            var UpdatedUnlocks:[]string = Old.UnlockedEntityIds
+            for (UnlockId : UnlockIds):
+                if (not UpdatedUnlocks.Find[UnlockId]):
+                    set UpdatedUnlocks = UpdatedUnlocks + array{UnlockId}
+
+            var UpdatedLedger:[string]int = Old.MaterialLedger
+            var Valid:logic = true
+
+            for (Reward : MaterialRewards):
+                if:
+                    Reward.MaterialId <> ""
+                    Reward.Amount > 0
+                then:
+                    var Current:int = 0
+                    if:
+                        Stored := UpdatedLedger[Reward.MaterialId]
+                    then:
+                        set Current = Stored
+
+                    if:
+                        set UpdatedLedger[Reward.MaterialId] =
+                            Current + Reward.Amount
+                    then:
+                        set Valid = Valid
+                    else:
+                        set Valid = false
+                else:
+                    set Valid = false
+
+            if (not Valid?):
+                return false
+
+            NewXP:int = Old.XP + XPReward
+            NewLevel:int = AEONFALLGetLevelForXP(NewXP)
+
+            Candidate := aeonfall_player_profile:
+                MakeAEONFALLPlayerProfile<constructor>(Old)
+                Level := NewLevel
+                XP := NewXP
+                MasteryPoints := Old.MasteryPoints + MasteryReward
+                UnlockedEntityIds := UpdatedUnlocks
+                CompletedBossIds := UpdatedBossIds
+                CompletedWorldEventIds := UpdatedEventIds
+                MaterialLedger := UpdatedLedger
+
+            Saved := TrySaveProfile(Player, Candidate)
+            if (Saved?):
+                AEONFALLRuntimeBus.Emit(
+                    aeonfall_runtime_event{
+                        EventType := "progression.encounter_first_clear_committed",
+                        SourceId := EncounterId,
+                        Amount := XPReward,
+                        ContextId := "{NewLevel}"
+                    }
+                )
+                return true
+
+            AEONFALLRuntimeBus.Emit(
+                aeonfall_runtime_event{
+                    EventType := "progression.encounter_first_clear_rejected",
+                    SourceId := EncounterId,
+                    ContextId := "profile_commit_failed"
+                }
+            )
+
+        false
+
+
+    # Marks the permanent outcome of the Choosing.
+    # Persistent TranscendentState uses:
+    # 0 = not unlocked
+    # 1 = Choosing passed / Transcendent Zero activation unlocked
+    # Active/cooldown state is intentionally session-only.
+    CommitChoosingSuccess(Agent:agent)<transacts>:logic=
+        if:
+            Player := player[Agent]
+            Player.IsActive[]
+            Old := AEONFALLPlayerProfiles[Player]
+            Old.IsZeroCandidate?
+            Old.AxiomHeartCrafted?
+            Old.AscensionRank >= 2
+        then:
+            if (Old.TranscendentState = 1):
+                return false
+
+            Candidate := aeonfall_player_profile:
+                MakeAEONFALLPlayerProfile<constructor>(Old)
+                TranscendentState := 1
+
+            Saved := TrySaveProfile(Player, Candidate)
+            if (Saved?):
+                AEONFALLRuntimeBus.Emit(
+                    aeonfall_runtime_event{
+                        EventType := "transcendent.choosing_committed",
+                        SourceId := "player"
+                    }
+                )
+                return true
+
+        false
+
+    IncrementTranscendentHistory(Agent:agent)<transacts>:logic=
+        if:
+            Player := player[Agent]
+            Player.IsActive[]
+            Old := AEONFALLPlayerProfiles[Player]
+            Old.TranscendentState = 1
+        then:
+            Candidate := aeonfall_player_profile:
+                MakeAEONFALLPlayerProfile<constructor>(Old)
+                TranscendentHistoryCount :=
+                    Old.TranscendentHistoryCount + 1
+
+            Saved := TrySaveProfile(Player, Candidate)
+            if (Saved?):
+                return true
+
+        false

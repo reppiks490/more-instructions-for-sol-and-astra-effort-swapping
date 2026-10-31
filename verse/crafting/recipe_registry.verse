@@ -1,3 +1,5 @@
+using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 # Canonical in-session registry for validated crafting recipes.
 aeonfall_recipe_registry := class():
 
@@ -28,4 +30,15 @@ aeonfall_recipe_registry := class():
         Recipe := Recipes[RecipeId]
         Recipe.RecipeId <> ""
 
-AEONFALLRecipeRegistry:aeonfall_recipe_registry = aeonfall_recipe_registry{}
+# Mutable service allocation is scoped to the current Verse session.
+var AEONFALLRecipeRegistrySessions:weak_map(session, aeonfall_recipe_registry) = map{}
+
+GetAEONFALLRecipeRegistry()<transacts>:aeonfall_recipe_registry=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLRecipeRegistrySessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_recipe_registry{}
+    if (set AEONFALLRecipeRegistrySessions[CurrentSession] = Created):
+        return Created
+    # Never return an unretained temporary gameplay service.
+    Err("AEONFALL could not retain AEONFALLRecipeRegistry in its session")

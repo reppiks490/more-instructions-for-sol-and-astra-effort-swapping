@@ -59,7 +59,7 @@ def main() -> int:
         "",
         "    OnBegin<override>()<suspends>:void=",
         "        for (Offer : Slice001ShopOffers):",
-        "            Registered := AEONFALLShopRegistry.Register(Offer)",
+        "            Registered := GetAEONFALLShopRegistry().Register(Offer)",
         "            if (not Registered?):",
         "                AEONFALLRuntimeBus.Emit(",
         "                    aeonfall_runtime_event{",
