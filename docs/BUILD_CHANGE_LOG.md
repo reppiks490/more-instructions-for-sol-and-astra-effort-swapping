@@ -1,5 +1,19 @@
 # Build change log
 
+## 2026-11-01 — Arsenal Ascension: atomic Axiom Heart final forge
+
+Implemented the canonical RCP-013 Throne of Zero final craft using a generated,
+source-checked twelve-material cost vector. The server-side forge requires the
+existing Level 1000, mastery, Absolute and Trials I–IX gates, rejects duplicate
+or pre-existing apex output, and acknowledges one persistent profile write for
+all ingredient debits, MAT-030 creation, and AxiomHeartCrafted=true. A refused
+write cannot grant the Heart or emit success. The legacy flag setter is disabled.
+A project-bound button adapter owns and cancels its subscription. Seven source
+regression checks cover generation, gates, debits, save ordering and cleanup.
+Refined component production RCP-001–012/014 and the actual Throne of Zero
+editor placement remain separate work; no native Verse compile or Launch
+Session has been performed by this change.
+
 ## 2026-11-01 — Playable Slice: source-pinned physical binding audit
 
 Added a fail-closed, source-pinned editor inventory for the 49-device
