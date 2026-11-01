@@ -38,7 +38,7 @@ class AscensionTrialCommitTests(unittest.TestCase):
         self.assertIn("return false", method)
         self.assertIn("CompletedTrialIds := Old.CompletedTrialIds + array{TrialId}", method)
         self.assertIn("return TrySaveProfile(Player, Candidate)", method)
-        self.assertNotIn("SaveProfile(Player, Candidate)", method)
+        self.assertNotIn("\n                SaveProfile(Player, Candidate)", method)
 
     def test_trial_runtime_waits_for_persistence_before_unlocks(self):
         complete = self.trial.split("    Complete(Agent:agent)", 1)[1].split("    FailOwner(", 1)[0]
