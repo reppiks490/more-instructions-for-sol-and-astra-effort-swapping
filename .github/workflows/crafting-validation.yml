@@ -5,6 +5,11 @@ on:
     paths:
       - "content/crafting/**"
       - "tools/validate_crafting.py"
+      - "tools/build_axiom_refinement_registry.py"
+      - "tests/test_axiom_refinement.py"
+      - "verse/generated/axiom_refinement_recipes.verse"
+      - "verse/crafting/axiom_refinement_service.verse"
+      - "verse/crafting/axiom_refinement_button_device.verse"
       - ".github/workflows/crafting-validation.yml"
   pull_request:
     paths:
@@ -30,3 +35,9 @@ jobs:
 
       - name: Validate Axiom Heart recipe graph
         run: python tools/validate_crafting.py
+
+      - name: Verify generated intermediate refinement recipes
+        run: python tools/build_axiom_refinement_registry.py --check
+
+      - name: Test intermediate refinement contracts
+        run: python -m unittest tests.test_axiom_refinement -v
