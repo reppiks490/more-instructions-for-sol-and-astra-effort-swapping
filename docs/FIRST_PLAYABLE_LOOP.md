@@ -2,6 +2,22 @@
 
 The saved source now includes live player loadout restoration, checked purchases/crafts and first-clear unlock delivery, an input-driven NPC target selector, and a corpse harvesting loop. This document describes intended behavior and binding requirements. No editor import, engine compilation, native device behavior or Fortnite play session has been verified.
 
+## Checked economy writes and dev seed
+
+Single-material `Spend` and multi-material `TrySpendMany` now construct an
+immutable candidate profile and require `TrySaveProfile` acknowledgement.
+A refused or oversized persistence write cannot report a successful spend.
+This closes a gap in the generic ledger facade; first-slice shop and recipe
+unlocks already use a checked combined cost/unlock commit.
+
+The disabled-by-default `aeonfall_slice_001_dev_harness_device` now seeds
+MAT-003, MAT-008, MAT-011 and FAC-002 in **one** checked profile replacement.
+Its success HUD/event fires only after that save succeeds; failure displays
+the failure HUD and leaves the existing ledger unchanged. In a private UEFN
+Launch Session, exercise a valid seed, an inactive player, and a refused
+profile write; verify that no partial grant or false success occurs.
+These are source-level safety changes, not evidence of a native Verse compile.
+
 ## Ordinary corpse economy
 
 Bind `aeonfall_corpse_harvest_device.Ecology` to the region's horde adapter, `HarvestButton` to a button accessible in the encounter space, and `Feedback` to a HUD Message device that targets the interacting player. The adapter records corpse positions only from native NPC elimination events. Harvesting checks an active player, an active character, current corpse lifetime, region, and physical distance. The region feeding radius and harvest radius both limit selection. A session ownership lease rejects a second adapter using the same region or physical NPC spawner before it enables, disables or clears gameplay.
