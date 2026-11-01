@@ -58,7 +58,7 @@ class FirstPlayableSourceGuards(unittest.TestCase):
 
     def test_multi_material_spend_unchecked_save_is_rejected(self):
         self.assertMutationRejected("ledger", "return ProfileService.TrySaveProfile(Player, Candidate)",
-                                    "ProfileService.SetMaterialLedger(Agent, UpdatedLedger)\\n                    return true")
+                                    "ProfileService.SetMaterialLedger(Agent, UpdatedLedger)")
 
     def test_dev_seed_partial_write_is_rejected(self):
         self.assertMutationRejected("dev", "Saved := ProfileService.TrySaveProfile(Player, Candidate)",
