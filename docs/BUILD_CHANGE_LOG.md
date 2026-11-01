@@ -15,6 +15,17 @@ multiplayer rejoin. Native Verse compilation, actual teleporter arrival,
 collision/navmesh and Fortnite session tests remain unverified.
 
 
+## 2026-11-01 — QA Sentinel: fail-closed source provenance
+
+The source ZIP verifier now rejects rewritten build provenance that claims
+native UEFN compilation, editor import, Fortnite Launch Session, or a published
+island code. It validates required provenance fields, commit/tree identifier
+shapes, and source-check status values; it also rejects missing metadata before
+reading it. Regression tests regenerate valid checksums around forged evidence
+to verify the fail-closed behavior. These are source-package integrity checks,
+not a cryptographic signature, native Verse compilation, or publication proof.
+
+
 ## 2026-11-01 — Runtime Forge: preflight actor teardown before cleanup
 
 The session actor registry now rebuilds and validates all three replacement
