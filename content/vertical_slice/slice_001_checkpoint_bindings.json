@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "slice_id": "SLICE-001",
+  "status": "editor_bindings_required",
+  "runtime_device_class": "aeonfall_slice_001_checkpoint_device",
+  "runtime_source": "verse/progression/slice_001_checkpoint_device.verse",
+  "persistent_profile_field": "DiscoveredPoiIds",
+  "player_spawners": {
+    "logical_ref": "ossuary_player_spawners",
+    "expected_type": "player_spawner_device",
+    "editor_object_paths": []
+  },
+  "checkpoints": [
+    {
+      "order": 1,
+      "marker_id": "CHECKPOINT-1",
+      "persistent_id": "SLICE-001:CHECKPOINT-1",
+      "design_anchor_location_cm": [
+        0,
+        -1000,
+        100
+      ],
+      "volume_ref": "checkpoint_1_volume",
+      "volume_type": "volume_device",
+      "teleporter_ref": "checkpoint_1_teleporter",
+      "teleporter_type": "teleporter_device",
+      "editor_volume_path": null,
+      "editor_teleporter_path": null
+    },
+    {
+      "order": 2,
+      "marker_id": "CHECKPOINT-2",
+      "persistent_id": "SLICE-001:CHECKPOINT-2",
+      "design_anchor_location_cm": [
+        0,
+        2900,
+        100
+      ],
+      "volume_ref": "checkpoint_2_volume",
+      "volume_type": "volume_device",
+      "teleporter_ref": "checkpoint_2_teleporter",
+      "teleporter_type": "teleporter_device",
+      "editor_volume_path": null,
+      "editor_teleporter_path": null
+    },
+    {
+      "order": 3,
+      "marker_id": "CHECKPOINT-3",
+      "persistent_id": "SLICE-001:CHECKPOINT-3",
+      "design_anchor_location_cm": [
+        0,
+        6500,
+        100
+      ],
+      "volume_ref": "checkpoint_3_volume",
+      "volume_type": "volume_device",
+      "teleporter_ref": "checkpoint_3_teleporter",
+      "teleporter_type": "teleporter_device",
+      "editor_volume_path": null,
+      "editor_teleporter_path": null
+    },
+    {
+      "order": 4,
+      "marker_id": "CHECKPOINT-4",
+      "persistent_id": "SLICE-001:CHECKPOINT-4",
+      "design_anchor_location_cm": [
+        0,
+        11900,
+        100
+      ],
+      "volume_ref": "checkpoint_4_volume",
+      "volume_type": "volume_device",
+      "teleporter_ref": "checkpoint_4_teleporter",
+      "teleporter_type": "teleporter_device",
+      "editor_volume_path": null,
+      "editor_teleporter_path": null
+    }
+  ],
+  "rules": {
+    "progression": "contiguous_only",
+    "save": "checked_single_profile_copy",
+    "revisit": "no_duplicate_write",
+    "restore": "latest_contiguous_checkpoint_per_new_character",
+    "teleport_verification": "native_launch_session_required",
+    "first_spawn_without_checkpoint": "no_teleport",
+    "disconnect": "clear_transient_player_state",
+    "production_enabled_only_after_editor_validation": true
+  },
+  "execution_evidence": {
+    "uefn_compile": "not_run",
+    "device_placement": "not_run",
+    "launch_session": "not_run"
+  }
+}
