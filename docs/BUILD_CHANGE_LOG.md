@@ -1,5 +1,21 @@
 # Build change log
 
+## 2026-11-01 — Living World: exclusive invasion NPC ownership
+
+The REG-001 invasion spawn-group adapter now acquires a session-scoped lease
+before disabling any native NPC Spawner. Duplicate region/group adapters,
+duplicate spawners within a binding and cross-group shared spawners fail closed
+without touching the legitimate owner's devices. Only a leased adapter may
+subscribe, disable, despawn or release its devices on shutdown.
+
+Invasion release events are checked against the authoritative current wave:
+delayed old-wave releases cannot disable reused groups. Terminal cleanup
+notifications require the canonical invasion's completed/failed state. Added
+source regression guards and updated the UEFN physical-binding acceptance
+checklist. This is a source-level hardening change; native Verse compilation,
+editor streaming behavior and actual NPC concurrency remain unverified.
+
+
 ## 2026-11-01 — Living World: regional invasion admission and AI reserves
 
 Hardened REG-001 invasion admission without adding a parallel world director.
