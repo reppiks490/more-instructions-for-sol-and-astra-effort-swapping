@@ -1,5 +1,22 @@
 # Build change log
 
+## 2026-11-01 — Runtime Forge: checked material spends and atomic dev seeding
+
+Inspected current `main` and open pull requests (none open at start of
+this pass). The material ledger's generic `Spend` and `TrySpendMany`
+previously called unchecked void profile setters; `TrySpendMany` could
+return success even when persistence refused the write. Both paths now
+require `TrySaveProfile` acknowledgement before success.
+
+The first-slice dev harness formerly wrote three materials and reputation
+separately and always displayed success. It now builds one immutable profile
+candidate, commits once, and reports success only on an acknowledged save.
+The first-play source guard and mutation tests cover these invariants.
+
+This change does **not** claim an actual UEFN Verse compile, project import,
+or Fortnite Launch Session. Those remain required for production readiness.
+
+
 ## 2026-10-08 — continue the build through the live gameplay path
 
 Requested by the project owner in this chat: continue AEONFALL to completion using the granted access. Implementation and review are performed by the root Codex agent and the gameplay, Verse reliability, encounter and world/editor specialists. No new approval is required for these source changes.

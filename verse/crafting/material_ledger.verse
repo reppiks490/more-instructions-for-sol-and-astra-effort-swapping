@@ -31,11 +31,21 @@ aeonfall_material_ledger := class():
             Current := GetCount(Agent, MaterialId)
             SetCount(Agent, MaterialId, Current + Amount)
 
+    # A spend only succeeds after the new ledger is durably acknowledged.
+    # Do not route this through the unchecked SetCount compatibility setter.
     Spend(Agent:agent, MaterialId:string, Amount:int)<decides><transacts>:void=
         Amount > 0
-        Current := GetCount(Agent, MaterialId)
+        Player := player[Agent]
+        Player.IsActive[]
+        Profile := ProfileService.GetProfile[Agent]
+        Current := Profile.MaterialLedger[MaterialId]
         Current >= Amount
-        SetCount(Agent, MaterialId, Current - Amount)
+        var UpdatedLedger:[string]int = Profile.MaterialLedger
+        set UpdatedLedger[MaterialId] = Current - Amount
+        Candidate := aeonfall_player_profile:
+            MakeAEONFALLPlayerProfile<constructor>(Profile)
+            MaterialLedger := UpdatedLedger
+        ProfileService.TrySaveProfile(Player, Candidate)?
 
 
     # Checks a whole cost vector after coalescing duplicate material IDs.
@@ -128,7 +138,13 @@ aeonfall_material_ledger := class():
                         set Valid = false
 
             if (Valid?):
-                ProfileService.SetMaterialLedger(Agent, UpdatedLedger)
-                return true
+                if:
+                    Player := player[Agent]
+                    Player.IsActive[]
+                then:
+                    Candidate := aeonfall_player_profile:
+                        MakeAEONFALLPlayerProfile<constructor>(Profile)
+                        MaterialLedger := UpdatedLedger
+                    return ProfileService.TrySaveProfile(Player, Candidate)
 
         false
