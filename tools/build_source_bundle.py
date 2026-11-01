@@ -10,6 +10,7 @@ import argparse
 import hashlib
 import json
 import os
+import stat
 from pathlib import Path, PurePosixPath
 import subprocess
 import zipfile
@@ -88,6 +89,14 @@ def verify_bundle(path: Path) -> dict:
             raise BundleError("Archive contains duplicate names")
         if any(not safe_archive_name(name) for name in names):
             raise BundleError("Archive contains unsafe or noncanonical path")
+        # A valid checksum does not make a ZIP symlink, directory or device safe
+        # to extract. Reject non-regular Unix entry types before reading payloads.
+        for entry in archive.infolist():
+            entry_type = stat.S_IFMT(entry.external_attr >> 16)
+            if entry.is_dir() or entry_type not in (0, stat.S_IFREG):
+                raise BundleError(
+                    f"Archive contains non-regular file entry: {entry.filename}"
+                )
         if archive.testzip() is not None:
             raise BundleError("Archive CRC verification failed")
         prefix = "AEONFALL/"
