@@ -102,15 +102,33 @@ def verify_bundle(path: Path) -> dict:
         prefix = "AEONFALL/"
         manifest = json.loads(archive.read(prefix + "SOURCE_MANIFEST.json"))
         provenance = json.loads(archive.read(prefix + "BUILD_PROVENANCE.json"))
-        expected = {prefix + row["path"] for row in manifest["files"]}
+        # A checksum file can be regenerated alongside a tampered manifest.
+        # Verify that each declared Git blob really matches the archived bytes.
+        rows = manifest.get("files") if isinstance(manifest, dict) else None
+        if not isinstance(manifest, dict) or manifest.get("format_version") != 1 or not isinstance(rows, list):
+            raise BundleError("Invalid source manifest format")
+        source_paths = set()
+        for row in rows:
+            if not isinstance(row, dict) or not isinstance(row.get("path"), str) or not safe_archive_name(prefix + row["path"]):
+                raise BundleError("Invalid source manifest entry")
+            if row["path"] in source_paths:
+                raise BundleError(f"Duplicate source manifest path: {row['path']}")
+            source_paths.add(row["path"])
+        expected = {prefix + row["path"] for row in rows}
         expected.update({prefix + "SOURCE_MANIFEST.json",
                          prefix + "BUILD_PROVENANCE.json", prefix + "CHECKSUMS.sha256"})
         if set(names) != expected:
             raise BundleError("Archive inventory differs from manifest")
-        for row in manifest["files"]:
+        for row in rows:
             data = archive.read(prefix + row["path"])
-            if len(data) != row["bytes"] or sha256(data) != row["sha256"]:
+            if len(data) != row.get("bytes") or sha256(data) != row.get("sha256"):
                 raise BundleError(f"Archive source hash differs: {row['path']}")
+            blob = row.get("git_blob")
+            if not isinstance(blob, str) or len(blob) not in (40, 64):
+                raise BundleError(f"Invalid Git blob hash: {row['path']}")
+            algorithm = "sha1" if len(blob) == 40 else "sha256"
+            if git_blob_sha(data, algorithm) != blob:
+                raise BundleError(f"Archive Git blob differs: {row['path']}")
         checksums = archive.read(prefix + "CHECKSUMS.sha256").decode().splitlines()
         if len(checksums) != len(names) - 1:
             raise BundleError("Checksum inventory is incomplete")
