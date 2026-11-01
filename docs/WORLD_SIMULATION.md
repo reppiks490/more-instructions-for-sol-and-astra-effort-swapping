@@ -216,3 +216,28 @@ group, two different groups sharing one NPC Spawner, delayed release messages,
 normal completion/failure, and unload/re-entry with separated players.
 Repository Python source guards cannot establish Verse compilation or actual
 physical concurrency; both still require UEFN Launch Session evidence.
+
+## Cross-director spawner ownership and corpse callback safety
+
+Horde ecology and invasion spawn-group adapters now reject physical NPC
+Spawners already leased by the other director family, **in either startup
+order**. Existing per-region and per-group leases remain the authoritative
+logical ownership records; the cross-check prevents two independent directors
+from enabling, disabling, or despawning the same native device. Keep horde,
+invasion, ambient, hireable, wildlife and boss NPC Spawners distinct in UEFN:
+only the horde/invasion cross-family case is enforced in Verse so far.
+
+Elimination callbacks create logical remains only while their ecology adapter
+is running **and** the actor still has a registered death subscription and a
+brood record belonging to that region. Late callbacks after pruning/unload
+must not mint corpses or unregister a replacement actor. Apex trigger callbacks
+are ignored after adapter shutdown. Corpse denial and feeding remain
+exclusive and do not increase the authored AI reserves.
+
+**Acceptance in UEFN:** place one invasion and one horde adapter pointing to
+the same NPC Spawner, test both OnBegin orders, and verify only one acquires
+ownership and the rejected adapter never touches the physical spawner.
+Repeat with separate spawners and concurrent regions. Eliminate a brood actor
+during shutdown/despawn and confirm no duplicate corpse, orphan brood record,
+or leaked NPC remains. Native Verse compilation and multiplayer streaming
+tests remain required; Python source guards do not establish those outcomes.
