@@ -15,8 +15,9 @@ The canonical ability runtime now enforces `uses_per_form=1` for each
 registered owner's **active** ascended-form runtime, requires exact form and
 transformation IDs and positive remaining form time, and refuses a second
 successful use of the same ability during that epoch. An adapter callback
-rechecks the same active epoch before committing. A rejected, timed-out or
-cancelled attempt does **not** consume the use; a successful commit updates
+rechecks the same active epoch before committing. Each dispatched request is additionally bound to its original epoch, so a
+late callback cannot borrow the next transformation's budget. A rejected,
+timed-out or cancelled attempt does **not** consume the use; a successful commit updates
 canonical ability state and the epoch ledger in one failure context. Ending
 a managed ability does not refund its use. A new successful transformation
 activation increments the epoch and restores that ability's single use.
