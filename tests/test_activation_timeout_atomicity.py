@@ -136,7 +136,7 @@ class ActivationTimeoutAtomicityTests(unittest.TestCase):
         result, events = advance_reference({"a": 0.5}, 1.0, set())
         self.assertEqual(result, {"a": 0.5})
         self.assertEqual(events, [])
-        result, events = advance_reference(result, 0.25, {"a"})
+        result, events = advance_reference(result, 0.75, {"a"})
         self.assertEqual(result, {})
         self.assertEqual(events, ["a"])
 
