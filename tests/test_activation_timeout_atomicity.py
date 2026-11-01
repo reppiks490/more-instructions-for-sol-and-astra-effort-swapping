@@ -20,6 +20,7 @@ def source_errors(source: str) -> list[str]:
     try:
         update = method(source, "TryUpdatePendingTimeout", "TickPendingActivations")
         tick = method(source, "TickPendingActivations", "ClearOwnerPending")
+        cancel_commit = method(source, "CommitPendingCancellation", "CancelPending")
         cancel = method(source, "CancelPending", "TryUpdatePendingTimeout")
     except IndexError:
         return ["timeout helper or method boundaries missing"]
@@ -55,10 +56,21 @@ def source_errors(source: str) -> list[str]:
         errors.append("timeout tick must not bypass coordinator cancellation")
     if tick.find("Cancelled := CancelPending(") > tick.find('EventType := "ability.adapter_timeout"'):
         errors.append("timeout notification must follow cancellation")
-    if "Cancelled := GetAEONFALLAbilityRuntime().CancelPending" not in cancel:
-        errors.append("coordinator cancellation must cancel canonical ability state")
-    if "Released := GetAEONFALLClassRuntime().ReleaseReservation(RequestId)" not in cancel:
-        errors.append("coordinator cancellation must release class reservation")
+    if "CommitPendingCancellation[OwnerKey, AbilityId, RequestId, NeedsClassRelease]" not in cancel:
+        errors.append("coordinator must call transactional cancellation helper")
+    for fragment in (
+        ")<decides><transacts>:void=",
+        "RemovePendingRecord(RequestId)?",
+        "GetAEONFALLAbilityRuntime().CancelPending(OwnerKey, AbilityId, RequestId)?",
+        "if (NeedsClassRelease?):",
+        "GetAEONFALLClassRuntime().ReleaseReservation(RequestId)?",
+    ):
+        if fragment not in cancel_commit:
+            errors.append("transactional cancellation must roll back failed writes: " + fragment)
+    if cancel_commit.find("RemovePendingRecord(RequestId)?") > cancel_commit.find(
+        "GetAEONFALLAbilityRuntime().CancelPending(OwnerKey, AbilityId, RequestId)?"
+    ):
+        errors.append("transactional cancellation must remove record before canonical cancellation")
     return errors
 
 
@@ -98,6 +110,24 @@ class ActivationTimeoutAtomicityTests(unittest.TestCase):
         self.assert_mutation_rejected(
             "        for (RequestId -> Next : Updated):\n            Advanced := TryUpdatePendingTimeout(RequestId, Next)",
             "        set PendingActivations = Updated",
+        )
+
+    def test_reject_nontransactional_cancellation(self) -> None:
+        self.assert_mutation_rejected(
+            ")<decides><transacts>:void=\n        RemovePendingRecord(RequestId)?",
+            ")<transacts>:void=\n        RemovePendingRecord(RequestId)?",
+        )
+
+    def test_reject_skipped_pending_removal(self) -> None:
+        self.assert_mutation_rejected(
+            "        RemovePendingRecord(RequestId)?",
+            "        Print(\"pending record removal skipped\")",
+        )
+
+    def test_reject_skipped_class_release(self) -> None:
+        self.assert_mutation_rejected(
+            "        GetAEONFALLClassRuntime().ReleaseReservation(RequestId)?",
+            "        Print(\"class resource release skipped\")",
         )
 
     def test_reject_direct_runtime_cancel(self) -> None:
