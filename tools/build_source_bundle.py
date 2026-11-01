@@ -105,7 +105,7 @@ def verify_bundle(path: Path) -> dict:
         # A checksum file can be regenerated alongside a tampered manifest.
         # Verify that each declared Git blob really matches the archived bytes.
         rows = manifest.get("files") if isinstance(manifest, dict) else None
-        if manifest.get("format_version") != 1 or not isinstance(rows, list):
+        if not isinstance(manifest, dict) or manifest.get("format_version") != 1 or not isinstance(rows, list):
             raise BundleError("Invalid source manifest format")
         source_paths = set()
         for row in rows:
