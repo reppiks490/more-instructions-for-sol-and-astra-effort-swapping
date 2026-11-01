@@ -98,6 +98,13 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
         for (OtherRegion -> OtherAdapter : Owners):
             if (OtherAdapter.Spawner = Spawner):
                 return false
+        # Physical ownership crosses director families. A horde must never
+        # enable an invasion-owned NPC Spawner, even in another region.
+        if (InvasionOwners := AEONFALLInvasionSpawnerLeases[GetSession()]):
+            for (OtherKey -> OtherAdapter : InvasionOwners):
+                for (OwnedSpawner : OtherAdapter.Spawners):
+                    if (OwnedSpawner = Spawner):
+                        return false
         if:
             set Owners[RegionId] = Self
             set AEONFALLHordeAdapterLeases[GetSession()] = Owners
@@ -188,7 +195,14 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
             ReleaseOwnedActor(Key)
 
     RecordDeath(ActorKey:string, Position:vector3):void=
-        if (Running?):
+        # A delayed elimination callback cannot mint remains for an actor
+        # already pruned, unregistered, or owned by another regional adapter.
+        if:
+            Running?
+            DeathSubscriptions[ActorKey]
+            Brood := GetAEONFALLHordeRuntime().GetBrood[ActorKey]
+            Brood.RegionId = RegionId
+        then:
             PrunePositions()
             Id := GetAEONFALLHordeRuntime().AddCorpse(RegionId, CorpseBiomass, CorpseTrait)
             if (Id > 0):
@@ -196,9 +210,9 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
                     set CorpsePositions = CorpsePositions
                 else:
                     GetAEONFALLHordeRuntime().RemoveCorpse(Id)
-        GetAEONFALLHordeRuntime().RemoveBrood(ActorKey)
-        RemoveListener(ActorKey)
-        ReleaseOwnedActor(ActorKey)
+            GetAEONFALLHordeRuntime().RemoveBrood(ActorKey)
+            RemoveListener(ActorKey)
+            ReleaseOwnedActor(ActorKey)
 
     FindNearest(Position:vector3)<transacts>:?int=
         var Nearest:?int = false
@@ -234,10 +248,12 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
                 PrunePositions()
 
     OpenApex(MaybeAgent:?agent):void=
-        Changed := GetAEONFALLHordeRuntime().SetApexEvent(RegionId, true)
+        if (Running?):
+            Changed := GetAEONFALLHordeRuntime().SetApexEvent(RegionId, true)
 
     CloseApex(MaybeAgent:?agent):void=
-        Changed := GetAEONFALLHordeRuntime().SetApexEvent(RegionId, false)
+        if (Running?):
+            Changed := GetAEONFALLHordeRuntime().SetApexEvent(RegionId, false)
 
     PrunePositions()<transacts>:void=
         var Kept:[int]vector3 = map{}
