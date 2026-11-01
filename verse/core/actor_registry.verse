@@ -15,9 +15,17 @@ aeonfall_actor_registry := class():
         CanonicalId:string,
         Agent:agent
     )<decides><transacts>:string=
+        # Reject empty NPC Character Definition IDs before assigning a runtime
+        # key. A duplicate registration is idempotent only for the same
+        # canonical identity and a consistent forward/reverse mapping.
+        CanonicalId <> ""
         if:
             Existing := KeyByAgent[Agent]
         then:
+            ExistingAgent := AgentByKey[Existing]
+            ExistingAgent = Agent
+            ExistingCanonical := CanonicalByKey[Existing]
+            ExistingCanonical = CanonicalId
             Existing
         else:
             set NextActorNumber += 1
@@ -53,7 +61,13 @@ aeonfall_actor_registry := class():
     Unregister(RuntimeKey:string)<transacts>:logic=
         if:
             Agent := AgentByKey[RuntimeKey]
+            ReverseKey := KeyByAgent[Agent]
+            ReverseKey = RuntimeKey
+            CanonicalId := CanonicalByKey[RuntimeKey]
+            CanonicalId <> ""
         then:
+            # Never clear a different actor's gameplay state through an
+            # incomplete or inconsistent identity mapping.
             # Release dependent runtime state while the key is still resolvable.
             GetAEONFALLActivationCoordinator().ClearOwnerPending(RuntimeKey)
             GetAEONFALLCompanionRuntime().ReleaseAllForOwner(
