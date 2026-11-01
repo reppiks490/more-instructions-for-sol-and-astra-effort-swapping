@@ -261,16 +261,10 @@ aeonfall_profile_service := class():
                 AscensionRank := NewRank
             SaveProfile(Player, Candidate)
 
+    # Retired compatibility entry point. No caller may toggle apex eligibility
+    # without the canonical RCP-013 material transaction and all nine trials.
     SetAxiomHeartCrafted(Agent:agent, IsCrafted:logic)<transacts>:void=
-        if:
-            Player := player[Agent]
-            Player.IsActive[]
-            Old := AEONFALLPlayerProfiles[Player]
-        then:
-            Candidate := aeonfall_player_profile:
-                MakeAEONFALLPlayerProfile<constructor>(Old)
-                AxiomHeartCrafted := IsCrafted
-            SaveProfile(Player, Candidate)
+        return
 
     SetZeroCandidate(Agent:agent, IsCandidate:logic)<transacts>:void=
         if:

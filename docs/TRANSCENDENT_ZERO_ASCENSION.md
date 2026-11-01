@@ -78,3 +78,27 @@ same-objective retry, (3) timer expiry at the final objective, (4) disconnect,
 and (5) Trial IX forge / Trial X candidate events. The 68,420-acquisition
 Axiom Heart recipe remains a design graph, not an implemented in-island
 crafting transaction; this change does not claim to implement that forge.
+
+## Final forge implementation boundary (2026-11-01)
+
+The RCP-013 final craft now has a server-side `aeonfall_axiom_heart_forge_service`
+and `aeonfall_axiom_heart_forge_device`. Its ingredient vector is generated
+from the authoritative graph with
+`python tools/build_axiom_heart_final_costs.py --check`. The runtime requires
+`CanForgeAxiomHeart` (Level 1000, mastery/Absolute and Trials I–IX), checks all
+twelve canonical refined/raw costs, and saves all debits plus the MAT-030 output
+and `AxiomHeartCrafted` flag in one acknowledged profile replacement.
+A failed save or a repeated press grants nothing. No recipe, material, trial,
+authority ID, or 68,420-acquisition balance requirement was changed.
+
+For UEFN: place the `aeonfall_axiom_heart_forge_device` at the actual Throne
+of Zero, bind its `ForgeButton` and HUD devices, then compile Verse natively.
+In a multiplayer Launch Session verify: missing material, Trial VIII/IX
+incomplete, level/mastery shortfall, successful craft, repeated presses,
+concurrent presses, disconnected owner, persistence refusal, respawn and
+rejoin. Inspect actual persistent debits, exactly one MAT-030, and the Trial X
+entry gate. The device does not place a Throne of Zero mesh or verify the
+physical object path by itself. RCP-001–012 and RCP-014 refined-material
+production and their physical station bindings remain unimplemented; this
+change does **not** make the full 68,420-acquisition path playable. Source
+checks are not native Verse compilation or Fortnite Launch Session evidence.
