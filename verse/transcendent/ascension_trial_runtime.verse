@@ -81,6 +81,7 @@ aeonfall_ascension_trial_service := class():
             OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
             Old := StatesByOwner[OwnerKey]
             Old.Active?
+            Old.RemainingSeconds > 0.0
             Definition := GetAEONFALLAscensionTrialRegistry().Get[Old.TrialId]
         then:
             if:
@@ -91,6 +92,11 @@ aeonfall_ascension_trial_service := class():
             if:
                 Old.CompletedObjectiveIds.Find[ObjectiveId]
             then:
+                # A full objective set may be awaiting a previously failed
+                # persistent save. Replaying the final objective retries only
+                # the durable commit; no objective is counted twice.
+                if (Old.CompletedObjectiveIds.Length >= Definition.ObjectiveIds.Length):
+                    return Complete(Agent)
                 return false
 
             UpdatedObjectives:[]string =
@@ -117,10 +123,8 @@ aeonfall_ascension_trial_service := class():
                     }
                 )
 
-                if:
-                    UpdatedObjectives.Length >= Definition.ObjectiveIds.Length
-                then:
-                    Completed := Complete(Agent)
+                if (UpdatedObjectives.Length >= Definition.ObjectiveIds.Length):
+                    return Complete(Agent)
 
                 return true
 
@@ -131,13 +135,23 @@ aeonfall_ascension_trial_service := class():
             OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
             Old := StatesByOwner[OwnerKey]
             Old.Active?
+            Old.RemainingSeconds > 0.0
             Definition := GetAEONFALLAscensionTrialRegistry().Get[Old.TrialId]
             Old.CompletedObjectiveIds.Length >= Definition.ObjectiveIds.Length
         then:
-            ProfileService.CompleteTrial(
+            Committed := ProfileService.CompleteTrial(
                 Agent,
                 Definition.TrialId
             )
+            if (not Committed?):
+                AEONFALLRuntimeBus.Emit(
+                    aeonfall_runtime_event{
+                        EventType := "ascension_trial.persistence_rejected",
+                        SourceId := OwnerKey,
+                        TargetId := Definition.TrialId
+                    }
+                )
+                return false
 
             Finished := aeonfall_ascension_trial_runtime_state:
                 OwnerKey := OwnerKey

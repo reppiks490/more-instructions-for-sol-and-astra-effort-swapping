@@ -131,21 +131,25 @@ aeonfall_profile_service := class():
                     CompletedWorldEventIds := Old.CompletedWorldEventIds + array{EventId}
                 SaveProfile(Player, Candidate)
 
-    CompleteTrial(Agent:agent, TrialId:string)<transacts>:void=
+    # Trial completion is an irreversible ascension gate. Never acknowledge it
+    # until the unique canonical trial ID is durably written to the profile.
+    # A failed save must remain retryable from the active trial runtime.
+    CompleteTrial(Agent:agent, TrialId:string)<transacts>:logic=
         if:
+            TrialId <> ""
             Player := player[Agent]
             Player.IsActive[]
             Old := AEONFALLPlayerProfiles[Player]
         then:
-            if:
-                Old.CompletedTrialIds.Find[TrialId]
-            then:
-                return
-            else:
-                Candidate := aeonfall_player_profile:
-                    MakeAEONFALLPlayerProfile<constructor>(Old)
-                    CompletedTrialIds := Old.CompletedTrialIds + array{TrialId}
-                SaveProfile(Player, Candidate)
+            if (Old.CompletedTrialIds.Find[TrialId]):
+                return false
+
+            Candidate := aeonfall_player_profile:
+                MakeAEONFALLPlayerProfile<constructor>(Old)
+                CompletedTrialIds := Old.CompletedTrialIds + array{TrialId}
+            return TrySaveProfile(Player, Candidate)
+
+        false
 
     DiscoverPoi(Agent:agent, PoiId:string)<transacts>:void=
         if:

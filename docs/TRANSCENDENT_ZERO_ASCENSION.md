@@ -53,3 +53,28 @@ God and Absolute have exact transformation IDs, mutual exclusion and session-onl
 ## Failure philosophy
 
 Mastery clears and ordinary collected resources remain; designated trial consumables may be lost; failed Choosing attempts use requalification windows rather than account deletion. All checked persistence writes must succeed before an irreversible grant.
+
+
+## Trial I–X durable completion and retry boundary
+
+Trial completion now requires an acknowledged persistent profile write before
+the session trial is marked finished. The trial service cannot emit a completion,
+open the Trial IX Axiom Forge, or evaluate a Trial X Zero Candidate after a
+rejected save. This protects the intended **Trials I–IX → Axiom Heart → Trial X**
+sequence from false success telemetry and session-only progression.
+
+If the final objective is recorded but persistence fails (for example, because
+the player becomes inactive or the persistent map refuses the write), the
+trial remains active while time remains. Replaying an already-recorded final
+objective attempts the *same* durable commit without incrementing objective
+counts or charging any material. An expired trial cannot accept another
+objective or finalize. After expiry or disconnect, the player must start the
+trial again; completion is never fabricated from a session snapshot.
+
+**Verification boundary:** `tests/test_ascension_trial_commit.py` checks
+source invariants and the ten canonical IDs. UEFN compilation and a two-player
+Launch Session must still exercise (1) normal completion, (2) failed save then
+same-objective retry, (3) timer expiry at the final objective, (4) disconnect,
+and (5) Trial IX forge / Trial X candidate events. The 68,420-acquisition
+Axiom Heart recipe remains a design graph, not an implemented in-island
+crafting transaction; this change does not claim to implement that forge.
