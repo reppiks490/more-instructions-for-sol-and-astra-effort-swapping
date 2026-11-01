@@ -28,6 +28,9 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
     CanonicalId:string = ""
     @editable
     Spawner:npc_spawner_device = npc_spawner_device{}
+    # Editor contract: the NPC Spawner must not auto-spawn at game start.
+    @editable
+    StartDisabled:logic = true
     @editable
     CorpseBiomass:int = 20
     @editable
@@ -60,7 +63,9 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
     var CorpsePositions:[int]vector3 = map{}
 
     OnBegin<override>()<suspends>:void=
-        if (RegionId = "" or CanonicalId = "" or FeedingRadiusCm <= 0.0):
+        # Refuse unbound/unsafe editor configurations before leasing or enabling.
+        # This flag is a binding assertion; verify actual Spawner settings in UEFN.
+        if (RegionId = "" or CanonicalId = "" or not StartDisabled? or FeedingRadiusCm <= 0.0 or CorpseBiomass <= 0 or CorpseBiomass > GetAEONFALLHordeRuntime().Policy.CrownedBiomass):
             return
         Leased := AcquireAdapterLease()
         if (not Leased?):
@@ -78,7 +83,8 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
             OpenApexTrigger.TriggeredEvent.Subscribe(OpenApex),
             CloseApexTrigger.TriggeredEvent.Subscribe(CloseApex)
         }
-        # Configure spawner to start disabled so no spawn precedes registration.
+        # Spawner must already be configured game-start disabled in the editor.
+        # Enable only after lease, region registration, and event subscriptions.
         Spawner.Enable()
         race:
             FeedLoop()
@@ -174,6 +180,9 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
         if:
             Running?
             Key := GetAEONFALLActorRegistry().Register[CanonicalId, Agent]
+            # Lifecycle behavior may have registered the actor first. Never
+            # attach this brood to a different canonical NPC identity.
+            GetAEONFALLActorRegistry().GetCanonicalId[Key] = CanonicalId
             Character := Agent.GetFortCharacter[]
             Character.IsActive[]
             not DeathSubscriptions[Key]
@@ -202,6 +211,7 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
             DeathSubscriptions[ActorKey]
             Brood := GetAEONFALLHordeRuntime().GetBrood[ActorKey]
             Brood.RegionId = RegionId
+            GetAEONFALLActorRegistry().GetCanonicalId[ActorKey] = CanonicalId
         then:
             PrunePositions()
             Id := GetAEONFALLHordeRuntime().AddCorpse(RegionId, CorpseBiomass, CorpseTrait)
