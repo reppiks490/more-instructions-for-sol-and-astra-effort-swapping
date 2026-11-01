@@ -40,6 +40,16 @@ class BindingAuditTests(unittest.TestCase):
         return audit_module.audit(self.spec, inventory if inventory is not None else self.inventory,
                                   evidence_root=self.root)
 
+    def test_authored_source_contract_counts(self):
+        actual = audit_module.contracts()
+        self.assertEqual(len(actual["devices"]), 49)
+        self.assertEqual(len(actual["refs"]), 42)
+        self.assertEqual(len(actual["test_ids"]), 24)
+        bindings = json.loads(audit_module.BINDINGS.read_text())
+        for kind, count in (("weapons", 12), ("monsters", 12), ("tameables", 6),
+                            ("hireables", 8), ("encounters", 3), ("vehicles", 3)):
+            self.assertEqual(len(bindings[kind]), count, kind)
+
     def test_valid_inventory_does_not_claim_native_acceptance(self):
         result = self.verify()
         self.assertTrue(result["inventory_consistent"])
