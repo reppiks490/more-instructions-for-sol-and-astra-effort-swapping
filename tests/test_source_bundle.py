@@ -122,6 +122,45 @@ class SourceBundleTests(unittest.TestCase):
                 with self.assertRaisesRegex(bundle.BundleError, "non-regular file entry"):
                     bundle.verify_bundle(self.output)
 
+    def rewrite_manifest_with_valid_checksums(self, mutate):
+        """Simulate an internally consistent but dishonest source manifest."""
+        bundle.build_bundle(self.root, self.output)
+        with zipfile.ZipFile(self.output) as original:
+            contents = {name: original.read(name) for name in original.namelist()}
+        manifest_name = "AEONFALL/SOURCE_MANIFEST.json"
+        checksum_name = "AEONFALL/CHECKSUMS.sha256"
+        manifest = json.loads(contents[manifest_name])
+        mutate(manifest)
+        contents[manifest_name] = (json.dumps(manifest, indent=2, sort_keys=True) + "\\n").encode()
+        contents[checksum_name] = "".join(
+            f"{bundle.sha256(data)}  {name}\\n"
+            for name, data in sorted(contents.items()) if name != checksum_name
+        ).encode()
+        with zipfile.ZipFile(self.output, "w") as archive:
+            for name, data in sorted(contents.items()):
+                archive.writestr(name, data)
+
+    def test_manifest_cannot_claim_unrelated_git_blob(self):
+        def falsify(manifest):
+            manifest["files"][0]["git_blob"] = "0" * 40
+        self.rewrite_manifest_with_valid_checksums(falsify)
+        with self.assertRaisesRegex(bundle.BundleError, "Git blob differs"):
+            bundle.verify_bundle(self.output)
+
+    def test_manifest_cannot_repeat_source_row(self):
+        def duplicate(manifest):
+            manifest["files"].append(dict(manifest["files"][0]))
+        self.rewrite_manifest_with_valid_checksums(duplicate)
+        with self.assertRaisesRegex(bundle.BundleError, "Duplicate source manifest path"):
+            bundle.verify_bundle(self.output)
+
+    def test_manifest_cannot_claim_noncanonical_source_path(self):
+        def falsify(manifest):
+            manifest["files"][0]["path"] = "../escape.verse"
+        self.rewrite_manifest_with_valid_checksums(falsify)
+        with self.assertRaisesRegex(bundle.BundleError, "Invalid source manifest entry"):
+            bundle.verify_bundle(self.output)
+
     def test_duplicate_archive_names_are_rejected(self):
         bundle.build_bundle(self.root, self.output)
         with zipfile.ZipFile(self.output, "a") as archive:
