@@ -14,9 +14,17 @@ aeonfall_runtime_tick_device := class(creative_device):
     OnEnd<override>():void=
         # Keep teardown synchronous. A sleeper checks this before touching
         # session services or emitting another runtime tick.
-        set Running = false
+        if (Running?):
+            set Running = false
+            Released := GetAEONFALLRuntimeClockLease().Release(Self)
 
     OnBegin<override>()<suspends>:void=
+        # Two placed tick devices must not double-advance cooldowns, statuses,
+        # event timeouts or world simulation. Only the lease owner runs.
+        Acquired := GetAEONFALLRuntimeClockLease().Acquire(Self)
+        if (not Acquired?):
+            Print("AEONFALL runtime clock rejected duplicate scheduler device.")
+            return
         set Running = true
         var PreviousTime:float = GetSimulationElapsedTime()
 
@@ -76,3 +84,32 @@ aeonfall_runtime_tick_device := class(creative_device):
                 Amount := 1
             }
         )
+
+# Session-local single-owner lease. The lease is released only by its owner;
+# a duplicate device cannot stop the active clock during its own teardown.
+aeonfall_runtime_clock_lease := class():
+    var Owner:?aeonfall_runtime_tick_device = false
+
+    Acquire(Device:aeonfall_runtime_tick_device)<transacts>:logic=
+        if (Owner?):
+            return false
+        set Owner = option{Device}
+        true
+
+    Release(Device:aeonfall_runtime_tick_device)<transacts>:logic=
+        if (Current := Owner?, Current = Device):
+            set Owner = false
+            return true
+        false
+
+# Mutable lease state is retained for the Verse session, not per device.
+var AEONFALLRuntimeClockLeaseSessions:weak_map(session, aeonfall_runtime_clock_lease) = map{}
+
+GetAEONFALLRuntimeClockLease()<transacts>:aeonfall_runtime_clock_lease=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLRuntimeClockLeaseSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_runtime_clock_lease{}
+    if (set AEONFALLRuntimeClockLeaseSessions[CurrentSession] = Created):
+        return Created
+    Err("AEONFALL could not retain runtime clock lease in its session")

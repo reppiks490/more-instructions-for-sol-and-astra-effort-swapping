@@ -1,5 +1,20 @@
 # Build change log
 
+## 2026-11-01 — Runtime Forge: one authoritative session clock
+
+Added an exclusive, session-retained lease to the canonical runtime tick
+Creative device. A second accidentally placed scheduler now refuses startup,
+so it cannot double-advance ability cooldowns, status durations, encounter
+state, horde/invasion waves or delivery timeouts. OnEnd releases the lease
+only for the device that acquired it; rejected duplicates cannot stop the
+active scheduler. Added source invariant and mutation regression coverage.
+
+This change preserves the elapsed-simulation-time delta and existing service
+order. It does not claim a native Verse compile or Fortnite Launch Session.
+A private editor test must place two clocks, confirm only one advances,
+end the owner, and verify a replacement can acquire the lease.
+
+
 ## 2026-11-01 — Arsenal Ascension: bounded apex contracts and fail-closed generic triggers
 
 Added ten canonical God/Absolute mechanical contracts with explicit effect quotas, telegraph/counterplay, distinct planned audiovisual cues, class synergy, boss immunity and destination preflight requirements. The generic trigger adapter now rejects all transformation-bound abilities before physical dispatch; only specialized validated adapters may report success. Added cross-catalog validation and mutation tests. These contracts are specified and unbound, not UEFN-compiled or Launch Session verified.\n
