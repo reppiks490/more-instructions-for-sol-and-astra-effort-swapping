@@ -8,6 +8,12 @@ The canonical identities remain in `content/transcendent/ascended_forms.json`; t
 
 A future specialized adapter must check the exact registered owner/target and transformation identity, finite range and geometry, encounter-controlled immunity and objective permissions, per-owner/per-region live-instance quotas, lifetime cleanup, and deterministic one-use-per-form budgets **before** it emits a successful adapter result. Rejections must not consume resources. The generic adapter must never be toggled to bypass these checks. A transformation ends all its pending/active ability requests; late callbacks must be ignored.
 
+## Complete generic-adapter perimeter
+
+The shared Verse predicate `AEONFALLRequiresSpecializedTransformationPreflight` checks **three independent signals**: exact `RequiredTransformationId`, `RequiresTransformationContext`, and `TransformationOnly` resource policy. This prevents a legacy or malformed definition with an empty transformation ID from escaping the apex boundary. The generic trigger, status-batch and composite status+trigger adapters now reject transformed requests **before any status application or physical trigger**. The native prop-spawn adapter and Royal Scent challenge adapter also reject transformed definitions before reservation/spawn or mark/challenge creation. A rejected request reports failure (or fails preflight) so canonical charges, cooldown and class resources are not committed.
+
+This is defense in depth, **not** a specialized God/Absolute/Zero implementation. Every actual apex effect still requires a separate adapter with authoritative immunity, placement, instance/lifetime, use-per-form, and encounter ownership checks. Editor-side `RequireRegisteredTarget` flags are not substitutes for these checks. Source guard tests protect this perimeter; only a native UEFN compile and multiplayer Launch Session can prove engine behavior.
+
 ## Distinct mechanic / counterplay language
 
 God uses storm territory, gravity pressure, self recovery, ally shielding, and short fortitude. Absolute uses a slow window, temporary construct suppression, one whitelisted objective-rule change, validated traversal, and a combination domain only when the encounter authorizes it. Each has its own telegraph/impact/exit VFX, two-stage audio and actionable counterplay recorded in the JSON manifest. No permanent world edit, global rewind, universal invulnerability, unrestricted boss control, or arbitrary teleport is permitted.
