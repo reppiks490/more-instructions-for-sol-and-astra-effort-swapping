@@ -9,6 +9,11 @@ import math
 import re
 from pathlib import Path
 
+if __package__:
+    from .ossuary_preflight import preflight_existing_placements
+else:
+    from ossuary_preflight import preflight_existing_placements
+
 PACKAGE_ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = PACKAGE_ROOT / "assets/source/ossuary_starter/manifest.json"
 
@@ -128,7 +133,11 @@ def build(manifest_path: Path = MANIFEST, *, apply: bool = False, unreal_api=Non
             raise RuntimeError("Could not reopen the existing AEONFALL starter map.")
     elif not level_editor.new_level(map_path, is_partitioned_world=False):
         raise RuntimeError("UEFN did not create the starter level. Inspect editor validation output.")
-    existing_names = {actor.get_actor_label() for actor in actor_editor.get_all_level_actors()}
+    # A matching label alone is not proof of a matching asset/transform. Refuse
+    # ambiguous or drifted placements before spawning anything in the map.
+    existing_names = preflight_existing_placements(
+        plan["placements"], actor_editor.get_all_level_actors(), imported, ue)
+    reused = len(existing_names)
     created = 0
     for placement in plan["placements"]:
         if placement["name"] in existing_names:
@@ -145,6 +154,7 @@ def build(manifest_path: Path = MANIFEST, *, apply: bool = False, unreal_api=Non
     if not level_editor.save_current_level():
         raise RuntimeError("Could not save the assembled starter level.")
     report.update({"dry_run": False, "map_asset": map_path, "created_actors": created,
+                   "reused_actors": reused,
                    "required_next": ["Add Island Settings, player spawners, lighting and navigation",
                                      "Place/configure generated Verse devices and encounter signal bindings",
                                      "Inspect arch/stair collision clearance and run UEFN validation",
