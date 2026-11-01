@@ -1,5 +1,17 @@
 # Build change log
 
+## 2026-11-01 — Living World: corpse denial changes canonical corruption
+
+Burn (-2), sanctify (-4), and necromancy (+5) now use the existing regional
+corruption/hostility/mutation reconciliation before an exclusive corpse token
+is removed. Harvest remains corruption-neutral. Missing canonical region
+state fails closed for the three pressure-changing uses; the test-only
+unregistered horde service keeps its prior behavior. No new director, actor
+population, persistent player field, or stat multiplier was introduced.
+Added source regression tests and a UEFN threshold/multiplayer acceptance plan.
+Native Verse compilation and physical encounter/biome effects remain unverified.
+
+
 ## 2026-11-01 — Arsenal Ascension: authoritative one-use-per-form epochs
 
 The ability runtime now guards each canonical God/Absolute ability with an
