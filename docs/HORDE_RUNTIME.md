@@ -53,3 +53,31 @@ Regression: `python -m unittest tests/test_horde_binding_guards.py`. The source
 checks do not prove Verse compilation, physical NPC caps, editor start settings,
 streaming-cell unload behavior, or multiplayer elimination ordering; those remain
 Launch Session acceptance gates.
+
+## Canonical apex corruption admission (2026-11-01)
+
+Tier V Crowned Devourers now require **regional corruption >= 80** (the
+authored `devouring_front` band) **in addition** to the existing 300 brood
+biomass, 600 regional biomass, open apex event, and single-apex-per-region
+conditions. Only a registered canonical world region is subject to this extra
+gate; the isolated unregistered horde test region retains its original
+standalone policy. A canonical region registered in the world registry but
+missing initialized runtime state **fails closed**.
+
+This creates reversible ecological counterplay: burning (-2) and sanctifying
+(-4) remains can push corruption below 80 and prevent *future* Crowned
+Devourers even when a brood has accumulated sufficient biomass. Necromancy
+(+5) can reopen the ecological window. A blocked promotion retains biomass
+and tier, and consumes no extra NPC budget. Cleansing does **not** silently
+devolve an already spawned apex; its removal remains the responsibility of
+the encounter lifecycle. An open apex trigger alone no longer overrides
+canonical environmental conditions.
+
+**Validation:** `python -m unittest tests/test_horde_apex_corruption_gate.py`
+checks source admission and the authored REG-001 corruption band. These are
+source/data tests, not native Verse execution. UEFN acceptance must set a
+canonical region to corruption 79/80, open the apex event, feed a Tier IV
+brood across its threshold, verify denied/allowed promotions, repeat after
+sanctifying a corpse, and test missing region initialization and region
+unload/re-entry. Verify that physical Crowned presentation and streaming
+population caps remain correct with separated multiplayer clients.
