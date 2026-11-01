@@ -175,6 +175,16 @@ aeonfall_horde_runtime := class():
             Corpse.RegionId = RegionId
             Corpse.RemainingSeconds > 0.0
         then:
+            # A canonical world region must commit its corruption consequence
+            # before this exclusive corpse token is consumed. Test-only
+            # unregistered horde regions retain their standalone behavior.
+            if:
+                Use <> aeonfall_corpse_use.Harvest
+                GetAEONFALLRegionRegistry().IsRegistered[RegionId]
+            then:
+                Applied := AEONFALLRegionalEscalation.ApplyCorpseUse(RegionId, Use)
+                if (not Applied?):
+                    return false
             RemoveCorpse(CorpseId)
             Kind:string =
                 if (Use = aeonfall_corpse_use.Burn):

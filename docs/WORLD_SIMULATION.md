@@ -241,3 +241,35 @@ Repeat with separate spawners and concurrent regions. Eliminate a brood actor
 during shutdown/despawn and confirm no duplicate corpse, orphan brood record,
 or leaked NPC remains. Native Verse compilation and multiplayer streaming
 tests remain required; Python source guards do not establish those outcomes.
+
+## Corpse-denial corruption counterplay (2026-11-01)
+
+The existing horde corpse-use transaction now reconciles **canonical** regional
+corruption before removing a corpse. This is a deterministic consequence, not a
+new ecology director or another source of AI spawns:
+
+| First successful corpse use | Corruption change | Interpretation |
+| --- | ---: | --- |
+| Burn | -2 | Destroy fuel for gravefeeding and necromancy. |
+| Sanctify | -4 | Stronger cleansing at the same exclusive corpse token. |
+| Necromancy | +5 | Reanimation pollutes the local region; counterplay is denial. |
+| Harvest | 0 | Existing material/XP reward route; no corruption change. |
+
+Changes clamp to the canonical 0–100 region range and immediately reconcile
+existing hostility/mutation thresholds. If a registered region's runtime state
+is not initialized, burn/sanctify/necromancy **fail closed** and leave the corpse
+available. Unregistered test-only horde regions retain standalone corpse rules.
+A corpse cannot be used twice; a rejected, expired, foreign, or previously
+consumed corpse cannot modify corruption. A valid first use still emits its
+existing `horde.corpse_*` event. No new persistent records, NPC spawners,
+additional waves, or stat multipliers were added.
+
+This makes corruption bands respond to player corpse denial and necromancer
+success without forcing a fixed spawn count. An existing invasion can remain
+active while pressure changes; native spawner allocation and streaming gates
+are **not** overridden by corruption. UEFN acceptance must exercise both
+sides of a threshold (19/20, 39/40, 59/60, 79/80, 94/95), simultaneous
+attempts to claim one corpse, missing region initialization, and a region
+unload during denial. Verify the physical corruption/biome presentation and
+multiplayer replication in Launch Session. Python source guards are not a
+native Verse compilation or runtime proof.

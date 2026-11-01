@@ -26,6 +26,33 @@ aeonfall_regional_escalation_service := class():
         else:
             0
 
+    # Corpse outcomes modify existing regional corruption, not NPC stats or
+    # population. Harvest is economically neutral; only canonical regions
+    # with initialized world state can commit the other outcomes.
+    ApplyCorpseUse(RegionId:string, Use:aeonfall_corpse_use)<transacts>:logic=
+        if (Use = aeonfall_corpse_use.Harvest):
+            return true
+        var Delta:int = 0
+        if (Use = aeonfall_corpse_use.Burn):
+            set Delta = -2
+        else if (Use = aeonfall_corpse_use.Sanctify):
+            set Delta = -4
+        else if (Use = aeonfall_corpse_use.Necromancy):
+            set Delta = 5
+        else:
+            return false
+        if:
+            State := GetAEONFALLRegionRuntime().GetState[RegionId]
+            Updated := GetAEONFALLRegionRuntime().SetCorruption(
+                RegionId, State.Corruption + Delta
+            )
+            Updated?
+            Reconciled := ReconcileRegion(RegionId)
+            Reconciled?
+        then:
+            return true
+        false
+
     ComputeHostility(State:aeonfall_region_runtime_state):int=
         var Tier:int = CorruptionBand(State.Corruption)
 
