@@ -131,9 +131,9 @@ class SourceBundleTests(unittest.TestCase):
         checksum_name = "AEONFALL/CHECKSUMS.sha256"
         manifest = json.loads(contents[manifest_name])
         mutate(manifest)
-        contents[manifest_name] = (json.dumps(manifest, indent=2, sort_keys=True) + "\\n").encode()
+        contents[manifest_name] = (json.dumps(manifest, indent=2, sort_keys=True) + "\n").encode()
         contents[checksum_name] = "".join(
-            f"{bundle.sha256(data)}  {name}\\n"
+            f"{bundle.sha256(data)}  {name}\n"
             for name, data in sorted(contents.items()) if name != checksum_name
         ).encode()
         with zipfile.ZipFile(self.output, "w") as archive:
