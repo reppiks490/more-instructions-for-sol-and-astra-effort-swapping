@@ -308,18 +308,48 @@ aeonfall_profile_service := class():
             Player.IsActive[]
             Old := AEONFALLPlayerProfiles[Player]
         then:
-            var UpdatedUnlocks:[]string = Old.UnlockedEntityIds
+            # Defense in depth: only the first acquisition may debit materials.
+            # Both recipe and shop callers precheck this, but the durable commit
+            # must reject duplicate/stale requests independently.
             if:
                 Old.UnlockedEntityIds.Find[UnlockEntityId]
             then:
-                set UpdatedUnlocks = Old.UnlockedEntityIds
-            else:
-                set UpdatedUnlocks = Old.UnlockedEntityIds + array{UnlockEntityId}
+                return false
+
+            # A purchase is a debit, never an implicit material grant or a
+            # deletion of unrelated sparse ledger entries. Reject malformed
+            # or stale candidate ledgers before the single persistent write.
+            var ValidLedger:logic = true
+            for (MaterialId -> OldAmount : Old.MaterialLedger):
+                if:
+                    MaterialId <> ""
+                    OldAmount >= 0
+                    UpdatedAmount := NewLedger[MaterialId]
+                    UpdatedAmount >= 0
+                    UpdatedAmount <= OldAmount
+                then:
+                    set ValidLedger = ValidLedger
+                else:
+                    set ValidLedger = false
+
+            for (MaterialId -> UpdatedAmount : NewLedger):
+                if:
+                    MaterialId <> ""
+                    UpdatedAmount >= 0
+                    OldAmount := Old.MaterialLedger[MaterialId]
+                    UpdatedAmount <= OldAmount
+                then:
+                    set ValidLedger = ValidLedger
+                else:
+                    set ValidLedger = false
+
+            if (not ValidLedger?):
+                return false
 
             Candidate := aeonfall_player_profile:
                 MakeAEONFALLPlayerProfile<constructor>(Old)
                 MaterialLedger := NewLedger
-                UnlockedEntityIds := UpdatedUnlocks
+                UnlockedEntityIds := Old.UnlockedEntityIds + array{UnlockEntityId}
             return TrySaveProfile(Player, Candidate)
         false
 
