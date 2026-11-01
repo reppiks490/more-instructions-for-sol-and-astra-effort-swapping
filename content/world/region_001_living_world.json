@@ -56,7 +56,7 @@
   "spawn_groups": [
     {
       "id": "SG-R001-GRAVE-SCAVENGERS",
-      "max_active": 8,
+      "max_active": 6,
       "entity_ids": [
         "MON-043",
         "MON-133",
@@ -65,7 +65,7 @@
     },
     {
       "id": "SG-R001-NECRO-SUPPORT",
-      "max_active": 6,
+      "max_active": 4,
       "entity_ids": [
         "MON-048",
         "MON-050",
@@ -91,7 +91,7 @@
     },
     {
       "id": "SG-R001-OSSUARY-SIEGE",
-      "max_active": 12,
+      "max_active": 10,
       "entity_ids": [
         "MON-008",
         "MON-048",
