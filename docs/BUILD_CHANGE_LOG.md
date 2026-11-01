@@ -1,5 +1,18 @@
 # Build change log
 
+## 2026-11-01 — Runtime Forge: exclusive result-router subscriptions
+
+The ability-effect result router and physical unlock-delivery result router
+now each acquire a session-retained exclusive subscription lease before
+listening to the shared event bus. Duplicate placed devices fail closed,
+preventing duplicate result callbacks and misleading unresolved-result
+telemetry. Only the owner cancels its listener and releases the lease during
+teardown. Added source-mutation regression coverage and explicit native
+duplicate-device, owner-shutdown and replacement acceptance scenarios.
+The leases are independent and do not alter player persistence or ability
+cost semantics. Source tests and GitHub CI do not prove native Verse compilation,
+UEFN editor bindings or a Fortnite Launch Session.
+
 ## 2026-11-01 — Living World: corpse denial changes canonical corruption
 
 Burn (-2), sanctify (-4), and necromancy (+5) now use the existing regional
