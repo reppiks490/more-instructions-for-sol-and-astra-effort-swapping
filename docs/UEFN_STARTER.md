@@ -44,6 +44,27 @@ Place one `aeonfall_runtime_tick_device` (a second instance now refuses its sess
 
 Bind the encounter director to the authored boss, NPC Character Definition/spawner, physical objective anchors, hazards and phase effects. Use its generated canonical contract and exact signal names. Bind one horde ecology adapter per region, its NPC spawner, burn/sanctify buttons, apex event triggers, and evolution presentation graphs. NPCs still need authored Character Definitions and compatible behaviors. **Set a nonempty, exact canonical ID on every NPC lifecycle behavior.** Duplicate registration of the same agent is accepted only when its existing canonical ID and forward/reverse runtime-key mappings agree. In a private Launch Session, deliberately test an unconfigured NPC, repeated registration of one agent, NPC despawn/respawn, and two NPCs sharing a canonical catalog ID; verify that no actor inherits another actor's status, ability, or encounter state. Source guards cannot establish these native lifecycle outcomes.
 
+## Result-router ownership and native acceptance
+
+Place exactly one `aeonfall_ability_result_router_device` and one
+`aeonfall_unlock_delivery_router_device`. Each now acquires an exclusive
+session lease **before** subscribing to its result channel. A second instance
+of the same router rejects startup without touching the active subscription.
+The owner cancels its listener before releasing its lease on shutdown; a
+rejected duplicate cannot release or cancel the owner's listener. The two
+different router types have independent leases.
+
+In a private UEFN Launch Session, deliberately place two instances of each
+router, submit one successful and one failed ability effect and one physical
+unlock-delivery result, and verify that exactly one authoritative resolution
+occurs per request, with no duplicate `*_unresolved` diagnostic from the
+rejected instance. End the owner, verify its subscription stops, and start a
+replacement to verify it can acquire the released lease. Keep the existing
+scheduler running while performing this test; a replacement router does not
+auto-start when the old owner ends. Verify player rejoin and timeout behavior
+with both routers present. Python source tests cannot establish native
+subscription scheduling, Verse compilation or multiplayer behavior.
+
 ## Local editor automation mission
 
 With the official UEFN MCP connected on Windows, give the local agent this task:
