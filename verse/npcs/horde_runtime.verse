@@ -119,6 +119,18 @@ aeonfall_horde_runtime := class():
             return 3
         if (Old.Tier = 3, Biomass >= Policy.ApostateBiomass):
             return 4
+        # A Crowned Devourer needs an actively corrupted canonical region.
+        # Cleansing below the devouring-front band blocks *new* apexes;
+        # existing apexes remain encounter-owned until defeated or despawned.
+        # Unregistered isolated harness regions keep their standalone rules.
+        if (Old.Tier = 4, Biomass >= Policy.CrownedBiomass):
+            if (GetAEONFALLRegionRegistry().IsRegistered[Old.RegionId]):
+                if (RegionState := GetAEONFALLRegionRuntime().GetState[Old.RegionId]):
+                    if (RegionState.Corruption < 80):
+                        return Old.Tier
+                else:
+                    # A registered but uninitialized region cannot promote.
+                    return Old.Tier
         if:
             Old.Tier = 4
             Biomass >= Policy.CrownedBiomass
