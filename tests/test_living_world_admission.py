@@ -187,6 +187,55 @@ class LivingWorldAdmissionTests(unittest.TestCase):
             with self.subTest(guard=guard):
                 self.assertIn(guard, source)
 
+    def test_horde_and_invasion_spawners_are_mutually_exclusive(self):
+        horde = (ROOT / "verse/npcs/horde_ecology_adapter_device.verse").read_text(
+            encoding="utf-8"
+        )
+        invasion = (ROOT / "verse/world/npc_spawn_group_adapter_device.verse").read_text(
+            encoding="utf-8"
+        )
+        horde_acquire = horde.split("    AcquireAdapterLease()", 1)[1].split(
+            "    ReleaseAdapterLease()", 1
+        )[0]
+        invasion_acquire = invasion.split("    AcquireAdapterLease()", 1)[1].split(
+            "    ReleaseAdapterLease()", 1
+        )[0]
+        self.assertIn("AEONFALLInvasionSpawnerLeases[GetSession()]", horde_acquire)
+        self.assertIn("for (OwnedSpawner : OtherAdapter.Spawners):", horde_acquire)
+        self.assertIn("OwnedSpawner = Spawner", horde_acquire)
+        self.assertLess(
+            horde_acquire.index("OwnedSpawner = Spawner"),
+            horde_acquire.index("set Owners[RegionId] = Self"),
+        )
+        self.assertIn("AEONFALLHordeAdapterLeases[GetSession()]", invasion_acquire)
+        self.assertIn("for (CandidateSpawner : Spawners):", invasion_acquire)
+        self.assertIn("OtherAdapter.Spawner = CandidateSpawner", invasion_acquire)
+        self.assertLess(
+            invasion_acquire.index("OtherAdapter.Spawner = CandidateSpawner"),
+            invasion_acquire.index("set Owners[Key] = Self"),
+        )
+
+    def test_horde_stale_death_cannot_mint_corpse_or_clear_foreign_actor(self):
+        horde = (ROOT / "verse/npcs/horde_ecology_adapter_device.verse").read_text(
+            encoding="utf-8"
+        )
+        death = horde.split("    RecordDeath(ActorKey:", 1)[1].split(
+            "    FindNearest(", 1
+        )[0]
+        for guard in (
+            "Running?",
+            "DeathSubscriptions[ActorKey]",
+            "GetAEONFALLHordeRuntime().GetBrood[ActorKey]",
+            "Brood.RegionId = RegionId",
+        ):
+            self.assertIn(guard, death)
+            self.assertLess(death.index(guard), death.index("AddCorpse("))
+        self.assertLess(death.index("then:"), death.index("RemoveBrood(ActorKey)"))
+        self.assertLess(death.index("then:"), death.index("ReleaseOwnedActor(ActorKey)"))
+        for callback in ("OpenApex", "CloseApex"):
+            body = horde.split(f"    {callback}(MaybeAgent:?agent):void=", 1)[1]
+            self.assertIn("if (Running?):", body.split("\n\n", 1)[0])
+
 
 if __name__ == "__main__":
     unittest.main()
