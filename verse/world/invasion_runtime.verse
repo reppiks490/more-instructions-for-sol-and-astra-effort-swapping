@@ -8,6 +8,14 @@ aeonfall_invasion_runtime := class():
 
     var States:[string]aeonfall_invasion_runtime_state = map{}
 
+    # One physical invasion at a time per region: group caps are authored
+    # against a single regional event reserve, not an additive global pool.
+    HasActiveInRegion(RegionId:string)<transacts>:logic=
+        for (InvasionKey -> State : States):
+            if (State.RegionId = RegionId, State.Active?):
+                return true
+        false
+
     RequestWave(
         Definition:aeonfall_invasion_definition,
         WaveIndex:int
@@ -77,6 +85,8 @@ aeonfall_invasion_runtime := class():
             Definition := GetAEONFALLInvasionRegistry().Get[InvasionId]
             RegionState := GetAEONFALLRegionRuntime().GetState[Definition.RegionId]
             RegionState.HostilityTier >= Definition.MinHostilityTier
+            not HasActiveInRegion(Definition.RegionId)?
+            not RegionState.ActiveEventIds.Find[InvasionId]
         then:
             if:
                 Existing := States[InvasionId]
@@ -94,14 +104,16 @@ aeonfall_invasion_runtime := class():
                 Completed := false
                 Failed := false
 
+            # Admission is atomic: never mark an invasion active if its
+            # canonical region event cannot be reserved.
             if:
-                set States[InvasionId] = Initial
-            then:
                 Added := GetAEONFALLRegionRuntime().AddEvent(
                     Definition.RegionId,
                     InvasionId
                 )
-
+                Added?
+                set States[InvasionId] = Initial
+            then:
                 AEONFALLRegionalEscalation.ReconcileRegion(
                     Definition.RegionId
                 )
@@ -131,6 +143,8 @@ aeonfall_invasion_runtime := class():
         if:
             Old := States[InvasionId]
             Old.Active?
+            Definition := GetAEONFALLInvasionRegistry().Get[InvasionId]
+            Definition.ObjectiveIds.Find[ObjectiveId]
         then:
             if:
                 Old.CompletedObjectiveIds.Find[ObjectiveId]
