@@ -4,10 +4,11 @@
 
 The ability runtime now guards each canonical God/Absolute ability with an
 owner-scoped, active-form activation epoch. Pre-dispatch checks reject repeat
-uses; adapter-result handling rechecks the form and commits the ability state
+uses; each in-flight request records its originating epoch, and adapter-result
+handling rechecks the form and commits the ability state
 and use ledger atomically. Failed effects do not spend the use, ending a
 managed effect cannot refund it, and owner teardown drops ledger state.
-Added seven source mutation guards. Canonical IDs and one-use quotas are
+Added ten source mutation guards. Canonical IDs and one-use quotas are
 unchanged; Transcendent Zero remains separate and unbound. This does not
 claim native Verse compilation or a functional apex physical adapter.
 
