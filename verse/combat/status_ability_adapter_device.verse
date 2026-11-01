@@ -39,6 +39,19 @@ aeonfall_status_ability_adapter_device := class(creative_device):
         if (not Claimed?):
             return
 
+        # A status batch is a physical gameplay effect, not a safe shortcut
+        # around transformation immunity/quotas/encounter preflight.
+        if:
+            Definition := GetAEONFALLAbilityRegistry().Get[Request.AbilityId]
+            AEONFALLRequiresSpecializedTransformationPreflight(Definition)?
+        then:
+            AEONFALLAdapterResultDelivery.Report(aeonfall_adapter_result{
+                RequestId := Request.RequestId, OwnerKey := Request.OwnerKey,
+                AbilityId := Request.AbilityId, AdapterId := Request.AdapterId,
+                Succeeded := false, ResultCode := "apex_requires_specialized_preflight"
+            })
+            return
+
         var Succeeded:logic = true
         var ResultCode:string = "ok"
 
