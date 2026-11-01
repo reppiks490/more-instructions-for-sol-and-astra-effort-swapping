@@ -106,7 +106,8 @@ class InvasionCorruptionAdmissionTests(unittest.TestCase):
     def test_generated_bootstrap_matches_generator(self):
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / "generated.verse"
-            with mock.patch.object(self.generator, "OUTPUT", output):
+            with mock.patch.object(self.generator, "OUTPUT", output), \
+                    mock.patch.object(self.generator, "ROOT", Path(directory)):
                 with redirect_stdout(io.StringIO()):
                     self.assertEqual(self.generator.main(), 0)
             self.assertEqual(
