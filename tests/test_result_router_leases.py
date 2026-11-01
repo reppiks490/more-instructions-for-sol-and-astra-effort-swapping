@@ -114,8 +114,9 @@ class ResultRouterLeaseSourceTests(unittest.TestCase):
         for name, spec in ROUTERS.items():
             with self.subTest(router=name):
                 self.assert_mutation_rejected(
-                    name, "        set LeaseOwned = true\n        Subscription :=",
-                    f"        Subscription := {spec[5]}\n        set LeaseOwned = true\n        Subscription :="
+                    name,
+                    f"        set LeaseOwned = true\\n        Subscription := {spec[5]}",
+                    f"        Subscription := {spec[5]}\\n        set LeaseOwned = true"
                 )
 
     def test_reject_unowned_teardown(self):
