@@ -41,6 +41,10 @@ The leases are independent and do not alter player persistence or ability
 cost semantics. Source tests and GitHub CI do not prove native Verse compilation,
 UEFN editor bindings or a Fortnite Launch Session.
 
+## 2026-11-01 — QA Sentinel: source-manifest provenance integrity
+
+The source-package verifier now rejects duplicate and noncanonical manifest source paths and checks each declared Git blob object ID against the actual archived source bytes. Regression fixtures rewrite both the manifest and its checksum inventory to ensure self-consistent forged metadata is rejected. This verifies internal source provenance consistency; independent commit authenticity and native UEFN compilation remain separate gates.
+
 ## 2026-11-01 — Living World: corpse denial changes canonical corruption
 
 Burn (-2), sanctify (-4), and necromancy (+5) now use the existing regional
