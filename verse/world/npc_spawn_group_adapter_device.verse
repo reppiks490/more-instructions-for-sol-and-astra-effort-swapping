@@ -152,8 +152,11 @@ aeonfall_npc_spawn_group_adapter_device := class(creative_device):
             not State.Active?
         then:
             if (WasCompleted?):
-                return State.Completed?
-            return State.Failed?
+                if (State.Completed?):
+                    return true
+            else:
+                if (State.Failed?):
+                    return true
         false
 
     AddRequester(InvasionId:string)<transacts>:logic=
