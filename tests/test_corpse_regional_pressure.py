@@ -38,7 +38,7 @@ class CorpseRegionalPressureTests(unittest.TestCase):
 
     def test_canonical_region_commit_precedes_exclusive_corpse_removal(self):
         method = self.horde.split("    UseCorpse(", 1)[1].split(
-            "    RemoveCorpse(", 1
+            "    RemoveCorpse(CorpseId)<transacts>:void=", 1
         )[0]
         self.assertIn("Corpse := Corpses[CorpseId]", method)
         self.assertIn("Corpse.RegionId = RegionId", method)
@@ -73,7 +73,7 @@ class CorpseRegionalPressureTests(unittest.TestCase):
 
     def test_no_duplicate_use_or_new_population_records(self):
         method = self.horde.split("    UseCorpse(", 1)[1].split(
-            "    RemoveCorpse(", 1
+            "    RemoveCorpse(CorpseId)<transacts>:void=", 1
         )[0]
         self.assertEqual(method.count("RemoveCorpse(CorpseId)"), 1)
         self.assertNotIn("RegisterBrood(", method)
