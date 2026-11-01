@@ -245,6 +245,9 @@ jobs:
       - name: Validate God and Absolute adapter bindings
         run: python tools/validate_ascended_form_adapter_bindings.py
 
+      - name: Validate bounded God and Absolute mechanics
+        run: python tools/validate_apex_mechanics.py
+
       - name: Validate transformation Launch Session plan
         run: python tools/validate_transformation_launch_tests.py
 

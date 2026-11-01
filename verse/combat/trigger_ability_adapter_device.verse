@@ -46,6 +46,16 @@ aeonfall_trigger_ability_adapter_device := class(creative_device):
             set Succeeded = false
             set ResultCode = "adapter_id_empty"
 
+        # A generic trigger cannot attest boss immunity, destination validity,
+        # objective ownership or bounded physical effects. All transformed
+        # abilities require a dedicated preflighting adapter; fail closed.
+        if:
+            Definition := GetAEONFALLAbilityRegistry().Get[Request.AbilityId]
+            Definition.RequiredTransformationId <> ""
+        then:
+            set Succeeded = false
+            set ResultCode = "apex_requires_specialized_preflight"
+
         if:
             OwnerAgent := GetAEONFALLActorRegistry().GetAgent[Request.OwnerKey]
         then:
