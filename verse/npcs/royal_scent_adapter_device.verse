@@ -24,6 +24,8 @@ aeonfall_royal_scent_adapter_device := class(creative_device):
     StartMarkedChallenge(
         Request:aeonfall_ability_effect_request, SpeciesId:string
     )<decides><transacts>:void=
+        AbilityDefinition := GetAEONFALLAbilityRegistry().Get[Request.AbilityId]
+        not AEONFALLRequiresSpecializedTransformationPreflight(AbilityDefinition)?
         MarkDefinition := GetAEONFALLStatusRegistry().Get["STS-005"]
         Marked := GetAEONFALLStatusRuntime().ApplyStatus(
             Request.TargetKey, MarkDefinition, Request.OwnerKey, Request.Magnitude
