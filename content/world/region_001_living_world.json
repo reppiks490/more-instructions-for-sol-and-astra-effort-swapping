@@ -223,6 +223,7 @@
       "name": "Devouring Moon Precursor",
       "aggressor_id": "ECOL-GRAVEFEEDING",
       "min_hostility_tier": 4,
+      "min_corruption": 80,
       "duration_seconds": 360,
       "max_concurrent_ai": 20,
       "timeout_is_failure": true,
