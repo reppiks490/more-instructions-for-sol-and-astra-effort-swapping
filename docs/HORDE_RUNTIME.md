@@ -27,3 +27,29 @@ The existing repository validation commands and the horde integration guard run 
 ## UEFN acceptance
 
 Compile with the existing flat-module layout. Place one runtime tick device, one horde ecology adapter per region, and the dev harness in a private test level. Bind the spawner to valid Character Definitions, feed volumes to NPC-capable zones, and denial buttons to world-space interaction. Run the harness, then test simultaneous consumption, corpse expiration, elimination, region unload, presentation changes, navigation, multiplayer replication and memory. A promotion event alone does not transform a physical NPC.
+
+
+## Physical spawner and identity admission (2026-11-01)
+
+The horde ecology adapter now refuses to start unless its region and canonical
+NPC ID are set, `StartDisabled` is true, feeding range is positive, and its
+configured corpse biomass is within the current runtime policy (1 through
+`CrownedBiomass`). It obtains exclusive spawner ownership, registers the region,
+and subscribes to spawn/death inputs **before** calling `Spawner.Enable()`.
+The editable flag is only an authoring assertion: the actual NPC Spawner must
+be set to **Spawn Character at Game Start = False**, with physical NPC limits
+and streaming behavior independently verified in UEFN. A duplicate/rejected
+adapter must never disable a spawner owned by another director.
+
+NPC lifecycle behavior may register an actor before the ecology adapter sees its
+spawn event. In that case, the adapter reuses the runtime key only when the
+registry's canonical ID matches its configured `CanonicalId`. It does not
+unregister a lifecycle-owned key on shutdown. Delayed elimination callbacks
+recheck canonical identity as well as brood membership before creating remains.
+This closes cross-species biomass attribution without introducing a new actor
+registry, a second encounter director, extra NPCs, or stat scaling.
+
+Regression: `python -m unittest tests/test_horde_binding_guards.py`. The source
+checks do not prove Verse compilation, physical NPC caps, editor start settings,
+streaming-cell unload behavior, or multiplayer elimination ordering; those remain
+Launch Session acceptance gates.
