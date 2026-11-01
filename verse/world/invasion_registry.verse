@@ -11,6 +11,8 @@ aeonfall_invasion_registry := class():
             Definition.WaveSpawnGroupIds.Length > 0
             Definition.DurationSeconds > 0.0
             Definition.MaxConcurrentAi > 0
+            Definition.MinCorruption >= 0
+            Definition.MinCorruption <= 100
             GetAEONFALLRegionRegistry().IsRegistered[Definition.RegionId]
         then:
             if:
