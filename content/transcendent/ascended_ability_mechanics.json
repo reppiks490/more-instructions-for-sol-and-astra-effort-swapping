@@ -1,0 +1,437 @@
+{
+  "version": 1,
+  "policy": "Design limits and cue IDs are requirements for future specialized project-bound adapters, not claims that effects or UEFN assets exist. Generic trigger adapters reject transformed abilities until preflight implementations exist.",
+  "ability_count": 10,
+  "mechanics": [
+    {
+      "ability_id": "GOD-ABL-001",
+      "form_id": "FORM-GOD",
+      "adapter_id": "god_storm_genesis",
+      "target_policy": "Area",
+      "boss_safe": true,
+      "effect_kind": "storm_domain",
+      "limits": {
+        "uses_per_form": 1,
+        "max_targets": 8,
+        "max_instances": 1,
+        "radius_m": 12,
+        "max_range_m": 24,
+        "lifetime_seconds": 8
+      },
+      "preflight": {
+        "mode": "specialized_preflight_required",
+        "boss_policy": "respect_immune",
+        "registered_target_required": false,
+        "destination_validation_required": true,
+        "encounter_owned_rules_only": true
+      },
+      "counterplay": {
+        "telegraph_seconds": 1.25,
+        "recovery_seconds": 0.75,
+        "response": "Exit the visible circle before the third strike; grounded cover reduces the final pulse."
+      },
+      "class_synergy": {
+        "class_ids": [
+          "CLS-007"
+        ],
+        "interaction": "Beast-Crown scouting reveals a safe approach but does not extend storm radius."
+      },
+      "presentation": {
+        "tell_vfx": "CUE_APEX_GOD_ABL_001_TELL",
+        "impact_vfx": "CUE_APEX_GOD_ABL_001_IMPACT",
+        "exit_vfx": "CUE_APEX_GOD_ABL_001_EXIT",
+        "tell_audio": "CUE_APEX_GOD_ABL_001_TELL_SFX",
+        "impact_audio": "CUE_APEX_GOD_ABL_001_IMPACT_SFX",
+        "direction": "Sky-split sigil over the marked ground, then three descending thunder columns."
+      },
+      "implementation_state": "specified_unbound"
+    },
+    {
+      "ability_id": "GOD-ABL-002",
+      "form_id": "FORM-GOD",
+      "adapter_id": "god_gravity_throne",
+      "target_policy": "Area",
+      "boss_safe": true,
+      "effect_kind": "gravity_pressure",
+      "limits": {
+        "uses_per_form": 1,
+        "max_targets": 6,
+        "max_instances": 1,
+        "radius_m": 9,
+        "max_range_m": 20,
+        "lifetime_seconds": 5
+      },
+      "preflight": {
+        "mode": "specialized_preflight_required",
+        "boss_policy": "respect_immune",
+        "registered_target_required": false,
+        "destination_validation_required": true,
+        "encounter_owned_rules_only": true
+      },
+      "counterplay": {
+        "telegraph_seconds": 1.5,
+        "recovery_seconds": 0.85,
+        "response": "Leave the ring or anchor to a valid terrain fixture; bosses ignore forced displacement."
+      },
+      "class_synergy": {
+        "class_ids": [
+          "CLS-006"
+        ],
+        "interaction": "Sepulchral Sovereign redoubts offer anchor cover, subject to the shared structure cap."
+      },
+      "presentation": {
+        "tell_vfx": "CUE_APEX_GOD_ABL_002_TELL",
+        "impact_vfx": "CUE_APEX_GOD_ABL_002_IMPACT",
+        "exit_vfx": "CUE_APEX_GOD_ABL_002_EXIT",
+        "tell_audio": "CUE_APEX_GOD_ABL_002_TELL_SFX",
+        "impact_audio": "CUE_APEX_GOD_ABL_002_IMPACT_SFX",
+        "direction": "A black-gold crown projects a ring of descending runes before pressure arrives."
+      },
+      "implementation_state": "specified_unbound"
+    },
+    {
+      "ability_id": "GOD-ABL-003",
+      "form_id": "FORM-GOD",
+      "adapter_id": "god_phoenix_ascension",
+      "target_policy": "Self",
+      "boss_safe": true,
+      "effect_kind": "phoenix_recovery",
+      "limits": {
+        "uses_per_form": 1,
+        "max_targets": 1,
+        "max_instances": 1,
+        "radius_m": 0,
+        "max_range_m": 0,
+        "lifetime_seconds": 6
+      },
+      "preflight": {
+        "mode": "specialized_preflight_required",
+        "boss_policy": "respect_immune",
+        "registered_target_required": false,
+        "destination_validation_required": false,
+        "encounter_owned_rules_only": true
+      },
+      "counterplay": {
+        "telegraph_seconds": 1.8,
+        "recovery_seconds": 1,
+        "response": "Interrupt the channel before completion; recovery never resurrects an eliminated actor."
+      },
+      "class_synergy": {
+        "class_ids": [
+          "CLS-006"
+        ],
+        "interaction": "Corpse-charge architecture can protect the channel but cannot refund the form use."
+      },
+      "presentation": {
+        "tell_vfx": "CUE_APEX_GOD_ABL_003_TELL",
+        "impact_vfx": "CUE_APEX_GOD_ABL_003_IMPACT",
+        "exit_vfx": "CUE_APEX_GOD_ABL_003_EXIT",
+        "tell_audio": "CUE_APEX_GOD_ABL_003_TELL_SFX",
+        "impact_audio": "CUE_APEX_GOD_ABL_003_IMPACT_SFX",
+        "direction": "A six-wing ember silhouette appears and contracts before the recovery pulse."
+      },
+      "implementation_state": "specified_unbound"
+    },
+    {
+      "ability_id": "GOD-ABL-004",
+      "form_id": "FORM-GOD",
+      "adapter_id": "god_celestial_mandate",
+      "target_policy": "Ally",
+      "boss_safe": true,
+      "effect_kind": "celestial_ally_guard",
+      "limits": {
+        "uses_per_form": 1,
+        "max_targets": 1,
+        "max_instances": 1,
+        "radius_m": 0,
+        "max_range_m": 20,
+        "lifetime_seconds": 8
+      },
+      "preflight": {
+        "mode": "specialized_preflight_required",
+        "boss_policy": "respect_immune",
+        "registered_target_required": true,
+        "destination_validation_required": false,
+        "encounter_owned_rules_only": true
+      },
+      "counterplay": {
+        "telegraph_seconds": 1,
+        "recovery_seconds": 0.65,
+        "response": "Break line of sight or move beyond the tether range; the shield cannot be duplicated."
+      },
+      "class_synergy": {
+        "class_ids": [
+          "CLS-007"
+        ],
+        "interaction": "Beast-Crown companion command keeps an ally in range without increasing guard strength."
+      },
+      "presentation": {
+        "tell_vfx": "CUE_APEX_GOD_ABL_004_TELL",
+        "impact_vfx": "CUE_APEX_GOD_ABL_004_IMPACT",
+        "exit_vfx": "CUE_APEX_GOD_ABL_004_EXIT",
+        "tell_audio": "CUE_APEX_GOD_ABL_004_TELL_SFX",
+        "impact_audio": "CUE_APEX_GOD_ABL_004_IMPACT_SFX",
+        "direction": "A thin constellation tether visibly connects caster and one registered ally."
+      },
+      "implementation_state": "specified_unbound"
+    },
+    {
+      "ability_id": "GOD-ABL-005",
+      "form_id": "FORM-GOD",
+      "adapter_id": "god_titanheart_edict",
+      "target_policy": "Self",
+      "boss_safe": true,
+      "effect_kind": "titan_stagger_guard",
+      "limits": {
+        "uses_per_form": 1,
+        "max_targets": 1,
+        "max_instances": 1,
+        "radius_m": 0,
+        "max_range_m": 0,
+        "lifetime_seconds": 6
+      },
+      "preflight": {
+        "mode": "specialized_preflight_required",
+        "boss_policy": "respect_immune",
+        "registered_target_required": false,
+        "destination_validation_required": false,
+        "encounter_owned_rules_only": true
+      },
+      "counterplay": {
+        "telegraph_seconds": 1.2,
+        "recovery_seconds": 0.8,
+        "response": "Bait the short fortitude window, then use positional pressure after plates dissolve."
+      },
+      "class_synergy": {
+        "class_ids": [
+          "CLS-006"
+        ],
+        "interaction": "Sepulchral Sovereign cover combines defensively, never as total stagger immunity."
+      },
+      "presentation": {
+        "tell_vfx": "CUE_APEX_GOD_ABL_005_TELL",
+        "impact_vfx": "CUE_APEX_GOD_ABL_005_IMPACT",
+        "exit_vfx": "CUE_APEX_GOD_ABL_005_EXIT",
+        "tell_audio": "CUE_APEX_GOD_ABL_005_TELL_SFX",
+        "impact_audio": "CUE_APEX_GOD_ABL_005_IMPACT_SFX",
+        "direction": "Stone plates unfold around the caster with a low three-beat iron heartbeat."
+      },
+      "implementation_state": "specified_unbound"
+    },
+    {
+      "ability_id": "ABS-ABL-001",
+      "form_id": "FORM-ABSOLUTE",
+      "adapter_id": "absolute_chrono_rupture",
+      "target_policy": "Area",
+      "boss_safe": false,
+      "effect_kind": "chrono_slow_window",
+      "limits": {
+        "uses_per_form": 1,
+        "max_targets": 6,
+        "max_instances": 1,
+        "radius_m": 8,
+        "max_range_m": 18,
+        "lifetime_seconds": 4
+      },
+      "preflight": {
+        "mode": "specialized_preflight_required",
+        "boss_policy": "reject_immune",
+        "registered_target_required": false,
+        "destination_validation_required": true,
+        "encounter_owned_rules_only": true
+      },
+      "counterplay": {
+        "telegraph_seconds": 1.7,
+        "recovery_seconds": 1.1,
+        "response": "Leave the marked clockface; authored boss immunity prevents slow or timeline rewinds."
+      },
+      "class_synergy": {
+        "class_ids": [
+          "CLS-007"
+        ],
+        "interaction": "Beast-Crown tracking may reveal escape lanes but cannot override slow immunity."
+      },
+      "presentation": {
+        "tell_vfx": "CUE_APEX_ABS_ABL_001_TELL",
+        "impact_vfx": "CUE_APEX_ABS_ABL_001_IMPACT",
+        "exit_vfx": "CUE_APEX_ABS_ABL_001_EXIT",
+        "tell_audio": "CUE_APEX_ABS_ABL_001_TELL_SFX",
+        "impact_audio": "CUE_APEX_ABS_ABL_001_IMPACT_SFX",
+        "direction": "Three clock rings freeze in sequence; the last ring shatters at activation."
+      },
+      "implementation_state": "specified_unbound"
+    },
+    {
+      "ability_id": "ABS-ABL-002",
+      "form_id": "FORM-ABSOLUTE",
+      "adapter_id": "absolute_void_dominion",
+      "target_policy": "Area",
+      "boss_safe": true,
+      "effect_kind": "void_construct_suppression",
+      "limits": {
+        "uses_per_form": 1,
+        "max_targets": 8,
+        "max_instances": 1,
+        "radius_m": 10,
+        "max_range_m": 20,
+        "lifetime_seconds": 6
+      },
+      "preflight": {
+        "mode": "specialized_preflight_required",
+        "boss_policy": "respect_immune",
+        "registered_target_required": false,
+        "destination_validation_required": true,
+        "encounter_owned_rules_only": true
+      },
+      "counterplay": {
+        "telegraph_seconds": 1.5,
+        "recovery_seconds": 1,
+        "response": "Move protected objects outside the dome; objective-owned and permanent objects are exempt."
+      },
+      "class_synergy": {
+        "class_ids": [
+          "CLS-006"
+        ],
+        "interaction": "Grave Architecture can bait suppression but its protected objectives remain exempt."
+      },
+      "presentation": {
+        "tell_vfx": "CUE_APEX_ABS_ABL_002_TELL",
+        "impact_vfx": "CUE_APEX_ABS_ABL_002_IMPACT",
+        "exit_vfx": "CUE_APEX_ABS_ABL_002_EXIT",
+        "tell_audio": "CUE_APEX_ABS_ABL_002_TELL_SFX",
+        "impact_audio": "CUE_APEX_ABS_ABL_002_IMPACT_SFX",
+        "direction": "Temporary constructs show violet seams before a silent inward-collapse pulse."
+      },
+      "implementation_state": "specified_unbound"
+    },
+    {
+      "ability_id": "ABS-ABL-003",
+      "form_id": "FORM-ABSOLUTE",
+      "adapter_id": "absolute_axiom_dominion",
+      "target_policy": "AuthoredObjective",
+      "boss_safe": true,
+      "effect_kind": "axiom_objective_override",
+      "limits": {
+        "uses_per_form": 1,
+        "max_targets": 1,
+        "max_instances": 1,
+        "radius_m": 0,
+        "max_range_m": 15,
+        "lifetime_seconds": 5
+      },
+      "preflight": {
+        "mode": "specialized_preflight_required",
+        "boss_policy": "respect_immune",
+        "registered_target_required": true,
+        "destination_validation_required": false,
+        "encounter_owned_rules_only": true
+      },
+      "counterplay": {
+        "telegraph_seconds": 2,
+        "recovery_seconds": 1.25,
+        "response": "Disrupt the exposed channel or defend the authored objective until the window expires."
+      },
+      "class_synergy": {
+        "class_ids": [
+          "CLS-006"
+        ],
+        "interaction": "Sepulchral Sovereign can defend the objective; it cannot select arbitrary rules."
+      },
+      "presentation": {
+        "tell_vfx": "CUE_APEX_ABS_ABL_003_TELL",
+        "impact_vfx": "CUE_APEX_ABS_ABL_003_IMPACT",
+        "exit_vfx": "CUE_APEX_ABS_ABL_003_EXIT",
+        "tell_audio": "CUE_APEX_ABS_ABL_003_TELL_SFX",
+        "impact_audio": "CUE_APEX_ABS_ABL_003_IMPACT_SFX",
+        "direction": "A single encounter glyph displays the rule to be temporarily altered."
+      },
+      "implementation_state": "specified_unbound"
+    },
+    {
+      "ability_id": "ABS-ABL-004",
+      "form_id": "FORM-ABSOLUTE",
+      "adapter_id": "absolute_boundary_rewrite",
+      "target_policy": "Position",
+      "boss_safe": true,
+      "effect_kind": "boundary_phase_route",
+      "limits": {
+        "uses_per_form": 1,
+        "max_targets": 1,
+        "max_instances": 1,
+        "radius_m": 0,
+        "max_range_m": 15,
+        "lifetime_seconds": 8
+      },
+      "preflight": {
+        "mode": "specialized_preflight_required",
+        "boss_policy": "respect_immune",
+        "registered_target_required": false,
+        "destination_validation_required": true,
+        "encounter_owned_rules_only": true
+      },
+      "counterplay": {
+        "telegraph_seconds": 1.8,
+        "recovery_seconds": 1,
+        "response": "Deny the landing zone or wait out the route; invalid destinations fail without teleport."
+      },
+      "class_synergy": {
+        "class_ids": [
+          "CLS-007"
+        ],
+        "interaction": "Beast-Crown scouts may confirm routes but cannot bypass destination validation."
+      },
+      "presentation": {
+        "tell_vfx": "CUE_APEX_ABS_ABL_004_TELL",
+        "impact_vfx": "CUE_APEX_ABS_ABL_004_IMPACT",
+        "exit_vfx": "CUE_APEX_ABS_ABL_004_EXIT",
+        "tell_audio": "CUE_APEX_ABS_ABL_004_TELL_SFX",
+        "impact_audio": "CUE_APEX_ABS_ABL_004_IMPACT_SFX",
+        "direction": "Two matching boundary frames materialize with a visible destination preview."
+      },
+      "implementation_state": "specified_unbound"
+    },
+    {
+      "ability_id": "ABS-ABL-005",
+      "form_id": "FORM-ABSOLUTE",
+      "adapter_id": "absolute_sovereign_paradox",
+      "target_policy": "Area",
+      "boss_safe": false,
+      "effect_kind": "paradox_combo_domain",
+      "limits": {
+        "uses_per_form": 1,
+        "max_targets": 5,
+        "max_instances": 1,
+        "radius_m": 7,
+        "max_range_m": 16,
+        "lifetime_seconds": 3
+      },
+      "preflight": {
+        "mode": "specialized_preflight_required",
+        "boss_policy": "reject_immune",
+        "registered_target_required": false,
+        "destination_validation_required": true,
+        "encounter_owned_rules_only": true
+      },
+      "counterplay": {
+        "telegraph_seconds": 2.25,
+        "recovery_seconds": 1.5,
+        "response": "Disperse before convergence; immune bosses and incompatible encounters reject the combo."
+      },
+      "class_synergy": {
+        "class_ids": [
+          "CLS-006"
+        ],
+        "interaction": "Grave Architecture can shape safe lanes but never multiplies paradox pulses."
+      },
+      "presentation": {
+        "tell_vfx": "CUE_APEX_ABS_ABL_005_TELL",
+        "impact_vfx": "CUE_APEX_ABS_ABL_005_IMPACT",
+        "exit_vfx": "CUE_APEX_ABS_ABL_005_EXIT",
+        "tell_audio": "CUE_APEX_ABS_ABL_005_TELL_SFX",
+        "impact_audio": "CUE_APEX_ABS_ABL_005_IMPACT_SFX",
+        "direction": "Opposing gold and violet halos alternate before the permitted combo pulse."
+      },
+      "implementation_state": "specified_unbound"
+    }
+  ]
+}

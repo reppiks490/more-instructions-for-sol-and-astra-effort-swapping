@@ -1,92 +1,55 @@
-# Transcendent Zero — Ascension Contract
+# Transcendent Zero — Canonical Ascension Contract
 
-## Principle
-Transcendent Zero is not a rarity purchase, ordinary level reward, or random drop. It is a chosen-player ascension layer that sits above God and Absolute progression.
+## Qualification is not a grant
 
-Finishing the prerequisites creates a **Zero Candidate**. It does **not** automatically grant Transcendent Zero.
+Transcendent Zero sits above God and Absolute and is awarded only by the Choosing service. The canonical order is **Level 1000 + broad mastery → Trials I–IX → Axiom Heart → Trial X → Zero Candidate → Choosing → Transcendent Zero**. Neither a shop, a recipe completion, a single boss, a triggered effect graph, nor an admin-facing public gameplay control may grant it.
 
-## Candidate Baseline
-Initial design gates:
-- Level 100
-- 10 fully mastered classes
-- 40 eligible major/super/world boss clears
-- 20 eligible world-event clears
-- God progression complete
-- Absolute progression complete
-- all 10 Ascension Trials complete
-- Axiom Heart crafted
-- hidden lore/mastery prerequisites satisfied
+## Candidate baseline
 
-These numbers are balance inputs and may only be lowered after playtest evidence.
+Design prerequisites include Level **1000**, ten mastered classes, forty eligible major/super/world boss clears, twenty eligible world-event clears, completed God and Absolute progression, ten completed Ascension Trials, the crafted Axiom Heart, and hidden lore/mastery gates. These are demanding balance inputs, not a claim that all gates have been verified in a published UEFN session. Do not lower them without evidence.
 
-## Ten Ascension Trials
+## The ten canonical trials
 
-### I — Worth
-Complete a long elite encounter chain with a strict defeat allowance and rotating combat roles.
+These names, ordering and allowed powers mirror `content/transcendent/ascension_trials.json`:
+
+### I — Severance
+Enter alone, survive three archetypes, and clear without companions or God/Absolute abilities. No external carry can satisfy the proof.
 
 ### II — Collection
-Present refined materials from every major biome/ecology family. Repetition from one farm cannot substitute for breadth.
+Deposit distinct ecology, faction, boss and world-event tributes. Companions and God abilities are permitted; Absolute is not. Repetition of one farming route is insufficient.
 
 ### III — Hunter
-Defeat designated representatives of Gravefeeding, necromantic, infernal, mythical, eldritch, construct, celestial, oceanic, and faction champion ecologies.
+Defeat eldritch, infernal, colossal, necromantic and mythical threat representatives through their specific counterplay. God is permitted; Absolute is not.
 
-### IV — Conqueror
-Clear empowered variants of selected bosses with additional mechanics rather than only higher health.
+### IV — Dominion
+Win a faction conflict, stabilize a corrupted region, hold two objectives and preserve neutral population. Destruction alone cannot substitute for governance.
 
-### V — Unbroken
-Survive an escalating resource-limited gauntlet where ammunition, healing, cooldown timing, and positioning all matter.
+### V — Memory
+Recognize three remixed boss patterns, solve a sequence without HUD prompting and clear the Memory Echo without companions or Absolute abilities.
 
-### VI — Worldwalker
-Discover and solve hidden sites across surface, underground, oceanic, aerial, mirror, dimensional, and event-only spaces.
+### VI — Genesis
+Build a defensive network, protect three nodes, repair a broken link and win using created space. God abilities and companions are permitted; Absolute is not.
 
-### VII — Master
-Demonstrate mastery checks across ten different classes. Completion requires class mechanics, not merely XP thresholds.
+### VII — Restraint
+Spare an optional target, disable without an ultimate, protect an ally objective and clear under a power cap. God and Absolute abilities are forbidden.
 
 ### VIII — Sacrifice
-Forge and permanently consume designated high-tier crafted relics into the Axiom Heart chain. Required relics must have re-craft paths so this is punishing but recoverable.
+Temporarily seal the highest-tier loadout, offer designated sovereign sigils, clear with reduced slots and recover sealed relics. No companion or transformed powers; trial-specific tributes may be consumed but equipment must not be destructively deleted.
 
-### IX — Impossible War
-Complete a raid sequence that combines several previously learned boss systems. It must reward system knowledge and squad coordination.
+### IX — Convergence
+Stabilize three regions, defeat the Convergence Warden and open the Axiom Forge. God and Absolute abilities are permitted. This is the last trial **before** Heart crafting.
 
-### X — Zero Echo
-A candidate-only mastery remix using mechanics the player has already encountered. It does not teach a secret new rule; it tests whether the candidate actually understands AEONFALL.
+### X — The Final Witness
+Requires the crafted Axiom Heart. Complete Force, Shelter, Choice, Company and Final Witness objectives without companions, God or Absolute. Completion creates a Zero Candidate; it is **not** a Transcendent grant.
 
-## The Choosing
-Eligible candidates enter a final selection framework. Design goals:
-- tiny active Transcendent population
-- no direct purchase
-- no random lottery
-- no single-stat leaderboard
-- supports combat, puzzle solving, resource control, leadership, and system mastery
-- repeatable eligibility across seasons without permanently erasing prior achievement
+## Axiom Heart and Choosing
 
-Exact live population caps remain a balancing/publishing decision until concurrency and persistence behavior are tested in the actual island.
+The authoritative material/recipe graph is `content/crafting/axiom_heart_recipe.json`, with a computed design total of **68,420 raw-equivalent acquisitions**, including earned Seed of Zero. `content/progression/axiom_heart_recipe.json` is a non-authoritative progression summary. The final Choosing must consider combat, puzzles, resource discipline, leadership and mastery without purchases, lotteries or a single-stat leaderboard. Live population caps require actual concurrency/persistence testing.
 
-## Axiom Heart
-Canonical machine-readable recipe:
-`content/progression/axiom_heart_recipe.json`
+## Bounded apex power
 
-The V1 recipe represents **68,420 raw-equivalent inputs** across many systems, including a non-purchasable Seed of Zero.
+God and Absolute have exact transformation IDs, mutual exclusion and session-only duration/exhaustion. Transcendent Authorities are also temporary, and only persistent eligibility/history survives a session. All physical world-bending effects require project-bound preflight, boss immunity and encounter exception checks, resource budgets, and deterministic teardown. See `docs/APEX_MECHANICS_EXECUTION.md` for the fail-closed adapter boundary. An imported asset, static validator or Python test is not native UEFN compilation or multiplayer Launch Session proof.
 
-## Grant Boundary
-Only the final Choosing/Ascension service may set an active Transcendent state.
+## Failure philosophy
 
-The following systems may **not** grant Transcendent Zero:
-- shops
-- premium entitlements
-- item purchases
-- ordinary XP
-- random loot
-- admin-facing public gameplay controls
-- a single boss clear
-- crafting the Axiom Heart by itself
-
-## Power Duration
-The active Transcendent combat form remains time-bounded. Persistent data records qualification/history; combat dominance does not become a permanent always-on state.
-
-## Failure Philosophy
-The path is intentionally brutal, but failure should preserve meaningful progress:
-- unique mastery clears remain recorded
-- ordinary collected materials remain
-- some trial-specific consumables may be lost
-- failed Choosing attempts require requalification windows, not total account deletion
+Mastery clears and ordinary collected resources remain; designated trial consumables may be lost; failed Choosing attempts use requalification windows rather than account deletion. All checked persistence writes must succeed before an irreversible grant.
