@@ -1,5 +1,19 @@
 # Build change log
 
+## 2026-11-01 — Playable Slice: source-pinned physical binding audit
+
+Added a fail-closed, source-pinned editor inventory for the 49-device
+BOS-005 first-playable rig and its 42 exclusive physical encounter roles.
+The audit compares observed editor object paths, device classes, director
+links, project/level identity, source contract hashes and optional captured
+editor-output SHA-256. Missing, aliased or mismatched placements are rejected.
+The checklist carries all 24 canonical Launch Session IDs without treating
+self-reported passes as native evidence. Twelve source-only regression tests
+cover identity drift, physical aliases, wrong classes, wrong links, stale
+contracts and evidence provenance. No editor placement, native Verse compile
+or Fortnite Launch Session was performed by this change.
+
+
 ## 2026-11-01 — Runtime Forge: exclusive result-router subscriptions
 
 The ability-effect result router and physical unlock-delivery result router
