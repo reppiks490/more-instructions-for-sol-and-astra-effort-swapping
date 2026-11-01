@@ -10,6 +10,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import stat
 from pathlib import Path, PurePosixPath
 import subprocess
@@ -82,6 +83,41 @@ def safe_archive_name(name: str) -> bool:
             and chr(92) not in relative and ":" not in relative and chr(0) not in relative)
 
 
+
+def validate_provenance(provenance: object) -> None:
+    """Fail closed on fabricated native/editor claims in the source-only package.
+
+    This validates the self-reported evidence schema; it does not authenticate
+    the commit against a trusted GitHub ref or attest to a CI run.
+    """
+    required = {
+        "format_version", "kind", "commit", "tree", "source_checks",
+        "uefn_editor_import", "verse_engine_compile",
+        "fortnite_launch_session", "published_island_code",
+    }
+    if not isinstance(provenance, dict) or set(provenance) != required:
+        raise BundleError("Invalid build provenance fields")
+    if type(provenance["format_version"]) is not int or provenance["format_version"] != 1:
+        raise BundleError("Invalid build provenance format")
+    if provenance["kind"] != "UEFN source and import package":
+        raise BundleError("Invalid source package kind")
+    for field in ("commit", "tree"):
+        value = provenance[field]
+        if not isinstance(value, str) or not re.fullmatch(r"(?:[0-9a-f]{40}|[0-9a-f]{64})", value):
+            raise BundleError(f"Invalid provenance {field} identifier")
+    if len(provenance["commit"]) != len(provenance["tree"]):
+        raise BundleError("Provenance commit/tree object formats differ")
+    checks = provenance["source_checks"]
+    if not isinstance(checks, dict) or set(checks) != {"result", "workflow_run_url"}:
+        raise BundleError("Invalid source-check provenance fields")
+    if checks["result"] not in ("passed", "not_run") or not isinstance(checks["workflow_run_url"], str):
+        raise BundleError("Invalid source-check provenance values")
+    for field in ("uefn_editor_import", "verse_engine_compile", "fortnite_launch_session"):
+        if provenance[field] != "not_run":
+            raise BundleError(f"Unverified native/editor evidence claim: {field}")
+    if provenance["published_island_code"] is not None:
+        raise BundleError("Source-only package cannot claim a published island")
+
 def verify_bundle(path: Path) -> dict:
     with zipfile.ZipFile(path) as archive:
         names = archive.namelist()
@@ -100,8 +136,16 @@ def verify_bundle(path: Path) -> dict:
         if archive.testzip() is not None:
             raise BundleError("Archive CRC verification failed")
         prefix = "AEONFALL/"
+        required_metadata = {
+            prefix + "SOURCE_MANIFEST.json",
+            prefix + "BUILD_PROVENANCE.json",
+            prefix + "CHECKSUMS.sha256",
+        }
+        if not required_metadata.issubset(names):
+            raise BundleError("Archive is missing required metadata")
         manifest = json.loads(archive.read(prefix + "SOURCE_MANIFEST.json"))
         provenance = json.loads(archive.read(prefix + "BUILD_PROVENANCE.json"))
+        validate_provenance(provenance)
         # A checksum file can be regenerated alongside a tampered manifest.
         # Verify that each declared Git blob really matches the archived bytes.
         rows = manifest.get("files") if isinstance(manifest, dict) else None

@@ -122,16 +122,16 @@ class SourceBundleTests(unittest.TestCase):
                 with self.assertRaisesRegex(bundle.BundleError, "non-regular file entry"):
                     bundle.verify_bundle(self.output)
 
-    def rewrite_manifest_with_valid_checksums(self, mutate):
-        """Simulate an internally consistent but dishonest source manifest."""
+    def rewrite_metadata_with_valid_checksums(self, metadata_file, mutate):
+        """Simulate dishonest metadata with a regenerated, valid checksum list."""
         bundle.build_bundle(self.root, self.output)
         with zipfile.ZipFile(self.output) as original:
             contents = {name: original.read(name) for name in original.namelist()}
-        manifest_name = "AEONFALL/SOURCE_MANIFEST.json"
+        metadata_name = "AEONFALL/" + metadata_file
         checksum_name = "AEONFALL/CHECKSUMS.sha256"
-        manifest = json.loads(contents[manifest_name])
-        mutate(manifest)
-        contents[manifest_name] = (json.dumps(manifest, indent=2, sort_keys=True) + "\n").encode()
+        metadata = json.loads(contents[metadata_name])
+        mutate(metadata)
+        contents[metadata_name] = (json.dumps(metadata, indent=2, sort_keys=True) + "\n").encode()
         contents[checksum_name] = "".join(
             f"{bundle.sha256(data)}  {name}\n"
             for name, data in sorted(contents.items()) if name != checksum_name
@@ -139,6 +139,50 @@ class SourceBundleTests(unittest.TestCase):
         with zipfile.ZipFile(self.output, "w") as archive:
             for name, data in sorted(contents.items()):
                 archive.writestr(name, data)
+
+    def rewrite_manifest_with_valid_checksums(self, mutate):
+        self.rewrite_metadata_with_valid_checksums("SOURCE_MANIFEST.json", mutate)
+
+    def rewrite_provenance_with_valid_checksums(self, mutate):
+        self.rewrite_metadata_with_valid_checksums("BUILD_PROVENANCE.json", mutate)
+
+    def test_provenance_cannot_claim_native_editor_or_publication_evidence(self):
+        changes = (
+            ("verse_engine_compile", "passed", "Unverified native/editor evidence"),
+            ("fortnite_launch_session", "passed", "Unverified native/editor evidence"),
+            ("uefn_editor_import", "passed", "Unverified native/editor evidence"),
+            ("published_island_code", "1234-5678-9012", "cannot claim a published island"),
+        )
+        for field, value, error in changes:
+            with self.subTest(field=field):
+                self.rewrite_provenance_with_valid_checksums(
+                    lambda proof: proof.__setitem__(field, value))
+                with self.assertRaisesRegex(bundle.BundleError, error):
+                    bundle.verify_bundle(self.output)
+
+    def test_provenance_rejects_missing_and_extra_evidence_fields(self):
+        for mutate in (
+            lambda proof: proof.pop("commit"),
+            lambda proof: proof.__setitem__("native_compile_passed", True),
+        ):
+            self.rewrite_provenance_with_valid_checksums(mutate)
+            with self.assertRaisesRegex(bundle.BundleError, "Invalid build provenance fields"):
+                bundle.verify_bundle(self.output)
+
+    def test_provenance_rejects_invalid_commit_and_source_check_claims(self):
+        changes = (
+            (lambda proof: proof.__setitem__("commit", "not-a-commit"),
+             "Invalid provenance commit identifier"),
+            (lambda proof: proof["source_checks"].__setitem__("result", "certified"),
+             "Invalid source-check provenance values"),
+            (lambda proof: proof.__setitem__("source_checks", {}),
+             "Invalid source-check provenance fields"),
+        )
+        for mutate, error in changes:
+            with self.subTest(error=error):
+                self.rewrite_provenance_with_valid_checksums(mutate)
+                with self.assertRaisesRegex(bundle.BundleError, error):
+                    bundle.verify_bundle(self.output)
 
     def test_manifest_cannot_claim_unrelated_git_blob(self):
         def falsify(manifest):
