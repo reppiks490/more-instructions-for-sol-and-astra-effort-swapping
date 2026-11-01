@@ -10,6 +10,8 @@ The inner ZIP contains every committed regular source file, authored asset and d
 
 The package refuses modified indexed files, a staged tree different from the committed tree, symlinks, path escapes and duplicate ZIP names. It never includes untracked files or Git credentials. Tests exercise real temporary Git repositories and intentionally corrupt delivery bytes.
 
+Verification also checks that each manifest source path is canonical and unique and that the archived bytes produce the declared Git blob object ID (SHA-1 or SHA-256 repository format). A self-consistent rewritten manifest and checksum list cannot silently claim a different Git blob. This is **internal package consistency**, not a cryptographic signature or independent proof of GitHub commit ownership; compare the recorded commit and tree against a trusted repository ref when provenance matters.
+
 The provenance explicitly records editor import, native Verse compilation and Fortnite Launch Session as `not_run`. A successful source-check artifact is a reviewable import package, not an editor-produced playable Fortnite island.
 
 Open the latest successful [AEONFALL Validation run](https://github.com/reppiks490/more-instructions-for-sol-and-astra-effort-swapping/actions/workflows/catalog-validation.yml), expand Artifacts and download the source artifact. GitHub may require sign-in for Actions artifacts. A public exact-commit archive remains available through GitHub's repository archive endpoint and does not include the generated verification metadata.
