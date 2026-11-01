@@ -48,23 +48,8 @@ class RuntimeClockLeaseSourceTests(unittest.TestCase):
 
     def test_reject_early_clock_start(self):
         self.assert_rejected(
-            "        set Running = true\n        var PreviousTime:float",
-            "        set Running = true\n        var PreviousTime:float",
-            "not-used",
-        ) if False else self.assert_rejected(
-            "        set Running = true\n        var PreviousTime:float",
-            "        set Running = true\n        set Running = true\n        var PreviousTime:float",
-            "not-used",
-        ) if False else self.assert_rejected(
             "        Acquired := GetAEONFALLRuntimeClockLease().Acquire(Self)",
             "        set Running = true\n        Acquired := GetAEONFALLRuntimeClockLease().Acquire(Self)",
-            "reject duplicate ownership",
-        )
-
-    def test_reject_early_clock_start(self):
-        self.assert_rejected(
-            "        Acquired := GetAEONFALLRuntimeClockLease().Acquire(Self)",
-            "        set Running = true\\n        Acquired := GetAEONFALLRuntimeClockLease().Acquire(Self)",
             "reject duplicate ownership",
         )
 
