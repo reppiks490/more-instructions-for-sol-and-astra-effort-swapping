@@ -16,6 +16,9 @@ checklist. This is a source-level hardening change; native Verse compilation,
 editor streaming behavior and actual NPC concurrency remain unverified.
 
 
+## 2026-11-01 — Arsenal Ascension: bounded apex contracts and fail-closed generic triggers
+
+Added ten canonical God/Absolute mechanical contracts with explicit effect quotas, telegraph/counterplay, distinct planned audiovisual cues, class synergy, boss immunity and destination preflight requirements. The generic trigger adapter now rejects all transformation-bound abilities before physical dispatch; only specialized validated adapters may report success. Added cross-catalog validation and mutation tests. These contracts are specified and unbound, not UEFN-compiled or Launch Session verified.\n
 ## 2026-11-01 — Living World: regional invasion admission and AI reserves
 
 Hardened REG-001 invasion admission without adding a parallel world director.
