@@ -46,3 +46,17 @@ Boss Character Definitions own locomotion and body behavior. Encounter controlle
 
 ## Acceptance Boundary
 Nothing moves from `specified` to `implemented` until the corresponding project-bound asset exists and the Verse code compiles in UEFN. Nothing moves to `tested` until Launch Session covers success, failure, cleanup, respawn/rejoin, and multiplayer behavior.
+
+## Actor lifecycle editor acceptance (Runtime Forge)
+
+Before enabling the first playable, import and compile the current actor
+registry and NPC behavior sources in UEFN. Spawn/despawn two NPCs sharing
+one canonical Character Definition and confirm unique runtime keys; respawn
+and remove a human player; verify both identity indexes agree before
+activation, that cleanup releases pending requests/statuses/companions, and
+that a new actor never inherits the removed actor's state. Exercise duplicate
+registration and a mismatched canonical identity. Confirm the registered
+predicate rejects stale reverse indexes using a native test harness where
+possible. The map-preflight failure path is source guarded but must not be
+reported as native-tested without actual diagnostic evidence.
+

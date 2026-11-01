@@ -55,6 +55,8 @@ aeonfall_actor_registry := class():
 
     IsRegistered(RuntimeKey:string)<decides><transacts>:void=
         Agent := AgentByKey[RuntimeKey]
+        ReverseKey := KeyByAgent[Agent]
+        ReverseKey = RuntimeKey
         CanonicalId := CanonicalByKey[RuntimeKey]
         CanonicalId <> ""
 
@@ -66,6 +68,44 @@ aeonfall_actor_registry := class():
             CanonicalId := CanonicalByKey[RuntimeKey]
             CanonicalId <> ""
         then:
+            # Preflight all three replacement maps before any dependent
+            # runtime teardown. A failed rebuild must not clear live actor
+            # abilities, companions or pending requests while keeping identity.
+            var UpdatedAgents:[string]agent = map{}
+            var UpdatedKeys:[agent]string = map{}
+            var UpdatedCanonical:[string]string = map{}
+            var Valid:logic = true
+
+            for (Key -> StoredAgent : AgentByKey):
+                if (Key <> RuntimeKey):
+                    if:
+                        set UpdatedAgents[Key] = StoredAgent
+                    then:
+                        set Valid = Valid
+                    else:
+                        set Valid = false
+
+            for (StoredAgent -> Key : KeyByAgent):
+                if (StoredAgent <> Agent):
+                    if:
+                        set UpdatedKeys[StoredAgent] = Key
+                    then:
+                        set Valid = Valid
+                    else:
+                        set Valid = false
+
+            for (Key -> CanonicalId : CanonicalByKey):
+                if (Key <> RuntimeKey):
+                    if:
+                        set UpdatedCanonical[Key] = CanonicalId
+                    then:
+                        set Valid = Valid
+                    else:
+                        set Valid = false
+
+            if (not Valid?):
+                return false
+
             # Never clear a different actor's gameplay state through an
             # incomplete or inconsistent identity mapping.
             # Release dependent runtime state while the key is still resolvable.
@@ -99,50 +139,17 @@ aeonfall_actor_registry := class():
             GetAEONFALLTranscendentRuntime().ClearOwner(RuntimeKey)
             GetAEONFALLHallOfAscendants().RemoveOwner(RuntimeKey)
 
-            var UpdatedAgents:[string]agent = map{}
-            var UpdatedKeys:[agent]string = map{}
-            var UpdatedCanonical:[string]string = map{}
-            var Valid:logic = true
+            set AgentByKey = UpdatedAgents
+            set KeyByAgent = UpdatedKeys
+            set CanonicalByKey = UpdatedCanonical
 
-            for (Key -> StoredAgent : AgentByKey):
-                if (Key <> RuntimeKey):
-                    if:
-                        set UpdatedAgents[Key] = StoredAgent
-                    then:
-                        set Valid = Valid
-                    else:
-                        set Valid = false
-
-            for (StoredAgent -> Key : KeyByAgent):
-                if (StoredAgent <> Agent):
-                    if:
-                        set UpdatedKeys[StoredAgent] = Key
-                    then:
-                        set Valid = Valid
-                    else:
-                        set Valid = false
-
-            for (Key -> CanonicalId : CanonicalByKey):
-                if (Key <> RuntimeKey):
-                    if:
-                        set UpdatedCanonical[Key] = CanonicalId
-                    then:
-                        set Valid = Valid
-                    else:
-                        set Valid = false
-
-            if (Valid?):
-                set AgentByKey = UpdatedAgents
-                set KeyByAgent = UpdatedKeys
-                set CanonicalByKey = UpdatedCanonical
-
-                AEONFALLRuntimeBus.Emit(
-                    aeonfall_runtime_event{
-                        EventType := "actor.unregistered",
-                        SourceId := RuntimeKey
-                    }
-                )
-                return true
+            AEONFALLRuntimeBus.Emit(
+                aeonfall_runtime_event{
+                    EventType := "actor.unregistered",
+                    SourceId := RuntimeKey
+                }
+            )
+            return true
 
         false
 
