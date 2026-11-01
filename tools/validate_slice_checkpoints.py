@@ -23,6 +23,7 @@ REQUIRED_SOURCE = (
     "Spawner.SpawnedEvent.Subscribe(OnSpawned)",
     "GetPlayspace().PlayerAddedEvent().Subscribe(OnPlayerAdded)",
     "GetPlayspace().PlayerRemovedEvent().Subscribe(OnPlayerRemoved)",
+    "PreviousIndex < Index",
     "Old.DiscoveredPoiIds.Find[PreviousId]",
     "DiscoveredPoiIds := Old.DiscoveredPoiIds + array{Id}",
     "ProfileService.TrySaveProfile(Player, Candidate)",
