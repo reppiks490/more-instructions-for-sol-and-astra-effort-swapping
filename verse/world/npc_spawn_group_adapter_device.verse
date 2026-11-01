@@ -75,6 +75,13 @@ aeonfall_npc_spawn_group_adapter_device := class(creative_device):
             return false
         if (Owners.Length >= 128):
             return false
+        # Horde ecology and invasion adapters use separate logical leases,
+        # but must never share one physical NPC Spawner.
+        if (HordeOwners := AEONFALLHordeAdapterLeases[GetSession()]):
+            for (OtherRegion -> OtherAdapter : HordeOwners):
+                for (CandidateSpawner : Spawners):
+                    if (OtherAdapter.Spawner = CandidateSpawner):
+                        return false
         for (Index -> Spawner : Spawners):
             for (OtherIndex -> OtherSpawner : Spawners):
                 if (Index <> OtherIndex, Spawner = OtherSpawner):
