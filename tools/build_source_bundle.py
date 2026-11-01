@@ -70,13 +70,26 @@ def tracked_sources(root: Path) -> list[tuple[str, str, bytes]]:
     return sorted(sources)
 
 
+def safe_archive_name(name: str) -> bool:
+    """Reject noncanonical paths before anyone can treat a verified ZIP as safe to extract."""
+    prefix = "AEONFALL/"
+    if not name.startswith(prefix):
+        return False
+    relative = name[len(prefix):]
+    parts = relative.split("/")
+    return (bool(relative) and all(part not in {"", ".", ".."} for part in parts)
+            and chr(92) not in relative and ":" not in relative and chr(0) not in relative)
+
+
 def verify_bundle(path: Path) -> dict:
     with zipfile.ZipFile(path) as archive:
-        if archive.testzip() is not None:
-            raise BundleError("Archive CRC verification failed")
         names = archive.namelist()
         if len(names) != len(set(names)):
             raise BundleError("Archive contains duplicate names")
+        if any(not safe_archive_name(name) for name in names):
+            raise BundleError("Archive contains unsafe or noncanonical path")
+        if archive.testzip() is not None:
+            raise BundleError("Archive CRC verification failed")
         prefix = "AEONFALL/"
         manifest = json.loads(archive.read(prefix + "SOURCE_MANIFEST.json"))
         provenance = json.loads(archive.read(prefix + "BUILD_PROVENANCE.json"))

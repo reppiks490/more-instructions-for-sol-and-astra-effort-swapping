@@ -87,6 +87,23 @@ class SourceBundleTests(unittest.TestCase):
         with self.assertRaisesRegex(bundle.BundleError, "source hash differs"):
             bundle.verify_bundle(self.output)
 
+    def test_unsafe_archive_names_are_rejected_before_inventory_checks(self):
+        unsafe_names = (
+            "AEONFALL/../escape.verse",
+            "AEONFALL/./alias.verse",
+            "AEONFALL//empty-component.verse",
+            "AEONFALL/nested\\\\backslash.verse",
+            "AEONFALL/C:drive.verse",
+            "/AEONFALL/absolute.verse",
+        )
+        for name in unsafe_names:
+            with self.subTest(name=name):
+                bundle.build_bundle(self.root, self.output)
+                with zipfile.ZipFile(self.output, "a") as archive:
+                    archive.writestr(name, b"untrusted source")
+                with self.assertRaisesRegex(bundle.BundleError, "unsafe or noncanonical path"):
+                    bundle.verify_bundle(self.output)
+
     def test_duplicate_archive_names_are_rejected(self):
         bundle.build_bundle(self.root, self.output)
         with zipfile.ZipFile(self.output, "a") as archive:
