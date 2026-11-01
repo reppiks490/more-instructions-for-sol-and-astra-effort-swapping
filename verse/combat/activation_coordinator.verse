@@ -255,6 +255,20 @@ aeonfall_activation_coordinator := class():
                 return true
         false
 
+    # Preserve the original pending entry if a deadline map write fails.
+    # Never replace the entire pending map with a partial reconstruction.
+    TryUpdatePendingTimeout(
+        RequestId:string, Next:aeonfall_pending_activation
+    )<transacts>:logic=
+        if:
+            Existing := PendingActivations[RequestId]
+            Existing.OwnerKey = Next.OwnerKey
+            Existing.AbilityId = Next.AbilityId
+            set PendingActivations[RequestId] = Next
+        then:
+            return true
+        false
+
     TickPendingActivations(DeltaSeconds:float)<transacts>:void=
         if (DeltaSeconds <= 0.0):
             return
@@ -262,6 +276,8 @@ aeonfall_activation_coordinator := class():
         var Updated:[string]aeonfall_pending_activation = map{}
         var Expired:[]aeonfall_pending_activation = array{}
 
+        # Collect before modifying PendingActivations. This prevents map
+        # mutation during iteration and retains expired records for cancellation.
         for (RequestId -> Pending : PendingActivations):
             Remaining:float = Pending.TimeoutRemainingSeconds - DeltaSeconds
 
@@ -279,18 +295,15 @@ aeonfall_activation_coordinator := class():
             else:
                 set Expired = Expired + array{Pending}
 
-        set PendingActivations = Updated
+        for (RequestId -> Next : Updated):
+            Advanced := TryUpdatePendingTimeout(RequestId, Next)
 
+        # Cancel through the coordinator, not directly through the ability
+        # runtime: this verifies ownership and releases the matching class
+        # reservation only after canonical cancellation succeeds. A failed
+        # cancellation keeps its original pending record for a later retry.
         for (Pending : Expired):
-            if:
-                Definition := GetAEONFALLAbilityRegistry().Get[Pending.AbilityId]
-            then:
-                if (Definition.ClassResourceMode <> aeonfall_class_resource_mode.None):
-                    Released := GetAEONFALLClassRuntime().ReleaseReservation(
-                        Pending.RequestId
-                    )
-
-            Cancelled := GetAEONFALLAbilityRuntime().CancelPending(
+            Cancelled := CancelPending(
                 Pending.OwnerKey,
                 Pending.AbilityId,
                 Pending.RequestId
