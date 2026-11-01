@@ -134,3 +134,14 @@ proxies are not claimed as supported native-player replacements. The original
 screenshot supplies owner identification only. It is not used to design the
 replacement appearance. Physical outfit choice and multiplayer/veil verification
 remain editor acceptance checks.
+
+
+## 2026-11-01 — Living World: fail-closed horde spawner and identity admission
+
+- Guarded horde adapter startup against unbound, game-start-enabled (declared),
+  and invalid corpse-biomass configurations before any spawner is enabled.
+- Require canonical identity agreement when an NPC lifecycle behavior has
+  already registered the spawned agent; recheck it on delayed death callbacks.
+- Added focused Python source regression checks and updated UEFN acceptance
+  instructions. Physical editor settings, native Verse compilation, streaming,
+  and multiplayer behavior remain unverified.
