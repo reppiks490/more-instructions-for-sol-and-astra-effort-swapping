@@ -210,6 +210,7 @@ jobs:
         run: |
           python tools/validate_ossuary_starter_assets.py
           python tools/test_ossuary_starter_assets.py
+          python tools/test_ossuary_editor_preflight.py
           python tools/build_ossuary_starter_assets.py
           git diff --exit-code -- assets/source/ossuary_starter
 
