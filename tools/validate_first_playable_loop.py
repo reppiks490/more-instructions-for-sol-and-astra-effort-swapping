@@ -9,6 +9,8 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = {
     "class": "verse/progression/class_runtime.verse",
+    "ledger": "verse/crafting/material_ledger.verse",
+    "dev": "verse/testing/slice_001_dev_harness_device.verse",
     "position": "verse/combat/position_targeting_runtime.verse",
     "selector": "verse/combat/actor_target_selector_device.verse",
     "harvest": "verse/npcs/corpse_harvest_device.verse",
@@ -47,6 +49,27 @@ def check_sources(sources: dict[str, str], policy: dict) -> list[str]:
     need("class", "set ResourceHistory = KeptHistory", "class history must be cleared on unregister")
     need("class", "Admitted?", "class activation must check event admission")
     order("class", "Current.ClassId = ClassId", "if (CommitClassActivation[OwnerKey, ClassId])")
+    # A void profile setter cannot establish successful persistence. Prevent
+    # future regressions where material costs are reported spent on a refused
+    # save or the dev harness reports a partial economy seed as successful.
+    need("ledger", "ProfileService.TrySaveProfile(Player, Candidate)?",
+         "single-material spend must check the persistent save acknowledgement")
+    need("ledger", "return ProfileService.TrySaveProfile(Player, Candidate)",
+         "multi-material spend must return the persistent save acknowledgement")
+    if "ProfileService.SetMaterialLedger(Agent, UpdatedLedger)" in sources["ledger"]:
+        errors.append("multi-material spend must not use an unchecked void setter")
+    need("dev", "ProfileService.TrySaveProfile(Player, Candidate)",
+         "dev economy seed must check one atomic persistent save")
+    need("dev", "FactionReputation := UpdatedReputation",
+         "dev economy seed must include reputation in the same profile candidate")
+    need("dev", "FailureMessage.Show(Agent)",
+         "dev economy seed must report a rejected save")
+    order("dev", 'set UpdatedMaterials["MAT-003"]',
+          "Candidate := aeonfall_player_profile:",
+          "Saved := ProfileService.TrySaveProfile(Player, Candidate)",
+          "if (Saved?):", "SuccessMessage.Show(Agent)")
+    if "MaterialLedger.Add(Agent" in sources["dev"] or "Reputation.AddReputation(Agent" in sources["dev"]:
+        errors.append("dev economy seed must not perform separate unchecked writes")
     for name in ("position", "selector", "harvest", "heat", "ecology", "prop"):
         if "GetFortCharacter()" in sources[name]:
             errors.append(f"{name}: native failable GetFortCharacter requires []")
