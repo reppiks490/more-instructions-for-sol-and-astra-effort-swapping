@@ -126,5 +126,67 @@ class LivingWorldAdmissionTests(unittest.TestCase):
                 self.assertIn(guard, source)
 
 
+    def test_spawn_adapters_lease_physical_devices_before_touching_them(self):
+        source = (ROOT / "verse/world/npc_spawn_group_adapter_device.verse").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn(
+            "AEONFALLInvasionSpawnerLeases:weak_map(session, "
+            "[string]aeonfall_npc_spawn_group_adapter_device)", source
+        )
+        startup = source.split("    OnBegin<override>()", 1)[1].split(
+            "    OnEnd<override>()", 1
+        )[0]
+        self.assertLess(
+            startup.index("Leased := AcquireAdapterLease()"),
+            startup.index("DisableAll()"),
+        )
+        self.assertLess(
+            startup.index("set OwnsLease = true"),
+            startup.index("RuntimeEvent.Subscribe(OnRuntimeEvent)"),
+        )
+        self.assertIn("Spawners.Length = 0", startup)
+        self.assertIn("not StartDisabled?", startup)
+
+        acquire = source.split("    AcquireAdapterLease()", 1)[1].split(
+            "    ReleaseAdapterLease()", 1
+        )[0]
+        self.assertIn("Owners[Key]", acquire)
+        self.assertIn("Index <> OtherIndex", acquire)
+        self.assertIn("OtherAdapter.Spawners", acquire)
+        self.assertIn("Spawner = OwnedSpawner", acquire)
+        self.assertIn("Owners.Length >= 128", acquire)
+
+        shutdown = source.split("    OnEnd<override>()", 1)[1].split(
+            "    AcquireAdapterLease()", 1
+        )[0]
+        self.assertLess(
+            shutdown.index("if (not OwnsLease?):"),
+            shutdown.index("DisableAll()"),
+        )
+        self.assertLess(
+            shutdown.index("DespawnAll()"),
+            shutdown.index("ReleaseAdapterLease()"),
+        )
+
+    def test_spawn_adapter_ignores_stale_and_spoofed_lifecycle_events(self):
+        source = (ROOT / "verse/world/npc_spawn_group_adapter_device.verse").read_text(
+            encoding="utf-8"
+        )
+        for guard in (
+            "if (not OwnsLease?):",
+            "State.CurrentWaveIndex > OldWaveIndex",
+            "not CurrentWave.Find[SpawnGroupId]",
+            "IsValidWaveRelease(Event.SourceId, Event.Amount)?",
+            "IsTerminalInvasion(Event.SourceId, true)?",
+            "IsTerminalInvasion(Event.SourceId, false)?",
+            "not State.Active?",
+            "State.Completed?",
+            "State.Failed?",
+        ):
+            with self.subTest(guard=guard):
+                self.assertIn(guard, source)
+
+
 if __name__ == "__main__":
     unittest.main()
