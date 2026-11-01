@@ -62,11 +62,34 @@ class ApexUseEpochTests(unittest.TestCase):
         self.assertLess(resolve.index("if (not EffectiveSucceeded?):"), resolve.index("set ApexCommittedEpochByStateKey[Key] = ApexEpoch"))
         self.assertIn("if (Saved?):\n                RemoveEffectClaim(Result.RequestId)", resolve)
 
+    def test_request_binds_the_original_epoch_before_dispatch(self):
+        request = self.source.split("    RequestActivation(", 1)[1].split("    IsCurrentEffectRequest(", 1)[0]
+        self.assertIn("RequestedApexEpoch", request)
+        self.assertIn("set ApexPendingByRequest[RequestId] = aeonfall_apex_pending_epoch{", request)
+        self.assertLess(
+            request.index("set ApexPendingByRequest[RequestId]"),
+            request.index("AEONFALLRuntimeBus.TryRequestAbilityEffect("),
+        )
+
+    def test_stale_callback_cannot_borrow_new_form_epoch(self):
+        resolve = self.source.split("    ResolveActivation(", 1)[1].split("    CancelPending(", 1)[0]
+        self.assertIn("PendingApex := ApexPendingByRequest[Result.RequestId]", resolve)
+        self.assertIn("PendingApex.OwnerKey = Result.OwnerKey", resolve)
+        self.assertIn("PendingApex.Epoch = CurrentEpoch", resolve)
+        self.assertIn('set FailureCode = "apex_request_epoch_mismatch"', resolve)
+        self.assertIn("RemovePendingApexEpoch(Result.RequestId)", resolve)
+
+    def test_cancel_releases_pending_epoch_without_refund(self):
+        cancel = self.source.split("    CancelPending(", 1)[1].split("    EndActivation(", 1)[0]
+        self.assertIn("RemovePendingApexEpoch(RequestId)", cancel)
+        self.assertNotIn("set ApexCommittedEpochByStateKey", cancel)
+
     def test_owner_cleanup_purges_ledger(self):
         clear = self.source.split("    ClearOwner(", 1)[1].split("# Mutable service allocation", 1)[0]
         self.assertIn("for (Key -> Epoch : ApexCommittedEpochByStateKey):", clear)
         self.assertIn("StoredOwner <> OwnerKey", clear)
         self.assertIn("set ApexCommittedEpochByStateKey = KeptApexEpochs", clear)
+        self.assertIn("set ApexPendingByRequest = KeptPendingApex", clear)
 
     def test_only_god_absolute_use_this_ledger(self):
         helper = self.source.split("    IsGodAbsoluteAbility(", 1)[1].split("    GetApexEpoch(", 1)[0]
