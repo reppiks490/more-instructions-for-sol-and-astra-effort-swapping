@@ -209,6 +209,44 @@ def check_runtime_clock(text: str) -> list[str]:
         errors.append("runtime clock must check shutdown after Sleep and before advance")
     if re.search(r"Tick(All|PendingActivations)\(Interval\)", code):
         errors.append("runtime clock must not advance services by requested Sleep interval")
+    # A second placed clock must not double-advance the session's timers.
+    # This is structural source validation, not a native Verse compile.
+    lease_tokens = [
+        "var Owner:?aeonfall_runtime_tick_device = false",
+        "Acquire(Device:aeonfall_runtime_tick_device)<transacts>:logic=",
+        "if (Owner?):",
+        "set Owner = option{Device}",
+        "Release(Device:aeonfall_runtime_tick_device)<transacts>:logic=",
+        "if (Current := Owner?, Current = Device):",
+        "set Owner = false",
+        "AEONFALLRuntimeClockLeaseSessions:weak_map(session, aeonfall_runtime_clock_lease)",
+        "GetAEONFALLRuntimeClockLease()<transacts>:aeonfall_runtime_clock_lease=",
+        "Acquired := GetAEONFALLRuntimeClockLease().Acquire(Self)",
+        "if (not Acquired?):",
+        "GetAEONFALLRuntimeClockLease().Release(Self)",
+    ]
+    for token in lease_tokens:
+        if token not in code:
+            errors.append(f"runtime clock single-owner lease missing {token!r}")
+
+    begin = code.find("    OnBegin<override>()<suspends>:void=")
+    acquire = code.find("Acquired := GetAEONFALLRuntimeClockLease().Acquire(Self)", begin)
+    rejected = code.find("if (not Acquired?):", acquire)
+    rejection_return = code.find("return", rejected)
+    running = code.find("set Running = true", begin)
+    if min(begin, acquire, rejected, rejection_return, running) < 0 or not (
+        begin < acquire < rejected < rejection_return < running
+    ):
+        errors.append("runtime clock must reject duplicate ownership before starting")
+
+    end = code.find("    OnEnd<override>():void=")
+    end_guard = code.find("if (Running?):", end)
+    stop = code.find("set Running = false", end_guard)
+    release = code.find("GetAEONFALLRuntimeClockLease().Release(Self)", stop)
+    if min(end, end_guard, stop, release) < 0 or not (
+        end < end_guard < stop < release < begin
+    ):
+        errors.append("runtime clock must release only its own active lease on shutdown")
     return errors
 
 def main() -> int:
