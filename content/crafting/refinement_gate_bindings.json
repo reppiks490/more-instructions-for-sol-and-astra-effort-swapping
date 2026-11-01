@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "policy": "Fail closed unless every narrative prerequisite maps to authoritative durable profile evidence. Unbound recipes are registered but cannot be crafted.",
+  "recipes": [
+    {
+      "recipe_id": "RCP-001",
+      "state": "unbound",
+      "minimum_ascension_rank": 0,
+      "required_trial_ids": [],
+      "reason": "Void-refinement unlock has no durable canonical proof binding."
+    },
+    {
+      "recipe_id": "RCP-002",
+      "state": "unbound",
+      "minimum_ascension_rank": 0,
+      "required_trial_ids": [],
+      "reason": "Dimensional-stabilization mastery lacks a verified durable proof binding."
+    },
+    {
+      "recipe_id": "RCP-003",
+      "state": "unbound",
+      "minimum_ascension_rank": 0,
+      "required_trial_ids": [],
+      "reason": "Designated mythic boss IDs have not been bound to this recipe."
+    },
+    {
+      "recipe_id": "RCP-004",
+      "state": "unbound",
+      "minimum_ascension_rank": 0,
+      "required_trial_ids": [],
+      "reason": "Hollow Astral Synod mastery lacks a verified durable proof binding."
+    },
+    {
+      "recipe_id": "RCP-005",
+      "state": "unbound",
+      "minimum_ascension_rank": 0,
+      "required_trial_ids": [],
+      "reason": "Titan-hunt mastery lacks a verified durable proof binding."
+    },
+    {
+      "recipe_id": "RCP-006",
+      "state": "unbound",
+      "minimum_ascension_rank": 0,
+      "required_trial_ids": [],
+      "reason": "High-tier demon court event ID has not been bound."
+    },
+    {
+      "recipe_id": "RCP-007",
+      "state": "unbound",
+      "minimum_ascension_rank": 0,
+      "required_trial_ids": [],
+      "reason": "Court of Broken Hours mastery lacks a verified durable proof binding."
+    },
+    {
+      "recipe_id": "RCP-008",
+      "state": "unbound",
+      "minimum_ascension_rank": 0,
+      "required_trial_ids": [],
+      "reason": "Leviathan encounter ID has not been bound."
+    },
+    {
+      "recipe_id": "RCP-009",
+      "state": "unbound",
+      "minimum_ascension_rank": 0,
+      "required_trial_ids": [],
+      "reason": "Siege-engine core encounter ID has not been bound."
+    },
+    {
+      "recipe_id": "RCP-010",
+      "state": "unbound",
+      "minimum_ascension_rank": 0,
+      "required_trial_ids": [],
+      "reason": "Grave Architect purge encounter ID has not been bound."
+    },
+    {
+      "recipe_id": "RCP-011",
+      "state": "unbound",
+      "minimum_ascension_rank": 0,
+      "required_trial_ids": [],
+      "reason": "Multi-ecology mythic mastery lacks a verified durable proof binding."
+    },
+    {
+      "recipe_id": "RCP-012",
+      "state": "bound",
+      "minimum_ascension_rank": 2,
+      "required_trial_ids": [
+        "ASC-TRIAL-008"
+      ],
+      "reason": "Absolute rank and Trial VIII are represented by durable profile fields."
+    },
+    {
+      "recipe_id": "RCP-014",
+      "state": "unbound",
+      "minimum_ascension_rank": 0,
+      "required_trial_ids": [
+        "ASC-TRIAL-002",
+        "ASC-TRIAL-003"
+      ],
+      "reason": "Broad ecology mastery lacks a verified durable proof binding despite Trials II and III."
+    }
+  ]
+}
