@@ -1,17 +1,3 @@
-## 2026-11-01 — Runtime Forge: preflight actor teardown before cleanup
-
-The session actor registry now rebuilds and validates all three replacement
-identity maps before clearing dependent gameplay state. Previously a failed
-map reconstruction could leave an actor registered while its pending ability
-requests, statuses, companions and other session state had already been
-destroyed. A failed preflight now returns without teardown. The registered
-identity predicate also checks the agent-to-key reverse mapping, rather than
-accepting a forward-only entry. Source mutation tests cover both invariants.
-
-This changes no persistent player schema, authored IDs, or editor assets.
-Native Verse compilation and NPC/player lifecycle Launch Session evidence
-remain outstanding.
-
 # Build change log
 
 ## 2026-11-01 — Playable Slice: source-pinned physical binding audit
