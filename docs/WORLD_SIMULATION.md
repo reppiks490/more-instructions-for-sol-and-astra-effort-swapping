@@ -188,3 +188,31 @@ actual concurrent NPC count stays within its declared cap, and completion,
 failure, unload and re-entry leave no orphan actors. Repeat with two
 players separated across streaming cells. Use Spatial Profiler and cooked
 memory evidence; the Python validator checks authored budgets only.
+
+## REG-001 physical spawn ownership and lifecycle authorization
+
+The invasion spawn-group adapter now acquires a **session-scoped exclusive
+lease** before disabling or subscribing to any native NPC Spawner. At most one
+adapter may own a `RegionId + SpawnGroupId` binding, and no physical NPC
+Spawner may appear twice within one adapter or be shared between adapters,
+even across different regions or spawn groups. An empty binding, zero spawners,
+or `StartDisabled = false` is rejected without touching physical devices.
+Rejected adapters do not disable or despawn another owner's NPCs during
+shutdown. A lease is released only by its owner on device shutdown.
+
+An event-bus message is never sufficient authorization to change native spawn
+state. Spawn requests require the canonical invasion, current wave and region.
+Wave release additionally requires a **later active wave that no longer contains
+the group**; old delayed release messages cannot disable a group reused in the
+current wave. Completion/failure notifications must match the authoritative
+terminal state before releasing physical NPCs. A group present in consecutive
+waves remains enabled without duplicate activation.
+
+These guards protect ownership and lifecycle, **not streaming relevance**.
+Keep the editor's NPC Spawn Count/live limit within the group cap, never share
+spawners with ambient, boss, faction, hireable or wildlife systems, and bind
+relevance/streaming gating in UEFN. Validate two competing adapters for one
+group, two different groups sharing one NPC Spawner, delayed release messages,
+normal completion/failure, and unload/re-entry with separated players.
+Repository Python source guards cannot establish Verse compilation or actual
+physical concurrency; both still require UEFN Launch Session evidence.
