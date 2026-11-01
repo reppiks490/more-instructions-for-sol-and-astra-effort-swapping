@@ -8,6 +8,10 @@ using { /Verse.org/Simulation }
 # 2. A project-bound adapter executes/preflights the effect and reports a result.
 # 3. ResolveActivation commits cooldown/charges/meter only on success.
 
+aeonfall_apex_pending_epoch := class:
+    OwnerKey:string = ""
+    Epoch:int = 0
+
 aeonfall_ability_runtime := class():
 
     var States:[string]aeonfall_ability_runtime_state = map{}
@@ -16,6 +20,8 @@ aeonfall_ability_runtime := class():
     # One successful use of each God/Absolute ability per active form epoch.
     # Session-only: no persistent profile schema changes.
     var ApexCommittedEpochByStateKey:[string]int = map{}
+    # Bind each in-flight request to the epoch that actually dispatched it.
+    var ApexPendingByRequest:[string]aeonfall_apex_pending_epoch = map{}
 
     MakeStateKey(OwnerKey:string, AbilityId:string):string=
         OwnerKey + "::" + AbilityId
@@ -172,6 +178,14 @@ aeonfall_ability_runtime := class():
 
         false
 
+    RemovePendingApexEpoch(RequestId:string)<transacts>:void=
+        var Kept:[string]aeonfall_apex_pending_epoch = map{}
+        for (Id -> Pending : ApexPendingByRequest):
+            if (Id <> RequestId):
+                if (set Kept[Id] = Pending):
+                    set Kept = Kept
+        set ApexPendingByRequest = Kept
+
     RequestActivation(
         RequestId:string,
         OwnerKey:string,
@@ -187,6 +201,15 @@ aeonfall_ability_runtime := class():
             CanActivate(OwnerKey, Definition, Context)?
             Old := GetState[OwnerKey, Definition.AbilityId]
         then:
+            var RequestedApexEpoch:int = 0
+            if (IsGodAbsoluteAbility(Definition)?):
+                if:
+                    Epoch := GetApexEpoch[OwnerKey, Definition]
+                then:
+                    set RequestedApexEpoch = Epoch
+                else:
+                    return false
+
             Reserved := aeonfall_ability_runtime_state:
                 AbilityId := Old.AbilityId
                 CurrentCharges := Old.CurrentCharges
@@ -200,9 +223,21 @@ aeonfall_ability_runtime := class():
                 Locked := Old.Locked
 
             Key := MakeStateKey(OwnerKey, Definition.AbilityId)
-            if:
-                set States[Key] = Reserved
-            then:
+            var ReservedState:logic = false
+            if (RequestedApexEpoch > 0):
+                if:
+                    set States[Key] = Reserved
+                    set ApexPendingByRequest[RequestId] = aeonfall_apex_pending_epoch{
+                        OwnerKey := OwnerKey,
+                        Epoch := RequestedApexEpoch
+                    }
+                then:
+                    set ReservedState = true
+            else:
+                if (set States[Key] = Reserved):
+                    set ReservedState = true
+
+            if (ReservedState?):
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{
                         EventType := "ability.effect_requested",
@@ -286,6 +321,15 @@ aeonfall_ability_runtime := class():
                     CurrentEpoch := GetApexEpoch[Result.OwnerKey, Definition]
                 then:
                     set ApexEpoch = CurrentEpoch
+                    if:
+                        PendingApex := ApexPendingByRequest[Result.RequestId]
+                        PendingApex.OwnerKey = Result.OwnerKey
+                        PendingApex.Epoch = CurrentEpoch
+                    then:
+                        set ApexEpoch = CurrentEpoch
+                    else:
+                        set EffectiveSucceeded = false
+                        set FailureCode = "apex_request_epoch_mismatch"
                     StateKey := MakeStateKey(Result.OwnerKey, Definition.AbilityId)
                     if (CommittedEpoch := ApexCommittedEpochByStateKey[StateKey]):
                         if (CommittedEpoch >= ApexEpoch):
@@ -313,6 +357,7 @@ aeonfall_ability_runtime := class():
                     set States[Key] = Cancelled
                 then:
                     RemoveEffectClaim(Result.RequestId)
+                    RemovePendingApexEpoch(Result.RequestId)
                     AEONFALLRuntimeBus.Emit(
                         aeonfall_runtime_event{
                             EventType := "ability.effect_rejected",
@@ -375,6 +420,7 @@ aeonfall_ability_runtime := class():
 
             if (Saved?):
                 RemoveEffectClaim(Result.RequestId)
+                RemovePendingApexEpoch(Result.RequestId)
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{
                         EventType := "ability.activation_committed",
@@ -415,6 +461,7 @@ aeonfall_ability_runtime := class():
                 set States[Key] = Updated
             then:
                 RemoveEffectClaim(RequestId)
+                RemovePendingApexEpoch(RequestId)
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{
                         EventType := "ability.pending_cancelled",
@@ -705,6 +752,13 @@ aeonfall_ability_runtime := class():
                 if (set KeptApexEpochs[Key] = Epoch):
                     set KeptApexEpochs = KeptApexEpochs
         set ApexCommittedEpochByStateKey = KeptApexEpochs
+
+        var KeptPendingApex:[string]aeonfall_apex_pending_epoch = map{}
+        for (RequestId -> Pending : ApexPendingByRequest):
+            if (Pending.OwnerKey <> OwnerKey):
+                if (set KeptPendingApex[RequestId] = Pending):
+                    set KeptPendingApex = KeptPendingApex
+        set ApexPendingByRequest = KeptPendingApex
 
         var UpdatedStates:[string]aeonfall_ability_runtime_state = map{}
         var UpdatedOwners:[string]string = map{}
