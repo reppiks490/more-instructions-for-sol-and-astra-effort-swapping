@@ -17,7 +17,7 @@ var AEONFALLSliceCheckpointOwners:weak_map(session, ?aeonfall_slice_001_checkpoi
 
 # CHECKPOINT-1..4 use the canonical Ossuary geometry marker order.
 # Discovery persists in the existing single player profile; transient character
-# identity and pending restoration never persist. No new weak_map(player, ...) root.
+# identity and pending restoration never persist. No additional player persistence map.
 aeonfall_slice_001_checkpoint_device := class(creative_device):
     @editable
     CheckpointVolumes:[]volume_device = array{}
