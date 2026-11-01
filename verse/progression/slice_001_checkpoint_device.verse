@@ -149,12 +149,12 @@ aeonfall_slice_001_checkpoint_device := class(creative_device):
         then:
             if (Old.DiscoveredPoiIds.Find[Id]):
                 return true
-            if (Index > 0):
-                if (PreviousId := CheckpointIds[Index - 1]):
+            # Require the entire earlier chain, not merely the immediately
+            # previous ID: a damaged legacy profile must not create gaps.
+            for (PreviousIndex -> PreviousId : CheckpointIds):
+                if (PreviousIndex < Index):
                     if (not Old.DiscoveredPoiIds.Find[PreviousId]):
                         return false
-                else:
-                    return false
             Candidate := aeonfall_player_profile:
                 MakeAEONFALLPlayerProfile<constructor>(Old)
                 DiscoveredPoiIds := Old.DiscoveredPoiIds + array{Id}
