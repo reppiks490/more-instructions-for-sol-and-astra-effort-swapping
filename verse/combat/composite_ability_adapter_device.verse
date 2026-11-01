@@ -46,6 +46,18 @@ aeonfall_composite_ability_adapter_device := class(creative_device):
         Claimed := GetAEONFALLAbilityRuntime().ClaimEffectRequest(Request)
         if (not Claimed?):
             return
+        # Neither status application nor the linked trigger may dispatch an
+        # apex effect through this generic composite graph.
+        if:
+            Definition := GetAEONFALLAbilityRegistry().Get[Request.AbilityId]
+            AEONFALLRequiresSpecializedTransformationPreflight(Definition)?
+        then:
+            AEONFALLAdapterResultDelivery.Report(aeonfall_adapter_result{
+                RequestId := Request.RequestId, OwnerKey := Request.OwnerKey,
+                AbilityId := Request.AbilityId, AdapterId := Request.AdapterId,
+                Succeeded := false, ResultCode := "apex_requires_specialized_preflight"
+            })
+            return
         var Succeeded:logic = false
         var ResultCode:string = "effect_preflight_failed"
         # Resolve graph recipient before the batch. A missing recipient cannot
