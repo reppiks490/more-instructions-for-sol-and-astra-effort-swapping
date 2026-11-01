@@ -51,10 +51,13 @@ aeonfall_trigger_ability_adapter_device := class(creative_device):
         # abilities require a dedicated preflighting adapter; fail closed.
         if:
             Definition := GetAEONFALLAbilityRegistry().Get[Request.AbilityId]
-            Definition.RequiredTransformationId <> ""
         then:
+            if (AEONFALLRequiresSpecializedTransformationPreflight(Definition)?):
+                set Succeeded = false
+                set ResultCode = "apex_requires_specialized_preflight"
+        else:
             set Succeeded = false
-            set ResultCode = "apex_requires_specialized_preflight"
+            set ResultCode = "ability_definition_missing"
 
         if:
             OwnerAgent := GetAEONFALLActorRegistry().GetAgent[Request.OwnerKey]

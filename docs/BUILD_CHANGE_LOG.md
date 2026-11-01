@@ -1,5 +1,15 @@
 # Build change log
 
+## 2026-11-01 — Arsenal Ascension: close generic adapter apex bypasses
+
+Centralized transformation-bound preflight detection across exact IDs, legacy
+transformation flags and TransformationOnly resource policies. Generic trigger,
+status and composite adapters reject apex effects before physical dispatch;
+prop spawning and Royal Scent challenge setup also fail closed for transformed
+definitions. Added source mutation tests. Canonical IDs and content quotas are
+unchanged. This is source-level hardening, not a native Verse compile or a
+functional apex effect adapter.
+
 ## 2026-11-01 — Living World: exclusive invasion NPC ownership
 
 The REG-001 invasion spawn-group adapter now acquires a session-scoped lease
