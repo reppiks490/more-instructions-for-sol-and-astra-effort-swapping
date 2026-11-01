@@ -318,10 +318,8 @@ jobs:
       - name: Build first-slice Verse registry
         run: python tools/build_slice_registry.py
 
-      - name: Report generated status drift
-        run: |
-          python tools/build_status.py
-          git diff -- STATUS.md || true
+      - name: Enforce generated status snapshot
+        run: python tools/build_status.py --check
 
   source-package:
     needs: validate
