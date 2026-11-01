@@ -45,7 +45,8 @@ aeonfall_slice_001_checkpoint_device := class(creative_device):
 
     OnBegin<override>()<suspends>:void=
         # Fail before any subscriptions, teleports or persistent writes.
-        if (not ValidatePhysicalBindings()?):
+        Valid := ValidatePhysicalBindings()
+        if (not Valid?):
             Print("AEONFALL: SLICE-001 checkpoint bindings invalid; device disabled.")
             return
         if:
@@ -176,7 +177,9 @@ aeonfall_slice_001_checkpoint_device := class(creative_device):
     RestoreWhenReady(Player:player)<suspends>:void=
         var Attempt:int = 0
         loop:
-            if (not Running? or not Player.IsActive[]):
+            if (not Running?):
+                return
+            if (not Player.IsActive[]):
                 return
             if:
                 Profile := ProfileService.GetProfile[Player]
