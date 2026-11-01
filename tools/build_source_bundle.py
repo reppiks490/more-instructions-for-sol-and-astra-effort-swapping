@@ -78,7 +78,7 @@ def safe_archive_name(name: str) -> bool:
     relative = name[len(prefix):]
     parts = relative.split("/")
     return (bool(relative) and all(part not in {"", ".", ".."} for part in parts)
-            and "\\\\" not in relative and ":" not in relative and "\\x00" not in relative)
+            and chr(92) not in relative and ":" not in relative and chr(0) not in relative)
 
 
 def verify_bundle(path: Path) -> dict:
