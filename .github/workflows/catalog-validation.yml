@@ -221,6 +221,9 @@ jobs:
       - name: Validate first playable loop source guards
         run: python tools/validate_first_playable_loop.py
 
+      - name: Validate Ossuary checkpoint geometry and respawn source
+        run: python tools/validate_slice_checkpoints.py
+
       - name: Validate player loadout and unique sovereign integration
         run: |
           python tools/validate_player_loadout.py

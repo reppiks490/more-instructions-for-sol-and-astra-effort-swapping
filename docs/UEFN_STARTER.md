@@ -36,6 +36,18 @@ map from a successful installer run. Use the copied contract files to
 configure actual UEFN assets, then record native compiler and Launch Session
 evidence separately.
 
+## Four-checkpoint respawn and rejoin wiring
+
+The source package also contains
+[`aeonfall_slice_001_checkpoint_device`](SLICE_001_CHECKPOINT_RUNTIME.md).
+Its four checkpoint volumes and four native teleporters must be placed and
+bound manually to the canonical Ossuary markers. Bind all player spawners,
+including the loadout-device pads. The checked persistent save, ordered
+progression and rejoin restoration are implemented as Verse source, but
+arrival, native compile, collision and multiplayer behavior require the
+linked Launch Session acceptance tests. The binding contract deliberately
+contains no fabricated editor object paths.
+
 ## Assemble the playable loop
 
 The generated level is architecture. Add Island Settings, player spawn pads, lighting and navigation to the new level using the Creative device catalog. The imported scene markers and placement manifest identify checkpoints, boss area and objective anchors; markers in the source manifest are planning coordinates, not automatically spawned Creative devices.

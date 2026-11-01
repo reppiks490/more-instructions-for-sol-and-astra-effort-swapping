@@ -1,5 +1,20 @@
 # Build change log
 
+## 2026-11-01 — Playable Slice: persistent Ossuary checkpoint/respawn runtime
+
+Added a project-bindable four-checkpoint Verse device with distinct volume,
+teleporter and spawner preflight, a single session owner lease, contiguous
+checkpoint discovery, checked immutable-profile saves, and bounded
+character-spawn/rejoin restoration. Progress is stored only in the existing
+DiscoveredPoiIds field; transient character tracking is removed on leave and
+device shutdown. The source contract pins each checkpoint to the authored
+Ossuary geometry anchors without inventing editor object paths. A new
+validator, mutation tests, CI step and Windows editor/Launch Session handoff
+document cover sequential unlocks, save refusal, repeat entry, respawn and
+multiplayer rejoin. Native Verse compilation, actual teleporter arrival,
+collision/navmesh and Fortnite session tests remain unverified.
+
+
 ## 2026-11-01 — QA Sentinel: enforce generated status drift in CI
 
 AEONFALL Validation now runs `tools/build_status.py --check` rather than
