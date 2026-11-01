@@ -13,6 +13,10 @@ aeonfall_npc_spawn_group_adapter_device := class(creative_device):
     @editable
     SpawnGroupId:string = ""
 
+    # Fail closed until this device is bound to its canonical streamed region.
+    @editable
+    RegionId:string = ""
+
     @editable
     Spawners:[]npc_spawner_device = array{}
 
@@ -37,6 +41,29 @@ aeonfall_npc_spawn_group_adapter_device := class(creative_device):
         if (Subscription := BusSubscription?):
             Subscription.Cancel()
         set BusSubscription = false
+        set ActiveInvasionIds = array{}
+        DisableAll()
+        if (DespawnOnRelease?):
+            DespawnAll()
+
+    # Runtime events are notifications, not authorization. Verify the active
+    # canonical invasion, its region, current wave and declared group before
+    # touching any physical NPC Spawner.
+    IsActiveWaveRequest(InvasionId:string, WaveIndex:int)<transacts>:logic=
+        if:
+            RegionId <> ""
+            SpawnGroupId <> ""
+            Definition := GetAEONFALLInvasionRegistry().Get[InvasionId]
+            Definition.RegionId = RegionId
+            State := GetAEONFALLInvasionRuntime().GetState[InvasionId]
+            State.Active?
+            State.RegionId = RegionId
+            State.CurrentWaveIndex = WaveIndex
+            Wave := Definition.WaveSpawnGroupIds[WaveIndex]
+            Wave.Find[SpawnGroupId]
+        then:
+            return true
+        false
 
     AddRequester(InvasionId:string)<transacts>:logic=
         if (InvasionId = ""):
@@ -45,6 +72,10 @@ aeonfall_npc_spawn_group_adapter_device := class(creative_device):
         if:
             ActiveInvasionIds.Find[InvasionId]
         then:
+            return false
+
+        # Region admission is exclusive; refuse stale/parallel requesters.
+        if (ActiveInvasionIds.Length >= 1):
             return false
 
         set ActiveInvasionIds = ActiveInvasionIds + array{InvasionId}
@@ -105,6 +136,8 @@ aeonfall_npc_spawn_group_adapter_device := class(creative_device):
         if:
             Event.EventType = "invasion.spawn_group_requested"
             Event.TargetId = SpawnGroupId
+            Event.ContextId = RegionId
+            IsActiveWaveRequest(Event.SourceId, Event.Amount)?
         then:
             Added := AddRequester(Event.SourceId)
             if (Added?):
@@ -114,6 +147,7 @@ aeonfall_npc_spawn_group_adapter_device := class(creative_device):
         if:
             Event.EventType = "invasion.spawn_group_released"
             Event.TargetId = SpawnGroupId
+            Event.ContextId = RegionId
         then:
             RemovedWave := RemoveRequester(Event.SourceId)
             if:
@@ -127,6 +161,7 @@ aeonfall_npc_spawn_group_adapter_device := class(creative_device):
 
         if:
             Event.EventType = "invasion.completed"
+            Event.TargetId = RegionId
             RemovedCompleted := RemoveRequester(Event.SourceId)
             RemovedCompleted?
             ActiveInvasionIds.Length = 0
@@ -138,6 +173,7 @@ aeonfall_npc_spawn_group_adapter_device := class(creative_device):
 
         if:
             Event.EventType = "invasion.failed"
+            Event.TargetId = RegionId
             RemovedFailed := RemoveRequester(Event.SourceId)
             RemovedFailed?
             ActiveInvasionIds.Length = 0

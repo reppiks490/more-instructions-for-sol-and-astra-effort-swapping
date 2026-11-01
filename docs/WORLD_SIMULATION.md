@@ -143,3 +143,48 @@ The director chooses authored encounters from those constraints rather than pure
 
 ## Performance Rule
 No region should exceed its baseline AI/VFX budget except during a deliberately reserved event window.
+
+
+## REG-001 invasion admission and streaming contract
+
+The first playable region reuses the existing invasion state machine and
+NPC-spawn-group adapter; it does **not** create a second encounter director.
+One invasion may be active per region. Starting one reserves its canonical
+region event before committing the invasion state; a conflicting event or
+another active invasion refuses admission without spawning. Only objective IDs
+declared by the registered invasion can receive completion credit.
+
+Every invasion wave must fit its declared `max_concurrent_ai` when the
+`max_active` values of its distinct spawn groups are summed. The
+REG-001 groups now reserve 6 grave scavengers, 4 necromancer supports,
+10 ossuary siege actors, 10 brood actors, 6 null escorts, and 16
+devouring precursors. The largest authored wave reserves 20 AI.
+This is a **worst-case simultaneous event allocation**, not a requirement to
+spawn the full count or an excuse to add permanent ambient actors.
+
+For each `aeonfall_npc_spawn_group_adapter_device` in the UEFN editor:
+
+- Set `RegionId = REG-001` and the exact canonical `SpawnGroupId`.
+  Leave `StartDisabled = true` and `DespawnOnRelease = true`.
+- Use **dedicated** NPC Spawners for this group. The aggregate native
+  Spawn Count/live limit across those spawners must be at or below the
+  group's `max_active`; no ambient, boss, hireable or other region may
+  share them.
+- Configure region-local player-relevance volumes and editor spawn
+  distances so spawners cannot materialize distant AI. A queued event
+  is not a streaming permission. Before enabling an invasion in the
+  level, suppress ordinary ambient AI enough to preserve the regional
+  event reserve; restore it on completion, failure and region unload.
+- The adapter checks the registered active invasion, current wave,
+  canonical region and group before enabling spawners. Wave release,
+  completion, failure and device shutdown disable or despawn owned
+  actors. No world-partition callbacks or native spawn-count enforcement
+  are claimed by this source alone.
+
+**UEFN acceptance:** verify a second same-region invasion is rejected,
+foreign objective IDs do not score, cross-region or stale wave requests
+cannot activate spawners, an invalid `RegionId` fails closed, each wave's
+actual concurrent NPC count stays within its declared cap, and completion,
+failure, unload and re-entry leave no orphan actors. Repeat with two
+players separated across streaming cells. Use Spatial Profiler and cooked
+memory evidence; the Python validator checks authored budgets only.

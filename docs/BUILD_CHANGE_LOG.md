@@ -1,5 +1,20 @@
 # Build change log
 
+## 2026-11-01 — Living World: regional invasion admission and AI reserves
+
+Hardened REG-001 invasion admission without adding a parallel world director.
+The runtime now rejects concurrent invasions in the same region, reserves the
+canonical region event before committing active state, and accepts only
+registered invasion objectives. Physical spawn adapters require matching
+canonical region and active wave and clean up their owned spawners on shutdown.
+
+Fixed three REG-001 group caps so every authored invasion wave fits its own
+declared concurrent-AI reserve; validation now rejects over-budget and
+duplicate-group waves. The new policy regression tests cover the authored
+allocation and source-level admission guards. Physical NPC Spawner counts,
+streaming behavior, Verse compilation and multiplayer Launch Session remain
+editor verification gates; source checks do not prove those results.
+
 ## 2026-11-01 — Runtime Forge: checked material spends and atomic dev seeding
 
 Inspected current `main` and open pull requests (none open at start of

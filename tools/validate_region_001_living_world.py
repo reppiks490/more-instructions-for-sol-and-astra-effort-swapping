@@ -95,12 +95,33 @@ def main() -> int:
         waves = inv.get("waves", [])
         if len(waves) < 2:
             errors.append(f"{iid}: requires at least two waves")
-        for wave in waves:
-            if not wave:
-                errors.append(f"{iid}: empty wave")
+        for wave_index, wave in enumerate(waves):
+            if not isinstance(wave, list) or not wave:
+                errors.append(f"{iid}: empty/invalid wave {wave_index}")
+                continue
+            if any(not isinstance(gid, str) for gid in wave):
+                errors.append(f"{iid}: non-string group in wave {wave_index}")
+                continue
+            if len(wave) != len(set(wave)):
+                errors.append(f"{iid}: duplicate group in wave {wave_index}")
+            wave_cap = 0
             for gid in wave:
-                if gid not in groups:
+                group = groups.get(gid)
+                if group is None:
                     errors.append(f"{iid}: missing spawn group {gid}")
+                    continue
+                group_cap = group.get("max_active")
+                if type(group_cap) is int and 1 <= group_cap <= 24:
+                    wave_cap += group_cap
+            # A wave is admitted only if every configured spawner can run at
+            # its authored maximum without exceeding the invasion's AI reserve.
+            # This is a data contract; editor NPC Spawner limits need a separate
+            # physical binding audit before Launch Session.
+            if type(cap) is int and wave_cap > cap:
+                errors.append(
+                    f"{iid}: wave {wave_index} reserves {wave_cap} AI "
+                    f"but max_concurrent_ai is {cap}"
+                )
         if not inv.get("objective_ids"):
             errors.append(f"{iid}: no objectives")
 
