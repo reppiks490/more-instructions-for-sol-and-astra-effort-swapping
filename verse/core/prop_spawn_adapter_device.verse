@@ -131,6 +131,7 @@ aeonfall_prop_spawn_adapter_device := class(creative_device):
         PhysicalProps.Length < 64
         GetAEONFALLSpawnRuntime().Records.Length < 160
         Definition := GetAEONFALLAbilityRegistry().Get[Request.AbilityId]
+        not AEONFALLRequiresSpecializedTransformationPreflight(Definition)?
         Definition.AdapterId = AdapterId
         Definition.TargetPolicy = aeonfall_target_policy.Position
         Definition.SpawnIds.Length = 1
