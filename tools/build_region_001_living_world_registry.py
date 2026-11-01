@@ -38,6 +38,7 @@ def main() -> int:
             f"        RegionId := {q(region_id)},",
             f"        AggressorId := {q(inv['aggressor_id'])},",
             f"        MinHostilityTier := {inv['min_hostility_tier']},",
+            f"        MinCorruption := {inv.get('min_corruption', 0)},",
             f"        WaveSpawnGroupIds := {nested(inv['waves'])},",
             f"        ObjectiveIds := {arr(inv.get('objective_ids', []))},",
             f"        HazardIds := {arr(inv.get('hazard_ids', []))},",

@@ -5,6 +5,8 @@ aeonfall_invasion_definition := class:
     RegionId:string = ""
     AggressorId:string = ""
     MinHostilityTier:int = 0
+    # Minimum canonical corruption for ecology-specific encounter admission.
+    MinCorruption:int = 0
     WaveSpawnGroupIds:[][]string = array{}
     ObjectiveIds:[]string = array{}
     HazardIds:[]string = array{}

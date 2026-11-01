@@ -86,6 +86,9 @@ def main() -> int:
         tier = inv.get("min_hostility_tier")
         if not isinstance(tier, int) or not 0 <= tier <= 5:
             errors.append(f"{iid}: invalid hostility tier {tier}")
+        min_corruption = inv.get("min_corruption", 0)
+        if type(min_corruption) is not int or not 0 <= min_corruption <= 100:
+            errors.append(f"{iid}: min_corruption must be an integer 0..100")
         duration = inv.get("duration_seconds")
         if not isinstance(duration, (int,float)) or duration <= 0:
             errors.append(f"{iid}: invalid duration")

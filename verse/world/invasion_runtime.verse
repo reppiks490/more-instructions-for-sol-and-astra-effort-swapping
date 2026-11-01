@@ -85,6 +85,8 @@ aeonfall_invasion_runtime := class():
             Definition := GetAEONFALLInvasionRegistry().Get[InvasionId]
             RegionState := GetAEONFALLRegionRuntime().GetState[Definition.RegionId]
             RegionState.HostilityTier >= Definition.MinHostilityTier
+            # A hostile event cannot substitute for the ecological substrate.
+            RegionState.Corruption >= Definition.MinCorruption
             not HasActiveInRegion(Definition.RegionId)?
             not RegionState.ActiveEventIds.Find[InvasionId]
         then:
