@@ -9,6 +9,33 @@ This package contains original modular dungeon geometry, a landscape heightmap, 
 3. Reopen the project. Enable **Python Editor Scripting** and **UEFN MCP Toolsets** in Project Settings. Enable Python locally in Tools if prompted. Configure MCP auto-start in Editor Preferences, restart, and connect a local MCP-capable agent. Codex CLI configuration is in `bootstrap/uefn.mcp.toml`.
 4. Execute `AEONFALLImportPackage/tools/uefn_editor/build_ossuary_level.py` through UEFN's Python execution UI. It discovers your project content mount, imports the modular GLBs, generates UI-supported collision, saves the active map, and assembles `AEONFALL/Maps/OssuaryExchange_Starter`. Repeated execution reuses imported meshes and skips existing named actors.
 
+## SLICE-001 editor contract handoff
+
+The installer now copies the authoritative `content/vertical_slice/` contracts into
+`AEONFALLImportPackage/content/vertical_slice/` beside the geometry and editor
+scripts. Read `AEONFALLImportPackage/editor_config.json` first: its
+`slice_contracts` entries identify the first playable rig, the canonical UEFN
+binding inventory, and the 24 Launch Session acceptance cases.
+
+Before writing to the project, the installer checks that the rig's single
+BOS-005 director resolves to a canonical encounter, that every physical
+encounter role references an existing device of the correct type, that no
+physical role is accidentally shared, and that rig dependencies and acceptance
+test IDs are consistent. A malformed or incomplete handoff aborts the
+installation before any files are copied. The `--dry-run` JSON includes
+`slice_handoff.rig_device_count`, `physical_encounter_roles`,
+`phase_count`, `launch_test_count`, and the inventory counts for weapons,
+monsters, tameables, hireables, encounters and vehicles.
+
+**These are source-contract checks, not editor validation.** The reported
+`contracts_validated_editor_unbound` state does not mean any device has
+been placed, bound or compiled. The first rig's 49 device records describe
+a BOS-005 editor placement task; King Without Pulse and Grave Market Eclipse
+remain separate project-bound encounter/event tasks. Do not infer a playable
+map from a successful installer run. Use the copied contract files to
+configure actual UEFN assets, then record native compiler and Launch Session
+evidence separately.
+
 ## Assemble the playable loop
 
 The generated level is architecture. Add Island Settings, player spawn pads, lighting and navigation to the new level using the Creative device catalog. The imported scene markers and placement manifest identify checkpoints, boss area and objective anchors; markers in the source manifest are planning coordinates, not automatically spawned Creative devices.

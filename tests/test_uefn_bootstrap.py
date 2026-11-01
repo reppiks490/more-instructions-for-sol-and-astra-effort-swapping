@@ -274,6 +274,97 @@ class InstallerTests(unittest.TestCase):
         self.assert_metadata_unchanged()
 
 
+    def seed_slice_handoff(self):
+        folder = self.source / "content/vertical_slice"
+        devices = [
+            {"id": name, "type": kind, "depends_on": []}
+            for name, kind in (
+                ("start", "trigger_device"), ("fail", "trigger_device"),
+                ("volume", "volume_device"), ("complete", "trigger_device"),
+                ("failed", "trigger_device"), ("boss", "npc_spawner_device"),
+                ("enter", "trigger_device"), ("cleanup", "trigger_device"),
+                ("objective", "trigger_device"),
+            )
+        ]
+        devices.append({
+            "id": "director", "type": "aeonfall_encounter_director_device",
+            "depends_on": ["volume"],
+            "editable_values": {"EncounterId": "BOS-005"},
+            "bindings": {
+                "StartInput": "start", "FailInput": "fail",
+                "ParticipantVolume": "volume", "CompletedOutput": "complete",
+                "FailedOutput": "failed", "BossSpawners": ["boss"],
+                "Phases": [{
+                    "phase_id": "P1", "enter_ref": "enter", "cleanup_ref": "cleanup",
+                    "inputs": [{"source": "TriggerGraph", "device_ref": "objective"}],
+                    "hazards": [], "spawn_groups": [],
+                }],
+            },
+        })
+        rig = {"rig_id": "FIXTURE", "encounter_id": "BOS-005", "devices": devices}
+        bindings = {"slice_id": "SLICE-001", "encounters": [{"id": "BOS-005"}],
+                    "weapons": [{"id": "WPN-001"}]}
+        launch = {"slice_id": "SLICE-001", "tests": [{"id": "LT-001"}]}
+        for name, content in (
+            ("first_playable_rig.json", rig),
+            ("slice_001_uefn_bindings.json", bindings),
+            ("slice_001_launch_tests.json", launch),
+        ):
+            write(folder / name, json.dumps(content))
+        return folder
+
+    def test_slice_handoff_is_validated_and_packaged_for_editor(self):
+        folder = self.seed_slice_handoff()
+        dry = self.install(dry_run=True)
+        self.assertEqual(dry["slice_handoff"]["rig_device_count"], 10)
+        self.assertEqual(dry["slice_handoff"]["physical_encounter_roles"], 9)
+        self.assertEqual(dry["slice_handoff"]["phase_count"], 1)
+        self.assertEqual(dry["slice_handoff"]["launch_test_count"], 1)
+        self.assertEqual(dry["slice_handoff"]["uefn_compile"], "not_run")
+        result = self.install()
+        self.assertEqual(result["slice_handoff"]["state"], "contracts_validated_editor_unbound")
+        for name in installer.SLICE_CONTRACTS:
+            self.assertEqual(
+                (self.package / "content/vertical_slice" / name).read_bytes(),
+                (folder / name).read_bytes(),
+            )
+        config = json.loads((self.package / "editor_config.json").read_text())
+        self.assertEqual(config["slice_handoff_state"], "contracts_validated_editor_unbound")
+        self.assertEqual(len(config["slice_contracts"]), 3)
+        self.assert_metadata_unchanged()
+
+    def test_missing_handoff_contract_rejected_without_project_mutation(self):
+        folder = self.seed_slice_handoff()
+        (folder / "slice_001_launch_tests.json").unlink()
+        before = snapshot(self.project.parent)
+        with self.assertRaisesRegex(ValueError, "Missing required slice handoff contract"):
+            self.install()
+        self.assertEqual(snapshot(self.project.parent), before)
+
+    def test_wrong_physical_binding_type_rejected_before_install(self):
+        folder = self.seed_slice_handoff()
+        path = folder / "first_playable_rig.json"
+        rig = json.loads(path.read_text())
+        rig["devices"][0]["type"] = "damage_volume_device"
+        write(path, json.dumps(rig))
+        before = snapshot(self.project.parent)
+        with self.assertRaisesRegex(ValueError, "Invalid StartInput reference"):
+            self.install()
+        self.assertEqual(snapshot(self.project.parent), before)
+
+    def test_shared_physical_encounter_role_rejected_before_install(self):
+        folder = self.seed_slice_handoff()
+        path = folder / "first_playable_rig.json"
+        rig = json.loads(path.read_text())
+        rig["devices"][-1]["bindings"]["Phases"][0]["cleanup_ref"] = "enter"
+        write(path, json.dumps(rig))
+        before = snapshot(self.project.parent)
+        with self.assertRaisesRegex(ValueError, "Physical device reused"):
+            self.install()
+        self.assertEqual(snapshot(self.project.parent), before)
+
+
+
 class FakeStaticMesh:
     def __init__(self, path, *, simple=0, convex=0):
         self.path = path
