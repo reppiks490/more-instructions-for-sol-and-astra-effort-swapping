@@ -104,6 +104,24 @@ class SourceBundleTests(unittest.TestCase):
                 with self.assertRaisesRegex(bundle.BundleError, "unsafe or noncanonical path"):
                     bundle.verify_bundle(self.output)
 
+    def test_non_regular_archive_entries_are_rejected_even_when_bytes_match(self):
+        # The manifest and checksums can remain valid while ZIP metadata
+        # changes a source entry into a symlink, directory, FIFO or socket.
+        for file_type in (0o120000, 0o040000, 0o010000, 0o140000):
+            with self.subTest(file_type=oct(file_type)):
+                bundle.build_bundle(self.root, self.output)
+                with zipfile.ZipFile(self.output) as original:
+                    contents = {name: original.read(name) for name in original.namelist()}
+                with zipfile.ZipFile(self.output, "w") as archive:
+                    for name, data in contents.items():
+                        info = zipfile.ZipInfo(name)
+                        info.create_system = 3
+                        mode = file_type if name == "AEONFALL/source.verse" else 0o100000
+                        info.external_attr = (mode | 0o644) << 16
+                        archive.writestr(info, data)
+                with self.assertRaisesRegex(bundle.BundleError, "non-regular file entry"):
+                    bundle.verify_bundle(self.output)
+
     def test_duplicate_archive_names_are_rejected(self):
         bundle.build_bundle(self.root, self.output)
         with zipfile.ZipFile(self.output, "a") as archive:
