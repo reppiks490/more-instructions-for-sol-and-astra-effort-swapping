@@ -298,6 +298,15 @@ class FakeImportTask:
         return self.objects
 
 
+class FakeStaticMeshComponent:
+    def __init__(self, mesh):
+        self.mesh = mesh
+
+    def get_editor_property(self, name):
+        assert name == "static_mesh"
+        return self.mesh
+
+
 class FakeActor:
     def __init__(self, mesh, location, rotation):
         self.mesh = mesh
@@ -315,10 +324,23 @@ class FakeActor:
     def set_actor_scale3d(self, value):
         self.scale = value
 
+    def get_component_by_class(self, component_class):
+        return component_class(self.mesh)
+
+    def get_actor_location(self):
+        return type("Location", (), dict(zip(("x", "y", "z"), self.location)))()
+
+    def get_actor_rotation(self):
+        return type("Rotation", (), dict(zip(("pitch", "yaw", "roll"), self.rotation)))()
+
+    def get_actor_scale3d(self):
+        return type("Scale", (), dict(zip(("x", "y", "z"), self.scale)))()
+
 
 class FakeUnreal:
     """Documented API-shaped contract fake, with observable side effects."""
     StaticMesh = FakeStaticMesh
+    StaticMeshComponent = FakeStaticMeshComponent
     AssetImportTask = FakeImportTask
     EditorActorSubsystem = type("EditorActorSubsystem", (), {})
     LevelEditorSubsystem = type("LevelEditorSubsystem", (), {})
@@ -507,10 +529,31 @@ class EditorBuilderTests(unittest.TestCase):
         second = self.build(ue)
         self.assertEqual(first["created_actors"], 1)
         self.assertEqual(second["created_actors"], 0)
+        self.assertEqual(second["reused_actors"], 1)
         self.assertEqual(len(ue.tasks), 1)
         self.assertEqual(len(ue.level_actors[first["map_asset"]]), 1)
         self.assertEqual(len([call for call in ue.calls if call[0] == "new_level"]), 1)
         self.assertEqual(len([call for call in ue.calls if call[0] == "load_level"]), 1)
+
+    def test_rerun_refuses_moved_actor_before_new_placements(self):
+        ue = FakeUnreal()
+        first = self.build(ue)
+        actor = ue.level_actors[first["map_asset"]][0]
+        actor.location = (150, 200, 0)
+        with self.assertRaisesRegex(RuntimeError, "location drift"):
+            self.build(ue)
+        self.assertEqual(len(ue.level_actors[first["map_asset"]]), 1)
+
+    def test_rerun_refuses_duplicate_placement_labels(self):
+        ue = FakeUnreal()
+        first = self.build(ue)
+        actors = ue.level_actors[first["map_asset"]]
+        actors.append(FakeActor(actors[0].mesh, actors[0].location, actors[0].rotation))
+        actors[-1].set_actor_label(actors[0].get_actor_label())
+        actors[-1].set_actor_scale3d(actors[0].scale)
+        with self.assertRaisesRegex(RuntimeError, "Duplicate existing"):
+            self.build(ue)
+        self.assertEqual(len(actors), 2)
 
     def test_cuboid_uses_box_collision_and_reuses_it_on_rerun(self):
         ue = FakeUnreal()
