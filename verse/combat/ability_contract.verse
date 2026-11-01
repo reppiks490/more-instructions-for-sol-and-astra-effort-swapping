@@ -88,3 +88,15 @@ aeonfall_ability_context_flags := class:
     EncounterActive:logic = false
     TransformationActive:logic = false
     TransformationId:string = ""
+
+# All transformed abilities require effect-specific physical preflight. This
+# includes legacy definitions that carry a transformation flag but no exact ID.
+# Keep this predicate shared by every general-purpose physical adapter.
+AEONFALLRequiresSpecializedTransformationPreflight(Definition:aeonfall_ability_definition)<transacts>:logic=
+    if (Definition.RequiredTransformationId <> ""):
+        return true
+    if (Definition.RequiresTransformationContext?):
+        return true
+    if (Definition.ResourcePolicy = aeonfall_resource_policy.TransformationOnly):
+        return true
+    false
