@@ -23,8 +23,12 @@ pushes. The runtime invariant gate checks measured-delta wiring and shutdown ord
   transacts while some call the default-effect event emitter; generated project
   digests and the Verse compiler must resolve this pre-existing effect compatibility
   concern. No module has been promoted to implemented or production.
-- Place one canonical runtime tick device per session, as already required by its
-  design; duplicate authored tick devices remain unsupported.
+- A session-scoped owner lease now rejects a second placed runtime tick device,
+  preventing duplicated cooldown, status, horde, invasion and delivery advances.
+  Only the owning device releases the lease during synchronous OnEnd cleanup.
+  The source mutation suite checks admission, owner-matched release and shutdown
+  ordering. A native multiplayer Launch Session must still verify duplicate
+  placement, device teardown and takeover by a newly started replacement.
 
 ## Epic API references checked
 
