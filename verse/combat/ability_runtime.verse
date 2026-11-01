@@ -13,9 +13,34 @@ aeonfall_ability_runtime := class():
     var States:[string]aeonfall_ability_runtime_state = map{}
     var OwnerByStateKey:[string]string = map{}
     var EffectClaims:[string]string = map{}
+    # One successful use of each God/Absolute ability per active form epoch.
+    # Session-only: no persistent profile schema changes.
+    var ApexCommittedEpochByStateKey:[string]int = map{}
 
     MakeStateKey(OwnerKey:string, AbilityId:string):string=
         OwnerKey + "::" + AbilityId
+
+    IsGodAbsoluteAbility(Definition:aeonfall_ability_definition):logic=
+        if (Definition.OwnerEntityId = "FORM-GOD"):
+            return true
+        if (Definition.OwnerEntityId = "FORM-ABSOLUTE"):
+            return true
+        false
+
+    # The active form owns the epoch. A stale callback from an expired form
+    # cannot borrow the next activation's one-use budget.
+    GetApexEpoch(
+        OwnerKey:string,
+        Definition:aeonfall_ability_definition
+    )<decides><transacts>:int=
+        FormState := GetAEONFALLAscendedFormRuntime().GetState(OwnerKey)
+        FormState.Phase = aeonfall_ascended_form_phase.Active
+        FormState.ActiveRemainingSeconds > 0.0
+        FormState.FormId = Definition.OwnerEntityId
+        FormState.TransformationId = Definition.RequiredTransformationId
+        Definition.RequiredTransformationId <> ""
+        FormState.SessionActivationCount > 0
+        FormState.SessionActivationCount
 
     Initialize(
         OwnerKey:string,
@@ -113,6 +138,19 @@ aeonfall_ability_runtime := class():
                 Context.TransformationId <> Definition.RequiredTransformationId
             then:
                 return false
+
+            # Check canonical form identity and committed use before reserving
+            # any resource or dispatching a physical adapter.
+            if (IsGodAbsoluteAbility(Definition)?):
+                if:
+                    Epoch := GetApexEpoch[OwnerKey, Definition]
+                then:
+                    StateKey := MakeStateKey(OwnerKey, Definition.AbilityId)
+                    if (CommittedEpoch := ApexCommittedEpochByStateKey[StateKey]):
+                        if (CommittedEpoch >= Epoch):
+                            return false
+                else:
+                    return false
 
             if (Definition.ResourcePolicy = aeonfall_resource_policy.Cooldown):
                 return logic{State.CooldownRemainingSeconds <= 0.0}
@@ -236,7 +274,28 @@ aeonfall_ability_runtime := class():
             Old.Pending?
             Old.PendingRequestId = Result.RequestId
         then:
-            if (not Result.Succeeded?):
+            var EffectiveSucceeded:logic = Result.Succeeded
+            var FailureCode:string = Result.ResultCode
+            var ApexEpoch:int = 0
+
+            # Revalidate the exact active form on callback. Expiry, cancellation,
+            # or an already-committed use turns even a reported success into a
+            # non-spending rejection. Only the current epoch may be committed.
+            if (Result.Succeeded? and IsGodAbsoluteAbility(Definition)?):
+                if:
+                    CurrentEpoch := GetApexEpoch[Result.OwnerKey, Definition]
+                then:
+                    set ApexEpoch = CurrentEpoch
+                    StateKey := MakeStateKey(Result.OwnerKey, Definition.AbilityId)
+                    if (CommittedEpoch := ApexCommittedEpochByStateKey[StateKey]):
+                        if (CommittedEpoch >= ApexEpoch):
+                            set EffectiveSucceeded = false
+                            set FailureCode = "apex_use_already_committed"
+                else:
+                    set EffectiveSucceeded = false
+                    set FailureCode = "apex_form_not_active"
+
+            if (not EffectiveSucceeded?):
                 Cancelled := aeonfall_ability_runtime_state:
                     AbilityId := Old.AbilityId
                     CurrentCharges := Old.CurrentCharges
@@ -259,7 +318,7 @@ aeonfall_ability_runtime := class():
                             EventType := "ability.effect_rejected",
                             SourceId := Result.OwnerKey,
                             TargetId := Result.AbilityId,
-                            ContextId := Result.ResultCode
+                            ContextId := FailureCode
                         }
                     )
                     return true
@@ -302,9 +361,19 @@ aeonfall_ability_runtime := class():
                 Locked := Old.Locked
 
             Key := MakeStateKey(Result.OwnerKey, Result.AbilityId)
-            if:
-                set States[Key] = Committed
-            then:
+            var Saved:logic = false
+            if (ApexEpoch > 0):
+                # Commit the canonical state and one-use ledger atomically.
+                if:
+                    set States[Key] = Committed
+                    set ApexCommittedEpochByStateKey[Key] = ApexEpoch
+                then:
+                    set Saved = true
+            else:
+                if (set States[Key] = Committed):
+                    set Saved = true
+
+            if (Saved?):
                 RemoveEffectClaim(Result.RequestId)
                 AEONFALLRuntimeBus.Emit(
                     aeonfall_runtime_event{
@@ -625,6 +694,18 @@ aeonfall_ability_runtime := class():
                 if (set KeptClaims[Id] = Owner):
                     set KeptClaims = KeptClaims
         set EffectClaims = KeptClaims
+
+        # Owner-scoped cleanup avoids retaining epoch records after despawn.
+        var KeptApexEpochs:[string]int = map{}
+        for (Key -> Epoch : ApexCommittedEpochByStateKey):
+            if:
+                StoredOwner := OwnerByStateKey[Key]
+                StoredOwner <> OwnerKey
+            then:
+                if (set KeptApexEpochs[Key] = Epoch):
+                    set KeptApexEpochs = KeptApexEpochs
+        set ApexCommittedEpochByStateKey = KeptApexEpochs
+
         var UpdatedStates:[string]aeonfall_ability_runtime_state = map{}
         var UpdatedOwners:[string]string = map{}
 
