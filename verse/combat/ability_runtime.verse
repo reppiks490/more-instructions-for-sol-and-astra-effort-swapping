@@ -531,10 +531,15 @@ aeonfall_ability_runtime := class():
                 if (Recharge > 0.0):
                     set Recharge = Recharge - DeltaSeconds
 
-                if (Recharge <= 0.0):
+                # A stalled simulation tick may span several charge periods.
+                # Carry elapsed-time remainder forward instead of granting
+                # at most one charge per scheduler tick.
+                loop:
+                    if (Charges >= Definition.MaxCharges or Recharge > 0.0):
+                        break
                     set Charges = Charges + 1
                     if (Charges < Definition.MaxCharges):
-                        set Recharge = Definition.RechargeSeconds
+                        set Recharge = Recharge + Definition.RechargeSeconds
                     else:
                         set Recharge = 0.0
 
@@ -582,10 +587,15 @@ aeonfall_ability_runtime := class():
                     if (Recharge > 0.0):
                         set Recharge = Recharge - DeltaSeconds
 
-                    if (Recharge <= 0.0):
+                    # A stalled simulation tick may span several charge periods.
+                    # Carry elapsed-time remainder forward instead of granting
+                    # at most one charge per scheduler tick.
+                    loop:
+                        if (Charges >= Definition.MaxCharges or Recharge > 0.0):
+                            break
                         set Charges = Charges + 1
                         if (Charges < Definition.MaxCharges):
-                            set Recharge = Definition.RechargeSeconds
+                            set Recharge = Recharge + Definition.RechargeSeconds
                         else:
                             set Recharge = 0.0
 
