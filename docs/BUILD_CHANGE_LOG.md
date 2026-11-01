@@ -1,5 +1,13 @@
 # Build change log
 
+## 2026-11-01 — QA Sentinel: enforce generated status drift in CI
+
+AEONFALL Validation now runs `tools/build_status.py --check` rather than
+regenerating STATUS.md and suppressing the Git diff exit code. Catalog and
+endgame summary drift is now a failing check; authors must regenerate and
+commit the canonical status snapshot before merge. This is a source-level
+consistency gate, not native UEFN compilation or runtime profiling.
+
 ## 2026-11-01 — QA Sentinel: fail-closed source provenance
 
 The source ZIP verifier now rejects rewritten build provenance that claims
