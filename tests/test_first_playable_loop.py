@@ -52,6 +52,22 @@ class FirstPlayableSourceGuards(unittest.TestCase):
         self.assertMutationRejected("harvest", 'Old.UnlockedEntityIds.Find["WPN-003"]',
                                     'Old.UnlockedEntityIds.Find["WPN-001"]')
 
+    def test_single_material_spend_unchecked_save_is_rejected(self):
+        self.assertMutationRejected("ledger", "ProfileService.TrySaveProfile(Player, Candidate)?",
+                                    "ProfileService.SetMaterialCount(Agent, MaterialId, Current - Amount)")
+
+    def test_multi_material_spend_unchecked_save_is_rejected(self):
+        self.assertMutationRejected("ledger", "return ProfileService.TrySaveProfile(Player, Candidate)",
+                                    "ProfileService.SetMaterialLedger(Agent, UpdatedLedger)\\n                    return true")
+
+    def test_dev_seed_partial_write_is_rejected(self):
+        self.assertMutationRejected("dev", "Saved := ProfileService.TrySaveProfile(Player, Candidate)",
+                                    'MaterialLedger.Add(Agent, "MAT-003", 2500)')
+
+    def test_dev_seed_false_success_is_rejected(self):
+        self.assertMutationRejected("dev", "if (Saved?):",
+                                    "if (true?):")
+
     def test_native_failable_call_regression_is_rejected(self):
         self.assertMutationRejected("position", "GetFortCharacter[]", "GetFortCharacter()")
 
