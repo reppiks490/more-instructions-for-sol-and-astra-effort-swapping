@@ -50,7 +50,7 @@ class ApexMechanicsTests(unittest.TestCase):
 
     def test_generic_trigger_rejects_transformed_abilities_before_effect(self):
         source = (ROOT / "verse/combat/trigger_ability_adapter_device.verse").read_text(encoding="utf-8")
-        self.assertIn('Definition.RequiredTransformationId <> ""', source)
+        self.assertIn('AEONFALLRequiresSpecializedTransformationPreflight(Definition)?', source)
         self.assertIn('"apex_requires_specialized_preflight"', source)
         self.assertLess(source.index('"apex_requires_specialized_preflight"'), source.index("TriggerOutput.Trigger("))
 
