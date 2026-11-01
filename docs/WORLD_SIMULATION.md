@@ -273,3 +273,30 @@ attempts to claim one corpse, missing region initialization, and a region
 unload during denial. Verify the physical corruption/biome presentation and
 multiplayer replication in Launch Session. Python source guards are not a
 native Verse compilation or runtime proof.
+
+## Corruption-gated Devouring Moon admission (2026-11-01)
+
+The canonical invasion director now enforces the optional authored
+`min_corruption` field **at admission**, in addition to hostility and its
+existing single-invasion/region event reservation. The default is `0`, so
+faction conflicts and other invasion profiles retain their prior admission
+rules. REG-001's `INV-R001-005` (Devouring Moon Precursor) requires corruption
+`>= 80`, matching the Tier V Crowned Devourer ecological gate. A region at
+corruption 79 may still be hostile because of another event, but cannot start
+the Devouring Moon encounter. At 80 the encounter is eligible, subject to its
+existing hostility and event/AI-budget constraints. Sanctifying or burning
+remains before admission can deny the encounter without stat inflation.
+
+The gate is **not** an automatic cancellation of an invasion already active;
+mid-event cleansing changes pressure but does not abruptly despawn objectives
+or break wave progression. Invasion admission reads initialized canonical
+region state and fails closed if that state is absent. `min_corruption` must be
+an integer in 0..100, validated in authored JSON and Verse registry.
+No new NPC Spawners, wave allocations, or director services are introduced.
+
+**UEFN acceptance:** verify Devouring Moon is denied at corruption 79 even
+when hostility is 4 or higher; allowed at 80 only when existing event admission
+passes; and denied when region state is missing or another invasion is active.
+Test cleansing from 80 to 76 before Start, and cleansing during an active wave.
+Record actual physical AI counts, streaming transitions, and multiplayer
+behavior separately; Python source tests are not native Verse compilation.
