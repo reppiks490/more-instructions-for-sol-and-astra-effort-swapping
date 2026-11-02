@@ -112,6 +112,16 @@ aeonfall_horde_runtime := class():
                 return true
         false
 
+    # Query existing session brood records; no new population or persistence.
+    # Region unload clears brood, so absent/uninitialized ecology fails closed.
+    HasBroodAtLeastTier(RegionId:string, MinimumTier:int)<transacts>:logic=
+        if (RegionId = "" or MinimumTier < 1 or MinimumTier > 5):
+            return false
+        for (ActorKey -> Member : Brood):
+            if (Member.RegionId = RegionId, Member.Tier >= MinimumTier):
+                return true
+        false
+
     NextTier(Old:aeonfall_horde_brood, Biomass:int, RegionTotal:int)<transacts>:int=
         if (Old.Tier = 1, Biomass >= Policy.GorgedBiomass):
             return 2

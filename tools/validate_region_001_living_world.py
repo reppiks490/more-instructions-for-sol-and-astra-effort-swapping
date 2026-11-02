@@ -94,6 +94,12 @@ def main() -> int:
             errors.append(f"{iid}: min_aggressor_influence must be an integer 0..100")
         elif min_influence > 0 and catalog.get(inv.get("aggressor_id"), {}).get("family") != "faction":
             errors.append(f"{iid}: influence gate requires a canonical faction aggressor")
+        min_horde_biomass = inv.get("min_regional_horde_biomass", 0)
+        if type(min_horde_biomass) is not int or not 0 <= min_horde_biomass <= 6000:
+            errors.append(f"{iid}: min_regional_horde_biomass must be an integer 0..6000")
+        min_horde_tier = inv.get("min_horde_tier", 0)
+        if type(min_horde_tier) is not int or not 0 <= min_horde_tier <= 5:
+            errors.append(f"{iid}: min_horde_tier must be an integer 0..5")
         duration = inv.get("duration_seconds")
         if not isinstance(duration, (int,float)) or duration <= 0:
             errors.append(f"{iid}: invalid duration")

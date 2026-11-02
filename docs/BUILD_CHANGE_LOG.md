@@ -1,3 +1,15 @@
+## 2026-11-01 — Living World: evolved horde substrate for Devouring Moon
+
+The Devouring Moon Precursor now requires >=600 consumed regional horde biomass
+and an active Tier IV+ brood, as well as its existing corruption >=80 and
+hostility gate. These are bounded reads against the existing session ecology;
+necromancy-only corruption can no longer authorize a gravefeeding precursor.
+Canonical registry, authored JSON validation and generated Verse bootstrap
+are updated with zero-default optional fields. Added source/data regression
+coverage and UEFN acceptance guidance. No new director, NPC, spawner, profile
+persistence or combat stat multipliers. Native Verse and streaming verification
+remain pending.
+
 ## 2026-11-01 — Avatar FUS-001 attack request and Titan proxy feasibility
 
 Extended the disabled-by-default Armor Fusion controller with a third

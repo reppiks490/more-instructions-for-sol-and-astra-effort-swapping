@@ -40,6 +40,8 @@ def main() -> int:
             f"        MinHostilityTier := {inv['min_hostility_tier']},",
             f"        MinCorruption := {inv.get('min_corruption', 0)},",
             f"        MinAggressorInfluence := {inv.get('min_aggressor_influence', 0)},",
+            f"        MinRegionalHordeBiomass := {inv.get('min_regional_horde_biomass', 0)},",
+            f"        MinHordeTier := {inv.get('min_horde_tier', 0)},",
             f"        WaveSpawnGroupIds := {nested(inv['waves'])},",
             f"        ObjectiveIds := {arr(inv.get('objective_ids', []))},",
             f"        HazardIds := {arr(inv.get('hazard_ids', []))},",
