@@ -224,6 +224,9 @@ jobs:
       - name: Validate Ossuary checkpoint geometry and respawn source
         run: python tools/validate_slice_checkpoints.py
 
+      - name: Validate creator-only fusion architecture and state machine
+        run: python tools/validate_fusion_architecture.py
+
       - name: Validate player loadout and unique sovereign integration
         run: |
           python tools/validate_player_loadout.py
