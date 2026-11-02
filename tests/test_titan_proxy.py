@@ -536,6 +536,18 @@ class TitanSpawnHandshakeTests(unittest.TestCase):
         self.assertTrue(self.p.unexpected_agents())
         self.assertFalse(self.p.can_command("titan"))
 
+    def test_preexisting_agent_rejected_without_stranding_spawn_lease(self):
+        # Preflight happens before Begin; no SpawnAt exists to complete a
+        # lease if the dedicated spawner was already populated.
+        self.p.npcs = ["ambient"]
+        self.assertIsNone(self.p.begin())
+        self.assertFalse(self.p.in_flight)
+        self.p.npcs = []  # dedicated spawner cleanup
+        epoch = self.p.begin()
+        self.assertIsNotNone(epoch)
+        self.p.npcs = ["titan"]
+        self.assertTrue(self.p.return_spawn(epoch, "titan"))
+
     def test_preowner_failure_still_cleans_dedicated_spawner(self):
         epoch = self.p.begin()
         self.p.npcs = ["ambient"]
