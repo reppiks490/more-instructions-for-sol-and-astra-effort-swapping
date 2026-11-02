@@ -16,8 +16,13 @@ listens for an input press and, on the server Verse device, requires:
 - The Architect's `IsAuthorizedActive(Self, Player, Token)` accepts the exact
   owner, controller and generation; the finite budget's `Spend` accepts the
   cost, deadline and generation.
-- A 0.2–10 second configurable cooldown (default 1.5 seconds), with a 1–25
+- A 2–10 second configurable cooldown (default 2 seconds), with a 1–25
   point energy cost (default 10), and distinct fuse/separate/attack inputs.
+
+The paid admission and one-use Architect receipt must succeed together in a
+transaction. A refused receipt rolls back the 10-energy debit. The minimum
+2-second attack cooldown matches Arsenal Reaver's secondary gate. This is
+source wiring only, not a native hit acknowledgement.
 
 Only then does `AttackOutput.Trigger(Player)` send an **instigator-tagged
 request** to an editor-bound `trigger_device`. This does not apply damage by

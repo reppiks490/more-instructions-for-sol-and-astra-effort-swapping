@@ -40,7 +40,7 @@ aeonfall_sovereign_fusion_device := class(creative_device):
     @editable
     AttackEnergyCost:int = 10
     @editable
-    AttackCooldownSeconds:float = 1.5
+    AttackCooldownSeconds:float = 2.0
 
     StopEvent:event() = event(){}
     var Running:logic = false
@@ -59,7 +59,7 @@ aeonfall_sovereign_fusion_device := class(creative_device):
             SeparateInput <> AttackInput
             AttackEnergyCost >= 1
             AttackEnergyCost <= 25
-            AttackCooldownSeconds >= 0.2
+            AttackCooldownSeconds >= 2.0
             AttackCooldownSeconds <= 10.0
             DurationSeconds >= 15.0
             DurationSeconds <= 180.0

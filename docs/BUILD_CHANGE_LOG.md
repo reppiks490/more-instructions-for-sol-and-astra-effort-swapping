@@ -23,6 +23,19 @@ remain unverified.
 
 # Build change log
 
+## 2026-11-01 — Fusion Architect: integrated paid Reaver CI gate and cooldown
+
+After PR #64 integrated the actual Avatar/Arsenal receipt flow, added a
+cross-file CI gate and mutation coverage requiring Avatar's paid issuance and
+Arsenal's transactional consumption before cooldown and damage. Source tests
+inspect both Arsenal runtime and its physical adapter rather than treating
+the device as the runtime. Raised the Avatar attack minimum/default cooldown
+to 2 seconds to match Reaver, avoiding unnecessary paid attack requests under
+Arsenal's two-second gate. Canonical IDs, persistence, entitlement and Titan
+restrictions unchanged. Native UEFN compilation, editor bindings, LOS and
+multiplayer damage remain unverified.
+
+
 ## 2026-11-01 — Fusion Reaver: transactional attack-receipt handoff
 
 Wired the Architect's canonical FUS-001 one-use paid-attack receipt between
