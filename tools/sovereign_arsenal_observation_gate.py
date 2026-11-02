@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, replace
 import math
+import re
 
 from tools.sovereign_arsenal_admission import RegisteredTarget
 from tools.sovereign_arsenal_hit_journal import (
@@ -104,7 +105,7 @@ class SourceHitObservationGate:
     def _valid_actor(actor: object) -> bool:
         return (type(actor) is BoundActor
                 and type(actor.target_id) is str
-                and 4 < len(actor.target_id) <= 96 and actor.target_id.startswith("MON-")
+                and re.fullmatch(r"MON-[0-9]{3,4}", actor.target_id) is not None
                 and type(actor.actor_key) is str
                 and 1 <= len(actor.actor_key) <= 96
                 and type(actor.region_id) is str and actor.region_id in REGIONS)
