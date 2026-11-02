@@ -119,6 +119,15 @@ aeonfall_titan_proxy_command_runtime := class:
             return true
         false
 
+    # SpawnAt is suspending: GetAgents may expose the newly created NPC
+    # BEFORE SpawnAt returns it. This flag allows inventory observation
+    # only during the current reserved request; it never grants ownership,
+    # behavior readiness, movement, cues, or a second summon.
+    SpawnPendingForCurrentEpoch()<transacts>:logic=
+        if (Active?, SpawnInFlight?, SpawnEpoch = Epoch):
+            return true
+        false
+
     # A generation-addressable native SpawnAt return, never SpawnedEvent,
     # is the only candidate association. Clear the single in-flight lease on
     # return even if timeout, owner loss or teardown already invalidated it.
