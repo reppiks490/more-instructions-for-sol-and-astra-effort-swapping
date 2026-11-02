@@ -126,3 +126,10 @@ verify exclusive device bindings, latency/replay under two players, shutdown,
 session replacement, and UEFN's actual callback ordering. The Architect API
 alone does not integrate the two draft adapters; `native_adapter_wiring`
 remains `pending` in the machine-readable contract. FUS-002 remains disabled.
+
+## Paid Reaver handoff CI enforcement
+
+The architect validator now compares Avatar and Arsenal sources and requires
+receipt issuance in the same deciding admission as Avatar's paid request, and
+receipt consumption in Arsenal's deciding transaction before a second debit.
+Native editor graph and two-client hit attribution remain unverified.
