@@ -64,6 +64,9 @@ def check_contract(contract: dict, source: str) -> list[str]:
     need(runtime.get("source") == "verse/sovereign/fusion_state_runtime.verse",
          "runtime path drift")
     need(runtime.get("single_controller_lease") is True, "single-owner controller lease required")
+    need(runtime.get("controller_release") ==
+         "only_dormant_after_physical_cleanup_and_canonical_teardown",
+         "controller release must fail closed while fusion is not dormant")
     need(runtime.get("max_simultaneous_fusions") == 1, "fusion concurrency limit drift")
     need(runtime.get("physical_effects") == "adapter_owned_not_implemented",
          "native effect implementation must not be falsely claimed")
@@ -111,7 +114,13 @@ def check_contract(contract: dict, source: str) -> list[str]:
     require("Abort", "Current = Device", "Generation = Token",
             "set Phase = aeonfall_fusion_phase.Dormant", "set Generation += 1")
     require("ReleaseController", "Current = Device", "set Generation += 1",
-            "set Controller = false", "set Authority = false")
+            "set Controller = false", "set Authority = false",
+            'if (Phase <> aeonfall_fusion_phase.Dormant or FormId <> ""):',
+            "return false")
+    ordered("ReleaseController",
+            'if (Phase <> aeonfall_fusion_phase.Dormant or FormId <> ""):',
+            "return false", "if (Current := Controller?, Current = Device):",
+            "set Controller = false")
     for name in ("Abort", "ReleaseController", "CompleteSeparation"):
         need("Gate.CanWield" not in method(code, name),
              f"{name}: cleanup must work after authority revocation")
