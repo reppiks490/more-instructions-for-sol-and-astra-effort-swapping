@@ -561,8 +561,8 @@ class TitanProxySourceTests(unittest.TestCase):
 
     def test_headless_npc_cannot_receive_pending_navigation_or_hud(self):
         mutation = self.runtime.replace(
-            "        BoundNpc(Agent)?\n        BehaviorReady?\n        Command := Pending?",
-            "        BoundNpc(Agent)?\n        Command := Pending?", 1
+            "        BoundNpc(Agent)?\n        BehaviorReady?\n        not BehaviorTerminated?\n        Command := Pending?",
+            "        BoundNpc(Agent)?\n        not BehaviorTerminated?\n        Command := Pending?", 1
         )
         self.assertTrue(self.errors(runtime=mutation))
         mutation = self.device.replace(
