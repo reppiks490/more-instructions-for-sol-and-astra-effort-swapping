@@ -80,7 +80,9 @@ future integration; the nine additional abilities remain design-only.
 validate the hard stop and mutation-test its non-editable placement,
 unconditional early return, unchanged entrypoints, and universe-first
 contract. These are static/source checks, not native Verse compilation.
-Only a separately reviewed source change after **all** #84 full-universe
-source packages and actual collision/LOS, UEFN, multiplayer, mobile,
-accessibility and 300 MiB cooked-memory acceptance can remove the lock.
-Do not claim that editor toggles or green Python tests activate abilities.
+After **all** #84 full-universe source packages are complete, a dedicated
+reviewed native-verification branch may replace this lock **together with**
+a genuine collision/LOS adapter. Do not merge or enable/publish that change
+until actual UEFN compilation, multiplayer, Fortnite-mobile, accessibility
+and 300 MiB cooked-memory acceptance have passed. Do not claim that editor
+toggles or green Python tests activate abilities.
