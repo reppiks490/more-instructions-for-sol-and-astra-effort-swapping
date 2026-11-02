@@ -46,6 +46,17 @@ def section(source: str, method: str) -> str:
 
 
 
+def ordered(source: str, *fragments: str) -> bool:
+    """Monotonic token order, for helpers outside the main audit closure."""
+    position = 0
+    for fragment in fragments:
+        found = source.find(fragment, position)
+        if found < 0:
+            return False
+        position = found + len(fragment)
+    return True
+
+
 def avatar_paid_deciding_context(source: str) -> bool:
     """Require debit and one-use receipt in the SAME Avatar failure context."""
     body = section(source, "Attack")
