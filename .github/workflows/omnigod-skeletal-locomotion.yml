@@ -1,0 +1,71 @@
+name: AEONFALL Omnigod Skeletal Locomotion Source
+
+on:
+  push:
+    paths:
+      - "tools/build_omnigod_mechanical_locomotion.py"
+      - "tools/validate_omnigod_mechanical_locomotion.py"
+      - "tests/test_omnigod_mechanical_locomotion.py"
+      - "tools/build_omnigod_rigid_skin.py"
+      - "tools/build_omnigod_cinematic.py"
+      - "tools/build_omnigod_manifestation_assets.py"
+      - ".github/workflows/omnigod-skeletal-locomotion.yml"
+  pull_request:
+    paths:
+      - "tools/build_omnigod_mechanical_locomotion.py"
+      - "tools/validate_omnigod_mechanical_locomotion.py"
+      - "tests/test_omnigod_mechanical_locomotion.py"
+      - "tools/build_omnigod_rigid_skin.py"
+      - "tools/build_omnigod_cinematic.py"
+      - "tools/build_omnigod_manifestation_assets.py"
+      - ".github/workflows/omnigod-skeletal-locomotion.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate-five-way-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout exact source commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Python source tools
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Test five actual mechanical joint animations, direction and mutation guards
+        run: python -m unittest discover -s tests -p "test_omnigod_mechanical_locomotion.py" -v
+
+      - name: Build original machine-demon geometry
+        run: python tools/build_omnigod_manifestation_assets.py --output dist/omnigod_manifestation
+
+      - name: Build three original mechanical cinematic source clips
+        run: python tools/build_omnigod_cinematic.py --source dist/omnigod_manifestation/omnigod_dormant_assembly.glb --output dist/omnigod_cinematics
+
+      - name: Build true rigid-skinned armature
+        run: python tools/build_omnigod_rigid_skin.py --source dist/omnigod_cinematics/omnigod_mechanical_motion.glb --output dist/omnigod_skeletal_handoff
+
+      - name: Validate exact real skin weights and inverse bind positions
+        run: python tools/validate_omnigod_rigid_skin.py --source dist/omnigod_cinematics/omnigod_mechanical_motion.glb --output dist/omnigod_skeletal_handoff
+
+      - name: Build five in-place mechanical skeletal gait animations
+        run: python tools/build_omnigod_mechanical_locomotion.py --source dist/omnigod_skeletal_handoff/omnigod_mechanical_rigid_skin.glb --output dist/omnigod_npc_locomotion
+
+      - name: Validate glTF clip roles, joint bounds and loop closure
+        run: python tools/validate_omnigod_mechanical_locomotion.py --source dist/omnigod_skeletal_handoff/omnigod_mechanical_rigid_skin.glb --output dist/omnigod_npc_locomotion
+
+      - name: Upload real keyed source animations (NOT a cooked UEFN NPC)
+        uses: actions/upload-artifact@v4
+        with:
+          name: AEONFALL-Omnigod-FiveWay-Skeletal-Source-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            dist/omnigod_npc_locomotion/
+            tools/blender_export_omnigod_fbx.py
+          if-no-files-found: error
+          retention-days: 30
