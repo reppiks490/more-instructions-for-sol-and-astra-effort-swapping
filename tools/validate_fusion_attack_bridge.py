@@ -52,7 +52,7 @@ def check_source(source: str) -> list[str]:
     for fragment in (
         "FuseInput <> AttackInput", "SeparateInput <> AttackInput",
         "AttackEnergyCost >= 1", "AttackEnergyCost <= 25",
-        "AttackCooldownSeconds >= 0.2", "AttackCooldownSeconds <= 10.0"
+        "AttackCooldownSeconds >= 2.0", "AttackCooldownSeconds <= 10.0"
     ):
         numeric_end = r"(?![0-9.])" if fragment[-1:].isdigit() else ""
         if not re.search(re.escape(fragment) + numeric_end, settings):
@@ -70,7 +70,7 @@ def check_source(source: str) -> list[str]:
         "AttackInput:input_trigger_device",
         "AttackOutput:trigger_device",
         "AttackEnergyCost:int = 10",
-        "AttackCooldownSeconds:float = 1.5",
+        "AttackCooldownSeconds:float = 2.0",
     ):
         if fragment not in source:
             errors.append("Missing safe default: " + fragment)
