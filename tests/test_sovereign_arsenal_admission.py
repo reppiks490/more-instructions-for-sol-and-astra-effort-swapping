@@ -200,5 +200,117 @@ class ServerAdmissionReferenceTests(unittest.TestCase):
         self.assertEqual(self.a.admit("SFA-001", evidence(T, at=9998, generation=2)).reason, "clock regression")
 
 
+    @staticmethod
+    def _state(oracle):
+        return (oracle.energy, dict(oracle.ready_at_ms),
+                oracle.shield_granted, oracle.mark,
+                oracle.last_event_sequence, oracle.last_server_time_ms)
+
+    def test_malformed_target_id_types_fail_closed_without_event_consumption(self):
+        for bad_id in (None, [], {}, 123, True):
+            oracle = ArsenalAdmissionOracle()
+            before = self._state(oracle)
+            result = oracle.admit("SFA-001", evidence(replace(T, target_id=bad_id),
+                                                      at=100, sequence=9))
+            self.assertFalse(result.admitted, bad_id)
+            self.assertEqual(result.reason, "malformed target identity")
+            self.assertEqual(self._state(oracle), before)
+            self.assertTrue(oracle.admit("SFA-001", evidence(T, at=100, sequence=9)).admitted)
+
+    def test_non_target_objects_and_forged_subclasses_are_rejected(self):
+        class ForgedTarget(RegisteredTarget):
+            pass
+
+        for bad_target in (None, object(), {}, [], ForgedTarget("MON-001")):
+            oracle = ArsenalAdmissionOracle()
+            before = self._state(oracle)
+            result = oracle.admit("SFA-001", evidence(bad_target))
+            self.assertFalse(result.admitted, type(bad_target))
+            self.assertEqual(result.reason, "malformed registered target")
+            self.assertEqual(self._state(oracle), before)
+
+    def test_target_boolean_type_confusion_cannot_bypass_protection(self):
+        bad_fields = (
+            ("registered_monster", "true"), ("alive", 1),
+            ("vulnerable", None), ("friendly", "false"),
+            ("player", 0), ("boss", "false"), ("companion", 0),
+            ("sovereign_army", "false"), ("invulnerable", 0),
+            ("status_immune", "false"), ("line_of_sight", 1),
+            ("within_cone", "true"),
+        )
+        for field, value in bad_fields:
+            oracle = ArsenalAdmissionOracle()
+            before = self._state(oracle)
+            result = oracle.admit("SFA-007", evidence(replace(T, **{field: value})))
+            self.assertFalse(result.admitted, field)
+            self.assertIn("malformed target boolean", result.reason)
+            self.assertEqual(self._state(oracle), before)
+
+    def test_authority_and_destination_boolean_type_confusion_is_rejected(self):
+        for field, value in (
+            ("owner_authorized", 1), ("controller_lease_valid", "true"),
+            ("destination_authored", 1), ("destination_clear", "true"),
+            ("destination_line_of_sight", None),
+        ):
+            oracle = ArsenalAdmissionOracle()
+            before = self._state(oracle)
+            result = oracle.admit("SFA-001", replace(evidence(T), **{field: value}))
+            self.assertFalse(result.admitted, field)
+            self.assertIn("malformed snapshot boolean", result.reason)
+            self.assertEqual(self._state(oracle), before)
+
+    def test_malformed_snapshot_fields_are_non_mutating(self):
+        for field, value in (
+            ("targets", [T]), ("equipped_class_id", None),
+            ("shield", True), ("max_shield", "100"),
+            ("generation", True), ("server_event_sequence", "1"),
+            ("server_time_ms", 0.0),
+            ("destination_distance_cm", float("nan")),
+            ("destination_distance_cm", True),
+        ):
+            oracle = ArsenalAdmissionOracle()
+            before = self._state(oracle)
+            result = oracle.admit("SFA-001", replace(evidence(T), **{field: value}))
+            self.assertFalse(result.admitted, field)
+            self.assertEqual(self._state(oracle), before)
+
+    def test_malformed_snapshot_instance_and_ability_id_are_denied(self):
+        for invalid_proof in (None, {}, object()):
+            oracle = ArsenalAdmissionOracle()
+            before = self._state(oracle)
+            result = oracle.admit("SFA-001", invalid_proof)
+            self.assertEqual(result.reason, "malformed authoritative snapshot")
+            self.assertEqual(self._state(oracle), before)
+        for invalid_ability in (None, [], {}, 1):
+            oracle = ArsenalAdmissionOracle()
+            before = self._state(oracle)
+            result = oracle.admit(invalid_ability, evidence(T))
+            self.assertEqual(result.reason, "malformed ability identity")
+            self.assertEqual(self._state(oracle), before)
+
+    def test_after_success_malformed_evidence_preserves_mark_and_cooldowns(self):
+        self.assertTrue(self.a.admit("SFA-001", evidence(T, at=100, sequence=1)).admitted)
+        before = self._state(self.a)
+        invalid = self.a.admit("SFA-001", evidence(replace(T, target_id=[]),
+                                                    at=2200, sequence=2))
+        self.assertFalse(invalid.admitted)
+        self.assertEqual(self._state(self.a), before)
+        self.assertTrue(self.a.admit("SFA-001", evidence(T, at=2200, sequence=2)).admitted)
+
+    def test_well_formed_rejected_los_still_consumes_authenticated_event(self):
+        before = self._state(self.a)
+        rejected = self.a.admit("SFA-001", evidence(replace(T, line_of_sight=False),
+                                                     at=100, sequence=7))
+        self.assertFalse(rejected.admitted)
+        self.assertEqual(self.a.energy, before[0])
+        self.assertEqual(self.a.ready_at_ms, before[1])
+        self.assertEqual(self.a.shield_granted, before[2])
+        self.assertEqual(self.a.mark, before[3])
+        self.assertEqual((self.a.last_event_sequence, self.a.last_server_time_ms),
+                         (7, 100))
+        self.assertEqual(self.a.admit("SFA-001", evidence(T, at=200, sequence=7)).reason,
+                         "duplicate/stale server event")
+
+
 if __name__ == "__main__":
     unittest.main()
