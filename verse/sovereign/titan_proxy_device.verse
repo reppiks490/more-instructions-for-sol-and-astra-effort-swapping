@@ -5,7 +5,8 @@ using { /Verse.org/Simulation }
 using { /Verse.org/Verse }
 
 TitanProxyDenied<localizes>:message = "Titan proxy unavailable: FUS-001 owner or binding rejected."
-TitanProxyReady<localizes>:message = "Experimental Titan proxy summoned. Player movement stays native."
+TitanProxyReady<localizes>:message = "Titan NPC behavior online. Player movement stays native."
+TitanProxyRequested<localizes>:message = "Titan NPC summon requested; awaiting verified behavior."
 TitanProxyReleased<localizes>:message = "Titan proxy released."
 
 # Disabled-by-default, research-only physical harness. This is NOT a native
@@ -133,6 +134,12 @@ aeonfall_titan_proxy_device := class(creative_device):
                 Self, AvatarController, Player, Character, AvatarController.Token
             )
             if (StartedEpoch := Attempt?):
+                # Enabling an NPC Spawner may itself create agents. Any
+                # pre-existing or unsolicited agent invalidates this session.
+                if (TitanSpawner.GetAgents().Length <> 0):
+                    FinishProxy()
+                    Feedback.Show(Player, TitanProxyDenied, 3.0)
+                    return
                 set Epoch = StartedEpoch
                 set ProxyOwner = option{Player}
                 set ProxyCharacter = option{Character}
@@ -141,7 +148,7 @@ aeonfall_titan_proxy_device := class(creative_device):
                 TitanSpawner.Enable()
                 spawn{SpawnProxy(StartedEpoch)}
                 spawn{AwaitSpawn(StartedEpoch)}
-                Feedback.Show(Player, TitanProxyReady, 3.0)
+                Feedback.Show(Player, TitanProxyRequested, 3.0)
                 return
         Feedback.Show(Agent, TitanProxyDenied, 3.0)
 
@@ -164,13 +171,61 @@ aeonfall_titan_proxy_device := class(creative_device):
             Spawned := TitanSpawner.SpawnAt(Position, false)
             if (Runtime := Service?):
                 if (Runtime.CompleteSpawn(ExpectedEpoch, Spawned)?):
-                    return
+                    # GetAgents is a native independent count/identity check,
+                    # not solely the async return. Enabling the spawner can
+                    # also automatically spawn a character; reject that.
+                    Agents := TitanSpawner.GetAgents()
+                    if:
+                        Agents.Length = 1
+                        SpawnedAgent := Spawned?
+                        OnlyAgent := Agents[0]
+                        OnlyAgent = SpawnedAgent
+                    then:
+                        spawn{AwaitBehaviorReady(ExpectedEpoch, SpawnedAgent)}
+                        return
         # An invalid/late/failed result must not survive teardown or attach
         # to a new generation. Begin refuses new requests while in flight.
         TitanSpawner.Disable()
         TitanSpawner.DespawnAll(false)
         if (Runtime := Service?, Runtime.IsCurrentEpoch(ExpectedEpoch)?):
             FinishProxy()
+
+    AwaitBehaviorReady(ExpectedEpoch:int, SpawnedAgent:agent)<suspends>:void=
+        # SpawnAt success alone does not establish that npc_behavior ever
+        # started, bound, or acquired GetNavigatable. Fail closed on timeout.
+        var Attempts:int = 0
+        loop:
+            Sleep(0.25)
+            if (not Running?):
+                return
+            if (Runtime := Service?):
+                if (not Runtime.IsCurrentEpoch(ExpectedEpoch)?):
+                    return
+                if (Runtime.IsBehaviorReady(SpawnedAgent)?):
+                    if (Owner := ProxyOwner?):
+                        Feedback.Show(Owner, TitanProxyReady, 3.0)
+                    return
+            set Attempts += 1
+            if (Attempts >= 20):
+                FinishProxy()
+                return
+
+    # Observes every native spawner agent, not just the SpawnAt return.
+    # An enabled spawner can auto-spawn NPCs even without SpawnAt.
+    UnexpectedSpawnCount(Runtime:aeonfall_titan_proxy_command_runtime)<transacts>:logic=
+        AllAgents := TitanSpawner.GetAgents()
+        if (AllAgents.Length > 1):
+            return true
+        if (Runtime.HasNpc()?):
+            if (AllAgents.Length <> 1):
+                return true
+            if (OnlyAgent := AllAgents[0]):
+                if (not Runtime.IsOwnedNpc(OnlyAgent)?):
+                    return true
+        else:
+            if (AllAgents.Length > 0):
+                return true
+        false
 
     OnAdvance(Agent:agent):void=
         if (Player := ValidOwner[Agent], Runtime := Service?):
@@ -213,7 +268,9 @@ aeonfall_titan_proxy_device := class(creative_device):
             if (not Running?):
                 return
             if (Owner := ProxyOwner?, Runtime := Service?):
-                if (not Runtime.IsAuthorized()?):
+                if (not Runtime.IsAuthorized()? or UnexpectedSpawnCount(Runtime)?):
+                    # Fail closed on unsolicited spawn, disappearing NPC,
+                    # owner revocation or an invalid generation.
                     FinishProxy()
 
     FinishProxy():void=
