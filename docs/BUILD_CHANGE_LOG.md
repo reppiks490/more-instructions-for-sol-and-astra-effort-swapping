@@ -1,5 +1,19 @@
 # Build change log
 
+## 2026-11-01 — Omnigod: deterministic original 3D manifestation source
+
+Built a 13-piece original, crimson-violet machine-demon static source-geometry
+pack (GLB/OBJ/MTL and full assembled preview) from the audited Ossuary mesh
+encoder. A dedicated source-artifact workflow now validates watertight geometry,
+fixed source/Unreal coordinate mappings, real exported material/part files,
+SHA-256 inventories, repeatability, safe collision policy and honest native
+proof boundaries. The independent validator and mutation tests run in CI.
+The production handoff describes converting the blockout into a rigged FBX
+Custom NPC, with separate instigator-only player fusion and Everyone-visible
+replaceable NPC Sequencer bindings. No native UEFN import, rig, NPC possession
+or Launch Session has been claimed.
+
+
 ## 2026-11-01 — Living World: enforce bounded wave retirement
 
 The invasion NPC adapter now rejects `DespawnOnRelease = false` at startup
