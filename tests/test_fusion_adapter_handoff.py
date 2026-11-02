@@ -137,5 +137,27 @@ class FusionHandoffGuards(unittest.TestCase):
         self.assertTrue(self.check(arsenal=on_rend))
 
 
+    def test_damage_cannot_escape_successful_tryrend_branch(self):
+        outdented = ARSENAL.replace(
+            "            Target.Damage(18.0)",
+            "        Target.Damage(18.0)",
+        )
+        self.assertNotEqual(outdented, ARSENAL)
+        self.assertTrue(self.check(arsenal=outdented))
+
+    def test_missing_native_rend_callback_must_fail_closed(self):
+        no_handler = ARSENAL.split("    OnRend(", 1)[0]
+        self.assertNotEqual(no_handler, ARSENAL)
+        self.assertTrue(self.check(arsenal=no_handler))
+
+    def test_missing_authorized_damage_must_fail_closed(self):
+        no_damage = ARSENAL.replace(
+            "            Target.Damage(18.0)",
+            "            return",
+        )
+        self.assertNotEqual(no_damage, ARSENAL)
+        self.assertTrue(self.check(arsenal=no_damage))
+
+
 if __name__ == "__main__":
     unittest.main()
