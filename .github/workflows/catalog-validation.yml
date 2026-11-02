@@ -224,6 +224,11 @@ jobs:
       - name: Validate Ossuary checkpoint geometry and respawn source
         run: python tools/validate_slice_checkpoints.py
 
+      - name: Validate Ossuary gated encounter admission and cleanup
+        run: |
+          python tools/validate_slice_gates.py
+          python -m unittest tests.test_slice_001_gates -v
+
       - name: Validate player loadout and unique sovereign integration
         run: |
           python tools/validate_player_loadout.py
