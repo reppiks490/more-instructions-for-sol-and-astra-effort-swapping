@@ -67,6 +67,19 @@ class FusionAttackSourceTests(unittest.TestCase):
     def test_attack_cooldown_reset_on_exit(self):
         self.mutate("set LastAttackAt = -1000.0", "set LastAttackAt = 0.0")
 
+    def test_receipt_issued_after_upstream_debit(self):
+        self.mutate(
+            "Issued := State.IssueAttackReceipt(Self, Player, Token)",
+            "Issued := true",
+        )
+
+    def test_receipt_acknowledgement_required(self):
+        self.mutate("Issued?", "true?")
+
+    def test_cooldown_cannot_undercut_reaver(self):
+        self.mutate("AttackCooldownSeconds >= 2.0",
+                    "AttackCooldownSeconds >= 0.2")
+
     def test_single_physical_producer(self):
         self.assertTrue(guard.check_source(
             self.source + "\n    Bad():void=\n        AttackOutput.Trigger(Player)\n"
