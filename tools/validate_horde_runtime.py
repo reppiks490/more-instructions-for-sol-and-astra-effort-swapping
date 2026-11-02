@@ -19,6 +19,8 @@ def main() -> int:
             "Secondary = aeonfall_horde_trait.None", "ClearRegion", "RemoveBrood",
             "set ApexEventOpen = KeptEvents", "set RegionalBiomass = KeptBiomass",
             "DeltaSeconds <= 0.0", "horde.corpse_expired",
+            "HasBroodAtLeastTier(RegionId:string, MinimumTier:int)",
+            "Member.RegionId = RegionId, Member.Tier >= MinimumTier",
         ],
         "verse/npcs/horde_ecology_adapter_device.verse": [
             "Spawner.SpawnedEvent.Subscribe", "Character.EliminatedEvent().Subscribe",
@@ -51,7 +53,11 @@ def main() -> int:
         "negative tick ignored", "corpse live before expiry", "expiry", "ID never reused",
         "region brood cleanup", "region corpse cleanup", "region biomass cleanup",
         "unrelated region preserved", "brood cap", "corpse cap", "expired slot reusable",
-        "invalid policy rejected",
+        "invalid policy rejected", "tier-I query", "tier-II initially absent",
+        "tier-IV query", "tier-V initially absent", "substrate 599",
+        "substrate 600", "tier-V query", "foreign tier isolation",
+        "invalid minimum tier", "tier above maximum rejected",
+        "cleared region tier absent", "foreign region tier preserved",
     }
     for label in sorted(coverage - labels):
         errors.append(f"missing in-editor assertion: {label}")

@@ -1,3 +1,12 @@
+## 2026-11-01 — Living World: expanded in-editor evolved-horde assertions
+
+The existing development-only horde Verse harness now asserts living-brood
+queries at Tiers I, IV and V, the cumulative 599/600 biomass boundary,
+regional isolation, invalid-tier refusal and post-clear teardown. The static
+horde validator requires these scenarios in CI; physical execution and native
+Verse compilation still require a private UEFN Launch Session. No actors,
+spawners, encounter directors or persistence were added by this test upgrade.
+
 ## 2026-11-01 — Living World: horde physical teardown ownership
 
 The existing horde ecology adapter now cancels its spawn/death subscriptions
