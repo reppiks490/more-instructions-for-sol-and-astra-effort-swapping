@@ -97,6 +97,11 @@ def audit(sources: dict[str, str]) -> list[str]:
     need(titan.get("native_evidence", {}).get("uefn_compile") == "not_run",
          "Titan native compilation fabricated")
 
+    for key in ("native_verse_compile", "fortnite_launch_session",
+                "physical_editor_binding", "publication"):
+        need(contract.get("evidence", {}).get(key) == "not_run",
+             "unverified fusion native evidence: " + key)
+
     authority = uncomment(sources["authority"])
     has("authority", "AEONFALLSovereignAuthorityLease:weak_map(session,", "missing authority lease")
     has("authority", "Enabled:logic = false", "authority default must deny")
