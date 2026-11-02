@@ -156,7 +156,8 @@ class MobileAdmissionTests(unittest.TestCase):
     def test_budget_overload_drops_effect(self):
         req = lambda ident, tier, voices: {"id": ident, "tier": tier,
                 "peak_audio_voices": voices, "mode": "FUS-001",
-                "lease_valid": True, "generation": 1, "owner_scope": "trusted_owner"}
+                "lease_valid": True, "generation": 1, "current_generation": 1,
+                "region": "REG-001", "region_loaded": True, "owner_scope": "trusted_owner"}
         outcome = m.admit([req("SFA-001", "near", 1), req("SFA-011", "near", 1),
                            req("SFA-012", "near", 1)])
         self.assertEqual(len(outcome["accepted"]), 2)
@@ -166,7 +167,8 @@ class MobileAdmissionTests(unittest.TestCase):
     def test_overlap_audio_budget(self):
         req = lambda ident: {"id": ident, "tier": "near", "peak_audio_voices": 2,
                              "mode": "FUS-001", "lease_valid": True,
-                             "generation": 1, "owner_scope": "trusted_owner"}
+                             "generation": 1, "current_generation": 1, "region": "REG-001",
+                             "region_loaded": True, "owner_scope": "trusted_owner"}
         result = m.admit([req("SFA-002"), req("SFA-005")])
         self.assertEqual(len(result["accepted"]), 1)
         self.assertEqual(result["used"]["audio_voices"], 2)
@@ -176,16 +178,32 @@ class MobileAdmissionTests(unittest.TestCase):
                              ("owner_scope", "anonymous"), ("mode", "FUS-002"),
                              ("id", "SFA-999")):
             req = {"id": "SFA-001", "tier": "near", "peak_audio_voices": 1,
-                   "mode": "FUS-001", "lease_valid": True, "generation": 1,
+                   "mode": "FUS-001", "lease_valid": True, "generation": 1, "current_generation": 1,
+                   "region": "REG-001", "region_loaded": True,
                    "owner_scope": "trusted_owner"}
             req[field] = value
             with self.subTest(field=field), self.assertRaises(ValueError):
                 m.admit([req])
 
+    def test_stale_generation_unloaded_region_and_forged_audio_denied(self):
+        req = {"id": "SFA-002", "tier": "near", "peak_audio_voices": 2,
+               "mode": "FUS-001", "lease_valid": True, "generation": 2,
+               "current_generation": 2, "region": "REG-001",
+               "region_loaded": True, "owner_scope": "trusted_owner"}
+        for field, value in (("current_generation", 1), ("region_loaded", False),
+                             ("peak_audio_voices", 1), ("region", "REG-999")):
+            changed = dict(req, **{field: value})
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                m.admit([changed])
+        with self.assertRaises(ValueError):
+            m.admit([req, dict(req, region="REG-002")])
+
     def test_far_is_caption_only(self):
         req = {"id": "SFA-011", "tier": "far", "peak_audio_voices": 1,
                "mode": "FUS-001", "lease_valid": True,
-               "generation": 1, "owner_scope": "trusted_owner"}
+               "generation": 1, "current_generation": 1,
+               "region": "REG-001", "region_loaded": True,
+               "owner_scope": "trusted_owner"}
         result = m.admit([req])
         self.assertEqual(result["used"]["systems"], 0)
         self.assertEqual(result["rejected"][0]["reason"], "far_noncolor_hud_fallback_only")
