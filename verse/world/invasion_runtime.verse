@@ -114,6 +114,7 @@ aeonfall_invasion_runtime := class():
     Start(InvasionId:string)<transacts>:logic=
         # Retain the session service outside the negated admission predicate.
         ConflictRuntime := GetAEONFALLFactionConflictRuntime()
+        WorldEventRuntime := GetAEONFALLWorldEventRuntime()
         if:
             Definition := GetAEONFALLInvasionRegistry().Get[InvasionId]
             RegionState := GetAEONFALLRegionRuntime().GetState[Definition.RegionId]
@@ -123,6 +124,7 @@ aeonfall_invasion_runtime := class():
             HasRequiredAggressorInfluence(Definition, RegionState)?
             HasRequiredHordeSubstrate(Definition)?
             not ConflictRuntime.HasActiveInRegion(Definition.RegionId)?
+            not WorldEventRuntime.HasActiveInRegion(Definition.RegionId)?
             not HasActiveInRegion(Definition.RegionId)?
             not RegionState.ActiveEventIds.Find[InvasionId]
         then:
