@@ -11,6 +11,19 @@ remain unverified.
 
 # Build change log
 
+## 2026-11-01 — Architect + QA: cross-module paid-attack validation
+
+Integrated the Architect conditional receipt validator after Avatar/Arsenal's
+transactional Reaver handoff was merged. Verse Static Validation now tests
+the exact owner/generation receipt issue-and-consume ordering, secondary
+energy debit and damage-after-approval constraints on current source, with
+synthetic mutation regressions. Corrected the validator to inspect both
+**Arsenal runtime TryRend** and **Arsenal device OnRend** rather than
+mistakenly searching only one source file. This is cross-module source
+verification, not Epic native compilation, hit confirmation, or approval to
+enable damage.
+
+
 ## 2026-11-01 — Fusion Reaver: transactional attack-receipt handoff
 
 Wired the Architect's canonical FUS-001 one-use paid-attack receipt between
