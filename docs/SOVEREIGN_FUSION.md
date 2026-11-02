@@ -4,42 +4,45 @@ This opt-in integration extends the existing **UNI-001** sovereign authority.
 It does not create a new canonical class, grant a public unlock, change the
 single persistent player profile, or modify Transcendent Zero/ Axiom Heart.
 
-## Step 1: authoritative session fusion
+## Step 1: integrate the canonical fusion architect state
 
-`verse/sovereign/sovereign_fusion_runtime.verse` introduces a session-scoped
-controller lease and armor-only state machine. A request must originate from
-the single acquired controller, contain a live native player, and pass the
-**existing** `aeonfall_sovereign_authority_device.CanWield` check. A single
-session owner is latched and cannot be replaced by join order, team, display
-name, a public button, or ordinary class progression.
+The canonical FUS-001/FUS-002 phase machine is owned by
+`verse/sovereign/fusion_state_runtime.verse` in **Fusion Architect PR #42**.
+This follow-on adapter intentionally does NOT introduce a second owner or
+alternative phase machine. It acquires the canonical single-controller lease
+using the existing native `aeonfall_sovereign_authority_device`.
+`BeginActivation(Self, Player, "FUS-001")` is the only admission path;
+FUS-002 stays explicitly disabled until a supported Titan control design
+passes native verification.
 
-The runtime admits one armor manifestation at a time, increments a generation
-token for each admission, enforces 15–180 seconds and 30–120 starting energy,
-and requires the prior cooldown to expire before re-entry. All energy spending
-is atomic and token-bound (1–25 energy per request). Revoked, expired, swapped
-or interrupted sessions must end and enter a 30–300 second cooldown. No
-persistent progression changes. No claim of unlimited combat damage, immunity,
-or native NPC possession is made.
+`verse/sovereign/sovereign_fusion_runtime.verse` is a separate *budget
+ledger only*, not an alternative fusion owner/phase state. It persists per
+Verse session, grants 30–120 initial energy for 15–180 seconds, enforces
+a 30–300 second cooldown, and accepts individual 1–25 point spend requests
+only after `State.IsAuthorizedActive` checks the exact owner, leased
+controller and generation. Controller replacement does not reset cooldown.
+No new persistent player flags or canonical unlocks are introduced.
 
 ## Step 2: native presentation and lifecycle bridge
 
-`verse/sovereign/sovereign_fusion_device.verse` subscribes to two distinct
-input triggers. After successful authority/runtime admission it applies a
-dedicated **visual_effect_powerup_device** aura to the owner, pushes a
-dedicated **gameplay_camera_orbit_device** onto that player's camera stack,
-and plays an instigator-only **cinematic_sequence_device**. The owner can
-separate with the second input. A 1-second maintenance loop rechecks native
-authority, generation, original live character and finite energy. Timeouts,
-owner disconnect, death/character replacement, revocation and device end
-terminate the fusion and clean up only this device's camera/aura/cinematic.
-Effects are requests to native devices and cannot by themselves prove that
-the final cosmetic attachment worked.
+`verse/sovereign/sovereign_fusion_device.verse` subscribes to two separate
+player inputs. After successful canonical FUS-001 admission and resource
+reservation, it requests a dedicated visual powerup effect, orbit camera and
+instigator-only cinematic for the verified owner. The powerup's
+`HasEffect[Player]` provides a limited native acknowledgement before
+`ConfirmActivated`, but the device API may recognize other effects of the
+same type: dedicate the asset exclusively and verify real-client visuals.
 
-This is an **Armor Fusion foundation**: it makes a normal player visually
-glow, changes camera framing, and provides a controlled presentation handoff.
-It does **not** import the concept's skeletal armor, replace the player's
-native cosmetic mesh or grant physical NPC control. The Titan Fusion
-proxy-control experiment must remain separate and disabled until validated.
+A one-second loop checks that the canonical fusion remains authorized,
+the native character has not changed, and the budget has not expired. It
+spends one point per tick. On any rejection, expiry, owner separation,
+disconnect, defeat, revocation or device end, the adapter restores its
+owned physical presentation BEFORE completing/aborting canonical fusion
+state. On separation it also applies the resource cooldown.
+
+This is **not a custom imported playable armor mesh, arbitrary outfit swap,
+NPC possession, or validated Titan Fusion**. No actual editor assets,
+Character Definitions, imported meshes or native tests are claimed.
 
 ## Required editor setup before enabling
 
