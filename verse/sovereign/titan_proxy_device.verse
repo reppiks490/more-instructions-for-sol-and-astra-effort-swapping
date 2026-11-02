@@ -329,11 +329,8 @@ aeonfall_titan_proxy_device := class(creative_device):
                 # is intentionally not claimed to be a true NPC head POV.
                 Position := NpcCharacter.GetTransform().Translation + ProxyCameraOffset
                 Rotation := ProxyCamera.GetTransform().Rotation
-                if (ProxyCamera.TeleportTo[Position, Rotation]):
-                    # Keep the leased camera stack until native teardown.
-                    Print("Titan camera position updated.")
-                else:
-                    # Camera failure must not leave the player's view stolen.
+                # Camera failure must not leave the player's view stolen.
+                if (not ProxyCamera.TeleportTo[Position, Rotation]):
                     ReleaseProxyCamera()
                     return
             else:
