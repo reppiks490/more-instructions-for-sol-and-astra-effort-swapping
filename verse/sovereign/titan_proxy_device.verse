@@ -305,11 +305,17 @@ aeonfall_titan_proxy_device := class(creative_device):
             Runtime.IsBehaviorReady(Npc)?
             Owner := ProxyOwner?
             Owner.IsActive[]
+            NpcCharacter := Npc.GetFortCharacter[]
+            NpcCharacter.IsActive[]
             ProxyCamera.IsValid[]
         then:
-            ProxyCamera.AddTo(Owner)
-            set CameraOwner = option{Owner}
-            spawn{TrackProxyCamera(ExpectedEpoch, Npc, Owner)}
+            # Never push an unpositioned camera onto the player's stack.
+            Position := NpcCharacter.GetTransform().Translation + ProxyCameraOffset
+            Rotation := ProxyCamera.GetTransform().Rotation
+            if (ProxyCamera.TeleportTo[Position, Rotation]):
+                ProxyCamera.AddTo(Owner)
+                set CameraOwner = option{Owner}
+                spawn{TrackProxyCamera(ExpectedEpoch, Npc, Owner)}
 
     TrackProxyCamera(ExpectedEpoch:int, Npc:agent, Owner:player)<suspends>:void=
         loop:
