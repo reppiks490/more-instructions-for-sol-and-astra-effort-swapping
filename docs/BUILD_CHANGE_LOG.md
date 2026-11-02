@@ -1,3 +1,17 @@
+## 2026-11-01 — Avatar: opt-in NPC-tracking fixed-point camera research
+
+Added a disabled-by-default Fixed Point Camera adapter to the experimental
+Titan proxy. Only the exact FUS-001 owner with a behavior-acknowledged,
+epoch-bound NPC may receive the camera stack addition; a bounded 0.15s
+camera coroutine attempts to follow the NPC from a world-space offset,
+retaining editor rotation. On dismissal, stale epoch, death, disconnect,
+failed teleport or shutdown, the camera is removed from the owner's stack;
+never AddToAll/RemoveFromAll. The existing FUS-001 orbit camera and player
+movement remain untouched. Static camera source mutations and a deterministic
+owner/epoch lifecycle policy model cover multi-player isolation. UEFN native
+compilation, actual camera framing, teleport timing, multiplayer replication
+and any NPC possession remain unverified. FUS-002 stays disabled.
+
 ## 2026-11-01 — Avatar: Titan pending-spawn inventory reconciliation
 
 Epic's suspending NPC SpawnAt can expose its not-yet-returned agent through
