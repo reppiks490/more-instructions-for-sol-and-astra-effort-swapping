@@ -16,10 +16,10 @@ SOURCE = ROOT / "verse/sovereign/sovereign_fusion_device.verse"
 
 def method(source: str, name: str) -> str:
     source = "\n".join(line.split("#", 1)[0] for line in source.splitlines())
-    match = re.search(rf"^    {re.escape(name)}\\(", source, re.M)
+    match = re.search(rf"^    {re.escape(name)}\(", source, re.M)
     if not match:
         return ""
-    next_method = re.search(r"^    [A-Za-z_][A-Za-z_0-9]*\\(", source[match.end():], re.M)
+    next_method = re.search(r"^    [A-Za-z_][A-Za-z_0-9]*\(", source[match.end():], re.M)
     return source[match.start():match.end() + next_method.start()] if next_method else source[match.start():]
 
 
