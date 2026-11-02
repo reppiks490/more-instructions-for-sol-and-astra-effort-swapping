@@ -23,6 +23,17 @@ remain unverified.
 
 # Build change log
 
+## 2026-11-01 — Fusion Architect: integrated paid Reaver CI gate and cooldown
+
+Added cross-file CI checks after PR #64 integrated paid receipt issuance and
+consumption. Source validators now inspect both Arsenal's runtime transaction
+and native-device callback, while mutation tests reject skipped/reordered
+receipts, missing debits and unsafe native damage. Avatar's minimum/default
+attack cooldown is now 2 seconds to match Reaver. Preserves merged Titan,
+world, cinematic and other concurrent work. This is source-only evidence,
+not actual UEFN compilation, binding, LOS or multiplayer certification.
+
+
 ## 2026-11-01 — Runtime Forge: native input and volume subscription ownership
 
 Added owned and canceled subscriptions to the self, targeted and position

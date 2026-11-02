@@ -98,6 +98,11 @@ def check_sources(policy: dict, runtime: str, device: str) -> list[str]:
                 "Now := GetSimulationElapsedTime()", f"Now >= Last{name[3:]}At + {delay}",
                 f"Budget.Spend[Device, Player, Token, State, {cost}]",
                 f"set Last{name[3:]}At = Now")
+    ordered(method(runtime, "TryRend"), "paid Reaver receipt",
+            "Now >= LastRendAt + 2.0",
+            "State.ConsumeAttackReceipt[Device, Player, Token]",
+            "Budget.Spend[Device, Player, Token, State, 5]",
+            "set LastRendAt = Now")
     for part in ("set MarkToken = Token", "set MarkUntil = Now + 4.0",
                  "MarkToken = Token", "GetSimulationElapsedTime() < MarkUntil",
                  "PreviouslyGranted + Amount <= 40.0",
