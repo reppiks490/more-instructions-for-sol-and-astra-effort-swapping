@@ -521,7 +521,7 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "set BehaviorTerminated = false" in begin,
         "if (not BehaviorTerminated?, BoundNpc(Agent)?):" in acknowledge,
         "set BehaviorTerminated = true" in withdraw,
-        "if (not BehaviorTerminated?, BehaviorReady?, BoundNpc(Agent)?):" in ready,
+        "if (not BehaviorTerminated?, BehaviorReady?, BoundNpc(Agent)?, BehaviorPulseFresh()?):" in ready,
         "not BehaviorTerminated?" in movement,
         "not BehaviorTerminated?" in move,
         "not BehaviorTerminated?" in cue,
