@@ -384,6 +384,23 @@ class SourceObservationGateTests(unittest.TestCase):
                      ("actor-instance-0", "REG-001", True)):
             self.assertEqual(self.gate.retire_actor(*args), 0)
 
+    def test_owner_loss_from_retired_region_revokes_other_region_too(self):
+        # World-stream teardown cannot hide a trusted global owner revocation.
+        self.assertTrue(self.stage(plan(sequence=1)))
+        self.assertTrue(self.stage(plan(sequence=2),
+                                   bindings(region="REG-002")))
+        self.assertEqual(self.gate.retire_region("REG-001"), 1)
+        loss = replace(observe(sequence=1), owner_authorized=False)
+        denied = self.gate.resolve(loss)
+        self.assertFalse(denied.accepted)
+        self.assertIn("revoked", denied.reason)
+        self.assertEqual(self.gate.active_count, 0)
+        self.assertFalse(self.gate.resolve(
+            observe(sequence=2, region="REG-002")).accepted)
+        self.assertFalse(self.gate.stage(
+            plan(sequence=3), bindings(region="REG-002"),
+            opened_ms=100, deadline_ms=500))
+
     def test_unload_after_first_pulse_cancels_second_pulse(self):
         self.assertTrue(self.stage(plan("SFA-005")))
         first = self.gate.resolve(observe(pulse=0))
