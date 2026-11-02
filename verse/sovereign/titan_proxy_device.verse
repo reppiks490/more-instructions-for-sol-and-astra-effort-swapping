@@ -93,6 +93,7 @@ aeonfall_titan_proxy_device := class(creative_device):
             AdvanceInput.PressedEvent.Subscribe(OnAdvance),
             AttackCueInput.PressedEvent.Subscribe(OnAttackCue),
             DismissInput.PressedEvent.Subscribe(OnDismiss),
+            TitanSpawner.EliminatedEvent.Subscribe(OnNpcEliminated),
             GetPlayspace().PlayerRemovedEvent().Subscribe(OnPlayerLeft)
         }
         race:
@@ -191,6 +192,16 @@ aeonfall_titan_proxy_device := class(creative_device):
         if (Player := ValidOwner[Agent]):
             FinishProxy()
             Feedback.Show(Player, TitanProxyReleased, 2.0)
+
+    OnNpcEliminated(Result:device_ai_interaction_result):void=
+        if:
+            Target := Result.Target?
+            Runtime := Service?
+            Runtime.IsOwnedNpc(Target)?
+        then:
+            # Terminal NPC loss invalidates command/owner state before any
+            # dedicated-spawner reset; duplicate death callbacks are ignored.
+            FinishProxy()
 
     OnPlayerLeft(Player:player):void=
         if (Owner := ProxyOwner?, Owner = Player):
