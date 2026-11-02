@@ -1,0 +1,13 @@
+# Sovereign fusion — native trust-boundary ledger (source-only)
+
+Architect coordination: #37; universe-first parent #84; systems #87; independent QA #89 and canonical monster registry follow-up #104. This document and its audit are **additional to** the cross-lane perimeter validator, not a replacement for native UEFN verification or the 840-entity/13-region/13-system source gate.
+
+Run `python tools/audit_fusion_native_trust.py --json dist/fusion_native_trust.json`. It exits zero for a successful **inspection**, even when it reports unresolved blockers. `--require-source-trust` exits 2 while any blocker remains; this is intentionally **not** the routine source-integrity CI gate. Tests: `python -m unittest tests.test_fusion_native_trust -v`.
+
+The audit emits stable `FNT-001`–`FNT-009` IDs and specific owner handoffs: creator account provisioning, native enablement, FUS-002 isolation, trigger/receipt correlation, authoritative canonical MON actor binding, cover/LOS, a non-editable universe-first Arsenal gate, cooldown parity, and actual UEFN editor proof. In particular, `trigger_device.TriggeredEvent` provides an instigator, **not** a per-request signed receipt. The current one-use paid receipt prevents free or duplicate damage but cannot guarantee that an unrelated trigger does not preempt a legitimate outstanding receipt. An exact request correlation or an exclusively trusted server-owned path must be designed and tested before native activation.
+
+The actor registry currently checks nonempty canonical IDs, while Arsenal checks a `MON-` prefix; registration and native damage require catalog membership and exact `MON-[0-9]{3,4}` ASCII syntax. A valid string alone is not authoritative actor registration. The registry must bind canonical ID, runtime key, live `agent`/`fort_character`, generation and settlement target. Independently test target despawn, substitution, LOS/cover, two-client input, replay, and delayed callbacks.
+
+No source-only change should claim native proof or enable owner access. FUS-001 and FUS-002 stay disabled. QA must collect real UEFN compile, editor binding, two-client Launch Session, Fortnite-mobile input/performance, and actual cooked-memory calculation against 300 MiB **after** universe-wide source completion. Source audit results do not count as reviewed `SYS-OWNER-OMNIGOD-FUSION` source-pack approval.
+
+The audit deliberately leaves Avatar, Arsenal, Runtime Forge, Cinematics, and QA source untouched; those owners should implement their assigned remediations on separate branches and coordinate in #37/#87/#89/#104. Do not open a new PR until the external automatic Codex review trigger is removed or proven disabled. No Codex, spending, branch deletion, or automation mutation is permitted.
