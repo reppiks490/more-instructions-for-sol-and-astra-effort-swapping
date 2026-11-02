@@ -86,7 +86,17 @@ def validate(contract: dict, existing: dict) -> list[str]:
                              ("shield_restore_cap", 0, 20), ("effect_duration_seconds", 0, 8)):
             n = ability.get(k)
             require(type(n) in (int, float) and low <= n <= high, f"{aid}: invalid {k}")
-        if not all(type(ability.get(k)) in (int, float) for k in ("damage_each", "max_targets", "max_pulses", "bonus_damage_total")):
+        # Counts and debits are discrete native transactions, not fractional
+        # Python floats. Include Avatar's upstream Reaver charge in the cap.
+        for discrete in ("energy_cost", "upstream_energy_cost", "max_targets",
+                         "damage_each", "max_pulses", "bonus_damage_total",
+                         "shield_restore_cap"):
+            require(type(ability.get(discrete)) is int, f"{aid}: {discrete} must be integer")
+        spent = ability.get("energy_cost", 0) + ability.get("upstream_energy_cost", 0)
+        require(spent <= resource.get("max_spend_per_transaction", 25),
+                f"{aid}: combined upstream plus arsenal debit exceeds cap")
+        if not all(type(ability.get(k)) is int for k in
+                   ("damage_each", "max_targets", "max_pulses", "bonus_damage_total")):
             continue
         damage = ability["damage_each"] * ability["max_targets"] * ability["max_pulses"] + ability["bonus_damage_total"]
         require(damage <= 54, f"{aid}: per-request damage exceeds cap")
@@ -96,6 +106,20 @@ def validate(contract: dict, existing: dict) -> list[str]:
         require(ability.get("requires_line_of_sight") is (offensive or aid == "SFA-010"), f"{aid}: cover/LOS contract mismatch")
         require(ability.get("shield_generation_pool") == ("shared_40" if ability.get("shield_restore_cap", 0) else None), f"{aid}: shield pool bypass")
         require(bool(ability.get("counterplay")) and bool(ability.get("telegraph")), f"{aid}: telegraph/counterplay absent")
+        notes = ability.get("notes", {})
+        if aid == "SFA-004":
+            require(notes.get("no_forced_displacement") is True,
+                    "SFA-004: cannot grant forced displacement")
+        if aid == "SFA-006":
+            require(notes.get("max_tempo_multiplier") == 1.15,
+                    "SFA-006: native tempo ceiling drift")
+        if aid == "SFA-010":
+            require(notes.get("requires_authored_destination") is True
+                    and notes.get("no_wall_phasing") is True,
+                    "SFA-010: bounded authored anchor and no wall phasing required")
+        if aid == "SFA-011":
+            require(notes.get("threshold_health_fraction_max") == 0.25,
+                    "SFA-011: finisher threshold drift")
         assets = ability.get("asset_plan", {})
         require(isinstance(assets, dict) and REQUIRED_ASSETS <= set(assets) and all(isinstance(assets.get(k), str) and assets[k].startswith(aid + "-") for k in REQUIRED_ASSETS), f"{aid}: missing distinct asset plans")
     if len(abilities) >= 3:
