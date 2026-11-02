@@ -33,3 +33,57 @@ Source validation: `python tools/validate_fusion_architecture.py` and `python -m
 Before enabling any native fusion, record the exact source SHA, editor version and successful Verse compile; verify real owner reference provisioning and a physical controller in UEFN; run two-client Launch Sessions for authorization, character lifecycle and replication; prove every partial-effect teardown; and profile World Partition/HLOD transitions, streaming, Spatial Profiler, Memory Snapshot and platform runtime memory under full fusion VFX. Include readable telegraphs, audio alternatives and photosensitivity-safe fallback. Publication remains blocked until native evidence and current Epic feature/API eligibility are verified.
 
 No invented `.uefnproject`, `.uasset`, `.umap`, character mesh or editor evidence is supplied here. No native effect adapters are implemented in this PR. The runtime is a stable integration contract, **not a playable transformation**.
+
+## Integration handoff and release evidence (2026-11-01)
+
+**Architect-owned contract; no native entitlement granted by this document.**
+Avatar PR #48 owns its attack-input bridge and Titan feasibility study. Arsenal
+owns hit validation and checked resource transactions. Cinematics owns
+instigator-only effects and reduced-intensity alternatives. QA owns independent
+source-mutation and two-client Launch Session acceptance. No loop should edit
+another loop's device adapter without coordination in issue #37.
+
+### Handoff requirements
+
+1. **Authority:** every activation and attack request must originate from the
+   leased controller, verified live native owner, exact active character, and
+   current FUS-001 generation. Never infer authority from cosmetic identity,
+   display name, a trigger firing, or an NPC proxy.
+2. **Activation:** reserve budget, apply native effects, confirm the dedicated
+   effect acknowledgement, then commit Active. Partial failure must unwind
+   physical effects before aborting. A trigger is a request, never evidence
+   of damage, fusion success, or successful possession.
+3. **Separation:** disable further attack inputs, cancel outstanding callbacks,
+   restore camera/effects/cinematics on the original character, then finalize
+   the canonical phase. Test disconnect and respawn between every transition.
+4. **Arsenal:** bind Avatar's AttackOutput only to a range-, target-, team-,
+   and faction-checked server-side damage adapter. Revalidate token and
+   resource budget at acceptance; reject repeated inputs and stale callbacks.
+5. **Cinematics:** pair crimson/violet telegraphs with shapes, motion or audio
+   cues that remain legible without color; provide reduced-flash and
+   reduced-intensity alternatives. Effects must be cancellable on teardown.
+
+### Native acceptance evidence table (all unverified until captured)
+
+| Gate | Evidence required | Owner |
+| --- | --- | --- |
+| Native Verse compiler | Exact commit, UEFN version, complete diagnostics | QA |
+| Owner provisioning | Trusted native Player Reference, spoof and second-client denial | Architect / QA |
+| Activation and recovery | Two-client phase logs, respawn/rejoin and interrupted teardown | Avatar / QA |
+| Combat | Target/range/faction proof, damage receipt, budget and cooldown | Arsenal / QA |
+| Presentation | Instigator-only camera/VFX/audio and accessible cue alternatives | Cinematics / QA |
+| Streaming | World Partition boundary crossings, HLOD transitions, two separated clients | Avatar / QA |
+| Cooked publish budget | Editor Memory Calculation at exact cook (300 MiB limit) | QA |
+| Runtime memory | Spatial Profiler Live and Memory Snapshot per target platform | QA |
+
+Epic's UEFN documentation distinguishes the **300 MiB cooked publishing
+budget** from platform-specific **runtime memory**. Run Memory Calculation
+after a cook, and use Spatial Profiler/Memory Snapshot in a monitored Launch
+Session; a source CI pass cannot supply these measurements. Streaming and HLOD
+must be checked together because generated HLODs add memory and may use
+high-resolution geometry when source meshes lack appropriate LODs.
+
+Do not promote FUS-001 to native-enabled or FUS-002 to playable, or claim a
+published island, until all relevant gates have independent evidence. Preserve
+canonical IDs, existing profile schemas and the owner's sticky session
+identity. This handoff changes no runtime entitlement or existing gameplay.
