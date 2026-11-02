@@ -9,6 +9,7 @@ From repository root, with Python 3.12 and no paid dependencies:
 ```sh
 python tools/build_omnigod_manifestation_assets.py --output dist/omnigod_manifestation
 python tools/build_omnigod_cinematic.py --source dist/omnigod_manifestation/omnigod_dormant_assembly.glb --output dist/omnigod_cinematics
+python tools/validate_omnigod_cinematic.py --output dist/omnigod_cinematics
 python -m unittest discover -s tests -p "test_omnigod_cinematic.py" -v
 ```
 
