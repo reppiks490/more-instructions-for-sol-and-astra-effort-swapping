@@ -11,6 +11,7 @@ CONTRACT = ROOT / "content/sovereign/fusion_integration_contract.json"
 SOURCE = ROOT / "verse/sovereign/fusion_state_runtime.verse"
 AVATAR = ROOT / "verse/sovereign/sovereign_fusion_device.verse"
 ARSENAL = ROOT / "verse/sovereign/sovereign_arsenal_device.verse"
+ARSENAL_RUNTIME = ROOT / "verse/sovereign/sovereign_arsenal_runtime.verse"
 
 
 def method(source: str, name: str) -> str:
@@ -184,7 +185,8 @@ def check_contract(contract: dict, source: str) -> list[str]:
 
 
 def check_adapter_attack_handoff(
-    avatar_source: str, arsenal_source: str | None
+    avatar_source: str, arsenal_source: str | None,
+    arsenal_runtime_source: str | None = None,
 ) -> list[str]:
     """Conditional fusion adapter source check, NOT Verse execution."""
     errors: list[str] = []
@@ -235,7 +237,15 @@ def check_adapter_attack_handoff(
     # The Arsenal-owned file does not exist on main until its draft lands.
     # If present, the Reaver path must reject triggers lacking a paid receipt.
     if arsenal is not None:
-        rend = method(arsenal, "TryRend")
+        # The native OnRend callback belongs to the Arsenal *device*, while
+        # TryRend and the transactional energy receipt belong to its runtime.
+        # Synthetic tests may pass a combined fixture as the second argument.
+        receipt_runtime = (
+            arsenal if arsenal_runtime_source is None else
+            "\n".join(line.split("#", 1)[0]
+                      for line in arsenal_runtime_source.splitlines())
+        )
+        rend = method(receipt_runtime, "TryRend")
         if not rend:
             errors.append("Arsenal must expose transactional TryRend")
         else:
@@ -272,7 +282,15 @@ def main() -> int:
         errors = check_contract(contract, source)
         avatar = AVATAR.read_text(encoding="utf-8") if AVATAR.exists() else ""
         arsenal = ARSENAL.read_text(encoding="utf-8") if ARSENAL.exists() else None
-        errors.extend(check_adapter_attack_handoff(avatar, arsenal))
+        arsenal_runtime = (
+            ARSENAL_RUNTIME.read_text(encoding="utf-8")
+            if ARSENAL_RUNTIME.exists() else None
+        )
+        if (arsenal is None) != (arsenal_runtime is None):
+            errors.append("Arsenal device/runtime must be present together")
+        errors.extend(check_adapter_attack_handoff(
+            avatar, arsenal, arsenal_runtime
+        ))
     except (OSError, ValueError, TypeError) as exc:
         errors = [str(exc)]
     for error in errors:
