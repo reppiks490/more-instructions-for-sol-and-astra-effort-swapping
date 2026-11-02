@@ -6,6 +6,9 @@ on:
       - "tools/build_omnigod_manifestation_assets.py"
       - "tools/validate_omnigod_manifestation_assets.py"
       - "tests/test_omnigod_manifestation_assets.py"
+      - "tools/build_omnigod_fusion_animation.py"
+      - "tools/validate_omnigod_fusion_animation.py"
+      - "tests/test_omnigod_fusion_animation.py"
       - "tools/build_ossuary_starter_assets.py"
       - "tools/validate_ossuary_starter_assets.py"
       - ".github/workflows/omnigod-manifestation.yml"
@@ -14,6 +17,9 @@ on:
       - "tools/build_omnigod_manifestation_assets.py"
       - "tools/validate_omnigod_manifestation_assets.py"
       - "tests/test_omnigod_manifestation_assets.py"
+      - "tools/build_omnigod_fusion_animation.py"
+      - "tools/validate_omnigod_fusion_animation.py"
+      - "tests/test_omnigod_fusion_animation.py"
       - "tools/build_ossuary_starter_assets.py"
       - "tools/validate_ossuary_starter_assets.py"
       - ".github/workflows/omnigod-manifestation.yml"
@@ -45,6 +51,15 @@ jobs:
 
       - name: Validate exported GLB OBJ and exact asset inventory
         run: python tools/validate_omnigod_manifestation_assets.py --output dist/omnigod_manifestation
+
+      - name: Test mechanical fusion glTF animation and hostile mutations
+        run: python -m unittest discover -s tests -p "test_omnigod_fusion_animation.py" -v
+
+      - name: Build deterministic mechanical-fusion preview and audio/VFX cue sheet
+        run: python tools/build_omnigod_fusion_animation.py --output dist/omnigod_manifestation
+
+      - name: Validate real glTF animation channels, original rest pose and source proof
+        run: python tools/validate_omnigod_fusion_animation.py --output dist/omnigod_manifestation
 
       - name: Upload original 3D source geometry (NOT a cooked UEFN project)
         uses: actions/upload-artifact@v4
