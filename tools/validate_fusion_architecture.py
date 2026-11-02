@@ -272,9 +272,9 @@ def check_adapter_attack_handoff(
             # placed OUTSIDE the successful TryRend conditional. This is a
             # conservative indentation/source check, not Verse compilation.
             accepted = re.search(
-                r"^([ \\t]*)if\\s*\\(\\s*Service\\.TryRend\\[", on_rend, re.M
+                r"^([ \t]*)if\s*\(\s*Service\.TryRend\[", on_rend, re.M
             )
-            damage = re.search(r"^([ \\t]*)Target\\.Damage\\(", on_rend, re.M)
+            damage = re.search(r"^([ \t]*)Target\.Damage\(", on_rend, re.M)
             if (accepted is None or damage is None
                     or damage.start() <= accepted.start()
                     or len(damage.group(1)) <= len(accepted.group(1))):
