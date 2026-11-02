@@ -5,6 +5,10 @@ on:
     paths:
       - "verse/**"
       - "tools/validate_verse_static.py"
+      - "tools/validate_fusion_architecture.py"
+      - "tests/test_fusion_architecture.py"
+      - "tests/test_fusion_adapter_handoff.py"
+      - "content/sovereign/fusion_integration_contract.json"
       - "tools/migrate_session_services.py"
       - "tools/test_session_services.py"
       - "content/runtime/session_services.json"
@@ -13,6 +17,10 @@ on:
     paths:
       - "verse/**"
       - "tools/validate_verse_static.py"
+      - "tools/validate_fusion_architecture.py"
+      - "tests/test_fusion_architecture.py"
+      - "tests/test_fusion_adapter_handoff.py"
+      - "content/sovereign/fusion_integration_contract.json"
       - "tools/migrate_session_services.py"
       - "tools/test_session_services.py"
       - "content/runtime/session_services.json"
@@ -36,6 +44,11 @@ jobs:
 
       - name: Validate Verse source structure
         run: python tools/validate_verse_static.py
+
+      - name: Validate fusion authority and paid-attack integration
+        run: |
+          python tools/validate_fusion_architecture.py
+          python -m unittest discover -s tests -p 'test_fusion_*.py' -v
 
       - name: Check session service migration is stable
         run: python tools/migrate_session_services.py --check
