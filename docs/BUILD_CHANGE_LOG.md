@@ -15,6 +15,15 @@ existing UNI-001 entitlement or canonical progression was modified.
 Native UEFN compilation, editor binding, multiplayer execution, physical
 fusion effects and publication remain unverified.
 
+## 2026-11-01 — QA: reject invalid world-event transitions
+
+The shared world-event runtime now rejects empty event/objective identities
+and noncontiguous stage jumps. Added fail-closed source checks in the runtime
+invariant validator and mutation coverage for stage ordering, active-state
+authorization, terminal region cleanup, reward sequencing and failed-event
+participation cleanup. UEFN native runtime and streaming evidence remain open.
+
+
 ## 2026-11-01 — QA: checkpoint reconnect generation isolation
 
 Hardened the new SLICE-001 checkpoint device against suspended restore tasks
