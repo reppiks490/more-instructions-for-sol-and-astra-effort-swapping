@@ -21,7 +21,7 @@ import validate_omnigod_vfx_textures as base_check
 DIM, TILE, COUNT = 512, 128, 16
 CLIPS = (
     ("Reaver", "telegraph_reaver_chevrons", "reaver_blade_warning", 550, "downward_wipe"),
-    ("Cataclysm", "telegraph_cataclysm_broken_ring", "cataclysm_siege_warning", 900, "radial_expansion"),
+    ("Cataclysm", "telegraph_cataclysm_broken_ring", "cataclysm_siege_warning", 900, "sector_sweep"),
     ("Aegis", "telegraph_aegis_shield", "aegis_guard_warning", 700, "center_outward"),
 )
 CAPS = [
@@ -108,7 +108,7 @@ def inspect_frames(atlas: bytes, source: bytes, method: str) -> list[str]:
         if coverage > frame_counts[-1]:
             problems.append("intermediate coverage exceeds static source")
             break
-    if method not in ("downward_wipe", "radial_expansion", "center_outward"):
+    if method not in ("downward_wipe", "sector_sweep", "center_outward"):
         problems.append("unsupported animation style")
     return problems
 
