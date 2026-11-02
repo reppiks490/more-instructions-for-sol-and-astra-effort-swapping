@@ -1,3 +1,14 @@
+## 2026-11-01 — Living World: bounded world-event region shells
+
+The existing world-event state machine now rejects more than four distinct,
+initialized canonical regions in a live stage and refuses duplicate, blank,
+unknown or uninitialized region footprint IDs. Abstract zero-region stages
+remain legal. Shared session state and reciprocal checks between world-event,
+invasion and faction battle admissions prevent overlapping regional major
+events without adding NPCs or a new encounter director. Completion/failure
+clears shell ownership. Mutation tests and UEFN streaming acceptance added;
+source-level CI is not native Verse, multiplayer or physical memory proof.
+
 ## 2026-11-01 — Living World: expanded in-editor evolved-horde assertions
 
 The existing development-only horde Verse harness now asserts living-brood
