@@ -9,6 +9,7 @@ from __future__ import annotations
 import importlib.util
 import json
 import os
+import shutil
 from pathlib import Path
 import tempfile
 import unittest
@@ -81,6 +82,32 @@ class InstallerTests(unittest.TestCase):
             path.symlink_to(target, target_is_directory=directory)
         except (OSError, NotImplementedError) as error:
             self.skipTest(f"Symlink creation unavailable: {error}")
+
+    def test_real_repo_gate_handoff_is_source_validated(self):
+        result = installer.inspect_slice_handoff(ROOT)
+        self.assertEqual(result["progression_gates"], 5)
+        self.assertIn("content/vertical_slice/slice_001_gate_bindings.json", result["contracts"])
+        self.assertEqual(result["uefn_compile"], "not_run")
+
+    def test_mutated_gate_contract_rejected_before_editor_write(self):
+        # Clone only the authored sources required for the preflight; do not
+        # modify the actual repository or a real UEFN project.
+        full_source = self.root / "full-slice-source"
+        shutil.copytree(ROOT / "verse", full_source / "verse")
+        shutil.copytree(ROOT / "content/vertical_slice",
+                        full_source / "content/vertical_slice")
+        tool = full_source / "tools/validate_slice_gates.py"
+        tool.parent.mkdir(parents=True)
+        shutil.copy2(ROOT / "tools/validate_slice_gates.py", tool)
+        gate_path = full_source / "content/vertical_slice/slice_001_gate_bindings.json"
+        data = json.loads(gate_path.read_text())
+        data["gates"][3]["required_world_event_ids"] = []
+        gate_path.write_text(json.dumps(data))
+        before = snapshot(self.project.parent)
+        with self.assertRaisesRegex(ValueError, "Invalid progression gate handoff"):
+            installer.install(self.project, full_source)
+        self.assertEqual(snapshot(self.project.parent), before)
+        self.assert_metadata_unchanged()
 
     def test_install_copies_flat_verse_and_external_import_package(self):
         result = self.install()

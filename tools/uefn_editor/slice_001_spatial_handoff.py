@@ -13,6 +13,7 @@ SOURCES = {
     'rig': ROOT / 'content/vertical_slice/first_playable_rig.json',
     'bindings': ROOT / 'content/vertical_slice/slice_001_uefn_bindings.json',
     'launch_tests': ROOT / 'content/vertical_slice/slice_001_launch_tests.json',
+    'gates': ROOT / 'content/vertical_slice/slice_001_gate_bindings.json',
 }
 REQUIRED_MARKERS = (
     'PLAYER-SPAWN', 'CHECKPOINT-1', 'CHECKPOINT-2', 'CHECKPOINT-3', 'CHECKPOINT-4',
@@ -33,7 +34,7 @@ def vector3(value):
             and all(type(n) in (int, float) and math.isfinite(n) for n in value))
 
 
-def build(manifest, rig, bindings, launch, *, hashes=None):
+def build(manifest, rig, bindings, launch, gates=None, *, hashes=None):
     require(manifest.get('schema_version') == 1, 'Unsupported geometry manifest')
     require(rig.get('state') == 'authored_unplaced' and rig.get('encounter_id') == 'BOS-005',
             'Expected unplaced BOS-005 rig')
@@ -141,6 +142,56 @@ def build(manifest, rig, bindings, launch, *, hashes=None):
             'actual_editor_position_cm': None, 'editor_object_path': None,
             'placement_status': 'unplaced',
         })
+    # Additional passage devices are deliberately separate from the 49-device
+    # BOS-005 rig: each volume/teleporter is per-player, not a global barrier.
+    gate_placements = []
+    if gates is not None:
+        require(gates.get('slice_id') == 'SLICE-001'
+                and gates.get('status') == 'editor_bindings_required',
+                'Invalid progression gate handoff state')
+        routes = gates.get('gates')
+        require(isinstance(routes, list) and len(routes) == 5,
+                'Expected five progression gates')
+        refs = set(device_ids)
+        for index, route_spec in enumerate(routes):
+            require(route_spec.get('index') == index
+                    and route_spec.get('near_marker_id') in by_marker,
+                    f'Invalid progression gate {index} anchor/order')
+            marker = by_marker[route_spec['near_marker_id']]
+            for ref_key, class_key, expected_class in (
+                ('entry_volume_ref', 'entry_volume_type', 'volume_device'),
+                ('destination_ref', 'destination_type', 'teleporter_device'),
+            ):
+                ref = route_spec.get(ref_key)
+                require(isinstance(ref, str) and ref and ref not in refs
+                        and route_spec.get(class_key) == expected_class,
+                        f'Invalid progression gate physical role {index}: {ref_key}')
+                refs.add(ref)
+                gate_placements.append({
+                    'device_id': ref, 'expected_class': expected_class,
+                    'gate_id': route_spec['id'],
+                    'design_anchor_id': route_spec['near_marker_id'],
+                    'design_anchor_location_cm': marker['location_cm'],
+                    'design_anchor_radius_cm': marker['radius_cm'],
+                    'editor_object_path': None, 'actual_editor_position_cm': None,
+                    'placement_status': 'unplaced',
+                    'placement_instruction': 'manual_editor_safe_layout_required',
+                })
+        for ref, expected in (
+            ('slice_001_gate_owner', 'aeonfall_slice_001_progression_gate_device'),
+            (gates.get('feedback_ref'), 'hud_message_device'),
+        ):
+            require(isinstance(ref, str) and ref and ref not in refs,
+                    'Duplicate progression gate owner/HUD reference')
+            refs.add(ref)
+            gate_placements.append({
+                'device_id': ref, 'expected_class': expected,
+                'design_anchor_id': 'PLAYER-SPAWN',
+                'design_anchor_location_cm': by_marker['PLAYER-SPAWN']['location_cm'],
+                'editor_object_path': None, 'actual_editor_position_cm': None,
+                'placement_status': 'unplaced',
+                'placement_instruction': 'manual_editor_bind_to_single_gate_owner',
+            })
     return {
         'schema_version': 1, 'slice_id': 'SLICE-001',
         'state': 'authored_unplaced_not_editor_evidence',
@@ -148,7 +199,8 @@ def build(manifest, rig, bindings, launch, *, hashes=None):
         'geometry': {'module_count': len(manifest.get('modules', [])),
                      'placement_count': len(manifest.get('placements', [])),
                      'walkable_routes': paths, 'markers': [by_marker[k] for k in REQUIRED_MARKERS]},
-        'rig_devices': placements, 'content_bindings': content,
+        'rig_devices': placements, 'progression_gate_devices': gate_placements,
+        'content_bindings': content,
         'world_event': {'canonical_id': 'EVT-011', 'design_anchor_id': 'EVT-011-MARKET',
                         'editor_director_path': None, 'state': 'unplaced'},
         'king_without_pulse': {'canonical_id': 'BOS-011', 'design_anchor_id': 'EC_BOS_011',
@@ -176,10 +228,10 @@ def main(argv=None):
         docs = {key: json.loads(path.read_text(encoding='utf-8')) for key, path in paths.items()}
         hashes = {key: hashlib.sha256(path.read_bytes()).hexdigest() for key, path in paths.items()}
         result = build(docs['geometry'], docs['rig'], docs['bindings'], docs['launch_tests'],
-                       hashes=hashes)
+                       docs['gates'], hashes=hashes)
         args.out.parent.mkdir(parents=True, exist_ok=True)
         args.out.write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
-        print(f"Wrote {len(result['rig_devices'])} unplaced device checklist entries to {args.out}")
+        print(f"Wrote {len(result['rig_devices'])} rig and {len(result['progression_gate_devices'])} progression-gate unplaced device entries to {args.out}")
         return 0
     except (ValueError, OSError, KeyError, TypeError, json.JSONDecodeError) as exc:
         parser.exit(1, f'Spatial handoff failed: {exc}\n')

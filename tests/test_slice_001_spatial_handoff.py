@@ -96,6 +96,24 @@ class SpatialHandoffTests(unittest.TestCase):
         self.assertEqual(result['geometry']['module_count'], 18)
         self.assertEqual(result['geometry']['placement_count'], 593)
         self.assertTrue(all(d['editor_object_path'] is None for d in result['rig_devices']))
+        self.assertEqual(len(result['progression_gate_devices']), 12)
+        self.assertTrue(all(d['editor_object_path'] is None
+                            for d in result['progression_gate_devices']))
+        self.assertTrue(all(d['placement_status'] == 'unplaced'
+                            for d in result['progression_gate_devices']))
+
+    def test_real_source_duplicate_progression_volume_rejected(self):
+        docs = [json.loads(path.read_text()) for path in module.SOURCES.values()]
+        docs[4]['gates'][1]['entry_volume_ref'] = docs[4]['gates'][0]['entry_volume_ref']
+        with self.assertRaisesRegex(ValueError, 'Invalid progression gate physical role'):
+            module.build(*docs)
+
+    def test_real_source_unknown_progression_anchor_rejected(self):
+        docs = [json.loads(path.read_text()) for path in module.SOURCES.values()]
+        docs[4]['gates'][3]['near_marker_id'] = 'INVENTED'
+        with self.assertRaisesRegex(ValueError, 'Invalid progression gate'):
+            module.build(*docs)
+
 
 
 if __name__ == '__main__':

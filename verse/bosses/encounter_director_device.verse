@@ -1,6 +1,7 @@
 using { /Fortnite.com/Devices }
 using { /Fortnite.com/Characters }
 using { /Fortnite.com/Game }
+using { /Fortnite.com/Playspaces }
 using { /Verse.org/Simulation }
 using { /Verse.org/Verse }
 
@@ -98,6 +99,7 @@ aeonfall_encounter_director_device := class(creative_device):
 
     BossService:aeonfall_boss_encounter_service = aeonfall_boss_encounter_service{}
     EventService:aeonfall_world_event_service = aeonfall_world_event_service{}
+    ProfileService:aeonfall_profile_service = aeonfall_profile_service{}
     var Progress:?aeonfall_encounter_director_runtime = false
     var Subscriptions:[]cancelable = array{}
     var BossSubscriptions:[]cancelable = array{}
@@ -135,6 +137,7 @@ aeonfall_encounter_director_device := class(creative_device):
         set Subscriptions = array{
             StartInput.TriggeredEvent.Subscribe(OnStart),
             FailInput.TriggeredEvent.Subscribe(OnFail),
+            GetPlayspace().PlayerRemovedEvent().Subscribe(OnPlayerRemoved),
             ParticipantVolume.AgentEntersEvent.Subscribe(OnParticipantEntered),
             ParticipantVolume.AgentExitsEvent.Subscribe(OnParticipantExited)
         }
@@ -300,6 +303,23 @@ aeonfall_encounter_director_device := class(creative_device):
 
     OnStart(Instigator:?agent):void=
         if (not Ready? or Busy? or Ending?):
+            return
+        # Only a live player physically inside this encounter arena may start.
+        # Player-scoped checkpoint + prior-clear policy is also enforced here:
+        # direct trigger calls cannot circumvent the physical Ossuary gates.
+        if:
+            AdmittingAgent := Instigator?
+            AdmittingPlayer := player[AdmittingAgent]
+            AdmittingPlayer.IsActive[]
+            AdmittingCharacter := AdmittingPlayer.GetFortCharacter[]
+            AdmittingCharacter.IsActive[]
+            ParticipantVolume.GetAgentsInVolume().Find[AdmittingAgent]
+            Profile := ProfileService.GetProfile[AdmittingPlayer]
+            AEONFALLSlice001CanStart(Profile, EncounterId)?
+        then:
+            Report("encounter.director_admission_granted")
+        else:
+            Report("encounter.director_admission_rejected")
             return
         if (Runtime := Progress?, not Runtime.Active?):
             RewardAvailable := RewardReady(Runtime.Definition)
@@ -608,6 +628,22 @@ aeonfall_encounter_director_device := class(creative_device):
     OnParticipantExited(Agent:agent):void=
         if (Player := player[Agent], Key := GetAEONFALLActorRegistry().GetRuntimeKey[Player]):
             Removed := GetAEONFALLEncounterParticipation().Remove(EncounterId, Key)
+        FailIfArenaEmpty()
+
+    OnPlayerRemoved(Player:player):void=
+        # Disconnects may not emit an AgentExitsEvent. Rebuild participant
+        # membership from the live arena rather than trusting stale actor keys.
+        if (Runtime := Progress?, Runtime.Active?):
+            RefreshParticipants()
+            FailIfArenaEmpty()
+
+    FailIfArenaEmpty():void=
+        if:
+            Runtime := Progress?
+            Runtime.Active?
+            GetAEONFALLEncounterParticipation().GetParticipants(EncounterId).Length = 0
+        then:
+            OnFail(false)
 
     RefreshParticipants():void=
         GetAEONFALLEncounterParticipation().ClearEncounter(EncounterId)
@@ -622,12 +658,13 @@ aeonfall_encounter_director_device := class(creative_device):
         set PendingBossElimination = false
         set PendingFailure = false
         CancelBossSubscriptions()
+        var ServiceAcknowledged:logic = false
         if (Success?):
             RefreshParticipants()
             if (Runtime.Definition.Kind = aeonfall_encounter_kind.Boss):
-                Completed := BossService.CompleteEncounter(EncounterId)
+                set ServiceAcknowledged = BossService.CompleteEncounter(EncounterId)
             else:
-                Completed := EventService.CompleteEvent(EncounterId)
+                set ServiceAcknowledged = EventService.CompleteEvent(EncounterId)
         else:
             if (Runtime.Definition.Kind = aeonfall_encounter_kind.Boss):
                 Failed := BossService.FailEncounter(EncounterId)
@@ -637,9 +674,11 @@ aeonfall_encounter_director_device := class(creative_device):
         GetAEONFALLEncounterParticipation().ClearEncounter(EncounterId)
         ExitPhase(CurrentIndex, true)
         DisableAll(false)
-        if (Success?):
+        if (Success? and ServiceAcknowledged?):
             CompletedOutput.Trigger()
         else:
+            if (Success?):
+                Report("encounter.director_completion_unacknowledged")
             FailedOutput.Trigger()
 
     OnEnd<override>():void=
