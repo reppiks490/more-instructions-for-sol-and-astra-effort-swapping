@@ -66,7 +66,22 @@
     "recovery": "session restart dormant; reconnect requires fresh verified owner; no fusion state persisted",
     "cleanup": "adapter-owned physical cleanup precedes Abort or ReleaseController",
     "max_simultaneous_fusions": 1,
-    "controller_release": "only_dormant_after_physical_cleanup_and_canonical_teardown"
+    "controller_release": "only_dormant_after_physical_cleanup_and_canonical_teardown",
+    "attack_receipt": {
+      "form_id": "FUS-001",
+      "scope": "session_one_outstanding",
+      "ttl_seconds": 1,
+      "issue": "avatar_upstream_energy_debit_same_deciding_transaction",
+      "consume": "arsenal_secondary_energy_debit_same_deciding_transaction",
+      "invalidated_by": [
+        "begin_activation",
+        "begin_separation",
+        "complete_separation",
+        "abort",
+        "release_controller"
+      ],
+      "native_adapter_wiring": "pending"
+    }
   },
   "preservation": {
     "canonical_sovereign_ability_id": "UNI-001",
