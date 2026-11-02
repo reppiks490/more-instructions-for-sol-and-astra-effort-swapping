@@ -80,11 +80,12 @@ def create_parts():
     for sign in (-1,1):
         m.xz_extrusion(((sign*.08,.05),(sign*.37,.17),(sign*.38,.30),(sign*.10,.22)),
                        .07,3,f"eye_slit_{sign}")
-        m.xz_extrusion(((sign*.36,.33),(sign*.65,.60),(sign*.83,1.24),
-                        (sign*1.07,1.67),(sign*.96,1.07),(sign*.68,.32)),
+        # Convex triangular blade segments rather than a concave swept
+        # polygon. Closed, consistently oriented solids survive OBJ/GLB export.
+        m.xz_extrusion(((sign*.36,.33),(sign*.85,.42),(sign*1.07,1.67)),
                        .34,0,f"outer_horn_{sign}")
-        m.xz_extrusion(((sign*.20,.37),(sign*.35,.71),(sign*.47,1.16),
-                        (sign*.37,1.02),(sign*.16,.50)),.25,5,f"inner_horn_{sign}")
+        m.xz_extrusion(((sign*.17,.37),(sign*.51,.41),(sign*.43,1.17)),
+                       .25,5,f"inner_horn_{sign}")
     m.box((0,-.52,-.51),(.20,.12,.60),2,"central_crimson_fang")
 
     for sign,suffix in ((-1,"L"),(1,"R")):
