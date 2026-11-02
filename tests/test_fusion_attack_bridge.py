@@ -20,8 +20,16 @@ class FusionAttackSourceTests(unittest.TestCase):
         cls.source = guard.SOURCE.read_text(encoding="utf-8")
 
     def mutate(self, before: str, after: str):
-        self.assertIn(before, self.source)
-        self.assertTrue(guard.check_source(self.source.replace(before, after, 1)))
+        # Mutate the ATTACK method when the fragment occurs in several
+        # existing lifecycle methods; otherwise mutate the relevant setting.
+        attack_start = self.source.index("    Attack(Agent:agent):void=")
+        attack_tail = self.source[attack_start:]
+        if before in attack_tail:
+            changed = self.source[:attack_start] + attack_tail.replace(before, after, 1)
+        else:
+            self.assertIn(before, self.source)
+            changed = self.source.replace(before, after, 1)
+        self.assertTrue(guard.check_source(changed))
 
     def test_baseline(self):
         self.assertEqual(guard.check_source(self.source), [])
