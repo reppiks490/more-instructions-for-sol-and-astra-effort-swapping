@@ -21,7 +21,7 @@ The source audio and effect timings match the generated attack warnings:
 | Telegraph | Reveal shape | Single-shot duration | Frames |
 | --- | --- | ---: | ---: |
 | Reaver | Three directional chevrons, top-to-bottom reveal | 550 ms | 16 |
-| Cataclysm | Broken AoE sectors, center-outward wave | 900 ms | 16 |
+| Cataclysm | Broken AoE sectors, progressive angular sweep | 900 ms | 16 |
 | Aegis | Shield silhouette, center-to-edge reveal | 700 ms | 16 |
 
 The machine-readable `frame_times_ms` are explicit, starting at zero and ending at the WAV duration. The frame order is row-major 0–15; **never loop** the animation or reverse it on a cancel. On cancellation or owner-generation invalidation, remove all its visual/audio presentation instead. Each atlas occupies 512×512×4 = 1,048,576 bytes before texture compression or mipmaps; three would occupy 3,145,728 raw bytes. Those are **source byte-size arithmetic**, not UEFN GPU/resident memory measurements. Runtime platform formats and streaming must be profiled in the real editor.
