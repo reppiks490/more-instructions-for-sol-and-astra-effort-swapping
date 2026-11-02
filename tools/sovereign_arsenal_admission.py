@@ -94,9 +94,67 @@ class ArsenalAdmissionOracle:
         # Real server cooldowns are retained across controller replacement.
         # Server clock is monotonic across generations, never reset.
 
+    @staticmethod
+    def _snapshot_shape_error(proof: object) -> str | None:
+        """Reject malformed trusted-boundary evidence without touching state.
+
+        Dataclass annotations are not runtime validators. Shape rejection is
+        distinct from a well-formed but failed gameplay preflight: malformed
+        evidence does NOT consume the server event; valid rejected events do.
+        Exact types reject bool-as-int, truthy strings and forged subclasses.
+        """
+        if type(proof) is not AuthoritativeSnapshot:
+            return "malformed authoritative snapshot"
+        for field in (
+            "owner_authorized", "controller_lease_valid",
+            "destination_authored", "destination_clear",
+            "destination_line_of_sight",
+        ):
+            if type(getattr(proof, field)) is not bool:
+                return f"malformed snapshot boolean: {field}"
+        for field in ("generation", "server_time_ms", "server_event_sequence",
+                      "shield", "max_shield"):
+            if type(getattr(proof, field)) is not int:
+                return f"malformed snapshot integer: {field}"
+        if type(proof.equipped_class_id) is not str:
+            return "malformed equipped class identity"
+        if (not 0 <= proof.shield <= proof.max_shield <= 500):
+            return "invalid shield snapshot"
+        if (type(proof.destination_distance_cm) not in (int, float)
+                or not math.isfinite(proof.destination_distance_cm)):
+            return "malformed destination distance"
+        if type(proof.targets) is not tuple:
+            return "target evidence must be immutable snapshot"
+        for target in proof.targets:
+            if type(target) is not RegisteredTarget:
+                return "malformed registered target"
+            if type(target.target_id) is not str:
+                return "malformed target identity"
+            for field in (
+                "registered_monster", "alive", "vulnerable", "friendly",
+                "player", "boss", "companion", "sovereign_army",
+                "invulnerable", "status_immune", "line_of_sight", "within_cone",
+            ):
+                if type(getattr(target, field)) is not bool:
+                    return f"malformed target boolean: {field}"
+            for field in ("distance_cm", "health_fraction"):
+                value = getattr(target, field)
+                if type(value) not in (int, float) or not math.isfinite(value):
+                    return f"malformed target measurement: {field}"
+        return None
+
     def admit(self, ability_id: str, proof: AuthoritativeSnapshot) -> AdmissionReceipt:
         def deny(reason: str) -> AdmissionReceipt:
             return AdmissionReceipt(False, reason, self.energy)
+
+        # Reject malformed snapshots BEFORE consuming an authenticated event.
+        # A well-formed but ineligible target still consumes its event below,
+        # so a rejected LOS/phase/cooldown check cannot be retried for free.
+        shape_error = self._snapshot_shape_error(proof)
+        if shape_error is not None:
+            return deny(shape_error)
+        if type(ability_id) is not str:
+            return deny("malformed ability identity")
 
         # All preflight fields are server-generated. Reject malformed clocks and
         # out-of-order time before any resource/effect mutation.
