@@ -16,6 +16,21 @@ aeonfall_invasion_runtime := class():
                 return true
         false
 
+    # Ecology-led invasions use the default zero threshold. Faction-led
+    # invasions read the initialized region's canonical influence map.
+    HasRequiredAggressorInfluence(
+        Definition:aeonfall_invasion_definition,
+        RegionState:aeonfall_region_runtime_state
+    )<transacts>:logic=
+        if (Definition.MinAggressorInfluence <= 0):
+            return true
+        if:
+            Influence := RegionState.FactionInfluence[Definition.AggressorId]
+            Influence >= Definition.MinAggressorInfluence
+        then:
+            return true
+        false
+
     RequestWave(
         Definition:aeonfall_invasion_definition,
         WaveIndex:int
@@ -87,6 +102,7 @@ aeonfall_invasion_runtime := class():
             RegionState.HostilityTier >= Definition.MinHostilityTier
             # A hostile event cannot substitute for the ecological substrate.
             RegionState.Corruption >= Definition.MinCorruption
+            HasRequiredAggressorInfluence(Definition, RegionState)?
             not HasActiveInRegion(Definition.RegionId)?
             not RegionState.ActiveEventIds.Find[InvasionId]
         then:

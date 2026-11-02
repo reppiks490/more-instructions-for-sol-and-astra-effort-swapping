@@ -7,6 +7,8 @@ aeonfall_invasion_definition := class:
     MinHostilityTier:int = 0
     # Minimum canonical corruption for ecology-specific encounter admission.
     MinCorruption:int = 0
+    # Canonical territorial strength required for faction-led admission.
+    MinAggressorInfluence:int = 0
     WaveSpawnGroupIds:[][]string = array{}
     ObjectiveIds:[]string = array{}
     HazardIds:[]string = array{}
