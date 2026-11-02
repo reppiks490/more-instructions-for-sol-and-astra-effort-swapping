@@ -16,6 +16,7 @@ def evidence(*targets, at=0, sequence=1, generation=1, owner=True, lease=True,
         equipped_class_id=cls, targets=tuple(targets), shield=shield,
         max_shield=max_shield, destination_authored=destination,
         destination_clear=destination, destination_line_of_sight=destination,
+        destination_distance_cm=150.0 if destination else 0.0,
     )
 
 
@@ -130,6 +131,16 @@ class ServerAdmissionReferenceTests(unittest.TestCase):
             oracle = ArsenalAdmissionOracle()
             self.assertFalse(oracle.admit("SFA-010", replace(evidence(destination=True), **change)).admitted)
         self.assertTrue(self.a.admit("SFA-010", evidence(destination=True)).admitted)
+
+    def test_echo_step_anchor_has_strict_range_and_finite_distance(self):
+        for distance in (0, -1, 401, float("inf"), float("nan"), True):
+            oracle = ArsenalAdmissionOracle()
+            result = oracle.admit("SFA-010", replace(
+                evidence(destination=True), destination_distance_cm=distance))
+            self.assertFalse(result.admitted, distance)
+            self.assertEqual(oracle.energy, 100)
+        self.assertTrue(self.a.admit("SFA-010", replace(
+            evidence(destination=True), destination_distance_cm=400)).admitted)
 
     def test_cooldown_and_energy_debit_atomic(self):
         self.assertEqual(self.a.admit("SFA-001", evidence(T, at=0, sequence=1)).energy_after, 85)
