@@ -92,9 +92,12 @@ def validate(contract: dict, existing: dict) -> list[str]:
                          "damage_each", "max_pulses", "bonus_damage_total",
                          "shield_restore_cap"):
             require(type(ability.get(discrete)) is int, f"{aid}: {discrete} must be integer")
-        spent = ability.get("energy_cost", 0) + ability.get("upstream_energy_cost", 0)
-        require(spent <= resource.get("max_spend_per_transaction", 25),
-                f"{aid}: combined upstream plus arsenal debit exceeds cap")
+        main_cost, upstream_cost = ability.get("energy_cost"), ability.get("upstream_energy_cost")
+        if type(main_cost) is int and type(upstream_cost) is int:
+            require(main_cost + upstream_cost <= resource.get("max_spend_per_transaction", 25),
+                    f"{aid}: combined upstream plus arsenal debit exceeds cap")
+        else:
+            require(False, f"{aid}: malformed transaction debit")
         if not all(type(ability.get(k)) is int for k in
                    ("damage_each", "max_targets", "max_pulses", "bonus_damage_total")):
             continue
@@ -107,6 +110,9 @@ def validate(contract: dict, existing: dict) -> list[str]:
         require(ability.get("shield_generation_pool") == ("shared_40" if ability.get("shield_restore_cap", 0) else None), f"{aid}: shield pool bypass")
         require(bool(ability.get("counterplay")) and bool(ability.get("telegraph")), f"{aid}: telegraph/counterplay absent")
         notes = ability.get("notes", {})
+        if not isinstance(notes, dict):
+            require(False, f"{aid}: notes must be a record")
+            notes = {}
         if aid == "SFA-004":
             require(notes.get("no_forced_displacement") is True,
                     "SFA-004: cannot grant forced displacement")
@@ -122,14 +128,19 @@ def validate(contract: dict, existing: dict) -> list[str]:
                     "SFA-011: finisher threshold drift")
         assets = ability.get("asset_plan", {})
         require(isinstance(assets, dict) and REQUIRED_ASSETS <= set(assets) and all(isinstance(assets.get(k), str) and assets[k].startswith(aid + "-") for k in REQUIRED_ASSETS), f"{aid}: missing distinct asset plans")
-    if len(abilities) >= 3:
+    if len(abilities) >= 3 and all(isinstance(a, dict) for a in abilities[:3]):
         old = existing.get("weapons", [])
+        if not isinstance(old, list) or len(old) < 3:
+            errors.append("missing existing source kit evidence")
+            return errors
         for i in range(3):
             a, b = abilities[i], old[i]
             require(a.get("id") == b.get("ability") and a.get("energy_cost") == b.get("energy_cost") and a.get("cooldown_seconds") == b.get("cooldown_seconds") and a.get("range_cm") == b.get("range_cm", 0), f"{a.get('id')}: existing source kit drift")
         require(abilities[0].get("damage_each") == old[0].get("damage") and abilities[0].get("upstream_energy_cost") == old[0].get("upstream_avatar_energy_cost"), "Reaver damage/upstream payment drift")
         require(abilities[1].get("damage_each") == old[1].get("base_damage_each") and abilities[1].get("max_targets") == old[1].get("max_targets") and abilities[1].get("bonus_damage_total") == old[1].get("sepulchral_mark_bonus_each"), "Cataclysm damage/mark drift")
         require(abilities[2].get("shield_restore_cap") == old[2].get("shield_restore"), "Aegis shield drift")
+    elif len(abilities) >= 3:
+        errors.append("malformed existing source ability")
     return errors
 
 
