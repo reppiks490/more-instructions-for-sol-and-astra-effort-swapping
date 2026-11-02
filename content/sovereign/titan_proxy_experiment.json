@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "feature": "sovereign_titan_npc_proxy_experiment",
+  "canonical_form": "FUS-002",
+  "f002_activation": "disabled",
+  "experiment_authority": "active_FUS-001_same_owner_generation",
+  "activation_default": false,
+  "owner_limit": 1,
+  "nonpersistent": true,
+  "session_runtime": "verse/sovereign/titan_proxy_command_runtime.verse",
+  "npc_behavior": "verse/sovereign/titan_proxy_behavior.verse",
+  "controller_device": "verse/sovereign/titan_proxy_device.verse",
+  "canonical_state": "verse/sovereign/fusion_state_runtime.verse",
+  "authoritative_owner": "aeonfall_fusion_state_runtime.IsAuthorizedActive",
+  "native_binding": {
+    "controller_class": "aeonfall_titan_proxy_device",
+    "npc_spawner_type": "npc_spawner_device",
+    "character_behavior": "aeonfall_titan_proxy_behavior",
+    "input_types": {
+      "summon": "input_trigger_device",
+      "advance": "input_trigger_device",
+      "attack_cue": "input_trigger_device",
+      "dismiss": "input_trigger_device"
+    },
+    "outputs": {
+      "attack_cue": "trigger_device",
+      "feedback": "hud_message_device"
+    },
+    "waypoints_type": "creative_prop",
+    "waypoints_min": 1,
+    "waypoints_max": 8,
+    "character_definition": null,
+    "spawner_editor_path": null,
+    "input_editor_paths": [],
+    "waypoint_editor_paths": []
+  },
+  "movement": {
+    "native": "navigatable.NavigateTo",
+    "navigation_owner": "npc_behavior_only",
+    "reach_radius_cm": 150,
+    "max_navigation_seconds": 2,
+    "poll_seconds": 0.15,
+    "max_waypoint_distance_from_owner_cm": 1600,
+    "min_command_spacing_seconds": 0.5,
+    "allow_partial_path": false,
+    "behavior_bootstrap_checks": 40
+  },
+  "attack": {
+    "effect": "owner_instigated_cue_only_no_damage",
+    "energy_cost": 5,
+    "cooldown_seconds": 2,
+    "direct_damage": false,
+    "independent_hit_validation": false
+  },
+  "camera": {
+    "player_movement": "native_fortnite_character",
+    "owner_camera": "existing_FUS-001_orbit_camera",
+    "proxy_follow_camera": "not_implemented",
+    "npc_possession": false
+  },
+  "lifecycle": {
+    "lease": "one_session_controller",
+    "late_spawn": "reject_and_despawn",
+    "owner_exit": "invalidate_before_despawn",
+    "generation_change": "invalidate",
+    "character_replacement": "invalidate",
+    "device_shutdown": "cancel_subscriptions_and_despawn",
+    "player_join": "no_implicit_entitlement",
+    "replication": "native_npc_simulation_unverified"
+  },
+  "safety": {
+    "no_shared_npc_spawner": true,
+    "no_second_owner_or_profile_root": true,
+    "attack_cue_must_not_wire_damage": true,
+    "f002_not_activated": true,
+    "requires_native_compile": true,
+    "requires_two_client_launch_session": true
+  },
+  "native_evidence": {
+    "uefn_compile": "not_run",
+    "npc_character_definition": "not_run",
+    "npc_spawn": "not_run",
+    "navigation": "not_run",
+    "attack_cue": "not_run",
+    "multiplayer": "not_run",
+    "cleanup": "not_run",
+    "player_possession": "unproven"
+  }
+}
