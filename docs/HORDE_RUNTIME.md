@@ -114,3 +114,32 @@ region unload/re-entry (ledger reset), two players in different streamed cells,
 and corpse denial competing with feed. Ensure admission refusal has no physical
 spawner, objective or event reservation effects. Then verify native Verse
 compilation, actual NPC caps and multiplayer state before enabling the event.
+
+## Owned horde NPC teardown before region ledger release (2026-11-01)
+
+The ecology adapter previously disabled its NPC Spawner and deleted the brood
+ledger on `OnEnd`, but **did not despawn the already-materialized NPC bodies**.
+Those characters could outlive the stream-region ecology that owned their
+biomass, tier and death callbacks, then overlap a replacement adapter's actors.
+The existing **single leased spawner** now unconditionally calls
+`Spawner.DespawnAll(false)` before clearing the canonical region and releasing
+its ownership lease. `Running` is set to false and native subscriptions are
+canceled **before** spawner shutdown, so despawn/elimination callbacks cannot
+mint orphan corpses or increase regional biomass after teardown.
+
+The adapter's existing `if (not Running?): return` path remains intact: a
+rejected duplicate or invalid binding does **not** disable or despawn another
+owner's physical NPCs. Other regions and other spawner devices are untouched.
+This is cleanup of existing NPC bodies only; no new director, cap, spawner,
+corruption mechanic, persistent profile, or gameplay stat scaling was added.
+
+**UEFN acceptance:** In a development island, run a horde ecology with active
+Tier I–IV members and stored corpses, end/unload the region, and verify that
+physical characters, actor-registration ownership, death subscriptions,
+corpses and regional biomass are removed. Confirm no `horde.corpse_created`
+or `horde.fed` fires from eliminated/despawned bodies after teardown. Then
+restart the adapter with its same physical NPC Spawner; observe no overlapping
+old actors. Run the same test with two players in separate streaming cells,
+plus a duplicate adapter rejected by the lease (must not affect the rightful
+owner). Capture native Verse compilation, actual actor counts and memory;
+source tests alone cannot establish these physical properties.
