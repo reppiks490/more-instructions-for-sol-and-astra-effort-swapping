@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import math
+import re
 
 from tools.validate_sovereign_arsenal_universe import load_contract
 
@@ -196,7 +197,7 @@ class ArsenalAdmissionOracle:
             if len(set(ids)) != len(ids):
                 return deny("duplicated target")
             for target in targets:
-                if (not target.target_id.startswith("MON-") or len(target.target_id) <= 4
+                if (re.fullmatch(r"MON-[0-9]{3,4}", target.target_id) is None
                         or not target.registered_monster or not target.alive
                         or not target.vulnerable or target.friendly or target.player
                         or target.boss or target.companion or target.sovereign_army
