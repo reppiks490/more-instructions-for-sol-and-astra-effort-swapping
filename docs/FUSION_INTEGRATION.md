@@ -124,8 +124,9 @@ one-use receipt prevents a no-upstream-debit attack and duplicate reuse; it
 does not make a misconfigured editor graph trustworthy. Before enabling,
 verify exclusive device bindings, latency/replay under two players, shutdown,
 session replacement, and UEFN's actual callback ordering. The Architect API
-alone does not integrate the two draft adapters; `native_adapter_wiring`
-remains `pending` in the machine-readable contract. FUS-002 remains disabled.
+and the merged Avatar/Arsenal **source call sites** now share a paid
+receipt protocol with static mutation tests. However, `native_adapter_wiring`
+remains `pending`: no UEFN editor binding or multiplayer hit was demonstrated. FUS-002 remains disabled.
 
 ## Conditional adapter compatibility gate
 
