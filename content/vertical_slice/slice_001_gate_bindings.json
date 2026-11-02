@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "slice_id": "SLICE-001",
+  "status": "editor_bindings_required",
+  "runtime_source": "verse/progression/slice_001_progression_gate_device.verse",
+  "policy_source": "verse/progression/slice_001_gate_policy.verse",
+  "director_source": "verse/bosses/encounter_director_device.verse",
+  "runtime_class": "aeonfall_slice_001_progression_gate_device",
+  "lease": "one_gate_owner_per_session",
+  "profile_fields": [
+    "DiscoveredPoiIds",
+    "CompletedBossIds",
+    "CompletedWorldEventIds"
+  ],
+  "feedback_ref": "slice_gate_hud",
+  "feedback_type": "hud_message_device",
+  "editor_feedback_path": null,
+  "gates": [
+    {
+      "index": 0,
+      "id": "SLICE-001:GATE-RED-MASON",
+      "near_marker_id": "CHECKPOINT-1",
+      "required_checkpoint_ids": [
+        "SLICE-001:CHECKPOINT-1"
+      ],
+      "required_boss_ids": [],
+      "required_world_event_ids": [],
+      "unlocks_encounter_id": "BOS-005",
+      "entry_volume_ref": "gate_1_entry",
+      "entry_volume_type": "volume_device",
+      "destination_ref": "gate_1_destination",
+      "destination_type": "teleporter_device",
+      "editor_entry_path": null,
+      "editor_destination_path": null
+    },
+    {
+      "index": 1,
+      "id": "SLICE-001:GATE-SAINTLESS",
+      "near_marker_id": "CHECKPOINT-2",
+      "required_checkpoint_ids": [
+        "SLICE-001:CHECKPOINT-1",
+        "SLICE-001:CHECKPOINT-2"
+      ],
+      "required_boss_ids": [
+        "BOS-005"
+      ],
+      "required_world_event_ids": [],
+      "unlocks_encounter_id": "BOS-006",
+      "entry_volume_ref": "gate_2_entry",
+      "entry_volume_type": "volume_device",
+      "destination_ref": "gate_2_destination",
+      "destination_type": "teleporter_device",
+      "editor_entry_path": null,
+      "editor_destination_path": null
+    },
+    {
+      "index": 2,
+      "id": "SLICE-001:GATE-GRAVE-MARKET",
+      "near_marker_id": "CHECKPOINT-3",
+      "required_checkpoint_ids": [
+        "SLICE-001:CHECKPOINT-1",
+        "SLICE-001:CHECKPOINT-2",
+        "SLICE-001:CHECKPOINT-3"
+      ],
+      "required_boss_ids": [
+        "BOS-005",
+        "BOS-006"
+      ],
+      "required_world_event_ids": [],
+      "unlocks_encounter_id": "EVT-011",
+      "entry_volume_ref": "gate_3_entry",
+      "entry_volume_type": "volume_device",
+      "destination_ref": "gate_3_destination",
+      "destination_type": "teleporter_device",
+      "editor_entry_path": null,
+      "editor_destination_path": null
+    },
+    {
+      "index": 3,
+      "id": "SLICE-001:GATE-BLACK-THRONE",
+      "near_marker_id": "CHECKPOINT-4",
+      "required_checkpoint_ids": [
+        "SLICE-001:CHECKPOINT-1",
+        "SLICE-001:CHECKPOINT-2",
+        "SLICE-001:CHECKPOINT-3",
+        "SLICE-001:CHECKPOINT-4"
+      ],
+      "required_boss_ids": [
+        "BOS-005",
+        "BOS-006"
+      ],
+      "required_world_event_ids": [
+        "EVT-011"
+      ],
+      "unlocks_encounter_id": "BOS-011",
+      "entry_volume_ref": "gate_4_entry",
+      "entry_volume_type": "volume_device",
+      "destination_ref": "gate_4_destination",
+      "destination_type": "teleporter_device",
+      "editor_entry_path": null,
+      "editor_destination_path": null
+    },
+    {
+      "index": 4,
+      "id": "SLICE-001:GATE-EXIT",
+      "near_marker_id": "CHECKPOINT-4",
+      "required_checkpoint_ids": [
+        "SLICE-001:CHECKPOINT-1",
+        "SLICE-001:CHECKPOINT-2",
+        "SLICE-001:CHECKPOINT-3",
+        "SLICE-001:CHECKPOINT-4"
+      ],
+      "required_boss_ids": [
+        "BOS-005",
+        "BOS-006",
+        "BOS-011"
+      ],
+      "required_world_event_ids": [
+        "EVT-011"
+      ],
+      "unlocks_encounter_id": null,
+      "entry_volume_ref": "gate_5_entry",
+      "entry_volume_type": "volume_device",
+      "destination_ref": "gate_5_destination",
+      "destination_type": "teleporter_device",
+      "editor_entry_path": null,
+      "editor_destination_path": null
+    }
+  ],
+  "encounter_ingress": {
+    "event_source": "StartInput.TriggeredEvent",
+    "require_player_agent": true,
+    "require_live_character": true,
+    "require_arena_membership": true,
+    "require_full_checkpoint_prefix": true,
+    "require_prior_first_clears": true,
+    "unsupported_encounter_id": "reject",
+    "world_event_id": "EVT-011",
+    "director_owner_class": "aeonfall_encounter_director_device"
+  },
+  "result_cleanup": {
+    "fail_when_arena_empty": true,
+    "disconnect_rebuilds_membership": true,
+    "completed_output_requires_service_ack": true,
+    "persistent_rewards": "existing_first_clear_commit_only",
+    "failure_never_awards": true
+  },
+  "native_evidence": {
+    "uefn_compile": "not_run",
+    "physical_placement": "not_run",
+    "launch_session": "not_run"
+  }
+}
