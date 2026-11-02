@@ -151,6 +151,44 @@ class InstallerTests(unittest.TestCase):
         self.assertEqual(snapshot(self.project.parent), before)
         self.assert_metadata_unchanged()
 
+    def seed_fusion_native_binding_source(self):
+        # Only authored source plus manifest. No UEFN or forged asset files.
+        manifest = self.source / "content/sovereign/fusion_native_binding_handoff.json"
+        manifest.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(ROOT / "content/sovereign/fusion_native_binding_handoff.json", manifest)
+        inspector = self.source / "tools/uefn_editor/fusion_native_binding_handoff.py"
+        inspector.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(ROOT / "tools/uefn_editor/fusion_native_binding_handoff.py", inspector)
+        doc = json.loads(manifest.read_text(encoding="utf-8"))
+        for component in doc["components"]:
+            src = ROOT / component["source"]
+            target = self.source / component["source"]
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, target)
+        return manifest
+
+    def test_fusion_editor_contract_is_imported_without_native_proof(self):
+        self.seed_fusion_native_binding_source()
+        result = self.install()
+        self.assertGreater(result["source_count"], 2)
+        imported = self.package / "content/sovereign/fusion_native_binding_handoff.json"
+        self.assertTrue(imported.is_file())
+        spec = json.loads(imported.read_text(encoding="utf-8"))
+        self.assertEqual(spec["state"], "authored_unplaced")
+        self.assertEqual(spec["native_evidence"]["uefn_compile"], "not_run")
+        self.assert_metadata_unchanged()
+
+    def test_bad_fusion_editor_contract_blocks_install_before_mutation(self):
+        manifest = self.seed_fusion_native_binding_source()
+        spec = json.loads(manifest.read_text(encoding="utf-8"))
+        spec["components"][2]["bindings"]["RendRequest"]["alias"] = "arsenal.Feedback"
+        manifest.write_text(json.dumps(spec), encoding="utf-8")
+        before = snapshot(self.project.parent)
+        with self.assertRaisesRegex(ValueError, "Invalid Sovereign fusion physical handoff"):
+            self.install()
+        self.assertEqual(snapshot(self.project.parent), before)
+        self.assert_metadata_unchanged()
+
     def test_install_copies_flat_verse_and_external_import_package(self):
         result = self.install()
         self.assertEqual(result["source_count"], 2)
