@@ -47,23 +47,27 @@ aeonfall_npc_lifecycle_behavior<public> := class(npc_behavior):
             )
 
     OnEnd<override>():void=
-        if (RuntimeKey <> ""):
-            Removed := GetAEONFALLActorRegistry().Unregister(RuntimeKey)
-            if (not Removed?):
-                AEONFALLRuntimeBus.Emit(
-                    aeonfall_runtime_event{
-                        EventType := "npc.runtime_identity_cleanup_failed",
-                        SourceId := CanonicalId,
-                        TargetId := RuntimeKey
-                    }
-                )
-
-        AEONFALLRuntimeBus.Emit(
-            aeonfall_runtime_event{
-                EventType := "npc.removed",
-                SourceId := CanonicalId,
-                TargetId := RuntimeKey,
-                ContextId := BehaviorProfileId,
-                Flag := BossControlled
-            }
-        )
+        # An unregistered NPC must never emit an authoritative removal.
+        # Likewise, a failed registry teardown keeps that instance's session
+        # state; downstream listeners must not treat it as a successful removal.
+        if (RuntimeKey = ""):
+            return
+        Removed := GetAEONFALLActorRegistry().Unregister(RuntimeKey)
+        if (Removed?):
+            AEONFALLRuntimeBus.Emit(
+                aeonfall_runtime_event{
+                    EventType := "npc.removed",
+                    SourceId := CanonicalId,
+                    TargetId := RuntimeKey,
+                    ContextId := BehaviorProfileId,
+                    Flag := BossControlled
+                }
+            )
+        else:
+            AEONFALLRuntimeBus.Emit(
+                aeonfall_runtime_event{
+                    EventType := "npc.runtime_identity_cleanup_failed",
+                    SourceId := CanonicalId,
+                    TargetId := RuntimeKey
+                }
+            )
