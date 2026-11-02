@@ -19,6 +19,18 @@ aeonfall_fusion_state_runtime := class:
     var Generation:int = 0
     var FormId:string = ""
 
+    # Single-use FUS-001 attack receipt in this session and generation.
+    # The Avatar pays first; Arsenal must consume the receipt before damage.
+    var AttackReceiptPending:logic = false
+    var AttackReceiptGeneration:int = 0
+    var AttackReceiptExpiresAt:float = 0.0
+    var AttackReceiptSequence:int = 0
+
+    ClearAttackReceipt()<transacts>:void=
+        set AttackReceiptPending = false
+        set AttackReceiptGeneration = 0
+        set AttackReceiptExpiresAt = 0.0
+
     AcquireController(Device:creative_device, VerifiedAuthority:aeonfall_sovereign_authority_device)<transacts>:logic=
         if (Controller?):
             return false
@@ -49,6 +61,7 @@ aeonfall_fusion_state_runtime := class:
             if (Existing := Owner?, Existing <> Player):
                 return false
             set Owner = option{Player}
+            ClearAttackReceipt()
             set Generation += 1
             set FormId = RequestedFormId
             set Phase = aeonfall_fusion_phase.Activating
@@ -89,6 +102,7 @@ aeonfall_fusion_state_runtime := class:
         then:
             Authorized := Gate.CanWield(Player)
             if (Authorized?):
+                ClearAttackReceipt()
                 set Phase = aeonfall_fusion_phase.Separating
                 return true
         false
@@ -101,6 +115,7 @@ aeonfall_fusion_state_runtime := class:
             Generation = Token
             Phase = aeonfall_fusion_phase.Separating
         then:
+            ClearAttackReceipt()
             set Phase = aeonfall_fusion_phase.Dormant
             set FormId = ""
             set Generation += 1
@@ -123,6 +138,57 @@ aeonfall_fusion_state_runtime := class:
                 return true
         false
 
+    # Avatar issues only after its upstream debit in the same transaction.
+    # A trigger_device payload by itself is not an attack authorization.
+    # One outstanding receipt, one-second expiration, no persisted ticket.
+    IssueAttackReceipt(Device:creative_device, Player:player, Token:int)<transacts>:logic=
+        if:
+            Current := Controller?
+            Current = Device
+            Existing := Owner?
+            Existing = Player
+            Generation = Token
+            Phase = aeonfall_fusion_phase.Active
+            FormId = "FUS-001"
+            Gate := Authority?
+            Player.IsActive[]
+        then:
+            Authorized := Gate.CanWield(Player)
+            if (not Authorized?):
+                return false
+            if (AttackReceiptPending?):
+                if (GetSimulationElapsedTime() < AttackReceiptExpiresAt):
+                    return false
+            set AttackReceiptSequence += 1
+            set AttackReceiptGeneration = Token
+            set AttackReceiptExpiresAt = GetSimulationElapsedTime() + 1.0
+            set AttackReceiptPending = true
+            return true
+        false
+
+    # Arsenal consumes once, transactionally with its extra Budget.Spend.
+    # A failed spend or other deciding check must roll back consumption.
+    ConsumeAttackReceipt(
+        Device:creative_device, Player:player, Token:int
+    )<decides><transacts>:int=
+        Current := Controller?
+        Current = Device
+        Existing := Owner?
+        Existing = Player
+        Generation = Token
+        Phase = aeonfall_fusion_phase.Active
+        FormId = "FUS-001"
+        Player.IsActive[]
+        AttackReceiptPending?
+        AttackReceiptGeneration = Token
+        GetSimulationElapsedTime() < AttackReceiptExpiresAt
+        Gate := Authority?
+        Authorized := Gate.CanWield(Player)
+        Authorized?
+        ConsumedSequence := AttackReceiptSequence
+        ClearAttackReceipt()
+        ConsumedSequence
+
     # Abort must remain available after owner death, disconnect, or authority
     # revocation. The controller cleans up physical effects BEFORE calling it.
     Abort(Device:creative_device, Token:int)<transacts>:logic=
@@ -131,6 +197,7 @@ aeonfall_fusion_state_runtime := class:
             Current = Device
             Generation = Token
         then:
+            ClearAttackReceipt()
             set Phase = aeonfall_fusion_phase.Dormant
             set FormId = ""
             set Generation += 1
@@ -146,6 +213,7 @@ aeonfall_fusion_state_runtime := class:
         if (Phase <> aeonfall_fusion_phase.Dormant or FormId <> ""):
             return false
         if (Current := Controller?, Current = Device):
+            ClearAttackReceipt()
             set Phase = aeonfall_fusion_phase.Dormant
             set FormId = ""
             set Generation += 1
