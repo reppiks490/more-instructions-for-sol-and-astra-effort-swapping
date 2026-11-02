@@ -8,14 +8,15 @@ on:
       - "tools/build_omnigod_presentation_handoff.py"
       - "tests/test_omnigod_presentation_handoff.py"
       - "tests/test_omnigod_cinematic.py"
-      - "tools/build_omnigod_presentation_handoff.py"
-      - "tests/test_omnigod_presentation_handoff.py"
       - "tools/build_omnigod_manifestation_assets.py"
       - "tools/build_ossuary_starter_assets.py"
       - ".github/workflows/omnigod-cinematic-source.yml"
   pull_request:
     paths:
       - "tools/build_omnigod_cinematic.py"
+      - "tools/validate_omnigod_cinematic.py"
+      - "tools/build_omnigod_presentation_handoff.py"
+      - "tests/test_omnigod_presentation_handoff.py"
       - "tests/test_omnigod_cinematic.py"
       - "tools/build_omnigod_manifestation_assets.py"
       - "tools/build_ossuary_starter_assets.py"
