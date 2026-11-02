@@ -112,10 +112,12 @@ aeonfall_world_event_region_binding_device := class(creative_device):
         # Event.SourceId is deliberately *not* treated as authority; read the
         # current canonical state to survive late/reordered notifications.
         if:
-            Event.EventType = "world_event.started"
-            or Event.EventType = "world_event.stage_advanced"
-            or Event.EventType = "world_event.completed"
-            or Event.EventType = "world_event.failed"
+            (
+                Event.EventType = "world_event.started"
+                or Event.EventType = "world_event.stage_advanced"
+                or Event.EventType = "world_event.completed"
+                or Event.EventType = "world_event.failed"
+            )
         then:
             ReconcileRegion()
 

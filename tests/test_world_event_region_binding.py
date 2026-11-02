@@ -84,6 +84,21 @@ class WorldEventRegionBindingTests(unittest.TestCase):
         self.assertIn("ReconcileRegion()", handler)
         self.assertNotIn("Event.SourceId =", handler)
 
+    def test_multiline_event_predicate_is_explicitly_grouped(self):
+        handler = self.adapter.split("    OnRuntimeEvent(", 1)[1].split(
+            "    OnEnd<override>", 1
+        )[0]
+        self.assertIn(chr(10).join((
+            "if:",
+            "            (",
+            '                Event.EventType = "world_event.started"',
+        )), handler)
+        self.assertIn(chr(10).join((
+            'Event.EventType = "world_event.failed"',
+            "            )",
+            "        then:",
+        )), handler)
+
     def test_service_queries_only_active_canonical_claims(self):
         body = self.service.split("    ActiveEventForRegion(", 1)[1].split(
             "    CanClaimRegions(", 1
