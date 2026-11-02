@@ -468,6 +468,147 @@ class TitanProxySourceTests(unittest.TestCase):
         self.assertTrue(self.errors(c=c))
 
 
+    def test_command_hud_is_hidden_until_exact_behavior_ack(self):
+        summon = self.device.split("    OnSummon(Agent:agent):void=", 1)[1].split(
+            "    AwaitSpawn(ExpectedEpoch:int", 1
+        )[0]
+        ready = self.device.split(
+            "    AwaitBehaviorReady(ExpectedEpoch:int, SpawnedAgent:agent)", 1
+        )[1].split("    # An optional fixed-point camera", 1)[0]
+        self.assertNotIn("ActivateCommandInputs(", summon)
+        self.assertLess(ready.index("Runtime.IsBehaviorReady(SpawnedAgent)?"),
+                        ready.index("ActivateCommandInputs(Owner)"))
+        self.assertLess(ready.index("Runtime.IsAuthorized()?"),
+                        ready.index("ActivateCommandInputs(Owner)"))
+        mutation = self.device.replace(
+            "                        ActivateCommandInputs(Owner)",
+            "                        Print(\"no command registration\")", 1
+        )
+        self.assertTrue(self.errors(device=mutation))
+
+    def test_early_command_hud_registration_rejected(self):
+        mutation = self.device.replace(
+            "                RefreshSummonRegistration()\n                set WaypointIndex = 0",
+            "                ActivateCommandInputs(Player)\n                set WaypointIndex = 0",
+            1
+        )
+        self.assertTrue(self.errors(device=mutation))
+
+    def test_acknowledgement_cannot_bypass_owner_recheck(self):
+        mutation = self.device.replace(
+            "Owner := ProxyOwner?, Owner.IsActive[], Runtime.IsAuthorized()?",
+            "Owner := ProxyOwner?", 1
+        )
+        self.assertTrue(self.errors(device=mutation))
+
+    def test_summon_action_hidden_while_proxy_pending(self):
+        eligible = self.device.split(
+            "    EligibleSummoner()<transacts>:?player=", 1
+        )[1].split("    RefreshSummonRegistration():void=", 1)[0]
+        self.assertIn("not ProxyOwner?", eligible)
+        mutation = self.device.replace(
+            "    EligibleSummoner()<transacts>:?player=\n        if:\n            not ProxyOwner?",
+            "    EligibleSummoner()<transacts>:?player=\n        if:", 1
+        )
+        self.assertTrue(self.errors(device=mutation))
+
+    def test_command_ui_contract_cannot_claim_early_access(self):
+        c = copy.deepcopy(self.contract)
+        c["safety"]["command_input_requires_behavior_ack"] = False
+        self.assertTrue(self.errors(c=c))
+        c = copy.deepcopy(self.contract)
+        c["lifecycle"]["input_registration"] = "register_during_spawn"
+        self.assertTrue(self.errors(c=c))
+
+
+    def test_npc_behavior_onend_revokes_exact_epoch(self):
+        self.assertIn("Service.WithdrawBehavior(Agent, AckEpoch)", self.behavior)
+        self.assertIn("Epoch = ExpectedEpoch", self.runtime)
+        self.assertIn("Runtime.IsReadyForCurrentNpc()?", self.device)
+        mutation = self.behavior.replace(
+            "Withdrawn := Service.WithdrawBehavior(Agent, AckEpoch)",
+            'Print("no readiness withdrawal")', 1
+        )
+        self.assertTrue(self.errors(behavior=mutation))
+        mutation = self.runtime.replace(
+            "            Epoch = ExpectedEpoch\n            Current := OwnedNpc?",
+            "            true?\n            Current := OwnedNpc?", 1
+        )
+        self.assertTrue(self.errors(runtime=mutation))
+
+    def test_terminal_behavior_latch_cannot_be_bypassed(self):
+        self.assertIn("var BehaviorTerminated:logic = false", self.runtime)
+        self.assertIn("if (not BehaviorTerminated?, BoundNpc(Agent)?):", self.runtime)
+        self.assertIn("set BehaviorTerminated = true", self.runtime)
+        mutation = self.runtime.replace(
+            "if (not BehaviorTerminated?, BoundNpc(Agent)?):",
+            "if (BoundNpc(Agent)?):", 1
+        )
+        self.assertTrue(self.errors(runtime=mutation))
+        mutation = self.runtime.replace(
+            "            set BehaviorTerminated = true\n            set BehaviorReady = false\n            set Pending = false",
+            "            set BehaviorReady = false\n            set Pending = false", 1
+        )
+        self.assertTrue(self.errors(runtime=mutation))
+        mutation = self.runtime.replace(
+            "            set BehaviorTerminated = false\n            set Active = true",
+            "            set Active = true", 1
+        )
+        self.assertTrue(self.errors(runtime=mutation))
+        c = copy.deepcopy(self.contract)
+        c["safety"]["behavior_onend_terminal_for_epoch"] = False
+        self.assertTrue(self.errors(c=c))
+
+    def test_terminal_behavior_without_command_hud_is_reaped(self):
+        monitor = self.device.split("    Monitor()<suspends>:void=", 1)[1].split(
+            "    FinishProxy():void=", 1
+        )[0]
+        self.assertLess(
+            monitor.index("Runtime.HasTerminatedBehavior()?"),
+            monitor.index("else if (CommandRegistered?):"),
+        )
+        mutation = self.device.replace(
+            "else if (Runtime.HasTerminatedBehavior()? ):",
+            "else if (false?):",
+        )
+        # The actual source uses no space before ')'; ensure mutation hits.
+        mutation = self.device.replace(
+            "else if (Runtime.HasTerminatedBehavior()?):",
+            "else if (false?):", 1,
+        )
+        self.assertNotEqual(mutation, self.device)
+        self.assertTrue(self.errors(device=mutation))
+        c = copy.deepcopy(self.contract)
+        c["safety"]["behavior_end_cleanup_before_command_registration"] = False
+        self.assertTrue(self.errors(c=c))
+
+    def test_unowned_dedicated_spawner_cleanup_is_required(self):
+        monitor = self.device.split("    Monitor()<suspends>:void=", 1)[1].split(
+            "    FinishProxy():void=", 1
+        )[0]
+        self.assertIn("if (TitanSpawner.GetAgents().Length > 0):", monitor)
+        mutation = self.device.replace(
+            "if (TitanSpawner.GetAgents().Length > 0):",
+            "if (false?):", 1,
+        )
+        self.assertNotEqual(mutation, self.device)
+        self.assertTrue(self.errors(device=mutation))
+        c = copy.deepcopy(self.contract)
+        c["safety"]["orphan_spawner_monitor_cleanup"] = False
+        self.assertTrue(self.errors(c=c))
+
+    def test_headless_npc_cannot_receive_pending_navigation_or_hud(self):
+        mutation = self.runtime.replace(
+            "        BoundNpc(Agent)?\n        BehaviorReady?\n        not BehaviorTerminated?\n        Command := Pending?",
+            "        BoundNpc(Agent)?\n        not BehaviorTerminated?\n        Command := Pending?", 1
+        )
+        self.assertTrue(self.errors(runtime=mutation))
+        mutation = self.device.replace(
+            "if (not Runtime.IsReadyForCurrentNpc()?):", "if (false?):", 1
+        )
+        self.assertTrue(self.errors(device=mutation))
+
+
 class TitanProxyPolicyModelTests(unittest.TestCase):
     def setUp(self):
         self.p = ProxyModel()
@@ -535,6 +676,7 @@ class TitanSpawnHandshakeModel:
         self.spawn_epoch = 0
         self.bound_npc = None
         self.behavior_ready = False
+        self.behavior_terminated = False
         self.npcs = []
 
     def begin(self):
@@ -546,6 +688,7 @@ class TitanSpawnHandshakeModel:
         self.active = True
         self.bound_npc = None
         self.behavior_ready = False
+        self.behavior_terminated = False
         return self.epoch
 
     def return_spawn(self, epoch, agent):
@@ -561,16 +704,36 @@ class TitanSpawnHandshakeModel:
         return True
 
     def acknowledge(self, agent):
-        if self.active and self.bound_npc == agent and agent in self.npcs:
+        if (self.active and not self.behavior_terminated
+                and self.bound_npc == agent and agent in self.npcs):
             self.behavior_ready = True
             return True
         return False
 
     def can_command(self, agent):
         return (
-            self.active and self.behavior_ready and self.bound_npc == agent
+            self.active and self.behavior_ready and not self.behavior_terminated
+            and self.bound_npc == agent
             and len(self.npcs) == 1 and self.npcs[0] == agent
         )
+
+    def end_behavior(self, agent, epoch):
+        if not self.active or self.epoch != epoch or self.bound_npc != agent:
+            return False
+        self.behavior_ready = False
+        self.behavior_terminated = True
+        return True
+
+    def monitor_action(self, *, owner_associated, command_registered=False):
+        # Independent model: no proxy owner means the dedicated spawner
+        # must not retain any NPC; terminal behavior is checked before HUD.
+        if not owner_associated:
+            return "purge_orphans" if self.npcs else "idle"
+        if self.active and self.behavior_terminated:
+            return "end_proxy"
+        if command_registered and not self.can_command(self.bound_npc):
+            return "end_proxy"
+        return "wait"
 
     def unexpected_agents(self):
         if len(self.npcs) > 1:
@@ -584,6 +747,7 @@ class TitanSpawnHandshakeModel:
     def stop(self):
         self.active = False
         self.behavior_ready = False
+        self.behavior_terminated = True
         self.bound_npc = None
         self.npcs = []
         self.epoch += 1
@@ -696,6 +860,70 @@ class TitanSpawnHandshakeTests(unittest.TestCase):
         self.p.npcs = ["titan"]
         self.assertTrue(self.p.return_spawn(epoch, "titan"))
 
+    def test_behavior_end_retracts_commands_while_npc_still_alive(self):
+        epoch = self.p.begin()
+        self.p.npcs = ["titan"]
+        self.assertTrue(self.p.return_spawn(epoch, "titan"))
+        self.assertTrue(self.p.acknowledge("titan"))
+        self.assertTrue(self.p.can_command("titan"))
+        self.assertTrue(self.p.end_behavior("titan", epoch))
+        self.assertEqual(self.p.npcs, ["titan"])
+        self.assertFalse(self.p.can_command("titan"))
+        self.assertFalse(self.p.end_behavior("wrong-agent", epoch))
+
+    def test_terminal_ack_race_reaps_before_command_registration(self):
+        epoch = self.p.begin()
+        self.p.npcs = ["titan"]
+        self.assertTrue(self.p.return_spawn(epoch, "titan"))
+        self.assertTrue(self.p.acknowledge("titan"))
+        self.assertTrue(self.p.end_behavior("titan", epoch))
+        self.assertEqual(
+            self.p.monitor_action(owner_associated=True, command_registered=False),
+            "end_proxy",
+        )
+        self.p.stop()
+        self.assertEqual(self.p.npcs, [])
+
+    def test_orphan_spawn_reaped_without_owner(self):
+        self.p.npcs = ["unexpected"]
+        self.assertEqual(
+            self.p.monitor_action(owner_associated=False), "purge_orphans"
+        )
+        self.p.npcs.clear()
+        self.assertEqual(self.p.monitor_action(owner_associated=False), "idle")
+
+    def test_behavior_end_cannot_be_reacknowledged_in_same_epoch(self):
+        epoch = self.p.begin()
+        self.p.npcs = ["titan"]
+        self.assertTrue(self.p.return_spawn(epoch, "titan"))
+        self.assertTrue(self.p.acknowledge("titan"))
+        self.assertTrue(self.p.end_behavior("titan", epoch))
+        # Even if a stale OnBegin tick overlaps OnEnd, the same NPC
+        # cannot reopen owner commands or energy-consuming cues.
+        self.assertFalse(self.p.acknowledge("titan"))
+        self.assertFalse(self.p.can_command("titan"))
+        self.p.stop()
+        new_epoch = self.p.begin()
+        self.p.npcs = ["new"]
+        self.assertTrue(self.p.return_spawn(new_epoch, "new"))
+        self.assertTrue(self.p.acknowledge("new"))
+        self.assertTrue(self.p.can_command("new"))
+
+    def test_late_behavior_onend_cannot_revoke_new_generation(self):
+        old = self.p.begin()
+        self.p.npcs = ["old"]
+        self.assertTrue(self.p.return_spawn(old, "old"))
+        self.assertTrue(self.p.acknowledge("old"))
+        self.p.stop()
+        new = self.p.begin()
+        self.p.npcs = ["new"]
+        self.assertTrue(self.p.return_spawn(new, "new"))
+        self.assertTrue(self.p.acknowledge("new"))
+        self.assertFalse(self.p.end_behavior("old", old))
+        self.assertFalse(self.p.end_behavior("new", old))
+        self.assertTrue(self.p.can_command("new"))
+
+
     def test_preowner_failure_still_cleans_dedicated_spawner(self):
         epoch = self.p.begin()
         self.p.npcs = ["ambient", "duplicate"]
@@ -706,39 +934,61 @@ class TitanSpawnHandshakeTests(unittest.TestCase):
 
 
 class OwnerInputRegistrationModel:
-    """Independent owner-specific input registration reference model.
+    """Adversarial source-policy model, NOT native Input Trigger execution.
 
-    Mimics who receives the action UI and which callbacks may be admitted;
-    it is NOT an engine Input Trigger test or a multiplayer session.
+    A pending NPC cannot grant the owner command HUD. Only exact behavior
+    acknowledgement for the current authorized owner activates those inputs.
     """
 
     def __init__(self):
+        self.authorized_owner = None
         self.summoner = None
+        self.pending_owner = None
         self.commands = None
         self.proxy_active = False
 
     def reconcile(self, candidate, authorized):
-        self.summoner = candidate if authorized else None
+        self.authorized_owner = candidate if authorized else None
+        if self.proxy_active and self.pending_owner != self.authorized_owner:
+            self.dismiss()
+        self.summoner = self.authorized_owner if not self.proxy_active else None
 
     def summon(self, actor):
-        if self.proxy_active or actor is None or actor != self.summoner:
+        if (self.proxy_active or actor is None or actor != self.summoner
+                or actor != self.authorized_owner):
             return False
         self.proxy_active = True
+        self.pending_owner = actor
+        self.summoner = None
+        self.commands = None
+        return True
+
+    def acknowledge(self, actor, *, exact_npc=True, generation_valid=True):
+        if (not self.proxy_active or actor != self.pending_owner
+                or actor != self.authorized_owner or not exact_npc
+                or not generation_valid):
+            return False
         self.commands = actor
         return True
 
     def command(self, actor):
-        return self.proxy_active and actor == self.commands and actor == self.summoner
+        return (
+            self.proxy_active and actor == self.commands
+            and actor == self.pending_owner and actor == self.authorized_owner
+        )
 
     def dismiss(self):
         self.commands = None
+        self.pending_owner = None
         self.proxy_active = False
+        self.summoner = self.authorized_owner
 
     def disconnect(self, actor):
-        if actor == self.commands:
+        if actor == self.authorized_owner:
+            self.authorized_owner = None
+        if actor == self.pending_owner:
             self.dismiss()
-        if actor == self.summoner:
-            self.summoner = None
+        self.summoner = self.authorized_owner if not self.proxy_active else None
 
 
 class OwnerInputRegistrationModelTests(unittest.TestCase):
@@ -749,20 +999,36 @@ class OwnerInputRegistrationModelTests(unittest.TestCase):
         self.m.reconcile("creator", True)
         self.assertFalse(self.m.summon("intruder"))
         self.assertTrue(self.m.summon("creator"))
+        self.assertFalse(self.m.command("creator"))
+        self.assertFalse(self.m.acknowledge("intruder"))
+        self.assertTrue(self.m.acknowledge("creator"))
         self.assertFalse(self.m.command("intruder"))
         self.assertTrue(self.m.command("creator"))
+
+    def test_pending_spawn_never_exposes_command_or_repeat_summon(self):
+        self.m.reconcile("creator", True)
+        self.assertTrue(self.m.summon("creator"))
+        self.assertIsNone(self.m.summoner)
+        self.assertIsNone(self.m.commands)
+        self.assertFalse(self.m.command("creator"))
+        self.assertFalse(self.m.summon("creator"))
+        self.assertFalse(self.m.acknowledge("creator", exact_npc=False))
+        self.assertFalse(self.m.acknowledge("creator", generation_valid=False))
+        self.assertFalse(self.m.command("creator"))
 
     def test_revoked_authority_retracts_actions(self):
         self.m.reconcile("creator", True)
         self.assertTrue(self.m.summon("creator"))
+        self.assertTrue(self.m.acknowledge("creator"))
         self.m.reconcile("creator", False)
         self.assertFalse(self.m.command("creator"))
-        self.m.dismiss()
         self.assertFalse(self.m.summon("creator"))
+        self.assertIsNone(self.m.commands)
 
     def test_disconnect_unregistered_and_cleans_commands(self):
         self.m.reconcile("creator", True)
         self.assertTrue(self.m.summon("creator"))
+        self.assertTrue(self.m.acknowledge("creator"))
         self.m.disconnect("creator")
         self.assertIsNone(self.m.summoner)
         self.assertIsNone(self.m.commands)
@@ -771,11 +1037,25 @@ class OwnerInputRegistrationModelTests(unittest.TestCase):
     def test_new_authorized_player_cannot_inherit_old_proxy(self):
         self.m.reconcile("owner-A", True)
         self.assertTrue(self.m.summon("owner-A"))
+        self.assertTrue(self.m.acknowledge("owner-A"))
         self.m.reconcile("owner-B", True)
         self.assertFalse(self.m.command("owner-B"))
-        self.m.dismiss()
-        self.assertTrue(self.m.summon("owner-B"))
         self.assertFalse(self.m.command("owner-A"))
+        self.assertTrue(self.m.summon("owner-B"))
+        self.assertFalse(self.m.command("owner-B"))
+        self.assertTrue(self.m.acknowledge("owner-B"))
+        self.assertTrue(self.m.command("owner-B"))
+
+    def test_dismiss_restores_only_current_summon_eligibility(self):
+        self.m.reconcile("creator", True)
+        self.assertTrue(self.m.summon("creator"))
+        self.assertTrue(self.m.acknowledge("creator"))
+        self.m.dismiss()
+        self.assertFalse(self.m.command("creator"))
+        self.assertEqual(self.m.summoner, "creator")
+        self.assertTrue(self.m.summon("creator"))
+        self.assertFalse(self.m.command("creator"))
+
 
 class TitanCameraStackReferenceModel:
     """Stack ownership policy only; never models actual UEFN camera behavior."""

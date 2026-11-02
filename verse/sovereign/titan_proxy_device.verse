@@ -128,6 +128,7 @@ aeonfall_titan_proxy_device := class(creative_device):
     # changes. Registration is presentation/filtering, NOT authorization.
     EligibleSummoner()<transacts>:?player=
         if:
+            not ProxyOwner?
             AvatarController.Running?
             Owner := AvatarController.VisualOwner?
             Owner.IsActive[]
@@ -223,7 +224,9 @@ aeonfall_titan_proxy_device := class(creative_device):
                 set Epoch = StartedEpoch
                 set ProxyOwner = option{Player}
                 set ProxyCharacter = option{Character}
-                ActivateCommandInputs(Player)
+                # A pending NPC has no command HUD. Hide summon until this
+                # generation is either acknowledged or fully torn down.
+                RefreshSummonRegistration()
                 set WaypointIndex = 0
                 TitanSpawner.Reset()
                 TitanSpawner.Enable()
@@ -283,9 +286,15 @@ aeonfall_titan_proxy_device := class(creative_device):
                 if (not Runtime.IsCurrentEpoch(ExpectedEpoch)?):
                     return
                 if (Runtime.IsBehaviorReady(SpawnedAgent)?):
-                    StartProxyCamera(ExpectedEpoch, SpawnedAgent)
-                    if (Owner := ProxyOwner?):
+                    # A returned SpawnAt agent alone cannot enable touch/HUD
+                    # controls. Recheck the same live FUS-001 owner at the
+                    # exact behavior-acknowledged epoch before registration.
+                    if (Owner := ProxyOwner?, Owner.IsActive[], Runtime.IsAuthorized()?):
+                        ActivateCommandInputs(Owner)
+                        StartProxyCamera(ExpectedEpoch, SpawnedAgent)
                         Feedback.Show(Owner, TitanProxyReady, 3.0)
+                        return
+                    FinishProxy()
                     return
             set Attempts += 1
             if (Attempts >= 20):
@@ -415,11 +424,28 @@ aeonfall_titan_proxy_device := class(creative_device):
             if (not Running?):
                 return
             RefreshSummonRegistration()
-            if (Owner := ProxyOwner?, Runtime := Service?):
-                if (not Runtime.IsAuthorized()? or UnexpectedSpawnCount(Runtime)?):
-                    # Fail closed on unsolicited spawn, disappearing NPC,
-                    # owner revocation or an invalid generation.
-                    FinishProxy()
+            if (Runtime := Service?):
+                if (Owner := ProxyOwner?):
+                    if (not Runtime.IsAuthorized()? or UnexpectedSpawnCount(Runtime)?):
+                        # Fail closed on unsolicited spawn, disappearing NPC,
+                        # owner revocation or an invalid generation.
+                        FinishProxy()
+                    else if (Runtime.HasTerminatedBehavior()?):
+                        # OnEnd may precede command HUD registration. Do not
+                        # retain a headless NPC for the full readiness timeout.
+                        FinishProxy()
+                    else if (CommandRegistered?):
+                        # Once command UI was granted, loss of readiness is
+                        # terminal even if the NPC remains physically alive.
+                        if (not Runtime.IsReadyForCurrentNpc()?):
+                            FinishProxy()
+                else:
+                    # The spawner is dedicated to this harness. Any NPC
+                    # without an associated owner is unsolicited; purge it
+                    # even when no summon callback is currently running.
+                    if (TitanSpawner.GetAgents().Length > 0):
+                        TitanSpawner.Disable()
+                        TitanSpawner.DespawnAll(false)
 
     FinishProxy():void=
         # Remove input eligibility even when native actor cleanup fails.

@@ -108,6 +108,35 @@ https://dev.epicgames.com/documentation/fortnite/verse-api/fortnitedotcom/device
 
 ## Owner-only Input Trigger lifecycle (source, not native verified)
 
+**NPC behavior end:** A behavior may stop without its agent being eliminated.
+The NPC records the exact acknowledged epoch and calls an epoch/agent-scoped
+readiness withdrawal in `OnEnd`. Pending navigation is invalidated and the
+0.25s owner monitor tears down camera, command HUD and the dedicated NPC if
+its behavior is no longer ready. Stale `OnEnd` from an older epoch cannot
+revoke a newer generation. This is a source-level safety path, **not** native
+proof that engine callbacks always arrive in every shutdown scenario.
+
+**Terminal behavior epoch latch:** The command mailbox now permanently
+withdraws a behavior\u0027s readiness for its current epoch on `OnEnd`.
+An overlapping or late `OnBegin` poll cannot re-acknowledge the same NPC
+until a genuinely new, authorized `Begin` generation is established.
+Movement, paid non-damaging cues and owner camera readiness all remain
+closed after withdrawal; stale-epoch callbacks cannot revoke a newer NPC.
+This protects a source-level shutdown race, but does **not** prove the
+engine always calls `OnEnd` or that native callbacks arrive in any
+particular order. Verify both conditions in a real two-client Launch Session.
+
+**Behavior-readiness UI gate:** Summon is registered only while the exact
+FUS-001 owner is eligible and no proxy is pending/active. Once a summon is
+admitted, Summon is immediately unregistered and all three command actions
+(move, cue, dismiss) remain disabled and unregistered. Only the current
+NPC's exact `AcknowledgeBehavior` handshake, current epoch and renewed
+canonical owner/character authorization permit the command input registration.
+A wrong NPC, failed spawn, revocation, timeout or disconnect cannot expose
+command controls. After teardown, the eligible owner may regain Summon on the
+next monitor reconciliation. This limits false touch controls and duplicate
+requests; it is **not** proof of mobile HUD rendering or network latency.
+
 Epic's `input_trigger_device.Register(Agent)` and
 `Unregister(Agent)` methods are supported, but the UEFN device setting
 **Registered Player Behavior** determines whether registration actually
@@ -124,8 +153,9 @@ GetPlayers()[0], a display name or team as authority.
   mandatory even when the HUD appears owner-only.**
 - `Enabled At Game Start = Off`. `SummonInput` becomes enabled only for
   the current verified FUS-001 owner, reconciled every 0.25 seconds.
-  Movement, attack-cue and dismissal inputs remain disabled until successful
-  proxy admission and are registered only to that player.
+  Movement, attack-cue and dismissal inputs remain disabled until the exact
+  NPC behavior acknowledgement and renewed owner authorization, not merely
+  `SpawnAt` return. They are registered only to that player.
 - Never share these four physical Input Trigger instances with Arsenal,
   normal ability inputs, other islands, Titan spawners or Cinematics. Changing
   their enablement/registration would otherwise disrupt another system.
@@ -224,8 +254,11 @@ and two independent Fortnite clients' recorded Launch Sessions. Check:
 - Confirm **Require Registered** on all four dedicated inputs. Owner sees the
   summon action only during authorized FUS-001; nonowner sees no Titan
   movement/cue/dismiss UI, even when both clients use the same team.
-- After successfully summoning, confirm only the owner gains move/cue/dismiss
-  inputs. On owner revocation, character replacement, disconnect and
+- During an in-flight summon, confirm **no player** sees move/cue/dismiss or
+  a repeat Summon action. After the exact NPC behavior acknowledgement,
+  confirm only the owner gains move/cue/dismiss inputs. Test on Fortnite
+  mobile touch UI and with two live clients; do not assume registration
+  automatically proves native HUD visibility. On owner revocation, character replacement, disconnect and
   teardown, verify native input unregister/disable on both clients.
   Delayed input callbacks must still fail the server authorization gate.
 - Concurrent duplicate creative devices/spawners, duplicate NPC SpawnedEvent,
@@ -249,7 +282,9 @@ and two independent Fortnite clients' recorded Launch Sessions. Check:
   commands and only the dedicated NPC is moved/despawned.
 - Kill the bound Titan NPC and also simulate an unrelated NPC death. Only the
   exact bound-agent elimination must invalidate the proxy; duplicated death
-  callbacks must be harmless.
+  callbacks must be harmless. Stop the NPC behavior while its agent remains
+  alive and verify command HUD/camera/paid cue admission are withdrawn; a
+  late OnEnd from an old epoch must not stop a new proxy.
 - Resource depletion, 10 rapid attack-cue presses, generation rotation,
   FUS-001 separation, permission revocation, respawn, disconnect and
   device shutdown. Verify all NPCs and per-owner cues are cleared.
@@ -286,3 +321,17 @@ in GitHub issue #37. No concurrent edits to PR #48 or PR #49 are required.
 
 **Evidence:** Verse compile `not_run`; NPC placement `not_run`; navigation
 `not_run`; multiplayer `not_run`; possession `unproven`.
+
+## 2026-11-01 ownerless-spawner and pre-HUD behavior shutdown hardening
+
+The dedicated Titan spawner now receives continuous ownerless inventory
+reconciliation: an NPC appearing while no creator proxy is associated is
+removed without waiting for another summon press. This never clears a shared
+world/boss spawner, which remains prohibited by the editor-binding contract.
+The command mailbox also exposes the current epoch's terminal behavior latch
+to the monitor, allowing it to tear down an acknowledged NPC whose behavior
+ended **before** movement/cue/dismiss inputs were registered. The existing
+five-second timeout remains the fallback for a behavior that never acknowledges.
+Source mutation tests and a scheduler reference model cover both cases.
+No native spawner timing, OnEnd callback guarantee, UEFN compilation,
+multiplayer, mobile or cooked-memory result is claimed.

@@ -7,6 +7,9 @@ using { /UnrealEngine.com/Temporary/SpatialMath }
 # This behavior exclusively owns navigation; the player never possesses it.
 # No attack/damage calls occur here, and no persistent state is written.
 aeonfall_titan_proxy_behavior := class(npc_behavior):
+    # Recorded only after exact NPC/epoch behavior acknowledgement.
+    var AckEpoch:int = 0
+
     OnBegin<override>()<suspends>:void=
         if:
             Agent := GetAgent[]
@@ -19,9 +22,10 @@ aeonfall_titan_proxy_behavior := class(npc_behavior):
             var StartupChecks:int = 0
             loop:
                 Sleep(0.15)
-                if (Service.AcknowledgeBehavior(Agent)?):
+                if (Service.AcknowledgeBehavior(Agent)?, BoundEpoch := Service.BoundEpochFor[Agent]):
                     # The behavior, not SpawnAt or the player input, is
                     # responsible for declaring a navigatable NPC ready.
+                    set AckEpoch = BoundEpoch
                     set BoundOnce = true
                     if (Command := Service.GetNewMove[Agent, SeenSequence]):
                         set SeenSequence = Command.Sequence
@@ -49,6 +53,13 @@ aeonfall_titan_proxy_behavior := class(npc_behavior):
                         return
 
     OnEnd<override>():void=
-        if (Agent := GetAgent[], Character := Agent.GetFortCharacter[],
-            Navigation := Character.GetNavigatable[]):
-            Navigation.StopNavigation()
+        if (Agent := GetAgent[]):
+            # An NPC can remain alive after its Verse behavior stops.
+            # Withdraw only this acknowledged epoch; a stale OnEnd must
+            # never revoke a newer owner/NPC generation.
+            if (AckEpoch > 0):
+                Service := GetAEONFALLTitanProxyCommands()
+                Withdrawn := Service.WithdrawBehavior(Agent, AckEpoch)
+            if (Character := Agent.GetFortCharacter[],
+                Navigation := Character.GetNavigatable[]):
+                Navigation.StopNavigation()

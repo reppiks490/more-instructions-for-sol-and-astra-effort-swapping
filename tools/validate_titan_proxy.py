@@ -25,9 +25,20 @@ RUNTIME_GUARDS = (
     "IsAuthorized()?",
     "not OwnedNpc?",
     "BehaviorReady:logic = false",
+    "BehaviorTerminated:logic = false",
+    "set BehaviorTerminated = false",
+    "set BehaviorTerminated = true",
+    "if (not BehaviorTerminated?, BoundNpc(Agent)?):",
+    "if (not BehaviorTerminated?, BehaviorReady?, BoundNpc(Agent)?):",
     "set BehaviorReady = false",
     "AcknowledgeBehavior(Agent:agent)",
     "IsBehaviorReady(Agent:agent)",
+    "BoundEpochFor(Agent:agent)<decides><transacts>:int=",
+    "WithdrawBehavior(Agent:agent, ExpectedEpoch:int)",
+    "Epoch = ExpectedEpoch",
+    "HasTerminatedBehavior()<transacts>:logic=",
+    "if (Active?, BehaviorTerminated?):",
+    "IsReadyForCurrentNpc()<transacts>:logic=",
     "NpcChar.IsActive[]\n            BehaviorReady?",
     "Monster.IsActive[]\n            BehaviorReady?",
     "not SpawnInFlight?",
@@ -60,7 +71,9 @@ BEHAVIOR_GUARDS = (
     "class(npc_behavior)",
     "GetAgent[]",
     "Character.GetNavigatable[]",
-    "Service.AcknowledgeBehavior(Agent)?",
+    "Service.AcknowledgeBehavior(Agent)?, BoundEpoch := Service.BoundEpochFor[Agent]",
+    "set AckEpoch = BoundEpoch",
+    "Service.WithdrawBehavior(Agent, AckEpoch)",
     "Service.GetNewMove[Agent, SeenSequence]",
     "MakeNavigationTarget(Command.Destination)",
     "Navigation.NavigateTo(",
@@ -119,6 +132,7 @@ DEVICE_GUARDS = (
     "AttackCueInput.Unregister(Registered)",
     "DismissInput.Unregister(Registered)",
     "ClearCommandInputs()",
+    "ActivateCommandInputs(Owner)",
     "PlayerRemovedEvent().Subscribe(OnPlayerLeft)",
     "AvatarController.VisualOwner?",
     "AvatarController.VisualCharacter?",
@@ -129,6 +143,7 @@ DEVICE_GUARDS = (
     "Runtime.RequestAttackCue(Player)?",
     "AttackCueOutput.Trigger(Player)",
     "Runtime.IsAuthorized()?",
+    "Runtime.IsReadyForCurrentNpc()?",
     "Stopped := Runtime.End(Self)",
     "TitanSpawner.Disable()",
     "TitanSpawner.DespawnAll(false)",
@@ -230,7 +245,12 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
                 "requires_native_compile", "requires_two_client_launch_session",
                 "no_untagged_spawned_event_association",
                 "no_global_input_registration",
-                "camera_requires_npc_behavior_ack"):
+                "camera_requires_npc_behavior_ack",
+                "command_input_requires_behavior_ack",
+                "behavior_onend_revokes_readiness",
+                "behavior_onend_terminal_for_epoch",
+                "behavior_end_cleanup_before_command_registration",
+                "orphan_spawner_monitor_cleanup"):
         if c.get("safety", {}).get(key) is not True:
             errors.append(f"safety gate disabled: {key}")
     lifecycle = c.get("lifecycle", {})
@@ -238,8 +258,10 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "lease": "one_session_controller",
         "late_spawn": "reject_and_despawn",
         "npc_elimination": "exact_agent_identity_then_teardown",
-        "input_registration": "verified_owner_only_dynamic_register_unregister",
+        "input_registration": "summon_owner_only_commands_after_exact_behavior_ack",
         "behavior_ack": "npc_behavior_ack_required_before_commands",
+        "behavior_end": "epoch_scoped_withdraw_and_terminal_command_cleanup",
+        "orphan_spawns": "purge_dedicated_spawner_without_owner",
         "unexpected_spawns": "fail_closed_despawn_dedicated_spawner",
         "spawn_association": "serialized_SpawnAt_return_and_epoch",
         "inflight_inventory": "allow_single_untrusted_candidate_until_exact_SpawnAt_return_or_timeout",
@@ -302,14 +324,33 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
     terminal = device[finish_at:device.find("    OnEnd<override>():void=", finish_at)]
     if finish_at < 0 or "ClearCommandInputs()" not in terminal:
         errors.append("terminal cleanup must remove command input eligibility")
-    if device.find("ActivateCommandInputs(Player)", device.find("    OnSummon(")) < device.find("Attempt := Runtime.Begin("):
-        errors.append("Titan command inputs registered before authoritative begin")
     # Begin marks SpawnInFlight before any SpawnAt is actually called.
     # Rejecting an already-populated dedicated spawner after Begin and
     # calling End would leave SpawnInFlight permanently set (no async
     # completion exists to clear it). Preflight must precede reservation.
     summon = device[device.find("    OnSummon(Agent:agent):void="):
                     device.find("    AwaitSpawn(ExpectedEpoch:int")]
+    # No movement/cue/dismiss input may appear while SpawnAt suspends or
+    # while the NPC behavior is still bootstrapping. Source checks are
+    # structural; native UI timing remains a separate Launch Session gate.
+    if "ActivateCommandInputs(" in summon:
+        errors.append("Titan command HUD must remain off during spawn admission")
+    owner_bound = summon.find("set ProxyOwner = option{Player}")
+    summon_hidden = summon.find("RefreshSummonRegistration()")
+    if not (0 <= owner_bound < summon_hidden < summon.find("TitanSpawner.Reset()")):
+        errors.append("summon action must be retracted once a proxy is pending")
+    eligible = device[device.find("    EligibleSummoner()<transacts>:?player="):
+                      device.find("    RefreshSummonRegistration():void=")]
+    if "not ProxyOwner?" not in eligible:
+        errors.append("summon action must be hidden during active or pending proxy")
+    ready_start = device.find("    AwaitBehaviorReady(ExpectedEpoch:int, SpawnedAgent:agent)")
+    ready_end = device.find("    # An optional fixed-point camera", ready_start)
+    ready = device[ready_start:ready_end]
+    ack = ready.find("Runtime.IsBehaviorReady(SpawnedAgent)?")
+    owner = ready.find("Owner := ProxyOwner?, Owner.IsActive[], Runtime.IsAuthorized()?")
+    registration = ready.find("ActivateCommandInputs(Owner)")
+    if ready_start < 0 or ready_end < 0 or not (0 <= ack < owner < registration):
+        errors.append("Titan command input registration requires exact NPC ack and live owner")
     preflight = summon.find("TitanSpawner.GetAgents().Length <> 0")
     reserve = summon.find("Attempt := Runtime.Begin(")
     cleanup = summon.find("TitanSpawner.DespawnAll(false)")
@@ -384,6 +425,68 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "AddPhysicalDevice[Devices, ProxyCamera]",
     )):
         errors.append("optional camera binding must be checked only when enabled")
+
+    # An NPC behavior may end without NPC elimination. Prevent an acknowledged
+    # but now-headless NPC from accepting paid cues or retaining owner HUD.
+    behavior_end = behavior[behavior.find("    OnEnd<override>():void="):]
+    withdraw_at = runtime.find("    WithdrawBehavior(Agent:agent, ExpectedEpoch:int)")
+    withdraw_end = runtime.find("    IsReadyForCurrentNpc()", withdraw_at)
+    withdraw = runtime[withdraw_at:withdraw_end]
+    movement_start = runtime.find("    GetNewMove(Agent:agent, SeenSequence:int)")
+    movement_end = runtime.find("    # Attack is a bounded", movement_start)
+    movement = runtime[movement_start:movement_end]
+    monitor_start = device.find("    Monitor()<suspends>:void=")
+    monitor_end = device.find("    FinishProxy():void=", monitor_start)
+    monitor = device[monitor_start:monitor_end]
+    if not all(x in behavior_end for x in (
+        "if (AckEpoch > 0):", "Service.WithdrawBehavior(Agent, AckEpoch)",
+        "Navigation.StopNavigation()"
+    )) or not all(x in withdraw for x in (
+        "Active?", "Epoch = ExpectedEpoch", "Current := OwnedNpc?",
+        "Current = Agent", "set BehaviorTerminated = true",
+        "set BehaviorReady = false", "set Pending = false"
+    )) or "BehaviorReady?" not in movement or not all(x in monitor for x in (
+        "else if (Runtime.HasTerminatedBehavior()?):",
+        "else if (CommandRegistered?):",
+        "if (not Runtime.IsReadyForCurrentNpc()?):", "FinishProxy()"
+    )):
+        errors.append("NPC behavior OnEnd must revoke exact epoch readiness and command HUD")
+
+    # A terminal behavior must be reaped even if it ended between the
+    # handshake and command HUD registration. Orphaned agents from a
+    # dedicated spawner must also be cleared without an associated owner.
+    terminal_at = monitor.find("else if (Runtime.HasTerminatedBehavior()?):")
+    command_at = monitor.find("else if (CommandRegistered?):")
+    orphan_at = monitor.find("if (TitanSpawner.GetAgents().Length > 0):")
+    orphan_disable = monitor.find("TitanSpawner.Disable()", orphan_at)
+    orphan_despawn = monitor.find("TitanSpawner.DespawnAll(false)", orphan_at)
+    if not (0 <= terminal_at < command_at and
+            "FinishProxy()" in monitor[terminal_at:command_at]):
+        errors.append("terminal behavior must clean up before command registration")
+    if not (0 <= command_at < orphan_at < orphan_disable < orphan_despawn
+            and "else:\n                    # The spawner is dedicated" in monitor):
+        errors.append("unowned Titan spawner agents must be purged in ownerless monitor branch")
+
+    # OnEnd must be a one-way transition within the same epoch. Otherwise
+    # an OnBegin poll overlapping native shutdown could re-acknowledge the
+    # same NPC and reopen paid cues/owner HUD before the monitor tears down.
+    begin = runtime[runtime.find("    Begin("):runtime.find("    IsAuthorized()")]
+    acknowledge = runtime[runtime.find("    AcknowledgeBehavior("):
+                          runtime.find("    # A stopped npc_behavior")]
+    ready_start = runtime.find("    IsBehaviorReady(")
+    ready = runtime[ready_start:runtime.find("    BoundNpc(Agent:agent)", ready_start)]
+    move = runtime[runtime.find("    RequestMove("):runtime.find("    GetNewMove(")]
+    cue = runtime[runtime.find("    RequestAttackCue("):runtime.find("    # Invalidate mailbox")]
+    if not all((
+        "set BehaviorTerminated = false" in begin,
+        "if (not BehaviorTerminated?, BoundNpc(Agent)?):" in acknowledge,
+        "set BehaviorTerminated = true" in withdraw,
+        "if (not BehaviorTerminated?, BehaviorReady?, BoundNpc(Agent)?):" in ready,
+        "not BehaviorTerminated?" in movement,
+        "not BehaviorTerminated?" in move,
+        "not BehaviorTerminated?" in cue,
+    )):
+        errors.append("terminal NPC behavior must not re-acknowledge or accept commands in same epoch")
 
     if "weak_map(player," in combined:
         errors.append("second persistent profile map prohibited")
