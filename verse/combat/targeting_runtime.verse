@@ -25,6 +25,7 @@ aeonfall_targeting_runtime := class():
             OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Owner]
             TargetKey := GetAEONFALLActorRegistry().GetRuntimeKey[Target]
             OwnerKey <> TargetKey
+            GetAEONFALLActorRegistry().IsLiveCharacter[TargetKey]
         then:
             Selection := aeonfall_target_selection:
                 OwnerKey := OwnerKey
@@ -57,7 +58,7 @@ aeonfall_targeting_runtime := class():
             DurationSeconds > 0.0
             OwnerKey <> TargetKey
             GetAEONFALLActorRegistry().IsRegistered[OwnerKey]
-            GetAEONFALLActorRegistry().IsRegistered[TargetKey]
+            GetAEONFALLActorRegistry().IsLiveCharacter[TargetKey]
         then:
             Selection := aeonfall_target_selection:
                 OwnerKey := OwnerKey
@@ -83,7 +84,9 @@ aeonfall_targeting_runtime := class():
     GetSelection(OwnerKey:string)<decides><transacts>:aeonfall_target_selection=
         Selection := Selections[OwnerKey]
         Selection.RemainingSeconds > 0.0
-        GetAEONFALLActorRegistry().IsRegistered[Selection.TargetKey]
+        # A dead NPC may remain registered until its OnEnd cleanup. Never
+        # return its selection for paid ability activation in that interval.
+        GetAEONFALLActorRegistry().IsLiveCharacter[Selection.TargetKey]
         Selection
 
     Clear(OwnerKey:string)<transacts>:logic=
@@ -132,7 +135,7 @@ aeonfall_targeting_runtime := class():
 
             if:
                 Remaining > 0.0
-                GetAEONFALLActorRegistry().IsRegistered[Selection.TargetKey]
+                GetAEONFALLActorRegistry().IsLiveCharacter[Selection.TargetKey]
             then:
                 Next := aeonfall_target_selection:
                     OwnerKey := Selection.OwnerKey

@@ -1,4 +1,5 @@
 using { /Fortnite.com/Devices }
+using { /Fortnite.com/Characters }
 using { /Verse.org/Simulation }
 using { /Verse.org/Verse }
 
@@ -55,13 +56,15 @@ aeonfall_status_ability_adapter_device := class(creative_device):
         var Succeeded:logic = true
         var ResultCode:string = "ok"
 
-        if:
-            GetAEONFALLActorRegistry().IsRegistered[Request.TargetKey]
-        then:
-            set Succeeded = Succeeded
-        else:
+        # Request ownership and the live native actor must both be valid at
+        # effect execution time. Claiming the request is not proof that a
+        # selected NPC survived the asynchronous event handoff.
+        if (not GetAEONFALLActorRegistry().IsRegistered[Request.TargetKey]):
             set Succeeded = false
             set ResultCode = "target_not_registered"
+        else if (not GetAEONFALLActorRegistry().IsLiveCharacter[Request.TargetKey]):
+            set Succeeded = false
+            set ResultCode = "target_not_active"
 
         if (Succeeded?):
             if:
