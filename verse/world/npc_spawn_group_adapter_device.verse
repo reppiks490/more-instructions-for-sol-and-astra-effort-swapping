@@ -59,8 +59,8 @@ aeonfall_npc_spawn_group_adapter_device := class(creative_device):
         set BusSubscription = false
         set ActiveInvasionIds = array{}
         DisableAll()
-        if (DespawnOnRelease?):
-            DespawnAll()
+        # Device teardown must never strand AI even if wave-release despawn is optional.
+        DespawnAll()
         Released := ReleaseAdapterLease()
         set OwnsLease = false
 
@@ -271,8 +271,8 @@ aeonfall_npc_spawn_group_adapter_device := class(creative_device):
             RemovedCompleted := RemoveRequester(Event.SourceId)
             if (RemovedCompleted?, ActiveInvasionIds.Length = 0):
                 DisableAll()
-                if (DespawnOnRelease?):
-                    DespawnAll()
+                # Terminal owners release physical NPCs unconditionally.
+                DespawnAll()
             return
 
         if:
@@ -283,5 +283,5 @@ aeonfall_npc_spawn_group_adapter_device := class(creative_device):
             RemovedFailed := RemoveRequester(Event.SourceId)
             if (RemovedFailed?, ActiveInvasionIds.Length = 0):
                 DisableAll()
-                if (DespawnOnRelease?):
-                    DespawnAll()
+                # Timeout and explicit failure use the same hard teardown.
+                DespawnAll()
