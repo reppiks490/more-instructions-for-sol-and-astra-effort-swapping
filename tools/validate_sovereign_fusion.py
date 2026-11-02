@@ -34,7 +34,9 @@ def check_sources(runtime: str, device: str, policy: dict) -> list[str]:
     errors: list[str] = []
 
     def need(value: str, fragment: str, context: str):
-        if fragment not in value:
+        # Reject a numeric prefix mutation (e.g. <= 120 becoming <= 1200).
+        numeric_boundary = r"(?![0-9.])" if fragment[-1:].isdigit() else ""
+        if not re.search(re.escape(fragment) + numeric_boundary, value):
             errors.append(f"{context}: missing {fragment}")
 
     def scoped(value: str, name: str, *fragments: str):
