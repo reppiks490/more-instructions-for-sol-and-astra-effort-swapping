@@ -1,5 +1,19 @@
 # Build change log
 
+## 2026-11-01 — Omnigod: animated fusion source geometry and cue timeline
+
+Extended the original thirteen-part machine-demon source kit with an eight-second
+real glTF 2.0 animation: deterministic source-space armor separation/return,
+spinal reactor movement, expanding Axiom Core, and rotating 16-part eclipse.
+An emitted JSON timeline supplies seven synchronized, accessible future
+audio/VFX/telegraph design beats. New source validation checks actual GLB
+animation channel indices, timing, rest-pose restoration, finite transforms,
+quaternion norms, canonical FUS-001 IDs, checksums and non-fabricated native
+evidence. Dedicated CI packages the animation with the original geometry.
+This is a DCC node animation source preview, not a UEFN skeletal FBX,
+native cinematic, NPC possession, real audio or Launch Session verification.
+
+
 ## 2026-11-01 — Omnigod: deterministic original 3D manifestation source
 
 Built a 13-piece original, crimson-violet machine-demon static source-geometry
