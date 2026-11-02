@@ -223,6 +223,147 @@ class FullUniverseAuditTests(unittest.TestCase):
             self.assertTrue(any("missing/invalid unique_visual_key" in e
                                 for e in errors))
 
+    def test_copied_visual_payloads_do_not_inflate_entity_approvals(self):
+        # Distinct filenames and visual labels cannot launder identical bytes.
+        # Sharing ordinary mechanics infrastructure is intentionally allowed.
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            categories = self.policy["entity_source_categories"]["weapon"]
+            shared = root / "shared_mechanics.txt"
+            shared.write_text("reusable gameplay engine", encoding="utf-8")
+
+            def pack(ident, visual_bytes):
+                sources = {}
+                for category in categories:
+                    if category == "mechanics":
+                        sources[category] = ["shared_mechanics.txt"]
+                        continue
+                    relative = f"{ident}/{category}.txt"
+                    file = root / relative
+                    file.parent.mkdir(parents=True, exist_ok=True)
+                    file.write_bytes(
+                        visual_bytes if category == "visual"
+                        else f"{ident}-{category}".encode("utf-8")
+                    )
+                    sources[category] = [relative]
+                return {
+                    "canonical_id": ident, "regions": ["REG-001"],
+                    "unique_visual_key": f"{ident}-unique-label",
+                    "sources": sources,
+                    "source_review": {
+                        "state": "approved_source", "reviewer": "test reviewer",
+                        "evidence": "temporary fixture, not project asset",
+                    },
+                }
+
+            original = pack("WPN-001", b"same silhouette source bytes")
+            copied = pack("WPN-002", b"same silhouette source bytes")
+            entities = {
+                "WPN-001": {"family": "weapon"},
+                "WPN-002": {"family": "weapon"},
+            }
+
+            def check(packs):
+                registry = {"schema_version": 1, "entity_packs": packs,
+                            "region_packs": [], "system_packs": []}
+                return audit.inspect_inventory(
+                    root, self.policy, registry, entities, {"REG-001"}, set()
+                )
+
+            approvals, errors = check([original, copied])
+            self.assertEqual(approvals["entity_packs"]["approved"], 1)
+            self.assertTrue(any("cloned visual source payload" in x for x in errors))
+
+            (root / copied["sources"]["visual"][0]).write_bytes(
+                b"genuinely changed visual source data"
+            )
+            approvals, errors = check([original, copied])
+            self.assertEqual(approvals["entity_packs"]["approved"], 2)
+            self.assertEqual(errors, [])  # shared mechanics is permitted
+
+    def test_copied_regional_terrain_source_fails_even_with_new_filename(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            regions = {"REG-001", "REG-002"}
+
+            def region_pack(ident, heightmap):
+                sources = {}
+                for category in self.policy["region_source_categories"]:
+                    relative = f"{ident}/{category}.bin"
+                    file = root / relative
+                    file.parent.mkdir(parents=True, exist_ok=True)
+                    file.write_bytes(
+                        heightmap if category == "terrain"
+                        else f"{ident}-{category}".encode("utf-8")
+                    )
+                    sources[category] = [relative]
+                return {
+                    "region_id": ident, "sources": sources,
+                    "source_review": {
+                        "state": "approved_source", "reviewer": "test reviewer",
+                        "evidence": "temporary fixture, not UEFN terrain",
+                    },
+                }
+
+            packs = [
+                region_pack("REG-001", b"same landscape geometry"),
+                region_pack("REG-002", b"same landscape geometry"),
+            ]
+            registry = {"schema_version": 1, "entity_packs": [],
+                        "region_packs": packs, "system_packs": []}
+            approvals, errors = audit.inspect_inventory(
+                root, self.policy, registry, {}, regions, set()
+            )
+            self.assertEqual(approvals["region_packs"]["approved"], 1)
+            self.assertTrue(any("cloned terrain source payload" in x for x in errors))
+
+            (root / packs[1]["sources"]["terrain"][0]).write_bytes(
+                b"independently authored landscape source"
+            )
+            approvals, errors = audit.inspect_inventory(
+                root, self.policy, registry, {}, regions, set()
+            )
+            self.assertEqual(approvals["region_packs"]["approved"], 2)
+            self.assertEqual(errors, [])
+
+    def test_faction_visual_identity_payloads_also_require_distinction(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            categories = self.policy["entity_source_categories"]["faction"]
+
+            def pack(ident):
+                sources = {}
+                for category in categories:
+                    relative = f"{ident}/{category}.txt"
+                    file = root / relative
+                    file.parent.mkdir(parents=True, exist_ok=True)
+                    file.write_text(
+                        "copied source" if category == "visual_identity"
+                        else f"{ident} {category}", encoding="utf-8"
+                    )
+                    sources[category] = [relative]
+                return {
+                    "canonical_id": ident, "regions": ["GLOBAL"],
+                    "unique_visual_key": f"{ident} unique",
+                    "sources": sources,
+                    "source_review": {"state": "approved_source",
+                                      "reviewer": "fixture", "evidence": "fixture"},
+                }
+
+            inventory = {"schema_version": 1,
+                         "entity_packs": [pack("FAC-001"), pack("FAC-002")],
+                         "region_packs": [], "system_packs": []}
+            approvals, errors = audit.inspect_inventory(
+                root, self.policy, inventory,
+                {"FAC-001": {"family": "faction"},
+                 "FAC-002": {"family": "faction"}},
+                {"REG-001"}, set()
+            )
+            self.assertEqual(approvals["entity_packs"]["approved"], 1)
+            self.assertTrue(
+                any("cloned visual_identity source payload" in x for x in errors)
+            )
+
     def test_report_does_not_claim_imported_uefn_project(self):
         document = audit.markdown(self.current)
         self.assertIn("Source complete", document)
