@@ -1,5 +1,20 @@
 # Build change log
 
+## 2026-11-01 — Sovereign Armor Fusion adapter and bounded budget
+
+Added the creator-only FUS-001 physical presentation prototype atop the
+Fusion Architect's canonical `fusion_state_runtime.verse` phase contract.
+A dedicated session budget enforces finite energy, duration and cooldown
+without duplicating owner identity or phase state. The native adapter
+requests owner-specific visual glow, orbit camera and cinematic playback,
+then restores effects on separation, revocation, disconnect, death,
+character replacement, timeout and device end. A source validator,
+24 mutation tests, UEFN editor binding instructions and multiplayer
+acceptance matrix were added. Device defaults disabled; owner provisioning,
+native Verse compilation, actual custom armor mesh and multiplayer Launch
+Session remain unverified.
+
+
 ## 2026-11-01 — Fusion Architect: creator-only state and cross-loop contract
 
 Added a session-scoped fusion state service with a single leased controller,
