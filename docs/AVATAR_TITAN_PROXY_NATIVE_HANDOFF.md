@@ -38,7 +38,9 @@ has an active FUS-001 Armor Fusion**. It is disabled by default.
    successful NPC behavior acknowledgement. A bounded coroutine repositions
    that camera every 0.15 seconds to the NPC position plus an editable
    **world-space** offset, while preserving the editor-authored camera rotation.
-   Any invalidation or teleport failure removes it **from that owner only**.
+   The initial camera relocation must succeed **before** it is added to
+   the owner's stack; no unpositioned camera is presented. Subsequent
+   invalidation or teleport failure removes it **from that owner only**.
    This is not a native NPC viewpoint, facing-relative chase camera, camera
    proof, character swap or possession.
 
