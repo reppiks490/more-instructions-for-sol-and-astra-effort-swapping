@@ -110,7 +110,8 @@ def catalog_scan(root: Path, policy: dict):
 
 
 def inspect_package(root: Path, item: dict, key: str, valid_ids: set[str],
-                    required: dict[str, list[str]], require_region: bool):
+                    required: dict[str, list[str]], require_region: bool,
+                    region_ids: set[str]):
     errors = []
     ident = item.get(key)
     if ident not in valid_ids:
@@ -146,7 +147,7 @@ def inspect_package(root: Path, item: dict, key: str, valid_ids: set[str],
             complete = False
         else:
             for region in regions:
-                if region not in valid_ids and region != "GLOBAL":
+                if region not in region_ids and region != "GLOBAL":
                     errors.append(f"{ident}: unrecognized region scope {region!r}")
                     complete = False
     # Review is an explicit governance claim, NOT proof of native UEFN play.
@@ -205,12 +206,9 @@ def inspect_inventory(root: Path, policy: dict, inventory: dict,
             seen.add(ident)
             # Entity region scopes are validated against the actual world,
             # not against content entity IDs.
-            region_scope = region_ids if require_region else ids
-            complete, problems = inspect_package(root, package, key, region_scope if
-                require_region else ids, categories, require_region)
-            if require_region and ident not in ids:
-                problems.append(f"{collection}: invalid entity {ident}")
-                complete = False
+            complete, problems = inspect_package(
+                root, package, key, ids, categories, require_region, region_ids
+            )
             errors.extend(problems)
             if complete:
                 if require_region and not complete_value(package.get("unique_visual_key")):
