@@ -398,3 +398,20 @@ and verify leases and region claims are released without resurrecting physical
 actors. Run with two separated clients and record native Verse compilation,
 actual NPC counts, device ownership, streaming relevance and memory. The CI
 source tests do not execute any of these engine operations.
+
+## World-event shell trigger binding (2026-11-01)
+
+The shared world-event service now exposes the *active* owning event ID for a
+region, and an existing-bus subscriber maps canonical owner transitions to
+region-local `RegionEntered`/`RegionReleased` UEFN trigger outputs. This is
+not a new population director. It reuses `world_event.started`,
+`stage_advanced`, `completed`, and `failed` events and periodically reads
+authoritative session state so delayed, lost, or coalesced events do not
+create permanent incorrect ownership. Entry is emitted once per owner change;
+release precedes entry during handoff and fires on owned-device shutdown.
+
+The editor must still gate any physical spawn requests through player
+relevance, existing NPC spawner leases, authored caps, and cell teardown.
+See [WORLD_EVENT_REGION_BINDING.md](WORLD_EVENT_REGION_BINDING.md) for wiring
+and native two-player acceptance. Source tests do not establish physical
+streaming, native Verse compilation or cooked memory correctness.

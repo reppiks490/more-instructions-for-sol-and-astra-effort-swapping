@@ -238,6 +238,23 @@ def install(project_file: Path, source_root: Path = ROOT, plugin_name: str | Non
         )
         if errors:
             raise ValueError("Titan proxy handoff invalid: " + "; ".join(errors))
+    # FUS-001/002 native device roles and shared references are source-owned.
+    # Reject manifest drift BEFORE modifying an editor-created project.
+    fusion_path = source_root / "content/sovereign/fusion_native_binding_handoff.json"
+    if fusion_path.exists():
+        native_handoff = within(
+            source_root / "tools/uefn_editor/fusion_native_binding_handoff.py", source_root
+        )
+        if not native_handoff.is_file():
+            raise ValueError("Missing Sovereign fusion physical binding validator.")
+        spec = importlib.util.spec_from_file_location("fusion_native_installer_preflight", native_handoff)
+        if spec is None or spec.loader is None:
+            raise ValueError("Could not load Sovereign fusion physical binding validator.")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        errors = module.validate_contract(source_root, module.read_contract(source_root))
+        if errors:
+            raise ValueError("Invalid Sovereign fusion physical handoff: " + "; ".join(errors))
     destination = writable_path(plugin.parent / "Content" / "AEONFALL", project_root)
     package = writable_path(project_root / "AEONFALLImportPackage", project_root)
     inventory_path = destination / "aeonfall-install.json"
@@ -263,7 +280,7 @@ def install(project_file: Path, source_root: Path = ROOT, plugin_name: str | Non
                     raise ValueError(f"Edited stale source requires manual resolution: {path}")
                 stale.append((path, old_hash))
     imports = []
-    for relative in ["assets/source/ossuary_starter", "tools/uefn_editor", "docs", "content/vertical_slice", "content/sovereign/titan_proxy_experiment.json"]:
+    for relative in ["assets/source/ossuary_starter", "tools/uefn_editor", "docs", "content/vertical_slice", "content/sovereign/titan_proxy_experiment.json", "content/sovereign/fusion_native_binding_handoff.json"]:
         candidate = source_root / relative
         if candidate.is_dir():
             for item in sorted(candidate.rglob("*")):
