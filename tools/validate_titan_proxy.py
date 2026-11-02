@@ -72,6 +72,9 @@ BEHAVIOR_GUARDS = (
 )
 DEVICE_GUARDS = (
     "Enabled:logic = false",
+    "ExperimentalCameraEnabled:logic = false",
+    "ProxyCamera:gameplay_camera_fixed_point_device",
+    "ProxyCameraOffset:vector3",
     "TitanSpawner:npc_spawner_device",
     "Waypoints:[]creative_prop",
     "GetAEONFALLTitanProxyCommands()",
@@ -90,6 +93,12 @@ DEVICE_GUARDS = (
     "OnlyAgent = SpawnedAgent",
     "AwaitBehaviorReady(ExpectedEpoch, SpawnedAgent)",
     "Runtime.IsBehaviorReady(SpawnedAgent)?",
+    "StartProxyCamera(ExpectedEpoch, SpawnedAgent)",
+    "TrackProxyCamera(ExpectedEpoch:int, Npc:agent, Owner:player)",
+    "ProxyCamera.AddTo(Owner)",
+    "ProxyCamera.TeleportTo[Position, Rotation]",
+    "ProxyCamera.RemoveFrom(Owner)",
+    "ReleaseProxyCamera()",
     "Attempts >= 20",
     "UnexpectedSpawnCount(Runtime)?",
     "if (not Runtime.SpawnPendingForCurrentEpoch()?):",
@@ -164,6 +173,8 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "spawner_editor_path": None,
         "input_editor_paths": [],
         "waypoint_editor_paths": [],
+        "camera_type": "gameplay_camera_fixed_point_device",
+        "camera_editor_path": None,
     }
     for name, expected_value in fields.items():
         if binding.get(name) != expected_value:
@@ -204,15 +215,22 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
     if c.get("camera") != {
         "player_movement": "native_fortnite_character",
         "owner_camera": "existing_FUS-001_orbit_camera",
-        "proxy_follow_camera": "not_implemented",
-        "npc_possession": False
+        "proxy_follow_camera": "experimental_opt_in_fixed_point_world_offset_unverified",
+        "npc_possession": False,
+        "experimental_enabled_by_default": False,
+        "camera_device": "gameplay_camera_fixed_point_device",
+        "camera_stack": "owner_only_AddTo_RemoveFrom",
+        "update_seconds": 0.15,
+        "camera_offset": "editable_world_space_not_NPC_facing",
+        "native_test": "not_run",
     }:
         errors.append("camera/possession capability mismatch")
     for key in ("no_shared_npc_spawner", "no_second_owner_or_profile_root",
                 "attack_cue_must_not_wire_damage", "f002_not_activated",
                 "requires_native_compile", "requires_two_client_launch_session",
                 "no_untagged_spawned_event_association",
-                "no_global_input_registration"):
+                "no_global_input_registration",
+                "camera_requires_npc_behavior_ack"):
         if c.get("safety", {}).get(key) is not True:
             errors.append(f"safety gate disabled: {key}")
     lifecycle = c.get("lifecycle", {})
@@ -231,6 +249,7 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "device_shutdown": "cancel_subscriptions_and_despawn",
         "player_join": "no_implicit_entitlement",
         "replication": "native_npc_simulation_unverified",
+        "camera_teardown": "remove_owner_camera_before_npc_despawn",
     }.items():
         if lifecycle.get(field) != value:
             errors.append(f"lifecycle mismatch: {field}")
@@ -311,6 +330,60 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         < inventory.find("if (not Runtime.SpawnPendingForCurrentEpoch()?):")
     ):
         errors.append("single pending SpawnAt candidate must remain untrusted until identity reconciliation")
+
+    # The optional camera is presentation for a single authorized owner,
+    # never NPC possession or a replacement for canonical FUS-001 control.
+    if "ProxyCamera.AddToAll(" in device or "ProxyCamera.RemoveFromAll(" in device:
+        errors.append("Titan experimental camera must not alter all players' camera stacks")
+    camera_start = device.find("    StartProxyCamera(ExpectedEpoch:int, Npc:agent):void=")
+    camera_end = device.find("    # Observes every native spawner agent", camera_start)
+    camera = device[camera_start:camera_end]
+    if camera_start < 0 or camera_end < 0 or not all(fragment in camera for fragment in (
+        "ExperimentalCameraEnabled?",
+        "Runtime.IsCurrentEpoch(ExpectedEpoch)?",
+        "Runtime.IsBehaviorReady(Npc)?",
+        "Owner := ProxyOwner?",
+        "ProxyCamera.IsValid[]",
+        "NpcCharacter := Npc.GetFortCharacter[]",
+        "if (ProxyCamera.TeleportTo[Position, Rotation]):",
+        "ProxyCamera.AddTo(Owner)",
+        "set CameraOwner = option{Owner}",
+        "Sleep(0.15)",
+        "Runtime.IsBehaviorReady(Npc)?",
+        "CurrentCameraOwner = Owner",
+        "if (not ProxyCamera.TeleportTo[Position, Rotation]):",
+        "ReleaseProxyCamera()",
+        "ProxyCamera.RemoveFrom(Owner)",
+        "set CameraOwner = false",
+    )):
+        errors.append("experimental camera lost owner/epoch/behavior gating or owned teardown")
+    start_camera = camera.split("    TrackProxyCamera(ExpectedEpoch:int", 1)[0]
+    if not (0 <= start_camera.find("if (ProxyCamera.TeleportTo[Position, Rotation]):")
+            < start_camera.find("ProxyCamera.AddTo(Owner)")):
+        errors.append("Titan camera must be positioned successfully before stack addition")
+    # The camera is added only after behavior becomes ready, and must be
+    # removed before despawning so FUS-001 orbit camera remains on the stack.
+    ready_at = device.find("    AwaitBehaviorReady(ExpectedEpoch:int")
+    if ready_at < 0 or not (
+        device.find("Runtime.IsBehaviorReady(SpawnedAgent)?", ready_at)
+        < device.find("StartProxyCamera(ExpectedEpoch, SpawnedAgent)", ready_at)
+    ):
+        errors.append("Titan camera must not start before NPC behavior acknowledgement")
+    finish_at = device.find("    FinishProxy():void=")
+    finish = device[finish_at:device.find("    OnEnd<override>():void=", finish_at)]
+    if finish_at < 0 or not (
+        0 <= finish.find("ReleaseProxyCamera()")
+        < finish.find("Stopped := Runtime.End(Self)")
+        < finish.find("TitanSpawner.DespawnAll(false)")
+    ):
+        errors.append("camera stack must be removed before NPC teardown")
+    bindings_start = device.find("    GetPhysicalDevices()<decides><transacts>:[]creative_object=")
+    bindings_end = device.find("    AddPhysicalDevice(", bindings_start)
+    if bindings_start < 0 or bindings_end < 0 or not all(fragment in device[bindings_start:bindings_end] for fragment in (
+        "if (ExperimentalCameraEnabled?):",
+        "AddPhysicalDevice[Devices, ProxyCamera]",
+    )):
+        errors.append("optional camera binding must be checked only when enabled")
 
     if "weak_map(player," in combined:
         errors.append("second persistent profile map prohibited")

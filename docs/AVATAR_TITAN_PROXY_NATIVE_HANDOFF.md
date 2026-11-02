@@ -1,8 +1,9 @@
 # AEONFALL — Sovereign Titan proxy research harness (FUS-002 remains disabled)
 
 **Source prototype, not native-compiled UEFN gameplay.** The source in this PR
-does not implement native possession, skeletal mesh substitution, an NPC-follow
-camera, actual Titan damage, or verified replication. FUS-002 cannot be
+does not implement native possession, skeletal mesh substitution, actual
+Titan damage, or verified replication. An optional fixed-point camera follow
+experiment is authored but **not native-tested or enabled by default**. FUS-002 cannot be
 activated by the Architect's authoritative phase service; the sandbox harness
 may temporarily control a separate spawned NPC **only while the true creator
 has an active FUS-001 Armor Fusion**. It is disabled by default.
@@ -32,6 +33,16 @@ has an active FUS-001 Armor Fusion**. It is disabled by default.
    boundaries. `tools/validate_titan_proxy.py` and
    `tests/test_titan_proxy.py` assert source guards, mutate threat surfaces
    and run an independent policy **reference model**, not Verse.
+5. **Optional camera research:** a dedicated `gameplay_camera_fixed_point_device`
+   can be added to the single verified owner's camera stack only **after**
+   successful NPC behavior acknowledgement. A bounded coroutine repositions
+   that camera every 0.15 seconds to the NPC position plus an editable
+   **world-space** offset, while preserving the editor-authored camera rotation.
+   The initial camera relocation must succeed **before** it is added to
+   the owner's stack; no unpositioned camera is presented. Subsequent
+   invalidation or teleport failure removes it **from that owner only**.
+   This is not a native NPC viewpoint, facing-relative chase camera, camera
+   proof, character swap or possession.
 
 ## Native spawn and behavior-readiness safety upgrade
 
@@ -160,9 +171,17 @@ https://dev.epicgames.com/documentation/fortnite/using-input-trigger-devices-in-
   Arsenal's separate FUS-001 adapter must retain independent target/range/
   faction/LOS validation. This Titan harness currently does **no damage**.
 - Owner movement and the existing FUS-001 orbit camera remain native and
-  player-bound. **No Titan viewpoint** is enabled or claimed. NPC navigation
-  and its resulting replication are native-engine responsibilities whose
-  behavior must be demonstrated in two-client Launch Sessions.
+  player-bound. The experimental Titan fixed-point tracking camera is **off
+  by default**. If explicitly enabled for controlled editor testing, dedicate
+  one Fixed Point Camera device, disable **Add to Players on Start**, wire
+  `ProxyCamera` and set `ExperimentalCameraEnabled=true` only after all
+  native bindings and authority are proven. The device is added only to the
+  verified owner's stack after NPC behavior readiness and removed on dismissal,
+  NPC elimination, owner revocation, disconnect or device shutdown. Its
+  world-space camera offset and editor-authored rotation do **not** guarantee
+  Titan framing, occlusion safety, smoothness, target tracking or input
+  redirection. Native NPC navigation, camera behavior and replication must
+  be demonstrated in two-client Launch Sessions.
 - Keep native FUS-002 activation disabled. The harness is a test NPC, not a
   permanent player form or a second origin of Sovereign authority.
 
@@ -234,8 +253,15 @@ and two independent Fortnite clients' recorded Launch Sessions. Check:
 - Resource depletion, 10 rapid attack-cue presses, generation rotation,
   FUS-001 separation, permission revocation, respawn, disconnect and
   device shutdown. Verify all NPCs and per-owner cues are cleared.
-- Confirm **no** real damage, grants, avatar movement suppression, owner
-  camera theft or cross-client global activation. Never claim NPC possession.
+- With the optional camera **off**, confirm the owner's FUS-001 orbit camera
+  remains unmodified. With it on in a private editor session, verify only
+  the verified owner gets a fixed-point stack addition; observe camera
+  tracking on multiple waypoints and its world-offset/rotation limits. Dismiss,
+  revoke authority, kill the NPC, disconnect and force failed TeleportTo;
+  confirm only the owner camera is removed, returning to FUS-001 without
+  changing the second client's view or trapping the first client.
+- Confirm **no** real damage, grants, avatar movement suppression, inherited
+  owner camera, or cross-client global activation. Never claim NPC possession.
 - Measure platform memory, server/client network observations and lag spikes.
 
 No test or CI workflow in this repository can substitute for these native
@@ -255,6 +281,8 @@ in GitHub issue #37. No concurrent edits to PR #48 or PR #49 are required.
 - NPC Spawner: https://dev.epicgames.com/documentation/fortnite/verse-api/fortnitedotcom/devices/npc_spawner_device
 - NPC Behavior: https://dev.epicgames.com/documentation/fortnite/verse-api/fortnitedotcom/ai/npc_behavior
 - Navigatable: https://dev.epicgames.com/documentation/fortnite/verse-api/fortnitedotcom/ai/navigatable
+- Fixed Point Camera: https://dev.epicgames.com/documentation/fortnite/using-fixed-point-camera-devices-in-fortnite-creative
+- Camera Stack API: https://dev.epicgames.com/documentation/fortnite/verse-api/fortnitedotcom/devices/gameplay_camera_device
 
 **Evidence:** Verse compile `not_run`; NPC placement `not_run`; navigation
 `not_run`; multiplayer `not_run`; possession `unproven`.

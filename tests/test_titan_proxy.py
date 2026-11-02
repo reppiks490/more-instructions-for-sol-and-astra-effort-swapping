@@ -379,6 +379,94 @@ class TitanProxySourceTests(unittest.TestCase):
         c["camera"]["proxy_follow_camera"] = "native_verified"
         self.assertTrue(self.errors(c=c))
 
+    def test_camera_only_opt_in_with_exact_npc_acknowledgement(self):
+        self.assertIn("ExperimentalCameraEnabled:logic = false", self.device)
+        camera = self.device.split(
+            "    StartProxyCamera(ExpectedEpoch:int, Npc:agent):void=", 1
+        )[1].split("    # Observes every native spawner agent", 1)[0]
+        for fragment in (
+            "ExperimentalCameraEnabled?",
+            "Runtime.IsCurrentEpoch(ExpectedEpoch)?",
+            "Runtime.IsBehaviorReady(Npc)?",
+            "Owner := ProxyOwner?",
+            "ProxyCamera.AddTo(Owner)",
+            "CurrentCameraOwner = Owner",
+            "Runtime.IsBehaviorReady(Npc)?",
+            "if (not ProxyCamera.TeleportTo[Position, Rotation]):",
+            "ProxyCamera.RemoveFrom(Owner)",
+        ):
+            self.assertIn(fragment, camera)
+
+    def test_initial_camera_position_failure_cannot_push_stack(self):
+        camera = self.device.split(
+            "    StartProxyCamera(ExpectedEpoch:int, Npc:agent):void=", 1
+        )[1].split("    TrackProxyCamera(ExpectedEpoch:int", 1)[0]
+        self.assertLess(
+            camera.index("if (ProxyCamera.TeleportTo[Position, Rotation]):"),
+            camera.index("ProxyCamera.AddTo(Owner)")
+        )
+        device = self.device.replace(
+            "if (ProxyCamera.TeleportTo[Position, Rotation]):",
+            "if (true?):", 1
+        )
+        self.assertTrue(self.errors(device=device))
+
+    def test_camera_enabled_by_default_rejected(self):
+        device = self.device.replace(
+            "ExperimentalCameraEnabled:logic = false",
+            "ExperimentalCameraEnabled:logic = true",
+        )
+        self.assertTrue(self.errors(device=device))
+
+    def test_camera_global_stack_mutation_rejected(self):
+        device = self.device.replace("ProxyCamera.AddTo(Owner)", "ProxyCamera.AddToAll()")
+        self.assertTrue(self.errors(device=device))
+        device = self.device.replace(
+            "ProxyCamera.RemoveFrom(Owner)", "ProxyCamera.RemoveFromAll()"
+        )
+        self.assertTrue(self.errors(device=device))
+
+    def test_camera_late_ack_bypass_rejected(self):
+        device = self.device.replace(
+            "Runtime.IsBehaviorReady(Npc)?", "true?"
+        )
+        self.assertTrue(self.errors(device=device))
+
+    def test_camera_epoch_and_owner_bypass_rejected(self):
+        device = self.device.replace(
+            "Runtime.IsCurrentEpoch(ExpectedEpoch)?", "true?"
+        )
+        self.assertTrue(self.errors(device=device))
+        device = self.device.replace(
+            "CurrentCameraOwner = Owner", "true?"
+        )
+        self.assertTrue(self.errors(device=device))
+
+    def test_camera_stack_must_pop_on_teardown(self):
+        device = self.device.replace("ProxyCamera.RemoveFrom(Owner)", "Print(\"leak\")")
+        self.assertTrue(self.errors(device=device))
+        device = self.device.replace(
+            "        ClearCommandInputs()\n        ReleaseProxyCamera()\n        # Invalidate all mailbox",
+            "        ClearCommandInputs()\n        # Invalidate all mailbox",
+        )
+        self.assertTrue(self.errors(device=device))
+
+    def test_camera_physical_binding_is_conditional(self):
+        device = self.device.replace(
+            "        if (ExperimentalCameraEnabled?):\n"
+            "            set Devices = AddPhysicalDevice[Devices, ProxyCamera]",
+            "        set Devices = AddPhysicalDevice[Devices, ProxyCamera]",
+        )
+        self.assertTrue(self.errors(device=device))
+
+    def test_camera_native_evidence_unverified(self):
+        c = copy.deepcopy(self.contract)
+        c["camera"]["native_test"] = "passed"
+        self.assertTrue(self.errors(c=c))
+        c = copy.deepcopy(self.contract)
+        c["camera"]["npc_possession"] = True
+        self.assertTrue(self.errors(c=c))
+
 
 class TitanProxyPolicyModelTests(unittest.TestCase):
     def setUp(self):
@@ -688,6 +776,78 @@ class OwnerInputRegistrationModelTests(unittest.TestCase):
         self.m.dismiss()
         self.assertTrue(self.m.summon("owner-B"))
         self.assertFalse(self.m.command("owner-A"))
+
+class TitanCameraStackReferenceModel:
+    """Stack ownership policy only; never models actual UEFN camera behavior."""
+
+    def __init__(self, *, enabled=False):
+        self.enabled = enabled
+        self.camera_owner = None
+        self.active_epoch = 0
+
+    def start(self, *, owner, epoch, active, ready):
+        if (not self.enabled or not active or not ready or owner is None
+                or self.camera_owner is not None or epoch != self.active_epoch):
+            return False
+        self.camera_owner = owner
+        return True
+
+    def frame(self, *, owner, epoch, active, ready, teleport_ok=True):
+        if (owner != self.camera_owner or not active or not ready
+                or epoch != self.active_epoch):
+            return False
+        if not teleport_ok:
+            self.release()
+            return False
+        return True
+
+    def release(self):
+        self.camera_owner = None
+
+    def restart(self):
+        self.release()
+        self.active_epoch += 1
+
+
+class TitanCameraStackPolicyTests(unittest.TestCase):
+    def setUp(self):
+        self.cam = TitanCameraStackReferenceModel()
+
+    def test_disabled_by_default_and_no_implicit_stack(self):
+        self.assertFalse(self.cam.start(owner="creator", epoch=0, active=True, ready=True))
+        self.assertIsNone(self.cam.camera_owner)
+
+    def test_camera_only_after_native_ack_and_owner(self):
+        self.cam.enabled = True
+        self.assertFalse(self.cam.start(owner="creator", epoch=0, active=True, ready=False))
+        self.assertFalse(self.cam.start(owner=None, epoch=0, active=True, ready=True))
+        self.assertTrue(self.cam.start(owner="creator", epoch=0, active=True, ready=True))
+        self.assertFalse(self.cam.frame(owner="other", epoch=0, active=True, ready=True))
+        self.assertTrue(self.cam.frame(owner="creator", epoch=0, active=True, ready=True))
+
+    def test_failed_teleport_releases_stack_without_grant(self):
+        self.cam.enabled = True
+        self.assertTrue(self.cam.start(owner="creator", epoch=0, active=True, ready=True))
+        self.assertFalse(self.cam.frame(
+            owner="creator", epoch=0, active=True, ready=True, teleport_ok=False
+        ))
+        self.assertIsNone(self.cam.camera_owner)
+
+    def test_stale_epoch_after_revocation_cannot_track(self):
+        self.cam.enabled = True
+        self.assertTrue(self.cam.start(owner="creator", epoch=0, active=True, ready=True))
+        self.cam.restart()
+        self.assertFalse(self.cam.frame(owner="creator", epoch=0, active=True, ready=True))
+        self.assertFalse(self.cam.start(owner="creator", epoch=0, active=True, ready=True))
+        self.assertTrue(self.cam.start(owner="creator", epoch=1, active=True, ready=True))
+
+    def test_two_players_cannot_share_a_viewpoint_lease(self):
+        self.cam.enabled = True
+        self.assertTrue(self.cam.start(owner="creator", epoch=0, active=True, ready=True))
+        self.assertFalse(self.cam.start(owner="intruder", epoch=0, active=True, ready=True))
+        self.cam.release()
+        self.assertTrue(self.cam.start(owner="intruder", epoch=0, active=True, ready=True))
+
 
 if __name__ == "__main__":
     unittest.main()
