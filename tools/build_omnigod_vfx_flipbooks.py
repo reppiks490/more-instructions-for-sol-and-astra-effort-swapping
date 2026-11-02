@@ -151,7 +151,7 @@ def build(source: Path, output: Path) -> dict:
         "accessibility": {"non_color_shapes": True, "mute_safe_hud_text_required": True,
                           "screen_flashes": 0, "camera_shake": False, "no_automatic_loop": True},
         "atlases": clips,
-        "files": inventory,
+        "files": sorted(inventory, key=lambda entry: entry["path"]),
     }
     (output / "flipbook_manifest.json").write_text(
         json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
