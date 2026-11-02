@@ -132,10 +132,11 @@ class FusionArchitectureTests(unittest.TestCase):
         )))
 
 
-    def mutate_receipt_method(self, name: str, following: str,
+    def mutate_receipt_method(self, name: str, following: str | None,
                               before: str, after: str) -> str:
         start = self.source.index("    " + name + "(")
-        end = self.source.index("    " + following + "(", start)
+        end = (self.source.index("    " + following + "(", start)
+               if following is not None else len(self.source))
         section = self.source[start:end]
         self.assertIn(before, section)
         return self.source[:start] + section.replace(before, after, 1) + self.source[end:]
@@ -209,7 +210,7 @@ class FusionArchitectureTests(unittest.TestCase):
 
     def test_release_invalidates_unconsumed_ticket(self):
         altered = self.mutate_receipt_method(
-            "ReleaseController", "GetAEONFALLFusionState",
+            "ReleaseController", None,
             "ClearAttackReceipt()", "Print(\"pending receipt leaked\")"
         )
         self.assertTrue(self.errors(source=altered))
