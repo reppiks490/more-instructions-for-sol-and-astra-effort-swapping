@@ -137,9 +137,14 @@ aeonfall_fusion_state_runtime := class:
             return true
         false
 
-    # Only the leased controller can release the session. Never clear Owner:
-    # a second player cannot inherit creator-only entitlement in this session.
+    # Lease transfer is allowed only after an acknowledged Dormant phase.
+    # A controller must first remove physical effects and CompleteSeparation
+    # or Abort with the current generation. Otherwise releasing the lease
+    # would let a replacement controller mask still-active presentation.
+    # Never clear Owner: entitlement cannot transfer within this session.
     ReleaseController(Device:creative_device)<transacts>:logic=
+        if (Phase <> aeonfall_fusion_phase.Dormant or FormId <> ""):
+            return false
         if (Current := Controller?, Current = Device):
             set Phase = aeonfall_fusion_phase.Dormant
             set FormId = ""
