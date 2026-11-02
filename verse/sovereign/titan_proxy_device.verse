@@ -195,16 +195,19 @@ aeonfall_titan_proxy_device := class(creative_device):
             ControllerCharacter = Character
             Runtime := Service?
         then:
+            # Inspect the dedicated spawner BEFORE Begin reserves the
+            # in-flight SpawnAt lease. On a preexisting NPC, no SpawnAt has
+            # been issued: calling End after Begin would strand the lease
+            # forever and prevent all subsequent summons in this session.
+            if (TitanSpawner.GetAgents().Length <> 0):
+                TitanSpawner.Disable()
+                TitanSpawner.DespawnAll(false)
+                Feedback.Show(Player, TitanProxyDenied, 3.0)
+                return
             Attempt := Runtime.Begin(
                 Self, AvatarController, Player, Character, AvatarController.Token
             )
             if (StartedEpoch := Attempt?):
-                # Enabling an NPC Spawner may itself create agents. Any
-                # pre-existing or unsolicited agent invalidates this session.
-                if (TitanSpawner.GetAgents().Length <> 0):
-                    FinishProxy()
-                    Feedback.Show(Player, TitanProxyDenied, 3.0)
-                    return
                 set Epoch = StartedEpoch
                 set ProxyOwner = option{Player}
                 set ProxyCharacter = option{Character}
