@@ -108,6 +108,39 @@ class TitanProxySourceTests(unittest.TestCase):
     def test_authored_contract(self):
         self.assertEqual(self.errors(), [])
 
+    def test_preexisting_npc_preflight_must_precede_spawn_lease(self):
+        summon = self.device.split("    OnSummon(Agent:agent):void=", 1)[1].split(
+            "    AwaitSpawn(ExpectedEpoch:int", 1
+        )[0]
+        self.assertLess(
+            summon.index("TitanSpawner.GetAgents().Length <> 0"),
+            summon.index("TitanSpawner.DespawnAll(false)"),
+        )
+        self.assertLess(
+            summon.index("TitanSpawner.DespawnAll(false)"),
+            summon.index("Attempt := Runtime.Begin("),
+        )
+
+    def test_preflight_after_begin_mutation_is_rejected(self):
+        device = self.device.replace(
+            "            Attempt := Runtime.Begin(",
+            "            if (TitanSpawner.GetAgents().Length <> 0):\n"
+            "                TitanSpawner.Disable()\n"
+            "                TitanSpawner.DespawnAll(false)\n"
+            "            Attempt := Runtime.Begin(",
+            1,
+        ).replace(
+            "            if (TitanSpawner.GetAgents().Length <> 0):\n"
+            "                TitanSpawner.Disable()\n"
+            "                TitanSpawner.DespawnAll(false)\n"
+            "                Feedback.Show(Player, TitanProxyDenied, 3.0)\n"
+            "                return\n",
+            "",
+            1,
+        )
+        # A preflight omitted entirely must also fail the static contract.
+        self.assertTrue(self.errors(device=device))
+
     def test_native_evidence_forgery_rejected(self):
         c = copy.deepcopy(self.contract)
         c["native_evidence"]["uefn_compile"] = "passed"
