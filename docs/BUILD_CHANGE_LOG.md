@@ -1,5 +1,20 @@
 # Build change log
 
+## 2026-11-01 — Fusion Architect: creator-only state and cross-loop contract
+
+Added a session-scoped fusion state service with a single leased controller,
+native Sovereign authority rechecks, immutable session owner, monotonic
+generation tokens and explicit Dormant/Activating/Active/Separating transitions.
+Stale callbacks, duplicate activation, cross-player operations and unsupported
+Titan activation are rejected by source guards. Cleanup and controller release
+remain callable after authority revocation, but physical adapter teardown is
+still a required future handoff. A machine-readable contract, source validator,
+14 mutation tests, CI gate and cross-loop ownership guide coordinate Avatar,
+Arsenal, Cinematics and QA work (issue #37). No persistent profile schema,
+existing UNI-001 entitlement or canonical progression was modified.
+Native UEFN compilation, editor binding, multiplayer execution, physical
+fusion effects and publication remain unverified.
+
 ## 2026-11-01 — Runtime Forge: actor bootstrap lease and transactional activation cancellation
 
 Player identity bootstrap now acquires an exclusive session lease before subscribing to join/remove events or enumerating existing players. Only the owner can release that lease after canceling callbacks. This prevents duplicate bootstrap devices from duplicating identity-ready notifications or racing player removal.
