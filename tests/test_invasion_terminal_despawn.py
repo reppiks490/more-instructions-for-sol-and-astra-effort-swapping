@@ -1,8 +1,8 @@
 """Regression source checks for exclusive invasion NPC terminal cleanup.
 
 The runtime already emits canonical completion/failure events. This suite
-ensures their existing owning adapter cannot strand live bodies when optional
-wave-release despawning is disabled. Native Verse/UEFN still required.
+ensures their existing owning adapter cannot strand live bodies after a
+terminal transition. Native Verse/UEFN still required.
 """
 from pathlib import Path
 import unittest

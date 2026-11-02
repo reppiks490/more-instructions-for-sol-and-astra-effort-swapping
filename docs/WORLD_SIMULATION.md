@@ -343,3 +343,24 @@ removed, not merely prevented from respawning. Repeat with a duplicate
 adapter, two players in different streamed cells, and `OnEnd` during an active
 wave. Confirm a rejected adapter cannot despawn a legitimate owner. Also
 verify native Verse compilation; Python source checks cannot prove it.
+
+## Mandatory wave-retirement despawn admission (2026-11-01)
+
+An earlier physical adapter permitted `DespawnOnRelease = false` for an
+intermediate invasion wave transition. This could allow outgoing NPCs to stay
+alive after the new wave began: authored per-wave AI reserves are **not**
+additive across waves. Every invasion spawn-group adapter now rejects that
+configuration **before acquiring its ownership lease, touching spawners, or
+subscribing to the event bus**. Set `DespawnOnRelease = true` in UEFN.
+
+The property remains editable for compatibility with existing placed devices,
+but **false is no longer an authorized production or test runtime setting**.
+Canonical completion, failure and adapter shutdown continue to despawn owned
+actors unconditionally; the earlier source fix still protects those paths.
+Failed admission cannot clean up actors from a legitimate owner.
+
+The project must still test actual native NPC counts (including a group shared
+between consecutive waves), physical streaming unload/re-entry, two players
+in separate cells and the no-spawn guarantee for a rejected adapter. The
+`StartDisabled` and `DespawnOnRelease` properties are authoring declarations,
+not evidence that physical NPC Spawner settings were read or enforced in Verse.

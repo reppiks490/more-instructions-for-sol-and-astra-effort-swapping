@@ -1,5 +1,16 @@
 # Build change log
 
+## 2026-11-01 — Living World: enforce bounded wave retirement
+
+The invasion NPC adapter now rejects `DespawnOnRelease = false` at startup
+before leasing or touching native spawners. A disabled retirement despawn
+could otherwise retain old-wave NPCs alongside the incoming wave and violate
+per-wave authored AI reserves. Existing physical ownership/terminal cleanup
+is unchanged. Added source regression cases and UEFN negative-config and
+multiplayer acceptance guidance. No new waves, spawners or NPCs were added.
+Native engine and streaming evidence remains unverified.
+
+
 ## 2026-11-01 — Living World: hard terminal invasion NPC cleanup
 
 Verified that existing terminal completion/failure events already reach the
