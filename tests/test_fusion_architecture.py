@@ -88,6 +88,34 @@ class FusionArchitectureTests(unittest.TestCase):
         )
         self.assertTrue(self.errors(source=mutated))
 
+    def test_cannot_release_active_fusion_before_cleanup(self):
+        mutated = self.source.replace(
+            'if (Phase <> aeonfall_fusion_phase.Dormant or FormId <> ""):',
+            'if (false?):'
+        )
+        self.assertTrue(self.errors(source=mutated))
+
+    def test_cannot_move_release_guard_after_lease_reset(self):
+        original = (
+            '        if (Phase <> aeonfall_fusion_phase.Dormant or FormId <> ""):\\n'
+            '            return false\\n'
+        )
+        source = self.source
+        # Moving the gate behind the actual lease reset is unsafe.
+        start = source.index("    ReleaseController(")
+        section = source[start:]
+        self.assertIn(original.replace("\\n", "\n"), section)
+        segment = original.replace("\\n", "\n")
+        section = section.replace(segment, "", 1)
+        section = section.replace("            set Controller = false",
+                                  "            set Controller = false\\n" + segment.rstrip(), 1)
+        self.assertTrue(self.errors(source=source[:start] + section.replace("\\n", "\n")))
+
+    def test_controller_release_contract_cannot_be_downgraded(self):
+        data = copy.deepcopy(self.policy)
+        data["runtime"]["controller_release"] = "unconditional"
+        self.assertTrue(self.errors(policy=data))
+
     def test_cannot_clear_owner_on_release(self):
         mutated = self.source.replace(
             "set Controller = false", "set Owner = false\n            set Controller = false"
