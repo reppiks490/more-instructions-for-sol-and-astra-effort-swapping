@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "feature": "AEONFALL_FUS_001_002_native_binding_handoff",
+  "state": "authored_unplaced",
+  "components": [
+    {
+      "id": "authority",
+      "source": "verse/sovereign/sovereign_authority_device.verse",
+      "class_name": "aeonfall_sovereign_authority_device",
+      "tier": "core",
+      "bindings": {
+        "OwnerReference": {
+          "type": "player_reference_device",
+          "restriction": "trusted_operator_provisioned_reference_only"
+        }
+      }
+    },
+    {
+      "id": "armor",
+      "source": "verse/sovereign/sovereign_fusion_device.verse",
+      "class_name": "aeonfall_sovereign_fusion_device",
+      "tier": "core",
+      "bindings": {
+        "Authority": {
+          "type": "aeonfall_sovereign_authority_device",
+          "alias": "authority"
+        },
+        "FuseInput": {
+          "type": "input_trigger_device"
+        },
+        "SeparateInput": {
+          "type": "input_trigger_device"
+        },
+        "AttackInput": {
+          "type": "input_trigger_device"
+        },
+        "AttackOutput": {
+          "type": "trigger_device"
+        },
+        "ArmorGlow": {
+          "type": "visual_effect_powerup_device"
+        },
+        "ArmorCamera": {
+          "type": "gameplay_camera_orbit_device"
+        },
+        "FusionSequence": {
+          "type": "cinematic_sequence_device"
+        },
+        "Feedback": {
+          "type": "hud_message_device"
+        }
+      }
+    },
+    {
+      "id": "arsenal",
+      "source": "verse/sovereign/sovereign_arsenal_device.verse",
+      "class_name": "aeonfall_sovereign_arsenal_device",
+      "tier": "core",
+      "bindings": {
+        "Controller": {
+          "type": "aeonfall_sovereign_fusion_device",
+          "alias": "armor"
+        },
+        "RendRequest": {
+          "type": "trigger_device",
+          "alias": "armor.AttackOutput"
+        },
+        "CollapseInput": {
+          "type": "input_trigger_device"
+        },
+        "BulwarkInput": {
+          "type": "input_trigger_device"
+        },
+        "Feedback": {
+          "type": "hud_message_device"
+        }
+      }
+    },
+    {
+      "id": "appearance",
+      "source": "verse/sovereign/sovereign_appearance_device.verse",
+      "class_name": "aeonfall_sovereign_appearance_device",
+      "tier": "optional",
+      "bindings": {
+        "Authority": {
+          "type": "aeonfall_sovereign_authority_device",
+          "alias": "authority"
+        },
+        "Disguise": {
+          "type": "disguise_device"
+        }
+      }
+    },
+    {
+      "id": "titan",
+      "source": "verse/sovereign/titan_proxy_device.verse",
+      "class_name": "aeonfall_titan_proxy_device",
+      "tier": "experimental",
+      "bindings": {
+        "AvatarController": {
+          "type": "aeonfall_sovereign_fusion_device",
+          "alias": "armor"
+        },
+        "TitanSpawner": {
+          "type": "npc_spawner_device"
+        },
+        "SummonInput": {
+          "type": "input_trigger_device"
+        },
+        "AdvanceInput": {
+          "type": "input_trigger_device"
+        },
+        "AttackCueInput": {
+          "type": "input_trigger_device"
+        },
+        "DismissInput": {
+          "type": "input_trigger_device"
+        },
+        "AttackCueOutput": {
+          "type": "trigger_device",
+          "restriction": "non_damaging_owner_cue_only"
+        },
+        "Waypoints": {
+          "type": "[]creative_prop",
+          "min_items": 1,
+          "max_items": 8
+        },
+        "Feedback": {
+          "type": "hud_message_device"
+        }
+      }
+    }
+  ],
+  "editor_guardrails": {
+    "require_explicit_actor_paths": true,
+    "allow_shared_physical_object_only_when_aliased": true,
+    "require_disabled_by_default": true,
+    "no_auto_owner_provision": true,
+    "no_global_input_register": true,
+    "titan_enabled": false,
+    "attack_los_verified": false,
+    "physical_native_compile_verified": false,
+    "fortnite_launch_session_verified": false
+  },
+  "native_evidence": {
+    "uefn_compile": "not_run",
+    "uefn_editor": "not_run",
+    "client_one": "not_run",
+    "client_two": "not_run",
+    "combat_los": "not_run",
+    "player_possession": "unproven"
+  }
+}
