@@ -1,4 +1,4 @@
-"""Mutation regression tests; inspect source policy, not executed Verse/UEFN."""
+"""Mutation regressions for FUS-001 adapter; NOT native UEFN execution."""
 from __future__ import annotations
 
 import importlib.util
@@ -24,71 +24,80 @@ class FusionSourceGuards(unittest.TestCase):
         setattr(self, target, source.replace(old, replacement, 1))
         self.assertTrue(guard.check_sources(self.runtime, self.device, self.policy))
 
-    def test_canonical_sources_pass(self):
+    def test_authored_sources_pass(self):
         self.assertEqual(guard.check_sources(self.runtime, self.device, self.policy), [])
 
-    def test_disabled_until_provisioned(self):
+    def test_disabled_by_default(self):
         self.mutate("device", "Enabled:logic = false", "Enabled:logic = true")
 
-    def test_authoritative_entitlement(self):
-        self.mutate("runtime", "Authorized := Authority.CanWield(Player)", "Authorized := true")
+    def test_architect_state_is_required(self):
+        self.mutate("device", "GetAEONFALLFusionState[]", "GetAEONFALLSovereignFusionRuntime[]")
 
-    def test_one_controller_lease(self):
+    def test_native_authority_is_reused(self):
+        self.mutate("device", "State.AcquireController(Self, Authority)", "State.AcquireController(Self, FakeAuthority)")
+
+    def test_native_identity_is_rechecked_for_spending(self):
+        self.mutate("runtime", "Authorized := State.IsAuthorizedActive(Device, Player, NewToken)", "Authorized := true")
+
+    def test_single_budget_controller(self):
         self.mutate("runtime", "if (Controller?):", "if (false?):")
 
-    def test_owner_immutable(self):
-        self.mutate("runtime", "Bound = Player", "Player.IsActive[]")
+    def test_cooldown_before_reentry(self):
+        self.mutate("runtime", "GetSimulationElapsedTime() >= CooldownUntil", "GetSimulationElapsedTime() >= 0.0")
 
-    def test_cooldown_gate(self):
-        self.mutate("runtime", "Now >= CooldownUntil", "Now >= 0.0")
+    def test_cooldown_survives_replacement(self):
+        self.mutate("runtime", "set Controller = false", "set CooldownUntil = 0.0\n            set Controller = false")
 
-    def test_generation_increment(self):
-        self.mutate("runtime", "set Generation += 1", "set Generation += 0")
+    def test_active_token_cannot_be_substituted(self):
+        self.mutate("runtime", "Token = NewToken", "NewToken > 0")
 
-    def test_no_stale_energy_spend(self):
-        self.mutate("runtime", "IsCurrent(Player, Token)?", "Player.IsActive[]")
+    def test_spending_requires_energy(self):
+        self.mutate("runtime", "Remaining >= Cost", "Remaining >= 0")
 
-    def test_spend_resource_check(self):
-        self.mutate("runtime", "Energy >= Cost", "Energy >= 0")
-
-    def test_spend_bounded(self):
-        self.mutate("runtime", "Cost <= 25", "Cost <= 999")
-
-    def test_spend_positive(self):
+    def test_negative_energy_spend_rejected(self):
         self.mutate("runtime", "Cost > 0", "Cost >= 0")
 
-    def test_revocation_heartbeat(self):
-        self.mutate("device", "Granted := Authority.CanWield(Player)", "Granted := true")
+    def test_unbounded_energy_spend_rejected(self):
+        self.mutate("runtime", "Cost <= 25", "Cost <= 999")
 
-    def test_character_swap_fail_closed(self):
+    def test_bad_resource_cap_rejected(self):
+        self.mutate("runtime", "Capacity <= 120", "Capacity <= 1200")
+
+    def test_unsupported_titan_form_rejected(self):
+        self.mutate("device", '"FUS-001"', '"FUS-002"')
+
+    def test_activation_requires_native_visual_ack(self):
+        self.mutate("device", "ArmorGlow.HasEffect[Player]", "Player.IsActive[]")
+
+    def test_cleanup_precedes_fusion_completion(self):
+        self.mutate("device", "ClearPhysical()", "set Token = Token",)
+
+    def test_character_swap_exits(self):
         self.mutate("device", "Character = OriginalCharacter", "Player.IsActive[]")
 
-    def test_no_broadcast_camera(self):
+    def test_only_owner_can_separate(self):
+        self.mutate("device", "Owner = Player", "Player.IsActive[]")
+
+    def test_camera_cleanup(self):
+        self.mutate("device", "ArmorCamera.RemoveFrom(Owner)", "ArmorCamera.AddTo(Owner)")
+
+    def test_visual_cleanup(self):
+        self.mutate("device", "ArmorGlow.Clear(Owner)", "ArmorGlow.Pickup(Owner)")
+
+    def test_no_global_grants(self):
         self.device += "\n    Bad():void=\n        ArmorCamera.AddToAll()\n"
         self.assertTrue(guard.check_sources(self.runtime, self.device, self.policy))
 
-    def test_native_after_admission(self):
-        self.mutate("device", "ArmorGlow.Pickup(Player)", "ArmorGlow.Pickup(Player)\n                ArmorGlow.Pickup(Player)")
+    def test_no_parallel_owner(self):
+        self.runtime += "\n    var Owner:?player = false\n"
+        self.assertTrue(guard.check_sources(self.runtime, self.device, self.policy))
 
-    def test_cleanup_camera(self):
-        self.mutate("device", "ArmorCamera.RemoveFrom(Owner)", "ArmorCamera.AddTo(Owner)")
-
-    def test_cleanup_aura(self):
-        self.mutate("device", "ArmorGlow.Clear(Owner)", "ArmorGlow.Pickup(Owner)")
-
-    def test_owner_must_initiate_separation(self):
-        self.mutate("device", "Owner = Player", "Player.IsActive[]")
-
-    def test_unauthorized_titan_is_rejected(self):
+    def test_unverified_npc_possession_not_claimed(self):
         self.policy["titan_possession_implemented"] = True
         self.assertTrue(guard.check_sources(self.runtime, self.device, self.policy))
 
-    def test_no_unverified_native_claim(self):
+    def test_no_fabricated_native_compile(self):
         self.policy["engine_verification"]["compile"] = "passed"
-        self.assertTrue(guard.check_sources(self.runtime, self.device, self.policy))
-
-    def test_no_public_unlock(self):
-        self.policy["ordinary_unlockable"] = True
         self.assertTrue(guard.check_sources(self.runtime, self.device, self.policy))
 
 
