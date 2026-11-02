@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import copy
 import importlib.util
+import tempfile
 from pathlib import Path
 import unittest
 
@@ -166,6 +167,61 @@ class FullUniverseAuditTests(unittest.TestCase):
             lambda p, i: p.__setitem__("no_codex_in_automation", False))
         self.assertTrue(any("Codex prohibition" in e
                             for e in report["validation_errors"]))
+
+    def test_approved_entity_visual_keys_must_be_unique_and_typed(self):
+        # Synthetic fixture files are created only inside a temporary directory.
+        # They never count toward the real 840-entity delivery inventory.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            categories = self.policy["entity_source_categories"]["weapon"]
+
+            def pack(ident, visual_key):
+                sources = {}
+                for category in categories:
+                    relative = f"{ident}/{category}.txt"
+                    target = root / relative
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    target.write_text(f"{ident} {category}", encoding="utf-8")
+                    sources[category] = [relative]
+                return {
+                    "canonical_id": ident, "regions": ["REG-001"],
+                    "unique_visual_key": visual_key, "sources": sources,
+                    "source_review": {
+                        "state": "approved_source", "reviewer": "fixture-reviewer",
+                        "evidence": "synthetic unit-test evidence",
+                    },
+                }
+
+            def inspect(packs):
+                inventory = {
+                    "schema_version": 1, "entity_packs": packs,
+                    "region_packs": [], "system_packs": [],
+                }
+                return audit.inspect_inventory(
+                    root, self.policy, inventory,
+                    {"WPN-001": {"family": "weapon"},
+                     "WPN-002": {"family": "weapon"}},
+                    {"REG-001"}, set(),
+                )
+
+            first = pack("WPN-001", "Dread-plate-alpha")
+            second = pack("WPN-002", " dread-PLATE-ALPHA ")
+            approvals, errors = inspect([first, second])
+            self.assertEqual(approvals["entity_packs"]["approved"], 1)
+            self.assertTrue(any("duplicate unique_visual_key" in e for e in errors))
+
+            distinct = copy.deepcopy(second)
+            distinct["unique_visual_key"] = "Dread-plate-beta"
+            approvals, errors = inspect([first, distinct])
+            self.assertEqual(approvals["entity_packs"]["approved"], 2)
+            self.assertEqual(errors, [])
+
+            invalid = copy.deepcopy(second)
+            invalid["unique_visual_key"] = ["not-a-string"]
+            approvals, errors = inspect([first, invalid])
+            self.assertEqual(approvals["entity_packs"]["approved"], 1)
+            self.assertTrue(any("missing/invalid unique_visual_key" in e
+                                for e in errors))
 
     def test_report_does_not_claim_imported_uefn_project(self):
         document = audit.markdown(self.current)
