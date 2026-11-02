@@ -18,6 +18,7 @@ RUNTIME_GUARDS = (
     "Token > 0",
     "Controller.Token = Token",
     "Controller.VisualOwner?",
+    "CurrentOwner = Player",
     "Controller.VisualCharacter?",
     "State.IsAuthorizedActive(Controller, Player, Token)",
     "State.IsAuthorizedActive(Controller, CurrentOwner, Generation)",
