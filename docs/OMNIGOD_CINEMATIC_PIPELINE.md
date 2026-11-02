@@ -48,3 +48,21 @@ Only **one** owner-fusion sequence may run at a time. Do not overlap repeated re
 **Hard blockers:** verified owner provisioning, skeletal FBX rig/retargeting, actual NPC Character Definition, native Sequencer/Niagara/audio devices and Verse bindings, two-client Launch Session, platform profiling and memory calculation. FUS-002 Titan proxy remains experimental and disabled. FUS-001 is also native-disabled until acceptance. No unapproved spend or imported asset claims.
 
 Epic references: [Import and Play Mesh Animations](https://dev.epicgames.com/documentation/fortnite/import-and-play-mesh-animations-in-unreal-editor-for-fortnite), [Animation Presets](https://dev.epicgames.com/documentation/fortnite/animation-presets-in-unreal-editor-for-fortnite), [NPC Spawner with Animations](https://dev.epicgames.com/documentation/en-us/fortnite/using-the-npc-spawner-with-animations-in-unreal-editor-for-fortnite).
+
+## Timed accessibility and native binding handoff (source-only follow-on)
+
+After generating and validating the base GLB/WAV/cue sheet, run:
+
+```sh
+python tools/build_omnigod_presentation_handoff.py --output dist/omnigod_cinematics
+python tools/build_omnigod_presentation_handoff.py --output dist/omnigod_cinematics --validate-only
+python -m unittest discover -s tests -p "test_omnigod_presentation_handoff.py" -v
+```
+
+The dedicated Cinematic Source workflow runs these steps and includes the output in its downloadable source artifact. This creates **real UTF-8 WebVTT captions** (`captions/fusion_owner.vtt`, `captions/separation_owner.vtt`), an exact-millisecond `presentation_handoff.json` cue/animation/audio/device-role specification, and `presentation_handoff_manifest.json` with SHA-256 hashes of these three files. The handoff binds the four original source asset hashes and the original cue sheet. It enforces the existing 4,000 ms activation / 3,000 ms separation durations, the 1,300/480/1,100 ms WAV lengths, cue ordering, canonical phase, instigator-only visibility, cancellation contract and reduced-flash availability. The source validator runs **before** this additive packaging step, so its original four-asset cue-sheet inventory stays unchanged.
+
+**Required editor implementation, not supplied by source JSON:** confirm supported UEFN devices and instigator-specific native APIs in the actual editor; retarget the static-node GLB to a skeletal NPC rig; create the Everyone-visible NPC motion sequence separately from the Instigator Only owner camera/audio sequence; import or implement audio, captions/HUD and Niagara cues; bind each event to the canonical FUS-001 owner/generation/phase and exact native actor identity. `presentation_handoff.json` is **not** an executable Verse device graph or evidence that these bindings exist. Its `native_devices_bound=false`, `native_uefn_import=not_run` and `launch_session=not_run` flags must not be changed based on Python CI.
+
+**Cancellation and concurrency:** suppress overlapping owner sequences, reject stale-generation callbacks and wrong-player instigators, and verify all NPC/owner presentation resources are stopped **before** canonical abort or separation completion. Caption timing is local presentation, not an authoritative activation acknowledgement or combat receipt. Keep screen flashes at zero. Capture exact UEFN build/version, two-client visibility behavior, interrupted sequence cleanup, readable no-audio cues and memory measurements before release.
+
+**Codex-free branch policy:** Repository Codex code-review automation currently responds to PR open/ready events. Do not request or trigger those reviews. Keep follow-on cinematic work on its isolated branch without opening a new PR until automatic Codex review is disabled and verified. Ordinary non-Codex Actions may validate branch pushes.
