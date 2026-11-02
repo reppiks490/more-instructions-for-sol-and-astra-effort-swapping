@@ -1,0 +1,59 @@
+name: AEONFALL All Thirteen Region Terrain Sources
+
+on:
+  push:
+    paths:
+      - "tools/build_all_region_terrain.py"
+      - "tools/validate_all_region_terrain.py"
+      - "tests/test_all_region_terrain.py"
+      - "content/world/world_topology.json"
+      - "assets/source/ossuary_starter/landscape/**"
+      - ".github/workflows/full-universe-terrain.yml"
+  pull_request:
+    paths:
+      - "tools/build_all_region_terrain.py"
+      - "tools/validate_all_region_terrain.py"
+      - "tests/test_all_region_terrain.py"
+      - "content/world/world_topology.json"
+      - "assets/source/ossuary_starter/landscape/**"
+      - ".github/workflows/full-universe-terrain.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-all-regions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact reviewed source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Configure no-cost source runtime
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Test all 13 actual heightmaps and adversarial provenance
+        run: python -m unittest discover -s tests -p "test_all_region_terrain.py" -v
+
+      - name: Generate all thirteen original 16-bit region landscapes
+        run: python tools/build_all_region_terrain.py --output dist/full_universe_13_region_terrain
+
+      - name: Verify each of 832117 terrain pixels and each PNG CRC
+        run: python tools/validate_all_region_terrain.py --output dist/full_universe_13_region_terrain
+
+      - name: Upload complete 13-region terrain source bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: AEONFALL-13-Region-Terrain-Source-${{ github.event.pull_request.head.sha || github.sha }}
+          path: dist/full_universe_13_region_terrain/
+          if-no-files-found: error
+          retention-days: 30
+
+# This creates 13 terrain SOURCE sets, not a fully modeled/open world island.
+# Native imports, collision, navmesh, World Partition, cooked memory, and
+# Fortnite-mobile testing remain explicit separate release gates.
