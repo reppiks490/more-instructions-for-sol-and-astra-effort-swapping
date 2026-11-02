@@ -40,7 +40,8 @@ def real_file(root: Path, relative: str) -> bool:
     if path.is_absolute() or any(piece in ("..", "") for piece in path.parts):
         return False
     resolved = (root / path).resolve()
-    return resolved.is_relative_to(root.resolve()) and resolved.is_file()
+    return (resolved.is_relative_to(root.resolve()) and resolved.is_file()
+            and resolved.stat().st_size > 0)
 
 
 def complete_value(value) -> bool:
@@ -63,7 +64,13 @@ def catalog_scan(root: Path, policy: dict):
         errors.append("No canonical wave_*.json catalog files found.")
     for path in files:
         payload = read_json(path)
-        items = payload if isinstance(payload, list) else payload.get("entities", [])
+        if isinstance(payload, list):
+            items = payload
+        elif isinstance(payload, dict):
+            items = payload.get("entities", [])
+        else:
+            errors.append(f"{path.name}: malformed catalog payload {type(payload).__name__}")
+            continue
         if not isinstance(items, list):
             errors.append(f"{path.name}: non-list entities payload")
             continue
@@ -80,8 +87,16 @@ def catalog_scan(root: Path, policy: dict):
                 continue
             entities[ident] = item
             family = item.get("family")
-            counters[family] += 1
-            statuses[item.get("status")] += 1
+            if not isinstance(family, str):
+                errors.append(f"{ident}: malformed content family {family!r}")
+                family = None
+            else:
+                counters[family] += 1
+            status = item.get("status")
+            if not isinstance(status, str):
+                errors.append(f"{ident}: malformed catalog status {status!r}")
+            else:
+                statuses[status] += 1
             if family not in policy["entity_source_categories"]:
                 errors.append(f"{ident}: unsupported content family {family!r}")
             for key in policy["required_catalog_fields"]:
@@ -190,8 +205,9 @@ def inspect_inventory(root: Path, policy: dict, inventory: dict,
     catalogs = {
         "entity_packs": (
             "canonical_id", set(entities),
-            {ident: policy["entity_source_categories"].get(entity.get("family"), [])
-             for ident, entity in entities.items()},
+            {ident: policy["entity_source_categories"].get(
+                entity.get("family") if isinstance(entity.get("family"), str) else None, []
+            ) for ident, entity in entities.items()},
             True,
         ),
         "region_packs": (
@@ -299,7 +315,19 @@ def audit(root: Path = ROOT, *, policy_override=None, inventory_override=None):
     errors.extend(catalog_errors)
 
     worlds = world.get("regions", [])
-    world_ids = [r.get("id") for r in worlds if isinstance(r, dict)]
+    if not isinstance(worlds, list):
+        errors.append("Malformed world topology: regions must be a list")
+        worlds = []
+    world_ids = []
+    for region in worlds:
+        if not isinstance(region, dict):
+            errors.append("Invalid world region object")
+            continue
+        ident = region.get("id")
+        if not isinstance(ident, str):
+            errors.append(f"Malformed world region ID {ident!r}")
+            continue
+        world_ids.append(ident)
     if len(world_ids) != len(set(world_ids)):
         errors.append("Duplicated canonical world region ID")
     required_regions = set(policy["required_world_regions"])
@@ -310,18 +338,31 @@ def audit(root: Path = ROOT, *, policy_override=None, inventory_override=None):
         errors.append("World topology shrank below 13 regions")
     for region in worlds:
         if not isinstance(region, dict):
-            errors.append("Invalid world region object")
             continue
         for key in ("id", "name", "theme", "role", "neighbors", "streaming_band"):
             if not complete_value(region.get(key)):
                 errors.append(f"{region.get('id')}: missing world topology {key}")
-        for neighbor in region.get("neighbors", []):
-            if neighbor not in world_ids:
-                errors.append(f"{region.get('id')}: unknown neighboring region {neighbor}")
+        neighbors = region.get("neighbors", [])
+        if not isinstance(neighbors, list):
+            errors.append(f"{region.get('id')}: malformed neighbor list")
+            continue
+        for neighbor in neighbors:
+            if not isinstance(neighbor, str) or neighbor not in world_ids:
+                errors.append(f"{region.get('id')}: unknown neighboring region {neighbor!r}")
 
-    system_ids = {x["id"] for x in policy["required_systems"]}
-    if len(system_ids) != len(policy["required_systems"]):
-        errors.append("Duplicate required system in universe-first policy")
+    system_rows = policy.get("required_systems", [])
+    if not isinstance(system_rows, list):
+        errors.append("Malformed required systems policy")
+        system_rows = []
+    system_ids = set()
+    for system in system_rows:
+        ident = system.get("id") if isinstance(system, dict) else None
+        if not isinstance(ident, str) or not ident:
+            errors.append(f"Malformed required system ID {ident!r}")
+        elif ident in system_ids:
+            errors.append(f"Duplicate required system in universe-first policy: {ident}")
+        else:
+            system_ids.add(ident)
     approved, inventory_errors = inspect_inventory(root, policy, inventory, entities,
                                                      required_regions, system_ids)
     errors.extend(inventory_errors)
