@@ -89,6 +89,11 @@ def main() -> int:
         min_corruption = inv.get("min_corruption", 0)
         if type(min_corruption) is not int or not 0 <= min_corruption <= 100:
             errors.append(f"{iid}: min_corruption must be an integer 0..100")
+        min_influence = inv.get("min_aggressor_influence", 0)
+        if type(min_influence) is not int or not 0 <= min_influence <= 100:
+            errors.append(f"{iid}: min_aggressor_influence must be an integer 0..100")
+        elif min_influence > 0 and catalog.get(inv.get("aggressor_id"), {}).get("family") != "faction":
+            errors.append(f"{iid}: influence gate requires a canonical faction aggressor")
         duration = inv.get("duration_seconds")
         if not isinstance(duration, (int,float)) or duration <= 0:
             errors.append(f"{iid}: invalid duration")

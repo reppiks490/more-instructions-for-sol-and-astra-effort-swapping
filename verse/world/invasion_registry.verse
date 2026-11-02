@@ -13,6 +13,8 @@ aeonfall_invasion_registry := class():
             Definition.MaxConcurrentAi > 0
             Definition.MinCorruption >= 0
             Definition.MinCorruption <= 100
+            Definition.MinAggressorInfluence >= 0
+            Definition.MinAggressorInfluence <= 100
             GetAEONFALLRegionRegistry().IsRegistered[Definition.RegionId]
         then:
             if:
