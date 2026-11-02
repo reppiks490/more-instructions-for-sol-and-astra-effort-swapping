@@ -4,7 +4,9 @@ from __future__ import annotations
 import copy
 import importlib.util
 from pathlib import Path
+import tempfile
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location(
@@ -173,6 +175,108 @@ class FullUniverseAuditTests(unittest.TestCase):
         self.assertIn("Native UEFN verified", document)
         self.assertIn("not a sample", document)
         self.assertNotIn("UEFN compilation passed", document)
+
+    def test_malformed_inventory_ids_fail_closed_without_crashing(self):
+        for bad in ([], {}, ["WPN-001"]):
+            with self.subTest(bad=bad):
+                def mutation(policy, inventory):
+                    inventory["entity_packs"].append({
+                        "canonical_id": bad, "regions": ["REG-001"], "sources": {},
+                    })
+                report = self.modified(mutation)
+                self.assertTrue(any("invalid canonical_id" in error
+                                    for error in report["validation_errors"]))
+                self.assertFalse(report["source_complete"])
+
+    def test_unhashable_region_scopes_fail_closed(self):
+        for bad in ([], {"id": "REG-001"}):
+            with self.subTest(bad=bad):
+                def mutation(policy, inventory):
+                    inventory["entity_packs"].append({
+                        "canonical_id": "WPN-001", "regions": [bad],
+                        "sources": {}, "unique_visual_key": "UniqueOne",
+                    })
+                report = self.modified(mutation)
+                self.assertTrue(any("unrecognized region scope" in error
+                                    for error in report["validation_errors"]))
+
+    def test_non_string_source_category_does_not_crash_audit(self):
+        def mutation(policy, inventory):
+            inventory["entity_packs"].append({
+                "canonical_id": "WPN-001", "regions": ["REG-001"],
+                "sources": {1: ["README.md"]},
+            })
+        report = self.modified(mutation)
+        self.assertTrue(any("unexpected source categories" in error
+                            for error in report["validation_errors"]))
+
+    def test_empty_source_file_is_not_reviewed_evidence(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "empty.txt").write_bytes(b"")
+            (root / "real.txt").write_bytes(b"genuine source")
+            self.assertFalse(audit.real_file(root, "empty.txt"))
+            self.assertTrue(audit.real_file(root, "real.txt"))
+
+    def test_duplicate_visual_keys_revoke_both_approvals(self):
+        # Adversarial two-record fixture tests uniqueness, not production scope.
+        # The real audit still enumerates every canonical entity.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            categories = self.policy["entity_source_categories"]["weapon"]
+            packs = []
+            for ident, visual in (("WPN-001", "SovereignVisual"),
+                                  ("WPN-002", " sovereignvisual ")):
+                sources = {}
+                for category in categories:
+                    path = f"sources/{ident}/{category}.txt"
+                    absolute = root / path
+                    absolute.parent.mkdir(parents=True, exist_ok=True)
+                    absolute.write_text(f"{ident} {category}", encoding="utf-8")
+                    sources[category] = [path]
+                pack = {
+                    "canonical_id": ident,
+                    "regions": ["REG-001"],
+                    "unique_visual_key": visual,
+                    "sources": sources,
+                    "source_review": {
+                        "state": "approved_source",
+                        "reviewer": "independent source QA",
+                        "evidence": f"fixture review for {ident}",
+                    },
+                }
+                valid, problems = audit.inspect_package(
+                    root, pack, "canonical_id", {"WPN-001", "WPN-002"},
+                    {ident: categories}, True, {"REG-001"})
+                self.assertTrue(valid, problems)
+                packs.append(pack)
+            approvals, errors = audit.inspect_inventory(
+                root, self.policy,
+                {"schema_version": 1, "entity_packs": packs,
+                 "region_packs": [], "system_packs": []},
+                {"WPN-001": {"family": "weapon"},
+                 "WPN-002": {"family": "weapon"}},
+                {"REG-001"}, {entry["id"] for entry in self.policy["required_systems"]})
+            self.assertTrue(any("duplicate unique_visual_key" in error for error in errors))
+            self.assertEqual(approvals["entity_packs"]["approved"], 0)
+            self.assertEqual(approvals["entity_packs"]["approved_ids"], [])
+
+    def test_not_run_text_never_counts_as_native_compilation(self):
+        ledger = {
+            "entity_records": [{"canonical_id": "WPN-001", "verse_compiled": "not_run"}],
+            "system_records": [{"system_id": "SYS-GOD-FORM", "verse_compiled": "not_run"}],
+        }
+        original_read_json = audit.read_json
+        def read_with_unverified_ledger(path):
+            if path == ROOT / audit.EVIDENCE:
+                return ledger
+            return original_read_json(path)
+        with patch.object(audit, "read_json", side_effect=read_with_unverified_ledger):
+            report = audit.audit(ROOT)
+        evidence = report["native_evidence"]
+        self.assertEqual(evidence["native_verse_compiled_entity_records"], 0)
+        self.assertEqual(evidence["native_verse_compiled_system_records"], 0)
+        self.assertFalse(report["native_uefn_complete"])
 
 
 if __name__ == "__main__":
