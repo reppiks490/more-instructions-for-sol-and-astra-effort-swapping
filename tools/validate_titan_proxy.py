@@ -31,6 +31,8 @@ RUNTIME_GUARDS = (
     "NpcChar.IsActive[]\n            BehaviorReady?",
     "Monster.IsActive[]\n            BehaviorReady?",
     "not SpawnInFlight?",
+    "SpawnPendingForCurrentEpoch()<transacts>:logic=",
+    "if (Active?, SpawnInFlight?, SpawnEpoch = Epoch):",
     "set SpawnEpoch = Epoch",
     "SpawnEpoch <> ExpectedEpoch",
     "set SpawnInFlight = false",
@@ -90,6 +92,7 @@ DEVICE_GUARDS = (
     "Runtime.IsBehaviorReady(SpawnedAgent)?",
     "Attempts >= 20",
     "UnexpectedSpawnCount(Runtime)?",
+    "if (not Runtime.SpawnPendingForCurrentEpoch()?):",
     "TitanProxyRequested",
     "SummonInput.Register(Current)",
     "SummonInput.Unregister(Previous)",
@@ -221,6 +224,7 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "behavior_ack": "npc_behavior_ack_required_before_commands",
         "unexpected_spawns": "fail_closed_despawn_dedicated_spawner",
         "spawn_association": "serialized_SpawnAt_return_and_epoch",
+        "inflight_inventory": "allow_single_untrusted_candidate_until_exact_SpawnAt_return_or_timeout",
         "owner_exit": "invalidate_before_despawn",
         "generation_change": "invalidate",
         "character_replacement": "invalidate",
@@ -292,6 +296,21 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
     cleanup = summon.find("TitanSpawner.DespawnAll(false)")
     if min(preflight, reserve, cleanup) < 0 or not (preflight < cleanup < reserve):
         errors.append("Titan preexisting-spawn cleanup must precede async lease reservation")
+
+    # A native SpawnAt call suspends while the NPC is loading. Polling
+    # GetAgents before return cannot classify one candidate as hostile;
+    # until CompleteSpawn checks its returned identity the candidate
+    # remains untrusted and cannot execute commands or receive cues.
+    inventory_at = device.find("    UnexpectedSpawnCount(Runtime:")
+    inventory_end = device.find("    OnAdvance(Agent:agent):void=", inventory_at)
+    inventory = device[inventory_at:inventory_end]
+    if inventory_at < 0 or inventory_end < 0 or not (
+        inventory.find("if (AllAgents.Length > 1):") >= 0
+        and inventory.find("if (not Runtime.SpawnPendingForCurrentEpoch()?):") >= 0
+        and inventory.find("if (AllAgents.Length > 1):")
+        < inventory.find("if (not Runtime.SpawnPendingForCurrentEpoch()?):")
+    ):
+        errors.append("single pending SpawnAt candidate must remain untrusted until identity reconciliation")
 
     if "weak_map(player," in combined:
         errors.append("second persistent profile map prohibited")
