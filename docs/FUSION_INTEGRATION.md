@@ -88,7 +88,7 @@ published island, until all relevant gates have independent evidence. Preserve
 canonical IDs, existing profile schemas and the owner's sticky session
 identity. This handoff changes no runtime entitlement or existing gameplay.
 
-## Authoritative Reaver admission receipt (Architect API; adapters not yet wired)
+## Authoritative Reaver admission receipt (source adapters wired; native binding unverified)
 
 `IssueAttackReceipt(Controller, Player, Generation)` records one
 **session-scoped, one-use, one-second** FUS-001 Reaver admission for the
@@ -123,6 +123,60 @@ consume a *real* pending admission before the legitimate callback. The
 one-use receipt prevents a no-upstream-debit attack and duplicate reuse; it
 does not make a misconfigured editor graph trustworthy. Before enabling,
 verify exclusive device bindings, latency/replay under two players, shutdown,
-session replacement, and UEFN's actual callback ordering. The Architect API
-alone does not integrate the two draft adapters; `native_adapter_wiring`
-remains `pending` in the machine-readable contract. FUS-002 remains disabled.
+session replacement, and UEFN's actual callback ordering. Source-level Avatar and Arsenal receipt admission was integrated by merged
+PR #64. This does **not** authenticate the editor-bound trigger graph or establish
+native Verse compilation, physical hit confirmation, or source-to-native binding.
+The contract's `native_adapter_wiring` remains `pending` until independently
+verified in UEFN. FUS-002 remains disabled.
+
+## Paid Reaver CI reconciliation and handoff (source only)
+
+The Architect reconciliation branch restores a blocking cross-file source guard
+against the **actual separate production files**. It requires the Avatar upstream
+energy debit and acknowledged single-use receipt issuance in one admission before
+the attack trigger; then Arsenal's transactional receipt consumption, downstream
+5-energy debit/cooldown, and the native `OnRend` damage statement nested under
+successful `TryRend`. It rejects removed receipts, modified transaction order,
+missing native handlers, calls outdented from the guarded block, and additional
+unpaid damage branches. This is a conservative source-text validator, **not**
+a Verse compiler, formal security proof, or UEFN integration test.
+
+Run from the repository root:
+
+```bash
+python tools/validate_fusion_architecture.py
+python -m unittest discover -s tests -p 'test_fusion_*.py' -v
+```
+
+The ordinary non-Codex Verse Static Validation workflow runs both on applicable
+source changes. A green job proves those source checks ran; it does not validate
+physics collision, wall/cover line-of-sight, native damage attribution, input
+provenance, concurrency behavior, or player-facing animation.
+
+### Unresolved authorization and resource boundaries
+
+- **Attack cooldown mismatch:** the Avatar's current editable
+  `AttackCooldownSeconds` is 1.5 by default and accepts 0.2 seconds; Arsenal
+  requires a separate 2-second Reaver cooldown. A paid upstream trigger may
+  be refused downstream, creating an energy-loss experience. Avatar owns the
+  proposed 2-second parity fix; it must retain a test proving no timing bypass.
+- **Missing/invalid target:** the upstream 10 energy is charged before the
+  Arsenal target, LOS and damage acceptance stages. Source receipts prevent
+  unpaid/duplicate authorization, **not** unsuccessful charges. Arsenal/Avatar
+  must specify the miss-cost policy or a two-phase reservation/acknowledgement.
+- **Receipt stealing:** a misbound or injected `trigger_device` callback may
+  consume a real pending receipt before the legitimate callback, even though
+  it cannot mint one. Confirm exclusive device bindings and two-client ordering
+  in UEFN, including expiry and rapid input races.
+- **Teardown ownership:** any revocation, character replacement, disconnect,
+  interrupted cinematic, or form abort must cancel callbacks and remove all
+  owned physical effects before release. Reject stale generations and keep
+  cleanup possible even after entitlement is lost.
+- **Native hit gate:** target range/cone is not collision/cover. Keep both
+  fusion forms native-disabled until an actual hit-confirmed LOS/collision
+  adapter and UEFN two-client verification exist.
+
+Preserve the original `UNI-001`, `FUS-001` and `FUS-002` identities, the
+one existing player-profile root, and the universe-first source-completion
+gate from issue #84. No new public entitlement, editor enablement, asset import,
+real-money spending, or automatic Codex review is authorized by these guards.
