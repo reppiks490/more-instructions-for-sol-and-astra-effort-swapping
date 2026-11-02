@@ -8,6 +8,9 @@ aeonfall_world_event_service := class():
     var States:[string]aeonfall_world_event_runtime_state = map{}
 
     StartEvent(EventId:string, InitialRegionIds:[]string)<transacts>:logic=
+        # An empty identifier aliases unrelated events and defeats cleanup/rewards.
+        if (EventId = ""):
+            return false
         if:
             Existing := States[EventId]
             Existing.Active?
@@ -40,6 +43,9 @@ aeonfall_world_event_service := class():
         States[EventId]
 
     MarkObjectiveComplete(EventId:string, ObjectiveId:string)<transacts>:logic=
+        # Empty objective IDs cannot count as valid phase progress.
+        if (EventId = "" or ObjectiveId = ""):
+            return false
         if:
             Old := States[EventId]
             Old.Active?
@@ -78,10 +84,12 @@ aeonfall_world_event_service := class():
         ActiveRegionIds:[]string
     )<transacts>:logic=
         if:
+            EventId <> ""
             NextStageIndex >= 0
             Old := States[EventId]
             Old.Active?
-            NextStageIndex > Old.CurrentStageIndex
+            # No phase jumps, retries of the same phase, or rewinds.
+            NextStageIndex = Old.CurrentStageIndex + 1
         then:
             Updated := aeonfall_world_event_runtime_state:
                 EventId := Old.EventId

@@ -39,6 +39,9 @@ aeonfall_slice_001_checkpoint_device := class(creative_device):
     var OwnsLease:logic = false
     var Subscriptions:[]cancelable = array{}
     var PendingPlayers:[player]logic = map{}
+    # An old suspended restore must never act on a rejoined player or clear a new request.
+    var RestoreTokens:[player]int = map{}
+    var NextRestoreToken:int = 0
     var SeenCharacters:[player]fort_character = map{}
 
     Message<localizes>(Text:string):message = "{Text}"
@@ -80,6 +83,7 @@ aeonfall_slice_001_checkpoint_device := class(creative_device):
             Subscription.Cancel()
         set Subscriptions = array{}
         set PendingPlayers = map{}
+        set RestoreTokens = map{}
         set SeenCharacters = map{}
         if:
             OwnsLease?
@@ -169,17 +173,35 @@ aeonfall_slice_001_checkpoint_device := class(creative_device):
             QueuePlayer(Player)
 
     QueuePlayer(Player:player):void=
+        if (not Running?):
+            return
+        if (not Player.IsActive[]):
+            return
         if (Existing := PendingPlayers[Player], Existing?):
             return
-        if (Running?, Player.IsActive[], set PendingPlayers[Player] = true):
-            spawn{RestoreWhenReady(Player)}
+        set NextRestoreToken += 1
+        Token := NextRestoreToken
+        if (set RestoreTokens[Player] = Token, set PendingPlayers[Player] = true):
+            spawn{RestoreWhenReady(Player, Token)}
 
-    RestoreWhenReady(Player:player)<suspends>:void=
+    IsRestoreTokenCurrent(Player:player, Token:int)<transacts>:logic=
+        if (Current := RestoreTokens[Player], Current = Token):
+            return true
+        false
+
+    ClearPendingIfCurrent(Player:player, Token:int):void=
+        if (Current := RestoreTokens[Player], Current = Token):
+            if (set PendingPlayers[Player] = false) {}
+
+    RestoreWhenReady(Player:player, Token:int)<suspends>:void=
         var Attempt:int = 0
         loop:
             if (not Running?):
                 return
+            if (not IsRestoreTokenCurrent(Player, Token)?):
+                return
             if (not Player.IsActive[]):
+                ClearPendingIfCurrent(Player, Token)
                 return
             if:
                 Profile := ProfileService.GetProfile[Player]
@@ -187,7 +209,7 @@ aeonfall_slice_001_checkpoint_device := class(creative_device):
                 Character.IsActive[]
             then:
                 if (Seen := SeenCharacters[Player], Seen = Character):
-                    if (set PendingPlayers[Player] = false) {}
+                    ClearPendingIfCurrent(Player, Token)
                     return
                 Latest := LatestContiguousCheckpoint(Profile)
                 if (Latest >= 0):
@@ -201,13 +223,14 @@ aeonfall_slice_001_checkpoint_device := class(creative_device):
                                 SourceId := Id
                             })
                     else:
+                        ClearPendingIfCurrent(Player, Token)
                         return
                 if (set SeenCharacters[Player] = Character):
-                    if (set PendingPlayers[Player] = false) {}
+                    ClearPendingIfCurrent(Player, Token)
                     return
             set Attempt += 1
             if (Attempt >= 100):
-                if (set PendingPlayers[Player] = false) {}
+                ClearPendingIfCurrent(Player, Token)
                 Print("AEONFALL: checkpoint restore timed out waiting for active profile/character.")
                 return
             Sleep(0.1)
@@ -223,10 +246,14 @@ aeonfall_slice_001_checkpoint_device := class(creative_device):
 
     OnPlayerRemoved(Player:player):void=
         var Pending:[player]logic = map{}
+        var Tokens:[player]int = map{}
         var Seen:[player]fort_character = map{}
         for (Stored -> Value : PendingPlayers, Stored <> Player):
             if (set Pending[Stored] = Value) {}
+        for (Stored -> Epoch : RestoreTokens, Stored <> Player):
+            if (set Tokens[Stored] = Epoch) {}
         for (Stored -> Character : SeenCharacters, Stored <> Player):
             if (set Seen[Stored] = Character) {}
         set PendingPlayers = Pending
+        set RestoreTokens = Tokens
         set SeenCharacters = Seen

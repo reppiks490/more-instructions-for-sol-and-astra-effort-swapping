@@ -48,8 +48,12 @@ the existing profile and character, selects the **latest contiguous** persisted
 checkpoint, and requests a native Teleporter move. A player without a
 checkpoint is left at the ordinary island spawn. A bounded startup wait avoids
 indefinite retry loops. Disconnect and device shutdown clear transient
-character/pending state and cancel native event subscriptions. The runtime does
-not rewrite the profile during restoration or duplicate loadout delivery.
+character/pending state and cancel native event subscriptions. Each queued
+restore has a distinct generation token; an old suspended restore refuses to
+teleport a rejoined player or clear the pending flag of a newer restore. A
+terminated or disconnected restore invalidates its token before any further
+effects, while successful restoration records only its own request. The runtime
+does not rewrite the profile during restoration or duplicate loadout delivery.
 
 **Scope:** This handles checkpoint discovery and spawn/rejoin relocation. It
 does not claim to solve dungeon gate progression, boss encounter cleanup,
