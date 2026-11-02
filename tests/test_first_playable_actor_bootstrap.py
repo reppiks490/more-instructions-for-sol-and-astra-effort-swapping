@@ -76,10 +76,6 @@ class ActorBootstrapLeaseTests(unittest.TestCase):
 
     def test_subscription_before_lease_rejected(self):
         old = "        Added := GetPlayspace().PlayerAddedEvent().Subscribe(RegisterPlayer)"
-        self.check_mutation(
-            old, "        Added := GetPlayspace().PlayerAddedEvent().Subscribe(RegisterPlayer)\n"
-                 "        Print(\"subscription before ownership\")",
-        ) if False else None
         self.assertIn(old, self.source)
         mutant = self.source.replace(
             "        if (set AEONFALLActorBootstrapOwners[GetSession()] = option{Self}):",
