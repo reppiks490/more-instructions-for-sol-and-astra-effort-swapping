@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "parent_ability_id": "UNI-001",
+  "mode_key": "sovereign_armor_fusion",
+  "mode": "armor_prototype",
+  "owner_limit": 1,
+  "enabled_by_default": false,
+  "authority": "aeonfall_sovereign_authority_device.CanWield",
+  "persistent_grant": false,
+  "ordinary_unlockable": false,
+  "titan_possession_implemented": false,
+  "session": {
+    "one_controller": true,
+    "generation_bound": true,
+    "duration_seconds": 90,
+    "max_duration_seconds": 180,
+    "cooldown_seconds": 90,
+    "min_cooldown_seconds": 30,
+    "max_cooldown_seconds": 300
+  },
+  "energy": {
+    "initial": 100,
+    "max_capacity": 120,
+    "cost_per_tick": 1,
+    "max_spend_per_request": 25
+  },
+  "physical": {
+    "native_visual": "visual_effect_powerup_device",
+    "native_camera": "gameplay_camera_orbit_device",
+    "native_cinematic": "cinematic_sequence_device",
+    "instigator_only": true,
+    "arbitrary_custom_player_mesh": false
+  },
+  "engine_verification": {
+    "compile": "not_run",
+    "launch_session": "not_run",
+    "multiplayer": "not_run"
+  },
+  "form_id": "FUS-001",
+  "canonical_state_runtime": "verse/sovereign/fusion_state_runtime.verse",
+  "resource_runtime": "verse/sovereign/sovereign_fusion_runtime.verse",
+  "depends_on_pr": 42
+}
