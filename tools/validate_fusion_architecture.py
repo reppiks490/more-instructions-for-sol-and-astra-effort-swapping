@@ -67,6 +67,19 @@ def check_contract(contract: dict, source: str) -> list[str]:
     need(runtime.get("controller_release") ==
          "only_dormant_after_physical_cleanup_and_canonical_teardown",
          "controller release must fail closed while fusion is not dormant")
+    receipt = runtime.get("attack_receipt", {})
+    need(receipt.get("form_id") == "FUS-001"
+         and receipt.get("scope") == "session_one_outstanding"
+         and receipt.get("ttl_seconds") == 1,
+         "attack receipt must be single-use, generation-bound and short-lived")
+    need(receipt.get("issue") == "avatar_upstream_energy_debit_same_deciding_transaction"
+         and receipt.get("consume") == "arsenal_secondary_energy_debit_same_deciding_transaction"
+         and receipt.get("native_adapter_wiring") == "pending",
+         "upstream/downstream receipt wiring must not claim unverified completion")
+    need(receipt.get("invalidated_by") == [
+         "begin_activation", "begin_separation", "complete_separation",
+         "abort", "release_controller"],
+         "every fusion phase reset must invalidate outstanding attack receipts")
     need(runtime.get("max_simultaneous_fusions") == 1, "fusion concurrency limit drift")
     need(runtime.get("physical_effects") == "adapter_owned_not_implemented",
          "native effect implementation must not be falsely claimed")
@@ -113,6 +126,41 @@ def check_contract(contract: dict, source: str) -> list[str]:
             "Generation = Token", "Gate.CanWield(Player)")
     require("Abort", "Current = Device", "Generation = Token",
             "set Phase = aeonfall_fusion_phase.Dormant", "set Generation += 1")
+    # Receipt admission is tied to live owner, form and generation; consumption
+    # is transactional and must happen only once before downstream damage.
+    require("ClearAttackReceipt", "set AttackReceiptPending = false",
+            "set AttackReceiptGeneration = 0", "set AttackReceiptExpiresAt = 0.0")
+    require("IssueAttackReceipt", "Current = Device", "Existing = Player",
+            "Generation = Token", "Phase = aeonfall_fusion_phase.Active",
+            'FormId = "FUS-001"', "Gate.CanWield(Player)",
+            "if (AttackReceiptPending?):",
+            "GetSimulationElapsedTime() < AttackReceiptExpiresAt",
+            "set AttackReceiptSequence += 1",
+            "set AttackReceiptGeneration = Token",
+            "set AttackReceiptExpiresAt = GetSimulationElapsedTime() + 1.0",
+            "set AttackReceiptPending = true")
+    ordered("IssueAttackReceipt", "Gate.CanWield(Player)",
+            "if (AttackReceiptPending?):", "set AttackReceiptSequence += 1",
+            "set AttackReceiptPending = true")
+    require("ConsumeAttackReceipt", "Current = Device", "Existing = Player",
+            "Generation = Token", "Phase = aeonfall_fusion_phase.Active",
+            'FormId = "FUS-001"', "Player.IsActive[]",
+            "AttackReceiptPending?", "AttackReceiptGeneration = Token",
+            "GetSimulationElapsedTime() < AttackReceiptExpiresAt",
+            "Gate.CanWield(Player)", "ClearAttackReceipt()",
+            "<decides><transacts>:int=")
+    ordered("ConsumeAttackReceipt", "AttackReceiptPending?",
+            "AttackReceiptGeneration = Token",
+            "GetSimulationElapsedTime() < AttackReceiptExpiresAt",
+            "Gate.CanWield(Player)", "ClearAttackReceipt()")
+    for name in ("BeginActivation", "BeginSeparation", "CompleteSeparation",
+                 "Abort", "ReleaseController"):
+        require(name, "ClearAttackReceipt()")
+    ordered("BeginActivation", "ClearAttackReceipt()", "set Generation += 1")
+    ordered("BeginSeparation", "ClearAttackReceipt()", "set Phase = aeonfall_fusion_phase.Separating")
+    ordered("CompleteSeparation", "ClearAttackReceipt()", "set Phase = aeonfall_fusion_phase.Dormant")
+    ordered("Abort", "ClearAttackReceipt()", "set Phase = aeonfall_fusion_phase.Dormant")
+    ordered("ReleaseController", "ClearAttackReceipt()", "set Controller = false")
     require("ReleaseController", "Current = Device", "set Generation += 1",
             "set Controller = false", "set Authority = false",
             'if (Phase <> aeonfall_fusion_phase.Dormant or FormId <> ""):',
