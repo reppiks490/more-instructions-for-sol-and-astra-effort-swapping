@@ -19,6 +19,13 @@ aeonfall_faction_conflict_service := class():
 
     var Conflicts:[string]aeonfall_faction_conflict_state = map{}
 
+    # Each region admits only one faction battle at a time, regardless of ID.
+    HasActiveInRegion(RegionId:string)<transacts>:logic=
+        for (ConflictId -> Conflict : Conflicts):
+            if (Conflict.RegionId = RegionId, Conflict.Active?):
+                return true
+        false
+
     ClampScore(Value:int):int=
         if (Value < 0):
             0
@@ -45,6 +52,8 @@ aeonfall_faction_conflict_service := class():
         FactionAId:string,
         FactionBId:string
     )<transacts>:logic=
+        # Resolve the session service before negating its read-only guard.
+        InvasionRuntime := GetAEONFALLInvasionRuntime()
         if:
             ConflictId <> ""
             RegionId <> ""
@@ -52,6 +61,9 @@ aeonfall_faction_conflict_service := class():
             FactionBId <> ""
             FactionAId <> FactionBId
             GetAEONFALLRegionRegistry().IsRegistered[RegionId]
+            GetAEONFALLRegionRuntime().GetState[RegionId]
+            not HasActiveInRegion(RegionId)?
+            not InvasionRuntime.HasActiveInRegion(RegionId)?
         then:
             if:
                 Existing := Conflicts[ConflictId]
