@@ -66,6 +66,27 @@ class UniverseArsenalContractTests(unittest.TestCase):
     def test_no_source_kit_drift(self):
         self.check_mutation(lambda c: c["abilities"][0].update(upstream_energy_cost=0))
 
+    def test_combined_avatar_and_arsenal_spend_cap(self):
+        self.check_mutation(lambda c: c["abilities"][4].update(upstream_energy_cost=10))
+
+    def test_integer_target_count_only(self):
+        self.check_mutation(lambda c: c["abilities"][4].update(max_targets=1.5))
+
+    def test_integer_native_damage_only(self):
+        self.check_mutation(lambda c: c["abilities"][4].update(damage_each=5.5))
+
+    def test_chainhook_cannot_force_displace(self):
+        self.check_mutation(lambda c: c["abilities"][3]["notes"].update(no_forced_displacement=False))
+
+    def test_overclock_tempo_never_unbounded(self):
+        self.check_mutation(lambda c: c["abilities"][5]["notes"].update(max_tempo_multiplier=4.0))
+
+    def test_anchor_requires_no_wall_phasing(self):
+        self.check_mutation(lambda c: c["abilities"][9]["notes"].update(no_wall_phasing=False))
+
+    def test_finisher_threshold_stays_at_quarter_health(self):
+        self.check_mutation(lambda c: c["abilities"][10]["notes"].update(threshold_health_fraction_max=1.0))
+
     def test_distinct_telegraph_required(self):
         self.check_mutation(lambda c: c["abilities"][11]["asset_plan"].pop("accessibility"))
 
