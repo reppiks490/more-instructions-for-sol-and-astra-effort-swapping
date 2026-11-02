@@ -119,6 +119,7 @@ DEVICE_GUARDS = (
     "AttackCueInput.Unregister(Registered)",
     "DismissInput.Unregister(Registered)",
     "ClearCommandInputs()",
+    "ActivateCommandInputs(Owner)",
     "PlayerRemovedEvent().Subscribe(OnPlayerLeft)",
     "AvatarController.VisualOwner?",
     "AvatarController.VisualCharacter?",
@@ -230,7 +231,8 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
                 "requires_native_compile", "requires_two_client_launch_session",
                 "no_untagged_spawned_event_association",
                 "no_global_input_registration",
-                "camera_requires_npc_behavior_ack"):
+                "camera_requires_npc_behavior_ack",
+                "command_input_requires_behavior_ack"):
         if c.get("safety", {}).get(key) is not True:
             errors.append(f"safety gate disabled: {key}")
     lifecycle = c.get("lifecycle", {})
@@ -238,7 +240,7 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "lease": "one_session_controller",
         "late_spawn": "reject_and_despawn",
         "npc_elimination": "exact_agent_identity_then_teardown",
-        "input_registration": "verified_owner_only_dynamic_register_unregister",
+        "input_registration": "summon_owner_only_commands_after_exact_behavior_ack",
         "behavior_ack": "npc_behavior_ack_required_before_commands",
         "unexpected_spawns": "fail_closed_despawn_dedicated_spawner",
         "spawn_association": "serialized_SpawnAt_return_and_epoch",
@@ -302,14 +304,33 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
     terminal = device[finish_at:device.find("    OnEnd<override>():void=", finish_at)]
     if finish_at < 0 or "ClearCommandInputs()" not in terminal:
         errors.append("terminal cleanup must remove command input eligibility")
-    if device.find("ActivateCommandInputs(Player)", device.find("    OnSummon(")) < device.find("Attempt := Runtime.Begin("):
-        errors.append("Titan command inputs registered before authoritative begin")
     # Begin marks SpawnInFlight before any SpawnAt is actually called.
     # Rejecting an already-populated dedicated spawner after Begin and
     # calling End would leave SpawnInFlight permanently set (no async
     # completion exists to clear it). Preflight must precede reservation.
     summon = device[device.find("    OnSummon(Agent:agent):void="):
                     device.find("    AwaitSpawn(ExpectedEpoch:int")]
+    # No movement/cue/dismiss input may appear while SpawnAt suspends or
+    # while the NPC behavior is still bootstrapping. Source checks are
+    # structural; native UI timing remains a separate Launch Session gate.
+    if "ActivateCommandInputs(" in summon:
+        errors.append("Titan command HUD must remain off during spawn admission")
+    owner_bound = summon.find("set ProxyOwner = option{Player}")
+    summon_hidden = summon.find("RefreshSummonRegistration()")
+    if not (0 <= owner_bound < summon_hidden < summon.find("TitanSpawner.Reset()")):
+        errors.append("summon action must be retracted once a proxy is pending")
+    eligible = device[device.find("    EligibleSummoner()<transacts>:?player="):
+                      device.find("    RefreshSummonRegistration():void=")]
+    if "not ProxyOwner?" not in eligible:
+        errors.append("summon action must be hidden during active or pending proxy")
+    ready_start = device.find("    AwaitBehaviorReady(ExpectedEpoch:int, SpawnedAgent:agent)")
+    ready_end = device.find("    # An optional fixed-point camera", ready_start)
+    ready = device[ready_start:ready_end]
+    ack = ready.find("Runtime.IsBehaviorReady(SpawnedAgent)?")
+    owner = ready.find("Owner := ProxyOwner?, Owner.IsActive[], Runtime.IsAuthorized()?")
+    registration = ready.find("ActivateCommandInputs(Owner)")
+    if ready_start < 0 or ready_end < 0 or not (0 <= ack < owner < registration):
+        errors.append("Titan command input registration requires exact NPC ack and live owner")
     preflight = summon.find("TitanSpawner.GetAgents().Length <> 0")
     reserve = summon.find("Attempt := Runtime.Begin(")
     cleanup = summon.find("TitanSpawner.DespawnAll(false)")

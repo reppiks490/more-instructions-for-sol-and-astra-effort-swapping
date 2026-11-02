@@ -1,3 +1,13 @@
+## 2026-11-01 — Avatar: gate Titan command inputs on exact NPC behavior readiness
+
+Moved movement, cue and dismissal Input Trigger registration from SpawnAt
+admission to the exact NPC behavior acknowledgement and renewed FUS-001
+owner/character authorization. Summon is unregistered during pending/active
+proxy, then restored only after teardown and owner reconciliation. Expanded
+static mutation guards and two-player lifecycle policy tests. FUS-002 and
+optional camera remain disabled; native Verse compile, Fortnite mobile HUD,
+multiplayer replication and UEFN Launch Session are not verified.
+
 ## 2026-11-01 — Avatar: opt-in NPC-tracking fixed-point camera research
 
 Added a disabled-by-default Fixed Point Camera adapter to the experimental

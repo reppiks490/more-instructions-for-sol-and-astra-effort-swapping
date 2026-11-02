@@ -128,6 +128,7 @@ aeonfall_titan_proxy_device := class(creative_device):
     # changes. Registration is presentation/filtering, NOT authorization.
     EligibleSummoner()<transacts>:?player=
         if:
+            not ProxyOwner?
             AvatarController.Running?
             Owner := AvatarController.VisualOwner?
             Owner.IsActive[]
@@ -223,7 +224,9 @@ aeonfall_titan_proxy_device := class(creative_device):
                 set Epoch = StartedEpoch
                 set ProxyOwner = option{Player}
                 set ProxyCharacter = option{Character}
-                ActivateCommandInputs(Player)
+                # A pending NPC has no command HUD. Hide summon until this
+                # generation is either acknowledged or fully torn down.
+                RefreshSummonRegistration()
                 set WaypointIndex = 0
                 TitanSpawner.Reset()
                 TitanSpawner.Enable()
@@ -283,9 +286,15 @@ aeonfall_titan_proxy_device := class(creative_device):
                 if (not Runtime.IsCurrentEpoch(ExpectedEpoch)?):
                     return
                 if (Runtime.IsBehaviorReady(SpawnedAgent)?):
-                    StartProxyCamera(ExpectedEpoch, SpawnedAgent)
-                    if (Owner := ProxyOwner?):
+                    # A returned SpawnAt agent alone cannot enable touch/HUD
+                    # controls. Recheck the same live FUS-001 owner at the
+                    # exact behavior-acknowledged epoch before registration.
+                    if (Owner := ProxyOwner?, Owner.IsActive[], Runtime.IsAuthorized()?):
+                        ActivateCommandInputs(Owner)
+                        StartProxyCamera(ExpectedEpoch, SpawnedAgent)
                         Feedback.Show(Owner, TitanProxyReady, 3.0)
+                        return
+                    FinishProxy()
                     return
             set Attempts += 1
             if (Attempts >= 20):

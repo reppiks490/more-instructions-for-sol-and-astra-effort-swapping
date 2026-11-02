@@ -468,6 +468,59 @@ class TitanProxySourceTests(unittest.TestCase):
         self.assertTrue(self.errors(c=c))
 
 
+    def test_command_hud_is_hidden_until_exact_behavior_ack(self):
+        summon = self.device.split("    OnSummon(Agent:agent):void=", 1)[1].split(
+            "    AwaitSpawn(ExpectedEpoch:int", 1
+        )[0]
+        ready = self.device.split(
+            "    AwaitBehaviorReady(ExpectedEpoch:int, SpawnedAgent:agent)", 1
+        )[1].split("    # An optional fixed-point camera", 1)[0]
+        self.assertNotIn("ActivateCommandInputs(", summon)
+        self.assertLess(ready.index("Runtime.IsBehaviorReady(SpawnedAgent)?"),
+                        ready.index("ActivateCommandInputs(Owner)"))
+        self.assertLess(ready.index("Runtime.IsAuthorized()?"),
+                        ready.index("ActivateCommandInputs(Owner)"))
+        mutation = self.device.replace(
+            "                        ActivateCommandInputs(Owner)",
+            "                        Print(\"no command registration\")", 1
+        )
+        self.assertTrue(self.errors(device=mutation))
+
+    def test_early_command_hud_registration_rejected(self):
+        mutation = self.device.replace(
+            "                RefreshSummonRegistration()\n                set WaypointIndex = 0",
+            "                ActivateCommandInputs(Player)\n                set WaypointIndex = 0",
+            1
+        )
+        self.assertTrue(self.errors(device=mutation))
+
+    def test_acknowledgement_cannot_bypass_owner_recheck(self):
+        mutation = self.device.replace(
+            "Owner := ProxyOwner?, Owner.IsActive[], Runtime.IsAuthorized()?",
+            "Owner := ProxyOwner?", 1
+        )
+        self.assertTrue(self.errors(device=mutation))
+
+    def test_summon_action_hidden_while_proxy_pending(self):
+        eligible = self.device.split(
+            "    EligibleSummoner()<transacts>:?player=", 1
+        )[1].split("    RefreshSummonRegistration():void=", 1)[0]
+        self.assertIn("not ProxyOwner?", eligible)
+        mutation = self.device.replace(
+            "    EligibleSummoner()<transacts>:?player=\n        if:\n            not ProxyOwner?",
+            "    EligibleSummoner()<transacts>:?player=\n        if:", 1
+        )
+        self.assertTrue(self.errors(device=mutation))
+
+    def test_command_ui_contract_cannot_claim_early_access(self):
+        c = copy.deepcopy(self.contract)
+        c["safety"]["command_input_requires_behavior_ack"] = False
+        self.assertTrue(self.errors(c=c))
+        c = copy.deepcopy(self.contract)
+        c["lifecycle"]["input_registration"] = "register_during_spawn"
+        self.assertTrue(self.errors(c=c))
+
+
 class TitanProxyPolicyModelTests(unittest.TestCase):
     def setUp(self):
         self.p = ProxyModel()
@@ -706,39 +759,61 @@ class TitanSpawnHandshakeTests(unittest.TestCase):
 
 
 class OwnerInputRegistrationModel:
-    """Independent owner-specific input registration reference model.
+    """Adversarial source-policy model, NOT native Input Trigger execution.
 
-    Mimics who receives the action UI and which callbacks may be admitted;
-    it is NOT an engine Input Trigger test or a multiplayer session.
+    A pending NPC cannot grant the owner command HUD. Only exact behavior
+    acknowledgement for the current authorized owner activates those inputs.
     """
 
     def __init__(self):
+        self.authorized_owner = None
         self.summoner = None
+        self.pending_owner = None
         self.commands = None
         self.proxy_active = False
 
     def reconcile(self, candidate, authorized):
-        self.summoner = candidate if authorized else None
+        self.authorized_owner = candidate if authorized else None
+        if self.proxy_active and self.pending_owner != self.authorized_owner:
+            self.dismiss()
+        self.summoner = self.authorized_owner if not self.proxy_active else None
 
     def summon(self, actor):
-        if self.proxy_active or actor is None or actor != self.summoner:
+        if (self.proxy_active or actor is None or actor != self.summoner
+                or actor != self.authorized_owner):
             return False
         self.proxy_active = True
+        self.pending_owner = actor
+        self.summoner = None
+        self.commands = None
+        return True
+
+    def acknowledge(self, actor, *, exact_npc=True, generation_valid=True):
+        if (not self.proxy_active or actor != self.pending_owner
+                or actor != self.authorized_owner or not exact_npc
+                or not generation_valid):
+            return False
         self.commands = actor
         return True
 
     def command(self, actor):
-        return self.proxy_active and actor == self.commands and actor == self.summoner
+        return (
+            self.proxy_active and actor == self.commands
+            and actor == self.pending_owner and actor == self.authorized_owner
+        )
 
     def dismiss(self):
         self.commands = None
+        self.pending_owner = None
         self.proxy_active = False
+        self.summoner = self.authorized_owner
 
     def disconnect(self, actor):
-        if actor == self.commands:
+        if actor == self.authorized_owner:
+            self.authorized_owner = None
+        if actor == self.pending_owner:
             self.dismiss()
-        if actor == self.summoner:
-            self.summoner = None
+        self.summoner = self.authorized_owner if not self.proxy_active else None
 
 
 class OwnerInputRegistrationModelTests(unittest.TestCase):
@@ -749,20 +824,36 @@ class OwnerInputRegistrationModelTests(unittest.TestCase):
         self.m.reconcile("creator", True)
         self.assertFalse(self.m.summon("intruder"))
         self.assertTrue(self.m.summon("creator"))
+        self.assertFalse(self.m.command("creator"))
+        self.assertFalse(self.m.acknowledge("intruder"))
+        self.assertTrue(self.m.acknowledge("creator"))
         self.assertFalse(self.m.command("intruder"))
         self.assertTrue(self.m.command("creator"))
+
+    def test_pending_spawn_never_exposes_command_or_repeat_summon(self):
+        self.m.reconcile("creator", True)
+        self.assertTrue(self.m.summon("creator"))
+        self.assertIsNone(self.m.summoner)
+        self.assertIsNone(self.m.commands)
+        self.assertFalse(self.m.command("creator"))
+        self.assertFalse(self.m.summon("creator"))
+        self.assertFalse(self.m.acknowledge("creator", exact_npc=False))
+        self.assertFalse(self.m.acknowledge("creator", generation_valid=False))
+        self.assertFalse(self.m.command("creator"))
 
     def test_revoked_authority_retracts_actions(self):
         self.m.reconcile("creator", True)
         self.assertTrue(self.m.summon("creator"))
+        self.assertTrue(self.m.acknowledge("creator"))
         self.m.reconcile("creator", False)
         self.assertFalse(self.m.command("creator"))
-        self.m.dismiss()
         self.assertFalse(self.m.summon("creator"))
+        self.assertIsNone(self.m.commands)
 
     def test_disconnect_unregistered_and_cleans_commands(self):
         self.m.reconcile("creator", True)
         self.assertTrue(self.m.summon("creator"))
+        self.assertTrue(self.m.acknowledge("creator"))
         self.m.disconnect("creator")
         self.assertIsNone(self.m.summoner)
         self.assertIsNone(self.m.commands)
@@ -771,11 +862,25 @@ class OwnerInputRegistrationModelTests(unittest.TestCase):
     def test_new_authorized_player_cannot_inherit_old_proxy(self):
         self.m.reconcile("owner-A", True)
         self.assertTrue(self.m.summon("owner-A"))
+        self.assertTrue(self.m.acknowledge("owner-A"))
         self.m.reconcile("owner-B", True)
         self.assertFalse(self.m.command("owner-B"))
-        self.m.dismiss()
-        self.assertTrue(self.m.summon("owner-B"))
         self.assertFalse(self.m.command("owner-A"))
+        self.assertTrue(self.m.summon("owner-B"))
+        self.assertFalse(self.m.command("owner-B"))
+        self.assertTrue(self.m.acknowledge("owner-B"))
+        self.assertTrue(self.m.command("owner-B"))
+
+    def test_dismiss_restores_only_current_summon_eligibility(self):
+        self.m.reconcile("creator", True)
+        self.assertTrue(self.m.summon("creator"))
+        self.assertTrue(self.m.acknowledge("creator"))
+        self.m.dismiss()
+        self.assertFalse(self.m.command("creator"))
+        self.assertEqual(self.m.summoner, "creator")
+        self.assertTrue(self.m.summon("creator"))
+        self.assertFalse(self.m.command("creator"))
+
 
 class TitanCameraStackReferenceModel:
     """Stack ownership policy only; never models actual UEFN camera behavior."""
