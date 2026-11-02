@@ -1,18 +1,21 @@
 # Build change log
 
-## 2026-11-01 — Sovereign fusion: verified-owner state and armor presentation bridge
+## 2026-11-01 — Sovereign fusion: FUS-001 native adapter and bounded budget
 
-Introduced a session-scoped, generation-bound UNI-001 armor fusion runtime with
-single controller lease, native owner authority verification, finite energy,
-cooldown, fail-closed resource spending and deterministic separation. Added a
-disabled-by-default player-specific native presentation device using visual
-effect powerup, orbit camera and instigator-only cinematic sequence, including
-authoritative heartbeat, owner-revocation, character-swap and teardown cleanup.
-Source/policy mutation guards, CI integration and native Launch Session
-acceptance guide were added. This is **not** custom NPC possession or a
-playable imported machine-demon mesh; no native compile or multiplayer session
-was performed and creator provisioning remains unverified.
+Added an opt-in FUS-001 Armor Fusion presentation bridge on a dedicated branch.
+Unlike the initial draft, this integrates with the Fusion Architect's canonical
+`fusion_state_runtime.verse` state and verified-owner lease (PR #42); it does
+not add another owner or form state machine. A separate session-only resource
+ledger bounds admission duration, energy costs, and cooldown, preserving the
+cooldown through controller replacement. Player-specific aura/camera/cinematic
+presentation is requested only after owner admission; acknowledgement,
+generation-bound spending, rollback and physical cleanup on separation,
+revocation, disconnect, character replacement or shutdown are source-guarded.
 
+Added mutation tests, CI checks, editor instructions and a multiplayer
+acceptance matrix. Custom NPC possession, physical armor models, native
+Verse compilation and Fortnite Launch Session tests remain outstanding.
+The owner is not yet provisioned, and all new devices default disabled.
 
 ## 2026-11-01 — Playable Slice: persistent Ossuary checkpoint/respawn runtime
 
