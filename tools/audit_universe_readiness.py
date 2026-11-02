@@ -115,7 +115,7 @@ def inspect_package(root: Path, item: dict, key: str, valid_ids: set[str],
                     region_ids: set[str]):
     errors = []
     ident = item.get(key)
-    if ident not in valid_ids:
+    if not isinstance(ident, str) or ident not in valid_ids:
         errors.append(f"Unknown {key} {ident!r} in source registry")
         return False, errors
     categories = required.get(ident, [])
@@ -148,7 +148,7 @@ def inspect_package(root: Path, item: dict, key: str, valid_ids: set[str],
             complete = False
         else:
             for region in regions:
-                if region not in region_ids and region != "GLOBAL":
+                if not isinstance(region, str) or (region not in region_ids and region != "GLOBAL"):
                     errors.append(f"{ident}: unrecognized region scope {region!r}")
                     complete = False
     # Review is an explicit governance claim, NOT proof of native UEFN play.
@@ -220,6 +220,9 @@ def inspect_inventory(root: Path, policy: dict, inventory: dict,
                 errors.append(f"{collection}: non-object source package")
                 continue
             ident = package.get(key)
+            if not isinstance(ident, str):
+                errors.append(f"{collection}: malformed {key} {ident!r}")
+                continue
             if ident in seen:
                 errors.append(f"{collection}: duplicate source package for {ident!r}")
                 continue
