@@ -11,6 +11,18 @@ remain unverified.
 
 # Build change log
 
+## 2026-11-01 — Fusion Architect: fail-closed cross-loop attack handoff
+
+The Architect validator now conditionally enforces paid-attack receipt
+compatibility when Avatar's optional AttackOutput or Arsenal's Reaver adapter
+source is present. It requires admission and one-use receipt issuance before
+native output, and transactional receipt consumption before secondary energy
+debit, cooldown and native damage. Eleven synthetic/mutation regressions
+cover missing or reordered calls, forged acceptance and unpaired adapters.
+Existing first-playable main remains compatible until the draft adapters
+land. Source-only checks do not attest native UEFN behavior.
+
+
 ## 2026-11-01 — Fusion Architect: one-use Reaver admission receipts
 
 Added a session-local, generation-bound, one-second attack receipt to the
