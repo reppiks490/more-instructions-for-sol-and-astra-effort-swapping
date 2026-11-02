@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 import build_omnigod_manifestation_assets as geometry
 import build_omnigod_cinematic as cinematic
+import validate_omnigod_cinematic as validator
 
 
 class CinematicSourceTests(unittest.TestCase):
@@ -75,6 +76,23 @@ class CinematicSourceTests(unittest.TestCase):
         self.assertTrue(first["accessibility"]["reduced_flash"])
         self.assertEqual(first["accessibility"]["screen_flash_count"], 0)
         self.assertTrue(first["binding_rules"]["abort_cancels_all_cues"])
+
+    def test_independent_validator_and_mutated_cues(self):
+        out = self.root / "validated"
+        cinematic.build(self.source, out)
+        self.assertEqual(validator.validate(out), [])
+        cue_path = out / "cue_sheet.json"
+        original = json.loads(cue_path.read_text())
+        tampered = json.loads(json.dumps(original))
+        tampered["binding_rules"]["abort_cancels_all_cues"] = False
+        cue_path.write_text(json.dumps(tampered))
+        self.assertTrue(any("cleanup" in e for e in validator.validate(out)))
+        tampered = json.loads(json.dumps(original))
+        tampered["files"][0]["sha256"] = "0" * 64
+        cue_path.write_text(json.dumps(tampered))
+        self.assertTrue(any("hash mismatch" in e for e in validator.validate(out)))
+        cue_path.write_text(json.dumps(original))
+        self.assertEqual(validator.validate(out), [])
 
     def test_wrong_source_and_corruption_fail_closed(self):
         broken = self.root / "broken.glb"
