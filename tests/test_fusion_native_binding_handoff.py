@@ -83,6 +83,19 @@ class FusionBindingSourceTests(unittest.TestCase):
             ))
             self.assertTrue(handoff.validate_contract(root, self.doc))
 
+    def test_unexpected_manifest_role_properties_fail_closed(self):
+        doc = copy.deepcopy(self.doc)
+        doc["components"][1]["bindings"]["FuseInput"]["editor_verified"] = True
+        self.assertTrue(handoff.validate_contract(ROOT, doc))
+
+    def test_duplicate_editable_declarations_are_rejected(self):
+        source = (
+            "    @editable\n    Input:input_trigger_device = input_trigger_device{}\n"
+            "    @editable\n    Input:input_trigger_device = input_trigger_device{}\n"
+        )
+        with self.assertRaisesRegex(ValueError, "Duplicate @editable"):
+            handoff.source_device_editables(source)
+
     def test_source_hashes_and_never_native_evidence_template(self):
         doc = self.original
         self.assertEqual(doc["native_evidence"], handoff.EVIDENCE_STATE)
@@ -136,6 +149,19 @@ class FusionBindingReportTests(unittest.TestCase):
         inventory["native_evidence"]["uefn_compile"] = "passed"
         self.assertFalse(self.report(inventory)["binding_consistent"])
 
+    def test_unrecognized_editor_proof_property_is_rejected(self):
+        inventory = copy.deepcopy(self.template)
+        inventory["native_verified"] = True
+        self.assertFalse(self.report(inventory)["binding_consistent"])
+        inventory = copy.deepcopy(self.template)
+        inventory["objects"][0]["compiled"] = True
+        self.assertFalse(self.report(inventory)["binding_consistent"])
+
+    def test_claimed_class_without_object_path_is_rejected(self):
+        inventory = copy.deepcopy(self.template)
+        inventory["objects"][0]["observed_type"] = inventory["objects"][0]["expected_type"]
+        self.assertFalse(self.report(inventory)["binding_consistent"])
+
     def test_stale_source_digest_fails(self):
         inventory = copy.deepcopy(self.template)
         first = next(iter(inventory["verse_source_sha256"]))
@@ -179,7 +205,19 @@ class FusionBindingReportTests(unittest.TestCase):
         for alias, value in inventory["shared_editor_links"].items():
             if alias.split(".", 1)[0] in {"authority", "armor", "arsenal"}:
                 value["observed_object_path"] = paths[value["target_role"]]
-        result = self.report(inventory)
+        # Even an operator-reported complete core inventory cannot be
+        # considered complete without a project, level, and checked capture.
+        self.assertFalse(self.report(inventory)["core_binding_report_complete"])
+        inventory["editor_project"] = "AEONFALL-Editor-Project-From-Operator"
+        inventory["editor_level"] = "/AEONFALL/Maps/ActualEditorLevel"
+        with tempfile.TemporaryDirectory() as directory:
+            capture = Path(directory) / "editor_capture.txt"
+            capture.write_bytes(b"untrusted-operator-evidence-not-fortnite")
+            inventory["editor_capture"] = {
+                "path": capture.name,
+                "sha256": hashlib.sha256(capture.read_bytes()).hexdigest(),
+            }
+            result = self.report(inventory, evidence_root=directory)
         self.assertTrue(result["binding_consistent"], result["errors"])
         self.assertTrue(result["core_binding_report_complete"])
         self.assertEqual(result["native_verse_compile"], "not_assessed")
