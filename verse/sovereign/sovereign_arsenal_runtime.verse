@@ -105,13 +105,13 @@ aeonfall_sovereign_arsenal_runtime := class:
             set MarkToken = 0
             set MarkUntil = 0.0
 
-var AEONFALLSovereignArsenalSessions:weak_map(session, aeonfall_sovereign_arsenal_runtime) = map{}
+var AEONFALLSovereignArsenalRuntimeSessions:weak_map(session, aeonfall_sovereign_arsenal_runtime) = map{}
 
 GetAEONFALLSovereignArsenalRuntime()<transacts>:aeonfall_sovereign_arsenal_runtime=
     CurrentSession := GetSession()
-    if (Existing := AEONFALLSovereignArsenalSessions[CurrentSession]):
+    if (Existing := AEONFALLSovereignArsenalRuntimeSessions[CurrentSession]):
         return Existing
     Created := aeonfall_sovereign_arsenal_runtime{}
-    if (set AEONFALLSovereignArsenalSessions[CurrentSession] = Created):
+    if (set AEONFALLSovereignArsenalRuntimeSessions[CurrentSession] = Created):
         return Created
     Err("AEONFALL could not retain arsenal state in its Verse session")
