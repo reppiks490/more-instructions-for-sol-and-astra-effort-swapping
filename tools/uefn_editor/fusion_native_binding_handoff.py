@@ -53,7 +53,13 @@ def component_sources(root: Path, doc: dict) -> dict:
 
 
 def source_device_editables(code: str) -> dict[str, str]:
-    all_fields = dict(EDITABLE.findall(code))
+    # A duplicate editable declaration is a source error, not permission to
+    # silently overwrite the earlier physical role in a Python dictionary.
+    fields = EDITABLE.findall(code)
+    names = [name for name, _ in fields]
+    if len(names) != len(set(names)):
+        raise ValueError("Duplicate @editable field names in Verse source")
+    all_fields = dict(fields)
     return {
         name: kind for name, kind in all_fields.items()
         if kind.endswith("_device") or kind == "creative_prop" or kind == "[]creative_prop"
@@ -101,7 +107,11 @@ def validate_contract(root: Path, doc: dict) -> list[str]:
             errors.append(f"{name}: missing editor-placeable creative device class")
         if not re.search(r"(?m)^[ \t]+Enabled:logic = false[ \t]*$", code):
             errors.append(f"{name}: controller is not disabled by default")
-        actual = source_device_editables(code)
+        try:
+            actual = source_device_editables(code)
+        except ValueError as error:
+            errors.append(f"{name}: {error}")
+            continue
         declared = component.get("bindings")
         if not isinstance(declared, dict):
             errors.append(f"{name}: bindings must be a keyed map")
@@ -114,6 +124,15 @@ def validate_contract(root: Path, doc: dict) -> list[str]:
                 continue
             role = f"{name}.{field}"
             target = definition.get("alias")
+            expected_keys = {"type"}
+            if role in ALIASES:
+                expected_keys.add("alias")
+            if role in ("authority.OwnerReference", "titan.AttackCueOutput"):
+                expected_keys.add("restriction")
+            if role == "titan.Waypoints":
+                expected_keys |= {"min_items", "max_items"}
+            if set(definition) != expected_keys:
+                errors.append(f"{role}: unexpected or missing physical role contract property")
             if target != ALIASES.get(role):
                 errors.append(f"{role}: expected explicit shared-role alias {ALIASES.get(role)!r}")
             if "min_items" in definition or "max_items" in definition:
@@ -197,6 +216,8 @@ def audit(root: Path, doc: dict, report: dict, *, evidence_root=None) -> dict:
     expected = inventory_template(root, doc) if not issues else None
     if expected is None:
         return {"binding_consistent": False, "errors": issues, "native_playability": "not_established"}
+    if set(report) != set(expected):
+        issues.append("Inventory contains missing or unrecognized top-level fields")
     for field in ("schema_version", "feature", "authored_manifest_sha256",
                   "verse_source_sha256", "claim_boundary", "native_evidence"):
         if report.get(field) != expected[field]:
@@ -219,6 +240,8 @@ def audit(root: Path, doc: dict, report: dict, *, evidence_root=None) -> dict:
             continue
         observed[role] = item
         declared = roles[role]
+        if set(item) != set(declared):
+            issues.append(f"{role}: unexpected editor evidence fields")
         if item.get("expected_type") != declared["expected_type"]:
             issues.append(f"{role}: expected class field does not match source")
         values = item.get("object_paths") if role == "titan.Waypoints" else [item.get("object_path")]
@@ -229,6 +252,8 @@ def audit(root: Path, doc: dict, report: dict, *, evidence_root=None) -> dict:
         if role == "titan.Waypoints" and len(values) > 8:
             issues.append("Titan waypoint count exceeds eight")
         if not values or values == [None]:
+            if any(observed_type is not None for observed_type in classes):
+                issues.append(f"{role}: claimed native class without an editor object path")
             pending.append(role)
             continue
         for location, actual_type in zip(values, classes):
@@ -253,7 +278,7 @@ def audit(root: Path, doc: dict, report: dict, *, evidence_root=None) -> dict:
         issues.append("Shared native links do not match the source roles")
     for role, original in expected["shared_editor_links"].items():
         value = links.get(role)
-        if not isinstance(value, dict) or value.get("target_role") != original["target_role"]:
+        if not isinstance(value, dict) or set(value) != set(original) or value.get("target_role") != original["target_role"]:
             issues.append(f"{role}: shared native object alias is mismatched")
             continue
         target = observed.get(original["target_role"], {})
@@ -266,11 +291,22 @@ def audit(root: Path, doc: dict, report: dict, *, evidence_root=None) -> dict:
 
     captured, capture_errors = verify_capture(report.get("editor_capture"), evidence_root)
     issues.extend(capture_errors)
-    if report.get("editor_project") is not None and not isinstance(report["editor_project"], str):
+    editor_project = report.get("editor_project")
+    editor_level = report.get("editor_level")
+    if editor_project is not None and (not isinstance(editor_project, str) or not editor_project.strip()):
         issues.append("Editor project identity is malformed")
-    if report.get("editor_level") is not None and not valid_editor_path(report["editor_level"]):
+    if editor_level is not None and not valid_editor_path(editor_level):
         issues.append("Editor level path is malformed")
     core_pending = [role for role in pending if tier.get(role.split(".", 1)[0]) == "core"]
+    # A complete reported inventory MUST identify an actual editor project,
+    # level, and hash-checked capture. Such reports still are NOT engine proof.
+    if not core_pending:
+        if not isinstance(editor_project, str) or not editor_project.strip():
+            issues.append("Reported complete bindings require an editor project identity")
+        if not valid_editor_path(editor_level):
+            issues.append("Reported complete bindings require an editor level path")
+        if not captured:
+            issues.append("Reported complete bindings require an integrity-checked editor capture")
     return {
         "schema_version": 1, "feature": doc["feature"],
         "source_controller_count": len(doc["components"]),
