@@ -109,6 +109,48 @@ class InstallerTests(unittest.TestCase):
         self.assertEqual(snapshot(self.project.parent), before)
         self.assert_metadata_unchanged()
 
+    def seed_titan_proxy_source(self):
+        # Standalone minimal-source installer fixture with the actual authored
+        # proxy source; it does not instantiate a UEFN project or compile Verse.
+        import shutil
+        for name in (
+            "titan_proxy_command_runtime.verse",
+            "titan_proxy_behavior.verse",
+            "titan_proxy_device.verse",
+            "fusion_state_runtime.verse",
+        ):
+            src = ROOT / "verse/sovereign" / name
+            dst = self.source / "verse/sovereign" / name
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, dst)
+        contract = self.source / "content/sovereign/titan_proxy_experiment.json"
+        contract.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(ROOT / "content/sovereign/titan_proxy_experiment.json", contract)
+        validator = self.source / "tools/validate_titan_proxy.py"
+        validator.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(ROOT / "tools/validate_titan_proxy.py", validator)
+        return contract
+
+    def test_titan_proxy_contract_preserved_in_editor_import_package(self):
+        self.seed_titan_proxy_source()
+        result = self.install()
+        self.assertGreater(result["source_count"], 2)
+        imported = self.package / "content/sovereign/titan_proxy_experiment.json"
+        self.assertTrue(imported.is_file())
+        self.assertEqual(json.loads(imported.read_text())["f002_activation"], "disabled")
+        self.assert_metadata_unchanged()
+
+    def test_tampered_titan_proxy_rejected_before_editor_write(self):
+        contract = self.seed_titan_proxy_source()
+        spec = json.loads(contract.read_text())
+        spec["native_evidence"]["uefn_compile"] = "passed"
+        contract.write_text(json.dumps(spec))
+        before = snapshot(self.project.parent)
+        with self.assertRaisesRegex(ValueError, "Titan proxy handoff invalid"):
+            self.install()
+        self.assertEqual(snapshot(self.project.parent), before)
+        self.assert_metadata_unchanged()
+
     def test_install_copies_flat_verse_and_external_import_package(self):
         result = self.install()
         self.assertEqual(result["source_count"], 2)

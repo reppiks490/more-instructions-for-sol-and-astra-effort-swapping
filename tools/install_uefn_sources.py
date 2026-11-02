@@ -216,6 +216,28 @@ def install(project_file: Path, source_root: Path = ROOT, plugin_name: str | Non
     project_root = project_file.resolve().parent
     sources = source_plan(source_root)
     handoff = inspect_slice_handoff(source_root)
+    # Source-only Titan experiment must not be silently installed if its owner,
+    # no-damage or native-evidence contract has drifted. Validate first, prior
+    # to writing Verse or any editor import file.
+    titan_contract = source_root / "content/sovereign/titan_proxy_experiment.json"
+    if titan_contract.exists():
+        validator = within(source_root / "tools/validate_titan_proxy.py", source_root)
+        if not validator.is_file():
+            raise ValueError("Missing Titan proxy source validator.")
+        spec = importlib.util.spec_from_file_location("titan_proxy_installer_preflight", validator)
+        if spec is None or spec.loader is None:
+            raise ValueError("Cannot load Titan proxy source validator.")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        errors = module.validate(
+            json.loads(within(titan_contract, source_root).read_text(encoding="utf-8")),
+            (source_root / "verse/sovereign/titan_proxy_command_runtime.verse").read_text(encoding="utf-8"),
+            (source_root / "verse/sovereign/titan_proxy_behavior.verse").read_text(encoding="utf-8"),
+            (source_root / "verse/sovereign/titan_proxy_device.verse").read_text(encoding="utf-8"),
+            (source_root / "verse/sovereign/fusion_state_runtime.verse").read_text(encoding="utf-8"),
+        )
+        if errors:
+            raise ValueError("Titan proxy handoff invalid: " + "; ".join(errors))
     destination = writable_path(plugin.parent / "Content" / "AEONFALL", project_root)
     package = writable_path(project_root / "AEONFALLImportPackage", project_root)
     inventory_path = destination / "aeonfall-install.json"
@@ -241,7 +263,7 @@ def install(project_file: Path, source_root: Path = ROOT, plugin_name: str | Non
                     raise ValueError(f"Edited stale source requires manual resolution: {path}")
                 stale.append((path, old_hash))
     imports = []
-    for relative in ["assets/source/ossuary_starter", "tools/uefn_editor", "docs", "content/vertical_slice"]:
+    for relative in ["assets/source/ossuary_starter", "tools/uefn_editor", "docs", "content/vertical_slice", "content/sovereign/titan_proxy_experiment.json"]:
         candidate = source_root / relative
         if candidate.is_dir():
             for item in sorted(candidate.rglob("*")):

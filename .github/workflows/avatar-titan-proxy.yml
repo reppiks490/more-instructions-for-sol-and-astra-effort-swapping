@@ -1,0 +1,43 @@
+name: AEONFALL Avatar Titan Proxy Source Guard
+
+on:
+  push:
+    paths:
+      - "verse/sovereign/titan_proxy*.verse"
+      - "content/sovereign/titan_proxy_experiment.json"
+      - "tools/validate_titan_proxy.py"
+      - "tests/test_titan_proxy.py"
+      - "tools/install_uefn_sources.py"
+      - "tests/test_uefn_bootstrap.py"
+      - ".github/workflows/avatar-titan-proxy.yml"
+  pull_request:
+    paths:
+      - "verse/sovereign/titan_proxy*.verse"
+      - "content/sovereign/titan_proxy_experiment.json"
+      - "tools/validate_titan_proxy.py"
+      - "tests/test_titan_proxy.py"
+      - "tools/install_uefn_sources.py"
+      - "tests/test_uefn_bootstrap.py"
+      - ".github/workflows/avatar-titan-proxy.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  source-only:
+    name: Source and mutation validation (not UEFN)
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Pin disabled proxy and reject native evidence claims
+        run: python tools/validate_titan_proxy.py
+      - name: Test spoofing, command bounds, lifecycle and source mutations
+        run: python -m unittest tests.test_titan_proxy -v
+      - name: Test editor installer fail-closed behavior
+        run: python -m unittest tests.test_uefn_bootstrap -v
+      - name: Check generic Verse source structure (not Verse compilation)
+        run: python tools/validate_verse_static.py
