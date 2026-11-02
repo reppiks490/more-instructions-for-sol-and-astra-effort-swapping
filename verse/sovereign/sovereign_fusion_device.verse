@@ -221,10 +221,16 @@ aeonfall_sovereign_fusion_device := class(creative_device):
             Authorized?
             Now := GetSimulationElapsedTime()
             Now >= LastAttackAt + AttackCooldownSeconds
+            # The upfront energy debit and one-use Architect receipt MUST
+            # succeed in the same deciding failure context. If another
+            # receipt is pending or authority changes, the debit rolls back
+            # rather than charging for an unauthorized output request.
             Resource.Spend[Self, Player, Token, State, AttackEnergyCost]
+            Issued := State.IssueAttackReceipt(Self, Player, Token)
+            Issued?
         then:
-            # Charge and cooldown are server-side, bound to the canonical
-            # generation and owner. Physical output is editor-owned.
+            # Only the paid, generation-bound admission may issue a physical
+            # instigator-tagged request. The trigger alone is NOT a receipt.
             set LastAttackAt = Now
             AttackOutput.Trigger(Player)
 
