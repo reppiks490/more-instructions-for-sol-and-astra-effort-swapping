@@ -243,6 +243,52 @@ class SourceObservationGateTests(unittest.TestCase):
             SourceHitObservationGate(extended)
 
 
+    def test_revocation_precedes_stale_target_actor_and_event_routing(self):
+        # Trusted revocation is generation-wide, not scoped to whichever
+        # target/pulse happens to be delivered with the revoked callback.
+        cases = (
+            ("missing target", replace(observe(target="MON-002"),
+                                       owner_authorized=False)),
+            ("recycled actor", replace(observe(actor="recycled-actor"),
+                                       controller_lease_valid=False)),
+            ("region transfer", replace(observe(region="REG-002"),
+                                        owner_authorized=False)),
+            ("unknown event", replace(observe(sequence=999),
+                                      controller_lease_valid=False)),
+            ("invalid paid pulse", replace(observe(pulse=3),
+                                           owner_authorized=False)),
+            ("clock regression", replace(observe(at=99),
+                                         controller_lease_valid=False)),
+        )
+        for label, evidence in cases:
+            with self.subTest(label=label):
+                gate = SourceHitObservationGate(contract())
+                self.assertTrue(gate.stage(plan(), bindings(), opened_ms=100,
+                                           deadline_ms=500))
+                self.assertTrue(gate.stage(plan(sequence=2), bindings(),
+                                           opened_ms=100, deadline_ms=500))
+                result = gate.resolve(evidence)
+                self.assertFalse(result.accepted)
+                self.assertIn("revoked", result.reason)
+                self.assertEqual(gate.active_count, 0)
+                self.assertFalse(gate.resolve(observe(sequence=2)).accepted)
+                self.assertFalse(gate.stage(plan(sequence=3), bindings(),
+                                            opened_ms=100, deadline_ms=500))
+                gate.change_generation(2)
+                self.assertTrue(gate.stage(plan(generation=2), bindings(),
+                                           opened_ms=100, deadline_ms=500))
+                self.assertEqual(gate.resolve(observe(generation=2)).damage, 18)
+
+    def test_stale_generation_cannot_revoke_current_owner(self):
+        gate = SourceHitObservationGate(contract())
+        gate.change_generation(2)
+        self.assertTrue(gate.stage(plan(generation=2), bindings(),
+                                   opened_ms=100, deadline_ms=500))
+        stale = replace(observe(generation=1), owner_authorized=False)
+        self.assertFalse(gate.resolve(stale).accepted)
+        self.assertEqual(gate.active_count, 1)
+        self.assertEqual(gate.resolve(observe(generation=2)).damage, 18)
+
     def test_all_thirteen_region_unloads_revoke_local_plans_only(self):
         for n in range(1, 14):
             with self.subTest(region=n):
