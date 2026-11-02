@@ -452,7 +452,8 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
     begin = runtime[runtime.find("    Begin("):runtime.find("    IsAuthorized()")]
     acknowledge = runtime[runtime.find("    AcknowledgeBehavior("):
                           runtime.find("    # A stopped npc_behavior")]
-    ready = runtime[runtime.find("    IsBehaviorReady("):runtime.find("    BoundNpc(")]
+    ready_start = runtime.find("    IsBehaviorReady(")
+    ready = runtime[ready_start:runtime.find("    BoundNpc(Agent:agent)", ready_start)]
     move = runtime[runtime.find("    RequestMove("):runtime.find("    GetNewMove(")]
     cue = runtime[runtime.find("    RequestAttackCue("):runtime.find("    # Invalidate mailbox")]
     if not all((
