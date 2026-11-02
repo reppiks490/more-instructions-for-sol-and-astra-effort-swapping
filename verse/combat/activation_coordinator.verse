@@ -112,6 +112,10 @@ aeonfall_activation_coordinator := class():
         if (not IsMatchingPending(Definition, Result)?):
             return false
         RemovedPending := RemovePendingRecord(Result.RequestId)
+        # A failed map rebuild must not commit an ability or class-resource
+        # spend while the coordinator still believes this request is pending.
+        if (not RemovedPending?):
+            return false
 
         if (not Result.Succeeded?):
             if (Definition.ClassResourceMode <> aeonfall_class_resource_mode.None):
@@ -233,6 +237,20 @@ aeonfall_activation_coordinator := class():
 
         false
 
+    # All three mutable ledgers must agree on cancellation. Using a single
+    # failure transaction rolls back prior map/state mutations when any write
+    # or class-reservation release refuses the operation.
+    CommitPendingCancellation(
+        OwnerKey:string,
+        AbilityId:string,
+        RequestId:string,
+        NeedsClassRelease:logic
+    )<decides><transacts>:void=
+        RemovePendingRecord(RequestId)?
+        GetAEONFALLAbilityRuntime().CancelPending(OwnerKey, AbilityId, RequestId)?
+        if (NeedsClassRelease?):
+            GetAEONFALLClassRuntime().ReleaseReservation(RequestId)?
+
     CancelPending(
         OwnerKey:string,
         AbilityId:string,
@@ -247,11 +265,10 @@ aeonfall_activation_coordinator := class():
             State.Pending?
             State.PendingRequestId = RequestId
         then:
-            Cancelled := GetAEONFALLAbilityRuntime().CancelPending(OwnerKey, AbilityId, RequestId)
-            if (Cancelled?):
-                Removed := RemovePendingRecord(RequestId)
-                if (Definition.ClassResourceMode <> aeonfall_class_resource_mode.None):
-                    Released := GetAEONFALLClassRuntime().ReleaseReservation(RequestId)
+            NeedsClassRelease:logic = logic{
+                Definition.ClassResourceMode <> aeonfall_class_resource_mode.None
+            }
+            if (CommitPendingCancellation[OwnerKey, AbilityId, RequestId, NeedsClassRelease]):
                 return true
         false
 

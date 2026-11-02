@@ -3,6 +3,7 @@
 from __future__ import annotations
 import argparse
 import hashlib
+import importlib.util
 import json
 import re
 import shutil
@@ -158,6 +159,34 @@ def inspect_slice_handoff(source_root: Path) -> dict | None:
         for group in phase.get("spawn_groups", []):
             for ref in group.get("spawner_refs", []):
                 require_ref(ref, "npc_spawner_device", label + ".spawn_group")
+    # The canonical full source bundle must fail before any UEFN project
+    # mutation if the progression gates, prior-clear guards, or cleanup policy
+    # disagree. Standalone minimal Verse fixtures remain installable.
+    gate_source = source_root / "verse/progression/slice_001_gate_policy.verse"
+    if gate_source.exists():
+        gate_path = within(folder / "slice_001_gate_bindings.json", source_root)
+        if not gate_path.is_file():
+            raise ValueError("Missing SLICE-001 progression gate handoff contract.")
+        gate_contract = json.loads(gate_path.read_text(encoding="utf-8"))
+        validator_path = within(source_root / "tools/validate_slice_gates.py", source_root)
+        if not validator_path.is_file():
+            raise ValueError("Missing gate validation tool.")
+        spec = importlib.util.spec_from_file_location("slice_gate_installer_audit", validator_path)
+        if spec is None or spec.loader is None:
+            raise ValueError("Could not load gate validation tool.")
+        gate_validator = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(gate_validator)
+        checkpoints = json.loads((folder / "slice_001_checkpoint_bindings.json").read_text(encoding="utf-8"))
+        encounters = json.loads((folder / "slice_001_encounters.json").read_text(encoding="utf-8"))
+        gate_errors = gate_validator.check_contract(
+            gate_contract, checkpoints, encounters,
+            gate_source.read_text(encoding="utf-8"),
+            (source_root / "verse/progression/slice_001_progression_gate_device.verse").read_text(encoding="utf-8"),
+            (source_root / "verse/bosses/encounter_director_device.verse").read_text(encoding="utf-8"),
+        )
+        if gate_errors:
+            raise ValueError("Invalid progression gate handoff: " + "; ".join(gate_errors))
+        contracts["slice_001_gate_bindings.json"] = gate_contract
     tests = launch.get("tests", [])
     if not isinstance(tests, list) or not tests:
         raise ValueError("Launch acceptance tests are missing.")
@@ -174,7 +203,8 @@ def inspect_slice_handoff(source_root: Path) -> dict | None:
         "launch_test_count": len(tests),
         "binding_counts": {key: len(bindings.get(key, [])) for key in
                            ("weapons", "monsters", "tameables", "hireables", "encounters", "vehicles")},
-        "contracts": [f"content/vertical_slice/{name}" for name in SLICE_CONTRACTS],
+        "contracts": [f"content/vertical_slice/{name}" for name in contracts],
+        "progression_gates": len(contracts.get("slice_001_gate_bindings.json", {}).get("gates", [])),
         "uefn_compile": "not_run",
         "device_placement": "not_run",
         "launch_session": "not_run",

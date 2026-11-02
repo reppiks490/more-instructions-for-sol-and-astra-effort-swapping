@@ -26,6 +26,30 @@ class TransactionGuardTests(unittest.TestCase):
     def test_wrong_cancel_accepted(self):
         self.mutation(COORDINATOR, "Pending.OwnerKey = OwnerKey", "true?", "cancellation")
 
+    def test_failed_pending_removal_cannot_commit(self):
+        self.mutation(
+            COORDINATOR,
+            "if (not RemovedPending?):\n            return false",
+            "if (RemovedPending?):\n            return false",
+            "result cannot commit resource spend",
+        )
+
+    def test_cancel_record_removal_must_be_failable(self):
+        self.mutation(
+            COORDINATOR,
+            "RemovePendingRecord(RequestId)?",
+            "RemovePendingRecord(RequestId)",
+            "cancellation must roll back",
+        )
+
+    def test_cancel_class_release_must_be_failable(self):
+        self.mutation(
+            COORDINATOR,
+            "GetAEONFALLClassRuntime().ReleaseReservation(RequestId)?",
+            "GetAEONFALLClassRuntime().ReleaseReservation(RequestId)",
+            "cancellation must roll back",
+        )
+
     def test_instant_latched(self):
         self.mutation(RUNTIME, "Active := Managed", "Active := true", "latch")
 

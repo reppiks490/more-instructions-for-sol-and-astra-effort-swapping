@@ -29,6 +29,8 @@ def validate_sources(sources: dict[str, str]) -> list[str]:
     resolve = method(sources.get(COORDINATOR, ""), "ResolveAdapterResult")
     if "IsMatchingPending(Definition, Result)" not in resolve or resolve.find("IsMatchingPending") > resolve.find("RemovePendingRecord"):
         errors.append("result identity validation must precede pending removal")
+    if "RemovedPending := RemovePendingRecord(Result.RequestId)" not in resolve or "if (not RemovedPending?):\n            return false" not in resolve:
+        errors.append("result cannot commit resource spend after failed pending removal")
     matching = method(sources.get(COORDINATOR, ""), "IsMatchingPending")
     for guard in ["Pending.OwnerKey = Result.OwnerKey", "Pending.AbilityId = Result.AbilityId",
                   "Result.AdapterId = Definition.AdapterId", "State.PendingRequestId = Result.RequestId"]:
@@ -38,6 +40,17 @@ def validate_sources(sources: dict[str, str]) -> list[str]:
     for guard in ["Pending.OwnerKey = OwnerKey", "Pending.AbilityId = AbilityId", "State.PendingRequestId = RequestId"]:
         if guard not in cancel:
             errors.append("missing cancellation guard: " + guard)
+    cancel_commit = method(sources.get(COORDINATOR, ""), "CommitPendingCancellation")
+    for guard in [
+        ")<decides><transacts>:void=",
+        "RemovePendingRecord(RequestId)?",
+        "GetAEONFALLAbilityRuntime().CancelPending(OwnerKey, AbilityId, RequestId)?",
+        "GetAEONFALLClassRuntime().ReleaseReservation(RequestId)?",
+    ]:
+        if guard not in cancel_commit:
+            errors.append("cancellation must roll back all ledgers on failure: " + guard)
+    if "CommitPendingCancellation[OwnerKey, AbilityId, RequestId, NeedsClassRelease]" not in cancel:
+        errors.append("cancellation must use transaction helper")
     runtime = sources.get(RUNTIME, "")
     claim = method(runtime, "ClaimEffectRequest")
     if "IsCurrentEffectRequest(Request)?" not in claim or "not EffectClaims[Request.RequestId]" not in claim:
