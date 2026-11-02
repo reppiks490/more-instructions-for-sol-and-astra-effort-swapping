@@ -15,6 +15,10 @@ aeonfall_titan_proxy_command_runtime := class:
     var Owner:?player = false
     var OriginalCharacter:?fort_character = false
     var OwnedNpc:?agent = false
+    # A stop does not release an in-flight native SpawnAt. Never resummon
+    # until the old async request actually returned an agent or false.
+    var SpawnInFlight:logic = false
+    var SpawnEpoch:int = 0
     var Active:logic = false
     var Generation:int = 0
     var Epoch:int = 0
@@ -46,6 +50,7 @@ aeonfall_titan_proxy_command_runtime := class:
         if:
             Owns(OwnerDevice)?
             not Active?
+            not SpawnInFlight?
             Token > 0
             Controller.Running?
             Controller.Token = Token
@@ -70,6 +75,8 @@ aeonfall_titan_proxy_command_runtime := class:
             set Sequence = 0
             set Pending = false
             set Epoch += 1
+            set SpawnEpoch = Epoch
+            set SpawnInFlight = true
             set NextMoveAt = 0.0
             set NextCueAt = 0.0
             return option{Epoch}
@@ -106,6 +113,19 @@ aeonfall_titan_proxy_command_runtime := class:
     HasNpc()<transacts>:logic=
         if (OwnedNpc?):
             return true
+        false
+
+    # A generation-addressable native SpawnAt return, never SpawnedEvent,
+    # is the only candidate association. Clear the single in-flight lease on
+    # return even if timeout, owner loss or teardown already invalidated it.
+    CompleteSpawn(ExpectedEpoch:int, Spawned:?agent)<transacts>:logic=
+        if (not SpawnInFlight? or SpawnEpoch <> ExpectedEpoch):
+            return false
+        set SpawnInFlight = false
+        set SpawnEpoch = 0
+        if (IsCurrentEpoch(ExpectedEpoch)?):
+            if (Agent := Spawned?):
+                return BindSpawn(Agent)
         false
 
     BindSpawn(Agent:agent)<transacts>:logic=
