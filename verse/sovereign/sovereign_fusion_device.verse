@@ -141,33 +141,6 @@ aeonfall_sovereign_fusion_device := class(creative_device):
                     Aborted := State.Abort(Self, Started)
         Feedback.Show(Agent, FusionDenied, 3.0)
 
-    # A native player retains normal Fortnite movement and the owned orbit
-    # camera. This attack bridge requests an instigator-scoped device graph;
-    # it does NOT attest a hit, damage, animation or replicated target state.
-    Attack(Agent:agent):void=
-        if:
-            Running?
-            Player := player[Agent]
-            Player.IsActive[]
-            Owner := VisualOwner?
-            Owner = Player
-            OriginalCharacter := VisualCharacter?
-            Character := Player.GetFortCharacter[]
-            Character = OriginalCharacter
-            Character.IsActive[]
-            State := Runtime?
-            Resource := Budget?
-            Authorized := State.IsAuthorizedActive(Self, Player, Token)
-            Authorized?
-            Now := GetSimulationElapsedTime()
-            Now >= LastAttackAt + AttackCooldownSeconds
-            Resource.Spend[Self, Player, Token, State, AttackEnergyCost]
-        then:
-            # Charge and cooldown are server-side, bound to the canonical
-            # generation and owner. Physical output is editor-owned.
-            set LastAttackAt = Now
-            AttackOutput.Trigger(Player)
-
     Separate(Agent:agent):void=
         if (Player := player[Agent], Owner := VisualOwner?, Owner = Player):
             FinishActive()
@@ -227,6 +200,33 @@ aeonfall_sovereign_fusion_device := class(creative_device):
                         FinishActive()
                 else:
                     FinishActive()
+
+    # A native player retains normal Fortnite movement and the owned orbit
+    # camera. This attack bridge requests an instigator-scoped device graph;
+    # it does NOT attest a hit, damage, animation or replicated target state.
+    Attack(Agent:agent):void=
+        if:
+            Running?
+            Player := player[Agent]
+            Player.IsActive[]
+            Owner := VisualOwner?
+            Owner = Player
+            OriginalCharacter := VisualCharacter?
+            Character := Player.GetFortCharacter[]
+            Character = OriginalCharacter
+            Character.IsActive[]
+            State := Runtime?
+            Resource := Budget?
+            Authorized := State.IsAuthorizedActive(Self, Player, Token)
+            Authorized?
+            Now := GetSimulationElapsedTime()
+            Now >= LastAttackAt + AttackCooldownSeconds
+            Resource.Spend[Self, Player, Token, State, AttackEnergyCost]
+        then:
+            # Charge and cooldown are server-side, bound to the canonical
+            # generation and owner. Physical output is editor-owned.
+            set LastAttackAt = Now
+            AttackOutput.Trigger(Player)
 
     OnEnd<override>():void=
         set Running = false
