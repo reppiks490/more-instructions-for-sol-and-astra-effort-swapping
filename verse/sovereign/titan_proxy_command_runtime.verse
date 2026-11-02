@@ -18,6 +18,9 @@ aeonfall_titan_proxy_command_runtime := class:
     # The native SpawnAt agent is not gameplay-ready until its own NPC
     # behavior explicitly acknowledges the same authorized binding.
     var BehaviorReady:logic = false
+    # OnEnd is terminal for the acknowledged epoch. A late OnBegin poll
+    # cannot re-acknowledge an NPC after its behavior has been withdrawn.
+    var BehaviorTerminated:logic = false
     # A stop does not release an in-flight native SpawnAt. Never resummon
     # until the old async request actually returned an agent or false.
     var SpawnInFlight:logic = false
@@ -74,6 +77,7 @@ aeonfall_titan_proxy_command_runtime := class:
             set OriginalCharacter = option{Character}
             set OwnedNpc = false
             set BehaviorReady = false
+            set BehaviorTerminated = false
             set Active = true
             set Generation = Token
             set Sequence = 0
@@ -157,7 +161,7 @@ aeonfall_titan_proxy_command_runtime := class:
     # Handshake from the NPC's own behavior after native GetAgent and
     # GetNavigatable succeeded. No input/attack is permitted before this.
     AcknowledgeBehavior(Agent:agent)<transacts>:logic=
-        if (BoundNpc(Agent)?):
+        if (not BehaviorTerminated?, BoundNpc(Agent)?):
             set BehaviorReady = true
             return true
         false
@@ -175,6 +179,7 @@ aeonfall_titan_proxy_command_runtime := class:
             Current := OwnedNpc?
             Current = Agent
         then:
+            set BehaviorTerminated = true
             set BehaviorReady = false
             set Pending = false
             return true
@@ -186,7 +191,7 @@ aeonfall_titan_proxy_command_runtime := class:
         false
 
     IsBehaviorReady(Agent:agent)<transacts>:logic=
-        if (BehaviorReady?, BoundNpc(Agent)?):
+        if (not BehaviorTerminated?, BehaviorReady?, BoundNpc(Agent)?):
             return true
         false
 
@@ -219,6 +224,7 @@ aeonfall_titan_proxy_command_runtime := class:
             NpcChar := Npc.GetFortCharacter[]
             NpcChar.IsActive[]
             BehaviorReady?
+            not BehaviorTerminated?
             Source := OriginalCharacter?
             Range := Distance(Source.GetTransform().Translation, Destination)
             Range <= 1600.0
@@ -236,6 +242,7 @@ aeonfall_titan_proxy_command_runtime := class:
     GetNewMove(Agent:agent, SeenSequence:int)<decides><transacts>:aeonfall_titan_proxy_move_command=
         BoundNpc(Agent)?
         BehaviorReady?
+        not BehaviorTerminated?
         Command := Pending?
         Command.Sequence > SeenSequence
         Command
@@ -250,6 +257,7 @@ aeonfall_titan_proxy_command_runtime := class:
             Monster := Owned.GetFortCharacter[]
             Monster.IsActive[]
             BehaviorReady?
+            not BehaviorTerminated?
             Controller := FusionController?
             State := GetAEONFALLFusionState()
             Budget := GetAEONFALLSovereignFusionBudget[]
@@ -268,6 +276,7 @@ aeonfall_titan_proxy_command_runtime := class:
             set Active = false
             set OwnedNpc = false
             set BehaviorReady = false
+            set BehaviorTerminated = true
             set OriginalCharacter = false
             set Owner = false
             set FusionController = false

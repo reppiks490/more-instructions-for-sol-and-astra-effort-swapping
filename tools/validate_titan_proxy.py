@@ -25,6 +25,11 @@ RUNTIME_GUARDS = (
     "IsAuthorized()?",
     "not OwnedNpc?",
     "BehaviorReady:logic = false",
+    "BehaviorTerminated:logic = false",
+    "set BehaviorTerminated = false",
+    "set BehaviorTerminated = true",
+    "if (not BehaviorTerminated?, BoundNpc(Agent)?):",
+    "if (not BehaviorTerminated?, BehaviorReady?, BoundNpc(Agent)?):",
     "set BehaviorReady = false",
     "AcknowledgeBehavior(Agent:agent)",
     "IsBehaviorReady(Agent:agent)",
@@ -240,7 +245,8 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
                 "no_global_input_registration",
                 "camera_requires_npc_behavior_ack",
                 "command_input_requires_behavior_ack",
-                "behavior_onend_revokes_readiness"):
+                "behavior_onend_revokes_readiness",
+                "behavior_onend_terminal_for_epoch"):
         if c.get("safety", {}).get(key) is not True:
             errors.append(f"safety gate disabled: {key}")
     lifecycle = c.get("lifecycle", {})
@@ -432,12 +438,33 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "Navigation.StopNavigation()"
     )) or not all(x in withdraw for x in (
         "Active?", "Epoch = ExpectedEpoch", "Current := OwnedNpc?",
-        "Current = Agent", "set BehaviorReady = false", "set Pending = false"
+        "Current = Agent", "set BehaviorTerminated = true",
+        "set BehaviorReady = false", "set Pending = false"
     )) or "BehaviorReady?" not in movement or not all(x in monitor for x in (
         "else if (CommandRegistered?):",
         "if (not Runtime.IsReadyForCurrentNpc()?):", "FinishProxy()"
     )):
         errors.append("NPC behavior OnEnd must revoke exact epoch readiness and command HUD")
+
+    # OnEnd must be a one-way transition within the same epoch. Otherwise
+    # an OnBegin poll overlapping native shutdown could re-acknowledge the
+    # same NPC and reopen paid cues/owner HUD before the monitor tears down.
+    begin = runtime[runtime.find("    Begin("):runtime.find("    IsAuthorized()")]
+    acknowledge = runtime[runtime.find("    AcknowledgeBehavior("):
+                          runtime.find("    # A stopped npc_behavior")]
+    ready = runtime[runtime.find("    IsBehaviorReady("):runtime.find("    BoundNpc(")]
+    move = runtime[runtime.find("    RequestMove("):runtime.find("    GetNewMove(")]
+    cue = runtime[runtime.find("    RequestAttackCue("):runtime.find("    # Invalidate mailbox")]
+    if not all((
+        "set BehaviorTerminated = false" in begin,
+        "if (not BehaviorTerminated?, BoundNpc(Agent)?):" in acknowledge,
+        "set BehaviorTerminated = true" in withdraw,
+        "if (not BehaviorTerminated?, BehaviorReady?, BoundNpc(Agent)?):" in ready,
+        "not BehaviorTerminated?" in movement,
+        "not BehaviorTerminated?" in move,
+        "not BehaviorTerminated?" in cue,
+    )):
+        errors.append("terminal NPC behavior must not re-acknowledge or accept commands in same epoch")
 
     if "weak_map(player," in combined:
         errors.append("second persistent profile map prohibited")

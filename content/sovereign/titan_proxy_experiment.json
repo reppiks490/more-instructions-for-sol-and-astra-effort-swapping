@@ -101,7 +101,8 @@
     "no_global_input_registration": true,
     "camera_requires_npc_behavior_ack": true,
     "command_input_requires_behavior_ack": true,
-    "behavior_onend_revokes_readiness": true
+    "behavior_onend_revokes_readiness": true,
+    "behavior_onend_terminal_for_epoch": true
   },
   "native_evidence": {
     "uefn_compile": "not_run",

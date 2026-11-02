@@ -116,6 +116,16 @@ its behavior is no longer ready. Stale `OnEnd` from an older epoch cannot
 revoke a newer generation. This is a source-level safety path, **not** native
 proof that engine callbacks always arrive in every shutdown scenario.
 
+**Terminal behavior epoch latch:** The command mailbox now permanently
+withdraws a behavior\u0027s readiness for its current epoch on `OnEnd`.
+An overlapping or late `OnBegin` poll cannot re-acknowledge the same NPC
+until a genuinely new, authorized `Begin` generation is established.
+Movement, paid non-damaging cues and owner camera readiness all remain
+closed after withdrawal; stale-epoch callbacks cannot revoke a newer NPC.
+This protects a source-level shutdown race, but does **not** prove the
+engine always calls `OnEnd` or that native callbacks arrive in any
+particular order. Verify both conditions in a real two-client Launch Session.
+
 **Behavior-readiness UI gate:** Summon is registered only while the exact
 FUS-001 owner is eligible and no proxy is pending/active. Once a summon is
 admitted, Summon is immediately unregistered and all three command actions

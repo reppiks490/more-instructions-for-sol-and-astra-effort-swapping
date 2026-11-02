@@ -536,6 +536,29 @@ class TitanProxySourceTests(unittest.TestCase):
         )
         self.assertTrue(self.errors(runtime=mutation))
 
+    def test_terminal_behavior_latch_cannot_be_bypassed(self):
+        self.assertIn("var BehaviorTerminated:logic = false", self.runtime)
+        self.assertIn("if (not BehaviorTerminated?, BoundNpc(Agent)?):", self.runtime)
+        self.assertIn("set BehaviorTerminated = true", self.runtime)
+        mutation = self.runtime.replace(
+            "if (not BehaviorTerminated?, BoundNpc(Agent)?):",
+            "if (BoundNpc(Agent)?):", 1
+        )
+        self.assertTrue(self.errors(runtime=mutation))
+        mutation = self.runtime.replace(
+            "            set BehaviorTerminated = true\n            set BehaviorReady = false\n            set Pending = false",
+            "            set BehaviorReady = false\n            set Pending = false", 1
+        )
+        self.assertTrue(self.errors(runtime=mutation))
+        mutation = self.runtime.replace(
+            "            set BehaviorTerminated = false\n            set Active = true",
+            "            set Active = true", 1
+        )
+        self.assertTrue(self.errors(runtime=mutation))
+        c = copy.deepcopy(self.contract)
+        c["safety"]["behavior_onend_terminal_for_epoch"] = False
+        self.assertTrue(self.errors(c=c))
+
     def test_headless_npc_cannot_receive_pending_navigation_or_hud(self):
         mutation = self.runtime.replace(
             "        BoundNpc(Agent)?\n        BehaviorReady?\n        Command := Pending?",
@@ -615,6 +638,7 @@ class TitanSpawnHandshakeModel:
         self.spawn_epoch = 0
         self.bound_npc = None
         self.behavior_ready = False
+        self.behavior_terminated = False
         self.npcs = []
 
     def begin(self):
@@ -626,6 +650,7 @@ class TitanSpawnHandshakeModel:
         self.active = True
         self.bound_npc = None
         self.behavior_ready = False
+        self.behavior_terminated = False
         return self.epoch
 
     def return_spawn(self, epoch, agent):
@@ -641,14 +666,16 @@ class TitanSpawnHandshakeModel:
         return True
 
     def acknowledge(self, agent):
-        if self.active and self.bound_npc == agent and agent in self.npcs:
+        if (self.active and not self.behavior_terminated
+                and self.bound_npc == agent and agent in self.npcs):
             self.behavior_ready = True
             return True
         return False
 
     def can_command(self, agent):
         return (
-            self.active and self.behavior_ready and self.bound_npc == agent
+            self.active and self.behavior_ready and not self.behavior_terminated
+            and self.bound_npc == agent
             and len(self.npcs) == 1 and self.npcs[0] == agent
         )
 
@@ -656,6 +683,7 @@ class TitanSpawnHandshakeModel:
         if not self.active or self.epoch != epoch or self.bound_npc != agent:
             return False
         self.behavior_ready = False
+        self.behavior_terminated = True
         return True
 
     def unexpected_agents(self):
@@ -670,6 +698,7 @@ class TitanSpawnHandshakeModel:
     def stop(self):
         self.active = False
         self.behavior_ready = False
+        self.behavior_terminated = True
         self.bound_npc = None
         self.npcs = []
         self.epoch += 1
@@ -792,6 +821,23 @@ class TitanSpawnHandshakeTests(unittest.TestCase):
         self.assertEqual(self.p.npcs, ["titan"])
         self.assertFalse(self.p.can_command("titan"))
         self.assertFalse(self.p.end_behavior("wrong-agent", epoch))
+
+    def test_behavior_end_cannot_be_reacknowledged_in_same_epoch(self):
+        epoch = self.p.begin()
+        self.p.npcs = ["titan"]
+        self.assertTrue(self.p.return_spawn(epoch, "titan"))
+        self.assertTrue(self.p.acknowledge("titan"))
+        self.assertTrue(self.p.end_behavior("titan", epoch))
+        # Even if a stale OnBegin tick overlaps OnEnd, the same NPC
+        # cannot reopen owner commands or energy-consuming cues.
+        self.assertFalse(self.p.acknowledge("titan"))
+        self.assertFalse(self.p.can_command("titan"))
+        self.p.stop()
+        new_epoch = self.p.begin()
+        self.p.npcs = ["new"]
+        self.assertTrue(self.p.return_spawn(new_epoch, "new"))
+        self.assertTrue(self.p.acknowledge("new"))
+        self.assertTrue(self.p.can_command("new"))
 
     def test_late_behavior_onend_cannot_revoke_new_generation(self):
         old = self.p.begin()
