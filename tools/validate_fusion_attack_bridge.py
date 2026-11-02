@@ -40,6 +40,8 @@ def check_source(source: str) -> list[str]:
         "Authorized?", "Now := GetSimulationElapsedTime()",
         "Now >= LastAttackAt + AttackCooldownSeconds",
         "Resource.Spend[Self, Player, Token, State, AttackEnergyCost]",
+        "Issued := State.IssueAttackReceipt(Self, Player, Token)",
+        "Issued?",
         "set LastAttackAt = Now", "AttackOutput.Trigger(Player)"
     )
     offset = 0
