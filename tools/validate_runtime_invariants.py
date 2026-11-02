@@ -269,6 +269,42 @@ def check_world_event_state_machine(source: str) -> list[str]:
                 return [f"world event {name} boundary missing"]
             section = section.split(end, 1)[0]
         parts[name] = section
+    # Streaming shells are bounded region reservations, never implicit
+    # permission to materialize the full world's physical NPC population.
+    if "    CanClaimRegions(" not in source or "    StartEvent(" not in source:
+        errors.append("world event canonical region admission helper missing")
+        footprint = ""
+    else:
+        footprint = source.split("    CanClaimRegions(", 1)[1].split("    StartEvent(", 1)[0]
+    required_footprint = [
+        "RegionIds.Length > AEONFALLWorldEventMaxActiveRegions",
+        "RegionId = \"\"",
+        "GetAEONFALLRegionRegistry().IsRegistered[RegionId]",
+        "GetAEONFALLRegionRuntime().GetState[RegionId]",
+        "Seen.Find[RegionId]",
+        "GetAEONFALLInvasionRuntime().HasActiveInRegion(RegionId)?",
+        "GetAEONFALLFactionConflictRuntime().HasActiveInRegion(RegionId)?",
+        "OtherEventId <> EventId",
+        "State.Active?",
+        "State.ActiveRegionIds.Find[RegionId]",
+    ]
+    for guard in required_footprint:
+        if guard not in footprint:
+            errors.append(f"world event shell missing regional guard {guard!r}")
+    if "AEONFALLWorldEventMaxActiveRegions:int = 4" not in source:
+        errors.append("world event materialized region limit must remain four")
+    if "    HasActiveInRegion(" not in source:
+        errors.append("world event region ownership query missing")
+    if "CanClaimRegions(EventId, InitialRegionIds)?" not in parts["start"]:
+        errors.append("world event start bypasses footprint admission")
+    elif parts["start"].find("CanClaimRegions(EventId, InitialRegionIds)?") > parts["start"].find("set States[EventId] = Initial"):
+        errors.append("world event start claims regions after committing state")
+    if "CanClaimRegions(EventId, ActiveRegionIds)?" not in parts["advance"]:
+        errors.append("world event stage skips footprint revalidation")
+    elif parts["advance"].find("CanClaimRegions(EventId, ActiveRegionIds)?") > parts["advance"].find("set States[EventId] = Updated"):
+        errors.append("world event stage claims regions after committing state")
+    if "GetAEONFALLWorldEventRuntime()" not in source or "AEONFALLWorldEventRuntimeSessions:weak_map(session," not in source:
+        errors.append("world event missing shared session-owned service")
     if 'if (EventId = ""):' not in parts["start"]:
         errors.append("world event start accepts blank canonical identity")
     if 'if (EventId = "" or ObjectiveId = ""):' not in parts["objective"]:

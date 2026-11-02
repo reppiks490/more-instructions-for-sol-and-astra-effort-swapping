@@ -54,6 +54,7 @@ aeonfall_faction_conflict_service := class():
     )<transacts>:logic=
         # Resolve the session service before negating its read-only guard.
         InvasionRuntime := GetAEONFALLInvasionRuntime()
+        WorldEventRuntime := GetAEONFALLWorldEventRuntime()
         if:
             ConflictId <> ""
             RegionId <> ""
@@ -64,6 +65,7 @@ aeonfall_faction_conflict_service := class():
             GetAEONFALLRegionRuntime().GetState[RegionId]
             not HasActiveInRegion(RegionId)?
             not InvasionRuntime.HasActiveInRegion(RegionId)?
+            not WorldEventRuntime.HasActiveInRegion(RegionId)?
         then:
             if:
                 Existing := Conflicts[ConflictId]

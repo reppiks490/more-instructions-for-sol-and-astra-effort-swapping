@@ -1,11 +1,51 @@
 using { /Verse.org/Verse }
+using { /Verse.org/Simulation }
 
 # Session-only world-event state service.
 # Event-specific directors use this shared state machine and bind spawn groups,
 # objectives, streaming regions, hazards, weather, and presentation externally.
+# Only local, materialized regions claim event slots; distant world effects
+# remain abstract with an empty regional footprint.
+AEONFALLWorldEventMaxActiveRegions:int = 4
+
 aeonfall_world_event_service := class():
 
     var States:[string]aeonfall_world_event_runtime_state = map{}
+
+    # A regional shell is logical admission, not permission to spawn NPCs.
+    HasActiveInRegion(RegionId:string)<transacts>:logic=
+        for (OtherEventId -> State : States):
+            if (State.Active?, State.ActiveRegionIds.Find[RegionId]):
+                return true
+        false
+
+    # One active world-event owner per region. Both initial and subsequent
+    # stage footprints must be distinct, canonical, initialized and bounded.
+    # A zero-region abstract stage is allowed and owns no physical region.
+    CanClaimRegions(EventId:string, RegionIds:[]string)<transacts>:logic=
+        if (RegionIds.Length > AEONFALLWorldEventMaxActiveRegions):
+            return false
+        var Seen:[]string = array{}
+        for (RegionId : RegionIds):
+            if (RegionId = ""):
+                return false
+            if (not GetAEONFALLRegionRegistry().IsRegistered[RegionId]):
+                return false
+            if (not GetAEONFALLRegionRuntime().GetState[RegionId]):
+                return false
+            if (Seen.Find[RegionId]):
+                return false
+            # No event shell may take materialized space from an existing
+            # invasion, faction battle or another active world-event shell.
+            if (GetAEONFALLInvasionRuntime().HasActiveInRegion(RegionId)?):
+                return false
+            if (GetAEONFALLFactionConflictRuntime().HasActiveInRegion(RegionId)?):
+                return false
+            for (OtherEventId -> State : States):
+                if (OtherEventId <> EventId, State.Active?, State.ActiveRegionIds.Find[RegionId]):
+                    return false
+            set Seen = Seen + array{RegionId}
+        true
 
     StartEvent(EventId:string, InitialRegionIds:[]string)<transacts>:logic=
         # An empty identifier aliases unrelated events and defeats cleanup/rewards.
@@ -15,6 +55,8 @@ aeonfall_world_event_service := class():
             Existing := States[EventId]
             Existing.Active?
         then:
+            return false
+        if (not CanClaimRegions(EventId, InitialRegionIds)?):
             return false
 
         Initial := aeonfall_world_event_runtime_state:
@@ -90,6 +132,7 @@ aeonfall_world_event_service := class():
             Old.Active?
             # No phase jumps, retries of the same phase, or rewinds.
             NextStageIndex = Old.CurrentStageIndex + 1
+            CanClaimRegions(EventId, ActiveRegionIds)?
         then:
             Updated := aeonfall_world_event_runtime_state:
                 EventId := Old.EventId
@@ -183,3 +226,16 @@ aeonfall_world_event_service := class():
                 return true
 
         false
+
+# One shared service for regional admission with invasions and faction wars.
+# This does not add an NPC director, actor budget, or persistent world state.
+var AEONFALLWorldEventRuntimeSessions:weak_map(session, aeonfall_world_event_service) = map{}
+
+GetAEONFALLWorldEventRuntime()<transacts>:aeonfall_world_event_service=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLWorldEventRuntimeSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_world_event_service{}
+    if (set AEONFALLWorldEventRuntimeSessions[CurrentSession] = Created):
+        return Created
+    Err("AEONFALL could not retain world-event runtime in its session")
