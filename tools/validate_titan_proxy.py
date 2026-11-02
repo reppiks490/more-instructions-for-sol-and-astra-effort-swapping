@@ -344,6 +344,8 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "Runtime.IsBehaviorReady(Npc)?",
         "Owner := ProxyOwner?",
         "ProxyCamera.IsValid[]",
+        "NpcCharacter := Npc.GetFortCharacter[]",
+        "if (ProxyCamera.TeleportTo[Position, Rotation]):",
         "ProxyCamera.AddTo(Owner)",
         "set CameraOwner = option{Owner}",
         "Sleep(0.15)",
@@ -355,6 +357,10 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "set CameraOwner = false",
     )):
         errors.append("experimental camera lost owner/epoch/behavior gating or owned teardown")
+    start_camera = camera.split("    TrackProxyCamera(ExpectedEpoch:int", 1)[0]
+    if not (0 <= start_camera.find("if (ProxyCamera.TeleportTo[Position, Rotation]):")
+            < start_camera.find("ProxyCamera.AddTo(Owner)")):
+        errors.append("Titan camera must be positioned successfully before stack addition")
     # The camera is added only after behavior becomes ready, and must be
     # removed before despawning so FUS-001 orbit camera remains on the stack.
     ready_at = device.find("    AwaitBehaviorReady(ExpectedEpoch:int")
