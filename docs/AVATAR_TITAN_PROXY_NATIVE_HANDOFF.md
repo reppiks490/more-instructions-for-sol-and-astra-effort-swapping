@@ -109,6 +109,9 @@ and two independent Fortnite clients' recorded Launch Sessions. Check:
   NavigateTo, NPC elimination, streaming and teleport distance.
 - Two players simultaneously; only the one authorized owner can issue
   commands and only the dedicated NPC is moved/despawned.
+- Kill the bound Titan NPC and also simulate an unrelated NPC death. Only the
+  exact bound-agent elimination must invalidate the proxy; duplicated death
+  callbacks must be harmless.
 - Resource depletion, 10 rapid attack-cue presses, generation rotation,
   FUS-001 separation, permission revocation, respawn, disconnect and
   device shutdown. Verify all NPCs and per-owner cues are cleared.
