@@ -77,7 +77,8 @@
     "npc_elimination": "exact_agent_identity_then_teardown",
     "behavior_ack": "npc_behavior_ack_required_before_commands",
     "unexpected_spawns": "fail_closed_despawn_dedicated_spawner",
-    "input_registration": "verified_owner_only_dynamic_register_unregister"
+    "input_registration": "verified_owner_only_dynamic_register_unregister",
+    "inflight_inventory": "allow_single_untrusted_candidate_until_exact_SpawnAt_return_or_timeout"
   },
   "safety": {
     "no_shared_npc_spawner": true,
