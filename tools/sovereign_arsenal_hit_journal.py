@@ -8,6 +8,7 @@ and a native actor-registry/LOS preflight. Never accept plans from clients.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+import re
 
 MAX_DAMAGE_PER_REQUEST = 54
 MAX_TARGETS = 3
@@ -85,7 +86,7 @@ class SourceHitJournal:
                 or type(plan.target_ids) is not tuple
                 or not 1 <= len(plan.target_ids) <= MAX_TARGETS):
             return False
-        if any(type(t) is not str or len(t) <= 4 or not t.startswith("MON-")
+        if any(type(t) is not str or re.fullmatch(r"MON-[0-9]{3,4}", t) is None
                for t in plan.target_ids):
             return False
         if len(set(plan.target_ids)) != len(plan.target_ids):
