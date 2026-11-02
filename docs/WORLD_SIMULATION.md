@@ -317,3 +317,29 @@ objective against an authored per-stage registry. Native UEFN multiplayer
 acceptance must attempt phase skips, repeated/late completion, disconnects,
 and region unloading under world-event/boss contention. Capture Spatial
 Profiler and Memory Snapshot data before declaring cleanup proven.
+
+## Terminal invasion NPC cleanup contract (2026-11-01)
+
+The canonical invasion runtime **already emits** `invasion.completed` and
+`invasion.failed` terminal events. The owning spawn-group adapter validates
+those events against canonical terminal state and requester ownership, then
+disables its physical spawners. It must additionally call `DespawnAll(false)`
+on **every** successfully owned terminal transition, including when the
+editable `DespawnOnRelease` value is false. Device shutdown also enforces
+unconditional owned-NPC despawn before releasing its physical lease. This is
+important for non-retroactive ecology gates: a completed or failed encounter
+must not leave unrelated physical pressure after its authorization ends.
+
+`DespawnOnRelease` now controls **intermediate wave retirement only** (and
+should remain enabled for production). It does not grant an exception to
+terminal completion, failure, timeout, or adapter shutdown cleanup. A reused
+spawn group in consecutive waves is not retired mid-wave. Rejected duplicate
+adapters must not clean up another owner's NPCs. No additional event types,
+spawners, encounter directors, or AI allocation were introduced.
+
+**UEFN acceptance:** With `DespawnOnRelease = false`, finish and fail a live
+invasion (including timeout) and confirm that all owned NPCs are physically
+removed, not merely prevented from respawning. Repeat with a duplicate
+adapter, two players in different streamed cells, and `OnEnd` during an active
+wave. Confirm a rejected adapter cannot despawn a legitimate owner. Also
+verify native Verse compilation; Python source checks cannot prove it.
