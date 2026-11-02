@@ -395,6 +395,12 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         finish = runtime.find(end, begin)
         if begin < 0 or finish <= begin or required not in runtime[begin:finish]:
             errors.append("heartbeat authorization missing in " + start.strip())
+    ready_start = runtime.find("    IsReadyForCurrentNpc()")
+    ready_end = runtime.find("    IsBehaviorReady(Agent:agent)", ready_start)
+    if ready_start < 0 or ready_end <= ready_start or (
+        "IsBehaviorReady(Npc)?" not in runtime[ready_start:ready_end]
+    ):
+        errors.append("current NPC readiness must require a fresh behavior pulse")
     get_new_start = runtime.find("    GetNewMove(")
     get_new_end = runtime.find("    # Attack is a bounded", get_new_start)
     if get_new_start < 0 or get_new_end <= get_new_start or (
