@@ -1,0 +1,85 @@
+name: AEONFALL Full-Universe Source Coverage
+
+on:
+  push:
+    paths:
+      - "content/catalog/**"
+      - "content/world/world_topology.json"
+      - "content/implementation/universe_first_policy.json"
+      - "content/implementation/universe_source_delivery_inventory.json"
+      - "content/implementation/implementation_evidence.json"
+      - "tools/audit_universe_readiness.py"
+      - "tests/test_universe_first_readiness.py"
+      - ".github/workflows/full-universe-coverage.yml"
+  pull_request:
+    paths:
+      - "content/catalog/**"
+      - "content/world/world_topology.json"
+      - "content/implementation/universe_first_policy.json"
+      - "content/implementation/universe_source_delivery_inventory.json"
+      - "content/implementation/implementation_evidence.json"
+      - "tools/audit_universe_readiness.py"
+      - "tests/test_universe_first_readiness.py"
+      - ".github/workflows/full-universe-coverage.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  full-universe-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact submitted universe sources
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Install Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate universe-first policy, inventory, and regression guards
+        run: python -m unittest discover -s tests -p "test_universe_first_readiness.py" -v
+
+      - name: Audit EVERY catalog entity, EVERY world region and core system
+        run: |
+          python tools/audit_universe_readiness.py \
+            --json dist/universe_coverage/full_universe_readiness.json \
+            --markdown dist/universe_coverage/full_universe_readiness.md
+
+      - name: Show honest source and native status
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report=json.loads(Path("dist/universe_coverage/full_universe_readiness.json").read_text())
+          print("Catalog entity count:", report["catalog"]["major_entities"])
+          print("World region count:", report["world"]["region_count"])
+          print("Every single ID recorded:", len(report["catalog"]["entity_rows"]))
+          print("Approved source entities:", report["source_delivery"]["entity_packs"]["approved"])
+          print("Approved source regions:", report["source_delivery"]["region_packs"]["approved"])
+          print("Approved source systems:", report["source_delivery"]["system_packs"]["approved"])
+          print("Full source complete:", report["source_complete"])
+          print("Native UEFN verified:", report["native_uefn_complete"])
+          assert not report["validation_errors"], report["validation_errors"][:10]
+          assert len(report["catalog"]["entity_rows"])==report["catalog"]["major_entities"]
+          assert report["catalog"]["major_entities"]>=800
+          assert report["world"]["region_count"]>=13
+          PY
+
+      - name: Upload complete no-sampling universe backlog and truth ledger
+        uses: actions/upload-artifact@v4
+        with:
+          name: AEONFALL-Full-Universe-Audit-${{ github.event.pull_request.head.sha || github.sha }}
+          path: dist/universe_coverage/
+          if-no-files-found: error
+          retention-days: 30
+
+# This is an INTEGRITY check, NOT a 'universe finished' badge. To exercise
+# the deliberate source-completion blocker separately, run:
+# python tools/audit_universe_readiness.py --require-source-complete
+# It MUST fail until all reviewed file-backed packages are registered.
+# Native completion additionally requires real UEFN evidence.
