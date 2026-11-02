@@ -15,10 +15,10 @@ DEVICE = ROOT / "verse/sovereign/sovereign_arsenal_device.verse"
 
 def method(source: str, name: str) -> str:
     source = "\n".join(line.split("#", 1)[0] for line in source.splitlines())
-    match = re.search(rf"^    {re.escape(name)}\\(", source, re.M)
+    match = re.search(rf"^    {re.escape(name)}\(", source, re.M)
     if not match:
         return ""
-    following = re.search(r"^    [A-Za-z_][A-Za-z0-9_]*\\(", source[match.end():], re.M)
+    following = re.search(r"^    [A-Za-z_][A-Za-z0-9_]*\(", source[match.end():], re.M)
     return source[match.start():match.end() + following.start()] if following else source[match.start():]
 
 
