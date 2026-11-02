@@ -42,6 +42,23 @@ remain unverified.
 
 # Build change log
 
+## 2026-11-01 — Cinematics: animated Omnigod combat telegraph source
+
+Added real, deterministic 4×4 sprite atlases for three source-only Sovereign
+attack telegraphs. Reaver's chevrons, Cataclysm's segmented ring sweep and
+Aegis's shield each contain 16 RGBA8 frames in a 512×512 PNG, timed to their
+original 550/900/700 ms warning WAVs. Dedicated validation inspects all 48
+frames and independent original PNG/WAV provenance, nondecreasing alpha (no
+flashes), correct frames and audio timing, SHA-256 manifests, conservative LOD
+design caps and disabled native UEFN/owner authority claims. Eleven tests
+exercise deterministic output, multiple source and metadata mutations, and a
+rehash-consistent flashing-frame regression. A dedicated non-Codex workflow
+packages the generated source; no automatic Codex review or PR is requested.
+These are real importable source images only: Niagara materials, native UEFN
+imports, Verse compilation, multiplayer permissions, performance and gameplay
+damage remain NOT RUN. This remains a universe-first source milestone.
+
+
 ## 2026-11-01 — Runtime Forge: fail-closed placement and spawn handle maps
 
 Position targeting and canonical spawned-prop records now preflight full
