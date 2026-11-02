@@ -37,6 +37,10 @@ aeonfall_player_loadout_device := class(creative_device):
     var OwnsLease:logic = false
     var Subscriptions:[]cancelable = array{}
     var PendingPlayers:[player]logic = map{}
+    # A suspended restore is bound to one generation of a player's join life.
+    # Disconnect invalidates it before the same player can rejoin.
+    var RestoreTokens:[player]int = map{}
+    var NextRestoreToken:int = 0
     var SeenCharacters:[player]fort_character = map{}
     var StarterDeliveryNeeded:[player]logic = map{}
 
@@ -71,6 +75,15 @@ aeonfall_player_loadout_device := class(creative_device):
 
     OnEnd<override>():void=
         set Running = false
+        # Invalidate suspended restores and cancel listeners before allowing
+        # another device to acquire the loadout ownership lease.
+        set PendingPlayers = map{}
+        set RestoreTokens = map{}
+        set SeenCharacters = map{}
+        set StarterDeliveryNeeded = map{}
+        for (Subscription : Subscriptions):
+            Subscription.Cancel()
+        set Subscriptions = array{}
         if:
             OwnsLease?
             Lease := AEONFALLPlayerLoadoutOwners[GetSession()]
@@ -79,12 +92,6 @@ aeonfall_player_loadout_device := class(creative_device):
         then:
             if (set AEONFALLPlayerLoadoutOwners[GetSession()] = false) {}
         set OwnsLease = false
-        for (Subscription : Subscriptions):
-            Subscription.Cancel()
-        set Subscriptions = array{}
-        set PendingPlayers = map{}
-        set SeenCharacters = map{}
-        set StarterDeliveryNeeded = map{}
 
     OnPlayerAdded(Player:player):void=
         QueuePlayer(Player)
@@ -94,22 +101,41 @@ aeonfall_player_loadout_device := class(creative_device):
             QueuePlayer(Player)
 
     QueuePlayer(Player:player):void=
+        if (not Running?):
+            return
+        if (not Player.IsActive[]):
+            return
         if (Existing := PendingPlayers[Player], Existing?):
             return
-        if (Running?, Player.IsActive[], set PendingPlayers[Player] = true):
-            spawn{RestoreWhenReady(Player)}
+        set NextRestoreToken += 1
+        Token := NextRestoreToken
+        if (set RestoreTokens[Player] = Token, set PendingPlayers[Player] = true):
+            spawn{RestoreWhenReady(Player, Token)}
+
+    IsRestoreTokenCurrent(Player:player, Token:int)<transacts>:logic=
+        if (Current := RestoreTokens[Player], Current = Token):
+            return true
+        false
+
+    ClearPendingIfCurrent(Player:player, Token:int):void=
+        if (Current := RestoreTokens[Player], Current = Token):
+            if (set PendingPlayers[Player] = false) {}
 
     OnPlayerRemoved(Player:player):void=
         # Remove inactive players without accessing their persistent weak map.
         var Pending:[player]logic = map{}
+        var Tokens:[player]int = map{}
         var Seen:[player]fort_character = map{}
         var Starters:[player]logic = map{}
+        for (StoredPlayer -> Token : RestoreTokens):
+            if (StoredPlayer <> Player, set Tokens[StoredPlayer] = Token) {}
         for (StoredPlayer -> Value : PendingPlayers):
             if (StoredPlayer <> Player, set Pending[StoredPlayer] = Value) {}
         for (StoredPlayer -> Character : SeenCharacters):
             if (StoredPlayer <> Player, set Seen[StoredPlayer] = Character) {}
         for (StoredPlayer -> Value : StarterDeliveryNeeded):
             if (StoredPlayer <> Player, set Starters[StoredPlayer] = Value) {}
+        set RestoreTokens = Tokens
         set PendingPlayers = Pending
         set SeenCharacters = Seen
         set StarterDeliveryNeeded = Starters
@@ -136,23 +162,31 @@ aeonfall_player_loadout_device := class(creative_device):
             return true
         false
 
-    RestoreWhenReady(Player:player)<suspends>:void=
-        # Startup and respawn races have a bounded wait and visible diagnostics.
+    RestoreWhenReady(Player:player, Token:int)<suspends>:void=
+        # A stale sleeper must not restore a rejoined player, claim a new
+        # character, clear another task's pending slot, or show false failure.
         var Attempt:int = 0
         loop:
             if (not Running?):
                 return
+            if (not IsRestoreTokenCurrent(Player, Token)?):
+                return
             if (not Player.IsActive[]):
+                ClearPendingIfCurrent(Player, Token)
                 return
             Ready := RegistriesReady(Player)
             if (Ready?):
+                if (not IsRestoreTokenCurrent(Player, Token)?):
+                    return
                 Restored := RestorePlayer(Player)
                 if (Restored?):
-                    if (set PendingPlayers[Player] = false) {}
+                    ClearPendingIfCurrent(Player, Token)
                     return
             set Attempt += 1
             if (Attempt >= 100):
-                if (set PendingPlayers[Player] = false) {}
+                if (not IsRestoreTokenCurrent(Player, Token)?):
+                    return
+                ClearPendingIfCurrent(Player, Token)
                 Feedback.Show(Player, Message("AEONFALL loadout is unavailable. Check bootstrap and delivery bindings."))
                 AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
                     EventType := "player.loadout_startup_failed",

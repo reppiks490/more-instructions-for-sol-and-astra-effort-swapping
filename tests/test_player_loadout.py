@@ -93,6 +93,28 @@ class PlayerLoadoutContracts(unittest.TestCase):
     def test_duplicate_loadout_owner_is_rejected(self):
         self.mutation("device", "            Owner <> Self\n", "")
 
+
+    def test_loadout_generation_token_required(self):
+        self.mutation("device", "var RestoreTokens:[player]int = map{}", "var RestoreTokens:[player]logic = map{}")
+
+    def test_old_restore_cannot_act_after_rejoin(self):
+        self.mutation("device", "if (not IsRestoreTokenCurrent(Player, Token)?):", "if (not Running?):", 3)
+
+    def test_pending_clear_must_be_token_guarded(self):
+        self.mutation("device", "    ClearPendingIfCurrent(Player:player, Token:int):void=", "    ClearPendingWithoutToken(Player:player, Token:int):void=")
+
+    def test_new_token_queued_before_spawn(self):
+        self.mutation("device", "spawn{RestoreWhenReady(Player, Token)}", "spawn{RestoreWhenReady(Player, 0)}")
+
+    def test_disconnect_invalidates_tokens(self):
+        self.mutation("device", "        set RestoreTokens = Tokens\n", "")
+
+    def test_device_end_invalidates_tokens(self):
+        self.mutation("device", "        set RestoreTokens = map{}\n", "")
+
+    def test_cancel_subscriptions_before_lease_release(self):
+        self.mutation("device", "        for (Subscription : Subscriptions):\n            Subscription.Cancel()", "        Print(\"subscriptions left active\")")
+
     def test_profile_native_subscription_cancellation(self):
         self.mutation("profile_bootstrap", "Subscription.Cancel()", "Print(\"leaked\")")
 
