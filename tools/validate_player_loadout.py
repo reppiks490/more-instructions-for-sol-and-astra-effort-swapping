@@ -82,6 +82,37 @@ def check_sources(sources: dict[str, str]) -> list[str]:
     ordered("activation", "CanActivateForPlayer(", "if (not Entitled?):", "Initialized := AEONFALLAbilityRuntime.Initialize(")
     for fragment in ("PlayerSpawners:[]player_spawner_device", "SpawnedEvent.Subscribe(OnSpawned)", "RegistriesReady(Player:player)", "Slice001ClassDefinitions", "Slice001AbilityDefinitions", "Attempt >= 100", "Seen = Character", "EnsureStarter(Player, \"WPN-001\")", "TrySelectClass(Player, ClassId)", "RequestEquipmentRestore(", "RestoreEquipmentOnFirstSpawn:logic = false", "RestoreEquipmentOnRespawn:logic = false", "Owner <> Self", "set OwnsLease = true"):
         need("device", fragment, f"live-loadout lifecycle missing {fragment}")
+    # Join/leave sleeper isolation: an earlier suspended task must not
+    # mutate the new task's pending flag, class/equipment, or failure HUD.
+    device = sources["device"]
+    for fragment in (
+        "var RestoreTokens:[player]int = map{}",
+        "var NextRestoreToken:int = 0",
+        "set NextRestoreToken += 1",
+        "set RestoreTokens[Player] = Token",
+        "spawn{RestoreWhenReady(Player, Token)}",
+        "IsRestoreTokenCurrent(Player:player, Token:int)",
+        "ClearPendingIfCurrent(Player:player, Token:int)",
+        "RestoreWhenReady(Player:player, Token:int)",
+        "if (not IsRestoreTokenCurrent(Player, Token)?):",
+        "set RestoreTokens = Tokens",
+        "set RestoreTokens = map{}",
+    ):
+        if fragment not in device:
+            errors.append("loadout rejoin generation guard missing " + fragment)
+    if device.count("if (not IsRestoreTokenCurrent(Player, Token)?):") < 3:
+        errors.append("loadout restore must recheck generation before write and timeout")
+    if "if (set PendingPlayers[Player] = false)" not in device.split("    ClearPendingIfCurrent(", 1)[-1].split("    OnPlayerRemoved(", 1)[0]:
+        errors.append("loadout pending cleanup must be generation-scoped")
+    restore = device.split("    RestoreWhenReady(", 1)[-1].split("    RestorePlayer(", 1)[0]
+    if "set PendingPlayers[Player] = false" in restore:
+        errors.append("loadout stale restore may clear another request's pending state")
+    queue = device.split("    QueuePlayer(", 1)[-1].split("    IsRestoreTokenCurrent(", 1)[0]
+    if queue.find("set RestoreTokens[Player] = Token") < 0 or queue.find("spawn{RestoreWhenReady(Player, Token)}") < 0 or queue.find("set RestoreTokens[Player] = Token") > queue.find("spawn{RestoreWhenReady(Player, Token)}"):
+        errors.append("loadout must assign generation before spawning waiter")
+    end = device.split("    OnEnd<override>()", 1)[-1].split("    OnPlayerAdded(", 1)[0]
+    if end.find("Subscription.Cancel()") < 0 or end.find("AEONFALLPlayerLoadoutOwners[GetSession()] = false") < 0 or end.find("Subscription.Cancel()") > end.find("AEONFALLPlayerLoadoutOwners[GetSession()] = false"):
+        errors.append("loadout must cancel subscriptions before releasing lease")
     for name in ("device", "profile_bootstrap", "actor_bootstrap"):
         need(name, "OnEnd<override>()", f"{name}: native subscriptions have no lifecycle cleanup")
         need(name, "Subscription.Cancel()", f"{name}: native subscriptions are not canceled")

@@ -1,5 +1,17 @@
 # Build change log
 
+## 2026-11-01 — Runtime Forge: loadout reconnect generation isolation
+
+Mirrored the checkpoint reconnect-safety pattern in the player loadout
+device. A bounded readiness waiter now carries a distinct generation token;
+disconnect and device shutdown invalidate older requests. An old waiter
+cannot act on the rejoined player or clear the new request's pending slot.
+OnEnd now cancels listeners before relinquishing exclusive session ownership.
+Static guard checks, mutation tests and a native multiplayer acceptance case
+were added. Persistent player schema and equipment policies are unchanged;
+UEFN compile and Launch Session evidence remain unverified.
+
+
 ## 2026-11-01 — Runtime Forge: profile bootstrap lease and truthful NPC removal
 
 The persistence bootstrap now acquires exclusive session ownership before

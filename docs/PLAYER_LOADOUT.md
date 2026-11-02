@@ -12,6 +12,25 @@ Weapon selection accepts a durably unlocked WPN identifier, initializes its regi
 
 Player ability activation checks the registered owner identity before initializing or spending anything. The active class grants only its registered `AbilityIds`. A weapon ability requires its owner weapon to be both unlocked and selected; an outside-class skill requires its skill unlock. NPC activations retain their authored NPC path. Owner-exclusive world powers use their separate authenticated controller.
 
+## Rejoin generation isolation
+
+The loadout restore waiter is now bound to a monotonically increasing,
+session-local token for each queued player lifecycle. Player removal drops
+that token, so an older suspended readiness task cannot act on a rejoined
+player, clear the new task's pending flag, or emit a false startup-failed
+diagnostic. Shutdown invalidates all tokens and cancels callbacks before the
+loadout owner lease is released. This is transient state; it does not modify
+the existing persistent profile schema.
+
+**Native acceptance:** Delay class bootstrap until the loadout readiness wait
+is active, disconnect the player, then reconnect them while the new restore
+is pending. Confirm that only the new task can initialize class abilities and
+request the physical starter grant; the stale task must not clear its pending
+slot, enqueue additional equipment, or show the failure HUD. Repeat with
+two clients and a session restart. Test respawn with inventory retained and
+enabled physical restore separately. These checks need a UEFN Launch Session;
+source mutation tests do not execute Verse.
+
 ## Inventory lifecycle
 
 `RestoreEquipmentOnFirstSpawn` and `RestoreEquipmentOnRespawn` default to false. Enable a flag only after configuring and testing the corresponding Island Settings inventory removal. Otherwise retained inventory could receive another physical item. Duplicate callbacks for the same native character are ignored. Initial starter delivery remains automatic for a newly saved starter unlock.
