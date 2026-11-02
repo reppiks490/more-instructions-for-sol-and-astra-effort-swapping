@@ -33,6 +33,38 @@ has an active FUS-001 Armor Fusion**. It is disabled by default.
    `tests/test_titan_proxy.py` assert source guards, mutate threat surfaces
    and run an independent policy **reference model**, not Verse.
 
+## Native spawn and behavior-readiness safety upgrade
+
+Epic's `npc_spawner_device.Enable()` states that characters **will start to
+spawn**. Therefore the old assumption that `Enable(); SpawnAt(...)`
+necessarily creates exactly one NPC was unsafe. The revised harness now
+cross-checks the returned `SpawnAt` agent against the complete
+`TitanSpawner.GetAgents()` inventory, rejects a preexisting or additional
+spawn, and monitors the inventory thereafter. It fails closed and cleans the
+**dedicated** spawner if the inventory differs from the authorized agent.
+The installer cannot verify physical editor settings: configure spawn-on-enable
+and periodic spawn behavior to avoid unsolicited agents, and verify actual
+Native NPC Spawner operation before activation.
+
+`SpawnAt` returning an agent **does not prove its custom Verse `npc_behavior`
+is running**. The NPC behavior now calls `AcknowledgeBehavior(Agent)`
+after `GetNavigatable[]` succeeds and its authorized identity matches the
+same agent. Both waypoint movement and the non-damaging attack cue require
+`BehaviorReady`; if no acknowledgment arrives within five seconds, the
+harness invalidates the session and despawns the dedicated NPC. The UI
+distinguishes *summon requested* from *behavior online*. A creator's input
+cannot make an unacknowledged or unrelated NPC ready.
+
+These safeguards detect several source-level failure modes; they **do not**
+prove native NPC Spawner and Verse timing, collision, replication or editor
+configuration. The source intentionally remains disabled. `GetAgents` may
+include engine-owned or expired agents depending on editor behavior; test the
+actual UEFN device under elimination and repeated summon cycles.
+
+Reference: Epic's public NPC Spawner
+`Enable`, `GetAgents` and `SpawnAt` APIs:
+https://dev.epicgames.com/documentation/fortnite/verse-api/fortnitedotcom/devices/npc_spawner_device
+
 ## Editor requirements (no physical proof yet)
 
 - Build and open an actual UEFN project created by the editor. Do not invent
@@ -107,6 +139,15 @@ and two independent Fortnite clients' recorded Launch Sessions. Check:
   missing Character Definition and delayed spawn after timeout/stop/restart.
 - Navigation each anchor, blocked navmesh, command rate limit, interrupted
   NavigateTo, NPC elimination, streaming and teleport distance.
+- Enable a deliberately misconfigured spawner that auto-spawns while
+  `SpawnAt` is in flight. Confirm any duplicate agent forces shutdown,
+  no unsolicited NPC survives, and the player never receives the
+  *behavior online* cue for an unacknowledged NPC.
+- Delay Character Definition startup; confirm movement and attack input
+  are rejected before NPC-behavior acknowledgment, and verify cleanup
+  after the five-second timeout. Test acknowledgment from the wrong agent.
+- Interrupt summoning before the owner field is established and confirm
+  pre-owner cleanup does not leave the device or NPC enabled.
 - Two players simultaneously; only the one authorized owner can issue
   commands and only the dedicated NPC is moved/despawned.
 - Kill the bound Titan NPC and also simulate an unrelated NPC death. Only the
