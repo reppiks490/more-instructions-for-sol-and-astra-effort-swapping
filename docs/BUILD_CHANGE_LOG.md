@@ -1,3 +1,12 @@
+## 2026-11-01 — Avatar: revoke Titan readiness on NPC behavior OnEnd
+
+The Titan behavior now captures its exact acknowledged epoch and withdraws
+readiness in OnEnd only when both agent identity and epoch still match.
+Pending movement is cleared; the owner monitor removes command HUD/camera
+and despawns the dedicated NPC if a previously ready behavior disappears
+without NPC elimination. Added source mutation and stale-epoch reference
+model tests. No native UEFN/replication claims; FUS-002 stays disabled.
+
 ## 2026-11-01 — Avatar: gate Titan command inputs on exact NPC behavior readiness
 
 Moved movement, cue and dismissal Input Trigger registration from SpawnAt

@@ -28,6 +28,10 @@ RUNTIME_GUARDS = (
     "set BehaviorReady = false",
     "AcknowledgeBehavior(Agent:agent)",
     "IsBehaviorReady(Agent:agent)",
+    "BoundEpochFor(Agent:agent)<decides><transacts>:int=",
+    "WithdrawBehavior(Agent:agent, ExpectedEpoch:int)",
+    "Epoch = ExpectedEpoch",
+    "IsReadyForCurrentNpc()<transacts>:logic=",
     "NpcChar.IsActive[]\n            BehaviorReady?",
     "Monster.IsActive[]\n            BehaviorReady?",
     "not SpawnInFlight?",
@@ -60,7 +64,9 @@ BEHAVIOR_GUARDS = (
     "class(npc_behavior)",
     "GetAgent[]",
     "Character.GetNavigatable[]",
-    "Service.AcknowledgeBehavior(Agent)?",
+    "Service.AcknowledgeBehavior(Agent)?, BoundEpoch := Service.BoundEpochFor[Agent]",
+    "set AckEpoch = BoundEpoch",
+    "Service.WithdrawBehavior(Agent, AckEpoch)",
     "Service.GetNewMove[Agent, SeenSequence]",
     "MakeNavigationTarget(Command.Destination)",
     "Navigation.NavigateTo(",
@@ -130,6 +136,7 @@ DEVICE_GUARDS = (
     "Runtime.RequestAttackCue(Player)?",
     "AttackCueOutput.Trigger(Player)",
     "Runtime.IsAuthorized()?",
+    "Runtime.IsReadyForCurrentNpc()?",
     "Stopped := Runtime.End(Self)",
     "TitanSpawner.Disable()",
     "TitanSpawner.DespawnAll(false)",
@@ -232,7 +239,8 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
                 "no_untagged_spawned_event_association",
                 "no_global_input_registration",
                 "camera_requires_npc_behavior_ack",
-                "command_input_requires_behavior_ack"):
+                "command_input_requires_behavior_ack",
+                "behavior_onend_revokes_readiness"):
         if c.get("safety", {}).get(key) is not True:
             errors.append(f"safety gate disabled: {key}")
     lifecycle = c.get("lifecycle", {})
@@ -242,6 +250,7 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "npc_elimination": "exact_agent_identity_then_teardown",
         "input_registration": "summon_owner_only_commands_after_exact_behavior_ack",
         "behavior_ack": "npc_behavior_ack_required_before_commands",
+        "behavior_end": "epoch_scoped_withdraw_and_terminal_command_cleanup",
         "unexpected_spawns": "fail_closed_despawn_dedicated_spawner",
         "spawn_association": "serialized_SpawnAt_return_and_epoch",
         "inflight_inventory": "allow_single_untrusted_candidate_until_exact_SpawnAt_return_or_timeout",
@@ -405,6 +414,30 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "AddPhysicalDevice[Devices, ProxyCamera]",
     )):
         errors.append("optional camera binding must be checked only when enabled")
+
+    # An NPC behavior may end without NPC elimination. Prevent an acknowledged
+    # but now-headless NPC from accepting paid cues or retaining owner HUD.
+    behavior_end = behavior[behavior.find("    OnEnd<override>():void="):]
+    withdraw_at = runtime.find("    WithdrawBehavior(Agent:agent, ExpectedEpoch:int)")
+    withdraw_end = runtime.find("    IsReadyForCurrentNpc()", withdraw_at)
+    withdraw = runtime[withdraw_at:withdraw_end]
+    movement_start = runtime.find("    GetNewMove(Agent:agent, SeenSequence:int)")
+    movement_end = runtime.find("    # Attack is a bounded", movement_start)
+    movement = runtime[movement_start:movement_end]
+    monitor_start = device.find("    Monitor()<suspends>:void=")
+    monitor_end = device.find("    FinishProxy():void=", monitor_start)
+    monitor = device[monitor_start:monitor_end]
+    if not all(x in behavior_end for x in (
+        "if (AckEpoch > 0):", "Service.WithdrawBehavior(Agent, AckEpoch)",
+        "Navigation.StopNavigation()"
+    )) or not all(x in withdraw for x in (
+        "Active?", "Epoch = ExpectedEpoch", "Current := OwnedNpc?",
+        "Current = Agent", "set BehaviorReady = false", "set Pending = false"
+    )) or "BehaviorReady?" not in movement or not all(x in monitor for x in (
+        "else if (CommandRegistered?):",
+        "if (not Runtime.IsReadyForCurrentNpc()?):", "FinishProxy()"
+    )):
+        errors.append("NPC behavior OnEnd must revoke exact epoch readiness and command HUD")
 
     if "weak_map(player," in combined:
         errors.append("second persistent profile map prohibited")

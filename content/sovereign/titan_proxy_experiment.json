@@ -87,7 +87,8 @@
     "unexpected_spawns": "fail_closed_despawn_dedicated_spawner",
     "input_registration": "summon_owner_only_commands_after_exact_behavior_ack",
     "inflight_inventory": "allow_single_untrusted_candidate_until_exact_SpawnAt_return_or_timeout",
-    "camera_teardown": "remove_owner_camera_before_npc_despawn"
+    "camera_teardown": "remove_owner_camera_before_npc_despawn",
+    "behavior_end": "epoch_scoped_withdraw_and_terminal_command_cleanup"
   },
   "safety": {
     "no_shared_npc_spawner": true,
@@ -99,7 +100,8 @@
     "no_untagged_spawned_event_association": true,
     "no_global_input_registration": true,
     "camera_requires_npc_behavior_ack": true,
-    "command_input_requires_behavior_ack": true
+    "command_input_requires_behavior_ack": true,
+    "behavior_onend_revokes_readiness": true
   },
   "native_evidence": {
     "uefn_compile": "not_run",

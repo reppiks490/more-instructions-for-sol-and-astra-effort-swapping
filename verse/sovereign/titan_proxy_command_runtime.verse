@@ -162,6 +162,29 @@ aeonfall_titan_proxy_command_runtime := class:
             return true
         false
 
+    # A stopped npc_behavior must not leave a live but commandable NPC.
+    # The epoch and exact agent both have to match; this is not a grant.
+    BoundEpochFor(Agent:agent)<decides><transacts>:int=
+        BoundNpc(Agent)?
+        Epoch
+
+    WithdrawBehavior(Agent:agent, ExpectedEpoch:int)<transacts>:logic=
+        if:
+            Active?
+            Epoch = ExpectedEpoch
+            Current := OwnedNpc?
+            Current = Agent
+        then:
+            set BehaviorReady = false
+            set Pending = false
+            return true
+        false
+
+    IsReadyForCurrentNpc()<transacts>:logic=
+        if (Npc := OwnedNpc?, IsBehaviorReady(Npc)?):
+            return true
+        false
+
     IsBehaviorReady(Agent:agent)<transacts>:logic=
         if (BehaviorReady?, BoundNpc(Agent)?):
             return true
@@ -212,6 +235,7 @@ aeonfall_titan_proxy_command_runtime := class:
 
     GetNewMove(Agent:agent, SeenSequence:int)<decides><transacts>:aeonfall_titan_proxy_move_command=
         BoundNpc(Agent)?
+        BehaviorReady?
         Command := Pending?
         Command.Sequence > SeenSequence
         Command

@@ -429,6 +429,12 @@ aeonfall_titan_proxy_device := class(creative_device):
                     # Fail closed on unsolicited spawn, disappearing NPC,
                     # owner revocation or an invalid generation.
                     FinishProxy()
+                else if (CommandRegistered?):
+                    # Behavior OnEnd can occur while the NPC remains alive.
+                    # Revoke its inputs and camera rather than spending cue
+                    # energy against a headless, non-navigating actor.
+                    if (not Runtime.IsReadyForCurrentNpc()?):
+                        FinishProxy()
 
     FinishProxy():void=
         # Remove input eligibility even when native actor cleanup fails.

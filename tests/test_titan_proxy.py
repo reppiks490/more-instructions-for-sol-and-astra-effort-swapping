@@ -521,6 +521,33 @@ class TitanProxySourceTests(unittest.TestCase):
         self.assertTrue(self.errors(c=c))
 
 
+    def test_npc_behavior_onend_revokes_exact_epoch(self):
+        self.assertIn("Service.WithdrawBehavior(Agent, AckEpoch)", self.behavior)
+        self.assertIn("Epoch = ExpectedEpoch", self.runtime)
+        self.assertIn("Runtime.IsReadyForCurrentNpc()?", self.device)
+        mutation = self.behavior.replace(
+            "Withdrawn := Service.WithdrawBehavior(Agent, AckEpoch)",
+            'Print("no readiness withdrawal")', 1
+        )
+        self.assertTrue(self.errors(behavior=mutation))
+        mutation = self.runtime.replace(
+            "            Epoch = ExpectedEpoch\n            Current := OwnedNpc?",
+            "            true?\n            Current := OwnedNpc?", 1
+        )
+        self.assertTrue(self.errors(runtime=mutation))
+
+    def test_headless_npc_cannot_receive_pending_navigation_or_hud(self):
+        mutation = self.runtime.replace(
+            "        BoundNpc(Agent)?\n        BehaviorReady?\n        Command := Pending?",
+            "        BoundNpc(Agent)?\n        Command := Pending?", 1
+        )
+        self.assertTrue(self.errors(runtime=mutation))
+        mutation = self.device.replace(
+            "if (not Runtime.IsReadyForCurrentNpc()?):", "if (false?):", 1
+        )
+        self.assertTrue(self.errors(device=mutation))
+
+
 class TitanProxyPolicyModelTests(unittest.TestCase):
     def setUp(self):
         self.p = ProxyModel()
@@ -624,6 +651,12 @@ class TitanSpawnHandshakeModel:
             self.active and self.behavior_ready and self.bound_npc == agent
             and len(self.npcs) == 1 and self.npcs[0] == agent
         )
+
+    def end_behavior(self, agent, epoch):
+        if not self.active or self.epoch != epoch or self.bound_npc != agent:
+            return False
+        self.behavior_ready = False
+        return True
 
     def unexpected_agents(self):
         if len(self.npcs) > 1:
@@ -748,6 +781,32 @@ class TitanSpawnHandshakeTests(unittest.TestCase):
         self.assertIsNotNone(epoch)
         self.p.npcs = ["titan"]
         self.assertTrue(self.p.return_spawn(epoch, "titan"))
+
+    def test_behavior_end_retracts_commands_while_npc_still_alive(self):
+        epoch = self.p.begin()
+        self.p.npcs = ["titan"]
+        self.assertTrue(self.p.return_spawn(epoch, "titan"))
+        self.assertTrue(self.p.acknowledge("titan"))
+        self.assertTrue(self.p.can_command("titan"))
+        self.assertTrue(self.p.end_behavior("titan", epoch))
+        self.assertEqual(self.p.npcs, ["titan"])
+        self.assertFalse(self.p.can_command("titan"))
+        self.assertFalse(self.p.end_behavior("wrong-agent", epoch))
+
+    def test_late_behavior_onend_cannot_revoke_new_generation(self):
+        old = self.p.begin()
+        self.p.npcs = ["old"]
+        self.assertTrue(self.p.return_spawn(old, "old"))
+        self.assertTrue(self.p.acknowledge("old"))
+        self.p.stop()
+        new = self.p.begin()
+        self.p.npcs = ["new"]
+        self.assertTrue(self.p.return_spawn(new, "new"))
+        self.assertTrue(self.p.acknowledge("new"))
+        self.assertFalse(self.p.end_behavior("old", old))
+        self.assertFalse(self.p.end_behavior("new", old))
+        self.assertTrue(self.p.can_command("new"))
+
 
     def test_preowner_failure_still_cleans_dedicated_spawner(self):
         epoch = self.p.begin()

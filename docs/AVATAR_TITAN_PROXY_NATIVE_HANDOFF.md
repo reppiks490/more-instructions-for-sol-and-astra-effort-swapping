@@ -108,6 +108,14 @@ https://dev.epicgames.com/documentation/fortnite/verse-api/fortnitedotcom/device
 
 ## Owner-only Input Trigger lifecycle (source, not native verified)
 
+**NPC behavior end:** A behavior may stop without its agent being eliminated.
+The NPC records the exact acknowledged epoch and calls an epoch/agent-scoped
+readiness withdrawal in `OnEnd`. Pending navigation is invalidated and the
+0.25s owner monitor tears down camera, command HUD and the dedicated NPC if
+its behavior is no longer ready. Stale `OnEnd` from an older epoch cannot
+revoke a newer generation. This is a source-level safety path, **not** native
+proof that engine callbacks always arrive in every shutdown scenario.
+
 **Behavior-readiness UI gate:** Summon is registered only while the exact
 FUS-001 owner is eligible and no proxy is pending/active. Once a summon is
 admitted, Summon is immediately unregistered and all three command actions
@@ -264,7 +272,9 @@ and two independent Fortnite clients' recorded Launch Sessions. Check:
   commands and only the dedicated NPC is moved/despawned.
 - Kill the bound Titan NPC and also simulate an unrelated NPC death. Only the
   exact bound-agent elimination must invalidate the proxy; duplicated death
-  callbacks must be harmless.
+  callbacks must be harmless. Stop the NPC behavior while its agent remains
+  alive and verify command HUD/camera/paid cue admission are withdrawn; a
+  late OnEnd from an old epoch must not stop a new proxy.
 - Resource depletion, 10 rapid attack-cue presses, generation rotation,
   FUS-001 separation, permission revocation, respawn, disconnect and
   device shutdown. Verify all NPCs and per-owner cues are cleared.
