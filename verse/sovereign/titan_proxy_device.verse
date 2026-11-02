@@ -93,7 +93,6 @@ aeonfall_titan_proxy_device := class(creative_device):
             AdvanceInput.PressedEvent.Subscribe(OnAdvance),
             AttackCueInput.PressedEvent.Subscribe(OnAttackCue),
             DismissInput.PressedEvent.Subscribe(OnDismiss),
-            TitanSpawner.SpawnedEvent.Subscribe(OnSpawned),
             GetPlayspace().PlayerRemovedEvent().Subscribe(OnPlayerLeft)
         }
         race:
@@ -139,7 +138,7 @@ aeonfall_titan_proxy_device := class(creative_device):
                 set WaypointIndex = 0
                 TitanSpawner.Reset()
                 TitanSpawner.Enable()
-                TitanSpawner.Spawn()
+                spawn{SpawnProxy(StartedEpoch)}
                 spawn{AwaitSpawn(StartedEpoch)}
                 Feedback.Show(Player, TitanProxyReady, 3.0)
                 return
@@ -156,11 +155,20 @@ aeonfall_titan_proxy_device := class(creative_device):
             # Timeout invalidates the generation and disables late spawns.
             FinishProxy()
 
-    OnSpawned(Agent:agent):void=
-        if (Runtime := Service?):
-            if (Runtime.BindSpawn(Agent)?):
-                return
-            # No unsolicited NPC may remain alive in this dedicated spawner.
+    SpawnProxy(ExpectedEpoch:int)<suspends>:void=
+        # SpawnAt returns the actual spawned agent, unlike SpawnedEvent, so
+        # the session can associate one in-flight request with one epoch.
+        if (TitanSpawner.IsValid[]):
+            Position := TitanSpawner.GetTransform().Translation
+            Spawned := TitanSpawner.SpawnAt(Position, false)
+            if (Runtime := Service?):
+                if (Runtime.CompleteSpawn(ExpectedEpoch, Spawned)?):
+                    return
+        # An invalid/late/failed result must not survive teardown or attach
+        # to a new generation. Begin refuses new requests while in flight.
+        TitanSpawner.Disable()
+        TitanSpawner.DespawnAll(false)
+        if (Runtime := Service?, Runtime.IsCurrentEpoch(ExpectedEpoch)?):
             FinishProxy()
 
     OnAdvance(Agent:agent):void=
