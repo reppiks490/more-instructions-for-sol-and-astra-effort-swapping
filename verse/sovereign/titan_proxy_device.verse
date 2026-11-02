@@ -434,6 +434,10 @@ aeonfall_titan_proxy_device := class(creative_device):
                         # OnEnd may precede command HUD registration. Do not
                         # retain a headless NPC for the full readiness timeout.
                         FinishProxy()
+                    else if (Runtime.HasStaleBehaviorHeartbeat()?):
+                        # OnEnd is not guaranteed for every interrupted
+                        # OnBegin path; a missing pulse must still revoke HUD.
+                        FinishProxy()
                     else if (CommandRegistered?):
                         # Once command UI was granted, loss of readiness is
                         # terminal even if the NPC remains physically alive.

@@ -21,6 +21,9 @@ aeonfall_titan_proxy_command_runtime := class:
     # OnEnd is terminal for the acknowledged epoch. A late OnBegin poll
     # cannot re-acknowledge an NPC after its behavior has been withdrawn.
     var BehaviorTerminated:logic = false
+    # NPC behavior refreshes this lease after each bounded navigation attempt.
+    # A missing OnEnd callback cannot leave a commandable NPC indefinitely.
+    var LastBehaviorPulseAt:float = -1.0
     # A stop does not release an in-flight native SpawnAt. Never resummon
     # until the old async request actually returned an agent or false.
     var SpawnInFlight:logic = false
@@ -78,6 +81,7 @@ aeonfall_titan_proxy_command_runtime := class:
             set OwnedNpc = false
             set BehaviorReady = false
             set BehaviorTerminated = false
+            set LastBehaviorPulseAt = -1.0
             set Active = true
             set Generation = Token
             set Sequence = 0
@@ -155,6 +159,7 @@ aeonfall_titan_proxy_command_runtime := class:
         then:
             set OwnedNpc = option{Agent}
             set BehaviorReady = false
+            set LastBehaviorPulseAt = -1.0
             return true
         false
 
@@ -162,6 +167,7 @@ aeonfall_titan_proxy_command_runtime := class:
     # GetNavigatable succeeded. No input/attack is permitted before this.
     AcknowledgeBehavior(Agent:agent)<transacts>:logic=
         if (not BehaviorTerminated?, BoundNpc(Agent)?):
+            set LastBehaviorPulseAt = GetSimulationElapsedTime()
             set BehaviorReady = true
             return true
         false
@@ -181,6 +187,7 @@ aeonfall_titan_proxy_command_runtime := class:
         then:
             set BehaviorTerminated = true
             set BehaviorReady = false
+            set LastBehaviorPulseAt = -1.0
             set Pending = false
             return true
         false
@@ -193,13 +200,37 @@ aeonfall_titan_proxy_command_runtime := class:
             return true
         false
 
+    # The behavior polls every 0.15s and a navigation race lasts <=2s.
+    # A 4s watchdog is conservative; editor scheduling still needs proof.
+    BehaviorPulseFresh()<transacts>:logic=
+        if:
+            LastBehaviorPulseAt >= 0.0
+            Now := GetSimulationElapsedTime()
+            Now >= LastBehaviorPulseAt
+            Now - LastBehaviorPulseAt <= 4.0
+        then:
+            return true
+        false
+
+    # Reap a stopped behavior even if it never delivered OnEnd or if the
+    # owner command HUD has not yet been registered.
+    HasStaleBehaviorHeartbeat()<transacts>:logic=
+        if:
+            Active?
+            BehaviorReady?
+            not BehaviorTerminated?
+            not BehaviorPulseFresh()?
+        then:
+            return true
+        false
+
     IsReadyForCurrentNpc()<transacts>:logic=
         if (Npc := OwnedNpc?, IsBehaviorReady(Npc)?):
             return true
         false
 
     IsBehaviorReady(Agent:agent)<transacts>:logic=
-        if (not BehaviorTerminated?, BehaviorReady?, BoundNpc(Agent)?):
+        if (not BehaviorTerminated?, BehaviorReady?, BoundNpc(Agent)?, BehaviorPulseFresh()?)::
             return true
         false
 
@@ -233,6 +264,7 @@ aeonfall_titan_proxy_command_runtime := class:
             NpcChar.IsActive[]
             BehaviorReady?
             not BehaviorTerminated?
+            IsBehaviorReady(Npc)?
             Source := OriginalCharacter?
             Range := Distance(Source.GetTransform().Translation, Destination)
             Range <= 1600.0
@@ -251,6 +283,7 @@ aeonfall_titan_proxy_command_runtime := class:
         BoundNpc(Agent)?
         BehaviorReady?
         not BehaviorTerminated?
+        IsBehaviorReady(Agent)?
         Command := Pending?
         Command.Sequence > SeenSequence
         Command
@@ -266,6 +299,7 @@ aeonfall_titan_proxy_command_runtime := class:
             Monster.IsActive[]
             BehaviorReady?
             not BehaviorTerminated?
+            IsBehaviorReady(Owned)?
             Controller := FusionController?
             State := GetAEONFALLFusionState()
             Budget := GetAEONFALLSovereignFusionBudget[]
@@ -285,6 +319,7 @@ aeonfall_titan_proxy_command_runtime := class:
             set OwnedNpc = false
             set BehaviorReady = false
             set BehaviorTerminated = true
+            set LastBehaviorPulseAt = -1.0
             set OriginalCharacter = false
             set Owner = false
             set FusionController = false

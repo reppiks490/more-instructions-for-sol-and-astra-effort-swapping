@@ -51,7 +51,8 @@
     "allow_partial_path": false,
     "behavior_bootstrap_checks": 40,
     "behavior_ready_timeout_seconds": 5,
-    "command_requires_behavior_ready": true
+    "command_requires_behavior_ready": true,
+    "behavior_heartbeat_timeout_seconds": 4
   },
   "attack": {
     "effect": "owner_instigated_cue_only_no_damage",
@@ -89,7 +90,8 @@
     "inflight_inventory": "allow_single_untrusted_candidate_until_exact_SpawnAt_return_or_timeout",
     "camera_teardown": "remove_owner_camera_before_npc_despawn",
     "behavior_end": "epoch_scoped_withdraw_and_terminal_command_cleanup",
-    "orphan_spawns": "purge_dedicated_spawner_without_owner"
+    "orphan_spawns": "purge_dedicated_spawner_without_owner",
+    "behavior_heartbeat": "ack_pulse_expiry_reaps_even_before_command_hud"
   },
   "safety": {
     "no_shared_npc_spawner": true,
@@ -105,7 +107,8 @@
     "behavior_onend_revokes_readiness": true,
     "behavior_onend_terminal_for_epoch": true,
     "behavior_end_cleanup_before_command_registration": true,
-    "orphan_spawner_monitor_cleanup": true
+    "orphan_spawner_monitor_cleanup": true,
+    "behavior_heartbeat_fail_closed": true
   },
   "native_evidence": {
     "uefn_compile": "not_run",

@@ -335,3 +335,24 @@ five-second timeout remains the fallback for a behavior that never acknowledges.
 Source mutation tests and a scheduler reference model cover both cases.
 No native spawner timing, OnEnd callback guarantee, UEFN compilation,
 multiplayer, mobile or cooked-memory result is claimed.
+
+## Behavior heartbeat watchdog — source-only safeguard
+
+The NPC behavior refreshes a server-session heartbeat through its existing
+`AcknowledgeBehavior` poll. Each navigation attempt is bounded by a 2-second
+race, so a 4-second watchdog allows the intended polling/navigation cadence
+while revoking a silent behavior that stops updating without a reliable
+`OnEnd` callback. The mailbox checks freshness on move, attack-cue and
+navigation dequeue; the owner monitor also reaps stale acknowledged NPCs
+**before** the command HUD is registered. Beginning a new authorized epoch,
+rebinding, terminal withdrawal and teardown reset the pulse. Stale callbacks
+cannot revive the old generation. The timeout is fail-closed and may cause
+false-negative teardown under severe native scheduling stalls; it does not
+prove `OnEnd` callback delivery or reliable native frame timing.
+
+Native acceptance must suspend/interrupt the NPC behavior without relying on
+`OnEnd`, wait more than 4 seconds, and verify the owner command inputs,
+optional camera and dedicated spawner are cleaned. Separately test a normal
+2-second bounded `NavigateTo` under mobile/low-end load and verify the
+watchdog does not spuriously terminate valid movement. This remains an
+unverified FUS-002 proxy experiment, not NPC possession or UEFN compilation.

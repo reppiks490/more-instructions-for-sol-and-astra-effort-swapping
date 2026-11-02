@@ -26,10 +26,12 @@ RUNTIME_GUARDS = (
     "not OwnedNpc?",
     "BehaviorReady:logic = false",
     "BehaviorTerminated:logic = false",
+    "LastBehaviorPulseAt:float = -1.0",
+    "set LastBehaviorPulseAt = GetSimulationElapsedTime()",
     "set BehaviorTerminated = false",
     "set BehaviorTerminated = true",
     "if (not BehaviorTerminated?, BoundNpc(Agent)?):",
-    "if (not BehaviorTerminated?, BehaviorReady?, BoundNpc(Agent)?):",
+    "if (not BehaviorTerminated?, BehaviorReady?, BoundNpc(Agent)?, BehaviorPulseFresh()?):",
     "set BehaviorReady = false",
     "AcknowledgeBehavior(Agent:agent)",
     "IsBehaviorReady(Agent:agent)",
@@ -39,6 +41,13 @@ RUNTIME_GUARDS = (
     "HasTerminatedBehavior()<transacts>:logic=",
     "if (Active?, BehaviorTerminated?):",
     "IsReadyForCurrentNpc()<transacts>:logic=",
+    "BehaviorPulseFresh()<transacts>:logic=",
+    "Now - LastBehaviorPulseAt <= 4.0",
+    "HasStaleBehaviorHeartbeat()<transacts>:logic=",
+    "not BehaviorPulseFresh()?",
+    "IsBehaviorReady(Npc)?",
+    "IsBehaviorReady(Agent)?",
+    "IsBehaviorReady(Owned)?",
     "NpcChar.IsActive[]\n            BehaviorReady?",
     "Monster.IsActive[]\n            BehaviorReady?",
     "not SpawnInFlight?",
@@ -144,6 +153,7 @@ DEVICE_GUARDS = (
     "AttackCueOutput.Trigger(Player)",
     "Runtime.IsAuthorized()?",
     "Runtime.IsReadyForCurrentNpc()?",
+    "Runtime.HasStaleBehaviorHeartbeat()?",
     "Stopped := Runtime.End(Self)",
     "TitanSpawner.Disable()",
     "TitanSpawner.DespawnAll(false)",
@@ -217,6 +227,7 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "allow_partial_path": False,
         "behavior_bootstrap_checks": 40,
         "behavior_ready_timeout_seconds": 5,
+        "behavior_heartbeat_timeout_seconds": 4,
         "command_requires_behavior_ready": True,
     }.items():
         if movement.get(name) != value:
@@ -250,7 +261,8 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
                 "behavior_onend_revokes_readiness",
                 "behavior_onend_terminal_for_epoch",
                 "behavior_end_cleanup_before_command_registration",
-                "orphan_spawner_monitor_cleanup"):
+                "orphan_spawner_monitor_cleanup",
+                "behavior_heartbeat_fail_closed"):
         if c.get("safety", {}).get(key) is not True:
             errors.append(f"safety gate disabled: {key}")
     lifecycle = c.get("lifecycle", {})
@@ -262,6 +274,7 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "behavior_ack": "npc_behavior_ack_required_before_commands",
         "behavior_end": "epoch_scoped_withdraw_and_terminal_command_cleanup",
         "orphan_spawns": "purge_dedicated_spawner_without_owner",
+        "behavior_heartbeat": "ack_pulse_expiry_reaps_even_before_command_hud",
         "unexpected_spawns": "fail_closed_despawn_dedicated_spawner",
         "spawn_association": "serialized_SpawnAt_return_and_epoch",
         "inflight_inventory": "allow_single_untrusted_candidate_until_exact_SpawnAt_return_or_timeout",
@@ -371,6 +384,33 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         < inventory.find("if (not Runtime.SpawnPendingForCurrentEpoch()?):")
     ):
         errors.append("single pending SpawnAt candidate must remain untrusted until identity reconciliation")
+
+    # Guard the actual command paths, not just a stray string elsewhere.
+    for start, end, required in (
+        ("    RequestMove(", "    GetNewMove(", "IsBehaviorReady(Npc)?"),
+        ("    GetNewMove(", "    # Attack is a bounded", "IsBehaviorReady(Agent)?"),
+        ("    RequestAttackCue(", "    # Invalidate mailbox", "IsBehaviorReady(Owned)?"),
+    ):
+        begin = runtime.find(start)
+        finish = runtime.find(end, begin)
+        if begin < 0 or finish <= begin or required not in runtime[begin:finish]:
+            errors.append("heartbeat authorization missing in " + start.strip())
+    get_new_start = runtime.find("    GetNewMove(")
+    get_new_end = runtime.find("    # Attack is a bounded", get_new_start)
+    if get_new_start < 0 or get_new_end <= get_new_start or (
+        "        BehaviorReady?" not in runtime[get_new_start:get_new_end]
+    ):
+        errors.append("navigation dequeue must still require behavior readiness")
+    if runtime.count("set LastBehaviorPulseAt = -1.0") < 4:
+        errors.append("behavior heartbeat must reset on begin, bind, withdrawal and end")
+    monitor_start = device.find("    Monitor()<suspends>:void=")
+    monitor_end = device.find("    FinishProxy():void=", monitor_start)
+    monitor = device[monitor_start:monitor_end]
+    if monitor_start < 0 or monitor_end < 0 or not (
+        0 <= monitor.find("Runtime.HasStaleBehaviorHeartbeat()?")
+        < monitor.find("else if (CommandRegistered?):")
+    ):
+        errors.append("stale behavior heartbeat must be reaped before HUD registration")
 
     # The optional camera is presentation for a single authorized owner,
     # never NPC possession or a replacement for canonical FUS-001 control.

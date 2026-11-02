@@ -546,13 +546,13 @@ class TitanProxySourceTests(unittest.TestCase):
         )
         self.assertTrue(self.errors(runtime=mutation))
         mutation = self.runtime.replace(
-            "            set BehaviorTerminated = true\n            set BehaviorReady = false\n            set Pending = false",
-            "            set BehaviorReady = false\n            set Pending = false", 1
+            "            set BehaviorTerminated = true\n            set BehaviorReady = false\n            set LastBehaviorPulseAt = -1.0\n            set Pending = false",
+            "            set BehaviorReady = false\n            set LastBehaviorPulseAt = -1.0\n            set Pending = false", 1
         )
         self.assertTrue(self.errors(runtime=mutation))
         mutation = self.runtime.replace(
-            "            set BehaviorTerminated = false\n            set Active = true",
-            "            set Active = true", 1
+            "            set BehaviorTerminated = false\n            set LastBehaviorPulseAt = -1.0\n            set Active = true",
+            "            set LastBehaviorPulseAt = -1.0\n            set Active = true", 1
         )
         self.assertTrue(self.errors(runtime=mutation))
         c = copy.deepcopy(self.contract)
@@ -599,14 +599,127 @@ class TitanProxySourceTests(unittest.TestCase):
 
     def test_headless_npc_cannot_receive_pending_navigation_or_hud(self):
         mutation = self.runtime.replace(
-            "        BoundNpc(Agent)?\n        BehaviorReady?\n        not BehaviorTerminated?\n        Command := Pending?",
-            "        BoundNpc(Agent)?\n        not BehaviorTerminated?\n        Command := Pending?", 1
+            "        BoundNpc(Agent)?\n        BehaviorReady?\n        not BehaviorTerminated?\n        IsBehaviorReady(Agent)?\n        Command := Pending?",
+            "        BoundNpc(Agent)?\n        not BehaviorTerminated?\n        IsBehaviorReady(Agent)?\n        Command := Pending?", 1
         )
         self.assertTrue(self.errors(runtime=mutation))
         mutation = self.device.replace(
             "if (not Runtime.IsReadyForCurrentNpc()?):", "if (false?):", 1
         )
         self.assertTrue(self.errors(device=mutation))
+
+
+    def test_behavior_heartbeat_is_required_on_all_command_paths(self):
+        self.assertIn("HasStaleBehaviorHeartbeat()", self.device)
+        for fragment in ("IsBehaviorReady(Npc)?", "IsBehaviorReady(Owned)?",
+                         "IsBehaviorReady(Agent)?"):
+            mutation = self.runtime.replace(fragment, "true?", 1)
+            self.assertNotEqual(mutation, self.runtime)
+            self.assertTrue(self.errors(runtime=mutation))
+        mutation = self.runtime.replace(
+            "set LastBehaviorPulseAt = GetSimulationElapsedTime()",
+            "set LastBehaviorPulseAt = -1.0", 1,
+        )
+        self.assertTrue(self.errors(runtime=mutation))
+        mutation = self.runtime.replace(
+            "Now - LastBehaviorPulseAt <= 4.0",
+            "Now - LastBehaviorPulseAt <= 400.0", 1,
+        )
+        self.assertTrue(self.errors(runtime=mutation))
+        mutation = self.device.replace(
+            "else if (Runtime.HasStaleBehaviorHeartbeat()?):",
+            "else if (false?):", 1,
+        )
+        self.assertTrue(self.errors(device=mutation))
+        c = copy.deepcopy(self.contract)
+        c["safety"]["behavior_heartbeat_fail_closed"] = False
+        self.assertTrue(self.errors(c=c))
+        c = copy.deepcopy(self.contract)
+        c["movement"]["behavior_heartbeat_timeout_seconds"] = 400
+        self.assertTrue(self.errors(c=c))
+
+
+class TitanBehaviorHeartbeatModel:
+    """Independent timing model; not native Verse or NPC execution."""
+
+    def __init__(self):
+        self.epoch = 0
+        self.npc = None
+        self.ready_flag = False
+        self.terminal = False
+        self.last_pulse = None
+
+    def begin(self, npc):
+        self.epoch += 1
+        self.npc = npc
+        self.ready_flag = False
+        self.terminal = False
+        self.last_pulse = None
+        return self.epoch
+
+    def pulse(self, npc, epoch, now):
+        if self.npc != npc or self.epoch != epoch or self.terminal:
+            return False
+        self.last_pulse = now
+        self.ready_flag = True
+        return True
+
+    def ready(self, npc, epoch, now):
+        return (self.npc == npc and self.epoch == epoch
+                and self.ready_flag and not self.terminal
+                and self.last_pulse is not None
+                and 0 <= now - self.last_pulse <= 4.0)
+
+    def monitor(self, now, *, command_registered):
+        if self.ready_flag and not self.terminal and not self.ready(
+                self.npc, self.epoch, now):
+            return "end_proxy"
+        if command_registered and not self.ready(self.npc, self.epoch, now):
+            return "end_proxy"
+        return "wait"
+
+    def withdraw(self, npc, epoch):
+        if self.npc != npc or self.epoch != epoch:
+            return False
+        self.ready_flag = False
+        self.terminal = True
+        self.last_pulse = None
+        return True
+
+
+class TitanBehaviorHeartbeatTests(unittest.TestCase):
+    def setUp(self):
+        self.p = TitanBehaviorHeartbeatModel()
+        self.epoch = self.p.begin("titan-A")
+
+    def test_missing_onend_expires_command_lease(self):
+        self.assertFalse(self.p.ready("titan-A", self.epoch, 0.0))
+        self.assertTrue(self.p.pulse("titan-A", self.epoch, 1.0))
+        self.assertTrue(self.p.ready("titan-A", self.epoch, 5.0))
+        self.assertFalse(self.p.ready("titan-A", self.epoch, 5.01))
+
+    def test_bounded_navigation_refresh_prevents_false_expiry(self):
+        self.assertTrue(self.p.pulse("titan-A", self.epoch, 0.2))
+        self.assertTrue(self.p.ready("titan-A", self.epoch, 2.35))
+        self.assertTrue(self.p.pulse("titan-A", self.epoch, 2.35))
+        self.assertTrue(self.p.ready("titan-A", self.epoch, 6.30))
+
+    def test_pre_hud_stale_heartbeat_is_reaped(self):
+        self.assertTrue(self.p.pulse("titan-A", self.epoch, 0.25))
+        self.assertEqual(self.p.monitor(4.50, command_registered=False),
+                         "end_proxy")
+        self.assertEqual(self.p.monitor(0.5, command_registered=False),
+                         "wait")
+
+    def test_stale_epoch_and_terminal_behavior_cannot_rearm(self):
+        self.assertTrue(self.p.pulse("titan-A", self.epoch, 0.25))
+        self.assertTrue(self.p.withdraw("titan-A", self.epoch))
+        self.assertFalse(self.p.pulse("titan-A", self.epoch, 1.0))
+        next_epoch = self.p.begin("titan-B")
+        self.assertFalse(self.p.pulse("titan-A", self.epoch, 1.1))
+        self.assertFalse(self.p.withdraw("titan-A", self.epoch))
+        self.assertTrue(self.p.pulse("titan-B", next_epoch, 1.2))
+        self.assertTrue(self.p.ready("titan-B", next_epoch, 1.3))
 
 
 class TitanProxyPolicyModelTests(unittest.TestCase):
