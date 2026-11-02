@@ -108,6 +108,42 @@ class TitanProxySourceTests(unittest.TestCase):
     def test_authored_contract(self):
         self.assertEqual(self.errors(), [])
 
+    def test_preexisting_npc_preflight_must_precede_spawn_lease(self):
+        summon = self.device.split("    OnSummon(Agent:agent):void=", 1)[1].split(
+            "    AwaitSpawn(ExpectedEpoch:int", 1
+        )[0]
+        self.assertLess(
+            summon.index("TitanSpawner.GetAgents().Length <> 0"),
+            summon.index("TitanSpawner.DespawnAll(false)"),
+        )
+        self.assertLess(
+            summon.index("TitanSpawner.DespawnAll(false)"),
+            summon.index("Attempt := Runtime.Begin("),
+        )
+
+    def test_preflight_after_begin_mutation_is_rejected(self):
+        preflight = (
+            "            if (TitanSpawner.GetAgents().Length <> 0):\n"
+            "                TitanSpawner.Disable()\n"
+            "                TitanSpawner.DespawnAll(false)\n"
+            "                Feedback.Show(Player, TitanProxyDenied, 3.0)\n"
+            "                return\n"
+        )
+        self.assertIn(preflight, self.device)
+        late_preflight = (
+            "                if (TitanSpawner.GetAgents().Length <> 0):\n"
+            "                    TitanSpawner.Disable()\n"
+            "                    TitanSpawner.DespawnAll(false)\n"
+            "                    Feedback.Show(Player, TitanProxyDenied, 3.0)\n"
+            "                    return\n"
+        )
+        device = self.device.replace(preflight, "", 1).replace(
+            "                set Epoch = StartedEpoch",
+            late_preflight + "                set Epoch = StartedEpoch",
+            1,
+        )
+        self.assertTrue(self.errors(device=device))
+
     def test_native_evidence_forgery_rejected(self):
         c = copy.deepcopy(self.contract)
         c["native_evidence"]["uefn_compile"] = "passed"
@@ -499,6 +535,18 @@ class TitanSpawnHandshakeTests(unittest.TestCase):
         self.p.npcs.append("ambient")
         self.assertTrue(self.p.unexpected_agents())
         self.assertFalse(self.p.can_command("titan"))
+
+    def test_preexisting_agent_rejected_without_stranding_spawn_lease(self):
+        # Preflight happens before Begin; no SpawnAt exists to complete a
+        # lease if the dedicated spawner was already populated.
+        self.p.npcs = ["ambient"]
+        self.assertIsNone(self.p.begin())
+        self.assertFalse(self.p.in_flight)
+        self.p.npcs = []  # dedicated spawner cleanup
+        epoch = self.p.begin()
+        self.assertIsNotNone(epoch)
+        self.p.npcs = ["titan"]
+        self.assertTrue(self.p.return_spawn(epoch, "titan"))
 
     def test_preowner_failure_still_cleans_dedicated_spawner(self):
         epoch = self.p.begin()

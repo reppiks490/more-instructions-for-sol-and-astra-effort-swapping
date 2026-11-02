@@ -281,6 +281,17 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         errors.append("terminal cleanup must remove command input eligibility")
     if device.find("ActivateCommandInputs(Player)", device.find("    OnSummon(")) < device.find("Attempt := Runtime.Begin("):
         errors.append("Titan command inputs registered before authoritative begin")
+    # Begin marks SpawnInFlight before any SpawnAt is actually called.
+    # Rejecting an already-populated dedicated spawner after Begin and
+    # calling End would leave SpawnInFlight permanently set (no async
+    # completion exists to clear it). Preflight must precede reservation.
+    summon = device[device.find("    OnSummon(Agent:agent):void="):
+                    device.find("    AwaitSpawn(ExpectedEpoch:int")]
+    preflight = summon.find("TitanSpawner.GetAgents().Length <> 0")
+    reserve = summon.find("Attempt := Runtime.Begin(")
+    cleanup = summon.find("TitanSpawner.DespawnAll(false)")
+    if min(preflight, reserve, cleanup) < 0 or not (preflight < cleanup < reserve):
+        errors.append("Titan preexisting-spawn cleanup must precede async lease reservation")
 
     if "weak_map(player," in combined:
         errors.append("second persistent profile map prohibited")
