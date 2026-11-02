@@ -40,7 +40,7 @@ aeonfall_sovereign_fusion_device := class(creative_device):
     @editable
     AttackEnergyCost:int = 10
     @editable
-    AttackCooldownSeconds:float = 1.5
+    AttackCooldownSeconds:float = 2.0
 
     StopEvent:event() = event(){}
     var Running:logic = false
@@ -59,7 +59,7 @@ aeonfall_sovereign_fusion_device := class(creative_device):
             SeparateInput <> AttackInput
             AttackEnergyCost >= 1
             AttackEnergyCost <= 25
-            AttackCooldownSeconds >= 0.2
+            AttackCooldownSeconds >= 2.0
             AttackCooldownSeconds <= 10.0
             DurationSeconds >= 15.0
             DurationSeconds <= 180.0
@@ -222,9 +222,14 @@ aeonfall_sovereign_fusion_device := class(creative_device):
             Now := GetSimulationElapsedTime()
             Now >= LastAttackAt + AttackCooldownSeconds
             Resource.Spend[Self, Player, Token, State, AttackEnergyCost]
+            # Receipt issuance must be in this same deciding transaction.
+            # If it fails, Verse rolls back the upstream energy debit and
+            # the physical trigger is not emitted.
+            Issued := State.IssueAttackReceipt(Self, Player, Token)
+            Issued?
         then:
-            # Charge and cooldown are server-side, bound to the canonical
-            # generation and owner. Physical output is editor-owned.
+            # Charge, one-shot receipt and cooldown are server-side.
+            # AttackOutput is a request, not a damage acknowledgement.
             set LastAttackAt = Now
             AttackOutput.Trigger(Player)
 
