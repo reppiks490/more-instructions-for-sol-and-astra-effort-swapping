@@ -6,6 +6,7 @@ import importlib.util
 import tempfile
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location(
@@ -388,6 +389,57 @@ class FullUniverseAuditTests(unittest.TestCase):
         self.assertFalse(report["source_complete"])
         self.assertEqual(len(report["catalog"]["entity_rows"]),
                          report["catalog"]["major_entities"])
+
+    def test_malformed_catalog_types_are_reported_without_losing_valid_ids(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            catalog = root / audit.CATALOG
+            catalog.mkdir(parents=True)
+            (catalog / "wave_001.json").write_text(
+                '[{"id":"WPN-001","family":[],"status":{}},'
+                '{"id":"WPN-002","family":"weapon","status":[]}]',
+                encoding="utf-8",
+            )
+            (catalog / "wave_002.json").write_text("42", encoding="utf-8")
+            entities, _, _, _, errors = audit.catalog_scan(root, self.policy)
+            self.assertEqual(set(entities), {"WPN-001", "WPN-002"})
+            self.assertTrue(any("malformed content family" in e for e in errors))
+            self.assertTrue(any("malformed catalog status" in e for e in errors))
+            self.assertTrue(any("malformed catalog payload" in e for e in errors))
+
+    def test_malformed_world_and_system_ids_keep_full_audit_available(self):
+        original_read = audit.read_json
+        world = copy.deepcopy(original_read(ROOT / audit.TOPOLOGY))
+        world["regions"][0]["id"] = ["REG-001"]
+        world["regions"][1]["neighbors"] = [{"forged": "REG-003"}]
+        world["regions"][2]["neighbors"] = "REG-004"
+        policy = copy.deepcopy(self.policy)
+        policy["required_systems"].append({"id": ["SYS-FORGED"]})
+
+        def tampered_read(path):
+            if path.name == "world_topology.json":
+                return world
+            return original_read(path)
+
+        with patch.object(audit, "read_json", side_effect=tampered_read):
+            report = audit.audit(ROOT, policy_override=policy,
+                                 inventory_override=copy.deepcopy(self.inventory))
+        errors = report["validation_errors"]
+        self.assertTrue(any("Malformed world region ID" in e for e in errors))
+        self.assertTrue(any("unknown neighboring region" in e for e in errors))
+        self.assertTrue(any("malformed neighbor list" in e for e in errors))
+        self.assertTrue(any("Malformed required system ID" in e for e in errors))
+        self.assertFalse(report["source_complete"])
+        self.assertEqual(len(report["catalog"]["entity_rows"]),
+                         report["catalog"]["major_entities"])
+
+    def test_zero_byte_artifacts_cannot_count_as_source_evidence(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "empty.fbx").write_bytes(b"")
+            (root / "actual.fbx").write_bytes(b"real source fixture")
+            self.assertFalse(audit.real_file(root, "empty.fbx"))
+            self.assertTrue(audit.real_file(root, "actual.fbx"))
 
     def test_report_does_not_claim_imported_uefn_project(self):
         document = audit.markdown(self.current)
