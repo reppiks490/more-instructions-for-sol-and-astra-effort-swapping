@@ -81,8 +81,8 @@ def check_prop(text: str) -> list[str]:
         errors.append("physical disposal must follow successful canonical release/map commit")
     if "Prop.Dispose()" in cleanup[:physical_map_swap]:
         errors.append("irreversible native disposal is inside rollback scope")
-    if "Prop.Dispose()" not in request[request.find("if (CommitSpawnTracking"):]:
-        errors.append("failed native admission must dispose its prop")
+    if 'Prop.Dispose()\n                set ResultCode = "spawn_tracking_or_status_failed"' not in request:
+        errors.append("failed native admission must dispose the prop on commit failure")
     return errors
 
 
@@ -96,6 +96,15 @@ class PropSpawnContextTransactionTests(unittest.TestCase):
         changed = self.text.replace(before, after, 1)
         self.assertTrue(check_prop(changed))
 
+    def mutation_last(self, before: str, after: str):
+        # The preview preflight repeats several guards; target their second
+        # occurrence inside CommitSpawnTracking, not PrepareSpawn.
+        commit_at = self.text.index("    CommitSpawnTracking(")
+        at = self.text.rfind(before)
+        self.assertGreater(at, commit_at)
+        changed = self.text[:at] + after + self.text[at + len(before):]
+        self.assertTrue(check_prop(changed))
+
     def test_committed_source(self):
         self.assertEqual(check_prop(self.text), [])
 
@@ -103,16 +112,16 @@ class PropSpawnContextTransactionTests(unittest.TestCase):
         self.mutation("        Consumed?\n", "        Print(\"context removal unchecked\")\n")
 
     def test_cannot_replay_missing_position_snapshot(self):
-        self.mutation(
+        self.mutation_last(
             "        Context := GetAEONFALLPositionTargetingRuntime().Get[Request.ContextId]",
             "        Context := aeonfall_position_target_context{}")
 
     def test_context_owner_must_match_request(self):
-        self.mutation("        Context.OwnerKey = Request.OwnerKey",
+        self.mutation_last("        Context.OwnerKey = Request.OwnerKey",
                       '        Context.OwnerKey <> ""')
 
     def test_context_ability_must_match_request(self):
-        self.mutation("        Context.AbilityId = Request.AbilityId",
+        self.mutation_last("        Context.AbilityId = Request.AbilityId",
                       '        Context.AbilityId <> ""')
 
     def test_spawn_context_consumed_before_status_commit(self):
