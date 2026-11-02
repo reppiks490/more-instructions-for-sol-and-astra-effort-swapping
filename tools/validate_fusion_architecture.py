@@ -265,12 +265,21 @@ def check_adapter_attack_handoff(
                     "secondary 5-energy debit and cooldown in a deciding transaction"
                 )
         on_rend = method(arsenal, "OnRend")
-        if on_rend:
-            approved = on_rend.find("Service.TryRend[")
-            damage = on_rend.find("Target.Damage(")
-            if approved < 0 or damage < approved:
+        if not on_rend:
+            errors.append("Arsenal device must provide its authorized OnRend callback")
+        else:
+            # A sequential string search alone falsely accepts a damage call
+            # placed OUTSIDE the successful TryRend conditional. This is a
+            # conservative indentation/source check, not Verse compilation.
+            accepted = re.search(
+                r"^([ \\t]*)if\\s*\\(\\s*Service\\.TryRend\\[", on_rend, re.M
+            )
+            damage = re.search(r"^([ \\t]*)Target\\.Damage\\(", on_rend, re.M)
+            if (accepted is None or damage is None
+                    or damage.start() <= accepted.start()
+                    or len(damage.group(1)) <= len(accepted.group(1))):
                 errors.append(
-                    "Arsenal must acknowledge TryRend before attempting native damage"
+                    "Arsenal native damage must be nested inside successful TryRend"
                 )
     return errors
 
