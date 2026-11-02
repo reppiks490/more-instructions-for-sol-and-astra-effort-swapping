@@ -222,6 +222,54 @@ class TitanProxySourceTests(unittest.TestCase):
         contract["lifecycle"]["unexpected_spawns"] = "ignore_auto_spawn"
         self.assertTrue(self.errors(c=contract))
 
+    def test_unauthorized_summon_input_registration_rejected(self):
+        device = self.device.replace(
+            "State.IsAuthorizedActive(AvatarController, Owner, AvatarController.Token)",
+            "true?"
+        )
+        self.assertTrue(self.errors(device=device))
+
+    def test_nonregistered_summoner_rejected(self):
+        device = self.device.replace("Registered = Player", "true?")
+        self.assertTrue(self.errors(device=device))
+
+    def test_unregistered_summon_input_rejected(self):
+        device = self.device.replace("SummonInput.Register(Current)", "Print(\"missing summon registration\")")
+        self.assertTrue(self.errors(device=device))
+
+    def test_missing_unregister_on_owner_change_rejected(self):
+        device = self.device.replace("SummonInput.Unregister(Previous)", "Print(\"not unregistered\")")
+        self.assertTrue(self.errors(device=device))
+
+    def test_commands_cannot_register_all_players(self):
+        device = self.device + "\n# unsafe code: AdvanceInput.RegisterAll()\n"
+        self.assertTrue(self.errors(device=device))
+
+    def test_missing_command_registration_rejected(self):
+        device = self.device.replace("AdvanceInput.Register(Owner)", "Print(\"no movement input\")")
+        self.assertTrue(self.errors(device=device))
+
+    def test_missing_command_unregister_rejected(self):
+        device = self.device.replace("DismissInput.Unregister(Registered)", "Print(\"leaked dismiss\")")
+        self.assertTrue(self.errors(device=device))
+
+    def test_missing_terminal_command_cleanup_rejected(self):
+        device = self.device.replace(
+            "    FinishProxy():void=\n        # Remove input eligibility even when native actor cleanup fails.\n        ClearCommandInputs()",
+            "    FinishProxy():void=\n        # cleanup omitted"
+        )
+        self.assertTrue(self.errors(device=device))
+
+    def test_editor_registered_requirement_must_be_explicit(self):
+        c = copy.deepcopy(self.contract)
+        c["native_binding"]["input_registered_behavior"] = "Ignore Registered"
+        self.assertTrue(self.errors(c=c))
+
+    def test_global_registration_contract_rejected(self):
+        c = copy.deepcopy(self.contract)
+        c["safety"]["no_global_input_registration"] = False
+        self.assertTrue(self.errors(c=c))
+
     def test_global_output_rejected(self):
         device = self.device.replace("AttackCueOutput.Trigger(Player)", "AttackCueOutput.Trigger()")
         self.assertTrue(self.errors(device=device))
@@ -459,6 +507,79 @@ class TitanSpawnHandshakeTests(unittest.TestCase):
         self.p.stop()
         self.assertEqual(self.p.npcs, [])
         self.assertFalse(self.p.can_command("ambient"))
+
+
+class OwnerInputRegistrationModel:
+    """Independent owner-specific input registration reference model.
+
+    Mimics who receives the action UI and which callbacks may be admitted;
+    it is NOT an engine Input Trigger test or a multiplayer session.
+    """
+
+    def __init__(self):
+        self.summoner = None
+        self.commands = None
+        self.proxy_active = False
+
+    def reconcile(self, candidate, authorized):
+        self.summoner = candidate if authorized else None
+
+    def summon(self, actor):
+        if self.proxy_active or actor is None or actor != self.summoner:
+            return False
+        self.proxy_active = True
+        self.commands = actor
+        return True
+
+    def command(self, actor):
+        return self.proxy_active and actor == self.commands and actor == self.summoner
+
+    def dismiss(self):
+        self.commands = None
+        self.proxy_active = False
+
+    def disconnect(self, actor):
+        if actor == self.commands:
+            self.dismiss()
+        if actor == self.summoner:
+            self.summoner = None
+
+
+class OwnerInputRegistrationModelTests(unittest.TestCase):
+    def setUp(self):
+        self.m = OwnerInputRegistrationModel()
+
+    def test_nonowner_never_receives_summon_or_command(self):
+        self.m.reconcile("creator", True)
+        self.assertFalse(self.m.summon("intruder"))
+        self.assertTrue(self.m.summon("creator"))
+        self.assertFalse(self.m.command("intruder"))
+        self.assertTrue(self.m.command("creator"))
+
+    def test_revoked_authority_retracts_actions(self):
+        self.m.reconcile("creator", True)
+        self.assertTrue(self.m.summon("creator"))
+        self.m.reconcile("creator", False)
+        self.assertFalse(self.m.command("creator"))
+        self.m.dismiss()
+        self.assertFalse(self.m.summon("creator"))
+
+    def test_disconnect_unregistered_and_cleans_commands(self):
+        self.m.reconcile("creator", True)
+        self.assertTrue(self.m.summon("creator"))
+        self.m.disconnect("creator")
+        self.assertIsNone(self.m.summoner)
+        self.assertIsNone(self.m.commands)
+        self.assertFalse(self.m.command("creator"))
+
+    def test_new_authorized_player_cannot_inherit_old_proxy(self):
+        self.m.reconcile("owner-A", True)
+        self.assertTrue(self.m.summon("owner-A"))
+        self.m.reconcile("owner-B", True)
+        self.assertFalse(self.m.command("owner-B"))
+        self.m.dismiss()
+        self.assertTrue(self.m.summon("owner-B"))
+        self.assertFalse(self.m.command("owner-A"))
 
 if __name__ == "__main__":
     unittest.main()
