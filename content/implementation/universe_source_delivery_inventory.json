@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "program": "AEONFALL Full Universe Source Deliveries",
+  "purpose": "Only register inspected source artifacts; empty entries are intentionally incomplete. Catalog specifications never count as delivery.",
+  "entity_packs": [],
+  "region_packs": [],
+  "system_packs": [],
+  "notes": [
+    "An approved entry records file-backed source coverage only, not native UEFN execution.",
+    "Every catalog ID, every region and every required system must have a reviewed file-backed source package before the creator's source-first gate is satisfied.",
+    "Never add synthetic placeholder entries, arbitrary samples or invented native test status."
+  ]
+}
