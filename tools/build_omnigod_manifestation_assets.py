@@ -94,10 +94,11 @@ def create_parts():
         m.xz_extrusion(((sign*-.89,.30),(sign*.16,.57),(sign*.92,.34),
                         (sign*1.12,-.32),(sign*.69,-.58),(sign*-.75,-.43)),
                        1.30,0,"outer_siege_shell")
-        m.xz_extrusion(((sign*-.21,.47),(sign*.10,.87),(sign*.40,1.30),
-                        (sign*.30,.63)),.28,5,"titan_spine_inner")
-        m.xz_extrusion(((sign*.46,.23),(sign*.74,.84),(sign*.93,1.50),
-                        (sign*.87,.38)),.25,0,"titan_spine_outer")
+        # Separate three-vertex wedge fins guarantee manifold convex solids.
+        m.xz_extrusion(((sign*-.21,.47),(sign*.30,.61),(sign*.40,1.30)),
+                       .28,5,"titan_spine_inner")
+        m.xz_extrusion(((sign*.46,.23),(sign*.87,.38),(sign*.93,1.50)),
+                       .25,0,"titan_spine_outer")
         m.box((0,-.83,.11),(1.19,.12,.13),2,"blood_edge")
         m.box((sign*.36,-.92,-.25),(.11,.05,.43),3,"violet_reactor_trace")
 
