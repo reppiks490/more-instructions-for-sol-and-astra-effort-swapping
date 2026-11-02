@@ -122,23 +122,26 @@ class TitanProxySourceTests(unittest.TestCase):
         )
 
     def test_preflight_after_begin_mutation_is_rejected(self):
-        device = self.device.replace(
-            "            Attempt := Runtime.Begin(",
-            "            if (TitanSpawner.GetAgents().Length <> 0):\n"
-            "                TitanSpawner.Disable()\n"
-            "                TitanSpawner.DespawnAll(false)\n"
-            "            Attempt := Runtime.Begin(",
-            1,
-        ).replace(
+        preflight = (
             "            if (TitanSpawner.GetAgents().Length <> 0):\n"
             "                TitanSpawner.Disable()\n"
             "                TitanSpawner.DespawnAll(false)\n"
             "                Feedback.Show(Player, TitanProxyDenied, 3.0)\n"
-            "                return\n",
-            "",
+            "                return\n"
+        )
+        self.assertIn(preflight, self.device)
+        late_preflight = (
+            "                if (TitanSpawner.GetAgents().Length <> 0):\n"
+            "                    TitanSpawner.Disable()\n"
+            "                    TitanSpawner.DespawnAll(false)\n"
+            "                    Feedback.Show(Player, TitanProxyDenied, 3.0)\n"
+            "                    return\n"
+        )
+        device = self.device.replace(preflight, "", 1).replace(
+            "                set Epoch = StartedEpoch",
+            late_preflight + "                set Epoch = StartedEpoch",
             1,
         )
-        # A preflight omitted entirely must also fail the static contract.
         self.assertTrue(self.errors(device=device))
 
     def test_native_evidence_forgery_rejected(self):
