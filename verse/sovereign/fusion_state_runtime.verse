@@ -151,10 +151,11 @@ aeonfall_fusion_state_runtime := class:
 
 var AEONFALLFusionStateSessions:weak_map(session, aeonfall_fusion_state_runtime) = map{}
 
-GetAEONFALLFusionState()<decides><transacts>:aeonfall_fusion_state_runtime=
-    if (Existing := AEONFALLFusionStateSessions[GetSession()]):
-        Existing
-    else:
-        Created := aeonfall_fusion_state_runtime{}
-        set AEONFALLFusionStateSessions[GetSession()] = Created
-        Created
+GetAEONFALLFusionState()<transacts>:aeonfall_fusion_state_runtime=
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLFusionStateSessions[CurrentSession]):
+        return Existing
+    Created := aeonfall_fusion_state_runtime{}
+    if (set AEONFALLFusionStateSessions[CurrentSession] = Created):
+        return Created
+    Err("AEONFALL could not retain fusion state in its Verse session")
