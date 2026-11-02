@@ -71,6 +71,11 @@ damage. Existing 54-point, three-target, two-pulse and 64-plan ceilings hold.
 - Malformed regions/epochs/actor keys are rejected without mutation. This
   bounded ledger stores at most one epoch per canonical region, with no
   unbounded region or retired-event history.
+- Incorporates independent QA's pre-routing revocation correction from
+  `qa/arsenal-revocation-before-hit-routing-20261101`: a well-formed
+  current-generation owner/lease loss revokes **all** paid events even if its
+  event, target, actor or callback clock cannot be routed. Stale generations
+  cannot revoke the current generation. Both source branches remain intact.
 
 **Required native integration order:** world-stream unload/despawn must first
 stop native collision callbacks, then retire matching paid events under the
