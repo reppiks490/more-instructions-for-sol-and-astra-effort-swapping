@@ -83,8 +83,8 @@ def check_contract(contract: dict, source: str) -> list[str]:
         "var Authority:?aeonfall_sovereign_authority_device = false",
         "var Owner:?player = false", "var Generation:int = 0",
         "AEONFALLFusionStateSessions:weak_map(session, aeonfall_fusion_state_runtime)",
-        "GetAEONFALLFusionState()<decides><transacts>",
-        "set AEONFALLFusionStateSessions[GetSession()] = Created",
+        "GetAEONFALLFusionState()<transacts>",
+        "set AEONFALLFusionStateSessions[CurrentSession] = Created",
     ):
         need(token in code, f"missing session/runtime contract: {token}")
 
