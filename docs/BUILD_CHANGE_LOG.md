@@ -1,5 +1,18 @@
 # Build change log
 
+## 2026-11-01 — Living World: hard terminal invasion NPC cleanup
+
+Verified that existing terminal completion/failure events already reach the
+canonical owned NPC adapter, so duplicate release events were unnecessary.
+Closed the remaining physical lifecycle gap: successfully owned terminal
+completion, failure/timeout and adapter shutdown now despawn their NPC bodies
+regardless of the optional intermediate wave-release configuration. Ownership,
+region, active requester and terminal-state guards are unchanged. Added
+source tests and UEFN two-player/streaming acceptance instructions. No new
+encounter directors, AI spawners or gameplay stat scaling were introduced.
+Native Verse compilation and physical NPC counts remain editor verification.
+
+
 ## 2026-11-01 — Runtime Forge: profile bootstrap lease and truthful NPC removal
 
 The persistence bootstrap now acquires exclusive session ownership before
