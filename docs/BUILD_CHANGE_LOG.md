@@ -15,6 +15,25 @@ existing UNI-001 entitlement or canonical progression was modified.
 Native UEFN compilation, editor binding, multiplayer execution, physical
 fusion effects and publication remain unverified.
 
+## 2026-11-01 — Living World: faction pressure and battle admission
+
+Faction-led REG-001 invasions now require canonical aggressor influence at
+admission: FAC-002 >=30, FAC-004 >=20 and FAC-007 >=15. Existing faction-war
+influence transfers (+20 winner, -10 loser) can therefore close or reopen
+future invasion windows without stat inflation. Ecology invasions keep their
+zero influence gate. Bounded authoring validation, generated bootstrap parity
+and source regressions cover the optional admission field.
+
+Invasions and faction conflicts now mutually refuse admission while the other
+encounter family has an active battle in that region. Two faction conflicts in
+the same region are likewise refused. Conflict admission now requires an
+initialized canonical region. No extra director, AI allocation, or persisted
+player state is introduced. Native Verse compilation, physical spawner
+exclusivity, multiplayer admission order and streaming-cell behavior require
+UEFN Launch Session verification.
+
+
+
 ## 2026-11-01 — QA: reject invalid world-event transitions
 
 The shared world-event runtime now rejects empty event/objective identities
