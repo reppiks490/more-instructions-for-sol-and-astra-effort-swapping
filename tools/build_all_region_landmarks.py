@@ -130,9 +130,15 @@ def _ornament(mesh,number,cx,base,scale):
         box(0,-.2,5.5,.32,.18,1.50,3,"eclipse_axis")
     elif number==3:
         for j,x in enumerate((-1.8,0,1.8)):
-            xz(((x-.40,.0),(x+.38,.0),(x+.09,2.8),
-                (x+.60,3.45),(x-.15,6.8),(x-.47,4.25)),
-               .58,1,f"forked_storm_rod_{j}")
+            # A lightning-fork silhouette assembled from three convex prisms.
+            # One concave six-point polygon would produce incorrect fan
+            # triangulation when exported; preserve strict GLB geometry proof.
+            xz(((x-.40,.0),(x+.38,.0),(x+.20,3.0),(x-.23,3.0)),
+               .58,1,f"storm_rod_base_{j}")
+            xz(((x-.23,2.85),(x+.62,3.48),(x-.15,4.68)),
+               .45,1,f"storm_rod_kink_{j}")
+            xz(((x-.15,4.25),(x+.32,4.15),(x-.12,6.8)),
+               .35,1,f"storm_rod_tip_{j}")
             box(x,-.42,3.1,.16,.13,2.4,3,f"storm_plasma_{j}")
         ring(0,6.8,.45,.72,.35,8,4,"tempest_crown")
     elif number==4:
