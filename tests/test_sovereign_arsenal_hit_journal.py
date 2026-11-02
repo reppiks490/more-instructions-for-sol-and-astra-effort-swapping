@@ -120,6 +120,14 @@ class HitJournalTests(unittest.TestCase):
                 self.assertFalse(self.j.stage(b))
         self.assertTrue(self.j.stage(p))
 
+    def test_monotonic_stage_prevents_replay_without_unbounded_seen_set(self):
+        self.assertTrue(self.j.stage(plan(sequence=2)))
+        self.assertTrue(self.j.close(1, 2))
+        self.assertFalse(self.j.stage(plan(sequence=1)))
+        self.assertFalse(self.j.stage(plan(sequence=2)))
+        self.assertTrue(self.j.stage(plan(sequence=3)))
+        self.assertFalse(hasattr(self.j, "_seen"))
+
     def test_active_event_limit_prevents_unbounded_ledger(self):
         for i in range(1, MAX_ACTIVE_PLANS + 1):
             self.assertTrue(self.j.stage(plan(sequence=i)))
