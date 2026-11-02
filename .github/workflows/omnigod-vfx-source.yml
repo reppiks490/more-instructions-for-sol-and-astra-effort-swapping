@@ -1,0 +1,42 @@
+name: AEONFALL Omnigod VFX Texture Source
+
+on:
+  push:
+    paths:
+      - "tools/build_omnigod_vfx_textures.py"
+      - "tools/validate_omnigod_vfx_textures.py"
+      - "tests/test_omnigod_vfx_textures.py"
+      - ".github/workflows/omnigod-vfx-source.yml"
+  pull_request:
+    paths:
+      - "tools/build_omnigod_vfx_textures.py"
+      - "tools/validate_omnigod_vfx_textures.py"
+      - "tests/test_omnigod_vfx_textures.py"
+      - ".github/workflows/omnigod-vfx-source.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  source-art:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@v4
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test deterministic source and negative mutations
+        run: python -m unittest discover -s tests -p "test_omnigod_vfx_textures.py" -v
+      - name: Build original PNG and WAV sources
+        run: python tools/build_omnigod_vfx_textures.py --output dist/omnigod_vfx_textures
+      - name: Validate exact source artifact and honest native status
+        run: python tools/validate_omnigod_vfx_textures.py --output dist/omnigod_vfx_textures
+      - name: Upload DCC/editor import sources (not native UEFN assets)
+        uses: actions/upload-artifact@v4
+        with:
+          name: AEONFALL-Omnigod-VFX-source-${{ github.sha }}
+          path: dist/omnigod_vfx_textures/
+          if-no-files-found: error
