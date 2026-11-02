@@ -364,6 +364,31 @@ class FullUniverseAuditTests(unittest.TestCase):
                 any("cloned visual_identity source payload" in x for x in errors)
             )
 
+    def test_malformed_registry_ids_and_region_scopes_fail_closed(self):
+        # JSON can contain lists/dicts where an ID or region string belongs.
+        # The auditor must report them, not throw TypeError before emitting
+        # the complete no-sample backlog report.
+        inventory = copy.deepcopy(self.inventory)
+        inventory["entity_packs"] = [
+            {"canonical_id": ["WPN-001"], "sources": {}},
+            {"canonical_id": "WPN-001", "regions": [{"spoofed": "REG-001"}],
+             "unique_visual_key": "fixture",
+             "sources": {}, "source_review": {"state": "approved_source",
+                                               "reviewer": "fixture",
+                                               "evidence": "fixture"}},
+        ]
+        inventory["region_packs"] = [
+            {"region_id": {"spoofed": "REG-001"}, "sources": {}}
+        ]
+        report = audit.audit(ROOT, inventory_override=inventory)
+        errors = report["validation_errors"]
+        self.assertTrue(any("malformed canonical_id" in e for e in errors))
+        self.assertTrue(any("malformed region_id" in e for e in errors))
+        self.assertTrue(any("unrecognized region scope" in e for e in errors))
+        self.assertFalse(report["source_complete"])
+        self.assertEqual(len(report["catalog"]["entity_rows"]),
+                         report["catalog"]["major_entities"])
+
     def test_report_does_not_claim_imported_uefn_project(self):
         document = audit.markdown(self.current)
         self.assertIn("Source complete", document)
