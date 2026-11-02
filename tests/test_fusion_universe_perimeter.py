@@ -36,6 +36,9 @@ class FusionUniversePerimeterTests(unittest.TestCase):
     def test_reject_alternate_authority(self):
         self.mutate_json("contract", lambda d: d["identity"].update(existing_authority="cosmetic"))
 
+    def test_reject_forged_native_compile(self):
+        self.mutate_json("contract", lambda d: d["evidence"].update(native_verse_compile="passed"))
+
     def test_reject_titan_activation(self):
         self.mutate_json("titan", lambda d: d.update(f002_activation="enabled"))
 
