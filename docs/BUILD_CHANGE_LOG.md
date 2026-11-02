@@ -53,6 +53,18 @@ remain unverified.
 
 # Build change log
 
+## 2026-11-01 — Runtime Forge: atomic position consumption and prop teardown
+
+The native prop spawn adapter now consumes a position snapshot inside the
+failable tracked-spawn transaction: a successful spawn cannot leave a
+replayable position context. The cleanup loop commits a complete survivor
+map and acknowledges logical release of expired handles before disposing
+physical props; failures leave tracked handles retryable instead of abandoning
+live props. Added source/mutation checks and editor-side two-player
+acceptance scenarios. No changes to costs, persistence or catalog IDs.
+UEFN Verse compilation, collision and Launch Session are unverified.
+
+
 ## 2026-11-01 — Runtime Forge: fail-closed placement and spawn handle maps
 
 Position targeting and canonical spawned-prop records now preflight full
