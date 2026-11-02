@@ -69,14 +69,17 @@ has an active FUS-001 Armor Fusion**. It is disabled by default.
 
 ## Important outstanding race / feasibility uncertainties
 
-Spawner events carry an agent, not a generation-bearing spawn-request
-identifier. The mailbox rejects duplicate/live unsolicited agents, invalid
-owners, stale commands and invalidates epoch before cleanup, but a delayed
-spawn event after a rapid stop-and-resummon cannot be fully distinguished
-from a new spawn using just `SpawnedEvent`. Native acceptance MUST test
-spawn latency and reuse and, if this race is observed, replace event-only
-binding with a generation-addressable `SpawnAt` return or a stricter native
-spawn barrier before enabling production.
+The harness now uses the documented asynchronous `SpawnAt(Position, false)`
+return value rather than associating an untagged `SpawnedEvent`. It permits
+**one in-flight SpawnAt request per session**, and binds the returned NPC only
+if the request epoch is still active and the exact FUS-001 owner/character/
+generation remains authorized. Stop invalidates the epoch *without resetting*
+the pending-spawn flag, so a new summon is rejected until the old SpawnAt
+returns. A late/failed return triggers a dedicated-spawner cleanup. Native
+acceptance must nevertheless verify SpawnAt timing and delayed callbacks,
+especially after respawn, shutdown and island reload. A permanently stalled
+SpawnAt intentionally fails closed rather than risking cross-generation NPC
+ownership.
 
 A timed `NavigateTo` may report partial or failed navigation, or get
 canceled. Source code proves no successful pathfinding or replicated
