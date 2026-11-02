@@ -48,6 +48,39 @@ separately acknowledged effect. The Python class is a behavioral oracle only.
    gameplay authorization. Region-specific audio/VFX streaming must honor
    mobile concurrency budgets and cleanup on unload.
 
+## Thirteen-region stream epoch and actor retirement source contract
+
+The offline gate now models world-stream unload and actor despawn without
+changing any native enablement, privilege or progression. Each `BoundActor`
+and `HitObservation` carries a positive, bounded `region_epoch` (initial
+reference epoch 1). A staged paid plan must use the current epoch for its
+single canonical region; every pulse must match both the bound instance key
+and epoch. An epoch mismatch closes the whole event with no further proposed
+damage. Existing 54-point, three-target, two-pulse and 64-plan ceilings hold.
+
+- `retire_region(REG-nnn)` synchronously closes every outstanding paid event
+  bound to that region, including partly settled multi-pulse attacks. It
+  quarantines the region from *new* staging. Repeat unload is idempotent.
+- `resume_region(REG-nnn, new_epoch)` requires a **strictly increasing**
+  positive server-issued epoch after retirement. It does not revive any old
+  event or refund spent resources. New actors must be rebound to that epoch.
+  A controller generation change does **not** clear a retired region.
+- `retire_actor(actor_key, region_id, region_epoch)` closes every active
+  event containing that exact server actor incarnation. It does not authorize
+  reuse of an actor key; native registry keys must remain incarnation-unique.
+- Malformed regions/epochs/actor keys are rejected without mutation. This
+  bounded ledger stores at most one epoch per canonical region, with no
+  unbounded region or retired-event history.
+
+**Required native integration order:** world-stream unload/despawn must first
+stop native collision callbacks, then retire matching paid events under the
+same server serialization boundary, and only then release actor bindings.
+Region reload must register fresh actors and publish a new authoritative
+epoch before staging. No client, cinematic event or editable device can
+supply or advance the epoch. A native effect acknowledgement and actual
+collision/LOS remain separate missing work; these Python methods cannot
+prove physical ordering, atomicity or Fortnite replication.
+
 ## Mandatory native handoff (not completed)
 
 Architect #37/#87 owns one-use atomic paid receipts and trusted owner lease.
