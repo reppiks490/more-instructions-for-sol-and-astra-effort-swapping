@@ -276,7 +276,8 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         if fragment not in teardown:
             errors.append("owner command input cleanup missing: " + fragment)
     finish_at = device.find("    FinishProxy():void=")
-    if finish_at < 0 or device.find("ClearCommandInputs()", finish_at) < finish_at:
+    terminal = device[finish_at:device.find("    OnEnd<override>():void=", finish_at)]
+    if finish_at < 0 or "ClearCommandInputs()" not in terminal:
         errors.append("terminal cleanup must remove command input eligibility")
     if device.find("ActivateCommandInputs(Player)", device.find("    OnSummon(")) < device.find("Attempt := Runtime.Begin("):
         errors.append("Titan command inputs registered before authoritative begin")
