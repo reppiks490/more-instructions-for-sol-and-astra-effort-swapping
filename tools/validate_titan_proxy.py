@@ -258,7 +258,7 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
     # Conditional cleanup based only on ProxyOwner leaks auto-spawned NPCs
     # rejected before the owner-facing session was initialized.
     finish = device[device.find("    FinishProxy():void="):device.find("    OnEnd<override>():void=")]
-    if "if (ProxyOwner?):" in finish:
+    if "if (ProxyOwner?" in finish:
         errors.append("Titan cleanup must also run before owner association")
     return errors
 
