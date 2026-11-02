@@ -35,6 +35,27 @@ has an active FUS-001 Armor Fusion**. It is disabled by default.
 
 ## Native spawn and behavior-readiness safety upgrade
 
+**2026-11-01 in-flight inventory reconciliation:** Epic documents
+`npc_spawner_device.SpawnAt` as suspending while the NPC loads. A native
+`GetAgents()` poll can therefore observe the eventual NPC **before** the
+`SpawnAt` call returns its agent. Previously the monitor unconditionally
+destroyed that legitimate single in-flight candidate as "unexpected," making
+otherwise valid summons nondeterministically fail under load.
+
+The monitor now tolerates **at most one untrusted candidate** only while the
+current session's exact epoch holds the outstanding `SpawnAt` lease. It does
+not mark the candidate owned or behavior-ready and it cannot navigate, emit
+attack cues, grant any entitlement, or receive gameplay commands. Two or more
+agents still trigger immediate teardown. When `SpawnAt` returns, the existing
+`CompleteSpawn` epoch/authority checks and `GetAgents` exact-identity match
+must succeed or the spawner is cleared. A failed/slow `SpawnAt` still hits
+the five-second timeout and is invalidated, with an outstanding lease kept
+until the actual asynchronous return. This trades a bounded observation
+window for correct asynchronous identity reconciliation; it is **not**
+evidence of native spawn success, race ordering, or possession. In Launch
+Session, explicitly instrument the relative timing of SpawnedEvent,
+GetAgents visibility, SpawnAt return and owner revocation.
+
 **2026-11-01 preflight correction:** A populated dedicated spawner must be
 rejected and cleared **before** the mailbox's `Begin` reserves its
 `SpawnInFlight` lease. The previous order reserved the lease, detected an
@@ -193,8 +214,12 @@ and two independent Fortnite clients' recorded Launch Sessions. Check:
 - Navigation each anchor, blocked navmesh, command rate limit, interrupted
   NavigateTo, NPC elimination, streaming and teleport distance.
 - Enable a deliberately misconfigured spawner that auto-spawns while
-  `SpawnAt` is in flight. Confirm any duplicate agent forces shutdown,
-  no unsolicited NPC survives, and the player never receives the
+  `SpawnAt` is in flight. Confirm two visible agents immediately force
+  shutdown. A single unbound candidate is only temporarily tolerated
+  during the exact in-flight epoch, cannot issue commands, and must match
+  the eventual `SpawnAt` return identity or force teardown. Record the
+  order of GetAgents visibility, async return, and monitor ticks; confirm
+  no unsolicited NPC survives and the player never receives the
   *behavior online* cue for an unacknowledged NPC.
 - Delay Character Definition startup; confirm movement and attack input
   are rejected before NPC-behavior acknowledgment, and verify cleanup

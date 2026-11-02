@@ -293,7 +293,12 @@ aeonfall_titan_proxy_device := class(creative_device):
                     return true
         else:
             if (AllAgents.Length > 0):
-                return true
+                # SpawnAt is suspending. A single visible NPC may be the
+                # still-loading result, but it is NOT owned, ready or
+                # commandable until the exact SpawnAt return is reconciled.
+                # Two agents are always an immediate failure (above).
+                if (not Runtime.SpawnPendingForCurrentEpoch()?):
+                    return true
         false
 
     OnAdvance(Agent:agent):void=
