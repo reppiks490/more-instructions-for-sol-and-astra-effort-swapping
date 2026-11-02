@@ -65,6 +65,43 @@ Reference: Epic's public NPC Spawner
 `Enable`, `GetAgents` and `SpawnAt` APIs:
 https://dev.epicgames.com/documentation/fortnite/verse-api/fortnitedotcom/devices/npc_spawner_device
 
+## Owner-only Input Trigger lifecycle (source, not native verified)
+
+Epic's `input_trigger_device.Register(Agent)` and
+`Unregister(Agent)` methods are supported, but the UEFN device setting
+**Registered Player Behavior** determines whether registration actually
+filters the HUD/input. This Titan harness now uses **individual** registration
+only after the existing FUS-001 Architect controller acknowledges a live
+native creator-owner/character/generation. It never uses RegisterAll,
+GetPlayers()[0], a display name or team as authority.
+
+**Required editor setup for all four dedicated Titan Input Triggers:**
+
+- `Registered Player Behavior = Require Registered`. If set to `Add
+  Registered` or `Ignore Registered`, registration does not provide the
+  intended owner-only input visibility. **Server Verse authorization remains
+  mandatory even when the HUD appears owner-only.**
+- `Enabled At Game Start = Off`. `SummonInput` becomes enabled only for
+  the current verified FUS-001 owner, reconciled every 0.25 seconds.
+  Movement, attack-cue and dismissal inputs remain disabled until successful
+  proxy admission and are registered only to that player.
+- Never share these four physical Input Trigger instances with Arsenal,
+  normal ability inputs, other islands, Titan spawners or Cinematics. Changing
+  their enablement/registration would otherwise disrupt another system.
+- On owner change, FUS-001 separation, revocation, device end, death,
+  disconnect or proxy dismissal, unregister the relevant owner and disable
+  command inputs. Do not use `UnregisterAll` to destroy another component's
+  registrations.
+
+Owner registration alone cannot prove that a press, native HUD display or
+multiplayer delivery occurs. Test with two live Fortnite clients and capture
+the device option screenshots; the input trigger's network response can be
+affected by client round-trip latency.
+
+Epic official references:
+https://dev.epicgames.com/documentation/fortnite/verse-api/fortnitedotcom/devices/input_trigger_device
+https://dev.epicgames.com/documentation/fortnite/using-input-trigger-devices-in-fortnite-creative
+
 ## Editor requirements (no physical proof yet)
 
 - Build and open an actual UEFN project created by the editor. Do not invent
@@ -135,6 +172,13 @@ and two independent Fortnite clients' recorded Launch Sessions. Check:
 
 - Creator-only summon, unrelated player attempt, spoofed Input Trigger and
   client reconnect; no entitlement on first join.
+- Confirm **Require Registered** on all four dedicated inputs. Owner sees the
+  summon action only during authorized FUS-001; nonowner sees no Titan
+  movement/cue/dismiss UI, even when both clients use the same team.
+- After successfully summoning, confirm only the owner gains move/cue/dismiss
+  inputs. On owner revocation, character replacement, disconnect and
+  teardown, verify native input unregister/disable on both clients.
+  Delayed input callbacks must still fail the server authorization gate.
 - Concurrent duplicate creative devices/spawners, duplicate NPC SpawnedEvent,
   missing Character Definition and delayed spawn after timeout/stop/restart.
 - Navigation each anchor, blocked navmesh, command rate limit, interrupted
