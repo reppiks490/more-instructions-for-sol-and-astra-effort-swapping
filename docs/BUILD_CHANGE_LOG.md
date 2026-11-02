@@ -1,3 +1,17 @@
+## 2026-11-01 — Avatar: Titan pending-spawn inventory reconciliation
+
+Epic's suspending NPC SpawnAt can expose its not-yet-returned agent through
+GetAgents. The Titan monitor previously classified that one legitimate
+in-flight candidate as an unsolicited NPC and destroyed it before identity
+reconciliation. The updated session mailbox exposes a current-epoch-only
+pending-spawn state: the monitor permits one **untrusted, non-commandable**
+candidate while the exact SpawnAt call is outstanding, but still rejects
+duplicates immediately and requires returned-agent identity, native behavior
+acknowledgment and canonical FUS-001 authority before movement/cues. Source
+mutation and adversarial scheduler-model tests cover wrong return identities,
+timeouts and cleanup. FUS-002 remains disabled. No native Verse compile,
+two-client Launch Session, camera-to-NPC or possession has been verified.
+
 ## 2026-11-01 — Living World: expanded in-editor evolved-horde assertions
 
 The existing development-only horde Verse harness now asserts living-brood
