@@ -74,6 +74,33 @@ jobs:
         run: python tools/build_omnigod_presentation_handoff.py --output dist/omnigod_cinematics
       - name: Independently revalidate handoff and caption integrity
         run: python tools/build_omnigod_presentation_handoff.py --output dist/omnigod_cinematics --validate-only
+      - name: Revalidate complete nine-file cinematic artifact inventory
+        run: |
+          python tools/validate_omnigod_cinematic.py --output dist/omnigod_cinematics
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path("dist/omnigod_cinematics")
+          present = {p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file()}
+          expected = {
+              "omnigod_mechanical_motion.glb",
+              "audio/eclipse_subpulse.wav",
+              "audio/iron_plate_lock.wav",
+              "audio/void_separation.wav",
+              "cue_sheet.json",
+              "captions/fusion_owner.vtt",
+              "captions/separation_owner.vtt",
+              "presentation_handoff.json",
+              "presentation_handoff_manifest.json",
+          }
+          assert present == expected, f"unexpected/missing assets: {sorted(present ^ expected)}"
+          handoff = json.loads((root / "presentation_handoff.json").read_text())
+          assert handoff["native_devices_bound"] is False
+          assert handoff["native_uefn_import"] == "not_run"
+          assert handoff["launch_session"] == "not_run"
+          assert len(handoff["bindings"]) == 3
+          print("PASS: nine exact authentic source files; native UEFN claims remain disabled")
+          PY
       - name: Upload original DCC preview sources (not native UEFN assets)
         uses: actions/upload-artifact@v4
         with:
