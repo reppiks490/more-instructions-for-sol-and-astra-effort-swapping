@@ -1,3 +1,13 @@
+## 2026-11-01 — Living World: horde physical teardown ownership
+
+The existing horde ecology adapter now cancels its spawn/death subscriptions
+and hard-despawns its leased NPC Spawner **before** it clears the region's
+session brood/biomass ledger and releases the lease. Previously only disabling
+respawns could leave live bodies orphaned after a streamed region closed.
+Rejected or invalid adapters continue to perform no physical teardown.
+Source regression tests and UEFN two-player unload/re-entry acceptance added.
+Native Verse compilation, real actor count and memory verification remain pending.
+
 ## 2026-11-01 — Living World: evolved horde substrate for Devouring Moon
 
 The Devouring Moon Precursor now requires >=600 consumed regional horde biomass

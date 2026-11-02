@@ -311,13 +311,18 @@ aeonfall_horde_ecology_adapter_device := class(creative_device):
     OnEnd<override>():void=
         if (not Running?):
             return
+        # Stop all producers before physical despawn. Retired NPCs must not
+        # register replacement broods or mint corpses during teardown.
         set Running = false
         StopEvent.Signal()
-        Spawner.Disable()
         for (Subscription : Subscriptions):
             Subscription.Cancel()
         for (Key -> Subscription : DeathSubscriptions):
             Subscription.Cancel()
+        # The lease is still owned by this running adapter; remove the actual
+        # NPC bodies before releasing it or deleting the canonical brood ledger.
+        Spawner.Disable()
+        Spawner.DespawnAll(false)
         for (Key -> Owned : OwnedActorKeys):
             Removed := GetAEONFALLActorRegistry().Unregister(Key)
         set OwnedActorKeys = map{}
