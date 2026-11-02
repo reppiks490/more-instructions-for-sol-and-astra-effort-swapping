@@ -9,7 +9,10 @@ is the Arsenal-specific implementation/change log for this increment.
 
 - `FWA-001 Blood-Iron Reaver`: short 350 cm forward-cone strike, 18 native
   damage to one selected, registered, vulnerable `MON-` NPC. The Avatar
-  AttackOutput spends 10 energy and issues a one-use receipt in the same\n  deciding transaction. Arsenal consumes that receipt before its separate\n  **5-energy** debit and 2 s cooldown; an owner-tagged trigger alone\n  cannot authorize native damage.
+  AttackOutput spends 10 energy and issues a one-use receipt in the same
+  deciding transaction. Arsenal consumes that receipt before its separate
+  **5-energy** debit and 2 s cooldown; an owner-tagged trigger alone
+  cannot authorize native damage.
   A validated strike marks its runtime target for 4 s.
 - `FWA-002 Violet Cataclysm`: 650 cm forward-cone cleave, **at most 3**
   registered vulnerable `MON-` NPCs, **10 damage each**, 20 energy and
