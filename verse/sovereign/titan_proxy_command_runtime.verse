@@ -185,6 +185,14 @@ aeonfall_titan_proxy_command_runtime := class:
             return true
         false
 
+    # An acknowledged behavior can end before the 0.25s owner monitor
+    # registers command inputs. Its terminal latch must be visible even
+    # when no command HUD was ever activated.
+    HasTerminatedBehavior()<transacts>:logic=
+        if (Active?, BehaviorTerminated?):
+            return true
+        false
+
     IsReadyForCurrentNpc()<transacts>:logic=
         if (Npc := OwnedNpc?, IsBehaviorReady(Npc)?):
             return true

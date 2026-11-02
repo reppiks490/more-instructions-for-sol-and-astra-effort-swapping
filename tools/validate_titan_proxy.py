@@ -36,6 +36,8 @@ RUNTIME_GUARDS = (
     "BoundEpochFor(Agent:agent)<decides><transacts>:int=",
     "WithdrawBehavior(Agent:agent, ExpectedEpoch:int)",
     "Epoch = ExpectedEpoch",
+    "HasTerminatedBehavior()<transacts>:logic=",
+    "if (Active?, BehaviorTerminated?):",
     "IsReadyForCurrentNpc()<transacts>:logic=",
     "NpcChar.IsActive[]\n            BehaviorReady?",
     "Monster.IsActive[]\n            BehaviorReady?",
@@ -246,7 +248,9 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
                 "camera_requires_npc_behavior_ack",
                 "command_input_requires_behavior_ack",
                 "behavior_onend_revokes_readiness",
-                "behavior_onend_terminal_for_epoch"):
+                "behavior_onend_terminal_for_epoch",
+                "behavior_end_cleanup_before_command_registration",
+                "orphan_spawner_monitor_cleanup"):
         if c.get("safety", {}).get(key) is not True:
             errors.append(f"safety gate disabled: {key}")
     lifecycle = c.get("lifecycle", {})
@@ -257,6 +261,7 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "input_registration": "summon_owner_only_commands_after_exact_behavior_ack",
         "behavior_ack": "npc_behavior_ack_required_before_commands",
         "behavior_end": "epoch_scoped_withdraw_and_terminal_command_cleanup",
+        "orphan_spawns": "purge_dedicated_spawner_without_owner",
         "unexpected_spawns": "fail_closed_despawn_dedicated_spawner",
         "spawn_association": "serialized_SpawnAt_return_and_epoch",
         "inflight_inventory": "allow_single_untrusted_candidate_until_exact_SpawnAt_return_or_timeout",
@@ -441,10 +446,26 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "Current = Agent", "set BehaviorTerminated = true",
         "set BehaviorReady = false", "set Pending = false"
     )) or "BehaviorReady?" not in movement or not all(x in monitor for x in (
+        "else if (Runtime.HasTerminatedBehavior()?):",
         "else if (CommandRegistered?):",
         "if (not Runtime.IsReadyForCurrentNpc()?):", "FinishProxy()"
     )):
         errors.append("NPC behavior OnEnd must revoke exact epoch readiness and command HUD")
+
+    # A terminal behavior must be reaped even if it ended between the
+    # handshake and command HUD registration. Orphaned agents from a
+    # dedicated spawner must also be cleared without an associated owner.
+    terminal_at = monitor.find("else if (Runtime.HasTerminatedBehavior()?):")
+    command_at = monitor.find("else if (CommandRegistered?):")
+    orphan_at = monitor.find("if (TitanSpawner.GetAgents().Length > 0):")
+    orphan_disable = monitor.find("TitanSpawner.Disable()", orphan_at)
+    orphan_despawn = monitor.find("TitanSpawner.DespawnAll(false)", orphan_at)
+    if not (0 <= terminal_at < command_at and
+            "FinishProxy()" in monitor[terminal_at:command_at]):
+        errors.append("terminal behavior must clean up before command registration")
+    if not (0 <= command_at < orphan_at < orphan_disable < orphan_despawn
+            and "else:\n                    # The spawner is dedicated" in monitor):
+        errors.append("unowned Titan spawner agents must be purged in ownerless monitor branch")
 
     # OnEnd must be a one-way transition within the same epoch. Otherwise
     # an OnBegin poll overlapping native shutdown could re-acknowledge the

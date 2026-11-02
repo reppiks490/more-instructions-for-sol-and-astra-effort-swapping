@@ -559,6 +559,44 @@ class TitanProxySourceTests(unittest.TestCase):
         c["safety"]["behavior_onend_terminal_for_epoch"] = False
         self.assertTrue(self.errors(c=c))
 
+    def test_terminal_behavior_without_command_hud_is_reaped(self):
+        monitor = self.device.split("    Monitor()<suspends>:void=", 1)[1].split(
+            "    FinishProxy():void=", 1
+        )[0]
+        self.assertLess(
+            monitor.index("Runtime.HasTerminatedBehavior()?"),
+            monitor.index("else if (CommandRegistered?):"),
+        )
+        mutation = self.device.replace(
+            "else if (Runtime.HasTerminatedBehavior()? ):",
+            "else if (false?):",
+        )
+        # The actual source uses no space before ')'; ensure mutation hits.
+        mutation = self.device.replace(
+            "else if (Runtime.HasTerminatedBehavior()?):",
+            "else if (false?):", 1,
+        )
+        self.assertNotEqual(mutation, self.device)
+        self.assertTrue(self.errors(device=mutation))
+        c = copy.deepcopy(self.contract)
+        c["safety"]["behavior_end_cleanup_before_command_registration"] = False
+        self.assertTrue(self.errors(c=c))
+
+    def test_unowned_dedicated_spawner_cleanup_is_required(self):
+        monitor = self.device.split("    Monitor()<suspends>:void=", 1)[1].split(
+            "    FinishProxy():void=", 1
+        )[0]
+        self.assertIn("if (TitanSpawner.GetAgents().Length > 0):", monitor)
+        mutation = self.device.replace(
+            "if (TitanSpawner.GetAgents().Length > 0):",
+            "if (false?):", 1,
+        )
+        self.assertNotEqual(mutation, self.device)
+        self.assertTrue(self.errors(device=mutation))
+        c = copy.deepcopy(self.contract)
+        c["safety"]["orphan_spawner_monitor_cleanup"] = False
+        self.assertTrue(self.errors(c=c))
+
     def test_headless_npc_cannot_receive_pending_navigation_or_hud(self):
         mutation = self.runtime.replace(
             "        BoundNpc(Agent)?\n        BehaviorReady?\n        not BehaviorTerminated?\n        Command := Pending?",
@@ -685,6 +723,17 @@ class TitanSpawnHandshakeModel:
         self.behavior_ready = False
         self.behavior_terminated = True
         return True
+
+    def monitor_action(self, *, owner_associated, command_registered=False):
+        # Independent model: no proxy owner means the dedicated spawner
+        # must not retain any NPC; terminal behavior is checked before HUD.
+        if not owner_associated:
+            return "purge_orphans" if self.npcs else "idle"
+        if self.active and self.behavior_terminated:
+            return "end_proxy"
+        if command_registered and not self.can_command(self.bound_npc):
+            return "end_proxy"
+        return "wait"
 
     def unexpected_agents(self):
         if len(self.npcs) > 1:
@@ -821,6 +870,27 @@ class TitanSpawnHandshakeTests(unittest.TestCase):
         self.assertEqual(self.p.npcs, ["titan"])
         self.assertFalse(self.p.can_command("titan"))
         self.assertFalse(self.p.end_behavior("wrong-agent", epoch))
+
+    def test_terminal_ack_race_reaps_before_command_registration(self):
+        epoch = self.p.begin()
+        self.p.npcs = ["titan"]
+        self.assertTrue(self.p.return_spawn(epoch, "titan"))
+        self.assertTrue(self.p.acknowledge("titan"))
+        self.assertTrue(self.p.end_behavior("titan", epoch))
+        self.assertEqual(
+            self.p.monitor_action(owner_associated=True, command_registered=False),
+            "end_proxy",
+        )
+        self.p.stop()
+        self.assertEqual(self.p.npcs, [])
+
+    def test_orphan_spawn_reaped_without_owner(self):
+        self.p.npcs = ["unexpected"]
+        self.assertEqual(
+            self.p.monitor_action(owner_associated=False), "purge_orphans"
+        )
+        self.p.npcs.clear()
+        self.assertEqual(self.p.monitor_action(owner_associated=False), "idle")
 
     def test_behavior_end_cannot_be_reacknowledged_in_same_epoch(self):
         epoch = self.p.begin()

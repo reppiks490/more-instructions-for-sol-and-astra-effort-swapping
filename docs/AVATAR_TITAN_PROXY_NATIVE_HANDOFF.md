@@ -321,3 +321,17 @@ in GitHub issue #37. No concurrent edits to PR #48 or PR #49 are required.
 
 **Evidence:** Verse compile `not_run`; NPC placement `not_run`; navigation
 `not_run`; multiplayer `not_run`; possession `unproven`.
+
+## 2026-11-01 ownerless-spawner and pre-HUD behavior shutdown hardening
+
+The dedicated Titan spawner now receives continuous ownerless inventory
+reconciliation: an NPC appearing while no creator proxy is associated is
+removed without waiting for another summon press. This never clears a shared
+world/boss spawner, which remains prohibited by the editor-binding contract.
+The command mailbox also exposes the current epoch's terminal behavior latch
+to the monitor, allowing it to tear down an acknowledged NPC whose behavior
+ended **before** movement/cue/dismiss inputs were registered. The existing
+five-second timeout remains the fallback for a behavior that never acknowledges.
+Source mutation tests and a scheduler reference model cover both cases.
+No native spawner timing, OnEnd callback guarantee, UEFN compilation,
+multiplayer, mobile or cooked-memory result is claimed.

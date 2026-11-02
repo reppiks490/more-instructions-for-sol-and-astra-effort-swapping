@@ -424,17 +424,28 @@ aeonfall_titan_proxy_device := class(creative_device):
             if (not Running?):
                 return
             RefreshSummonRegistration()
-            if (Owner := ProxyOwner?, Runtime := Service?):
-                if (not Runtime.IsAuthorized()? or UnexpectedSpawnCount(Runtime)?):
-                    # Fail closed on unsolicited spawn, disappearing NPC,
-                    # owner revocation or an invalid generation.
-                    FinishProxy()
-                else if (CommandRegistered?):
-                    # Behavior OnEnd can occur while the NPC remains alive.
-                    # Revoke its inputs and camera rather than spending cue
-                    # energy against a headless, non-navigating actor.
-                    if (not Runtime.IsReadyForCurrentNpc()?):
+            if (Runtime := Service?):
+                if (Owner := ProxyOwner?):
+                    if (not Runtime.IsAuthorized()? or UnexpectedSpawnCount(Runtime)?):
+                        # Fail closed on unsolicited spawn, disappearing NPC,
+                        # owner revocation or an invalid generation.
                         FinishProxy()
+                    else if (Runtime.HasTerminatedBehavior()?):
+                        # OnEnd may precede command HUD registration. Do not
+                        # retain a headless NPC for the full readiness timeout.
+                        FinishProxy()
+                    else if (CommandRegistered?):
+                        # Once command UI was granted, loss of readiness is
+                        # terminal even if the NPC remains physically alive.
+                        if (not Runtime.IsReadyForCurrentNpc()?):
+                            FinishProxy()
+                else:
+                    # The spawner is dedicated to this harness. Any NPC
+                    # without an associated owner is unsolicited; purge it
+                    # even when no summon callback is currently running.
+                    if (TitanSpawner.GetAgents().Length > 0):
+                        TitanSpawner.Disable()
+                        TitanSpawner.DespawnAll(false)
 
     FinishProxy():void=
         # Remove input eligibility even when native actor cleanup fails.
