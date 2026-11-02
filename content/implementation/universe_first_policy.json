@@ -1,0 +1,285 @@
+{
+  "schema_version": 1,
+  "program": "AEONFALL Complete Universe — Source First",
+  "strategy": "full_universe_source_before_playable_prototype",
+  "target_platform": "Fortnite Mobile",
+  "no_cutdown_scope": true,
+  "minimum_major_entities": 800,
+  "minimum_family_counts": {
+    "weapon": 180,
+    "armor": 120,
+    "monster": 170,
+    "wildlife": 60,
+    "npc": 60,
+    "boss": 80,
+    "relic": 45,
+    "vehicle": 25,
+    "class_skill": 30,
+    "event": 30
+  },
+  "required_catalog_fields": [
+    "id",
+    "name",
+    "family",
+    "tier",
+    "status",
+    "identity",
+    "mechanics",
+    "presentation",
+    "acquisition",
+    "performance"
+  ],
+  "required_identity_fields": [
+    "fantasy",
+    "silhouette",
+    "lore_hook"
+  ],
+  "required_mechanics_fields": [
+    "core",
+    "signature",
+    "counterplay"
+  ],
+  "required_presentation_fields": [
+    "vfx",
+    "animation",
+    "audio"
+  ],
+  "required_performance_fields": [
+    "concurrency_class",
+    "vfx_class",
+    "replication_class",
+    "streaming_locality"
+  ],
+  "required_world_regions": [
+    "REG-001",
+    "REG-002",
+    "REG-003",
+    "REG-004",
+    "REG-005",
+    "REG-006",
+    "REG-007",
+    "REG-008",
+    "REG-009",
+    "REG-010",
+    "REG-011",
+    "REG-012",
+    "REG-013"
+  ],
+  "region_source_categories": [
+    "terrain",
+    "landmarks",
+    "encounters",
+    "ecology",
+    "quests",
+    "navigation",
+    "streaming",
+    "vfx_audio",
+    "mobile_lod"
+  ],
+  "entity_source_categories": {
+    "weapon": [
+      "visual",
+      "mechanics",
+      "animation",
+      "vfx",
+      "audio",
+      "delivery",
+      "mobile_fallback"
+    ],
+    "armor": [
+      "visual",
+      "mechanics",
+      "animation",
+      "vfx",
+      "audio",
+      "delivery",
+      "mobile_fallback"
+    ],
+    "monster": [
+      "visual",
+      "behavior",
+      "animation",
+      "vfx",
+      "audio",
+      "drops",
+      "mobile_fallback"
+    ],
+    "wildlife": [
+      "visual",
+      "behavior",
+      "animation",
+      "vfx",
+      "audio",
+      "taming",
+      "mobile_fallback"
+    ],
+    "npc": [
+      "visual",
+      "behavior",
+      "animation",
+      "vfx",
+      "audio",
+      "interaction",
+      "mobile_fallback"
+    ],
+    "boss": [
+      "visual",
+      "behavior",
+      "phases",
+      "animation",
+      "vfx",
+      "audio",
+      "rewards",
+      "mobile_fallback"
+    ],
+    "relic": [
+      "visual",
+      "mechanics",
+      "animation",
+      "vfx",
+      "audio",
+      "delivery",
+      "mobile_fallback"
+    ],
+    "vehicle": [
+      "visual",
+      "handling",
+      "animation",
+      "vfx",
+      "audio",
+      "delivery",
+      "mobile_fallback"
+    ],
+    "class": [
+      "mechanics",
+      "animation",
+      "vfx",
+      "audio",
+      "progression",
+      "mobile_fallback"
+    ],
+    "skill": [
+      "mechanics",
+      "animation",
+      "vfx",
+      "audio",
+      "delivery",
+      "mobile_fallback"
+    ],
+    "event": [
+      "world_behavior",
+      "encounter",
+      "vfx",
+      "audio",
+      "rewards",
+      "mobile_fallback"
+    ],
+    "faction": [
+      "reputation",
+      "behavior",
+      "visual_identity",
+      "questline",
+      "world_impact",
+      "audio",
+      "mobile_fallback"
+    ]
+  },
+  "required_systems": [
+    {
+      "id": "SYS-SLICE-001-RUNTIME",
+      "scope": "runtime, player profiles, quests and combat"
+    },
+    {
+      "id": "SYS-GOD-FORM",
+      "scope": "God tier"
+    },
+    {
+      "id": "SYS-ABSOLUTE-FORM",
+      "scope": "Absolute tier"
+    },
+    {
+      "id": "SYS-TRANSCENDENT-ZERO",
+      "scope": "chosen-few ascension"
+    },
+    {
+      "id": "SYS-ASCENSION-TRIALS",
+      "scope": "ten difficult trials"
+    },
+    {
+      "id": "SYS-CHOOSING",
+      "scope": "chosen few entitlement"
+    },
+    {
+      "id": "SYS-HALL-ASCENDANTS",
+      "scope": "Hall of Ascendants"
+    },
+    {
+      "id": "SYS-WORLD-TOPOLOGY",
+      "scope": "streamed 13-region world"
+    },
+    {
+      "id": "SYS-OWNER-OMNIGOD-FUSION",
+      "scope": "owner-only Armor and experimental Titan fusion"
+    },
+    {
+      "id": "SYS-CRAFTING-AXIOM",
+      "scope": "full crafting and Axiom Heart"
+    },
+    {
+      "id": "SYS-FACTIONS-LIVING-WORLD",
+      "scope": "faction wars, NPC ecology, events"
+    },
+    {
+      "id": "SYS-ECONOMY-REWARDS",
+      "scope": "player economy, drops, merchants"
+    },
+    {
+      "id": "SYS-MOBILE-ACCESSIBILITY",
+      "scope": "touch controls, low-end VFX, readable telegraphs"
+    }
+  ],
+  "required_system_source_categories": [
+    "runtime",
+    "integration",
+    "verification",
+    "mobile_fallback"
+  ],
+  "required_ascension_trials": 10,
+  "required_fusion_modes": [
+    "FUS-001",
+    "FUS-002"
+  ],
+  "source_entry_requirements": {
+    "must_reference_existing_files": true,
+    "unique_visual_signature": true,
+    "explicit_region_scope": true,
+    "approved_source_review": true,
+    "engine_status_not_inferred": true
+  },
+  "engine_gate_requirements": [
+    "uefn_project_created",
+    "all_verse_compiled",
+    "assets_imported_and_bound",
+    "npc_character_definitions_validated",
+    "world_partition_streaming_validated",
+    "session_and_multiplayer_verified",
+    "mobile_controls_verified",
+    "mobile_runtime_profile_verified",
+    "memory_budget_verified",
+    "entitlement_verified",
+    "persistence_and_rejoin_verified",
+    "gameplay_accessibility_verified"
+  ],
+  "current_phase": "source_universe_construction",
+  "playable_prototype_priority": "deferred_by_creator_until_full_source_inventory",
+  "source_complete_does_not_imply_native_complete": true,
+  "source_evidence": "Source files and human review can establish source delivery, not execution in UEFN.",
+  "minimum_release_targets": {
+    "publishing_memory_mib": 300,
+    "require_real_cooked_memory_calculation": true,
+    "require_runtime_platform_profiling": true
+  },
+  "no_codex_in_automation": true,
+  "no_spend_without_approval": true,
+  "no_live_island_publication_without_approval": true
+}
