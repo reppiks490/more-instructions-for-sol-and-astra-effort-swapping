@@ -54,7 +54,8 @@ def check_source(source: str) -> list[str]:
         "AttackEnergyCost >= 1", "AttackEnergyCost <= 25",
         "AttackCooldownSeconds >= 0.2", "AttackCooldownSeconds <= 10.0"
     ):
-        if fragment not in settings:
+        numeric_end = r"(?![0-9.])" if fragment[-1:].isdigit() else ""
+        if not re.search(re.escape(fragment) + numeric_end, settings):
             errors.append("Invalid attack binding/limit: " + fragment)
     if "AttackInput.PressedEvent.Subscribe(Attack)" not in begin:
         errors.append("Missing attack subscription")
