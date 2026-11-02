@@ -117,6 +117,16 @@ class LiveTargetAdmissionTests(unittest.TestCase):
         other[path] = other[path].replace(before, after, 1)
         self.assertTrue(source_errors(other), before)
 
+    def mutate_last(self, path: str, before: str, after: str) -> None:
+        # The target runtime calls liveness on create and read/tick.
+        # Mutate the later call specifically instead of detecting a different
+        # guard failure in the earlier method.
+        at = self.sources[path].rfind(before)
+        self.assertGreaterEqual(at, 0)
+        other = dict(self.sources)
+        other[path] = other[path][:at] + after + other[path][at+len(before):]
+        self.assertTrue(source_errors(other), before)
+
     def test_authored_source(self):
         self.assertEqual(source_errors(self.sources), [])
 
@@ -132,7 +142,7 @@ class LiveTargetAdmissionTests(unittest.TestCase):
                     "            GetAEONFALLActorRegistry().IsRegistered[TargetKey]")
 
     def test_runtime_target_preflight(self):
-        self.mutate(TARGETING, "            GetAEONFALLActorRegistry().IsLiveCharacter[TargetKey]",
+        self.mutate_last(TARGETING, "            GetAEONFALLActorRegistry().IsLiveCharacter[TargetKey]",
                     "            GetAEONFALLActorRegistry().IsRegistered[TargetKey]")
 
     def test_read_must_revalidate_liveness(self):
@@ -140,7 +150,7 @@ class LiveTargetAdmissionTests(unittest.TestCase):
                     "        GetAEONFALLActorRegistry().IsRegistered[Selection.TargetKey]")
 
     def test_tick_expires_eliminated_npc(self):
-        self.mutate(TARGETING, "                GetAEONFALLActorRegistry().IsLiveCharacter[Selection.TargetKey]",
+        self.mutate_last(TARGETING, "                GetAEONFALLActorRegistry().IsLiveCharacter[Selection.TargetKey]",
                     "                GetAEONFALLActorRegistry().IsRegistered[Selection.TargetKey]")
 
     def test_target_input_rejects_eliminated_owner(self):
