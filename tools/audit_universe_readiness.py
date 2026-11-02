@@ -39,7 +39,8 @@ def real_file(root: Path, relative: str) -> bool:
     if path.is_absolute() or any(piece in ("..", "") for piece in path.parts):
         return False
     resolved = (root / path).resolve()
-    return resolved.is_relative_to(root.resolve()) and resolved.is_file()
+    return (resolved.is_relative_to(root.resolve()) and resolved.is_file()
+            and resolved.stat().st_size > 0)
 
 
 def complete_value(value) -> bool:
@@ -114,7 +115,7 @@ def inspect_package(root: Path, item: dict, key: str, valid_ids: set[str],
                     region_ids: set[str]):
     errors = []
     ident = item.get(key)
-    if ident not in valid_ids:
+    if not isinstance(ident, str) or ident not in valid_ids:
         errors.append(f"Unknown {key} {ident!r} in source registry")
         return False, errors
     categories = required.get(ident, [])
@@ -123,7 +124,7 @@ def inspect_package(root: Path, item: dict, key: str, valid_ids: set[str],
         return False, [f"{ident}: missing source-category map"]
     extra = set(sources) - set(categories)
     if extra:
-        errors.append(f"{ident}: unexpected source categories {sorted(extra)}")
+        errors.append(f"{ident}: unexpected source categories {sorted(map(repr, extra))}")
     complete = True
     all_paths = []
     for category in categories:
@@ -147,7 +148,7 @@ def inspect_package(root: Path, item: dict, key: str, valid_ids: set[str],
             complete = False
         else:
             for region in regions:
-                if region not in region_ids and region != "GLOBAL":
+                if not isinstance(region, str) or (region not in region_ids and region != "GLOBAL"):
                     errors.append(f"{ident}: unrecognized region scope {region!r}")
                     complete = False
     # Review is an explicit governance claim, NOT proof of native UEFN play.
@@ -195,15 +196,23 @@ def inspect_inventory(root: Path, policy: dict, inventory: dict,
             packages = []
         seen = set()
         ready = set()
+        visual_keys = {}
         for package in packages:
             if not isinstance(package, dict):
                 errors.append(f"{collection}: non-object source package")
                 continue
             ident = package.get(key)
+            if not isinstance(ident, str):
+                errors.append(f"{collection}: invalid {key} {ident!r}")
+                continue
             if ident in seen:
                 errors.append(f"{collection}: duplicate source package for {ident!r}")
                 continue
             seen.add(ident)
+            if require_region and ident in ids:
+                visual = package.get("unique_visual_key")
+                if isinstance(visual, str) and visual.strip():
+                    visual_keys.setdefault(visual.strip().casefold(), []).append(ident)
             # Entity region scopes are validated against the actual world,
             # not against content entity IDs.
             complete, problems = inspect_package(
@@ -211,10 +220,15 @@ def inspect_inventory(root: Path, policy: dict, inventory: dict,
             )
             errors.extend(problems)
             if complete:
-                if require_region and not complete_value(package.get("unique_visual_key")):
+                if require_region and not (isinstance(package.get("unique_visual_key"), str)
+                                           and package["unique_visual_key"].strip()):
                     errors.append(f"{ident}: missing distinguishing visual source identity")
                 else:
                     ready.add(ident)
+        for visual, claims in visual_keys.items():
+            if len(claims) > 1:
+                errors.append(f"{collection}: duplicate unique_visual_key {visual!r} for {sorted(claims)}")
+                ready.difference_update(claims)
         approvals[collection] = {"approved": len(ready), "total": len(ids),
                                  "pending": sorted(ids - ready), "approved_ids": sorted(ready)}
     # No global claim of a completed native island can originate here.
@@ -281,8 +295,8 @@ def audit(root: Path = ROOT, *, policy_override=None, inventory_override=None):
             for flag in NATIVE_FIELDS[1:])
         for ident in system_ids
     )
-    native_records = sum(bool(x.get("verse_compiled")) for x in evidence_entities.values())
-    native_system_records = sum(bool(x.get("verse_compiled")) for x in evidence_systems.values())
+    native_records = sum(x.get("verse_compiled") is True for x in evidence_entities.values())
+    native_system_records = sum(x.get("verse_compiled") is True for x in evidence_systems.values())
     fully_delivered = (not errors and all(group["approved"] == group["total"]
                                           for group in approved.values()))
     native_complete = (fully_delivered and verified_entities == len(entities)
