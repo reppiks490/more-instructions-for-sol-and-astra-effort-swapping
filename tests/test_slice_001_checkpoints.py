@@ -94,6 +94,32 @@ class CheckpointContractTests(unittest.TestCase):
         source = self.source.replace("Subscription.Cancel()", "Print(\"leak\")")
         self.assertTrue(self.errors(source=source))
 
+    def test_stale_restore_cannot_teleport_rejoined_player(self):
+        source = self.source.replace(
+            "if (not IsRestoreTokenCurrent(Player, Token)?):",
+            "if (false?):"
+        )
+        self.assertTrue(self.errors(source=source))
+
+    def test_disconnected_player_invalidates_pending_generation(self):
+        source = self.source.replace(
+            "for (Stored -> Epoch : RestoreTokens, Stored <> Player):",
+            "for (Stored -> Epoch : RestoreTokens):"
+        )
+        self.assertTrue(self.errors(source=source))
+
+    def test_old_restore_cannot_clear_new_pending_request(self):
+        source = self.source.replace(
+            "ClearPendingIfCurrent(Player, Token)\n                    return",
+            "if (set PendingPlayers[Player] = false) {}\n                    return",
+            1
+        )
+        self.assertTrue(self.errors(source=source))
+
+    def test_teardown_invalidates_restore_generations(self):
+        source = self.source.replace("set RestoreTokens = map{}", "Print(\"stale epochs\")")
+        self.assertTrue(self.errors(source=source))
+
 
 if __name__ == "__main__":
     unittest.main()

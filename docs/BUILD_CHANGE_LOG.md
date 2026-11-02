@@ -1,5 +1,15 @@
 # Build change log
 
+## 2026-11-01 — QA: checkpoint reconnect generation isolation
+
+Hardened the new SLICE-001 checkpoint device against suspended restore tasks
+outliving their player session. Per-request generation tokens are invalidated
+on disconnect and device teardown; only the current task can request a native
+teleport or clear pending restoration. Added source mutation tests for stale
+rejoin, cross-generation cleanup, disconnect invalidation and shutdown. This
+remains source-level evidence; multiplayer Fortnite Launch Session is required.
+
+
 ## 2026-11-01 — Playable Slice: persistent Ossuary checkpoint/respawn runtime
 
 Added a project-bindable four-checkpoint Verse device with distinct volume,

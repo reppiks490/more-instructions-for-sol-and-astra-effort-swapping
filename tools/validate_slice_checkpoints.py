@@ -30,6 +30,10 @@ REQUIRED_SOURCE = (
     "LatestContiguousCheckpoint(Profile)",
     "Destination.Teleport(Player)",
     "SeenCharacters[Player]",
+    "RestoreTokens:[player]int",
+    "IsRestoreTokenCurrent(Player, Token)?",
+    "ClearPendingIfCurrent(Player, Token)",
+    "set RestoreTokens = map{}",
     "Subscription.Cancel()",
     "OnEnd<override>()",
 )
@@ -118,6 +122,25 @@ def check_contract(manifest: dict, contract: dict, source: str) -> list[str]:
         "ProfileService.TrySaveProfile(Player, Candidate)"
     ):
         errors.append("checkpoint prerequisite must precede persistent commit")
+    if "    RestoreWhenReady(" not in source or "    LatestContiguousCheckpoint(" not in source:
+        errors.append("checkpoint restore task boundaries missing")
+    else:
+        restore = source.split("    RestoreWhenReady(", 1)[1].split(
+            "    LatestContiguousCheckpoint(", 1
+        )[0]
+        guard = restore.find("if (not IsRestoreTokenCurrent(Player, Token)?):")
+        teleport = restore.find("Destination.Teleport(Player)")
+        if guard < 0 or teleport < 0 or guard > teleport:
+            errors.append("stale restore task must be rejected before teleport")
+        if "set PendingPlayers[Player] = false" in restore:
+            errors.append("restore must not clear a newer task's pending flag")
+        if restore.count("ClearPendingIfCurrent(Player, Token)") < 3:
+            errors.append("all restore termination paths must clear their own pending flag")
+    if "    OnPlayerRemoved(" not in source or (
+        "for (Stored -> Epoch : RestoreTokens, Stored <> Player):"
+        not in source.split("    OnPlayerRemoved(", 1)[1]
+    ) or "set RestoreTokens = Tokens" not in source.split("    OnPlayerRemoved(", 1)[1]:
+        errors.append("disconnect must invalidate pending restore generations")
     return errors
 
 
