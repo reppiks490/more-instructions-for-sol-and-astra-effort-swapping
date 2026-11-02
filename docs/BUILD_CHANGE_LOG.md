@@ -33,6 +33,22 @@ remain unverified.
 
 # Build change log
 
+## 2026-11-01 — Omnigod: real five-way mechanical skeletal animation source
+
+Extended the weighted thirteen-joint machine-demon glTF with five actual
+keyed skeletal clips for Basic Locomotion source roles: idle, forward,
+backward, left, and right. Each has seventeen bounded in-place frames over
+1.6s, with distinct leg-direction displacement, counter-moving gauntlets,
+reactor/crown stabilization, nonflashing Axiom pulse and eclipse sway.
+The three existing Cinematics clips and source rig remain byte-semantic
+unchanged. Independent numeric/mutation tests and a dedicated free Actions
+source artifact validate weight/rig preservation, all five distinct bone
+animations, finite transforms, rest-loop closure and native-proof honesty.
+These remain source locomotion clips, NOT an imported UEFN Animation Preset
+or verified custom NPC. Blender FBX, native import/compile and two-client
+Launch Session are still unverified.
+
+
 ## 2026-11-01 — Omnigod: weighted mechanical armature handoff
 
 Generated a genuine glTF 2.0 skinned mesh from the original thirteen
