@@ -99,7 +99,11 @@ aeonfall_unlock_delivery_service := class():
         false
 
     TickDeferred()<transacts>:void=
+        # Retryable durable unlocks must never disappear because the remaining
+        # backlog could not be reconstructed. Successful Request admissions
+        # are deduplicated by HasPendingDelivery on the following tick.
         var Remaining:[string]aeonfall_unlock_delivery_state = map{}
+        var Valid:logic = true
         for (Key -> State : Deferred):
             var Started:logic = false
             if (Agent := GetAEONFALLActorRegistry().GetAgent[State.OwnerKey]):
@@ -107,8 +111,16 @@ aeonfall_unlock_delivery_service := class():
                 if (not Started?):
                     set Started = Request(Agent, State.EntityId, State.SourceId)
                 if (not Started?):
-                    if (set Remaining[Key] = State) {}
+                    if (set Remaining[Key] = State):
+                        set Valid = Valid
+                    else:
+                        set Valid = false
             # An unregistered owner is dropped without touching persistence.
+        if (not Valid?):
+            AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                EventType := "unlock.deferred_rebuild_failed"
+            })
+            return
         set Deferred = Remaining
 
     RequestEquipmentRestore(Player:player, EntityIds:[]string, SourceId:string)<transacts>:logic=
@@ -183,14 +195,23 @@ aeonfall_unlock_delivery_service := class():
             Existing := Pending[RequestId]
         then:
             var Updated:[string]aeonfall_unlock_delivery_state = map{}
+            var Valid:logic = true
 
             for (StoredId -> State : Pending):
                 if (StoredId <> RequestId):
-                    if:
-                        set Updated[StoredId] = State
-                    then:
-                        set Updated = Updated
+                    if (set Updated[StoredId] = State):
+                        set Valid = Valid
+                    else:
+                        set Valid = false
 
+            # Resolve must not report physical delivery success if another
+            # pending owner's record was lost during an incomplete rebuild.
+            if (not Valid?):
+                AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                    EventType := "unlock.pending_remove_failed",
+                    ContextId := RequestId
+                })
+                return false
             set Pending = Updated
             return true
 
@@ -198,18 +219,31 @@ aeonfall_unlock_delivery_service := class():
 
     ClearOwner(OwnerKey:string)<transacts>:void=
         var Updated:[string]aeonfall_unlock_delivery_state = map{}
+        var KeptDeferred:[string]aeonfall_unlock_delivery_state = map{}
+        var Valid:logic = true
 
         for (RequestId -> State : Pending):
             if (State.OwnerKey <> OwnerKey):
-                if:
-                    set Updated[RequestId] = State
-                then:
-                    set Updated = Updated
-
-        set Pending = Updated
-        var KeptDeferred:[string]aeonfall_unlock_delivery_state = map{}
+                if (set Updated[RequestId] = State):
+                    set Valid = Valid
+                else:
+                    set Valid = false
         for (Key -> State : Deferred):
-            if (State.OwnerKey <> OwnerKey, set KeptDeferred[Key] = State) {}
+            if (State.OwnerKey <> OwnerKey):
+                if (set KeptDeferred[Key] = State):
+                    set Valid = Valid
+                else:
+                    set Valid = false
+
+        # Preflight BOTH maps before changing either. A disconnect cannot
+        # erase another player's pending/queued physical equipment delivery.
+        if (not Valid?):
+            AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                EventType := "unlock.owner_clear_failed",
+                SourceId := OwnerKey
+            })
+            return
+        set Pending = Updated
         set Deferred = KeptDeferred
 
     TickAll(DeltaSeconds:float)<transacts>:void=
@@ -220,6 +254,7 @@ aeonfall_unlock_delivery_service := class():
         var Updated:[string]aeonfall_unlock_delivery_state = map{}
         var Retries:[]aeonfall_unlock_delivery_state = array{}
         var Expired:[]aeonfall_unlock_delivery_state = array{}
+        var Valid:logic = true
 
         for (RequestId -> State : Pending):
             Remaining:float = State.RemainingSeconds - DeltaSeconds
@@ -234,10 +269,10 @@ aeonfall_unlock_delivery_service := class():
                     AttemptsRemaining := State.AttemptsRemaining
                     PhysicalClaimed := State.PhysicalClaimed
 
-                if:
-                    set Updated[RequestId] = Next
-                then:
-                    set Updated = Updated
+                if (set Updated[RequestId] = Next):
+                    set Valid = Valid
+                else:
+                    set Valid = false
             else:
                 if (State.AttemptsRemaining > 0):
                     Retry := aeonfall_unlock_delivery_state:
@@ -249,13 +284,20 @@ aeonfall_unlock_delivery_service := class():
                         AttemptsRemaining := State.AttemptsRemaining - 1
                         PhysicalClaimed := State.PhysicalClaimed
 
-                    if:
-                        set Updated[RequestId] = Retry
-                    then:
+                    if (set Updated[RequestId] = Retry):
                         set Retries += array{Retry}
+                    else:
+                        set Valid = false
 
                 else:
                     set Expired += array{State}
+
+        # Retry callbacks and timeout reports must never see a partial map.
+        if (not Valid?):
+            AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                EventType := "unlock.pending_tick_rebuild_failed"
+            })
+            return
 
         # Commit retry state before callbacks can resolve it. Never overwrite
         # callback removals with a pre-dispatch snapshot of Pending.

@@ -42,6 +42,19 @@ remain unverified.
 
 # Build change log
 
+## 2026-11-01 — Runtime Forge: physical delivery fail-closed rebuilds
+
+Post-commit unlock delivery now guards replacement map allocation in pending
+request removal, full owner cleanup, deferred retry backlog and timeout/retry
+ticks. Failed insertions no longer silently truncate another player's physical
+delivery state or emit false success/expiry while dropping pending work.
+Failure diagnostics, source regression checks and multiplayer acceptance
+criteria were added. The single persistent profile root, material/unlock
+transaction ordering and existing item adapters remain unchanged. Native
+UEFN Verse compilation, item possession and Launch Session outcomes are
+unverified.
+
+
 ## 2026-11-01 — Runtime Forge: fail-closed multiplayer runtime map rebuilds
 
 Actor context `Clear` and encounter participant `RemoveRuntimeKey` now
