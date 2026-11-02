@@ -55,6 +55,26 @@ class FusionHandoffGuards(unittest.TestCase):
     def test_valid_paid_handoff(self):
         self.assertEqual(self.check(), [])
 
+    def test_split_device_and_runtime_contract(self):
+        device = (
+            "aeonfall_sovereign_arsenal_device := class:\n"
+            + "    OnRend(MaybeAgent:?agent):void=\n"
+            + "        if (Service.TryRend[Controller, Player, Controller.Token, State, Budget, Selection.TargetKey]):\n"
+            + "            Target.Damage(18.0)\n"
+        )
+        runtime = ARSENAL.split("    OnRend(", 1)[0]
+        self.assertEqual(guard.check_adapter_attack_handoff(AVATAR, device, runtime), [])
+
+    def test_missing_transaction_in_split_runtime_fails(self):
+        device = ("aeonfall_sovereign_arsenal_device := class:\n"
+                  "    OnRend(MaybeAgent:?agent):void=\n"
+                  "        if (Service.TryRend[Controller, Player, Controller.Token, State, Budget, Selection.TargetKey]):\n"
+                  "            Target.Damage(18.0)\n")
+        runtime = ARSENAL.split("    OnRend(", 1)[0].replace(
+            "State.ConsumeAttackReceipt[Device, Player, Token]", "true?"
+        )
+        self.assertTrue(guard.check_adapter_attack_handoff(AVATAR, device, runtime))
+
     def test_old_main_without_attack_bridge_remains_valid(self):
         self.assertEqual(self.check("    Fuse(Agent:agent):void=\n        return\n", None), [])
 
