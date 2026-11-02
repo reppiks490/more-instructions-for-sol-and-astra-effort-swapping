@@ -24,6 +24,11 @@ RUNTIME_GUARDS = (
     "State.IsAuthorizedActive(Controller, CurrentOwner, Generation)",
     "IsAuthorized()?",
     "not OwnedNpc?",
+    "not SpawnInFlight?",
+    "set SpawnEpoch = Epoch",
+    "SpawnEpoch <> ExpectedEpoch",
+    "set SpawnInFlight = false",
+    "CompleteSpawn(ExpectedEpoch:int, Spawned:?agent)",
     "not player[Agent]",
     "Agent.GetFortCharacter[]",
     "Controller.Running?",
@@ -65,7 +70,9 @@ DEVICE_GUARDS = (
     "AdvanceInput.PressedEvent.Subscribe(OnAdvance)",
     "AttackCueInput.PressedEvent.Subscribe(OnAttackCue)",
     "DismissInput.PressedEvent.Subscribe(OnDismiss)",
-    "TitanSpawner.SpawnedEvent.Subscribe(OnSpawned)",
+    "SpawnProxy(StartedEpoch)",
+    "TitanSpawner.SpawnAt(Position, false)",
+    "Runtime.CompleteSpawn(ExpectedEpoch, Spawned)?",
     "PlayerRemovedEvent().Subscribe(OnPlayerLeft)",
     "AvatarController.VisualOwner?",
     "AvatarController.VisualCharacter?",
@@ -111,6 +118,7 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "controller_class": "aeonfall_titan_proxy_device",
         "npc_spawner_type": "npc_spawner_device",
         "character_behavior": "aeonfall_titan_proxy_behavior",
+        "spawn_api": "npc_spawner_device.SpawnAt",
         "waypoints_type": "creative_prop",
         "waypoints_min": 1,
         "waypoints_max": 8,
@@ -162,13 +170,15 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         errors.append("camera/possession capability mismatch")
     for key in ("no_shared_npc_spawner", "no_second_owner_or_profile_root",
                 "attack_cue_must_not_wire_damage", "f002_not_activated",
-                "requires_native_compile", "requires_two_client_launch_session"):
+                "requires_native_compile", "requires_two_client_launch_session",
+                "no_untagged_spawned_event_association"):
         if c.get("safety", {}).get(key) is not True:
             errors.append(f"safety gate disabled: {key}")
     lifecycle = c.get("lifecycle", {})
     for field, value in {
         "lease": "one_session_controller",
         "late_spawn": "reject_and_despawn",
+        "spawn_association": "serialized_SpawnAt_return_and_epoch",
         "owner_exit": "invalidate_before_despawn",
         "generation_change": "invalidate",
         "character_replacement": "invalidate",
@@ -196,6 +206,8 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
                 errors.append(f"{label} missing guard: {fragment}")
     # Never append a player persistable root or open a second form grant.
     combined = runtime + behavior + device
+    if "SpawnedEvent.Subscribe" in device:
+        errors.append("unversioned native SpawnedEvent association is prohibited")
     if "weak_map(player," in combined:
         errors.append("second persistent profile map prohibited")
     if 'BeginActivation(' in combined or 'ConfirmActivated(' in combined:
