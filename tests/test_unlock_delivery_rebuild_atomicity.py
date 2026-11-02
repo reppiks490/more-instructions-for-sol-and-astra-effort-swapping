@@ -60,6 +60,13 @@ def source_errors(source: str) -> list[str]:
                   "set Retries += array{Retry}", "set Expired += array{State}"):
         if token not in tick:
             errors.append("retry/timeout tracking missing: " + token)
+    # Do not accept a failure flag from the unrelated active-request branch:
+    # both the retained Next map write and retry map write must fail closed.
+    if ("if (set Updated[RequestId] = Retry):\\n"
+        "                        set Retries += array{Retry}\\n"
+        "                    else:\\n"
+        "                        set Valid = false").replace("\\\\n", "\\n") not in tick:
+        errors.append("retry admission must mark a failed retry-map insert")
     if not (0 <= tick.find("if (not Valid?):") < tick.find("set Pending = Updated") <
             tick.find("for (Retry : Retries):") < tick.find("for (State : Expired):")):
         errors.append("delivery retries and expiry cannot dispatch before map commit")
