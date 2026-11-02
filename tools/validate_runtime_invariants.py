@@ -249,12 +249,77 @@ def check_runtime_clock(text: str) -> list[str]:
         errors.append("runtime clock must release only its own active lease on shutdown")
     return errors
 
+def check_world_event_state_machine(source: str) -> list[str]:
+    """Structural guards only: this does not run or compile Verse."""
+    errors: list[str] = []
+    segments = (
+        ("start", "    StartEvent(", "    GetState("),
+        ("objective", "    MarkObjectiveComplete(", "    AdvanceStage("),
+        ("advance", "    AdvanceStage(", "    CompleteEvent("),
+        ("complete", "    CompleteEvent(", "    FailEvent("),
+        ("fail", "    FailEvent(", None),
+    )
+    parts: dict[str, str] = {}
+    for name, begin, end in segments:
+        if begin not in source:
+            return [f"world event {name} method missing"]
+        section = source.split(begin, 1)[1]
+        if end is not None:
+            if end not in section:
+                return [f"world event {name} boundary missing"]
+            section = section.split(end, 1)[0]
+        parts[name] = section
+    if 'if (EventId = ""):' not in parts["start"]:
+        errors.append("world event start accepts blank canonical identity")
+    if 'if (EventId = "" or ObjectiveId = ""):' not in parts["objective"]:
+        errors.append("world event objective accepts blank identity")
+    advance = parts["advance"]
+    if "EventId <> \"\"" not in advance:
+        errors.append("world event advancement lacks nonempty event ID guard")
+    if "NextStageIndex = Old.CurrentStageIndex + 1" not in advance:
+        errors.append("world event must advance exactly one stage")
+    if "NextStageIndex > Old.CurrentStageIndex" in advance:
+        errors.append("world event permits phase skipping")
+    for name in ("advance", "complete", "fail"):
+        segment = parts[name]
+        if "Old.Active?" not in segment:
+            errors.append(f"world event {name} requires active state")
+        if "set States[EventId] = Updated" not in segment:
+            errors.append(f"world event {name} must commit updated state")
+    for name in ("complete", "fail"):
+        section = parts[name]
+        if "ActiveRegionIds := array{}" not in section or "Active := false" not in section:
+            errors.append(f"world event {name} must clear region residency and active state")
+        commit = section.find("set States[EventId] = Updated")
+        emit = section.find("AEONFALLRuntimeBus.Emit(")
+        if commit < 0 or emit < commit:
+            errors.append(f"world event {name} emits before state commit")
+    complete = parts["complete"]
+    if "AEONFALLEncounterRewardService.AwardRegistered(" not in complete:
+        errors.append("world event completion reward path missing")
+    elif complete.find("AEONFALLEncounterRewardService.AwardRegistered(") < complete.find(
+        "set States[EventId] = Updated"
+    ):
+        errors.append("world event grants reward before terminal commit")
+    if "GetAEONFALLEncounterParticipation().ClearEncounter(" not in parts["fail"]:
+        errors.append("world event failure participation cleanup missing")
+    return errors
+
+
 def main() -> int:
     errors: list[str] = []
     clock_path = ROOT / "verse/core/runtime_tick_device.verse"
     if clock_path.exists():
         errors.extend(check_runtime_clock(clock_path.read_text(encoding="utf-8")))
 
+
+    world_event_path = ROOT / "verse/events/world_event_runtime.verse"
+    if world_event_path.exists():
+        errors.extend(check_world_event_state_machine(
+            world_event_path.read_text(encoding="utf-8")
+        ))
+    else:
+        errors.append("missing world event runtime for state-machine audit")
 
     for rel, tokens in REQUIRED_TOKENS.items():
         path = ROOT / rel
