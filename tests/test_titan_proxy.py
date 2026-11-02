@@ -171,6 +171,57 @@ class TitanProxySourceTests(unittest.TestCase):
         )
         self.assertTrue(self.errors(device=device))
 
+    def test_owner_commands_require_native_behavior_ack(self):
+        runtime = self.runtime.replace(
+            "NpcChar.IsActive[]\n            BehaviorReady?",
+            "NpcChar.IsActive[]"
+        )
+        self.assertTrue(self.errors(runtime=runtime))
+        runtime = self.runtime.replace(
+            "Monster.IsActive[]\n            BehaviorReady?",
+            "Monster.IsActive[]"
+        )
+        self.assertTrue(self.errors(runtime=runtime))
+
+    def test_npc_behavior_must_emit_ack(self):
+        behavior = self.behavior.replace(
+            "Service.AcknowledgeBehavior(Agent)?",
+            "Service.BoundNpc(Agent)?"
+        )
+        self.assertTrue(self.errors(behavior=behavior))
+
+    def test_early_ready_feedback_rejected(self):
+        device = self.device.replace(
+            "Runtime.IsBehaviorReady(SpawnedAgent)?",
+            "true?"
+        )
+        self.assertTrue(self.errors(device=device))
+
+    def test_auto_spawn_detection_required(self):
+        device = self.device.replace("UnexpectedSpawnCount(Runtime)?", "false?")
+        self.assertTrue(self.errors(device=device))
+
+    def test_spawn_count_match_required(self):
+        device = self.device.replace("OnlyAgent = SpawnedAgent", "true?")
+        self.assertTrue(self.errors(device=device))
+
+    def test_no_preowner_cleanup_leak(self):
+        device = self.device.replace(
+            "if (Runtime := Service?, Runtime.Owns(Self)?):\n            Stopped := Runtime.End(Self)",
+            "if (ProxyOwner?, Runtime := Service?, Runtime.Owns(Self)?):\n            Stopped := Runtime.End(Self)"
+        )
+        self.assertTrue(self.errors(device=device))
+
+    def test_forged_behavior_ready_contract_rejected(self):
+        contract = copy.deepcopy(self.contract)
+        contract["movement"]["command_requires_behavior_ready"] = False
+        self.assertTrue(self.errors(c=contract))
+
+    def test_forged_spawn_inventory_contract_rejected(self):
+        contract = copy.deepcopy(self.contract)
+        contract["lifecycle"]["unexpected_spawns"] = "ignore_auto_spawn"
+        self.assertTrue(self.errors(c=contract))
+
     def test_global_output_rejected(self):
         device = self.device.replace("AttackCueOutput.Trigger(Player)", "AttackCueOutput.Trigger()")
         self.assertTrue(self.errors(device=device))
@@ -272,6 +323,142 @@ class TitanProxyPolicyModelTests(unittest.TestCase):
         self.assertFalse(self.p.stop("proxy-B"))
         self.assertTrue(self.p.active)
 
+
+
+class TitanSpawnHandshakeModel:
+    """Independent scheduler-adversarial model of the bounded spawn handshake."""
+
+    def __init__(self):
+        self.epoch = 0
+        self.active = False
+        self.in_flight = False
+        self.spawn_epoch = 0
+        self.bound_npc = None
+        self.behavior_ready = False
+        self.npcs = []
+
+    def begin(self):
+        if self.active or self.in_flight or self.npcs:
+            return None
+        self.epoch += 1
+        self.spawn_epoch = self.epoch
+        self.in_flight = True
+        self.active = True
+        self.bound_npc = None
+        self.behavior_ready = False
+        return self.epoch
+
+    def return_spawn(self, epoch, agent):
+        if not self.in_flight or self.spawn_epoch != epoch:
+            return False
+        self.in_flight = False
+        self.spawn_epoch = 0
+        if not self.active or self.epoch != epoch or agent is None:
+            return False
+        if len(self.npcs) != 1 or self.npcs[0] != agent:
+            return False
+        self.bound_npc = agent
+        return True
+
+    def acknowledge(self, agent):
+        if self.active and self.bound_npc == agent and agent in self.npcs:
+            self.behavior_ready = True
+            return True
+        return False
+
+    def can_command(self, agent):
+        return (
+            self.active and self.behavior_ready and self.bound_npc == agent
+            and len(self.npcs) == 1 and self.npcs[0] == agent
+        )
+
+    def unexpected_agents(self):
+        if len(self.npcs) > 1:
+            return True
+        if self.bound_npc is None:
+            return bool(self.npcs)
+        return self.npcs != [self.bound_npc]
+
+    def stop(self):
+        self.active = False
+        self.behavior_ready = False
+        self.bound_npc = None
+        self.npcs = []
+        self.epoch += 1
+        # Do NOT reset self.in_flight. The earlier SpawnAt must return.
+
+
+class TitanSpawnHandshakeTests(unittest.TestCase):
+    def setUp(self):
+        self.p = TitanSpawnHandshakeModel()
+
+    def test_spawnat_return_does_not_equal_navigation_ready(self):
+        epoch = self.p.begin()
+        self.p.npcs = ["titan"]
+        self.assertTrue(self.p.return_spawn(epoch, "titan"))
+        self.assertFalse(self.p.can_command("titan"))
+        self.assertTrue(self.p.acknowledge("titan"))
+        self.assertTrue(self.p.can_command("titan"))
+
+    def test_unsolicited_autospawn_fails_closed(self):
+        epoch = self.p.begin()
+        self.p.npcs = ["auto", "titan"]
+        self.assertTrue(self.p.unexpected_agents())
+        self.assertFalse(self.p.return_spawn(epoch, "titan"))
+        self.assertFalse(self.p.can_command("titan"))
+
+    def test_wrong_agent_return_fails_closed(self):
+        epoch = self.p.begin()
+        self.p.npcs = ["auto"]
+        self.assertFalse(self.p.return_spawn(epoch, "titan"))
+        self.assertFalse(self.p.acknowledge("auto"))
+
+    def test_late_return_never_authorizes_new_generation(self):
+        old = self.p.begin()
+        self.p.stop()
+        self.assertTrue(self.p.in_flight)
+        self.assertIsNone(self.p.begin())
+        self.assertFalse(self.p.return_spawn(old, "stale"))
+        latest = self.p.begin()
+        self.assertNotEqual(old, latest)
+        self.p.npcs = ["current"]
+        self.assertTrue(self.p.return_spawn(latest, "current"))
+        self.assertFalse(self.p.acknowledge("stale"))
+        self.assertTrue(self.p.acknowledge("current"))
+
+    def test_behavior_timeout_invalidates_all_commands(self):
+        epoch = self.p.begin()
+        self.p.npcs = ["titan"]
+        self.assertTrue(self.p.return_spawn(epoch, "titan"))
+        self.p.stop()
+        self.assertFalse(self.p.acknowledge("titan"))
+        self.assertFalse(self.p.can_command("titan"))
+
+    def test_dead_npc_is_not_a_command_target(self):
+        epoch = self.p.begin()
+        self.p.npcs = ["titan"]
+        self.assertTrue(self.p.return_spawn(epoch, "titan"))
+        self.assertTrue(self.p.acknowledge("titan"))
+        self.p.npcs = []
+        self.assertTrue(self.p.unexpected_agents())
+        self.assertFalse(self.p.can_command("titan"))
+
+    def test_extra_npc_after_ready_invalidates_inventory(self):
+        epoch = self.p.begin()
+        self.p.npcs = ["titan"]
+        self.assertTrue(self.p.return_spawn(epoch, "titan"))
+        self.assertTrue(self.p.acknowledge("titan"))
+        self.p.npcs.append("ambient")
+        self.assertTrue(self.p.unexpected_agents())
+        self.assertFalse(self.p.can_command("titan"))
+
+    def test_preowner_failure_still_cleans_dedicated_spawner(self):
+        epoch = self.p.begin()
+        self.p.npcs = ["ambient"]
+        self.assertTrue(self.p.unexpected_agents())
+        self.p.stop()
+        self.assertEqual(self.p.npcs, [])
+        self.assertFalse(self.p.can_command("ambient"))
 
 if __name__ == "__main__":
     unittest.main()

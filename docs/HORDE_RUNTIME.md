@@ -81,3 +81,65 @@ brood across its threshold, verify denied/allowed promotions, repeat after
 sanctifying a corpse, and test missing region initialization and region
 unload/re-entry. Verify that physical Crowned presentation and streaming
 population caps remain correct with separated multiplayer clients.
+
+## Devouring Moon: evolved horde substrate gate (2026-11-01)
+
+The canonical Devouring Moon Precursor (INV-R001-005) now requires three
+independent ecological conditions **at admission**: corruption >=80,
+regional consumed horde biomass >=600, and at least one living Tier IV or
+Tier V brood in REG-001. It retains its existing hostility, invasion/event
+exclusivity, wave budgets, and 20-AI authored maximum. The existing session
+horde service provides the cumulative feed ledger and the bounded brood scan;
+there is no new encounter director, spawned population, or persistent root.
+
+Necromancy still raises corruption by +5 from the same exclusive corpse token,
+but cannot substitute for actual horde feeding or a progressed Grave Architect.
+Burning, sanctifying, and harvesting remains deny the food supply, while
+burning/sanctifying can also lower corruption below 80. A post-admission
+cleansing or brood death does not retroactively stop an active invasion or
+improperly release its owned spawners. Horde region teardown clears biomass
+and brood; a reloaded region must rebuild the required substrate and cannot
+admit a stale Devouring Moon event from old session state.
+
+All non-Devouring invasions retain optional defaults of zero for both new
+authoring fields. The validator enforces integer bounds 0..6000 for consumed
+biomass and 0..5 for minimum brood tier, and the Verse registry rejects
+out-of-range definitions. These numbers gate *eligibility*, never NPC stats.
+
+**UEFN acceptance:** At corruption 80 and hostility 4, assert that 599 biomass
+and a Tier IV brood still refuse INV-R001-005; at 600 biomass with only Tier III
+also refuse; at 600 with Tier IV it becomes eligible, provided no other
+regional battle is active. Repeat with corruption 79, absent horde adapter,
+region unload/re-entry (ledger reset), two players in different streamed cells,
+and corpse denial competing with feed. Ensure admission refusal has no physical
+spawner, objective or event reservation effects. Then verify native Verse
+compilation, actual NPC caps and multiplayer state before enabling the event.
+
+## Owned horde NPC teardown before region ledger release (2026-11-01)
+
+The ecology adapter previously disabled its NPC Spawner and deleted the brood
+ledger on `OnEnd`, but **did not despawn the already-materialized NPC bodies**.
+Those characters could outlive the stream-region ecology that owned their
+biomass, tier and death callbacks, then overlap a replacement adapter's actors.
+The existing **single leased spawner** now unconditionally calls
+`Spawner.DespawnAll(false)` before clearing the canonical region and releasing
+its ownership lease. `Running` is set to false and native subscriptions are
+canceled **before** spawner shutdown, so despawn/elimination callbacks cannot
+mint orphan corpses or increase regional biomass after teardown.
+
+The adapter's existing `if (not Running?): return` path remains intact: a
+rejected duplicate or invalid binding does **not** disable or despawn another
+owner's physical NPCs. Other regions and other spawner devices are untouched.
+This is cleanup of existing NPC bodies only; no new director, cap, spawner,
+corruption mechanic, persistent profile, or gameplay stat scaling was added.
+
+**UEFN acceptance:** In a development island, run a horde ecology with active
+Tier I–IV members and stored corpses, end/unload the region, and verify that
+physical characters, actor-registration ownership, death subscriptions,
+corpses and regional biomass are removed. Confirm no `horde.corpse_created`
+or `horde.fed` fires from eliminated/despawned bodies after teardown. Then
+restart the adapter with its same physical NPC Spawner; observe no overlapping
+old actors. Run the same test with two players in separate streaming cells,
+plus a duplicate adapter rejected by the lease (must not affect the rightful
+owner). Capture native Verse compilation, actual actor counts and memory;
+source tests alone cannot establish these physical properties.

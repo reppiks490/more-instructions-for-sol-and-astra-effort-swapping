@@ -1,3 +1,25 @@
+## 2026-11-01 — Living World: horde physical teardown ownership
+
+The existing horde ecology adapter now cancels its spawn/death subscriptions
+and hard-despawns its leased NPC Spawner **before** it clears the region's
+session brood/biomass ledger and releases the lease. Previously only disabling
+respawns could leave live bodies orphaned after a streamed region closed.
+Rejected or invalid adapters continue to perform no physical teardown.
+Source regression tests and UEFN two-player unload/re-entry acceptance added.
+Native Verse compilation, real actor count and memory verification remain pending.
+
+## 2026-11-01 — Living World: evolved horde substrate for Devouring Moon
+
+The Devouring Moon Precursor now requires >=600 consumed regional horde biomass
+and an active Tier IV+ brood, as well as its existing corruption >=80 and
+hostility gate. These are bounded reads against the existing session ecology;
+necromancy-only corruption can no longer authorize a gravefeeding precursor.
+Canonical registry, authored JSON validation and generated Verse bootstrap
+are updated with zero-default optional fields. Added source/data regression
+coverage and UEFN acceptance guidance. No new director, NPC, spawner, profile
+persistence or combat stat multipliers. Native Verse and streaming verification
+remain pending.
+
 ## 2026-11-01 — Avatar FUS-001 attack request and Titan proxy feasibility
 
 Extended the disabled-by-default Armor Fusion controller with a third
@@ -26,6 +48,35 @@ handoff data only; no skeletal rig, Sequencer, Niagara, Verse compilation,
 native owner binding, two-client Launch Session or memory profile is claimed.
 No Codex review was requested; the branch is intentionally PR-free while
 automatic Codex review remains enabled.
+
+
+## 2026-11-01 — Omnigod: weighted mechanical armature handoff
+
+Generated a genuine glTF 2.0 skinned mesh from the original thirteen
+machine-demon parts, with 13 named joints, per-vertex JOINTS_0/WEIGHTS_0,
+inverse bind matrices, exact source-rest-position baking and all 3 cinematics
+animations retargeted to joints. Added numerical validation and deliberate
+negative mutations, a GitHub Actions source artifact, and a syntax-checked
+opt-in Blender FBX export helper. This is a rigid mechanical armature, not
+a humanoid locomotion rig, native UEFN import, NPC possession or proven
+Fortnite Launch Session. Existing owner authority, profiles and canonical
+progression remain unchanged.
+
+
+## 2026-11-01 — Runtime Forge: native input and volume subscription ownership
+
+Added owned and canceled subscriptions to the self, targeted and position
+ability-input devices. Empty ability IDs refuse startup; stopped callbacks
+cannot request an activation. Encounter context volumes now track their own
+one-per-agent admissions, reconcile already-inside agents and atomically
+balance EnterEncounter/ExitEncounter so duplicates cannot inflate context
+depth. Shutdown cancels native callbacks and releases only the volume's
+tracked context contributions. The participant-volume bridge also retains
+and cancels subscriptions and refuses blank encounter IDs, without erasing a
+director's participant list. New mutation checks and editor acceptance guidance
+cover stale callbacks, overlapping contexts and lifecycle teardown. This is
+source-level validation only: native Verse compilation and Fortnite Launch
+Session results remain unverified.
 
 
 ## 2026-11-01 — Fusion Reaver: transactional attack-receipt handoff

@@ -60,3 +60,29 @@ predicate rejects stale reverse indexes using a native test harness where
 possible. The map-preflight failure path is source guarded but must not be
 reported as native-tested without actual diagnostic evidence.
 
+
+
+## Native input and encounter-volume lifecycle acceptance
+
+First-playable ability inputs now retain `input_trigger_device.PressedEvent`
+subscriptions and cancel them on `OnEnd`. Place the self, targeted and
+position-input devices with nonempty canonical AbilityId bindings. In a private
+two-client Launch Session, trigger one request for each, stop the device, and
+verify that no further activation, resource spend or rejection event arises
+from the stopped device. Start a replacement and verify one activation per
+press. Source guards alone do not establish native callback behavior.
+
+For an `aeonfall_encounter_context_volume_device`, bind its native volume and
+nonempty canonical EncounterId, then spawn an already-inside player before
+device startup. Confirm that startup observes that player. Duplicate enter
+events must not increment encounter depth twice. Exit and device shutdown
+must release only this volume's admitted context depth, leaving overlapping
+encounter volumes unaffected. Denied map writes must not create phantom
+encounter privileges. The `aeonfall_encounter_participant_volume_device`
+also cancels its subscriptions on shutdown; do not use its stop event to
+erase another director's participant list. Actor unregister and encounter
+director termination remain responsible for global participant cleanup.
+
+These are explicit native acceptance tasks; Python source mutation tests do
+not assert a successful UEFN Verse compile, editor bindings or multiplayer
+execution.

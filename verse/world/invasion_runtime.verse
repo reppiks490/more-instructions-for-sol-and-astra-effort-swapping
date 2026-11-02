@@ -31,6 +31,22 @@ aeonfall_invasion_runtime := class():
             return true
         false
 
+    # The Devouring Moon requires real consumed biomass and an evolved brood,
+    # not corruption manufactured exclusively through necromancy. These are
+    # bounded queries against the existing session-only horde ledger.
+    HasRequiredHordeSubstrate(Definition:aeonfall_invasion_definition)<transacts>:logic=
+        if (Definition.MinRegionalHordeBiomass <= 0):
+            if (Definition.MinHordeTier <= 0):
+                return true
+        Horde := GetAEONFALLHordeRuntime()
+        if (Definition.MinRegionalHordeBiomass > 0):
+            if (Horde.GetRegionalBiomass(Definition.RegionId) < Definition.MinRegionalHordeBiomass):
+                return false
+        if (Definition.MinHordeTier > 0):
+            if (not Horde.HasBroodAtLeastTier(Definition.RegionId, Definition.MinHordeTier)?):
+                return false
+        true
+
     RequestWave(
         Definition:aeonfall_invasion_definition,
         WaveIndex:int
@@ -105,6 +121,7 @@ aeonfall_invasion_runtime := class():
             # A hostile event cannot substitute for the ecological substrate.
             RegionState.Corruption >= Definition.MinCorruption
             HasRequiredAggressorInfluence(Definition, RegionState)?
+            HasRequiredHordeSubstrate(Definition)?
             not ConflictRuntime.HasActiveInRegion(Definition.RegionId)?
             not HasActiveInRegion(Definition.RegionId)?
             not RegionState.ActiveEventIds.Find[InvasionId]

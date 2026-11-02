@@ -1,0 +1,74 @@
+name: AEONFALL Omnigod Rigid Skin Handoff
+
+on:
+  push:
+    paths:
+      - "tools/build_omnigod_rigid_skin.py"
+      - "tools/validate_omnigod_rigid_skin.py"
+      - "tools/blender_export_omnigod_fbx.py"
+      - "tests/test_omnigod_rigid_skin.py"
+      - "tools/build_omnigod_cinematic.py"
+      - "tools/build_omnigod_manifestation_assets.py"
+      - ".github/workflows/omnigod-rigid-skin.yml"
+  pull_request:
+    paths:
+      - "tools/build_omnigod_rigid_skin.py"
+      - "tools/validate_omnigod_rigid_skin.py"
+      - "tools/blender_export_omnigod_fbx.py"
+      - "tests/test_omnigod_rigid_skin.py"
+      - "tools/build_omnigod_cinematic.py"
+      - "tools/build_omnigod_manifestation_assets.py"
+      - ".github/workflows/omnigod-rigid-skin.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-rigid-skin:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check out exact reviewed commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Install free Python runtime
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Test original source geometry and real skin mutations
+        run: python -m unittest discover -s tests -p "test_omnigod_rigid_skin.py" -v
+
+      - name: Rebuild original Omnigod geometry
+        run: python tools/build_omnigod_manifestation_assets.py --output dist/omnigod_manifestation
+
+      - name: Validate exact 3D part topology
+        run: python tools/validate_omnigod_manifestation_assets.py --output dist/omnigod_manifestation
+
+      - name: Generate original three cinematic clips and WAV cues
+        run: python tools/build_omnigod_cinematic.py --source dist/omnigod_manifestation/omnigod_dormant_assembly.glb --output dist/omnigod_cinematics
+
+      - name: Validate original cinematic output
+        run: python tools/validate_omnigod_cinematic.py --output dist/omnigod_cinematics
+
+      - name: Build actual skinned rigid-plate glTF
+        run: python tools/build_omnigod_rigid_skin.py --source dist/omnigod_cinematics/omnigod_mechanical_motion.glb --output dist/omnigod_skeletal_handoff
+
+      - name: Validate inverse bind matrices, vertex weights and source equivalence
+        run: python tools/validate_omnigod_rigid_skin.py --source dist/omnigod_cinematics/omnigod_mechanical_motion.glb --output dist/omnigod_skeletal_handoff
+
+      - name: Source syntax check for opt-in Blender export script
+        run: python -m py_compile tools/blender_export_omnigod_fbx.py
+
+      - name: Upload checked rigid-skin DCC source (not a cooked UEFN asset)
+        uses: actions/upload-artifact@v4
+        with:
+          name: AEONFALL-Omnigod-Rigid-Skin-Source-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            dist/omnigod_skeletal_handoff/
+            tools/blender_export_omnigod_fbx.py
+          if-no-files-found: error
+          retention-days: 30

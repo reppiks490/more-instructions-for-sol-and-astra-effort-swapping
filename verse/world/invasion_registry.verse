@@ -15,6 +15,10 @@ aeonfall_invasion_registry := class():
             Definition.MinCorruption <= 100
             Definition.MinAggressorInfluence >= 0
             Definition.MinAggressorInfluence <= 100
+            Definition.MinRegionalHordeBiomass >= 0
+            Definition.MinRegionalHordeBiomass <= 6000
+            Definition.MinHordeTier >= 0
+            Definition.MinHordeTier <= 5
             GetAEONFALLRegionRegistry().IsRegistered[Definition.RegionId]
         then:
             if:
