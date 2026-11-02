@@ -41,6 +41,10 @@ aeonfall_sovereign_arsenal_runtime := class:
         TargetKey <> ""
         Now := GetSimulationElapsedTime()
         Now >= LastRendAt + 2.0
+        # Only Avatar may mint a paid receipt. A bare TriggeredEvent
+        # carrying the owner is not proof of the upstream energy debit.
+        # Both consumption and the secondary debit roll back together.
+        State.ConsumeAttackReceipt[Device, Player, Token]
         Budget.Spend[Device, Player, Token, State, 5]
         set LastRendAt = Now
         set MarkTargetKey = TargetKey

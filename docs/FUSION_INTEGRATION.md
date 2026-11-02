@@ -124,5 +124,22 @@ one-use receipt prevents a no-upstream-debit attack and duplicate reuse; it
 does not make a misconfigured editor graph trustworthy. Before enabling,
 verify exclusive device bindings, latency/replay under two players, shutdown,
 session replacement, and UEFN's actual callback ordering. The Architect API
-alone does not integrate the two draft adapters; `native_adapter_wiring`
-remains `pending` in the machine-readable contract. FUS-002 remains disabled.
+and the merged Avatar/Arsenal **source call sites** now share a paid
+receipt protocol with static mutation tests. However, `native_adapter_wiring`
+remains `pending`: no UEFN editor binding or multiplayer hit was demonstrated. FUS-002 remains disabled.
+
+## Conditional adapter compatibility gate
+
+`tools/validate_fusion_architecture.py` now inspects optional Avatar and
+Arsenal source files when present. If Avatar adds its `AttackOutput` field,
+CI requires the upstream energy debit, canonical receipt issuance and its
+success guard in the **same deciding admission**, ahead of native output.
+If Arsenal's Reaver adapter exists, CI requires transactional receipt
+consumption before its secondary energy spend/cooldown; native damage must
+remain downstream of `TryRend`. Mutation tests cover misplaced issuance,
+missing acknowledgement, replay-admission bypass, ordering and unauthorized
+damage. The base branch without the optional attack bridge remains valid.
+
+This guard checks source structure, not Verse runtime execution, physical
+trigger provenance or multiplayer damage. A successful source check must not
+change `native_adapter_wiring: pending` or any editor-evidence field.

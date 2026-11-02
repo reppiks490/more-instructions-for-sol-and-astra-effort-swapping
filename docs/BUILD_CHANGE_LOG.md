@@ -11,6 +11,18 @@ remain unverified.
 
 # Build change log
 
+## 2026-11-01 — Architect: paid Reaver receipt integrated into Avatar and Arsenal
+
+Rebuilt this implementation on current main after concurrent Avatar, Arsenal,
+Titan and Cinematics merges. Avatar now issues a one-use, generation-bound
+receipt in the same deciding transaction as its initial 10-energy spend;
+Arsenal consumes it before the secondary 5-energy spend, cooldown and damage.
+The Avatar minimum/default attack cooldown is 2 seconds, matching Reaver.
+Validation and negative regression tests enforce cross-loop call ordering.
+FUS-002 stays disabled; native Verse compilation, UEFN bindings, cover/LOS,
+and two-player damage replication remain unverified.
+
+
 ## 2026-11-01 — Cinematics: original glTF mechanical motion and PCM cue sources
 
 Added a deterministic DCC-preview animation pipeline for the 13-part original

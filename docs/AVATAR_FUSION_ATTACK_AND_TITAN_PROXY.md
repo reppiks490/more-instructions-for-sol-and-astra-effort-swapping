@@ -16,10 +16,10 @@ listens for an input press and, on the server Verse device, requires:
 - The Architect's `IsAuthorizedActive(Self, Player, Token)` accepts the exact
   owner, controller and generation; the finite budget's `Spend` accepts the
   cost, deadline and generation.
-- A 0.2–10 second configurable cooldown (default 1.5 seconds), with a 1–25
+- A 2–10 second configurable cooldown (default 2 seconds), with a 1–25
   point energy cost (default 10), and distinct fuse/separate/attack inputs.
 
-Only then does `AttackOutput.Trigger(Player)` send an **instigator-tagged
+An authoritative FUS-001 receipt is issued immediately after the upstream\n10-energy spend **in the same deciding transaction**. Receipt admission can\nfail, rolling back the energy debit and withholding the trigger. The\n2-second minimum attack cooldown aligns with Arsenal's Reaver cooldown.\nReceipt expiry and replay protection do not replace the native binding tests.\n\nOnly then does `AttackOutput.Trigger(Player)` send an **instigator-tagged
 request** to an editor-bound `trigger_device`. This does not apply damage by
 itself, select a target, certify a hit or prove replication of any downstream
 graph. The Arsenal loop must supply a bounded, target-validated native

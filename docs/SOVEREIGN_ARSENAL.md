@@ -9,9 +9,10 @@ is the Arsenal-specific implementation/change log for this increment.
 
 - `FWA-001 Blood-Iron Reaver`: short 350 cm forward-cone strike, 18 native
   damage to one selected, registered, vulnerable `MON-` NPC. The Avatar
-  AttackOutput in draft PR #48 spends 10 energy before emitting the trigger;
-  Arsenal independently spends **5 more** and enforces a 2 s cooldown to
-  prevent forged/duplicate trigger signals from dealing free damage.
+  AttackOutput spends 10 energy and issues a one-use receipt in the same
+  deciding transaction. Arsenal consumes that receipt before its separate
+  **5-energy** debit and 2 s cooldown; an owner-tagged trigger alone
+  cannot authorize native damage.
   A validated strike marks its runtime target for 4 s.
 - `FWA-002 Violet Cataclysm`: 650 cm forward-cone cleave, **at most 3**
   registered vulnerable `MON-` NPCs, **10 damage each**, 20 energy and
@@ -34,7 +35,7 @@ is the Arsenal-specific implementation/change log for this increment.
 Place one `aeonfall_sovereign_arsenal_device` with `Enabled=false`.
 Bind `Controller` to the exact existing FUS-001 Avatar controller. Bind
 `RendRequest` to **that controller's** `AttackOutput` trigger from
-draft PR #48; it must be a dedicated, instigator-preserving trigger with
+merged Avatar source; it must be a dedicated, instigator-preserving trigger with
 no external/ambient transmitters, delay or global damage graph. Bind
 `CollapseInput` and `BulwarkInput` to two distinct Creative Input
 Trigger devices, and `Feedback` to an owner-scoped HUD device. The
