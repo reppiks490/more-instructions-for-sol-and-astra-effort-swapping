@@ -68,7 +68,8 @@
     "device_shutdown": "cancel_subscriptions_and_despawn",
     "player_join": "no_implicit_entitlement",
     "replication": "native_npc_simulation_unverified",
-    "spawn_association": "serialized_SpawnAt_return_and_epoch"
+    "spawn_association": "serialized_SpawnAt_return_and_epoch",
+    "npc_elimination": "exact_agent_identity_then_teardown"
   },
   "safety": {
     "no_shared_npc_spawner": true,
