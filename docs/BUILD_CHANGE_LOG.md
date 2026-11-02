@@ -1,5 +1,18 @@
 # Build change log
 
+## 2026-11-01 — Runtime Forge: profile bootstrap lease and truthful NPC removal
+
+The persistence bootstrap now acquires exclusive session ownership before
+subscribing to player events or initializing profiles. Duplicate placed devices
+fail closed, callbacks stop before lease release, and the existing single
+persistent player root remains unchanged. NPC lifecycle OnEnd now emits
+`npc.removed` only following a successful runtime-key unregister; failed
+registration or failed teardown cannot masquerade as a successful removal.
+Source mutation coverage and native Launch Session acceptance steps are in
+[the lifecycle acceptance guide](FIRST_PLAYABLE_LIFECYCLE_ACCEPTANCE.md).
+Native Verse compilation and physical multiplayer execution are unverified.
+
+
 ## 2026-11-01 — Sovereign Armor Fusion adapter and bounded budget
 
 Added the creator-only FUS-001 physical presentation prototype atop the
