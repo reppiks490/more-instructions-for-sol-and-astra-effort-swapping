@@ -24,6 +24,12 @@ RUNTIME_GUARDS = (
     "State.IsAuthorizedActive(Controller, CurrentOwner, Generation)",
     "IsAuthorized()?",
     "not OwnedNpc?",
+    "BehaviorReady:logic = false",
+    "set BehaviorReady = false",
+    "AcknowledgeBehavior(Agent:agent)",
+    "IsBehaviorReady(Agent:agent)",
+    "NpcChar.IsActive[]\n            BehaviorReady?",
+    "Monster.IsActive[]\n            BehaviorReady?",
     "not SpawnInFlight?",
     "set SpawnEpoch = Epoch",
     "SpawnEpoch <> ExpectedEpoch",
@@ -52,7 +58,7 @@ BEHAVIOR_GUARDS = (
     "class(npc_behavior)",
     "GetAgent[]",
     "Character.GetNavigatable[]",
-    "Service.BoundNpc(Agent)?",
+    "Service.AcknowledgeBehavior(Agent)?",
     "Service.GetNewMove[Agent, SeenSequence]",
     "MakeNavigationTarget(Command.Destination)",
     "Navigation.NavigateTo(",
@@ -78,6 +84,13 @@ DEVICE_GUARDS = (
     "SpawnProxy(StartedEpoch)",
     "TitanSpawner.SpawnAt(Position, false)",
     "Runtime.CompleteSpawn(ExpectedEpoch, Spawned)?",
+    "TitanSpawner.GetAgents()",
+    "OnlyAgent = SpawnedAgent",
+    "AwaitBehaviorReady(ExpectedEpoch, SpawnedAgent)",
+    "Runtime.IsBehaviorReady(SpawnedAgent)?",
+    "Attempts >= 20",
+    "UnexpectedSpawnCount(Runtime)?",
+    "TitanProxyRequested",
     "PlayerRemovedEvent().Subscribe(OnPlayerLeft)",
     "AvatarController.VisualOwner?",
     "AvatarController.VisualCharacter?",
@@ -122,6 +135,7 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "npc_spawner_type": "npc_spawner_device",
         "character_behavior": "aeonfall_titan_proxy_behavior",
         "spawn_api": "npc_spawner_device.SpawnAt",
+        "spawner_reconciliation_api": "npc_spawner_device.GetAgents",
         "waypoints_type": "creative_prop",
         "waypoints_min": 1,
         "waypoints_max": 8,
@@ -155,6 +169,8 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "min_command_spacing_seconds": 0.5,
         "allow_partial_path": False,
         "behavior_bootstrap_checks": 40,
+        "behavior_ready_timeout_seconds": 5,
+        "command_requires_behavior_ready": True,
     }.items():
         if movement.get(name) != value:
             errors.append(f"movement bound drift: {name}")
@@ -182,6 +198,8 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "lease": "one_session_controller",
         "late_spawn": "reject_and_despawn",
         "npc_elimination": "exact_agent_identity_then_teardown",
+        "behavior_ack": "npc_behavior_ack_required_before_commands",
+        "unexpected_spawns": "fail_closed_despawn_dedicated_spawner",
         "spawn_association": "serialized_SpawnAt_return_and_epoch",
         "owner_exit": "invalidate_before_despawn",
         "generation_change": "invalidate",
@@ -229,6 +247,19 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         errors.append("attack cue cooldown cannot precede resource charge")
     if behavior.count("Navigation.NavigateTo(") != 1:
         errors.append("single NPC navigation authority required")
+    if device.find("Feedback.Show(Owner, TitanProxyReady, 3.0)") < device.find("Runtime.IsBehaviorReady(SpawnedAgent)?"):
+        errors.append("Titan ready feedback must follow behavior acknowledgement")
+    for required in (
+        "NpcChar.IsActive[]\n            BehaviorReady?",
+        "Monster.IsActive[]\n            BehaviorReady?",
+    ):
+        if required not in runtime:
+            errors.append("Titan commands require actual acknowledged behavior")
+    # Conditional cleanup based only on ProxyOwner leaks auto-spawned NPCs
+    # rejected before the owner-facing session was initialized.
+    finish = device[device.find("    FinishProxy():void="):device.find("    OnEnd<override>():void=")]
+    if "if (ProxyOwner?" in finish:
+        errors.append("Titan cleanup must also run before owner association")
     return errors
 
 
