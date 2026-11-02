@@ -24,6 +24,8 @@ jobs:
     steps:
       - name: Checkout exact source
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Python 3.12
         uses: actions/setup-python@v5
         with:
@@ -37,6 +39,6 @@ jobs:
       - name: Upload DCC/editor import sources (not native UEFN assets)
         uses: actions/upload-artifact@v4
         with:
-          name: AEONFALL-Omnigod-VFX-source-${{ github.sha }}
+          name: AEONFALL-Omnigod-VFX-source-${{ github.event.pull_request.head.sha || github.sha }}
           path: dist/omnigod_vfx_textures/
           if-no-files-found: error
