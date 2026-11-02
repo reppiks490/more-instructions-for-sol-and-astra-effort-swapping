@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "tools/build_omnigod_cinematic.py"
+      - "tools/validate_omnigod_cinematic.py"
       - "tests/test_omnigod_cinematic.py"
       - "tools/build_omnigod_manifestation_assets.py"
       - "tools/build_ossuary_starter_assets.py"
@@ -39,6 +40,8 @@ jobs:
         run: python tools/build_omnigod_manifestation_assets.py --output dist/omnigod_manifestation
       - name: Generate glTF animations and PCM source audio
         run: python tools/build_omnigod_cinematic.py --source dist/omnigod_manifestation/omnigod_dormant_assembly.glb --output dist/omnigod_cinematics
+      - name: Independently validate animated GLB, PCM, cue contracts and hashes
+        run: python tools/validate_omnigod_cinematic.py --output dist/omnigod_cinematics
       - name: Validate generated cue inventory and animated GLB
         run: |
           python - <<'PY'
