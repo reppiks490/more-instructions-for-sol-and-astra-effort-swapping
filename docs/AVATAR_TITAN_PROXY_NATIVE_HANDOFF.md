@@ -35,6 +35,15 @@ has an active FUS-001 Armor Fusion**. It is disabled by default.
 
 ## Native spawn and behavior-readiness safety upgrade
 
+**2026-11-01 preflight correction:** A populated dedicated spawner must be
+rejected and cleared **before** the mailbox's `Begin` reserves its
+`SpawnInFlight` lease. The previous order reserved the lease, detected an
+existing NPC, then called `End` without issuing `SpawnAt`. Because no
+asynchronous return could clear the lease, subsequent summons were blocked
+for the entire session. Source guards and a mutation regression now require
+inventory preflight and dedicated-spawner cleanup before reservation.
+This does not make the NPC natively validated.
+
 Epic's `npc_spawner_device.Enable()` states that characters **will start to
 spawn**. Therefore the old assumption that `Enable(); SpawnAt(...)`
 necessarily creates exactly one NPC was unsafe. The revised harness now
