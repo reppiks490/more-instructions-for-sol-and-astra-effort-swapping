@@ -161,6 +161,16 @@ class TitanProxySourceTests(unittest.TestCase):
         runtime = self.runtime.replace("not SpawnInFlight?", "true?")
         self.assertTrue(self.errors(runtime=runtime))
 
+    def test_npc_elimination_must_match_owned_agent(self):
+        device = self.device.replace("Runtime.IsOwnedNpc(Target)?", "true?")
+        self.assertTrue(self.errors(device=device))
+
+    def test_npc_elimination_subscription_required(self):
+        device = self.device.replace(
+            "TitanSpawner.EliminatedEvent.Subscribe(OnNpcEliminated),", ""
+        )
+        self.assertTrue(self.errors(device=device))
+
     def test_global_output_rejected(self):
         device = self.device.replace("AttackCueOutput.Trigger(Player)", "AttackCueOutput.Trigger()")
         self.assertTrue(self.errors(device=device))
