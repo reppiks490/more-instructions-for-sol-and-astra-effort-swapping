@@ -35,5 +35,9 @@
     "compile": "not_run",
     "launch_session": "not_run",
     "multiplayer": "not_run"
-  }
+  },
+  "form_id": "FUS-001",
+  "canonical_state_runtime": "verse/sovereign/fusion_state_runtime.verse",
+  "resource_runtime": "verse/sovereign/sovereign_fusion_runtime.verse",
+  "depends_on_pr": 42
 }
