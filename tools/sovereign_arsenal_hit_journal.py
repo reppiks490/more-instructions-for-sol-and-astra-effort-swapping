@@ -66,7 +66,7 @@ class SourceHitJournal:
 
     def __init__(self) -> None:
         self._active: dict[tuple[int, int], _ActivePlan] = {}
-        self._seen: set[tuple[int, int]] = set()
+        self._last_staged_sequence = 0
         self._generation = 1
 
     @property
@@ -117,10 +117,11 @@ class SourceHitJournal:
         if not self._valid(plan) or plan.generation != self._generation:
             return False
         key = (plan.generation, plan.event_sequence)
-        if key in self._seen or len(self._active) >= MAX_ACTIVE_PLANS:
+        if (plan.event_sequence <= self._last_staged_sequence
+                or len(self._active) >= MAX_ACTIVE_PLANS):
             return False
         self._active[key] = _ActivePlan(plan)
-        self._seen.add(key)
+        self._last_staged_sequence = plan.event_sequence
         return True
 
     def resolve(self, generation: int, event_sequence: int, target_id: str,
@@ -174,7 +175,7 @@ class SourceHitJournal:
         if type(new_generation) is not int or new_generation <= self._generation:
             raise ValueError("generation must increase")
         self._active.clear()
-        self._seen.clear()
+        self._last_staged_sequence = 0
         self._generation = new_generation
 
 
