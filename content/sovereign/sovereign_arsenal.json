@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "feature": "one_true_omnigod_sovereign_arsenal",
+  "form_id": "FUS-001",
+  "parent_ability_id": "UNI-001",
+  "enabled_by_default": false,
+  "owner_limit": 1,
+  "ordinary_unlockable": false,
+  "persistent_grant": false,
+  "authority": "aeonfall_fusion_state_runtime.IsAuthorizedActive",
+  "budget": "aeonfall_sovereign_fusion_budget_runtime.Spend",
+  "adapter": "verse/sovereign/sovereign_arsenal_device.verse",
+  "runtime": "verse/sovereign/sovereign_arsenal_runtime.verse",
+  "armor": {
+    "id": "ARM-FUS-001",
+    "name": "Crimson-Violet Dreadframe",
+    "effect": "owner-only fusion presentation; no native invulnerability",
+    "shield_restoration_per_cast": 20,
+    "shield_restoration_per_generation": 40,
+    "shield_cap": "native GetMaxShield",
+    "immunity_exceptions": [
+      "No invulnerability",
+      "No boss mechanic immunity",
+      "No status immunity",
+      "No permission changes"
+    ]
+  },
+  "weapons": [
+    {
+      "id": "FWA-001",
+      "name": "Blood-Iron Reaver",
+      "ability": "SFA-001",
+      "native_effect": "registered MON- target single hit",
+      "range_cm": 350,
+      "view_cosine": 0.7,
+      "damage": 18,
+      "energy_cost": 5,
+      "upstream_avatar_energy_cost": 10,
+      "cooldown_seconds": 2,
+      "mark_seconds": 4
+    },
+    {
+      "id": "FWA-002",
+      "name": "Violet Cataclysm",
+      "ability": "SFA-002",
+      "native_effect": "nearest three eligible MON- targets in forward cone",
+      "range_cm": 650,
+      "view_cosine": 0.85,
+      "base_damage_each": 10,
+      "max_targets": 3,
+      "sepulchral_mark_bonus_each": 4,
+      "energy_cost": 20,
+      "cooldown_seconds": 8
+    },
+    {
+      "id": "FWA-003",
+      "name": "Dreadframe Aegis",
+      "ability": "SFA-003",
+      "native_effect": "self shield restore, capped by native max and per-generation allowance",
+      "energy_cost": 15,
+      "cooldown_seconds": 18,
+      "shield_restore": 20
+    }
+  ],
+  "synergy": {
+    "class_id": "CLS-006",
+    "class_name": "Sepulchral Sovereign",
+    "rule": "FWA-001 marks its target for four seconds; only while CLS-006 is actively equipped, FWA-002 deals +4 to that marked target; no class switching, unlock, or profile writes."
+  },
+  "targeting": {
+    "only_registered_canonical_prefix": "MON-",
+    "players": false,
+    "bosses": false,
+    "companions": false,
+    "sovereign_army": false,
+    "requires_active_vulnerable_character": true,
+    "view_cone_and_range": true,
+    "raycast_line_of_sight": "not_implemented",
+    "geometry_cover_verification": "required_before_native_enablement",
+    "max_hits_per_request": 3
+  },
+  "restrictions": [
+    "FUS-002 remains disabled",
+    "No team changes or player damage",
+    "No BOS- damage or encounter mechanic bypass",
+    "No unbounded damage, shield, energy, cooldown, or effect duration",
+    "No physical graph may be enabled before native Verse compile and LOS/collision acceptance",
+    "Only the leased canonical fusion controller may spend energy; no entitlement writes"
+  ],
+  "engine_verification": {
+    "verse_compile": "not_run",
+    "uefn_bindings": "not_run",
+    "two_client_launch_session": "not_run",
+    "line_of_sight": "not_run",
+    "damage_replication": "not_run"
+  }
+}
