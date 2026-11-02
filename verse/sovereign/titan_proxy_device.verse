@@ -37,6 +37,10 @@ aeonfall_titan_proxy_device := class(creative_device):
     var Service:?aeonfall_titan_proxy_command_runtime = false
     var ProxyOwner:?player = false
     var ProxyCharacter:?fort_character = false
+    # Native player registration is only an input/HUD filter. The server
+    # still rechecks Architect owner, character and generation on every call.
+    var SummonRegistered:?player = false
+    var CommandRegistered:?player = false
     var Epoch:int = 0
     var WaypointIndex:int = 0
     var Subscriptions:[]cancelable = array{}
@@ -84,6 +88,13 @@ aeonfall_titan_proxy_device := class(creative_device):
             Print("Titan proxy lease already held; duplicate harness rejected.")
             return
         set Service = option{Runtime}
+        # All four Input Triggers must be Titan-dedicated and configured
+        # "Registered Player Behavior = Require Registered" in UEFN.
+        # Begin with no listener eligible, never RegisterAll/global-enable.
+        SummonInput.Disable()
+        AdvanceInput.Disable()
+        AttackCueInput.Disable()
+        DismissInput.Disable()
         # This spawner must be Titan-owned, initially disabled and never
         # shared with world monsters, boss arenas or other fusion devices.
         TitanSpawner.Disable()
@@ -100,6 +111,58 @@ aeonfall_titan_proxy_device := class(creative_device):
         race:
             Monitor()
             StopEvent.Await()
+
+    # Update the registered summon user as canonical FUS-001 authority
+    # changes. Registration is presentation/filtering, NOT authorization.
+    EligibleSummoner()<transacts>:?player=
+        if:
+            AvatarController.Running?
+            Owner := AvatarController.VisualOwner?
+            Owner.IsActive[]
+            Character := Owner.GetFortCharacter[]
+            Original := AvatarController.VisualCharacter?
+            Character = Original
+            Character.IsActive[]
+            State := GetAEONFALLFusionState()
+            Authorized := State.IsAuthorizedActive(AvatarController, Owner, AvatarController.Token)
+            Authorized?
+        then:
+            return option{Owner}
+        false
+
+    RefreshSummonRegistration():void=
+        Candidate := EligibleSummoner()
+        if (Previous := SummonRegistered?):
+            if (Current := Candidate?, Current = Previous):
+                return
+            SummonInput.Disable()
+            SummonInput.Unregister(Previous)
+            set SummonRegistered = false
+        if (Current := Candidate?):
+            SummonInput.Register(Current)
+            SummonInput.Enable()
+            set SummonRegistered = option{Current}
+
+    ActivateCommandInputs(Owner:player):void=
+        # Reserve input actions only for the verified proxy owner. Any
+        # actual capability still requires runtime.IsAuthorized() on press.
+        AdvanceInput.Register(Owner)
+        AttackCueInput.Register(Owner)
+        DismissInput.Register(Owner)
+        AdvanceInput.Enable()
+        AttackCueInput.Enable()
+        DismissInput.Enable()
+        set CommandRegistered = option{Owner}
+
+    ClearCommandInputs():void=
+        AdvanceInput.Disable()
+        AttackCueInput.Disable()
+        DismissInput.Disable()
+        if (Registered := CommandRegistered?):
+            AdvanceInput.Unregister(Registered)
+            AttackCueInput.Unregister(Registered)
+            DismissInput.Unregister(Registered)
+        set CommandRegistered = false
 
     # Only a current and active Armor Fusion owner can operate the proxy.
     ValidOwner(Agent:agent)<decides><transacts>:player=
@@ -122,6 +185,9 @@ aeonfall_titan_proxy_device := class(creative_device):
             not ProxyOwner?
             Player := player[Agent]
             Player.IsActive[]
+            Registered := SummonRegistered?
+            Registered = Player
+            Player.IsActive[]
             Character := Player.GetFortCharacter[]
             Character.IsActive[]
             ControllerOwner := AvatarController.VisualOwner?
@@ -143,6 +209,7 @@ aeonfall_titan_proxy_device := class(creative_device):
                 set Epoch = StartedEpoch
                 set ProxyOwner = option{Player}
                 set ProxyCharacter = option{Character}
+                ActivateCommandInputs(Player)
                 set WaypointIndex = 0
                 TitanSpawner.Reset()
                 TitanSpawner.Enable()
@@ -261,12 +328,17 @@ aeonfall_titan_proxy_device := class(creative_device):
     OnPlayerLeft(Player:player):void=
         if (Owner := ProxyOwner?, Owner = Player):
             FinishProxy()
+        if (Registered := SummonRegistered?, Registered = Player):
+            SummonInput.Disable()
+            SummonInput.Unregister(Player)
+            set SummonRegistered = false
 
     Monitor()<suspends>:void=
         loop:
             Sleep(0.25)
             if (not Running?):
                 return
+            RefreshSummonRegistration()
             if (Owner := ProxyOwner?, Runtime := Service?):
                 if (not Runtime.IsAuthorized()? or UnexpectedSpawnCount(Runtime)?):
                     # Fail closed on unsolicited spawn, disappearing NPC,
@@ -274,6 +346,8 @@ aeonfall_titan_proxy_device := class(creative_device):
                     FinishProxy()
 
     FinishProxy():void=
+        # Remove input eligibility even when native actor cleanup fails.
+        ClearCommandInputs()
         # Invalidate all mailbox commands FIRST, then remove only NPCs
         # spawned by the bound dedicated Titan spawner. Cleanup also covers
         # unsolicited agents found before a player-owner binding completes.
@@ -289,6 +363,11 @@ aeonfall_titan_proxy_device := class(creative_device):
     OnEnd<override>():void=
         set Running = false
         StopEvent.Signal()
+        SummonInput.Disable()
+        if (Registered := SummonRegistered?):
+            SummonInput.Unregister(Registered)
+        set SummonRegistered = false
+        ClearCommandInputs()
         for (Subscription : Subscriptions):
             Subscription.Cancel()
         set Subscriptions = array{}
