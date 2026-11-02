@@ -63,3 +63,24 @@ oracle are **never** permission or damage authorization. The existing disabled
 native Reaver path still has the upstream miss-cost/LOS blockers documented
 above. The complete-universe source gate remains closed, and native UEFN,
 Fortnite-mobile and 300 MiB cooked-memory acceptance are unverified.
+
+
+## Native combat hard stop — not editor-toggleable
+
+`verse/sovereign/sovereign_arsenal_device.verse` now has a
+**non-`@editable` `NativeSourceGate:logic = false`**, checked as the
+first executable operation in `OnBegin`. Merely setting the existing
+`Enabled` property in UEFN cannot subscribe inputs or reach direct
+`Damage`/`SetShield` while this source-first lock remains closed.
+The three existing bounded native-source routines remain in place for
+future integration; the nine additional abilities remain design-only.
+
+`python tools/validate_sovereign_arsenal_source_lock.py` and
+`python -m unittest tests.test_sovereign_arsenal_source_lock -v`
+validate the hard stop and mutation-test its non-editable placement,
+unconditional early return, unchanged entrypoints, and universe-first
+contract. These are static/source checks, not native Verse compilation.
+Only a separately reviewed source change after **all** #84 full-universe
+source packages and actual collision/LOS, UEFN, multiplayer, mobile,
+accessibility and 300 MiB cooked-memory acceptance can remove the lock.
+Do not claim that editor toggles or green Python tests activate abilities.
