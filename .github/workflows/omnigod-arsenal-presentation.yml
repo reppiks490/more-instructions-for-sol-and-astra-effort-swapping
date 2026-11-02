@@ -1,0 +1,46 @@
+name: AEONFALL Omnigod Arsenal Presentation Source
+
+on:
+  push:
+    paths:
+      - 'tools/build_omnigod_arsenal_presentation.py'
+      - 'tests/test_omnigod_arsenal_presentation.py'
+      - 'docs/OMNIGOD_ARSENAL_PRESENTATION_SOURCE.md'
+      - '.github/workflows/omnigod-arsenal-presentation.yml'
+  pull_request:
+    paths:
+      - 'tools/build_omnigod_arsenal_presentation.py'
+      - 'tests/test_omnigod_arsenal_presentation.py'
+      - 'docs/OMNIGOD_ARSENAL_PRESENTATION_SOURCE.md'
+      - '.github/workflows/omnigod-arsenal-presentation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-source-art-audio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact source commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run ten adversarial audiovisual source tests
+        run: python -m unittest discover -s tests -p 'test_omnigod_arsenal_presentation.py' -v
+      - name: Generate original twelve-ability source package
+        run: python tools/build_omnigod_arsenal_presentation.py --output dist/omnigod_arsenal_presentation
+      - name: Recompute and verify all original file bytes and native-status gates
+        run: python tools/build_omnigod_arsenal_presentation.py --output dist/omnigod_arsenal_presentation --validate-only
+      - name: Upload source package, NOT imported UEFN objects
+        uses: actions/upload-artifact@v4
+        with:
+          name: AEONFALL-Omnigod-Arsenal-AV-Source-${{ github.event.pull_request.head.sha || github.sha }}
+          path: dist/omnigod_arsenal_presentation/
+          if-no-files-found: error
+          retention-days: 30
