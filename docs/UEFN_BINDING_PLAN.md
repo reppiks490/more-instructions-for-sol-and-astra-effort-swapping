@@ -110,3 +110,23 @@ These guards mitigate collateral state loss; they do **not** make the full
 multi-service actor teardown transactional or prove that forced allocation
 failures can be reproduced with standard UEFN APIs. Native compilation and
 Fortnite Launch Session evidence are still required.
+
+
+## Position and spawned-prop session state acceptance
+
+The first-playable placement abilities ABL-001, ABL-002 and ABL-010 use
+short-lived position snapshots and bounded logical spawn handles.
+`aeonfall_position_targeting_runtime` and `aeonfall_spawn_runtime`
+now reject partial map reconstruction on explicit remove, owner leave, and
+timeout/expiry. Physical disposal is still performed by the bound prop adapter:
+canonical `spawn.released` and `spawn.expired` events are emitted only
+**after** the corresponding logical map replacement succeeds.
+
+Native acceptance: create simultaneous wall/stair placements from two clients,
+remove one player's placement and disconnect that player during the other's
+active prop lifetime. Confirm no other player's aim context or spawned prop
+is removed. Test expiry with native device limits and invalid placement;
+canonical failure events must not report successful disposal. Retained
+entries may retry on the next scheduler tick after a failed map rebuild.
+UEFN compile, actual asset collision, native prop destruction, and Fortnite
+Launch Session remain unverified by source validation.

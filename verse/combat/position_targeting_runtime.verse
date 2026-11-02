@@ -77,14 +77,21 @@ aeonfall_position_targeting_runtime := class():
             Existing := Contexts[ContextId]
         then:
             var Updated:[string]aeonfall_position_target_context = map{}
+            var Valid:logic = true
 
             for (StoredId -> Context : Contexts):
                 if (StoredId <> ContextId):
-                    if:
-                        set Updated[StoredId] = Context
-                    then:
-                        set Updated = Updated
+                    if (set Updated[StoredId] = Context):
+                        set Valid = Valid
+                    else:
+                        set Valid = false
 
+            if (not Valid?):
+                AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                    EventType := "target.position_remove_failed",
+                    ContextId := ContextId
+                })
+                return false
             set Contexts = Updated
 
             AEONFALLRuntimeBus.Emit(
@@ -101,14 +108,21 @@ aeonfall_position_targeting_runtime := class():
 
     ClearOwner(OwnerKey:string)<transacts>:void=
         var Updated:[string]aeonfall_position_target_context = map{}
+        var Valid:logic = true
 
         for (ContextId -> Context : Contexts):
             if (Context.OwnerKey <> OwnerKey):
-                if:
-                    set Updated[ContextId] = Context
-                then:
-                    set Updated = Updated
+                if (set Updated[ContextId] = Context):
+                    set Valid = Valid
+                else:
+                    set Valid = false
 
+        if (not Valid?):
+            AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                EventType := "target.position_owner_clear_failed",
+                SourceId := OwnerKey
+            })
+            return
         set Contexts = Updated
 
     TickAll(DeltaSeconds:float)<transacts>:void=
@@ -116,6 +130,8 @@ aeonfall_position_targeting_runtime := class():
             return
 
         var Updated:[string]aeonfall_position_target_context = map{}
+        var Expired:[]aeonfall_position_target_context = array{}
+        var Valid:logic = true
 
         for (ContextId -> Context : Contexts):
             Remaining:float = Context.RemainingSeconds - DeltaSeconds
@@ -128,21 +144,28 @@ aeonfall_position_targeting_runtime := class():
                     Position := Context.Position
                     RemainingSeconds := Remaining
 
-                if:
-                    set Updated[ContextId] = Next
-                then:
-                    set Updated = Updated
+                if (set Updated[ContextId] = Next):
+                    set Valid = Valid
+                else:
+                    set Valid = false
             else:
-                AEONFALLRuntimeBus.Emit(
-                    aeonfall_runtime_event{
-                        EventType := "target.position_expired",
-                        SourceId := Context.OwnerKey,
-                        TargetId := Context.AbilityId,
-                        ContextId := ContextId
-                    }
-                )
+                set Expired += array{Context}
 
+        if (not Valid?):
+            AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                EventType := "target.position_tick_rebuild_failed"
+            })
+            return
         set Contexts = Updated
+        for (Context : Expired):
+            AEONFALLRuntimeBus.Emit(
+                aeonfall_runtime_event{
+                    EventType := "target.position_expired",
+                    SourceId := Context.OwnerKey,
+                    TargetId := Context.AbilityId,
+                    ContextId := Context.ContextId
+                }
+            )
 
 # Mutable service allocation is scoped to the current Verse session.
 var AEONFALLPositionTargetingRuntimeSessions:weak_map(session, aeonfall_position_targeting_runtime) = map{}
