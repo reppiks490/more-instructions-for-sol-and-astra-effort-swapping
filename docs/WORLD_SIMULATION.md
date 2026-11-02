@@ -300,3 +300,20 @@ passes; and denied when region state is missing or another invasion is active.
 Test cleansing from 80 to 76 before Start, and cleansing during an active wave.
 Record actual physical AI counts, streaming transitions, and multiplayer
 behavior separately; Python source tests are not native Verse compilation.
+
+## Shared world-event transition integrity (source-level)
+
+The shared `aeonfall_world_event_service` rejects empty event IDs and empty
+objective IDs. Stage changes must advance from the active stage to **exactly
+its immediate successor**; duplicate, rewind and jump requests fail closed.
+Completion and failure both clear the active region set and turn off the event
+before emitting the terminal notification. Only successful completion invokes
+the registered reward pathway; failure clears encounter participation.
+
+This is a structural and logical transition contract, **not** an engine
+streaming/unloading implementation. A stage transition must still be authorized
+by its canonical event director; the shared service does not yet verify an
+objective against an authored per-stage registry. Native UEFN multiplayer
+acceptance must attempt phase skips, repeated/late completion, disconnects,
+and region unloading under world-event/boss contention. Capture Spatial
+Profiler and Memory Snapshot data before declaring cleanup proven.
