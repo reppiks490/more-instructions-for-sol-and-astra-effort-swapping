@@ -121,7 +121,12 @@ aeonfall_targeting_runtime := class():
             return
 
         var Updated:[string]aeonfall_target_selection = map{}
+        var Expired:[]aeonfall_target_selection = array{}
+        var Valid:logic = true
 
+        # Collect the next map and expiry notifications separately. Do not
+        # publish expiry or overwrite another owner's selection until ALL
+        # retained selections have successfully been reconstructed.
         for (OwnerKey -> Selection : Selections):
             Remaining:float = Selection.RemainingSeconds - DeltaSeconds
 
@@ -135,21 +140,28 @@ aeonfall_targeting_runtime := class():
                     ContextId := Selection.ContextId
                     RemainingSeconds := Remaining
 
-                if:
-                    set Updated[OwnerKey] = Next
-                then:
-                    set Updated = Updated
+                if (set Updated[OwnerKey] = Next):
+                    set Valid = Valid
+                else:
+                    set Valid = false
             else:
-                AEONFALLRuntimeBus.Emit(
-                    aeonfall_runtime_event{
-                        EventType := "target.expired",
-                        SourceId := OwnerKey,
-                        TargetId := Selection.TargetKey,
-                        ContextId := Selection.ContextId
-                    }
-                )
+                set Expired += array{Selection}
 
+        if (not Valid?):
+            AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                EventType := "target.tick_rebuild_failed"
+            })
+            return
         set Selections = Updated
+        for (Selection : Expired):
+            AEONFALLRuntimeBus.Emit(
+                aeonfall_runtime_event{
+                    EventType := "target.expired",
+                    SourceId := Selection.OwnerKey,
+                    TargetId := Selection.TargetKey,
+                    ContextId := Selection.ContextId
+                }
+            )
 
 # Mutable service allocation is scoped to the current Verse session.
 var AEONFALLTargetingRuntimeSessions:weak_map(session, aeonfall_targeting_runtime) = map{}

@@ -34,7 +34,9 @@
     "input_editor_paths": [],
     "waypoint_editor_paths": [],
     "spawn_api": "npc_spawner_device.SpawnAt",
-    "spawner_reconciliation_api": "npc_spawner_device.GetAgents"
+    "spawner_reconciliation_api": "npc_spawner_device.GetAgents",
+    "input_registered_behavior": "Require Registered",
+    "input_registration_api": "input_trigger_device.Register/Unregister"
   },
   "movement": {
     "native": "navigatable.NavigateTo",
@@ -74,7 +76,8 @@
     "spawn_association": "serialized_SpawnAt_return_and_epoch",
     "npc_elimination": "exact_agent_identity_then_teardown",
     "behavior_ack": "npc_behavior_ack_required_before_commands",
-    "unexpected_spawns": "fail_closed_despawn_dedicated_spawner"
+    "unexpected_spawns": "fail_closed_despawn_dedicated_spawner",
+    "input_registration": "verified_owner_only_dynamic_register_unregister"
   },
   "safety": {
     "no_shared_npc_spawner": true,
@@ -83,7 +86,8 @@
     "f002_not_activated": true,
     "requires_native_compile": true,
     "requires_two_client_launch_session": true,
-    "no_untagged_spawned_event_association": true
+    "no_untagged_spawned_event_association": true,
+    "no_global_input_registration": true
   },
   "native_evidence": {
     "uefn_compile": "not_run",

@@ -86,3 +86,27 @@ director termination remain responsible for global participant cleanup.
 These are explicit native acceptance tasks; Python source mutation tests do
 not assert a successful UEFN Verse compile, editor bindings or multiplayer
 execution.
+
+
+## Multiplayer map-rebuild safety acceptance
+
+Actor-context teardown, encounter participant removal and target-selection
+expiry now preflight **all** replacement map entries. If any map insertion
+refuses allocation, the old map remains authoritative rather than silently
+dropping unrelated players, encounters or transformations. Failed context,
+participant and target rebuilds emit diagnostic runtime events. Target expiry
+notifications are deferred until its replacement map is committed, preventing
+false expiry reports on a failed rebuild.
+
+UEFN acceptance: connect two clients with distinct transformation/encounter
+contexts and selected actor targets, then remove one during a live boss
+encounter. Verify the other client's context and participation survive.
+Confirm target expiry is reported once only after the corresponding selection
+disappears. Force constrained state-allocation tests where supported; verify
+`context.owner_clear_failed`, `encounter.participant_cleanup_failed` or
+`target.tick_rebuild_failed` without other players losing state.
+
+These guards mitigate collateral state loss; they do **not** make the full
+multi-service actor teardown transactional or prove that forced allocation
+failures can be reproduced with standard UEFN APIs. Native compilation and
+Fortnite Launch Session evidence are still required.

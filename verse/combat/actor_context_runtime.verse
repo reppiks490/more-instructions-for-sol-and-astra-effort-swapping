@@ -140,15 +140,25 @@ aeonfall_actor_context_runtime := class():
         false
 
     Clear(OwnerKey:string)<transacts>:void=
+        # Preflight the entire replacement map before replacing ANY player's
+        # encounter/transformation context. Failed map allocation preserves
+        # all existing states; an unrelated player's authority must not vanish.
         var Updated:[string]aeonfall_actor_context_state = map{}
+        var Valid:logic = true
 
         for (StoredOwnerKey -> State : States):
             if (StoredOwnerKey <> OwnerKey):
-                if:
-                    set Updated[StoredOwnerKey] = State
-                then:
-                    set Updated = Updated
+                if (set Updated[StoredOwnerKey] = State):
+                    set Valid = Valid
+                else:
+                    set Valid = false
 
+        if (not Valid?):
+            AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                EventType := "context.owner_clear_failed",
+                SourceId := OwnerKey
+            })
+            return
         set States = Updated
 
 # Mutable service allocation is scoped to the current Verse session.

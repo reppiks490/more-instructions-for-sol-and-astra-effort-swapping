@@ -91,6 +91,22 @@ DEVICE_GUARDS = (
     "Attempts >= 20",
     "UnexpectedSpawnCount(Runtime)?",
     "TitanProxyRequested",
+    "SummonInput.Register(Current)",
+    "SummonInput.Unregister(Previous)",
+    "SummonInput.Disable()",
+    "SummonInput.Enable()",
+    "Registered := SummonRegistered?",
+    "Registered = Player",
+    "EligibleSummoner()<transacts>:?player=",
+    "State.IsAuthorizedActive(AvatarController, Owner, AvatarController.Token)",
+    "RefreshSummonRegistration()",
+    "AdvanceInput.Register(Owner)",
+    "AttackCueInput.Register(Owner)",
+    "DismissInput.Register(Owner)",
+    "AdvanceInput.Unregister(Registered)",
+    "AttackCueInput.Unregister(Registered)",
+    "DismissInput.Unregister(Registered)",
+    "ClearCommandInputs()",
     "PlayerRemovedEvent().Subscribe(OnPlayerLeft)",
     "AvatarController.VisualOwner?",
     "AvatarController.VisualCharacter?",
@@ -136,6 +152,8 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "character_behavior": "aeonfall_titan_proxy_behavior",
         "spawn_api": "npc_spawner_device.SpawnAt",
         "spawner_reconciliation_api": "npc_spawner_device.GetAgents",
+        "input_registered_behavior": "Require Registered",
+        "input_registration_api": "input_trigger_device.Register/Unregister",
         "waypoints_type": "creative_prop",
         "waypoints_min": 1,
         "waypoints_max": 8,
@@ -190,7 +208,8 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
     for key in ("no_shared_npc_spawner", "no_second_owner_or_profile_root",
                 "attack_cue_must_not_wire_damage", "f002_not_activated",
                 "requires_native_compile", "requires_two_client_launch_session",
-                "no_untagged_spawned_event_association"):
+                "no_untagged_spawned_event_association",
+                "no_global_input_registration"):
         if c.get("safety", {}).get(key) is not True:
             errors.append(f"safety gate disabled: {key}")
     lifecycle = c.get("lifecycle", {})
@@ -198,6 +217,7 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
         "lease": "one_session_controller",
         "late_spawn": "reject_and_despawn",
         "npc_elimination": "exact_agent_identity_then_teardown",
+        "input_registration": "verified_owner_only_dynamic_register_unregister",
         "behavior_ack": "npc_behavior_ack_required_before_commands",
         "unexpected_spawns": "fail_closed_despawn_dedicated_spawner",
         "spawn_association": "serialized_SpawnAt_return_and_epoch",
@@ -230,6 +250,38 @@ def validate(c: dict, runtime: str, behavior: str, device: str, fusion: str) -> 
     combined = runtime + behavior + device
     if "SpawnedEvent.Subscribe" in device:
         errors.append("unversioned native SpawnedEvent association is prohibited")
+    if "RegisterAll(" in device or "UnregisterAll(" in device:
+        errors.append("Titan inputs may register or clear only their owner")
+    # Registrations must occur after authorized session admission, and they
+    # must be torn down before invalidating the NPC command authority.
+    command_start = device.find("    ActivateCommandInputs(Owner:player):void=")
+    command_end = device.find("    ClearCommandInputs():void=")
+    if command_start < 0 or command_end <= command_start:
+        errors.append("owner command input lifecycle missing")
+    else:
+        command_segment = device[command_start:command_end]
+        for fragment in (
+            "AdvanceInput.Register(Owner)", "AttackCueInput.Register(Owner)",
+            "DismissInput.Register(Owner)"
+        ):
+            if fragment not in command_segment:
+                errors.append("owner command input registration missing: " + fragment)
+    teardown = device[command_end:device.find("    # Only a current and active Armor Fusion owner", command_end)]
+    for fragment in (
+        "AdvanceInput.Disable()", "AttackCueInput.Disable()",
+        "DismissInput.Disable()", "AdvanceInput.Unregister(Registered)",
+        "AttackCueInput.Unregister(Registered)",
+        "DismissInput.Unregister(Registered)"
+    ):
+        if fragment not in teardown:
+            errors.append("owner command input cleanup missing: " + fragment)
+    finish_at = device.find("    FinishProxy():void=")
+    terminal = device[finish_at:device.find("    OnEnd<override>():void=", finish_at)]
+    if finish_at < 0 or "ClearCommandInputs()" not in terminal:
+        errors.append("terminal cleanup must remove command input eligibility")
+    if device.find("ActivateCommandInputs(Player)", device.find("    OnSummon(")) < device.find("Attempt := Runtime.Begin("):
+        errors.append("Titan command inputs registered before authoritative begin")
+
     if "weak_map(player," in combined:
         errors.append("second persistent profile map prohibited")
     if 'BeginActivation(' in combined or 'ConfirmActivated(' in combined:
