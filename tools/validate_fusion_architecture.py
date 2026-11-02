@@ -268,18 +268,35 @@ def check_adapter_attack_handoff(
         if not on_rend:
             errors.append("Arsenal device must provide its authorized OnRend callback")
         else:
-            # A sequential string search alone falsely accepts a damage call
-            # placed OUTSIDE the successful TryRend conditional. This is a
-            # conservative indentation/source check, not Verse compilation.
+            # Positional substring checks permit outdented/second damage calls.
+            # The source guard requires EVERY direct target damage call to
+            # remain nested in the one successful TryRend conditional block.
+            # Native Verse execution and physical binding remain unverified.
             accepted = re.search(
                 r"^([ \t]*)if\s*\(\s*Service\.TryRend\[", on_rend, re.M
             )
-            damage = re.search(r"^([ \t]*)Target\.Damage\(", on_rend, re.M)
-            if (accepted is None or damage is None
-                    or damage.start() <= accepted.start()
-                    or len(damage.group(1)) <= len(accepted.group(1))):
+            damages = list(re.finditer(
+                r"^([ \t]*)Target\.Damage\(", on_rend, re.M
+            ))
+            valid = accepted is not None and bool(damages)
+            if valid:
+                guard_indent = len(accepted.group(1))
+                for damage in damages:
+                    if damage.start() <= accepted.start() or len(damage.group(1)) <= guard_indent:
+                        valid = False
+                        break
+                    # A nonempty dedented statement closes the approved
+                    # branch; later indented damage is not protected by it.
+                    intervening = on_rend[accepted.end():damage.start()].splitlines()
+                    for line in intervening[1:]:
+                        if line.strip() and len(line) - len(line.lstrip(" \t")) <= guard_indent:
+                            valid = False
+                            break
+                    if not valid:
+                        break
+            if not valid:
                 errors.append(
-                    "Arsenal native damage must be nested inside successful TryRend"
+                    "Every Arsenal native damage call must be nested inside successful TryRend"
                 )
     return errors
 
