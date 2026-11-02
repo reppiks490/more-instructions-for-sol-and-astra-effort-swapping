@@ -19,7 +19,9 @@ aeonfall_titan_proxy_behavior := class(npc_behavior):
             var StartupChecks:int = 0
             loop:
                 Sleep(0.15)
-                if (Service.BoundNpc(Agent)?):
+                if (Service.AcknowledgeBehavior(Agent)?):
+                    # The behavior, not SpawnAt or the player input, is
+                    # responsible for declaring a navigatable NPC ready.
                     set BoundOnce = true
                     if (Command := Service.GetNewMove[Agent, SeenSequence]):
                         set SeenSequence = Command.Sequence
