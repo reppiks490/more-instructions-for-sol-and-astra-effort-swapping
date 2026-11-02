@@ -47,6 +47,7 @@ class AuthoritativeSnapshot:
     destination_authored: bool = False
     destination_clear: bool = False
     destination_line_of_sight: bool = False
+    destination_distance_cm: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -159,10 +160,14 @@ class ArsenalAdmissionOracle:
         elif targets:
             return deny("self-only ability cannot select targets")
 
-        if ability_id == "SFA-010" and not (proof.destination_authored
-                                           and proof.destination_clear
-                                           and proof.destination_line_of_sight):
-            return deny("unsafe destination")
+        if ability_id == "SFA-010":
+            if not (proof.destination_authored and proof.destination_clear
+                    and proof.destination_line_of_sight):
+                return deny("unsafe destination")
+            if (type(proof.destination_distance_cm) not in (int, float)
+                    or not math.isfinite(proof.destination_distance_cm)
+                    or not 0 < proof.destination_distance_cm <= ability["range_cm"]):
+                return deny("destination outside bounded anchor range")
 
         restored = 0
         if ability["shield_restore_cap"]:
