@@ -1,3 +1,13 @@
+## 2026-11-01 — Living World: horde physical teardown ownership
+
+The existing horde ecology adapter now cancels its spawn/death subscriptions
+and hard-despawns its leased NPC Spawner **before** it clears the region's
+session brood/biomass ledger and releases the lease. Previously only disabling
+respawns could leave live bodies orphaned after a streamed region closed.
+Rejected or invalid adapters continue to perform no physical teardown.
+Source regression tests and UEFN two-player unload/re-entry acceptance added.
+Native Verse compilation, real actor count and memory verification remain pending.
+
 ## 2026-11-01 — Living World: evolved horde substrate for Devouring Moon
 
 The Devouring Moon Precursor now requires >=600 consumed regional horde biomass
@@ -34,6 +44,19 @@ source mutation tests and two-client native acceptance scenarios were added.
 No persistent profile, canonical content ID, class cost or native device
 asset changed. These are source guards; UEFN compiler and Launch Session
 behavior remain unverified.
+
+
+## 2026-11-01 — Omnigod: weighted mechanical armature handoff
+
+Generated a genuine glTF 2.0 skinned mesh from the original thirteen
+machine-demon parts, with 13 named joints, per-vertex JOINTS_0/WEIGHTS_0,
+inverse bind matrices, exact source-rest-position baking and all 3 cinematics
+animations retargeted to joints. Added numerical validation and deliberate
+negative mutations, a GitHub Actions source artifact, and a syntax-checked
+opt-in Blender FBX export helper. This is a rigid mechanical armature, not
+a humanoid locomotion rig, native UEFN import, NPC possession or proven
+Fortnite Launch Session. Existing owner authority, profiles and canonical
+progression remain unchanged.
 
 
 ## 2026-11-01 — Runtime Forge: native input and volume subscription ownership
