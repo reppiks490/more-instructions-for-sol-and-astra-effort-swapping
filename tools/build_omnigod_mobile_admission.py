@@ -20,6 +20,8 @@ TIERS = {"near": (1, 40, 2500), "mid": (1, 24, 6000), "far": (0, 0, 12000)}
 POOL = {"systems": 2, "particles": 80, "audio_voices": 2,
         "near_effects": 2, "mid_effects": 1, "far_effects": 0}
 MODES = ("Activating", "Separating")
+VOICE_PEAKS = {**{f"SFA-{i:03}": (2 if i in (2, 5) else 1) for i in range(1, 13)},
+               "FUS-001-Activating": 1, "FUS-001-Separating": 1}
 CLEANUP = ("owner_revoked", "generation_changed", "cancelled", "actor_despawned",
            "region_unloaded", "separation", "logout")
 OUTPUTS = ("mobile_presentation_admission.json", "mobile_presentation_admission.csv")
@@ -156,6 +158,8 @@ def load_inputs(arsenal_dir: Path, cinematic_dir: Path, world: Path,
                 if wav.getnframes() != 16 * (e["end_ms"] - e["start_ms"]):
                     raise ValueError("original PCM duration drift")
         peaks[ident] = peak(matching)
+        if peaks[ident] != VOICE_PEAKS[ident]:
+            raise ValueError("authored audio peak concurrency drift")
         if peaks[ident] > POOL["audio_voices"]:
             raise ValueError("single ability exceeds voice pool")
     if (s.get("schema_version") != 1 or s.get("source_only") is not True
@@ -201,12 +205,22 @@ def admit(requests: list[dict]) -> dict:
     used = {"systems": 0, "particles": 0, "audio_voices": 0, "near": 0, "mid": 0}
     accepted, rejected = [], []
     allowed = {f"SFA-{i:03}" for i in range(1, 13)} | {"FUS-001-" + x for x in MODES}
+    region_scope = None
     for r in requests:
         if (r.get("id") not in allowed or r.get("mode") != "FUS-001" or r.get("lease_valid") is not True
                 or type(r.get("generation")) is not int or r["generation"] <= 0
                 or r.get("owner_scope") != "trusted_owner"
+                or r.get("current_generation") != r.get("generation")
+                or r.get("region_loaded") is not True
+                or r.get("region") not in {f"REG-{i:03}" for i in range(1, 14)}
                 or r.get("tier") not in TIERS or not isinstance(r.get("id"), str)):
             raise ValueError("untrusted/stale source admission request")
+        if region_scope is None:
+            region_scope = r["region"]
+        if r["region"] != region_scope:
+            raise ValueError("cross-region admission cannot share a pool")
+        if r.get("peak_audio_voices") != VOICE_PEAKS[r["id"]]:
+            raise ValueError("underreported or forged audio voice request")
         tier = r["tier"]
         systems, particles, _ = TIERS[tier]
         voices = r["peak_audio_voices"] if tier != "far" else 0
@@ -263,6 +277,7 @@ def compile_plan(arsenal_dir: Path, cinematic_dir: Path, world: Path,
         for name, sample in samples:
             requests = [{"id": ident, "tier": tier, "peak_audio_voices": voice,
                          "mode": "FUS-001", "lease_valid": True, "generation": 1,
+                         "current_generation": 1, "region": region, "region_loaded": True,
                          "owner_scope": "trusted_owner"} for ident, tier, voice in sample]
             cases.append({"region": region, "case": name, **admit(requests)})
     if len(rows) != 13 * 14 * 3 or len(cases) != 13 * 6:
