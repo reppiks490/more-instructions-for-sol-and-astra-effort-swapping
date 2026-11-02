@@ -243,5 +243,109 @@ class SourceObservationGateTests(unittest.TestCase):
             SourceHitObservationGate(extended)
 
 
+    def test_all_thirteen_region_unloads_revoke_local_plans_only(self):
+        for n in range(1, 14):
+            with self.subTest(region=n):
+                region = f"REG-{n:03d}"
+                other = f"REG-{(n % 13) + 1:03d}"
+                gate = SourceHitObservationGate(contract())
+                self.assertTrue(gate.stage(plan(sequence=1),
+                                           bindings(region=region),
+                                           opened_ms=100, deadline_ms=500))
+                self.assertTrue(gate.stage(plan(sequence=2),
+                                           bindings(region=other),
+                                           opened_ms=100, deadline_ms=500))
+                self.assertEqual(gate.retire_region(region), 1)
+                self.assertEqual(gate.retire_region(region), 0)
+                self.assertEqual(gate.active_count, 1)
+                self.assertFalse(gate.resolve(observe(region=region)).accepted)
+                self.assertFalse(gate.stage(plan(sequence=3),
+                                            bindings(region=region),
+                                            opened_ms=100, deadline_ms=500))
+                self.assertEqual(gate.resolve(observe(sequence=2, region=other)).damage, 18)
+                self.assertTrue(gate.resume_region(region, 2))
+                self.assertTrue(gate.stage(
+                    plan(sequence=3),
+                    (BoundActor("MON-001", "fresh-actor", region, 2),),
+                    opened_ms=100, deadline_ms=500))
+                self.assertEqual(gate.resolve(
+                    replace(observe(sequence=3, region=region, actor="fresh-actor"),
+                            region_epoch=2)).damage, 18)
+
+    def test_actor_despawn_revokes_whole_paid_plan_not_neighbor(self):
+        p = plan("SFA-002", targets=("MON-001", "MON-002"))
+        self.assertTrue(self.stage(p))
+        self.assertTrue(self.stage(plan(sequence=2),
+                                   bindings(region="REG-002")))
+        self.assertEqual(self.gate.retire_actor("actor-instance-1", "REG-002", 1), 0)
+        self.assertEqual(self.gate.retire_actor("actor-instance-1", "REG-001", 2), 0)
+        self.assertEqual(self.gate.retire_actor("actor-instance-1", "REG-001", 1), 1)
+        self.assertEqual(self.gate.active_count, 1)
+        self.assertFalse(self.gate.resolve(observe()).accepted)
+        self.assertEqual(self.gate.resolve(
+            observe(sequence=2, region="REG-002")).damage, 18)
+
+    def test_region_epoch_malformed_evidence_does_not_consume(self):
+        for epoch in (0, True, "1", 2**63):
+            with self.subTest(epoch=epoch):
+                gate = SourceHitObservationGate(contract())
+                self.assertFalse(gate.stage(plan(),
+                                            (BoundActor("MON-001", "actor", "REG-001", epoch),),
+                                            opened_ms=100, deadline_ms=500))
+                self.assertTrue(gate.stage(plan(), bindings(),
+                                           opened_ms=100, deadline_ms=500))
+                bad = replace(observe(), region_epoch=epoch)
+                self.assertFalse(gate.resolve(bad).accepted)
+                self.assertEqual(gate.active_count, 1)
+                self.assertEqual(gate.resolve(observe()).damage, 18)
+
+    def test_valid_but_wrong_epoch_closes_paid_event(self):
+        self.assertTrue(self.stage())
+        denied = self.gate.resolve(replace(observe(), region_epoch=2))
+        self.assertFalse(denied.accepted)
+        self.assertEqual(self.gate.active_count, 0)
+        self.assertFalse(self.gate.resolve(observe()).accepted)
+
+    def test_region_retirement_persists_across_owner_generation(self):
+        self.assertTrue(self.stage())
+        self.assertEqual(self.gate.retire_region("REG-001"), 1)
+        self.gate.change_generation(2)
+        self.assertFalse(self.gate.stage(plan(generation=2),
+                                         bindings(), opened_ms=100, deadline_ms=500))
+        self.assertTrue(self.gate.resume_region("REG-001", 2))
+        self.assertFalse(self.gate.stage(plan(generation=2),
+                                         bindings(), opened_ms=100, deadline_ms=500))
+        self.assertTrue(self.gate.stage(
+            plan(generation=2),
+            (BoundActor("MON-001", "fresh", "REG-001", 2),),
+            opened_ms=100, deadline_ms=500))
+        self.assertEqual(self.gate.resolve(replace(
+            observe(generation=2, actor="fresh"), region_epoch=2)).damage, 18)
+
+    def test_region_epoch_monotonic_resume_and_bad_teardown_arguments(self):
+        self.assertFalse(self.gate.resume_region("REG-001", 2))
+        self.assertEqual(self.gate.retire_region([]), 0)
+        self.assertEqual(self.gate.retire_region("REG-999"), 0)
+        self.assertEqual(self.gate.retire_region("REG-001"), 0)
+        for epoch in (0, 1, True, "2", 2**63):
+            self.assertFalse(self.gate.resume_region("REG-001", epoch))
+        self.assertTrue(self.gate.resume_region("REG-001", 2))
+        self.assertEqual(self.gate.retire_region("REG-001"), 0)
+        self.assertFalse(self.gate.resume_region("REG-001", 2))
+        self.assertTrue(self.gate.resume_region("REG-001", 3))
+        for args in ((None, "REG-001", 3), ("", "REG-001", 3),
+                     ("actor-instance-0", [], 3),
+                     ("actor-instance-0", "REG-001", True)):
+            self.assertEqual(self.gate.retire_actor(*args), 0)
+
+    def test_unload_after_first_pulse_cancels_second_pulse(self):
+        self.assertTrue(self.stage(plan("SFA-005")))
+        first = self.gate.resolve(observe(pulse=0))
+        self.assertEqual(first.damage, 6)
+        self.assertEqual(self.gate.retire_region("REG-001"), 1)
+        self.assertFalse(self.gate.resolve(observe(pulse=1, at=201)).accepted)
+        self.assertEqual(self.gate.active_count, 0)
+
+
 if __name__ == "__main__":
     unittest.main()
