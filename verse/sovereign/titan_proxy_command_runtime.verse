@@ -202,13 +202,13 @@ aeonfall_titan_proxy_command_runtime := class:
             Stopped := End(OwnerDevice)
             set Lease = false
 
-var AEONFALLTitanProxyCommandSessions:weak_map(session, aeonfall_titan_proxy_command_runtime) = map{}
+var AEONFALLTitanProxyCommandsSessions:weak_map(session, aeonfall_titan_proxy_command_runtime) = map{}
 
 GetAEONFALLTitanProxyCommands()<transacts>:aeonfall_titan_proxy_command_runtime=
-    Current := GetSession()
-    if (Existing := AEONFALLTitanProxyCommandSessions[Current]):
+    CurrentSession := GetSession()
+    if (Existing := AEONFALLTitanProxyCommandsSessions[CurrentSession]):
         return Existing
     Created := aeonfall_titan_proxy_command_runtime{}
-    if (set AEONFALLTitanProxyCommandSessions[Current] = Created):
+    if (set AEONFALLTitanProxyCommandsSessions[CurrentSession] = Created):
         return Created
     Err("Unable to retain AEONFALL Titan proxy mailbox")
