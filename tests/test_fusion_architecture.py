@@ -132,5 +132,88 @@ class FusionArchitectureTests(unittest.TestCase):
         )))
 
 
+    def mutate_receipt_method(self, name: str, following: str,
+                              before: str, after: str) -> str:
+        start = self.source.index("    " + name + "(")
+        end = self.source.index("    " + following + "(", start)
+        section = self.source[start:end]
+        self.assertIn(before, section)
+        return self.source[:start] + section.replace(before, after, 1) + self.source[end:]
+
+    def test_attack_receipt_is_declared_unbound(self):
+        self.assertEqual(
+            self.policy["runtime"]["attack_receipt"]["native_adapter_wiring"],
+            "pending"
+        )
+        self.assertEqual(self.errors(), [])
+
+    def test_cannot_extend_attack_receipt_lifetime(self):
+        policy = copy.deepcopy(self.policy)
+        policy["runtime"]["attack_receipt"]["ttl_seconds"] = 3600
+        self.assertTrue(self.errors(policy=policy))
+
+    def test_cannot_forge_attack_receipt_as_wired(self):
+        policy = copy.deepcopy(self.policy)
+        policy["runtime"]["attack_receipt"]["native_adapter_wiring"] = "passed"
+        self.assertTrue(self.errors(policy=policy))
+
+    def test_issue_requires_live_creator_authority(self):
+        altered = self.mutate_receipt_method(
+            "IssueAttackReceipt", "ConsumeAttackReceipt",
+            "Authorized := Gate.CanWield(Player)", "Authorized := true"
+        )
+        self.assertTrue(self.errors(source=altered))
+
+    def test_issue_cannot_accept_duplicate_outstanding_ticket(self):
+        altered = self.mutate_receipt_method(
+            "IssueAttackReceipt", "ConsumeAttackReceipt",
+            "if (AttackReceiptPending?):", "if (false?):"
+        )
+        self.assertTrue(self.errors(source=altered))
+
+    def test_consume_requires_matching_fusion_generation(self):
+        altered = self.mutate_receipt_method(
+            "ConsumeAttackReceipt", "Abort",
+            "AttackReceiptGeneration = Token", "AttackReceiptGeneration >= 0"
+        )
+        self.assertTrue(self.errors(source=altered))
+
+    def test_consumed_ticket_cannot_be_replayed(self):
+        altered = self.mutate_receipt_method(
+            "ConsumeAttackReceipt", "Abort",
+            "ClearAttackReceipt()", "set AttackReceiptPending = true"
+        )
+        self.assertTrue(self.errors(source=altered))
+
+    def test_consume_must_reject_expired_ticket(self):
+        altered = self.mutate_receipt_method(
+            "ConsumeAttackReceipt", "Abort",
+            "GetSimulationElapsedTime() < AttackReceiptExpiresAt",
+            "GetSimulationElapsedTime() >= AttackReceiptExpiresAt"
+        )
+        self.assertTrue(self.errors(source=altered))
+
+    def test_abort_invalidates_unconsumed_ticket(self):
+        altered = self.mutate_receipt_method(
+            "Abort", "ReleaseController",
+            "ClearAttackReceipt()", "Print(\"pending receipt leaked\")"
+        )
+        self.assertTrue(self.errors(source=altered))
+
+    def test_separation_invalidates_unconsumed_ticket(self):
+        altered = self.mutate_receipt_method(
+            "BeginSeparation", "CompleteSeparation",
+            "ClearAttackReceipt()", "Print(\"pending receipt leaked\")"
+        )
+        self.assertTrue(self.errors(source=altered))
+
+    def test_release_invalidates_unconsumed_ticket(self):
+        altered = self.mutate_receipt_method(
+            "ReleaseController", "GetAEONFALLFusionState",
+            "ClearAttackReceipt()", "Print(\"pending receipt leaked\")"
+        )
+        self.assertTrue(self.errors(source=altered))
+
+
 if __name__ == "__main__":
     unittest.main()
