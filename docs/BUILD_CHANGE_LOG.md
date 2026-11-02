@@ -1,5 +1,18 @@
 # Build change log
 
+## 2026-11-01 — Fusion Architect: one-use Reaver admission receipts
+
+Added a session-local, generation-bound, one-second attack receipt to the
+canonical FUS-001 fusion state machine. Receipt issuance and consumption
+revalidate owner/controller and native authority, reject concurrent issuance,
+and invalidate on every separation, abort and controller release. Documented
+atomic Avatar upstream-cost issuance and Arsenal secondary-cost consumption;
+their draft device adapters still require independent wiring and UEFN
+verification before the feature can be enabled. Added source/mutation tests
+for replay, expiry, authority, invalidation and contract evidence boundaries.
+No persistence, canonical IDs, public unlocks or native enablement changed.
+
+
 ## 2026-11-01 — Omnigod: deterministic original 3D manifestation source
 
 Built a 13-piece original, crimson-violet machine-demon static source-geometry
