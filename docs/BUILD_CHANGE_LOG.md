@@ -11,6 +11,21 @@ remain unverified.
 
 # Build change log
 
+## 2026-11-01 — Omnigod: genuine rigid-skinned armature DCC handoff
+
+Built a deterministic glTF 2.0 **real skin** from the merged original 13-part
+machine-demon armor and three cinematic source animations: 13 named plate
+joints under a shared armature, JOINTS_0 and normalized WEIGHTS_0 per primitive,
+correct inverse bind matrices, bind-space vertex baking, exact rest-pose
+equivalence and all three cinematic clips retargeted onto the mechanical joints.
+Added independent numeric/mutation checks, source artifact CI, optional
+syntax-checked Blender FBX export helper, and UEFN Custom NPC import checklist.
+This remains a rigid mechanical source skeleton, not a full humanoid/locomotion
+rig. Neither Blender FBX export nor native UEFN import, player control, NPC
+animation playback or Fortnite Launch Session was run. No owner grants or
+canonical progression were changed.
+
+
 ## 2026-11-01 — Cinematics: original glTF mechanical motion and PCM cue sources
 
 Added a deterministic DCC-preview animation pipeline for the 13-part original
