@@ -3,6 +3,7 @@ using { /Fortnite.com/Characters }
 using { /Fortnite.com/Playspaces }
 using { /Verse.org/Simulation }
 using { /Verse.org/Verse }
+using { /UnrealEngine.com/Temporary/SpatialMath }
 
 TitanProxyDenied<localizes>:message = "Titan proxy unavailable: FUS-001 owner or binding rejected."
 TitanProxyReady<localizes>:message = "Titan NPC behavior online. Player movement stays native."
@@ -28,6 +29,14 @@ aeonfall_titan_proxy_device := class(creative_device):
     DismissInput:input_trigger_device = input_trigger_device{}
     @editable
     AttackCueOutput:trigger_device = trigger_device{}
+    # Optional viewpoint experiment. Camera follows the NPC's world position,
+    # not its head or facing; the player retains native character control.
+    @editable
+    ExperimentalCameraEnabled:logic = false
+    @editable
+    ProxyCamera:gameplay_camera_fixed_point_device = gameplay_camera_fixed_point_device{}
+    @editable
+    ProxyCameraOffset:vector3 = vector3{X := -600.0, Y := 0.0, Z := 300.0}
     @editable
     Waypoints:[]creative_prop = array{}
     @editable
@@ -37,6 +46,7 @@ aeonfall_titan_proxy_device := class(creative_device):
     var Service:?aeonfall_titan_proxy_command_runtime = false
     var ProxyOwner:?player = false
     var ProxyCharacter:?fort_character = false
+    var CameraOwner:?player = false
     # Native player registration is only an input/HUD filter. The server
     # still rechecks Architect owner, character and generation on every call.
     var SummonRegistered:?player = false
@@ -70,6 +80,8 @@ aeonfall_titan_proxy_device := class(creative_device):
         set Devices = AddPhysicalDevice[Devices, DismissInput]
         set Devices = AddPhysicalDevice[Devices, AttackCueOutput]
         set Devices = AddPhysicalDevice[Devices, Feedback]
+        if (ExperimentalCameraEnabled?):
+            set Devices = AddPhysicalDevice[Devices, ProxyCamera]
         for (Waypoint : Waypoints):
             set Devices = AddPhysicalDevice[Devices, Waypoint]
         Devices
@@ -271,6 +283,7 @@ aeonfall_titan_proxy_device := class(creative_device):
                 if (not Runtime.IsCurrentEpoch(ExpectedEpoch)?):
                     return
                 if (Runtime.IsBehaviorReady(SpawnedAgent)?):
+                    StartProxyCamera(ExpectedEpoch, SpawnedAgent)
                     if (Owner := ProxyOwner?):
                         Feedback.Show(Owner, TitanProxyReady, 3.0)
                     return
@@ -278,6 +291,59 @@ aeonfall_titan_proxy_device := class(creative_device):
             if (Attempts >= 20):
                 FinishProxy()
                 return
+
+    # An optional fixed-point camera follows a world-offset from the NPC,
+    # while the actual player's controls and FUS-001 armor remain untouched.
+    # The same camera device serves at most one owner per session. This is
+    # camera-stack presentation only: no NPC possession or aim delegation.
+    StartProxyCamera(ExpectedEpoch:int, Npc:agent):void=
+        if:
+            ExperimentalCameraEnabled?
+            not CameraOwner?
+            Runtime := Service?
+            Runtime.IsCurrentEpoch(ExpectedEpoch)?
+            Runtime.IsBehaviorReady(Npc)?
+            Owner := ProxyOwner?
+            Owner.IsActive[]
+            ProxyCamera.IsValid[]
+        then:
+            ProxyCamera.AddTo(Owner)
+            set CameraOwner = option{Owner}
+            spawn{TrackProxyCamera(ExpectedEpoch, Npc, Owner)}
+
+    TrackProxyCamera(ExpectedEpoch:int, Npc:agent, Owner:player)<suspends>:void=
+        loop:
+            Sleep(0.15)
+            if:
+                Running?
+                Runtime := Service?
+                Runtime.IsCurrentEpoch(ExpectedEpoch)?
+                Runtime.IsBehaviorReady(Npc)?
+                CurrentCameraOwner := CameraOwner?
+                CurrentCameraOwner = Owner
+                NpcCharacter := Npc.GetFortCharacter[]
+                NpcCharacter.IsActive[]
+                ProxyCamera.IsValid[]
+            then:
+                # The offset is editor-authored in world coordinates. It
+                # is intentionally not claimed to be a true NPC head POV.
+                Position := NpcCharacter.GetTransform().Translation + ProxyCameraOffset
+                Rotation := ProxyCamera.GetTransform().Rotation
+                if (ProxyCamera.TeleportTo[Position, Rotation]):
+                    # Keep the leased camera stack until native teardown.
+                    Print("Titan camera position updated.")
+                else:
+                    # Camera failure must not leave the player's view stolen.
+                    ReleaseProxyCamera()
+                    return
+            else:
+                return
+
+    ReleaseProxyCamera():void=
+        if (Owner := CameraOwner?):
+            if (ProxyCamera.IsValid[]):
+                ProxyCamera.RemoveFrom(Owner)
+        set CameraOwner = false
 
     # Observes every native spawner agent, not just the SpawnAt return.
     # An enabled spawner can auto-spawn NPCs even without SpawnAt.
@@ -355,6 +421,7 @@ aeonfall_titan_proxy_device := class(creative_device):
     FinishProxy():void=
         # Remove input eligibility even when native actor cleanup fails.
         ClearCommandInputs()
+        ReleaseProxyCamera()
         # Invalidate all mailbox commands FIRST, then remove only NPCs
         # spawned by the bound dedicated Titan spawner. Cleanup also covers
         # unsolicited agents found before a player-owner binding completes.
@@ -375,6 +442,7 @@ aeonfall_titan_proxy_device := class(creative_device):
             SummonInput.Unregister(Registered)
         set SummonRegistered = false
         ClearCommandInputs()
+        ReleaseProxyCamera()
         for (Subscription : Subscriptions):
             Subscription.Cancel()
         set Subscriptions = array{}
