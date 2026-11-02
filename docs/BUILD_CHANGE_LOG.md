@@ -1,5 +1,19 @@
 # Build change log
 
+## 2026-11-01 — Omnigod: original machine-demon 3D source kit
+
+Added a deterministic, original 13-part static geometry generator for the
+One True Omnigod Sovereign manifestation. The separate crimson/obsidian/violet
+armor, reactor, crown, claw gauntlets, open eclipse ring and siege greatsword
+export as GLB/OBJ/MTL, with an assembled static preview, measured triangle
+budget, fixed pivots, checked material/asset hashes and native-proof disclaimers.
+Dedicated CI generates downloadable import-source artifacts and tests topology,
+inventory, repeatability and hostile provenance edits. Editor handoff documents
+the FBX skeletal-rig/Custom NPC route and Epic's Everyone-visibility
+requirement for replaceable NPC Sequencer bindings. No UEFN editor import,
+skeletal rig, native NPC control or actual fusion demonstration is claimed.
+
+
 ## 2026-11-01 — Sovereign Armor Fusion adapter and bounded budget
 
 Added the creator-only FUS-001 physical presentation prototype atop the
