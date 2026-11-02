@@ -1,5 +1,12 @@
 # Build change log
 
+## 2026-11-01 — Runtime Forge: actor bootstrap lease and transactional activation cancellation
+
+Player identity bootstrap now acquires an exclusive session lease before subscribing to join/remove events or enumerating existing players. Only the owner can release that lease after canceling callbacks. This prevents duplicate bootstrap devices from duplicating identity-ready notifications or racing player removal.
+
+Activation result handling now stops before resource settlement when coordinator pending-record removal fails. Pending-request cancellation now uses a failable Verse transaction for pending-map removal, canonical cancellation, and conditional class reservation release. Source mutation checks and native multiplayer acceptance scenarios are documented in [first-playable lifecycle hardening](FIRST_PLAYABLE_LIFECYCLE_HARDENING.md). Native UEFN compiler, device binding, and Launch Session evidence remain outstanding.
+
+
 ## 2026-11-01 — QA: checkpoint reconnect generation isolation
 
 Hardened the new SLICE-001 checkpoint device against suspended restore tasks
