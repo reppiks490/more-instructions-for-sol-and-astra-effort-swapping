@@ -27,7 +27,7 @@ DIM = TILE * GRID
 FRAMES = GRID * GRID
 MAP = (
     ("Reaver", "telegraph_reaver_chevrons", "reaver_blade_warning", 550, "downward_wipe"),
-    ("Cataclysm", "telegraph_cataclysm_broken_ring", "cataclysm_siege_warning", 900, "radial_expansion"),
+    ("Cataclysm", "telegraph_cataclysm_broken_ring", "cataclysm_siege_warning", 900, "sector_sweep"),
     ("Aegis", "telegraph_aegis_shield", "aegis_guard_warning", 700, "center_outward"),
 )
 
@@ -60,8 +60,9 @@ def reveal(method: str, x: int, y: int, frame: int) -> float:
     xx, yy = x / (TILE - 1), y / (TILE - 1)
     if method == "downward_wipe":
         position = yy
-    elif method == "radial_expansion":
-        position = math.hypot(xx - .5, yy - .5) / math.sqrt(.5)
+    elif method == "sector_sweep":
+        # A ring has nearly constant radius; progress azimuthally so distinct sectors emerge.
+        position = (math.atan2(yy - .5, xx - .5) + math.pi) / (2 * math.pi)
     elif method == "center_outward":
         position = abs(xx - .5) * 2.
     else:
