@@ -9,6 +9,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT = ROOT / "content/sovereign/fusion_integration_contract.json"
 SOURCE = ROOT / "verse/sovereign/fusion_state_runtime.verse"
+AVATAR = ROOT / "verse/sovereign/sovereign_fusion_device.verse"
+ARSENAL = ROOT / "verse/sovereign/sovereign_arsenal_device.verse"
+ARSENAL_RUNTIME = ROOT / "verse/sovereign/sovereign_arsenal_runtime.verse"
 
 
 def method(source: str, name: str) -> str:
@@ -181,11 +184,98 @@ def check_contract(contract: dict, source: str) -> list[str]:
     return errors
 
 
+def check_adapter_attack_handoff(
+    avatar_source: str, arsenal_source: str | None
+) -> list[str]:
+    """Conditional fusion adapter source check, NOT Verse execution."""
+    errors: list[str] = []
+    avatar = "\n".join(
+        line.split("#", 1)[0] for line in avatar_source.splitlines()
+    )
+    arsenal = None if arsenal_source is None else "\n".join(
+        line.split("#", 1)[0] for line in arsenal_source.splitlines()
+    )
+
+    # The ordinary, already-merged fusion controller has no AttackOutput.
+    # Enforce this only when the Avatar team's optional attack bridge lands.
+    if re.search(r"\bAttackOutput\s*:\s*trigger_device\b", avatar):
+        attack = method(avatar, "Attack")
+        if not attack:
+            errors.append("Avatar AttackOutput must have an owned Attack method")
+        else:
+            # Both the upstream energy debit and receipt issuance must occur
+            # in one deciding admission before any external trigger signal.
+            admission = ""
+            if "        if:\n" in attack and "        then:" in attack:
+                admission = attack.split("        if:\n", 1)[1].split(
+                    "        then:", 1
+                )[0]
+            spend = admission.find(
+                "Resource.Spend[Self, Player, Token, State, AttackEnergyCost]"
+            )
+            issue = re.search(
+                r"([A-Za-z_]\w*)\s*:=\s*State\.IssueAttackReceipt"
+                r"\(Self,\s*Player,\s*Token\)",
+                admission,
+            )
+            signal = attack.find("AttackOutput.Trigger(Player)")
+            if spend < 0 or issue is None or signal < 0:
+                errors.append(
+                    "Avatar attack must debit energy, issue canonical receipt "
+                    "in the same deciding guard and then signal output"
+                )
+            else:
+                acknowledged = admission.find(issue.group(1) + "?", issue.end())
+                if not (spend < issue.start() < acknowledged and
+                        acknowledged >= 0 and
+                        attack.find("        then:") < signal):
+                    errors.append(
+                        "Avatar must verify paid receipt before physical output"
+                    )
+
+    # The Arsenal-owned file does not exist on main until its draft lands.
+    # If present, the Reaver path must reject triggers lacking a paid receipt.
+    if arsenal is not None:
+        rend = method(arsenal, "TryRend")
+        if not rend:
+            errors.append("Arsenal must expose transactional TryRend")
+        else:
+            receipt = re.search(
+                r"State\.ConsumeAttackReceipt\[\s*Device,\s*Player,"
+                r"\s*Token\s*\]",
+                rend,
+            )
+            spend = rend.find("Budget.Spend[Device, Player, Token, State, 5]")
+            cooldown = rend.find("set LastRendAt = Now")
+            if "<decides><transacts>:void=" not in rend or (
+                receipt is None or spend < 0 or cooldown < 0 or
+                not (receipt.start() < spend < cooldown)
+            ):
+                errors.append(
+                    "Arsenal TryRend must consume one paid receipt with its "
+                    "secondary 5-energy debit and cooldown in a deciding transaction"
+                )
+        on_rend = method(arsenal, "OnRend")
+        if on_rend:
+            approved = on_rend.find("Service.TryRend[")
+            damage = on_rend.find("Target.Damage(")
+            if approved < 0 or damage < approved:
+                errors.append(
+                    "Arsenal must acknowledge TryRend before attempting native damage"
+                )
+    return errors
+
+
 def main() -> int:
     try:
         contract = json.loads(CONTRACT.read_text(encoding="utf-8"))
         source = SOURCE.read_text(encoding="utf-8")
         errors = check_contract(contract, source)
+        avatar = AVATAR.read_text(encoding="utf-8") if AVATAR.exists() else ""
+        arsenal = (ARSENAL_RUNTIME.read_text(encoding="utf-8") + "\n" +
+                   ARSENAL.read_text(encoding="utf-8")
+                   if ARSENAL_RUNTIME.exists() and ARSENAL.exists() else None)
+        errors.extend(check_adapter_attack_handoff(avatar, arsenal))
     except (OSError, ValueError, TypeError) as exc:
         errors = [str(exc)]
     for error in errors:
