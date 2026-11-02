@@ -150,6 +150,17 @@ class TitanProxySourceTests(unittest.TestCase):
         )
         self.assertTrue(self.errors(runtime=runtime))
 
+    def test_untagged_spawner_association_rejected(self):
+        device = self.device.replace(
+            "Spawned := TitanSpawner.SpawnAt(Position, false)",
+            "SpawnedEvent.Subscribe(OnSpawned)"
+        )
+        self.assertTrue(self.errors(device=device))
+
+    def test_serial_spawn_guard_rejected(self):
+        runtime = self.runtime.replace("not SpawnInFlight?", "true?")
+        self.assertTrue(self.errors(runtime=runtime))
+
     def test_global_output_rejected(self):
         device = self.device.replace("AttackCueOutput.Trigger(Player)", "AttackCueOutput.Trigger()")
         self.assertTrue(self.errors(device=device))
@@ -179,6 +190,11 @@ class TitanProxySourceTests(unittest.TestCase):
     def test_enable_by_default_rejected(self):
         device = self.device.replace("Enabled:logic = false", "Enabled:logic = true")
         self.assertTrue(self.errors(device=device))
+
+    def test_serialized_spawn_contract_rejected(self):
+        c = copy.deepcopy(self.contract)
+        c["lifecycle"]["spawn_association"] = "untagged_spawn_event"
+        self.assertTrue(self.errors(c=c))
 
     def test_shared_spawner_assertion_rejected(self):
         c = copy.deepcopy(self.contract)
