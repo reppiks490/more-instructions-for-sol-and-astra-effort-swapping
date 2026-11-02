@@ -77,11 +77,13 @@ class SourceHitObservationGate:
             ident = ability["id"]
             if ident not in ATTACK_SPECS:
                 continue
+            if ident in self._abilities:
+                raise ValueError(f"duplicate offensive contract: {ident}")
             if (ability["native_enabled"] is not False
                     or (ability["damage_each"], ability["max_pulses"],
                         ability["max_targets"]) != ATTACK_SPECS[ident]
                     or type(ability["range_cm"]) is not int
-                    or not 0 < ability["range_cm"] <= 10000):
+                    or not 0 < ability["range_cm"] <= 650):
                 raise ValueError(f"unsafe offensive ability contract: {ident}")
             self._abilities[ident] = ability
         if set(self._abilities) != set(ATTACK_SPECS):
