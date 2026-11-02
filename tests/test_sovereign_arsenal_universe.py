@@ -87,6 +87,18 @@ class UniverseArsenalContractTests(unittest.TestCase):
     def test_finisher_threshold_stays_at_quarter_health(self):
         self.check_mutation(lambda c: c["abilities"][10]["notes"].update(threshold_health_fraction_max=1.0))
 
+    def test_null_first_source_ability_is_rejected_not_crashed(self):
+        self.check_mutation(lambda c: c["abilities"].__setitem__(0, None))
+
+    def test_invalid_cost_type_is_rejected_not_crashed(self):
+        self.check_mutation(lambda c: c["abilities"][4].update(energy_cost="invalid"))
+
+    def test_null_notes_is_rejected_not_crashed(self):
+        self.check_mutation(lambda c: c["abilities"][5].update(notes=None))
+
+    def test_boolean_target_count_is_not_an_integer(self):
+        self.check_mutation(lambda c: c["abilities"][4].update(max_targets=True))
+
     def test_distinct_telegraph_required(self):
         self.check_mutation(lambda c: c["abilities"][11]["asset_plan"].pop("accessibility"))
 
