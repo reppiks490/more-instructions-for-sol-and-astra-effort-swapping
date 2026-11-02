@@ -397,6 +397,20 @@ class TitanProxySourceTests(unittest.TestCase):
         ):
             self.assertIn(fragment, camera)
 
+    def test_initial_camera_position_failure_cannot_push_stack(self):
+        camera = self.device.split(
+            "    StartProxyCamera(ExpectedEpoch:int, Npc:agent):void=", 1
+        )[1].split("    TrackProxyCamera(ExpectedEpoch:int", 1)[0]
+        self.assertLess(
+            camera.index("if (ProxyCamera.TeleportTo[Position, Rotation]):"),
+            camera.index("ProxyCamera.AddTo(Owner)")
+        )
+        device = self.device.replace(
+            "if (ProxyCamera.TeleportTo[Position, Rotation]):",
+            "if (true?):", 1
+        )
+        self.assertTrue(self.errors(device=device))
+
     def test_camera_enabled_by_default_rejected(self):
         device = self.device.replace(
             "ExperimentalCameraEnabled:logic = false",
