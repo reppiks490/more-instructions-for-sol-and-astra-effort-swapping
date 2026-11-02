@@ -28,9 +28,9 @@ def plan(target_id, sequence=7):
 # ASCII-only canonical IDs, not arbitrary MON-prefix strings or Unicode digits.
 INVALID_IDS = (
     "MON-1", "MON-01", "MON-00001", "MON-ABC",
-    "MON-001 ", " MON-001", "MON-001\\n", "MON-001/PLAYER",
-    "MON-001-MON-002", "MON-001\\x00", "MON-\u0660\u0660\u0661",
-    "MON-\uff10\uff10\uff11", "MON-001\\t",
+    "MON-001 ", " MON-001", "MON-001\${k}", "MON-001/PLAYER",
+    "MON-001-MON-002", "MON-001\${k}", "MON-\u0660\u0660\u0661",
+    "MON-\uff10\uff10\uff11", "MON-001\${k}",
 )
 
 
