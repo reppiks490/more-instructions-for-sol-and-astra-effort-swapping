@@ -75,7 +75,7 @@ def pack_glb(doc: dict, binary: bytearray) -> bytes:
     doc["buffers"][0]["byteLength"] = len(binary)
     raw = json.dumps(doc, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
     raw += b" " * (-len(raw) % 4)
-    binary.extend(b"\\0" * (-len(binary) % 4))
+    binary.extend(b"\0" * (-len(binary) % 4))
     return (struct.pack("<III", 0x46546C67, 2, 12 + 8 + len(raw) + 8 + len(binary))
             + struct.pack("<II", len(raw), 0x4E4F534A) + raw
             + struct.pack("<II", len(binary), 0x004E4942) + binary)
@@ -86,7 +86,7 @@ def accessor(doc: dict, binary: bytearray, rows: list, kind: str) -> int:
     flat = [float(v) for row in rows for v in (row if width > 1 else [row])]
     if len(flat) != len(rows) * width or not all(math.isfinite(v) for v in flat):
         raise ValueError("invalid animation accessor")
-    binary.extend(b"\\0" * (-len(binary) % 4))
+    binary.extend(b"\0" * (-len(binary) % 4))
     offset = len(binary)
     binary.extend(struct.pack("<" + "f" * len(flat), *flat))
     view = len(doc["bufferViews"])
@@ -212,7 +212,7 @@ def build(source: Path, output: Path) -> dict:
             cue_sheet["files"].append({"path": path.relative_to(output).as_posix(),
                                        "bytes": len(payload),
                                        "sha256": hashlib.sha256(payload).hexdigest()})
-    (output / "cue_sheet.json").write_text(json.dumps(cue_sheet, indent=2, sort_keys=True) + "\\n",
+    (output / "cue_sheet.json").write_text(json.dumps(cue_sheet, indent=2, sort_keys=True) + "\n",
                                             encoding="utf-8")
     return cue_sheet
 
