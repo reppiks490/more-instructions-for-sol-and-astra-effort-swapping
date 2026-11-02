@@ -34,3 +34,32 @@ Cross-loop ownership: Architect owns identity/receipt state, Avatar owns physica
 **Known source/native mismatch:** the current disabled Reaver path charges the Avatar's upstream 10 energy before downstream targeting; an invalid/missing target can therefore consume upstream energy without a hit. The reference model intentionally describes the stronger future **single transaction** target-preflight/receipt/reservation contract, **not** the existing implemented two-phase native behavior. Do not cite reference tests as proof that this miss-cost, cover gap, or device binding is fixed; issue #52 tracks the required native solution. Existing Arsenals' disabled native source stays untouched by this PR.
 
 **Validation and counterexample scope:** `tests/test_sovereign_arsenal_universe.py` guards contract drift; `tests/test_sovereign_arsenal_admission.py` adversarially exercises target isolation, owner and lease failures, bad timestamps, replay, exhausted energy and shields, class-mark boundedness, destination checks and generation teardown. Passing source tests means these declared reference invariants hold; it does **not** imply Verse compilation, physical line-of-sight, editor bindings, two-client play, Fortnite-mobile performance, or full-universe readiness.
+
+
+## Malformed-evidence event policy (independent QA finding, 2026-11-01)
+
+The offline admission oracle now performs **exact runtime shape validation before
+touching the replay clock or event sequence**. Python dataclass annotations are
+not a security boundary. It rejects non-snapshot objects, non-target objects,
+unhashable/non-string target IDs, forged target subclasses, bool-as-int fields,
+truthy-string booleans, non-finite measurements, malformed shield and destination
+fields, and mutable target containers with a denied receipt rather than an
+exception. Rejection leaves energy, cooldowns, mark, shield allowance,
+last-event sequence and server time unchanged.
+
+The event policy is intentionally split: **malformed evidence never consumes
+an event**; a structurally valid, authenticated event that fails a gameplay
+preflight (LOS, vulnerability, cooldown, insufficient energy, etc.) **does
+consume its sequence and monotonic timestamp**, but does not debit energy or
+apply any effect. This prevents reusing the same valid event after a miss
+without allowing malformed data to corrupt the deterministic ledger. Eight
+adversarial tests enforce both cases, including a successful cast followed by
+a malformed cast and a same-sequence valid retry.
+
+This is a source-only safety model. The actual Verse adapter must obtain
+typed evidence from the server's authoritative actor registry, native collision
+checks and identity/receipt service; client-provided snapshots and this Python
+oracle are **never** permission or damage authorization. The existing disabled
+native Reaver path still has the upstream miss-cost/LOS blockers documented
+above. The complete-universe source gate remains closed, and native UEFN,
+Fortnite-mobile and 300 MiB cooked-memory acceptance are unverified.
