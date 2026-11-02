@@ -108,7 +108,15 @@ class PaidReaverHandoffTests(unittest.TestCase):
                      "Issued := true\n            Issued?")
 
     def test_reject_missing_authoritative_fusion(self):
-        self.mutated("avatar","Authorized := State.IsAuthorizedActive(Self, Player, Token)","Authorized := true")
+        # MaintenanceLoop also checks IsAuthorizedActive. Mutate the Attack
+        # guard specifically, not the earlier unrelated heartbeat check.
+        marker="    Attack(Agent:agent):void="
+        prefix,sep,attack=self.avatar.partition(marker)
+        self.assertTrue(sep)
+        guard="Authorized := State.IsAuthorizedActive(Self, Player, Token)"
+        self.assertIn(guard,attack)
+        self.avatar=prefix+sep+attack.replace(guard,"Authorized := true",1)
+        self.assertTrue(checks(self.avatar,self.arsenal,self.device))
 
     def test_reject_missing_downstream_receipt(self):
         self.mutated("arsenal","State.ConsumeAttackReceipt[Device, Player, Token]","true?")
