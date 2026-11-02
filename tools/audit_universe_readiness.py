@@ -195,6 +195,7 @@ def inspect_inventory(root: Path, policy: dict, inventory: dict,
             packages = []
         seen = set()
         ready = set()
+        approved_visual_keys = {}
         for package in packages:
             if not isinstance(package, dict):
                 errors.append(f"{collection}: non-object source package")
@@ -211,8 +212,20 @@ def inspect_inventory(root: Path, policy: dict, inventory: dict,
             )
             errors.extend(problems)
             if complete:
-                if require_region and not complete_value(package.get("unique_visual_key")):
-                    errors.append(f"{ident}: missing distinguishing visual source identity")
+                if require_region:
+                    visual_key = package.get("unique_visual_key")
+                    if not isinstance(visual_key, str) or not visual_key.strip():
+                        errors.append(f"{ident}: missing/invalid unique_visual_key")
+                    else:
+                        normalized_key = visual_key.strip().casefold()
+                        previous = approved_visual_keys.get(normalized_key)
+                        if previous is not None:
+                            errors.append(
+                                f"{ident}: duplicate unique_visual_key shared with {previous}"
+                            )
+                        else:
+                            approved_visual_keys[normalized_key] = ident
+                            ready.add(ident)
                 else:
                     ready.add(ident)
         approvals[collection] = {"approved": len(ready), "total": len(ids),
