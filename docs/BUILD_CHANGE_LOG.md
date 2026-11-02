@@ -42,6 +42,18 @@ remain unverified.
 
 # Build change log
 
+## 2026-11-01 — Runtime Forge: fail-closed placement and spawn handle maps
+
+Position targeting and canonical spawned-prop records now preflight full
+replacement maps for explicit removal, owner cleanup and timed expiration.
+Failed map insertions keep other players' aim contexts and prop reservations
+intact rather than committing a truncated map. Physical `spawn.released`
+and `spawn.expired` notifications are deferred until the matching logical
+state replacement succeeds. Source regression coverage and native two-client
+acceptance instructions were added. No new assets, catalogs, persistence
+fields or item costs; no native UEFN compile or Launch Session is claimed.
+
+
 ## 2026-11-01 — Runtime Forge: physical delivery fail-closed rebuilds
 
 Post-commit unlock delivery now guards replacement map allocation in pending

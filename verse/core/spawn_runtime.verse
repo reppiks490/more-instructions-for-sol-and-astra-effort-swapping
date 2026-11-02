@@ -89,14 +89,21 @@ aeonfall_spawn_runtime := class():
             Existing := Records[HandleId]
         then:
             var Updated:[string]aeonfall_spawn_record = map{}
+            var Valid:logic = true
 
             for (StoredId -> Record : Records):
                 if (StoredId <> HandleId):
-                    if:
-                        set Updated[StoredId] = Record
-                    then:
-                        set Updated = Updated
+                    if (set Updated[StoredId] = Record):
+                        set Valid = Valid
+                    else:
+                        set Valid = false
 
+            if (not Valid?):
+                AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                    EventType := "spawn.release_rebuild_failed",
+                    ContextId := HandleId
+                })
+                return false
             set Records = Updated
 
             AEONFALLRuntimeBus.Emit(
@@ -116,30 +123,42 @@ aeonfall_spawn_runtime := class():
         Reason:string
     )<transacts>:void=
         var Updated:[string]aeonfall_spawn_record = map{}
+        var Released:[]aeonfall_spawn_record = array{}
+        var Valid:logic = true
 
         for (HandleId -> Record : Records):
             if (Record.OwnerKey <> OwnerKey):
-                if:
-                    set Updated[HandleId] = Record
-                then:
-                    set Updated = Updated
+                if (set Updated[HandleId] = Record):
+                    set Valid = Valid
+                else:
+                    set Valid = false
             else:
-                AEONFALLRuntimeBus.Emit(
-                    aeonfall_runtime_event{
-                        EventType := "spawn.released",
-                        SourceId := OwnerKey,
-                        TargetId := Record.SpawnId,
-                        ContextId := Reason
-                    }
-                )
+                set Released += array{Record}
 
+        if (not Valid?):
+            AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                EventType := "spawn.owner_clear_rebuild_failed",
+                SourceId := OwnerKey
+            })
+            return
         set Records = Updated
+        for (Record : Released):
+            AEONFALLRuntimeBus.Emit(
+                aeonfall_runtime_event{
+                    EventType := "spawn.released",
+                    SourceId := OwnerKey,
+                    TargetId := Record.SpawnId,
+                    ContextId := Reason
+                }
+            )
 
     TickAll(DeltaSeconds:float)<transacts>:void=
         if (DeltaSeconds <= 0.0):
             return
 
         var Updated:[string]aeonfall_spawn_record = map{}
+        var Expired:[]aeonfall_spawn_record = array{}
+        var Valid:logic = true
 
         for (HandleId -> Record : Records):
             Remaining:float = Record.RemainingSeconds - DeltaSeconds
@@ -154,21 +173,28 @@ aeonfall_spawn_runtime := class():
                     RemainingSeconds := Remaining
                     Active := Record.Active
 
-                if:
-                    set Updated[HandleId] = Next
-                then:
-                    set Updated = Updated
+                if (set Updated[HandleId] = Next):
+                    set Valid = Valid
+                else:
+                    set Valid = false
             else:
-                AEONFALLRuntimeBus.Emit(
-                    aeonfall_runtime_event{
-                        EventType := "spawn.expired",
-                        SourceId := Record.OwnerKey,
-                        TargetId := Record.SpawnId,
-                        ContextId := HandleId
-                    }
-                )
+                set Expired += array{Record}
 
+        if (not Valid?):
+            AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                EventType := "spawn.tick_rebuild_failed"
+            })
+            return
         set Records = Updated
+        for (Record : Expired):
+            AEONFALLRuntimeBus.Emit(
+                aeonfall_runtime_event{
+                    EventType := "spawn.expired",
+                    SourceId := Record.OwnerKey,
+                    TargetId := Record.SpawnId,
+                    ContextId := Record.SpawnHandleId
+                }
+            )
 
 # Mutable service allocation is scoped to the current Verse session.
 var AEONFALLSpawnRuntimeSessions:weak_map(session, aeonfall_spawn_runtime) = map{}
