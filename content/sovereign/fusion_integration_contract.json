@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "feature": "one_true_omnigod_sovereign_fusion",
+  "issue": 37,
+  "identity": {
+    "existing_authority": "aeonfall_sovereign_authority_device.CanWield",
+    "existing_owner_identity": "content/sovereign/owner_identity.json",
+    "owner_limit": 1,
+    "enabled_by_default": false,
+    "never_authenticate_with": [
+      "display_name",
+      "team",
+      "cosmetic",
+      "first_join",
+      "client_supplied_token"
+    ],
+    "owner_rebind_policy": "no_rebind_within_session"
+  },
+  "forms": [
+    {
+      "id": "FUS-001",
+      "name": "Sovereign Armor Fusion",
+      "status": "source_state_machine_only",
+      "enabled_for_native_activation": false
+    },
+    {
+      "id": "FUS-002",
+      "name": "Sovereign Titan Fusion",
+      "status": "experimental_design_only",
+      "enabled_for_native_activation": false
+    }
+  ],
+  "states": [
+    "Dormant",
+    "Activating",
+    "Active",
+    "Separating"
+  ],
+  "transitions": [
+    [
+      "Dormant",
+      "Activating"
+    ],
+    [
+      "Activating",
+      "Active"
+    ],
+    [
+      "Active",
+      "Separating"
+    ],
+    [
+      "Separating",
+      "Dormant"
+    ]
+  ],
+  "abort_to": "Dormant",
+  "runtime": {
+    "source": "verse/sovereign/fusion_state_runtime.verse",
+    "session_scope": "weak_map(session, aeonfall_fusion_state_runtime)",
+    "single_controller_lease": true,
+    "generation_token": "monotonic; increment on begin and abort",
+    "physical_effects": "adapter_owned_not_implemented",
+    "authoritative_activation": "trusted controller plus existing owner authority on every owner operation",
+    "separation": "adapter must remove effects before CompleteSeparation",
+    "recovery": "session restart dormant; reconnect requires fresh verified owner; no fusion state persisted",
+    "cleanup": "adapter-owned physical cleanup precedes Abort or ReleaseController",
+    "max_simultaneous_fusions": 1
+  },
+  "preservation": {
+    "canonical_sovereign_ability_id": "UNI-001",
+    "player_profile_schema_change": false,
+    "ordinary_unlockable": false
+  },
+  "ownership": {
+    "architect": [
+      "content/sovereign/fusion_integration_contract.json",
+      "verse/sovereign/fusion_state_runtime.verse",
+      "tools/validate_fusion_architecture.py",
+      "tests/test_fusion_architecture.py",
+      "docs/FUSION_INTEGRATION.md"
+    ],
+    "avatar": "native armor/titan presentation and physical teardown",
+    "arsenal": "ability kit adapter, no entitlement mutation",
+    "cinematics": "VFX/audio/telegraph adapter, cancel and accessibility fallback",
+    "qa": "independent source and native lifecycle verification"
+  },
+  "evidence": {
+    "python_source_validation": "pending",
+    "native_verse_compile": "not_run",
+    "fortnite_launch_session": "not_run",
+    "physical_editor_binding": "not_run",
+    "publication": "not_run"
+  }
+}
