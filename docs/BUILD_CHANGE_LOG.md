@@ -1,5 +1,19 @@
 # Build change log
 
+## 2026-11-01 — Sovereign fusion: verified-owner state and armor presentation bridge
+
+Introduced a session-scoped, generation-bound UNI-001 armor fusion runtime with
+single controller lease, native owner authority verification, finite energy,
+cooldown, fail-closed resource spending and deterministic separation. Added a
+disabled-by-default player-specific native presentation device using visual
+effect powerup, orbit camera and instigator-only cinematic sequence, including
+authoritative heartbeat, owner-revocation, character-swap and teardown cleanup.
+Source/policy mutation guards, CI integration and native Launch Session
+acceptance guide were added. This is **not** custom NPC possession or a
+playable imported machine-demon mesh; no native compile or multiplayer session
+was performed and creator provisioning remains unverified.
+
+
 ## 2026-11-01 — Playable Slice: persistent Ossuary checkpoint/respawn runtime
 
 Added a project-bindable four-checkpoint Verse device with distinct volume,
