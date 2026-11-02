@@ -28,7 +28,7 @@ The exclusive corpse consumption, immutable profile replacement, class charge, o
 
 ## Targets and heat
 
-Bind the target selector's input trigger to the authored Creative Input Action. It picks the nearest active registered NPC in the configured view cone and range, limited to `TargetCanonicalIds`; default MON-043 and BOS-005. Active player-owned companions are excluded. Selection expires after eight seconds. Failure clears the player's earlier target. The selector provides spatial eligibility only: no line-of-sight raycast is available through the APIs used here. Confirm occlusion and targeting fairness in UEFN before release.
+Bind the target selector's input trigger to the authored Creative Input Action. It picks the nearest active registered NPC in the configured view cone and range, limited to `TargetCanonicalIds`; default MON-043 and BOS-005. Active player-owned companions are excluded. Selection expires after eight seconds. Failure clears the player's earlier target. The runtime now also requires a live native `fort_character` at initial selection and each read/tick: a still-registered eliminated NPC is rejected before targeted-input activation. The generic status effect adapter checks the native target again at effect execution time, so death between input and asynchronous delivery cannot commit statuses or report a successful effect. The selector provides spatial eligibility only: no line-of-sight raycast is available through the APIs used here. Confirm occlusion and targeting fairness in UEFN before release.
 
 The WPN-007 heat adapter is disabled by default. Bind its NPC spawner, configure its conditional button with the exact physical item used by the WPN-007 item delivery adapter, and then enable it. Positive native damage to an observed NPC adds 10 ABL-006 meter, at most once per player every 0.25 seconds. The player must own and select WPN-007 and actually hold the configured physical item. A generic trigger, selected profile entry alone, environment damage or another player's damage cannot award heat. Native damage attribution and the item gate require editor playtesting.
 
@@ -61,3 +61,20 @@ Class activation resolves all abilities, changes passives, saves the equipped cl
 Python tests mutate these source guards and verify exact source bundle delivery. They do not execute any of the session checks above.
 
 Review this guide when class resource rules, item mappings, target eligibility, corpse rewards or the native Fortnite APIs change. Source files live in `verse/combat/`, `verse/npcs/` and `verse/progression/`; the authored policy is `content/vertical_slice/slice_001_player_loop.json`.
+
+### Native target liveness acceptance
+
+In a two-client UEFN Launch Session, select MON-043 or BOS-005 using the
+Creative Input Action. Eliminate that exact NPC after selection but before
+the targeted-ability input and attempt a paid status ability. Confirm
+`ability.targeted_input_rejected` and no ability resource commit or new
+status application. Repeat with an event-adapter delivery delayed until
+after NPC elimination: the adapter should return `target_not_active`
+rather than successful status execution. An unregistered target must still
+return `target_not_registered`. Respawn a new NPC of the same canonical
+type; do not inherit the old runtime key's selection, then select the new
+instance explicitly. Test owner elimination/respawn too.
+
+This guard intentionally applies to `fort_character` targets; non-character
+Scene Graph/prop objectives need separate targeting policy. Source tests do
+not prove UEFN compilation or physical combat.

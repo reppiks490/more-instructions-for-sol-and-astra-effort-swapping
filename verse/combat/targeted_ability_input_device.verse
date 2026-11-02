@@ -1,4 +1,5 @@
 using { /Fortnite.com/Devices }
+using { /Fortnite.com/Characters }
 using { /Verse.org/Simulation }
 
 # Input bridge for abilities that consume the owner's current actor target.
@@ -36,7 +37,12 @@ aeonfall_targeted_ability_input_device := class(creative_device):
         if (not Running?):
             return
         if:
+            # The input trigger is player-facing. An eliminated player cannot
+            # activate against an NPC eliminated after target selection.
+            player[Agent]
             OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
+            OwnerCharacter := Agent.GetFortCharacter[]
+            OwnerCharacter.IsActive[]
             Selection := GetAEONFALLTargetingRuntime().GetSelection[OwnerKey]
         then:
             Flags := GetAEONFALLActorContextRuntime().GetFlags(OwnerKey)
