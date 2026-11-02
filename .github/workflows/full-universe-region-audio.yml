@@ -1,0 +1,56 @@
+name: AEONFALL All Thirteen Region Original Sound Sources
+
+on:
+  push:
+    paths:
+      - "tools/build_all_region_audio.py"
+      - "tools/validate_all_region_audio.py"
+      - "tests/test_all_region_audio.py"
+      - "content/world/world_topology.json"
+      - ".github/workflows/full-universe-region-audio.yml"
+  pull_request:
+    paths:
+      - "tools/build_all_region_audio.py"
+      - "tools/validate_all_region_audio.py"
+      - "tests/test_all_region_audio.py"
+      - "content/world/world_topology.json"
+      - ".github/workflows/full-universe-region-audio.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-original-regional-sound-sources:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact source commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Free Python 3.12 standard-library synthesis
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Test all 39 actual PCM streams, region identity and corruption resistance
+        run: python -m unittest discover -s tests -p "test_all_region_audio.py" -v
+
+      - name: Generate complete set of 39 original regional sound WAVs
+        run: python tools/build_all_region_audio.py --output dist/full_universe_region_audio
+
+      - name: Independently parse every RIFF WAV, check samples, volume and SHA inventory
+        run: python tools/validate_all_region_audio.py --output dist/full_universe_region_audio
+
+      - name: Upload real 13-region original WAV sources (NOT native UEFN sound cues)
+        uses: actions/upload-artifact@v4
+        with:
+          name: AEONFALL-13-Region-Original-Audio-${{ github.event.pull_request.head.sha || github.sha }}
+          path: dist/full_universe_region_audio/
+          if-no-files-found: error
+          retention-days: 30
+
+# Source sounds still require native mixing, import, Sound Cue/Audio Player
+# device setup, subtitles/telegraphs, compression, mobile and multiplayer QA.
