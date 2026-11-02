@@ -1,0 +1,70 @@
+name: AEONFALL Omnigod Mobile Presentation Admission Source
+
+on:
+  push:
+    paths:
+      - 'tools/build_omnigod_mobile_admission.py'
+      - 'tests/test_omnigod_mobile_admission.py'
+      - 'docs/OMNIGOD_MOBILE_PRESENTATION_ADMISSION.md'
+      - 'tools/build_omnigod_arsenal_presentation.py'
+      - 'tools/build_omnigod_sequence_tracks.py'
+      - 'content/sovereign/fusion_integration_contract.json'
+      - 'content/world/world_topology.json'
+      - 'content/implementation/universe_first_policy.json'
+      - '.github/workflows/omnigod-mobile-admission.yml'
+  pull_request:
+    paths:
+      - 'tools/build_omnigod_mobile_admission.py'
+      - 'tests/test_omnigod_mobile_admission.py'
+      - 'docs/OMNIGOD_MOBILE_PRESENTATION_ADMISSION.md'
+      - 'tools/build_omnigod_arsenal_presentation.py'
+      - 'tools/build_omnigod_sequence_tracks.py'
+      - 'content/sovereign/fusion_integration_contract.json'
+      - 'content/world/world_topology.json'
+      - 'content/implementation/universe_first_policy.json'
+      - '.github/workflows/omnigod-mobile-admission.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-source-budget:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout exact source SHA without Codex
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run twelve adversarial offline admission tests
+        run: python -m unittest discover -s tests -p 'test_omnigod_mobile_admission.py' -v
+      - name: Generate and validate real original Arsenal PNG WAV WebVTT bytes
+        run: |
+          python tools/build_omnigod_arsenal_presentation.py --output dist/omnigod_arsenal_presentation
+          python tools/build_omnigod_arsenal_presentation.py --output dist/omnigod_arsenal_presentation --validate-only
+      - name: Generate real source 13-plate GLB and PCM cues
+        run: |
+          python tools/build_omnigod_manifestation_assets.py --output dist/omnigod_manifestation
+          python tools/build_omnigod_cinematic.py --source dist/omnigod_manifestation/omnigod_dormant_assembly.glb --output dist/omnigod_cinematics
+          python tools/validate_omnigod_cinematic.py --output dist/omnigod_cinematics
+      - name: Build and independently validate captions and 146 source EDL events
+        run: |
+          python tools/build_omnigod_presentation_handoff.py --output dist/omnigod_cinematics
+          python tools/build_omnigod_sequence_tracks.py --output dist/omnigod_cinematics
+          python tools/build_omnigod_sequence_tracks.py --output dist/omnigod_cinematics --validate-only
+      - name: Compile 546 region LOD rows and 78 bounded stress cases
+        run: |
+          python tools/build_omnigod_mobile_admission.py --arsenal dist/omnigod_arsenal_presentation --cinematic dist/omnigod_cinematics --output dist/omnigod_mobile_admission
+          python tools/build_omnigod_mobile_admission.py --arsenal dist/omnigod_arsenal_presentation --cinematic dist/omnigod_cinematics --output dist/omnigod_mobile_admission --validate-only
+      - name: Upload source-only budget and provenance handoff
+        uses: actions/upload-artifact@v4
+        with:
+          name: AEONFALL-Omnigod-Mobile-Admission-${{ github.event.pull_request.head.sha || github.sha }}
+          path: dist/omnigod_mobile_admission/
+          if-no-files-found: error
+          retention-days: 30
