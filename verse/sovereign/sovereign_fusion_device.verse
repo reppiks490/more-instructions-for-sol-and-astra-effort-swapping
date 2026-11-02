@@ -8,10 +8,8 @@ FusionAwakened<localizes>:message = "SOVEREIGN ARMOR FUSION — crimson core onl
 FusionDenied<localizes>:message = "Fusion denied: owner authority, cooldown, or active session gate."
 FusionSeparated<localizes>:message = "SOVEREIGN SEPARATION — armor link disengaged."
 
-# Step-two native presentation bridge. This controls the player's OWN camera
-# and a bounded outline/glow powerup; it does NOT possess an NPC, attach a
-# custom skeletal mesh, grant permanent items, or modify a player profile.
-# Keep disabled until operator-only authority and unique editor devices bind.
+# Physical FUS-001 adapter of the Architect-owned canonical state machine.
+# This is not native NPC possession or arbitrary imported player skin support.
 aeonfall_sovereign_fusion_device := class(creative_device):
     @editable
     Enabled:logic = false
@@ -38,7 +36,8 @@ aeonfall_sovereign_fusion_device := class(creative_device):
 
     StopEvent:event() = event(){}
     var Running:logic = false
-    var Runtime:?aeonfall_sovereign_fusion_runtime = false
+    var Runtime:?aeonfall_fusion_state_runtime = false
+    var Budget:?aeonfall_sovereign_fusion_budget_runtime = false
     var Subscriptions:[]cancelable = array{}
     var VisualOwner:?player = false
     var VisualCharacter:?fort_character = false
@@ -60,12 +59,21 @@ aeonfall_sovereign_fusion_device := class(creative_device):
     OnBegin<override>()<suspends>:void=
         if (not Enabled? or not ValidSettings()?):
             return
-        if (Service := GetAEONFALLSovereignFusionRuntime[]):
-            Acquired := Service.AcquireController(Self)
-            if (not Acquired?):
-                Print("AEONFALL fusion rejected duplicate controller.")
+        if:
+            State := GetAEONFALLFusionState[]
+            Resource := GetAEONFALLSovereignFusionBudget[]
+        then:
+            StateLease := State.AcquireController(Self, Authority)
+            if (not StateLease?):
+                Print("AEONFALL fusion rejected duplicate canonical controller.")
                 return
-            set Runtime = option{Service}
+            BudgetLease := Resource.AcquireController(Self)
+            if (not BudgetLease?):
+                State.ReleaseController(Self)
+                Print("AEONFALL fusion rejected duplicate resource controller.")
+                return
+            set Runtime = option{State}
+            set Budget = option{Resource}
         else:
             return
         set Running = true
@@ -85,21 +93,36 @@ aeonfall_sovereign_fusion_device := class(creative_device):
             Player.IsActive[]
             Character := Player.GetFortCharacter[]
             Character.IsActive[]
-            Service := Runtime?
+            State := Runtime?
+            Resource := Budget?
             not VisualOwner?
+            Free := Resource.CanBegin(Self)
+            Free?
         then:
-            if (Started := Service.Begin[Self, Player, Authority, DurationSeconds, InitialEnergy]):
-                set Token = Started
-                set VisualOwner = option{Player}
-                set VisualCharacter = option{Character}
-                # These are irreversible native presentation calls, made only
-                # AFTER the authoritative, owner-only successful admission.
-                ArmorGlow.Pickup(Player)
-                ArmorCamera.AddTo(Player)
-                # Must be configured for instigator-only playback in the editor.
-                FusionSequence.Play(Player)
-                Feedback.Show(Player, FusionAwakened, 3.0)
-                return
+            NewToken := State.BeginActivation(Self, Player, "FUS-001")
+            if (Started := NewToken?):
+                Reserved := Resource.Start(Self, Started, DurationSeconds, InitialEnergy)
+                if (Reserved?):
+                    set Token = Started
+                    set VisualOwner = option{Player}
+                    set VisualCharacter = option{Character}
+                    # Native presentation is requested only AFTER authentic
+                    # FUS-001 admission, never from an arbitrary input event.
+                    ArmorGlow.Pickup(Player)
+                    ArmorCamera.AddTo(Player)
+                    FusionSequence.Play(Player)
+                    # A same-type native effect is the most observable signal
+                    # currently exposed; dedicated editor bindings are required.
+                    if (ArmorGlow.HasEffect[Player]):
+                        Confirmed := State.ConfirmActivated(Self, Player, Started)
+                        if (Confirmed?):
+                            Feedback.Show(Player, FusionAwakened, 3.0)
+                            return
+                    # A failed physical acknowledgement aborts the canonical
+                    # activation after removing any partial presentation.
+                    FinishActive()
+                else:
+                    Aborted := State.Abort(Self, Started)
         Feedback.Show(Agent, FusionDenied, 3.0)
 
     Separate(Agent:agent):void=
@@ -111,15 +134,26 @@ aeonfall_sovereign_fusion_device := class(creative_device):
             FinishActive()
 
     FinishActive():void=
-        if (Service := Runtime?):
-            Stopped := Service.End(Self, Token, CooldownSeconds)
+        # No physical cleanup depends on current authority. This must run
+        # before CompleteSeparation/Abort as required by the architect state.
+        LocalToken := Token
+        Owner := VisualOwner
         ClearPhysical()
+        if (State := Runtime?, Player := Owner?):
+            Began := State.BeginSeparation(Self, Player, LocalToken)
+            if (Began?):
+                Complete := State.CompleteSeparation(Self, LocalToken)
+            else:
+                Aborted := State.Abort(Self, LocalToken)
+        else if (State := Runtime?):
+            Aborted := State.Abort(Self, LocalToken)
+        if (Resource := Budget?):
+            Stopped := Resource.Stop(Self, LocalToken, CooldownSeconds)
         set Token = 0
 
     ClearPhysical():void=
         if (Owner := VisualOwner?):
-            # Separate on authority loss, death, disconnect, and timeout.
-            # No other player's camera, aura or outfit is altered.
+            # Only the owner's specifically bound presentation rig is changed.
             FusionSequence.Stop(Owner)
             ArmorCamera.RemoveFrom(Owner)
             ArmorGlow.Clear(Owner)
@@ -131,19 +165,19 @@ aeonfall_sovereign_fusion_device := class(creative_device):
             Sleep(1.0)
             if (not Running?):
                 return
-            if (Player := VisualOwner?, Service := Runtime?):
+            if (Player := VisualOwner?, State := Runtime?, Resource := Budget?):
                 if:
-                    Granted := Authority.CanWield(Player)
-                    Granted?
-                    Service.IsCurrent(Player, Token)?
+                    Authorized := State.IsAuthorizedActive(Self, Player, Token)
+                    Authorized?
                     OriginalCharacter := VisualCharacter?
                     Character := Player.GetFortCharacter[]
                     Character = OriginalCharacter
                     Character.IsActive[]
+                    not Resource.IsExpired(Self, Token)?
                 then:
-                    # One energy per elapsed maintenance tick. Burst attacks
-                    # must request additional atomic Spend with this epoch.
-                    if (Remaining := Service.Spend[Self, Player, Token, 1]):
+                    # One energy per second, plus bounded ability expenditures
+                    # admitted through the same authoritative resource budget.
+                    if (Remaining := Resource.Spend[Self, Player, Token, State, 1]):
                         set Token = Token
                     else:
                         FinishActive()
@@ -156,9 +190,10 @@ aeonfall_sovereign_fusion_device := class(creative_device):
         for (Subscription : Subscriptions):
             Subscription.Cancel()
         set Subscriptions = array{}
-        if (Service := Runtime?, Service.OwnsController(Self)?):
-            FinishActive()
-            Service.ReleaseController(Self)
-        else:
-            ClearPhysical()
+        FinishActive()
+        if (State := Runtime?, State.OwnsController(Self)?):
+            Released := State.ReleaseController(Self)
+        if (Resource := Budget?, Resource.OwnsController(Self)?):
+            Resource.ReleaseController(Self)
         set Runtime = false
+        set Budget = false
