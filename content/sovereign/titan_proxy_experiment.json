@@ -32,7 +32,8 @@
     "character_definition": null,
     "spawner_editor_path": null,
     "input_editor_paths": [],
-    "waypoint_editor_paths": []
+    "waypoint_editor_paths": [],
+    "spawn_api": "npc_spawner_device.SpawnAt"
   },
   "movement": {
     "native": "navigatable.NavigateTo",
@@ -66,7 +67,8 @@
     "character_replacement": "invalidate",
     "device_shutdown": "cancel_subscriptions_and_despawn",
     "player_join": "no_implicit_entitlement",
-    "replication": "native_npc_simulation_unverified"
+    "replication": "native_npc_simulation_unverified",
+    "spawn_association": "serialized_SpawnAt_return_and_epoch"
   },
   "safety": {
     "no_shared_npc_spawner": true,
@@ -74,7 +76,8 @@
     "attack_cue_must_not_wire_damage": true,
     "f002_not_activated": true,
     "requires_native_compile": true,
-    "requires_two_client_launch_session": true
+    "requires_two_client_launch_session": true,
+    "no_untagged_spawned_event_association": true
   },
   "native_evidence": {
     "uefn_compile": "not_run",
