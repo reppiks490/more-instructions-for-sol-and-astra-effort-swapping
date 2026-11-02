@@ -18,8 +18,8 @@ aeonfall_sovereign_arsenal_device := class(creative_device):
     Enabled:logic = false
     # NON-EDITABLE universe-first hard stop. Even if an editor toggles Enabled,
     # this source cannot subscribe to inputs or call native Damage/SetShield.
-    # Removing this requires full #84 source coverage plus real native LOS,
-    # collision, multiplayer, mobile and memory acceptance evidence.
+    # Replace only in a reviewed native-verification branch after #84 source
+    # completion and LOS/collision implementation; native proof gates merge.
     NativeSourceGate:logic = false
     @editable
     Controller:aeonfall_sovereign_fusion_device = aeonfall_sovereign_fusion_device{}
