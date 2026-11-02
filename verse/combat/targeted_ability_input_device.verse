@@ -14,10 +14,27 @@ aeonfall_targeted_ability_input_device := class(creative_device):
     @editable
     Magnitude:int = 0
 
+    var Running:logic = false
+    var InputSubscription:?cancelable = false
+
     OnBegin<override>()<suspends>:void=
-        Input.PressedEvent.Subscribe(OnPressed)
+        # An unconfigured input device must not observe player actions.
+        if (AbilityId = ""):
+            Print("AEONFALL ability input rejected empty canonical ability ID.")
+            return
+        set Running = true
+        Bound := Input.PressedEvent.Subscribe(OnPressed)
+        set InputSubscription = option{Bound}
+
+    OnEnd<override>():void=
+        set Running = false
+        if (Bound := InputSubscription?):
+            Bound.Cancel()
+        set InputSubscription = false
 
     OnPressed(Agent:agent)<transacts>:void=
+        if (not Running?):
+            return
         if:
             OwnerKey := GetAEONFALLActorRegistry().GetRuntimeKey[Agent]
             Selection := GetAEONFALLTargetingRuntime().GetSelection[OwnerKey]
