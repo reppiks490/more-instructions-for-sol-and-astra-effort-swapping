@@ -65,7 +65,8 @@
     "separation": "adapter must remove effects before CompleteSeparation",
     "recovery": "session restart dormant; reconnect requires fresh verified owner; no fusion state persisted",
     "cleanup": "adapter-owned physical cleanup precedes Abort or ReleaseController",
-    "max_simultaneous_fusions": 1
+    "max_simultaneous_fusions": 1,
+    "controller_release": "only_dormant_after_physical_cleanup_and_canonical_teardown"
   },
   "preservation": {
     "canonical_sovereign_ability_id": "UNI-001",

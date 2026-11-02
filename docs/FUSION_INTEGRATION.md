@@ -10,7 +10,7 @@ Preserve the existing `UNI-001` creator-only Sovereign Unmaking identity and its
 
 ## Runtime contract
 
-`verse/sovereign/fusion_state_runtime.verse` is a session-keyed service. A single trusted controller leases the service with `AcquireController`. The controller may call `BeginActivation` only for the live, authority-verified creator and only while Dormant; this returns a monotonic generation token. The service moves through **Dormant → Activating → Active → Separating → Dormant**. `ConfirmActivated` is permitted only after the future physical adapters report success. `BeginSeparation` checks live authority again. The controller must remove physical effects before `CompleteSeparation`. On interruption, owner death, lost reference, disconnection or shutdown, the controller must remove owned physical effects **before** `Abort` or `ReleaseController`. These cleanup paths intentionally do not require current authorization. Every new activation or abort invalidates stale async callbacks through the generation counter.
+`verse/sovereign/fusion_state_runtime.verse` is a session-keyed service. A single trusted controller leases the service with `AcquireController`. The controller may call `BeginActivation` only for the live, authority-verified creator and only while Dormant; this returns a monotonic generation token. The service moves through **Dormant → Activating → Active → Separating → Dormant**. `ConfirmActivated` is permitted only after the future physical adapters report success. `BeginSeparation` checks live authority again. The controller must remove physical effects before `CompleteSeparation`. On interruption, owner death, lost reference, disconnection or shutdown, the controller must remove owned physical effects **before** `Abort` or `ReleaseController`. `ReleaseController` now fails while the canonical phase is Activating, Active, or Separating (or FormId has not been cleared); it cannot silently reset an active phase and allow a replacement controller to inherit uncleared effects. The owner identity remains sticky after successful lease release. A failed release must be logged and the device must remain disabled until cleanup is reconciled. These cleanup paths intentionally do not require current authorization. Every new activation or abort invalidates stale async callbacks through the generation counter.
 
 The first verified session owner remains sticky after abort or controller release, so another player cannot inherit the fusion. A fresh Verse session starts Dormant, with no fusion state persisted; rejoining requires a newly verified owner and a new activation. An already-active owner must not silently reactivate after a respawn. No independent ability, appearance, monster allegiance or persistent progression is granted by this source-only state service.
 
@@ -33,3 +33,57 @@ Source validation: `python tools/validate_fusion_architecture.py` and `python -m
 Before enabling any native fusion, record the exact source SHA, editor version and successful Verse compile; verify real owner reference provisioning and a physical controller in UEFN; run two-client Launch Sessions for authorization, character lifecycle and replication; prove every partial-effect teardown; and profile World Partition/HLOD transitions, streaming, Spatial Profiler, Memory Snapshot and platform runtime memory under full fusion VFX. Include readable telegraphs, audio alternatives and photosensitivity-safe fallback. Publication remains blocked until native evidence and current Epic feature/API eligibility are verified.
 
 No invented `.uefnproject`, `.uasset`, `.umap`, character mesh or editor evidence is supplied here. No native effect adapters are implemented in this PR. The runtime is a stable integration contract, **not a playable transformation**.
+
+## Integration handoff and release evidence (2026-11-01)
+
+**Architect-owned contract; no native entitlement granted by this document.**
+Avatar PR #48 owns its attack-input bridge and Titan feasibility study. Arsenal
+owns hit validation and checked resource transactions. Cinematics owns
+instigator-only effects and reduced-intensity alternatives. QA owns independent
+source-mutation and two-client Launch Session acceptance. No loop should edit
+another loop's device adapter without coordination in issue #37.
+
+### Handoff requirements
+
+1. **Authority:** every activation and attack request must originate from the
+   leased controller, verified live native owner, exact active character, and
+   current FUS-001 generation. Never infer authority from cosmetic identity,
+   display name, a trigger firing, or an NPC proxy.
+2. **Activation:** reserve budget, apply native effects, confirm the dedicated
+   effect acknowledgement, then commit Active. Partial failure must unwind
+   physical effects before aborting. A trigger is a request, never evidence
+   of damage, fusion success, or successful possession.
+3. **Separation:** disable further attack inputs, cancel outstanding callbacks,
+   restore camera/effects/cinematics on the original character, then finalize
+   the canonical phase. Test disconnect and respawn between every transition.
+4. **Arsenal:** bind Avatar's AttackOutput only to a range-, target-, team-,
+   and faction-checked server-side damage adapter. Revalidate token and
+   resource budget at acceptance; reject repeated inputs and stale callbacks.
+5. **Cinematics:** pair crimson/violet telegraphs with shapes, motion or audio
+   cues that remain legible without color; provide reduced-flash and
+   reduced-intensity alternatives. Effects must be cancellable on teardown.
+
+### Native acceptance evidence table (all unverified until captured)
+
+| Gate | Evidence required | Owner |
+| --- | --- | --- |
+| Native Verse compiler | Exact commit, UEFN version, complete diagnostics | QA |
+| Owner provisioning | Trusted native Player Reference, spoof and second-client denial | Architect / QA |
+| Activation and recovery | Two-client phase logs, respawn/rejoin and interrupted teardown | Avatar / QA |
+| Combat | Target/range/faction proof, damage receipt, budget and cooldown | Arsenal / QA |
+| Presentation | Instigator-only camera/VFX/audio and accessible cue alternatives | Cinematics / QA |
+| Streaming | World Partition boundary crossings, HLOD transitions, two separated clients | Avatar / QA |
+| Cooked publish budget | Editor Memory Calculation at exact cook (300 MiB limit) | QA |
+| Runtime memory | Spatial Profiler Live and Memory Snapshot per target platform | QA |
+
+Epic's UEFN documentation distinguishes the **300 MiB cooked publishing
+budget** from platform-specific **runtime memory**. Run Memory Calculation
+after a cook, and use Spatial Profiler/Memory Snapshot in a monitored Launch
+Session; a source CI pass cannot supply these measurements. Streaming and HLOD
+must be checked together because generated HLODs add memory and may use
+high-resolution geometry when source meshes lack appropriate LODs.
+
+Do not promote FUS-001 to native-enabled or FUS-002 to playable, or claim a
+published island, until all relevant gates have independent evidence. Preserve
+canonical IDs, existing profile schemas and the owner's sticky session
+identity. This handoff changes no runtime entitlement or existing gameplay.
