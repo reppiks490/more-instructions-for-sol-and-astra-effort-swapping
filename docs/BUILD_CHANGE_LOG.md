@@ -11,6 +11,20 @@ remain unverified.
 
 # Build change log
 
+## 2026-11-01 — Cinematics: original glTF mechanical motion and PCM cue sources
+
+Added a deterministic DCC-preview animation pipeline for the 13-part original
+Omnigod machine-demon geometry. It emits three genuine glTF 2.0 animation
+clips (fusion, separation and dormant breathing), three original playable
+16-kHz PCM WAV cues, and a hashed cue sheet with accessible telegraphs,
+cancellation contract and distance-tier VFX design caps. A dedicated GitHub
+Actions workflow builds and tests the downloadable source package. The editor
+handoff covers separate Everyone-visible replaceable-NPC sequences versus
+instigator-only player fusion, Niagara, Verse generation-token teardown,
+LOD, memory and two-client acceptance. This is NOT a skeletal rig, native
+Niagara/Sequencer binding, imported UEFN asset or playable transformation;
+native tests remain pending.
+
 ## 2026-11-01 — Fusion Architect: one-use Reaver admission receipts
 
 Added a session-local, generation-bound, one-second attack receipt to the
