@@ -55,6 +55,21 @@ UEFN Verse compilation, item possession and Launch Session outcomes are
 unverified.
 
 
+## 2026-11-01 — Omnigod: five directional in-place skeletal source clips
+
+Extended the original thirteen-joint weighted machine-demon rig with five
+distinct glTF keyed skeletal animations: Idle, Forward, Backward, Left and
+Right. Each 1.6-second cycle has 17 finite frames, different greave
+directional thrust, counter-swinging gauntlets, servo stabilization, a
+bounded nonflashing Axiom pulse and subtle eclipse motion. The three
+existing cinematic clips and original skin are preserved; source CI
+checks exact glTF channels/coordinates/loop closure/real directional
+differences and negative mutations. Artifact is genuine DCC source
+animation, NOT a native UEFN Animation Preset, Blender-exported FBX,
+verified humanoid locomotion or multiplayer gameplay. Canonical IDs and
+creator-only permissions remain unchanged.
+
+
 ## 2026-11-01 — Runtime Forge: fail-closed multiplayer runtime map rebuilds
 
 Actor context `Clear` and encounter participant `RemoveRuntimeKey` now
