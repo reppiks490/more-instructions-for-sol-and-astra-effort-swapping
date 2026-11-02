@@ -88,8 +88,16 @@ class WorldEventRegionBindingTests(unittest.TestCase):
         handler = self.adapter.split("    OnRuntimeEvent(", 1)[1].split(
             "    OnEnd<override>", 1
         )[0]
-        self.assertIn('if:\\n            (\\n                Event.EventType = "world_event.started"', handler)
-        self.assertIn('Event.EventType = "world_event.failed"\\n            )\\n        then:', handler)
+        self.assertIn(chr(10).join((
+            "if:",
+            "            (",
+            '                Event.EventType = "world_event.started"',
+        )), handler)
+        self.assertIn(chr(10).join((
+            'Event.EventType = "world_event.failed"',
+            "            )",
+            "        then:",
+        )), handler)
 
     def test_service_queries_only_active_canonical_claims(self):
         body = self.service.split("    ActiveEventForRegion(", 1)[1].split(
