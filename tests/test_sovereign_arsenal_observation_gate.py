@@ -168,6 +168,15 @@ class SourceObservationGateTests(unittest.TestCase):
         self.assertEqual(self.gate.resolve(observe(sequence=2, at=500)).damage, 18)
         self.assertFalse(self.gate.resolve(observe(sequence=2, at=500)).accepted)
 
+    def test_second_pulse_rechecks_cover_after_first_hit(self):
+        p = plan("SFA-005")
+        self.assertTrue(self.stage(p))
+        first = self.gate.resolve(observe(pulse=0, at=101))
+        second = self.gate.resolve(observe(pulse=1, at=201, line_of_sight=False))
+        self.assertEqual((first.damage, second.damage), (6, 0))
+        self.assertEqual(second.damage_committed, 6)
+        self.assertFalse(self.gate.resolve(observe(pulse=1, at=202)).accepted)
+
     def test_all_thirteen_regions_accept_same_region_bindings(self):
         for n in range(1, 14):
             region = f"REG-{n:03d}"
@@ -215,6 +224,14 @@ class SourceObservationGateTests(unittest.TestCase):
         data["universe_first_gate"]["native_enablement_allowed"] = True
         with self.assertRaises(ValueError):
             SourceHitObservationGate(data)
+        duplicate = contract()
+        duplicate["abilities"].append(dict(duplicate["abilities"][0]))
+        with self.assertRaises(ValueError):
+            SourceHitObservationGate(duplicate)
+        extended = contract()
+        extended["abilities"][0]["range_cm"] = 651
+        with self.assertRaises(ValueError):
+            SourceHitObservationGate(extended)
 
 
 if __name__ == "__main__":
