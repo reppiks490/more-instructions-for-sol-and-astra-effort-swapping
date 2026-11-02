@@ -1,3 +1,14 @@
+## 2026-11-01 — Avatar FUS-001 attack request and Titan proxy feasibility
+
+Extended the disabled-by-default Armor Fusion controller with a third
+owner-gated attack input, bounded server-side energy cost/cooldown, canonical
+generation validation and a dedicated instigator-scoped trigger output.
+The player retains native movement and the existing owner-only orbit camera.
+Added attack source/mutation tests, CI guard and a FUS-002 NPC-proxy
+feasibility/cleanup design. Native hit detection, custom armor mesh, Titan
+possession, Verse compile, editor binding and multiplayer Launch Session
+remain unverified.
+
 # Build change log
 
 ## 2026-11-01 — Fusion Architect: one-use Reaver admission receipts
