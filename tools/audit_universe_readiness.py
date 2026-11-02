@@ -370,7 +370,7 @@ def markdown(report: dict) -> str:
         out.append(f"| {display} | {row['approved']} | {row['total']} |")
     out += ["", "## UEFN-native proof (separate gate)", "",
             f"- Native compilation recorded for {evidence['native_verse_compiled_entity_records']} "
-            f"of {evidence['entity_evidence_records']} sampled evidence records.",
+            f"of {evidence['entity_evidence_records']} tracked entity-evidence records.",
             f"- Fully UEFN-verified entities across entire catalog: "
             f"{evidence['verified_native_entities']} / {catalog['major_entities']}.",
             f"- Native-compiled system evidence records: "
@@ -427,10 +427,10 @@ def main() -> int:
         if len(report["validation_errors"]) > 50:
             print(f"... and {len(report['validation_errors'])-50} more errors.", file=sys.stderr)
         return 1
-    if args.require-source-complete and not report["source_complete"]:
+    if args.require_source_complete and not report["source_complete"]:
         print("Full universe source-completion gate is NOT satisfied.", file=sys.stderr)
         return 2
-    if args.require-native-complete and not report["native_uefn_complete"]:
+    if args.require_native_complete and not report["native_uefn_complete"]:
         print("Native UEFN completion gate is NOT satisfied.", file=sys.stderr)
         return 3
     return 0
