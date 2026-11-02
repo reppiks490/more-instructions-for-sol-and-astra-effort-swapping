@@ -190,6 +190,15 @@ class SourceObservationGateTests(unittest.TestCase):
                  BoundActor("MON-002", "actor-instance-1", "REG-002"))
         self.assertFalse(self.stage(p, mixed))
 
+    def test_noncanonical_monster_aliases_never_stage(self):
+        for target in ("MON-ABC", "MON-001 ", "MON-١٢٣", "MON-001\n",
+                       "MON-01", "MON-00001", "MON-001-2", "MON-１２３"):
+            p = plan(targets=(target,))
+            b = (BoundActor(target, "actor-instance-0", "REG-001"),)
+            self.assertFalse(self.stage(p, b), target)
+        self.assertTrue(self.stage(plan(targets=("MON-1234",)),
+                                   (BoundActor("MON-1234", "actor-instance-0", "REG-001"),)))
+
     def test_stage_bounds_and_invalid_binding(self):
         p = plan()
         for b in ([], (), (BoundActor("MON-001", "", "REG-001"),),
