@@ -41,6 +41,10 @@ def violations(source: str) -> list[str]:
                      "set OwnsLease = false"):
         if fragment not in end:
             errors.append("bootstrap must cancel and release only owner lease: " + fragment)
+    if end.count("set AEONFALLActorBootstrapOwners[GetSession()] = false") != 1:
+        errors.append("bootstrap must release the lease only once")
+    if end.find("Owner = Self") > end.find("set AEONFALLActorBootstrapOwners[GetSession()] = false"):
+        errors.append("bootstrap may only release lease after owner check")
     if (end.find("Subscription.Cancel()") < 0
         or end.find("set AEONFALLActorBootstrapOwners[GetSession()] = false") < 0
         or end.find("Subscription.Cancel()") > end.find("set AEONFALLActorBootstrapOwners[GetSession()] = false")):
