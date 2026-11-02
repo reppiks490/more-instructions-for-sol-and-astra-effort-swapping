@@ -11,6 +11,23 @@ remain unverified.
 
 # Build change log
 
+## 2026-11-01 — Cinematics: timed accessible fusion handoff source
+
+Added an independent reproducible post-processing step for the existing
+Omnigod source pack: real UTF-8 WebVTT caption files for owner activation
+and separation, a three-event millisecond-accurate audio/animation/presentation
+binding plan, and a SHA-256 companion inventory. It checks phase ordering,
+audio PCM duration, caption alignment, original source hashes, instigator-only
+visibility, generation/cleanup rules and native-disabled status. Eight source
+regressions cover determinism, tampering, mismatched WAV duration, unauthorized
+visibility and unsafe native-activation claims. The dedicated Cinematic Source
+workflow validates and uploads the additional assets. This produces editor
+handoff data only; no skeletal rig, Sequencer, Niagara, Verse compilation,
+native owner binding, two-client Launch Session or memory profile is claimed.
+No Codex review was requested; the branch is intentionally PR-free while
+automatic Codex review remains enabled.
+
+
 ## 2026-11-01 — Fusion Reaver: transactional attack-receipt handoff
 
 Wired the Architect's canonical FUS-001 one-use paid-attack receipt between
