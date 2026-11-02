@@ -56,10 +56,8 @@ def checks(avatar:str, arsenal:str, device:str) -> list[str]:
         ])
         gate("Avatar output",attack,["        then:",
               "AttackOutput.Trigger(Player)"])
-    if "<decides><transacts>:void=" not in rend.splitlines()[0:8].__str__():
-        # Multi-line method signatures include effects at line 7.
-        if "<decides><transacts>:void=" not in rend:
-            errors.append("TryRend must be transactional deciding")
+    if "<decides><transacts>:void=" not in rend:
+        errors.append("TryRend must be transactional deciding")
     gate("Arsenal admission",rend,[
         "Now >= LastRendAt + 2.0",
         "State.ConsumeAttackReceipt[Device, Player, Token]",
@@ -74,6 +72,8 @@ def checks(avatar:str, arsenal:str, device:str) -> list[str]:
         errors.append("more than one Avatar physical output")
     if rend.count("ConsumeAttackReceipt[")!=1:
         errors.append("more than one or missing paid receipt consumer")
+    if hit.count("Target.Damage(18.0)")!=1:
+        errors.append("Reaver damage must be applied only once")
     if "Enabled:logic = false" not in avatar or "Enabled:logic = false" not in device:
         errors.append("unverified player damage may not enable by default")
     return errors
