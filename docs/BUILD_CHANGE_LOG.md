@@ -645,3 +645,22 @@ remain editor acceptance checks.
 - Added focused Python source regression checks and updated UEFN acceptance
   instructions. Physical editor settings, native Verse compilation, streaming,
   and multiplayer behavior remain unverified.
+
+## 2026-11-01 — Cinematics universe-first original VFX, telegraphs and captions
+
+- Recovered the original authored six PNG/three PCM WAV source generator and
+  three 16-frame non-looping sprite-sheet atlases (48 total animation frames)
+  from preserved Cinematics history onto a clean main-based review branch.
+  Source manifests hash all actual files; independent binary, timeline,
+  monotonic-alpha and accessibility mutation tests reject corrupt output.
+- Added two ordinary non-Codex GitHub Actions source-artifact workflows and
+  extended the existing Omnigod cinematic workflow with deterministic WebVTT
+  captions for FUS-001 fusion/separation, phase/audio timing, a binding handoff,
+  source provenance and independent cancellation/visibility tests.
+- The creator's universe-first #84/#88 policy remains controlling: this
+  specialty does not certify any of 840 entity packages, 13 regions or 13
+  cross-universe systems. FUS-001 and experimental FUS-002 remain disabled.
+  PNG/WAV/GLB/WebVTT sources are not UEFN imports, Niagara emitters,
+  Sequencer tracks, NPC Character Definitions or native gameplay. Real Verse
+  compilation, two-client testing, mobile runtime and 300 MiB cooked memory
+  measurement remain separate mandatory gates. No spending or Codex usage.

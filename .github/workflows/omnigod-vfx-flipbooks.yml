@@ -1,0 +1,56 @@
+name: AEONFALL Omnigod Telegraph Motion Source
+
+on:
+  push:
+    paths:
+      - "tools/build_omnigod_vfx_textures.py"
+      - "tools/validate_omnigod_vfx_textures.py"
+      - "tests/test_omnigod_vfx_textures.py"
+      - "tools/build_omnigod_vfx_flipbooks.py"
+      - "tools/validate_omnigod_vfx_flipbooks.py"
+      - "tests/test_omnigod_vfx_flipbooks.py"
+      - ".github/workflows/omnigod-vfx-flipbooks.yml"
+  pull_request:
+    paths:
+      - "tests/test_omnigod_vfx_textures.py"
+      - "tools/build_omnigod_vfx_flipbooks.py"
+      - "tools/validate_omnigod_vfx_flipbooks.py"
+      - "tests/test_omnigod_vfx_flipbooks.py"
+      - ".github/workflows/omnigod-vfx-flipbooks.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-telegraph-atlases:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout non-Codex exact source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run original and flipbook regression tests
+        run: |
+          python -m unittest discover -s tests -p 'test_omnigod_vfx_textures.py' -v
+          python -m unittest discover -s tests -p 'test_omnigod_vfx_flipbooks.py' -v
+      - name: Produce verified original static visual/audio source
+        run: |
+          python tools/build_omnigod_vfx_textures.py --output dist/omnigod_vfx_textures
+          python tools/validate_omnigod_vfx_textures.py --output dist/omnigod_vfx_textures
+      - name: Produce 3 genuine 16-frame original RGBA PNG atlases
+        run: python tools/build_omnigod_vfx_flipbooks.py --source dist/omnigod_vfx_textures --output dist/omnigod_vfx_flipbooks
+      - name: Independently validate manifest, 48 frames, audio sync and integrity
+        run: python tools/validate_omnigod_vfx_flipbooks.py --source dist/omnigod_vfx_textures --output dist/omnigod_vfx_flipbooks
+      - name: Package motion source files, not imported UEFN objects
+        uses: actions/upload-artifact@v4
+        with:
+          name: AEONFALL-Omnigod-Telegraph-Flipbooks-${{ github.event.pull_request.head.sha || github.sha }}
+          path: dist/omnigod_vfx_flipbooks/
+          if-no-files-found: error
+          retention-days: 30
