@@ -185,6 +185,11 @@ class SourceHitObservationGate:
             return deny("malformed server observation")
         if self._revoked or observation.generation != self.generation:
             return deny("revoked generation")
+        # Independently identified QA race: a trusted current-generation
+        # owner/lease loss must revoke ALL events before target/actor routing.
+        if not observation.owner_authorized or not observation.controller_lease_valid:
+            self.revoke()
+            return deny("owner or controller lease revoked")
         key = (observation.generation, observation.event_sequence)
         bound = self._bound.get(key)
         if bound is None:
@@ -202,9 +207,6 @@ class SourceHitObservationGate:
             return deny("actor instance or region changed; event revoked")
         if observation.server_time_ms < bound.last_observed_ms:
             return deny("server clock regression")
-        if not observation.owner_authorized or not observation.controller_lease_valid:
-            self.revoke()
-            return deny("owner or controller lease revoked")
         if observation.server_time_ms > bound.deadline_ms:
             self.close(*key)
             return deny("paid event expired")
