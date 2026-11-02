@@ -87,6 +87,8 @@ class WorldEventTransitionTests(unittest.TestCase):
         self.assertTrue(self.errors(changed))
 
     def test_world_event_does_not_claim_foreign_or_duplicate_regions(self):
+        prefix, rest = self.source.split("    CanClaimRegions(", 1)
+        claim, suffix = rest.split("    StartEvent(", 1)
         for needle in (
             "GetAEONFALLRegionRegistry().IsRegistered[RegionId]",
             "GetAEONFALLRegionRuntime().GetState[RegionId]",
@@ -95,7 +97,9 @@ class WorldEventTransitionTests(unittest.TestCase):
             "State.ActiveRegionIds.Find[RegionId]",
         ):
             with self.subTest(guard=needle):
-                changed = self.source.replace(needle, "GUARD_REMOVED", 1)
+                self.assertIn(needle, claim)
+                mutated_claim = claim.replace(needle, "GUARD_REMOVED", 1)
+                changed = prefix + "    CanClaimRegions(" + mutated_claim + "    StartEvent(" + suffix
                 self.assertTrue(self.errors(changed))
 
     def test_world_event_rechecks_stage_footprint_before_transition(self):
