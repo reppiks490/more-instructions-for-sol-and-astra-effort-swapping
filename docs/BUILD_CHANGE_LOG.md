@@ -11,6 +11,22 @@ remain unverified.
 
 # Build change log
 
+## 2026-11-01 — Fusion Reaver: transactional attack-receipt handoff
+
+Wired the Architect's canonical FUS-001 one-use paid-attack receipt between
+the merged Avatar AttackOutput and Arsenal TryRend. The upstream 10-energy
+debit and one-second, generation-scoped receipt issuance now share one
+deciding admission; refused issuance rolls back the debit before any
+instigator-tagged trigger. Downstream TryRend consumes the receipt before
+its additional 5-energy debit and cooldown in the same deciding transaction.
+A forged/ambient Trigger(Player) alone cannot produce a paid Reaver strike.
+
+This is source-level authorization, not native Verse compilation, real
+line-of-sight collision, projectile hit confirmation, damage attribution or
+two-client Fortnite verification. The native adapters remain disabled by
+default until all these release gates are met.
+
+
 ## 2026-11-01 — Cinematics: original glTF mechanical motion and PCM cue sources
 
 Added a deterministic DCC-preview animation pipeline for the 13-part original

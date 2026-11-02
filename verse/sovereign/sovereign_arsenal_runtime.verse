@@ -41,6 +41,13 @@ aeonfall_sovereign_arsenal_runtime := class:
         TargetKey <> ""
         Now := GetSimulationElapsedTime()
         Now >= LastRendAt + 2.0
+        # A trigger_device instigator payload is NOT payment evidence.
+        # Redeem the Architect's single-use, owner/generation/TTL-bound
+        # paid admission before charging this ability's additional energy.
+        # Both mutations share this deciding transaction: if the budget
+        # debit fails, the receipt must remain unconsumed and damage denied.
+        ReceiptSequence := State.ConsumeAttackReceipt[Device, Player, Token]
+        ReceiptSequence > 0
         Budget.Spend[Device, Player, Token, State, 5]
         set LastRendAt = Now
         set MarkTargetKey = TargetKey
