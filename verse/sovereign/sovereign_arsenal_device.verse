@@ -16,6 +16,11 @@ ArsenalBulwark<localizes>:message = "DREADFRAME AEGIS — shield restored."
 aeonfall_sovereign_arsenal_device := class(creative_device):
     @editable
     Enabled:logic = false
+    # NON-EDITABLE universe-first hard stop. Even if an editor toggles Enabled,
+    # this source cannot subscribe to inputs or call native Damage/SetShield.
+    # Replace only in a reviewed native-verification branch after #84 source
+    # completion and LOS/collision implementation; native proof gates merge.
+    NativeSourceGate:logic = false
     @editable
     Controller:aeonfall_sovereign_fusion_device = aeonfall_sovereign_fusion_device{}
     # Bind ONLY to Avatar's instigator-tagged AttackOutput in PR #48.
@@ -38,6 +43,9 @@ aeonfall_sovereign_arsenal_device := class(creative_device):
         false
 
     OnBegin<override>()<suspends>:void=
+        # Source-first policy is enforced in code, not only by an editable flag.
+        if (not NativeSourceGate?):
+            return
         if (not Enabled? or not ValidSettings()?):
             return
         Service := GetAEONFALLSovereignArsenalRuntime()
