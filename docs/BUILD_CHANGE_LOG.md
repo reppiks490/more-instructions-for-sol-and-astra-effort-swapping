@@ -23,6 +23,19 @@ remain unverified.
 
 # Build change log
 
+## 2026-11-01 — Omnigod: weighted mechanical armature handoff
+
+Generated a genuine glTF 2.0 skinned mesh from the original thirteen
+machine-demon parts, with 13 named joints, per-vertex JOINTS_0/WEIGHTS_0,
+inverse bind matrices, exact source-rest-position baking and all 3 cinematics
+animations retargeted to joints. Added numerical validation and deliberate
+negative mutations, a GitHub Actions source artifact, and a syntax-checked
+opt-in Blender FBX export helper. This is a rigid mechanical armature, not
+a humanoid locomotion rig, native UEFN import, NPC possession or proven
+Fortnite Launch Session. Existing owner authority, profiles and canonical
+progression remain unchanged.
+
+
 ## 2026-11-01 — Runtime Forge: native input and volume subscription ownership
 
 Added owned and canceled subscriptions to the self, targeted and position
