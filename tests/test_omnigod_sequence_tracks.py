@@ -147,5 +147,31 @@ class SequencerTracksTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "visibility"):
             handoff.build(self.root)
 
+
+    def test_glb_plate_translation_values_rejected_even_when_rehashed(self):
+        import struct
+        doc, binary = motion.read_glb(self.root / "omnigod_mechanical_motion.glb")
+        sampler = doc["animations"][0]["samplers"][0]
+        output = doc["accessors"][sampler["output"]]
+        view = doc["bufferViews"][output["bufferView"]]
+        offset = view.get("byteOffset", 0) + output.get("byteOffset", 0)
+        struct.pack_into("<f", binary, offset, 1000.0)
+        (self.root / "omnigod_mechanical_motion.glb").write_bytes(
+            motion.pack_glb(doc, binary))
+        self.refresh()
+        handoff.build(self.root)
+        with self.assertRaisesRegex(ValueError, "actual plate/rotation keyframe"):
+            tracks.build(self.root)
+
+    def test_per_plate_sampler_time_forgery_rejected(self):
+        doc, binary = motion.read_glb(self.root / "omnigod_mechanical_motion.glb")
+        doc["animations"][0]["samplers"][1]["input"] = doc["animations"][1]["samplers"][0]["input"]
+        (self.root / "omnigod_mechanical_motion.glb").write_bytes(
+            motion.pack_glb(doc, binary))
+        self.refresh()
+        handoff.build(self.root)
+        with self.assertRaisesRegex(ValueError, "per-plate time sampler"):
+            tracks.build(self.root)
+
 if __name__ == "__main__":
     unittest.main()

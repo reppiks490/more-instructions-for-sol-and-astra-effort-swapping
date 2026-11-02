@@ -50,7 +50,8 @@ def verify_glb(root):
                 raise ValueError("GLB channel target drift")
             if channel.get("sampler") != i:
                 raise ValueError("GLB channel sampler drift")
-        accessor = doc["accessors"][anim["samplers"][0]["input"]]
+        sampler0 = anim["samplers"][0]
+        accessor = doc["accessors"][sampler0["input"]]
         view = doc["bufferViews"][accessor["bufferView"]]
         if (accessor.get("componentType"), accessor.get("type"),
                 accessor.get("count")) != (5126, "SCALAR", len(times)):
@@ -59,6 +60,41 @@ def verify_glb(root):
         actual = struct.unpack_from("<" + "f" * len(times), binary, offset)
         if any(abs(x - y) > 0.00001 for x, y in zip(actual, times)):
             raise ValueError("GLB animation times drift")
+        weights = motion.CLIPS[clip][1]
+        for i, sampler in enumerate(anim["samplers"]):
+            if (sampler.get("input") != sampler0["input"]
+                    or sampler.get("interpolation") != "LINEAR"):
+                raise ValueError("GLB per-plate time sampler drift")
+            output = doc["accessors"][sampler["output"]]
+            width = 3 if i < len(motion.PARTS) else 4
+            if (output.get("componentType"), output.get("type"),
+                    output.get("count")) != (5126, "VEC3" if width == 3 else "VEC4",
+                                              len(times)):
+                raise ValueError("GLB plate value accessor drift")
+            output_view = doc["bufferViews"][output["bufferView"]]
+            start = output_view.get("byteOffset", 0) + output.get("byteOffset", 0)
+            values = struct.unpack_from("<" + "f" * (len(times) * width),
+                                        binary, start)
+            if width == 3:
+                base = doc["nodes"][i].get("translation")
+                if not isinstance(base, list) or len(base) != 3:
+                    raise ValueError("GLB source node base placement missing")
+                delta = motion.gltf_offset(motion.SPREAD_CM[motion.PARTS[i]])
+                expected_values = [
+                    round(base[j] + delta[j] * weight, 6)
+                    for weight in weights for j in range(3)]
+            else:
+                import math
+                angles = ([0, 0.2, 0.65, 1.0, 1.2] if "Fusion" in clip
+                          else [0, 0.1, 0.3, 0.6, 0.9] if "Separation" in clip
+                          else [0, 0.03, 0, -0.03, 0])
+                expected_values = [
+                    component for angle in angles
+                    for component in (0, round(math.sin(angle / 2), 7),
+                                      0, round(math.cos(angle / 2), 7))]
+            if any(abs(value - expected_value) > 0.00001
+                   for value, expected_value in zip(values, expected_values)):
+                raise ValueError("GLB actual plate/rotation keyframe value drift")
     return sha(path.read_bytes())
 
 def compile_tracks(root):
