@@ -9,6 +9,10 @@ aeonfall_invasion_definition := class:
     MinCorruption:int = 0
     # Canonical territorial strength required for faction-led admission.
     MinAggressorInfluence:int = 0
+    # Existing consumed regional horde biomass; no spawned actor allocation.
+    MinRegionalHordeBiomass:int = 0
+    # Minimum tier of a live canonical brood in the region (0 = unused).
+    MinHordeTier:int = 0
     WaveSpawnGroupIds:[][]string = array{}
     ObjectiveIds:[]string = array{}
     HazardIds:[]string = array{}

@@ -251,7 +251,9 @@
       "hazard_ids": [
         "HZ-INV005-RED-ASH",
         "HZ-INV005-HUNGER-ZONES"
-      ]
+      ],
+      "min_regional_horde_biomass": 600,
+      "min_horde_tier": 4
     }
   ]
 }
