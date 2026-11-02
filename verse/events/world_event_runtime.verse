@@ -19,6 +19,16 @@ aeonfall_world_event_service := class():
                 return true
         false
 
+    # Adapter-facing canonical owner query. Empty means no active region
+    # shell; a bus notification alone never grants encounter authority.
+    ActiveEventForRegion(RegionId:string)<transacts>:string=
+        if (RegionId = ""):
+            return ""
+        for (EventId -> State : States):
+            if (State.Active?, State.ActiveRegionIds.Find[RegionId]):
+                return EventId
+        ""
+
     # One active world-event owner per region. Both initial and subsequent
     # stage footprints must be distinct, canonical, initialized and bounded.
     # A zero-region abstract stage is allowed and owns no physical region.
