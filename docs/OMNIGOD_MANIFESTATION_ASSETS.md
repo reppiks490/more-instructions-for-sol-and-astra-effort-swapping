@@ -35,6 +35,47 @@ Before doing any editor placement, verify the imported Torso dimensions, Crown o
 
 The source kit is capped at 16 modules and 9,000 total original triangles. Source tests validate individual glTF triangles, index bounds, nondegenerate faces, coordinates, asset hashes and the assembled 13-part scene. These are **source** validation budgets, not UEFN device memory, runtime VFX, or Fortnite triangle/LOD approvals. For decorative NPC parts, disable static collision; use an appropriately tested character capsule, navigation and encounter bounds rather than a giant composite collision hull. The corona's central hole must remain visually open and nonblocking.
 
+## Animated source preview: FUS-001 mechanical fusion
+
+The separate deterministic `tools/build_omnigod_fusion_animation.py` takes
+the existing 13-part assembly and adds a real glTF 2.0 node animation named
+`Omnigod_Armor_Fusion_Beats`. It produces two additional source files:
+
+- `omnigod_mechanical_fusion_preview.glb`: eight-second animated GLB containing
+  source component movement, pauldron/gauntlet separation, reactor translation,
+  forward Axiom Core pulse, eclipse expansion and a complete eclipse revolution.
+  Components return to their original static rest transforms at the end.
+- `omnigod_mechanical_fusion_timeline.json`: seven named beats with matching
+  timestamps and **authored VFX/audio descriptions** for future production.
+  This JSON is not an audio asset, particle system or Fortnite cutscene.
+
+The source geometry remains unchanged. Animation targets are bounded and
+nonnegative, with a single channel for each node/path, finite keyframes,
+rest-pose closure and a verified checksum. The `tools/validate_omnigod_fusion_animation.py`
+inspects actual glTF animation bytes, channel names, time arrays, sample vectors,
+quaternions, source geometry topology and native-proof claims. Tampered channel
+targets, inflated scale, fabricated UEFN results and checksum corruption fail.
+
+Run after generating the static pack:
+
+```powershell
+python tools/build_omnigod_fusion_animation.py --output dist/omnigod_manifestation
+python tools/validate_omnigod_fusion_animation.py --output dist/omnigod_manifestation
+python -m unittest discover -s tests -p "test_omnigod_fusion_animation.py" -v
+```
+
+A successful dedicated Actions run includes these animated source files in
+the same downloadable import-geometry artifact.
+
+**Rigging boundary:** The glTF preview animates **mesh nodes**, not skin
+weights or a bone-driven Character Definition. Bring this clip into a DCC,
+attach individual plates to real skeleton bones, and export actual skeletal
+FBX plus animations for the supported UEFN NPC workflow. Do not interpret
+the working animated GLB as native playable armor fusion, NPC possession,
+Niagara effects, or finished soundtrack. The owner-only player fusion
+cinematic must remain separate from an Everyone-visible replaceable NPC
+Sequencer binding.
+
 ## Native UEFN production path
 
 The supported workflow is to promote this static original blockout into a **DCC-rigged** skeletal character with real animations, then import FBX into UEFN:
