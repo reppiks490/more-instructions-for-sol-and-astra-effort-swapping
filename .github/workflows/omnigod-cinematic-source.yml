@@ -5,7 +5,11 @@ on:
     paths:
       - "tools/build_omnigod_cinematic.py"
       - "tools/validate_omnigod_cinematic.py"
+      - "tools/build_omnigod_presentation_handoff.py"
+      - "tests/test_omnigod_presentation_handoff.py"
       - "tests/test_omnigod_cinematic.py"
+      - "tools/build_omnigod_presentation_handoff.py"
+      - "tests/test_omnigod_presentation_handoff.py"
       - "tools/build_omnigod_manifestation_assets.py"
       - "tools/build_ossuary_starter_assets.py"
       - ".github/workflows/omnigod-cinematic-source.yml"
@@ -34,8 +38,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Validate animation and original audio sources
-        run: python -m unittest discover -s tests -p "test_omnigod_cinematic.py" -v
+      - name: Validate animation, audio, caption and handoff regressions
+        run: |
+          python -m unittest discover -s tests -p "test_omnigod_cinematic.py" -v
+          python -m unittest discover -s tests -p "test_omnigod_presentation_handoff.py" -v
       - name: Generate original static source geometry
         run: python tools/build_omnigod_manifestation_assets.py --output dist/omnigod_manifestation
       - name: Generate glTF animations and PCM source audio
@@ -63,6 +69,10 @@ jobs:
           assert len(glb["animations"]) == 3
           print("PASS: 3 glTF animations, 3 original WAV cues, source-only claims")
           PY
+      - name: Generate timed WebVTT captions and owner-scoped binding plan
+        run: python tools/build_omnigod_presentation_handoff.py --output dist/omnigod_cinematics
+      - name: Independently revalidate handoff and caption integrity
+        run: python tools/build_omnigod_presentation_handoff.py --output dist/omnigod_cinematics --validate-only
       - name: Upload original DCC preview sources (not native UEFN assets)
         uses: actions/upload-artifact@v4
         with:
