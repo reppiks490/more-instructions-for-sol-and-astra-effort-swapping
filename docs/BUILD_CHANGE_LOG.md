@@ -63,6 +63,19 @@ remain unverified.
 
 # Build change log
 
+## 2026-11-01 — Runtime Forge: eliminate stale native-character target effects
+
+Registered actors can outlive their physical Fortnite characters between
+elimination and lifecycle teardown. Added a live-character registry guard
+and required it when creating, reading and ticking actor-target selections.
+Targeted player input now checks its own active character. The generic
+status adapter revalidates target liveness at effect execution and returns a
+rejected result instead of charging resources for a dead NPC. Added mutation
+coverage and two-client native acceptance scenarios. No persistent schema,
+ability costs or authored target IDs changed; native UEFN compilation and
+Fortnite Launch Session remain unverified.
+
+
 ## 2026-11-01 — Runtime Forge: atomic position consumption and prop teardown
 
 The native prop spawn adapter now consumes a position snapshot inside the

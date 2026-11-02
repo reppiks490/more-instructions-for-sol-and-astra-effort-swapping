@@ -1,5 +1,6 @@
 using { /Verse.org/Verse }
 using { /Verse.org/Simulation }
+using { /Fortnite.com/Characters }
 
 # Session actor identity registry.
 # Canonical IDs describe what an actor is. Runtime keys distinguish individual
@@ -59,6 +60,16 @@ aeonfall_actor_registry := class():
         ReverseKey = RuntimeKey
         CanonicalId := CanonicalByKey[RuntimeKey]
         CanonicalId <> ""
+
+    # A registry key can survive briefly after an NPC's Fortnite character
+    # was eliminated. Physical effects may only target a live generation.
+    # This is deliberately stronger than IsRegistered: non-character agents
+    # cannot receive native fort_character status or attack effects.
+    IsLiveCharacter(RuntimeKey:string)<decides><transacts>:void=
+        IsRegistered[RuntimeKey]
+        TargetAgent := GetAgent[RuntimeKey]
+        Character := TargetAgent.GetFortCharacter[]
+        Character.IsActive[]
 
     Unregister(RuntimeKey:string)<transacts>:logic=
         if:
