@@ -1,0 +1,62 @@
+name: AEONFALL All 13 Region Landmark Geometry
+
+on:
+  push:
+    paths:
+      - "tools/build_all_region_landmarks.py"
+      - "tools/validate_all_region_landmarks.py"
+      - "tests/test_all_region_landmarks.py"
+      - "tools/build_all_region_terrain.py"
+      - "tools/build_ossuary_starter_assets.py"
+      - "tools/validate_ossuary_starter_assets.py"
+      - "content/world/world_topology.json"
+      - ".github/workflows/full-universe-landmarks.yml"
+  pull_request:
+    paths:
+      - "tools/build_all_region_landmarks.py"
+      - "tools/validate_all_region_landmarks.py"
+      - "tests/test_all_region_landmarks.py"
+      - "tools/build_all_region_terrain.py"
+      - "tools/build_ossuary_starter_assets.py"
+      - "tools/validate_ossuary_starter_assets.py"
+      - "content/world/world_topology.json"
+      - ".github/workflows/full-universe-landmarks.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate-all-landmarks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout exact reviewed source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Python standard library build
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Execute full-world binary geometry and adversarial QA
+        run: python -m unittest discover -s tests -p "test_all_region_landmarks.py" -v
+
+      - name: Generate all 39 original regional meshes with real terrain-sampled locators
+        run: python tools/build_all_region_landmarks.py --output dist/full_universe_region_landmarks
+
+      - name: Verify GLB triangles, 13 preview scenes, OBJ face counts, per-file SHA and entire world scope
+        run: python tools/validate_all_region_landmarks.py --output dist/full_universe_region_landmarks
+
+      - name: Upload complete static geometry source pack (not native UEFN level)
+        uses: actions/upload-artifact@v4
+        with:
+          name: AEONFALL-13-Region-Landmark-Sources-${{ github.event.pull_request.head.sha || github.sha }}
+          path: dist/full_universe_region_landmarks/
+          if-no-files-found: error
+          retention-days: 30
+
+# Green source checks DO NOT indicate imported UEFN scenes, collision,
+# World Partition, NPC behaviors, quest implementation or mobile Launch Session.
