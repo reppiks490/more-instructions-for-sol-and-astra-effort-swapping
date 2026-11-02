@@ -87,3 +87,42 @@ Do not promote FUS-001 to native-enabled or FUS-002 to playable, or claim a
 published island, until all relevant gates have independent evidence. Preserve
 canonical IDs, existing profile schemas and the owner's sticky session
 identity. This handoff changes no runtime entitlement or existing gameplay.
+
+## Authoritative Reaver admission receipt (Architect API; adapters not yet wired)
+
+`IssueAttackReceipt(Controller, Player, Generation)` records one
+**session-scoped, one-use, one-second** FUS-001 Reaver admission for the
+currently authorized owner and active generation. A second issuance while
+an unexpired receipt is outstanding fails. An expired receipt may be replaced.
+
+`ConsumeAttackReceipt[Controller, Player, Generation]` is failable and
+transactional: it checks the live authority, exact owner/controller, active
+FUS-001 generation, outstanding receipt, and deadline, then clears the receipt.
+Missing, duplicate, expired, revoked, cross-player or stale-generation requests
+fail closed. `BeginActivation`, `BeginSeparation`, `CompleteSeparation`,
+`Abort`, and `ReleaseController` invalidate pending receipts.
+
+**Avatar handoff (#48):** debit the upstream 10 energy and issue the
+receipt **inside the same deciding transaction**, before
+`AttackOutput.Trigger(Player)`. If either admission fails, do not charge or
+emit a physical attack request. Never mint a receipt from UI/display identity
+or a standalone public trigger. Preserve the existing cooldown and exact
+`fort_character` check.
+
+**Arsenal handoff (#49):** consume a receipt inside the same failable
+`TryRend` transaction as the secondary 5-energy debit and cooldown
+reservation. The transaction must roll both back on failure. Reject any
+`RendRequest.TriggeredEvent` without a paid, outstanding receipt. Only after
+canonical admission and independent MON-/range/faction/vulnerability checks
+should native damage be attempted. Trigger delivery and receipt consumption
+are **not** hit/damage acknowledgements.
+
+**Trust boundary:** a `trigger_device` callback supplies an instigator,
+not a cryptographically authenticated call origin. A forged callback could
+consume a *real* pending admission before the legitimate callback. The
+one-use receipt prevents a no-upstream-debit attack and duplicate reuse; it
+does not make a misconfigured editor graph trustworthy. Before enabling,
+verify exclusive device bindings, latency/replay under two players, shutdown,
+session replacement, and UEFN's actual callback ordering. The Architect API
+alone does not integrate the two draft adapters; `native_adapter_wiring`
+remains `pending` in the machine-readable contract. FUS-002 remains disabled.
