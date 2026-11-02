@@ -4,7 +4,7 @@
 
 ## Executable output
 
-The deterministic compiler reads the actual generated Arsenal 38-file source package (12 distinct RGBA8 256×256 PNG non-color telegraphs, 14 original PCM16 WAV warnings and 12 WebVTT captions), its SHA-256 manifest, the real GLB-derived 13-plate Sequencer edit-decision JSON/CSV and hashes, and the canonical fusion, universe-first and 13-region contracts. It checks all 38 source files, PCM durations, subtitle presence, owner visibility, two disabled fusion forms and cancellation/LOD guards. Source-only and native-status fields must remain unverified.
+The deterministic compiler reads the actual generated Arsenal 38-file source package (12 distinct RGBA8 256×256 PNG non-color telegraphs, 14 original PCM16 WAV warnings and 12 WebVTT captions), its SHA-256 manifest, the real GLB-derived 13-plate Sequencer edit-decision JSON/CSV and hashes, and the canonical fusion, universe-first and 13-region contracts. It checks all 38 source files, PCM durations, subtitle presence, owner visibility, two disabled fusion forms and cancellation/LOD guards. Its reference admission model additionally rejects stale generations, unloaded or mixed-region pools, and underreported audio voice reservations. Source-only and native-status fields must remain unverified.
 
 The output contains **546 source LOD rows** (13 regions × 14 presentations × 3 tiers), **78 resource stress cases** (13 regions × 6 scenarios), SHA-256 input provenance and an independent source-output manifest. The 14 presentations are SFA-001 through SFA-012 plus FUS-001 Activating and Separating. These rows are *not* 546 native game assets.
 
@@ -43,4 +43,4 @@ The provided allocator is an **offline conservative snapshot**, not an installed
 4. **Arsenal:** connect SFA-001–012 to canonical server-authoritative attack timing. CLS-006 accent is optional, not a class grant; SFA-005 second pulse is presentation only.
 5. **World/QA:** native-check all REG-001–013, streaming boundaries, two-client visibility, cleanup/rejoin, mobile touch readability, frame-time and audio occlusion. Capture actual Verse compiler output, Sequencer/Niagara bindings, Fortnite mobile profiles and a real **300 MiB cooked publishing-memory** measurement.
 
-The 12 synthetic-fixture offline regression tests check fail-closed source admission, not engine behavior. Ordinary CI also regenerates and validates real repository source files. No Codex, paid assets or island publication are authorized.
+The 13 synthetic-fixture offline regression tests check fail-closed source admission, not engine behavior. Ordinary CI also regenerates and validates real repository source files. No Codex, paid assets or island publication are authorized.
