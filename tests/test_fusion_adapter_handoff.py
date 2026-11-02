@@ -159,5 +159,16 @@ class FusionHandoffGuards(unittest.TestCase):
         self.assertTrue(self.check(arsenal=no_damage))
 
 
+    def test_second_unpaid_damage_branch_is_rejected(self):
+        modified = ARSENAL.replace(
+            "    OnEnd<override>():void=",
+            "        if (Unrelated?):\n"
+            "            Target.Damage(99.0)\n"
+            "    OnEnd<override>():void=",
+        )
+        self.assertNotEqual(modified, ARSENAL)
+        self.assertTrue(self.check(arsenal=modified))
+
+
 if __name__ == "__main__":
     unittest.main()
