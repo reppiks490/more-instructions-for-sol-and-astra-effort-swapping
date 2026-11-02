@@ -27,6 +27,8 @@ aeonfall_npc_spawn_group_adapter_device := class(creative_device):
     @editable
     StartDisabled:logic = true
 
+    # Required for bounded wave transitions; retained as an editable
+    # compatibility field so old placed devices fail closed if set false.
     @editable
     DespawnOnRelease:logic = true
 
@@ -38,8 +40,8 @@ aeonfall_npc_spawn_group_adapter_device := class(creative_device):
     OnBegin<override>()<suspends>:void=
         # Never disable a spawner before acquiring exclusive ownership.
         # Fail closed on unbound or game-start-enabled editor configurations.
-        if (RegionId = "" or SpawnGroupId = "" or Spawners.Length = 0 or not StartDisabled?):
-            Print("AEONFALL invasion spawn adapter rejected invalid binding.")
+        if (RegionId = "" or SpawnGroupId = "" or Spawners.Length = 0 or not StartDisabled? or not DespawnOnRelease?):
+            Print("AEONFALL invasion spawn adapter rejected invalid binding or unsafe wave cleanup.")
             return
         Leased := AcquireAdapterLease()
         if (not Leased?):
