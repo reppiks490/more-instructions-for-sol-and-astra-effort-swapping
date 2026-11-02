@@ -33,6 +33,19 @@ remain unverified.
 
 # Build change log
 
+## 2026-11-01 — Runtime Forge: fail-closed multiplayer runtime map rebuilds
+
+Actor context `Clear` and encounter participant `RemoveRuntimeKey` now
+preserve their entire old maps if any replacement entry refuses insertion,
+instead of dropping unrelated players or encounter memberships. Targeting
+`TickAll` similarly validates every retained selection before replacement
+and defers expired-target events until successful commit. Failure diagnostics,
+source mutation tests and two-client native acceptance scenarios were added.
+No persistent profile, canonical content ID, class cost or native device
+asset changed. These are source guards; UEFN compiler and Launch Session
+behavior remain unverified.
+
+
 ## 2026-11-01 — Omnigod: weighted mechanical armature handoff
 
 Generated a genuine glTF 2.0 skinned mesh from the original thirteen

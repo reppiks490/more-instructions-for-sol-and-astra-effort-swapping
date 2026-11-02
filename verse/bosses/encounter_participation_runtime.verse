@@ -102,7 +102,11 @@ aeonfall_encounter_participation_runtime := class():
             )
 
     RemoveRuntimeKey(RuntimeKey:string)<transacts>:void=
+        # A failed rebuild may not erase other encounters or participants.
+        # Keep the authoritative old map and emit a diagnostic for Launch
+        # Session investigation rather than committing a partial replacement.
         var UpdatedMap:[string][]string = map{}
+        var Valid:logic = true
 
         for (EncounterId -> Existing : ParticipantKeysByEncounter):
             var Updated:[]string = array{}
@@ -111,11 +115,17 @@ aeonfall_encounter_participation_runtime := class():
                 if (Key <> RuntimeKey):
                     set Updated = Updated + array{Key}
 
-            if:
-                set UpdatedMap[EncounterId] = Updated
-            then:
-                set UpdatedMap = UpdatedMap
+            if (set UpdatedMap[EncounterId] = Updated):
+                set Valid = Valid
+            else:
+                set Valid = false
 
+        if (not Valid?):
+            AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                EventType := "encounter.participant_cleanup_failed",
+                SourceId := RuntimeKey
+            })
+            return
         set ParticipantKeysByEncounter = UpdatedMap
 
 # Mutable service allocation is scoped to the current Verse session.
