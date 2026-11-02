@@ -162,7 +162,8 @@
       ],
       "hazard_ids": [
         "HZ-INV002-SMUGGLER-GATES"
-      ]
+      ],
+      "min_aggressor_influence": 30
     },
     {
       "id": "INV-R001-003",
@@ -187,7 +188,8 @@
       ],
       "hazard_ids": [
         "HZ-INV003-SANCTIFIED-FIRE"
-      ]
+      ],
+      "min_aggressor_influence": 20
     },
     {
       "id": "INV-R001-004",
@@ -216,7 +218,8 @@
       "hazard_ids": [
         "HZ-INV004-VOID-GRAVE-FIELD",
         "HZ-INV004-EXPERIMENTAL-RIFT"
-      ]
+      ],
+      "min_aggressor_influence": 15
     },
     {
       "id": "INV-R001-005",
