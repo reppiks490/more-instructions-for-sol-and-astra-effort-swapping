@@ -275,10 +275,10 @@ aeonfall_titan_proxy_device := class(creative_device):
 
     FinishProxy():void=
         # Invalidate all mailbox commands FIRST, then remove only NPCs
-        # spawned by the bound dedicated Titan spawner.
-        if (Runtime := Service?):
+        # spawned by the bound dedicated Titan spawner. Cleanup also covers
+        # unsolicited agents found before a player-owner binding completes.
+        if (Runtime := Service?, Runtime.Owns(Self)?):
             Stopped := Runtime.End(Self)
-        if (ProxyOwner?):
             TitanSpawner.Disable()
             TitanSpawner.DespawnAll(false)
         set ProxyOwner = false
