@@ -187,7 +187,6 @@ aeonfall_titan_proxy_device := class(creative_device):
             Player.IsActive[]
             Registered := SummonRegistered?
             Registered = Player
-            Player.IsActive[]
             Character := Player.GetFortCharacter[]
             Character.IsActive[]
             ControllerOwner := AvatarController.VisualOwner?
