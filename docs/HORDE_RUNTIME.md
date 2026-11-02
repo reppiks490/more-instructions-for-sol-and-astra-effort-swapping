@@ -143,3 +143,26 @@ old actors. Run the same test with two players in separate streaming cells,
 plus a duplicate adapter rejected by the lease (must not affect the rightful
 owner). Capture native Verse compilation, actual actor counts and memory;
 source tests alone cannot establish these physical properties.
+
+## UEFN runtime query assertions for evolved horde substrate (2026-11-01)
+
+The existing disabled-by-default `aeonfall_horde_runtime_test_device` now
+calls the **real Verse** `HasBroodAtLeastTier` query during its progression
+through five evolution stages. It checks Tier I exists while Tier II does not,
+Tier IV exists before Tier V, and Tier V becomes available only after the
+current test sequence feeds the regional ledger from 599 to 600 consumed
+biomass. It also verifies that unregistered/unrelated regions cannot inherit
+a Tier IV brood, invalid query tiers (0 and 6) fail, cleared-region queries
+fail, and another region's living brood survives the clear. These tests use
+the existing standalone `test` ecology region and do not seed fake canonical
+invasion or UEFN spawner state.
+
+The source-only validator `tools/validate_horde_runtime.py` now requires
+those labels and query guards in CI. **Passing CI only proves the harness
+contains the assertions**; it does not mean they have executed. To obtain
+runtime evidence, import sources into UEFN, compile Verse, place the horde
+harness with `Enabled = true` in a private development Launch Session, and
+capture the printed `HORDE RESULT: <checks> checks, 0 failures` message,
+compiler output and run context. Do not enable the harness in production.
+The Devouring Moon's canonical registration, corruption, real physical actors,
+actual NPC limits and streaming admission must still be verified separately.
