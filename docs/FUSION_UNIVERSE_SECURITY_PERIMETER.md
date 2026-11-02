@@ -25,3 +25,26 @@ On the inspected main revision, the Avatar permits `AttackCooldownSeconds` as lo
 ## Zero-Codex handoff
 
 The repository has an external **automatic Codex PR review** configuration evidenced by existing bot comments. Ordinary checked-in Actions workflows do not invoke Codex, but opening or readying a PR can trigger the external review. Under the creator's zero-Codex rule, this work is retained on an isolated branch **without opening a PR**. No review request, @codex mention, paid service, force push, or automation change is authorized. The branch can be proposed for merge only after the automatic review is disabled/verified not to trigger and the required non-Codex CI checks pass.
+
+## Architect follow-up: transaction structure and integration gate
+
+The cross-lane audit now checks the **deciding failure context** of Avatar's
+10-energy debit and single-use receipt, the Arsenal Reaver's
+`<decides><transacts>` receipt consumption and 5-energy debit, and the
+successful TryRend branch containing the one native damage call. It also
+requires the original live character and canonical active owner in Arsenal's
+native request path. These are **source structural guards**, not Verse
+execution, editor bindings, or proof of server-side damage attribution.
+
+Run `python tools/audit_fusion_universe_perimeter.py --json dist/fusion_perimeter.json`
+for a machine-readable report. Default invocation fails on broken source
+integrity but **prints unresolved integration blockers without hiding them**.
+The optional `--require-integration-ready` gate also fails on the documented
+Avatar/Reaver cooldown incompatibility. That strict gate is expected to fail
+until the Avatar owner aligns the minimum and default with Arsenal's 2-second
+Reaver admission; the Architect deliberately does not edit Avatar-owned code.
+Do not treat either gate as the universe-first full-source completion gate.
+
+Coordination: #37 (fusion contract), #87 (universe systems), #89 (QA), and
+Avatar's open PR chain #81 → #92 → #97 → #102. PR #74 remains merge-conflicted
+and cannot be bypassed. The five loop ownership boundaries remain unchanged.

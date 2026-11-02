@@ -45,6 +45,81 @@ def section(source: str, method: str) -> str:
     return code[start.start():end]
 
 
+
+def avatar_paid_deciding_context(source: str) -> bool:
+    """Require debit and one-use receipt in the SAME Avatar failure context."""
+    body = section(source, "Attack")
+    opening = re.search(r"(?m)^        if:[ \t]*$", body)
+    if opening is None:
+        return False
+    tail = body[opening.end():]
+    closing = re.search(r"(?m)^        then:[ \t]*$", tail)
+    if closing is None:
+        return False
+    conditions, admitted = tail[:closing.start()], tail[closing.end():]
+    return (
+        ordered(conditions,
+                "State.IsAuthorizedActive(Self, Player, Token)",
+                "Resource.Spend[Self, Player, Token, State, AttackEnergyCost]",
+                "Issued := State.IssueAttackReceipt(Self, Player, Token)",
+                "Issued?")
+        and conditions.count("Resource.Spend[Self, Player, Token, State, AttackEnergyCost]") == 1
+        and conditions.count("State.IssueAttackReceipt(Self, Player, Token)") == 1
+        and "AttackOutput.Trigger(Player)" not in conditions
+        and ordered(admitted, "set LastAttackAt = Now", "AttackOutput.Trigger(Player)")
+        and body.count("AttackOutput.Trigger(Player)") == 1
+    )
+
+
+def arsenal_receipt_transaction(source: str) -> bool:
+    """The secondary debit and cooldown must share a deciding transaction."""
+    body = section(source, "TryRend")
+    return (
+        ")<decides><transacts>:void=" in body
+        and ordered(body, "Now >= LastRendAt + 2.0",
+                    "ReceiptSequence := State.ConsumeAttackReceipt[Device, Player, Token]",
+                    "ReceiptSequence > 0",
+                    "Budget.Spend[Device, Player, Token, State, 5]",
+                    "set LastRendAt = Now")
+        and body.count("State.ConsumeAttackReceipt[Device, Player, Token]") == 1
+        and body.count("Budget.Spend[Device, Player, Token, State, 5]") == 1
+    )
+
+
+def native_damage_receipt_guard(source: str) -> bool:
+    """A native strike must remain inside the successful TryRend branch."""
+    body = section(source, "OnRend")
+    return bool(re.search(
+        r"(?m)^            if \(Service\.TryRend\[[^\n]+\]\):[ \t]*\n"
+        r"(?:[ \t]*\n)*"
+        r"                Target\.Damage\(18\.0\)",
+        body,
+    )) and body.count("Target.Damage(18.0)") == 1
+
+
+def integration_blockers(sources: dict[str, str]) -> list[str]:
+    """Known cross-lane integration gaps; separate from source integrity."""
+    avatar = uncomment(sources["avatar"])
+    arsenal = uncomment(sources["arsenal"])
+    default = re.search(r"AttackCooldownSeconds:float\s*=\s*([0-9.]+)", avatar)
+    minimum = re.search(r"AttackCooldownSeconds\s*>=\s*([0-9.]+)", avatar)
+    downstream = re.search(r"Now\s*>=\s*LastRendAt\s*\+\s*([0-9.]+)", arsenal)
+    if not (default and minimum and downstream):
+        return ["Reaver cooldown parity cannot be established from both source adapters."]
+    default_seconds = float(default.group(1))
+    min_seconds = float(minimum.group(1))
+    reaver_seconds = float(downstream.group(1))
+    if min_seconds < reaver_seconds or default_seconds < reaver_seconds:
+        return [
+            f"Avatar AttackCooldownSeconds default={default_seconds:g}s, "
+            f"minimum={min_seconds:g}s are below Arsenal Reaver "
+            f"{reaver_seconds:g}s; paid Avatar admissions can be rejected "
+            "downstream. Avatar owner must align both bounds without "
+            "changing the Architect entitlement or receipt protocol."
+        ]
+    return []
+
+
 def audit(sources: dict[str, str]) -> list[str]:
     errors: list[str] = []
     def need(condition: bool, reason: str) -> None:
@@ -171,19 +246,57 @@ def audit(sources: dict[str, str]) -> list[str]:
     has("arsenal_device", "Enabled:logic = false", "Arsenal adapter enabled without native evidence")
     need("not player[Candidate]" in section(sources["arsenal_device"], "EligibleTarget"),
          "Reaver target selection admits players")
+    need(avatar_paid_deciding_context(sources["avatar"]),
+         "Avatar paid debit/receipt/trigger must share one deciding context")
+    need(arsenal_receipt_transaction(sources["arsenal"]),
+         "Reaver receipt, positive sequence, debit and cooldown must be transactional")
+    need(native_damage_receipt_guard(sources["arsenal_device"]),
+         "Reaver native damage escaped successful paid TryRend branch")
+    need(ordered(section(sources["arsenal_device"], "ValidOwner"),
+                 "Owner = Player", "Character = Original",
+                 "State.IsAuthorizedActive(Controller, Player, Controller.Token)"),
+         "Reaver owner must match current original character and live fusion")
+    need("Player := ValidOwner[Agent]" in section(sources["arsenal_device"], "OnRend"),
+         "Reaver native request must resolve verified owner")
     return errors
 
 
 def main() -> int:
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--json", type=Path, help="Write source-only integration evidence")
+    parser.add_argument("--require-integration-ready", action="store_true",
+                        help="Also fail on cross-lane integration blockers")
+    args = parser.parse_args()
     try:
-        errors = audit(read_sources())
-    except (OSError, ValueError) as exc:
-        errors = [str(exc)]
+        sources = read_sources()
+        errors = audit(sources)
+        blockers = integration_blockers(sources)
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        errors, blockers = [str(exc)], []
+    report = {
+        "schema_version": 1,
+        "scope": "source_only_fusion_security_perimeter",
+        "source_guard_errors": errors,
+        "integration_blockers": blockers,
+        "native_uefn_status": "not_assessed",
+        "universe_completion_status": "not_assessed",
+    }
+    if args.json:
+        args.json.parent.mkdir(parents=True, exist_ok=True)
+        args.json.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n",
+                             encoding="utf-8")
     for error in errors:
         print("FAIL:", error)
+    for blocker in blockers:
+        print("INTEGRATION BLOCKER:", blocker)
     if not errors:
-        print("PASS: source-only fusion universe security perimeter; native UEFN not tested")
-    return int(bool(errors))
+        print("PASS: source-only fusion security perimeter; native UEFN not tested")
+    if errors:
+        return 1
+    if args.require_integration_ready and blockers:
+        return 2
+    return 0
 
 
 if __name__ == "__main__":

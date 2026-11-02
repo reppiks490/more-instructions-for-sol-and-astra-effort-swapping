@@ -1,6 +1,7 @@
 """Mutation guards across canonical fusion, owner, avatar and arsenal lanes."""
 import copy
 import json
+import re
 import unittest
 
 from tools.audit_fusion_universe_perimeter import audit, read_sources
@@ -95,6 +96,57 @@ class FusionUniversePerimeterTests(unittest.TestCase):
 
     def test_reject_player_targeting(self):
         self.mutate("arsenal_device", "not player[Candidate]", "player[Candidate]")
+
+
+    def test_avatar_receipt_check_must_decide_admission(self):
+        self.mutate("avatar", "            Issued?\n        then:",
+                    "            true?\n        then:")
+
+    def test_avatar_debit_must_remain_in_same_deciding_context(self):
+        self.mutate(
+            "avatar",
+            "            Resource.Spend[Self, Player, Token, State, AttackEnergyCost]",
+            "            # Resource.Spend[Self, Player, Token, State, AttackEnergyCost]",
+        )
+
+    def test_reaver_requires_deciding_transaction(self):
+        self.mutate("arsenal", ")<decides><transacts>:void=",
+                    ")<transacts>:void=")
+
+    def test_reaver_receipt_sequence_must_be_positive(self):
+        self.mutate("arsenal", "        ReceiptSequence > 0",
+                    "        ReceiptSequence >= 0")
+
+    def test_reaver_damage_must_be_inside_successful_admission(self):
+        self.mutate("arsenal_device", "                Target.Damage(18.0)",
+                    "            Target.Damage(18.0)")
+
+    def test_reaver_owner_must_be_original_character(self):
+        self.mutate("arsenal_device", "        Character = Original",
+                    "        Character <> Original")
+
+    def test_cooldown_parity_reports_unsafe_bounds(self):
+        from tools.audit_fusion_universe_perimeter import integration_blockers
+        sources = dict(self.sources)
+        sources["avatar"] = re.sub(
+            r"(AttackCooldownSeconds:float = )\d+(?:\.\d+)?",
+            r"\g<1>0.5", sources["avatar"],
+        )
+        self.assertTrue(integration_blockers(sources))
+
+    def test_cooldown_parity_can_be_resolved_by_avatar_owner(self):
+        from tools.audit_fusion_universe_perimeter import integration_blockers
+        sources = dict(self.sources)
+        sources["avatar"] = re.sub(
+            r"(AttackCooldownSeconds:float = )\d+(?:\.\d+)?",
+            r"\g<1>2.0", sources["avatar"],
+        )
+        sources["avatar"] = re.sub(
+            r"(AttackCooldownSeconds >= )\d+(?:\.\d+)?",
+            r"\g<1>2.0", sources["avatar"],
+        )
+        self.assertEqual(integration_blockers(sources), [])
+
 
 
 if __name__ == "__main__":
