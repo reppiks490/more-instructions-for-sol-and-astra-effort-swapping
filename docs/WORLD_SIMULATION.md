@@ -364,3 +364,37 @@ between consecutive waves), physical streaming unload/re-entry, two players
 in separate cells and the no-spawn guarantee for a rejected adapter. The
 `StartDisabled` and `DespawnOnRelease` properties are authoring declarations,
 not evidence that physical NPC Spawner settings were read or enforced in Verse.
+
+## Bounded cross-region world-event shells (2026-11-01)
+
+World-scale events can continue as **abstract global state** without forcing
+NPC bodies to stay loaded. The existing world-event state machine now limits
+any *materialized stage footprint* to **four distinct regions**. Regions must
+be valid in the canonical region registry and initialized in runtime state.
+Empty footprints remain legal for cinematic/abstract phases, but grant no
+physical region ownership. A stage with unknown, blank, duplicate, unloaded,
+or too many region IDs is rejected **before** its stage index or region claims
+can change. This prevents a world-scale event from silently treating the full
+world as an active NPC spawn region.
+
+The world-event session service now exposes the same one-service-per-session
+pattern used by existing invasion and faction conflict services. Its footprint
+claim checks active world-event owners as well as invasion and faction-war
+activity; invasions and faction wars reciprocally check for an active
+world-event claim. At most **one major battle/shell** among those three
+families can own a region at a time. Different regions can run separate events.
+Normal completion/failure clears the event's region footprint; advancing a
+stage can change regions only after validation. A stage-local shell is a
+logical ownership reservation, **not** a native AI-spawner, World Partition
+load request or editor relevance guarantee.
+
+**UEFN acceptance:** Register and initialize a test region before using it;
+attempt abstract start with `array{}`, then one/four/five-region stage
+footprints. Verify rejection at five, duplicates, unknown or uninitialized
+regions. Start an invasion, war, then world event in every ordering and confirm
+only the initial regional owner admits; unrelated regions must remain
+independent. Advance a multiregion world event between cells, fail/complete it,
+and verify leases and region claims are released without resurrecting physical
+actors. Run with two separated clients and record native Verse compilation,
+actual NPC counts, device ownership, streaming relevance and memory. The CI
+source tests do not execute any of these engine operations.
