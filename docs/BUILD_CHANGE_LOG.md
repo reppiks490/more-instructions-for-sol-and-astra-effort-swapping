@@ -1,3 +1,13 @@
+## 2026-11-01 — Living World: shared event-shell region trigger binding
+
+A fail-closed per-region Creative adapter now observes canonical world-event
+claim changes through existing runtime-bus lifecycle notifications, uses a
+1-second authoritative resync for dropped notifications, and drives distinct
+UEFN region-entry/region-release trigger outputs without adding spawners.
+Region binding leases reject duplicate owners; event payloads are not trusted
+as activation authority. Documentation and regression tests cover streaming
+and physical handoff requirements, which still require native UEFN proof.
+
 ## 2026-11-01 — Living World: bounded world-event region shells
 
 The existing world-event state machine now rejects more than four distinct,
