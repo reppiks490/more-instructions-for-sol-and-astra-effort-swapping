@@ -59,6 +59,13 @@ class ArsenalSourceGuards(unittest.TestCase):
         self.mutate("runtime", "Budget.Spend[Device, Player, Token, State, 20]",
                     "Budget.Spend[Device, Player, Token, State, 0]")
 
+    def test_rend_requires_paid_avatar_receipt(self):
+        self.mutate(
+            "runtime",
+            "State.ConsumeAttackReceipt[Device, Player, Token]",
+            "Token >= 0",
+        )
+
     def test_rend_cooldown_bypass(self):
         self.mutate("runtime", "Now >= LastRendAt + 2.0", "Now >= 0.0")
 
