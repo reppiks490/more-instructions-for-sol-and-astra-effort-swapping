@@ -11,6 +11,22 @@ remain unverified.
 
 # Build change log
 
+## 2026-11-01 — Runtime Forge: native input and volume subscription ownership
+
+Added owned and canceled subscriptions to the self, targeted and position
+ability-input devices. Empty ability IDs refuse startup; stopped callbacks
+cannot request an activation. Encounter context volumes now track their own
+one-per-agent admissions, reconcile already-inside agents and atomically
+balance EnterEncounter/ExitEncounter so duplicates cannot inflate context
+depth. Shutdown cancels native callbacks and releases only the volume's
+tracked context contributions. The participant-volume bridge also retains
+and cancels subscriptions and refuses blank encounter IDs, without erasing a
+director's participant list. New mutation checks and editor acceptance guidance
+cover stale callbacks, overlapping contexts and lifecycle teardown. This is
+source-level validation only: native Verse compilation and Fortnite Launch
+Session results remain unverified.
+
+
 ## 2026-11-01 — Cinematics: original glTF mechanical motion and PCM cue sources
 
 Added a deterministic DCC-preview animation pipeline for the 13-part original
