@@ -151,6 +151,13 @@ aeonfall_titan_proxy_command_runtime := class:
             return true
         false
 
+    # Elimination callbacks must match this dedicated proxy agent. Never
+    # use a shared spawner's unrelated NPC death to clear the owner session.
+    IsOwnedNpc(Agent:agent)<transacts>:logic=
+        if (Current := OwnedNpc?, Current = Agent):
+            return true
+        false
+
     # The NPC behavior is the ONLY native navigation owner. The creative
     # device writes commands, never races its own NavigateTo against behavior.
     RequestMove(Player:player, Destination:vector3)<transacts>:logic=
