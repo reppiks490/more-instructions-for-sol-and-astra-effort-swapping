@@ -79,6 +79,47 @@ class WorldEventTransitionTests(unittest.TestCase):
         )
         self.assertTrue(self.errors(changed))
 
+    def test_region_shell_budget_guard_cannot_be_removed(self):
+        changed = self.source.replace(
+            "RegionIds.Length > AEONFALLWorldEventMaxActiveRegions",
+            "RegionIds.Length > 1000", 1
+        )
+        self.assertTrue(self.errors(changed))
+
+    def test_world_event_does_not_claim_foreign_or_duplicate_regions(self):
+        for needle in (
+            "GetAEONFALLRegionRegistry().IsRegistered[RegionId]",
+            "GetAEONFALLRegionRuntime().GetState[RegionId]",
+            "Seen.Find[RegionId]",
+            "OtherEventId <> EventId",
+            "State.ActiveRegionIds.Find[RegionId]",
+        ):
+            with self.subTest(guard=needle):
+                changed = self.source.replace(needle, "GUARD_REMOVED", 1)
+                self.assertTrue(self.errors(changed))
+
+    def test_world_event_rechecks_stage_footprint_before_transition(self):
+        changed = self.source.replace(
+            "CanClaimRegions(EventId, ActiveRegionIds)?",
+            "true?", 1
+        )
+        self.assertTrue(self.errors(changed))
+
+    def test_world_event_start_cannot_bypass_claim_admission(self):
+        changed = self.source.replace(
+            "if (not CanClaimRegions(EventId, InitialRegionIds)?):",
+            "if (false?):", 1
+        )
+        self.assertTrue(self.errors(changed))
+
+    def test_region_claims_cannot_ignore_active_invasion_or_faction_war(self):
+        for needle in (
+            "GetAEONFALLInvasionRuntime().HasActiveInRegion(RegionId)?",
+            "GetAEONFALLFactionConflictRuntime().HasActiveInRegion(RegionId)?",
+        ):
+            with self.subTest(guard=needle):
+                self.assertTrue(self.errors(self.source.replace(needle, "false?", 1)))
+
 
 if __name__ == "__main__":
     unittest.main()
