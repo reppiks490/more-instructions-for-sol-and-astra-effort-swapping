@@ -39,9 +39,24 @@ def source_errors(source: str) -> list[str]:
         for token in ("var Valid:logic = true", write, failure, guard, commit, event):
             if token not in code:
                 errors.append(name + " missing preflight: " + token)
-        if not (0 <= code.find(write) < code.find(failure) <
-                code.find(guard) < code.find("return", code.find(guard)) <
-                code.find(commit)):
+        if name == "clear":
+            # ClearOwner rebuilds Pending first, Deferred second; the first
+            # failure branch therefore precedes the second map's write.
+            ordered = (
+                0 <= code.find("set Updated[RequestId] = State")
+                < code.find("set KeptDeferred[Key] = State")
+                < code.find(guard)
+                < code.find("return", code.find(guard))
+                < code.find("set Pending = Updated")
+                < code.find(commit)
+            )
+        else:
+            ordered = (
+                0 <= code.find(write) < code.find(failure)
+                < code.find(guard) < code.find("return", code.find(guard))
+                < code.find(commit)
+            )
+        if not ordered:
             errors.append(name + " must abort on failed rebuild before replacement")
     for token in ("set Updated[RequestId] = State", "set KeptDeferred[Key] = State",
                   "set Pending = Updated", "set Deferred = KeptDeferred"):
