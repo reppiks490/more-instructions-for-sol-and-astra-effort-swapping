@@ -20,6 +20,10 @@ aeonfall_sovereign_fusion_device := class(creative_device):
     @editable
     SeparateInput:input_trigger_device = input_trigger_device{}
     @editable
+    AttackInput:input_trigger_device = input_trigger_device{}
+    @editable
+    AttackOutput:trigger_device = trigger_device{}
+    @editable
     ArmorGlow:visual_effect_powerup_device = visual_effect_powerup_device{}
     @editable
     ArmorCamera:gameplay_camera_orbit_device = gameplay_camera_orbit_device{}
@@ -33,6 +37,10 @@ aeonfall_sovereign_fusion_device := class(creative_device):
     CooldownSeconds:float = 90.0
     @editable
     InitialEnergy:int = 100
+    @editable
+    AttackEnergyCost:int = 10
+    @editable
+    AttackCooldownSeconds:float = 1.5
 
     StopEvent:event() = event(){}
     var Running:logic = false
@@ -42,10 +50,17 @@ aeonfall_sovereign_fusion_device := class(creative_device):
     var VisualOwner:?player = false
     var VisualCharacter:?fort_character = false
     var Token:int = 0
+    var LastAttackAt:float = -1000.0
 
     ValidSettings()<transacts>:logic=
         if:
             FuseInput <> SeparateInput
+            FuseInput <> AttackInput
+            SeparateInput <> AttackInput
+            AttackEnergyCost >= 1
+            AttackEnergyCost <= 25
+            AttackCooldownSeconds >= 0.2
+            AttackCooldownSeconds <= 10.0
             DurationSeconds >= 15.0
             DurationSeconds <= 180.0
             CooldownSeconds >= 30.0
@@ -80,6 +95,7 @@ aeonfall_sovereign_fusion_device := class(creative_device):
         set Subscriptions = array{
             FuseInput.PressedEvent.Subscribe(Fuse),
             SeparateInput.PressedEvent.Subscribe(Separate),
+            AttackInput.PressedEvent.Subscribe(Attack),
             GetPlayspace().PlayerRemovedEvent().Subscribe(PlayerLeft)
         }
         race:
@@ -125,6 +141,33 @@ aeonfall_sovereign_fusion_device := class(creative_device):
                     Aborted := State.Abort(Self, Started)
         Feedback.Show(Agent, FusionDenied, 3.0)
 
+    # A native player retains normal Fortnite movement and the owned orbit
+    # camera. This attack bridge requests an instigator-scoped device graph;
+    # it does NOT attest a hit, damage, animation or replicated target state.
+    Attack(Agent:agent):void=
+        if:
+            Running?
+            Player := player[Agent]
+            Player.IsActive[]
+            Owner := VisualOwner?
+            Owner = Player
+            OriginalCharacter := VisualCharacter?
+            Character := Player.GetFortCharacter[]
+            Character = OriginalCharacter
+            Character.IsActive[]
+            State := Runtime?
+            Resource := Budget?
+            Authorized := State.IsAuthorizedActive(Self, Player, Token)
+            Authorized?
+            Now := GetSimulationElapsedTime()
+            Now >= LastAttackAt + AttackCooldownSeconds
+            Resource.Spend[Self, Player, Token, State, AttackEnergyCost]
+        then:
+            # Charge and cooldown are server-side, bound to the canonical
+            # generation and owner. Physical output is editor-owned.
+            set LastAttackAt = Now
+            AttackOutput.Trigger(Player)
+
     Separate(Agent:agent):void=
         if (Player := player[Agent], Owner := VisualOwner?, Owner = Player):
             FinishActive()
@@ -150,6 +193,7 @@ aeonfall_sovereign_fusion_device := class(creative_device):
         if (Resource := Budget?):
             Stopped := Resource.Stop(Self, LocalToken, CooldownSeconds)
         set Token = 0
+        set LastAttackAt = -1000.0
 
     ClearPhysical():void=
         if (Owner := VisualOwner?):
