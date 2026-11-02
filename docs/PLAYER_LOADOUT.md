@@ -62,3 +62,25 @@ All native join, leave, spawn and button subscriptions are canceled on device sh
 9. Leave during startup/delivery and end the round; subscriptions, ownership leases and player work are cleared.
 
 Source checks are `tools/validate_player_loadout.py`, `tests/test_player_loadout.py`, and the delivery coverage validator. They guard checked-save ordering, entitlements, lifecycle cleanup, claims and bounded queue behavior; they do not execute the native acceptance cases.
+
+
+## Post-commit delivery map integrity
+
+Physical delivery is an independent, retryable session workflow after a checked
+profile unlock. Pending-delivery resolution, per-owner disconnect cleanup,
+deferred-backlog pumping and scheduler retries now preflight the replacement
+maps. A failed insertion retains the old map and must not report successful
+physical delivery, erase another player's pending item, or announce an expiry
+that did not commit. On successful deferred retry admission, a retained deferred
+entry is deduplicated through the canonical pending request identity during the
+following tick.
+
+A private UEFN Launch Session must test two players with different pending
+weapon grants and a saturated deferred backlog. Disconnect one player during
+the other's retry; verify the second retains delivery ownership and receives
+only one physical grant. Attempt a refused replacement allocation where a
+native test harness allows it, and inspect
+`unlock.pending_remove_failed`, `unlock.owner_clear_failed`,
+`unlock.deferred_rebuild_failed` and
+`unlock.pending_tick_rebuild_failed`. None of these static guards is proof
+of item possession, UEFN compilation or an editor-tested physical adapter.
