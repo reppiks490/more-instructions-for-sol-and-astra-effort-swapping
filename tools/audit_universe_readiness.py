@@ -8,6 +8,7 @@ Every catalog entity and required region/system is enumerated without samples.
 from __future__ import annotations
 
 import argparse
+import hashlib
 from collections import Counter
 import json
 from pathlib import Path
@@ -164,6 +165,23 @@ def inspect_package(root: Path, item: dict, key: str, valid_ids: set[str],
     return complete and not errors, errors
 
 
+
+def source_payload_fingerprint(root: Path, paths: list[str]) -> tuple[str, ...]:
+    """Content identity, not filenames: cloned files cannot inflate source coverage.
+
+    Chunked SHA-256 avoids loading high-resolution meshes/textures into RAM.
+    Called only after inspect_package validates real local paths.
+    """
+    digests = []
+    for relative in paths:
+        digest = hashlib.sha256()
+        with (root / relative).open("rb") as asset:
+            for chunk in iter(lambda: asset.read(1024 * 1024), b""):
+                digest.update(chunk)
+        digests.append(digest.hexdigest())
+    return tuple(sorted(digests))
+
+
 def inspect_inventory(root: Path, policy: dict, inventory: dict,
                       entities: dict, region_ids: set[str], system_ids: set[str]):
     errors = []
@@ -196,6 +214,7 @@ def inspect_inventory(root: Path, policy: dict, inventory: dict,
         seen = set()
         ready = set()
         approved_visual_keys = {}
+        approved_source_fingerprints = {}
         for package in packages:
             if not isinstance(package, dict):
                 errors.append(f"{collection}: non-object source package")
@@ -216,18 +235,38 @@ def inspect_inventory(root: Path, policy: dict, inventory: dict,
                     visual_key = package.get("unique_visual_key")
                     if not isinstance(visual_key, str) or not visual_key.strip():
                         errors.append(f"{ident}: missing/invalid unique_visual_key")
-                    else:
-                        normalized_key = visual_key.strip().casefold()
-                        previous = approved_visual_keys.get(normalized_key)
-                        if previous is not None:
-                            errors.append(
-                                f"{ident}: duplicate unique_visual_key shared with {previous}"
-                            )
-                        else:
-                            approved_visual_keys[normalized_key] = ident
-                            ready.add(ident)
-                else:
-                    ready.add(ident)
+                        continue
+                    normalized_key = visual_key.strip().casefold()
+                    previous = approved_visual_keys.get(normalized_key)
+                    if previous is not None:
+                        errors.append(
+                            f"{ident}: duplicate unique_visual_key shared with {previous}"
+                        )
+                        continue
+                    approved_visual_keys[normalized_key] = ident
+
+                # Cross-pack source provenance: same bytes under different paths
+                # are not two independently authored visual/terrain identities.
+                # Other categories MAY share validated family runtime/assets.
+                signature_category = (
+                    "terrain" if collection == "region_packs" else
+                    "visual" if "visual" in categories.get(ident, []) else
+                    "visual_identity" if "visual_identity" in categories.get(ident, []) else
+                    None
+                )
+                if signature_category is not None:
+                    fingerprints = source_payload_fingerprint(
+                        root, package["sources"][signature_category]
+                    )
+                    signature = (signature_category, fingerprints)
+                    other = approved_source_fingerprints.get(signature)
+                    if other is not None:
+                        errors.append(
+                            f"{ident}: cloned {signature_category} source payload shared with {other}"
+                        )
+                        continue
+                    approved_source_fingerprints[signature] = ident
+                ready.add(ident)
         approvals[collection] = {"approved": len(ready), "total": len(ids),
                                  "pending": sorted(ids - ready), "approved_ids": sorted(ready)}
     # No global claim of a completed native island can originate here.
