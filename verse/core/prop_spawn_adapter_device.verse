@@ -85,8 +85,10 @@ aeonfall_prop_spawn_adapter_device := class(creative_device):
                 Spawned(1) = spawn_prop_result.Ok
                 Prop.IsValid[]
             then:
+                # The position snapshot must be consumed within the same
+                # canonical commit as the physical handle/status tracking.
+                # Never report success with a reusable placement snapshot.
                 if (CommitSpawnTracking[Request, Prepared.HandleId, Prop]):
-                    RemovedContext := GetAEONFALLPositionTargetingRuntime().Remove(Request.ContextId)
                     AEONFALLAdapterResultDelivery.Report(aeonfall_adapter_result{
                         RequestId := Request.RequestId,
                         OwnerKey := Request.OwnerKey,
@@ -179,6 +181,14 @@ aeonfall_prop_spawn_adapter_device := class(creative_device):
         GetAEONFALLSpawnRuntime().Records[Handle]
         Prop.IsValid[]
         Definition := GetAEONFALLAbilityRegistry().Get[Request.AbilityId]
+        # If the context is already consumed or its map cannot be safely
+        # rebuilt, the failable transaction rolls back all status/tracking
+        # writes. The caller disposes the newly spawned native prop.
+        Context := GetAEONFALLPositionTargetingRuntime().Get[Request.ContextId]
+        Context.OwnerKey = Request.OwnerKey
+        Context.AbilityId = Request.AbilityId
+        Consumed := GetAEONFALLPositionTargetingRuntime().Remove(Request.ContextId)
+        Consumed?
         GetAEONFALLStatusRuntime().ApplyBatch[
             Request.TargetKey, Definition.StatusIds, Request.OwnerKey, Request.Magnitude
         ]
@@ -191,29 +201,49 @@ aeonfall_prop_spawn_adapter_device := class(creative_device):
         })
         Admitted?
 
+    # Transactional teardown preflight: all surviving native handles must
+    # remain tracked, and all logical release acknowledgements must succeed,
+    # before ANY physical prop is disposed. Failure rolls the map and spawn
+    # budget back together, leaving the old physical records retryable.
+    CommitCleanup()<decides><transacts>:[]creative_prop=
+        var Kept:[string]creative_prop = map{}
+        var DisposeAfterCommit:[]creative_prop = array{}
+        for (Handle -> Prop : PhysicalProps):
+            if:
+                Record := GetAEONFALLSpawnRuntime().Records[Handle]
+                Record.Active?
+                Record.RemainingSeconds > 0.0
+                Prop.IsValid[]
+            then:
+                set Kept[Handle] = Prop
+            else:
+                # A missing record was already retired by the canonical tick.
+                # If it still exists, release its owner budget before disposal.
+                if (GetAEONFALLSpawnRuntime().Records[Handle]):
+                    Released := GetAEONFALLSpawnRuntime().Release(
+                        Handle, "physical_or_canonical_expired"
+                    )
+                    Released?
+                set DisposeAfterCommit += array{Prop}
+        set PhysicalProps = Kept
+        DisposeAfterCommit
+
     CleanupLoop()<suspends>:void=
         loop:
             Sleep(0.1)
             if (not Running?):
                 return
-            var Kept:[string]creative_prop = map{}
-            for (Handle -> Prop : PhysicalProps):
-                if:
-                    Record := GetAEONFALLSpawnRuntime().Records[Handle]
-                    Record.Active?
-                    Record.RemainingSeconds > 0.0
-                    Prop.IsValid[]
-                then:
-                    if (set Kept[Handle] = Prop):
-                        set Kept = Kept
-                    else:
-                        Prop.Dispose()
-                        Released := GetAEONFALLSpawnRuntime().Release(Handle, "tracking_failed")
-                else:
+            if (Disposable := CommitCleanup[]):
+                # Native disposal is irreversible and therefore outside the
+                # failable transaction, after the logical commit succeeded.
+                for (Prop : Disposable):
                     if (Prop.IsValid[]):
                         Prop.Dispose()
-                    Released := GetAEONFALLSpawnRuntime().Release(Handle, "physical_or_canonical_expired")
-            set PhysicalProps = Kept
+            else:
+                AEONFALLRuntimeBus.Emit(aeonfall_runtime_event{
+                    EventType := "spawn.physical_cleanup_retry",
+                    SourceId := AdapterId
+                })
 
     OnEnd<override>():void=
         set Running = false

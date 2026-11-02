@@ -119,6 +119,35 @@ def check_sources(sources: dict[str, str], policy: dict) -> list[str]:
     order("prop", "Claimed := AEONFALLAbilityRuntime.ClaimEffectRequest(Request)",
           "Prepared := PrepareSpawn[Request]", "Spawned := SpawnProp(",
           "CommitSpawnTracking[Request, Prepared.HandleId, Prop]", "Succeeded := true")
+    # The physical SpawnProp result is irreversible; its canonical success
+    # requires exactly one position-context consumption in the same failable
+    # transaction as status application and physical prop tracking.
+    prop_text = normalized(sources["prop"])
+    commit_start = prop_text.find("    CommitSpawnTracking(")
+    cleanup_start = prop_text.find("    CommitCleanup(")
+    commit = prop_text[commit_start:cleanup_start] if 0 <= commit_start < cleanup_start else ""
+    cleanup = prop_text[cleanup_start:] if cleanup_start >= 0 else ""
+    for fragment in (
+        "Consumed := AEONFALLPositionTargetingRuntime.Remove(Request.ContextId)",
+        "Consumed?",
+        "CommitCleanup()<decides><transacts>:[]creative_prop",
+        "Released?",
+        "set PhysicalProps = Kept",
+        "if (Disposable := CommitCleanup[])",
+    ):
+        if fragment not in prop_text:
+            errors.append("prop atomic spawn/cleanup guard missing: " + fragment)
+    if not (0 <= commit.find("Consumed :=") < commit.find("Consumed?") <
+            commit.find("AEONFALLStatusRuntime.ApplyBatch[") <
+            commit.find("set PhysicalProps[Handle] = Prop")):
+        errors.append("prop context must be consumed before transactional status/tracking commit")
+    if not (0 <= cleanup.find("CommitCleanup()<decides><transacts>") <
+            cleanup.find("set PhysicalProps = Kept") <
+            cleanup.find("if (Disposable := CommitCleanup[])") <
+            cleanup.find("Prop.Dispose()")):
+        errors.append("prop physical disposal must follow complete logical cleanup commit")
+    if "RemovedContext := AEONFALLPositionTargetingRuntime.Remove(Request.ContextId)" in prop_text:
+        errors.append("prop context must not be consumed after commit success")
     for name in ("selector", "harvest", "heat", "prop"):
         need(name, "OnEnd<override>", f"{name}: subscription cleanup missing")
         need(name, ".Cancel()", f"{name}: retained subscriptions must be cancelled")

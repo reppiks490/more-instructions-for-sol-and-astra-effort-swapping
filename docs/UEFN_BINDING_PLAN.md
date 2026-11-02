@@ -130,3 +130,32 @@ canonical failure events must not report successful disposal. Retained
 entries may retry on the next scheduler tick after a failed map rebuild.
 UEFN compile, actual asset collision, native prop destruction, and Fortnite
 Launch Session remain unverified by source validation.
+
+
+## Native prop position-consumption and cleanup proof
+
+The first-playable `aeonfall_prop_spawn_adapter_device` now requires the
+`position_targeting_runtime.Remove(ContextId)` acknowledgement within the
+failable `CommitSpawnTracking` transaction. If context consumption fails,
+canonical statuses and physical tracking roll back and the fresh native prop
+is disposed by the adapter. A successful result must never leave the same
+position context available for a second placement.
+
+The `CommitCleanup` transaction preflights the entire surviving physical
+prop tracking map and releases any still-live canonical handles before
+committing the new tracking map. Disposal happens only after successful
+logical commit, outside the failable transaction. A failed release or failed
+tracking map write preserves the prior handles and retries next tick, avoiding
+a permanently untracked prop or a false cleanup success.
+
+**Required UEFN tests:** With two players, spawn separate ABL-001 walls,
+ABL-002 stairs and ABL-010 routes; expire just one while the other remains
+active and confirm the other's prop survives. Reattempt an already consumed
+ContextId and verify that no new tracked prop or status is committed. Force
+a denied logical release or tracking allocation in a native test harness
+where available, verify `spawn.physical_cleanup_retry`, and ensure the
+original native props remain tracked until a later successful cleanup.
+Exercise native SpawnProp failure, invalid assets, OnEnd, and session restart.
+
+Static/source mutation tests prove only the code's guards. **There is no
+verified native UEFN compilation, collision, disposal or Launch Session result.**
