@@ -32,6 +32,7 @@ class BoundActor:
     target_id: str
     actor_key: str
     region_id: str
+    region_epoch: int = 1
 
 
 @dataclass(frozen=True)
@@ -47,6 +48,7 @@ class HitObservation:
     controller_lease_valid: bool
     native_hit_confirmed: bool
     target: RegisteredTarget
+    region_epoch: int = 1
 
 
 @dataclass
@@ -92,6 +94,10 @@ class SourceHitObservationGate:
         self._journal = SourceHitJournal()
         self._bound: dict[tuple[int, int], _BoundPlan] = {}
         self._revoked = False
+        # A region stays suspended across controller generations until a
+        # trusted world-stream service supplies a strictly newer epoch.
+        self._region_epochs = {region: 1 for region in REGIONS}
+        self._retired_regions: set[str] = set()
 
     @property
     def active_count(self) -> int:
@@ -108,16 +114,20 @@ class SourceHitObservationGate:
                 and re.fullmatch(r"MON-[0-9]{3,4}", actor.target_id) is not None
                 and type(actor.actor_key) is str
                 and 1 <= len(actor.actor_key) <= 96
-                and type(actor.region_id) is str and actor.region_id in REGIONS)
+                and type(actor.region_id) is str and actor.region_id in REGIONS
+                and type(actor.region_epoch) is int
+                and 1 <= actor.region_epoch <= MAX_SEQUENCE)
 
     @staticmethod
     def _valid_observation(obs: object) -> bool:
         if type(obs) is not HitObservation:
             return False
         if (any(type(getattr(obs, name)) is not int for name in (
-                "generation", "event_sequence", "pulse_index", "server_time_ms"))
+                "generation", "event_sequence", "pulse_index", "server_time_ms",
+                "region_epoch"))
                 or not 1 <= obs.event_sequence <= MAX_SEQUENCE
                 or obs.generation <= 0 or obs.pulse_index < 0
+                or not 1 <= obs.region_epoch <= MAX_SEQUENCE
                 or not 0 <= obs.server_time_ms <= MAX_SEQUENCE
                 or type(obs.actor_key) is not str
                 or type(obs.region_id) is not str
@@ -145,6 +155,9 @@ class SourceHitObservationGate:
                 or tuple(actor.target_id for actor in bindings) != plan.target_ids
                 or len({actor.actor_key for actor in bindings}) != len(bindings)
                 or len({actor.region_id for actor in bindings}) != 1
+                or any(actor.region_id in self._retired_regions
+                       or actor.region_epoch != self._region_epochs[actor.region_id]
+                       for actor in bindings)
                 or type(opened_ms) is not int or type(deadline_ms) is not int
                 or not 0 <= opened_ms < deadline_ms <= MAX_SEQUENCE
                 or deadline_ms - opened_ms > MAX_OBSERVATION_WINDOW_MS
@@ -181,7 +194,10 @@ class SourceHitObservationGate:
         if actor is None or observation.pulse_index >= bound.plan.pulses:
             return deny("target/pulse not in paid plan")
         if (observation.actor_key != actor.actor_key
-                or observation.region_id != actor.region_id):
+                or observation.region_id != actor.region_id
+                or observation.region_epoch != actor.region_epoch
+                or actor.region_id in self._retired_regions
+                or actor.region_epoch != self._region_epochs[actor.region_id]):
             self.close(*key)
             return deny("actor instance or region changed; event revoked")
         if observation.server_time_ms < bound.last_observed_ms:
@@ -225,6 +241,55 @@ class SourceHitObservationGate:
         key = (generation, event_sequence)
         self._bound.pop(key, None)
         return self._journal.close(generation, event_sequence)
+
+    def retire_region(self, region_id: str) -> int:
+        """World-stream unload: close ALL paid plans in one canonical region.
+
+        Region retirement is sticky, including across controller generations.
+        Only resume_region with a strictly newer server-issued epoch can admit
+        fresh plans. The caller MUST be the authoritative world-stream service.
+        """
+        if type(region_id) is not str or region_id not in REGIONS:
+            return 0
+        self._retired_regions.add(region_id)
+        affected = tuple(key for key, bound in self._bound.items()
+                         if any(actor.region_id == region_id
+                                for actor in bound.actors.values()))
+        for key in affected:
+            self.close(*key)
+        return len(affected)
+
+    def resume_region(self, region_id: str, new_epoch: int) -> bool:
+        """Resume after native stream rebind; no same-epoch or stale replay."""
+        if (type(region_id) is not str or region_id not in REGIONS
+                or type(new_epoch) is not int
+                or not 1 <= new_epoch <= MAX_SEQUENCE
+                or region_id not in self._retired_regions
+                or new_epoch <= self._region_epochs[region_id]):
+            return False
+        self._region_epochs[region_id] = new_epoch
+        self._retired_regions.remove(region_id)
+        return True
+
+    def retire_actor(self, actor_key: str, region_id: str, region_epoch: int) -> int:
+        """Actor despawn closes every paid plan bound to this exact instance.
+
+        This does not authenticate native registry identity and does not
+        authorize key reuse. Native actor keys MUST be unique per incarnation.
+        """
+        if (type(actor_key) is not str or not 1 <= len(actor_key) <= 96
+                or type(region_id) is not str or region_id not in REGIONS
+                or type(region_epoch) is not int
+                or not 1 <= region_epoch <= MAX_SEQUENCE):
+            return 0
+        affected = tuple(key for key, bound in self._bound.items()
+                         if any(actor.actor_key == actor_key
+                                and actor.region_id == region_id
+                                and actor.region_epoch == region_epoch
+                                for actor in bound.actors.values()))
+        for key in affected:
+            self.close(*key)
+        return len(affected)
 
     def revoke(self) -> None:
         """Terminal owner/session/stream teardown; no restaging this generation."""
